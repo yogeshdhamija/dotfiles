@@ -104,3 +104,6 @@ fi
 
 export PATH="/usr/local/sbin:$PATH"
 
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
