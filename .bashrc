@@ -117,3 +117,11 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# ssh autocomplete
+function _ssh_completion() {
+  perl -ne 'print "$1 " if /^Host (.+)$/' ~/.ssh/config
+}
+complete -W "$(_ssh_completion)" ssh
+
+source $HOME/.bash_prompt
