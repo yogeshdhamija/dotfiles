@@ -1,1 +1,12 @@
+
+# Make sure not to accidentally add ssh
 .ssh/*
+
+# Stop git from yelling at me about untracked files
+*
+!.bashrc
+!.bash_aliases
+!.vimrc
+!.zshrc
+!.bash_prompt
+!.tmux.conf
