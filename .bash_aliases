@@ -13,6 +13,8 @@ alias "fucking"="sudo"
 # Split horizontal using tmux
 alias "tsh"="tmux split-window -h"
 alias "tsv"="tmux split-window -v"
+alias "hsplit"="tmux split-window -h"
+alias "vsplit"="tmux split-window -v"
 
 # Default Noble environment variables
 alias "envs"="NOBLE_CONFIG_FILE=src/tests/fixtures/unify.json DBURL=mysql://unify:unify@127.0.0.1:3306/unify"
