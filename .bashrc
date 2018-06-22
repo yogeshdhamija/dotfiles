@@ -118,8 +118,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
-alias dgit='git --git-dir ~/.dotfiles/.git --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # ssh autocomplete
 function _ssh_completion() {
