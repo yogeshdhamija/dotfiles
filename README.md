@@ -30,3 +30,8 @@ This will set up a git repository in the folder `~/.cfg` with a detached working
     Instead, add things individually using `config add <file>`.
 
     This also applies to other stuff like `config commit -a`. 
+
+
+## Things to remember:
+
+ - The `noble_server_utils` file is sourced in `.bashrc`. It's an easy way to run noble servers locally.
