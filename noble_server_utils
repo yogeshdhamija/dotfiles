@@ -1,0 +1,79 @@
+export NOBLE_CONFIG_FILE=~/Stuff/Noble/src/tests/fixtures/unify.json
+WORKDIR=~/Stuff
+LOGDIR=$WORKDIR/logs
+
+# paths to create symlinks for, so that relative paths
+# used by some services work
+# noble.ops.workflow_server_gp looks for activities using relative path
+ACTIVITIES=$WORKDIR/Noble/src/noble/ops/activities
+# noble.client.client_web_server looks for certs using raltive path
+CERTS=$WORKDIR/Noble/src/noble/client/certs
+
+start_noble_server () {
+    mkdir -p $LOGDIR
+    LOGFILE=$LOGDIR/$1.log
+    echo "------" $1
+    echo "logging to $LOGFILE"
+    cd $WORKDIR
+    [ ! -e './activities' ] && ln -s $ACTIVITIES
+    [ ! -e './certs' ] && ln -s $CERTS
+    python -u -m $1 > $LOGFILE 2>&1 &
+}
+
+stop_noble_server () {
+    kill $(list_running | grep $1 | cut -d " " -f 1)
+}
+
+start_all_noble_servers () {
+    declare -a SERVERS=("noble.ops.unify_server"
+                        "noble.ops.control_server"
+                        "noble.ops.booking_server"
+                        "noble.ops.workflow_server_gp"
+                        "noble.ops.reporting_server"
+                        "noble.ops.prices_server"
+                        "noble.ops.fxts_prices_server"
+                        "noble.ops.registration_server"
+                        "noble.ops.risk_server"
+                        "noble.ops.api_server"
+                        "noble.ops.rpc_server"
+                        "noble.client.client_web_server"
+                        "noble.client.client_reporting_server"
+                        "noble.client.client_control_server"
+                        "noble.client.client_api_server"
+                        "noble.client.client_registration_server"
+                        "noble.client.client_rpc_server"
+                       )
+
+    for i in "${SERVERS[@]}"
+    do
+        start_noble_server $i
+    done
+    tail -F $LOGDIR/*
+}
+
+list_running_noble_servers () {
+    ps ax | grep "python -u -m noble" | grep -v grep | while read line; do echo $line | xargs; done
+}
+
+get_running_noble_pids () {
+    list_running_noble_servers  | cut -d " " -f 1
+}
+
+stop_all_noble_servers () {
+    for pid in $(get_running_noble_pids)
+    do
+        kill $pid
+    done
+}
+
+restart_all_noble_servers () {
+    stop_all
+    sleep 2
+    start_all_noble_servers
+}
+
+restart_noble_server () {
+    stop_noble_server $1
+    sleep 1
+    start_noble_server $1
+}

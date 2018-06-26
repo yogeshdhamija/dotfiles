@@ -127,3 +127,8 @@ function _ssh_completion() {
 complete -W "$(_ssh_completion)" ssh
 
 source $HOME/.bash_prompt
+
+# Noble server utils
+if [ -f $HOME/noble_server_utils ]; then
+    source $HOME/noble_server_utils
+fi
