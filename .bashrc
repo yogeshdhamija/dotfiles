@@ -65,6 +65,7 @@ complete -W "$(_ssh_completion)" ssh
 
 source $HOME/.bash_prompt
 
+export SHELL="$(which zsh)" 
 if [ -t 1 ]; then
   exec zsh
 fi
