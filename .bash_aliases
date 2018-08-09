@@ -1,6 +1,10 @@
 in() {
-    # in command searches current directory for filename contining string (regex supported)
-    find . -name "*$1*" -type f | grep "$1"
+    # in command searches current directory for filename contining string
+    find . -name "*$1*" -type f | grep -E "[^\/]*$"
+}
+fin() {
+    # is recursive egrep
+    grep -RE $1 .
 }
 
 # To stop and destroy all docker containers, images, and volumes
