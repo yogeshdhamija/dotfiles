@@ -69,8 +69,8 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-eval `dircolors ~/.oh-my-zsh/dircolors-solarized/dircolors.256dark`
-source $HOME/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
+eval `dircolors ~/.dircolors-solaraized/dircolors.256dark`
+source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 if [ -f ~/.bash_aliases ]; then
