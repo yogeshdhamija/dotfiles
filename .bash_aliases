@@ -1,3 +1,8 @@
+in() {
+    # in command searches current directory for filename contining string (regex supported)
+    find . -name "*$1*" -type f | grep "$1"
+}
+
 # To stop and destroy all docker containers, images, and volumes
 alias "docker-nuke"='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi $(docker images -q) --force; docker volume rm $(docker volume ls -f dangling=true -q)'
 
