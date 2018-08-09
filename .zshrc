@@ -1,11 +1,13 @@
-# If you come from bash you might have to change your $PATH.  export PATH=/usr/local/bin:/usr/local/sbin:$PATH 
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 # Path to your oh-my-zsh installation.
-# export ZSH=
+  export ZSH="/home/ydhamija96/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="random"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -13,6 +15,7 @@ ZSH_THEME="agnoster"
 # looking in ~/.oh-my-zsh/themes/
 # An empty array have no effect
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+#ZSH_THEME_RANDOM_CANDIDATES=( "mh" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -46,7 +49,10 @@ ZSH_THEME="agnoster"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
@@ -63,10 +69,14 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+eval `dircolors ~/.oh-my-zsh/dircolors-solarized/dircolors.256dark`
+source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
 
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+if [ -f ~/.bash_aliases ]; then
+  . ~/.bash_aliases
+fi
 # export MANPATH="/usr/local/man:$MANPATH"
-
-DEFAULT_USER=$USER
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -75,7 +85,7 @@ DEFAULT_USER=$USER
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='vim'
+#   export EDITOR='mvim'
 # fi
 
 # Compilation flags
@@ -93,17 +103,3 @@ DEFAULT_USER=$USER
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# source virtualenvwrapper.sh
-if [[ -f /usr/local/bin/virtualenvwrapper.sh ]] then;
-   source /usr/local/bin/virtualenvwrapper.sh
-fi
-
-if [[ -f /usr/local/Cellar/zsh-autosuggestions/0.4.2/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] then;
-    source /usr/local/Cellar/zsh-autosuggestions/0.4.2/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
-
-export PATH="/usr/local/sbin:$PATH"
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
