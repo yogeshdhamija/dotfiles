@@ -25,6 +25,8 @@ This will set up a git repository in the folder `~/.cfg` with a detached working
 
 ### Important:
 
+* **Make sure to install zsh!** Otherwise this'll break all yo' shit.
+
 * __Do **not** use the `config add .` command. This will add all the untracked files in your home directory, which is **everything**.__
 
     Instead, add things individually using `config add <file>`.

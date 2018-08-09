@@ -65,6 +65,6 @@ complete -W "$(_ssh_completion)" ssh
 
 source $HOME/.bash_prompt
 
-#if [ -t 1 ]; then
-#  exec zsh
-#fi
+if [ -t 1 ]; then
+  exec zsh
+fi
