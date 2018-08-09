@@ -1,8 +1,8 @@
-in() {
+function in() {
     # in command searches current directory for filename contining string
     find . -name "*$1*" -type f | grep -E "[^\/]*$"
 }
-fin() {
+function fin() {
     # is recursive egrep
     grep -RE $1 .
 }
