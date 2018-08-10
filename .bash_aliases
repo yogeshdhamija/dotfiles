@@ -6,6 +6,12 @@ function fin() {
     # is recursive egrep
     grep -RE $1 .
 }
+function windows() {
+    # If using WSL, run the command as if run from CMD
+
+    # I know this implementation is terrible. Fix it if it's causing problems.
+    cmd.exe /C $1 $2 $3 $4 $5 $6 $7 $8 $9 $10
+}
 
 # To stop and destroy all docker containers, images, and volumes
 alias "docker-nuke"='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi $(docker images -q) --force; docker volume rm $(docker volume ls -f dangling=true -q)'
