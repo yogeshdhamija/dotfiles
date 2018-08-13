@@ -1,38 +1,3 @@
-" START:
-" **********************
-
-" Install Plug if not installed
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-
-
-
-" PLUGINS:
-" **********************
-
-call plug#begin('~/.vim/plugged')
-
-" VIM LSP Stuff
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-
-" VIM Register LSP Servers
-Plug 'ryanolsonx/vim-lsp-python'
-
-" Other
-Plug 'editorconfig/editorconfig-vim'
-Plug 'mhinz/vim-signify'
-
-call plug#end()
-
-
-
 
 " SETTINGS: 
 " **********************
@@ -66,4 +31,53 @@ let g:lsp_signs_enabled = 1
 
 " LSP show error of cursor line when in normal mode
 let g:lsp_diagnostics_echo_cursor = 1
+
+
+
+
+
+
+
+" PLUGINS:
+" **********************
+
+" Install Plug if not installed
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+
+" VIM LSP Stuff
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+" Other
+Plug 'editorconfig/editorconfig-vim'
+Plug 'mhinz/vim-signify'
+
+call plug#end()
+
+
+
+
+
+
+
+" REGISTER LSP SERVERS:
+" **********************************
+
+" Python
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+    	\ 'workspace_config': {'pyls': { 'configurationSources': ['flake8', 'pycodestyle'] } },
+        \ 'whitelist': ['python'],
+        \ })
+endif
 
