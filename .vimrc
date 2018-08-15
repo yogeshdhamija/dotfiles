@@ -32,6 +32,14 @@ let g:lsp_signs_enabled = 1
 " LSP show error of cursor line when in normal mode
 let g:lsp_diagnostics_echo_cursor = 1
 
+" Easier splitting
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+set splitbelow
+set splitright
+
 
 
 
