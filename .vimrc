@@ -1,4 +1,36 @@
 
+" PLUGINS:
+" **********************
+
+" Install Plug if not installed
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+
+" VIM LSP Stuff
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+" Other
+Plug 'editorconfig/editorconfig-vim'
+Plug 'mhinz/vim-signify'
+
+" Theme
+Plug 'flazz/vim-colorschemes'
+
+call plug#end()
+
+
+
+
+
+
 " SETTINGS: 
 " **********************
 
@@ -40,35 +72,10 @@ nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
-
-
-
-
-
-
-" PLUGINS:
-" **********************
-
-" Install Plug if not installed
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin('~/.vim/plugged')
-
-" VIM LSP Stuff
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-
-" Other
-Plug 'editorconfig/editorconfig-vim'
-Plug 'mhinz/vim-signify'
-
-call plug#end()
+" Colorscheme settings
+" colorscheme random
+" colorscheme PaperColor
+colorscheme antares
 
 
 
