@@ -19,6 +19,11 @@ What works best is to follow the method below, which I found in [this article](h
 * `config config --local status.showUntrackedFiles no`
 * `config checkout`
 
+Optional:
+
+To set your default terminal to zsh:
+* `chsh -s $(which zsh)`
+
 This will set up a git repository in the folder `~/.cfg` with a detached working tree. This way, you can treat your home directory if as if it were a git repository
 -- using the `config` command, instead of `git` -- but it won't do crazy stuff like interfere with your other git repositories. 
 
