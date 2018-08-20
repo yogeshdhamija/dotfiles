@@ -54,35 +54,22 @@ endif
 " SETTINGS: 
 " **********************
 
-" Line numbers
-set number
+set number		" Line numbers
+set mouse=a		" Mouse
+syntax on		" Syntax highlighting
+set hlsearch		" Highlight all terms when searched using '/'
+set cursorline		" Show line under where cursor is
+set autoread		" Autoread files changed outside vim
+set scrolloff=30	" Scroll offset
+nnoremap * *``
+			" Pressing * does not move cursor
 
-" Mouse
-set mouse=a
 
-" Syntax highlighting
-syntax on
+let g:lsp_async_completion=1		" LSP use async for autocompletion
+let g:asyncomplete_remove_duplicates=1	" LSP optimization by reducing duplicate hint windows
+let g:lsp_signs_enabled = 1		" LSP nable signs for warnings, errors, etc.
+let g:lsp_diagnostics_echo_cursor = 1	" LSP show error of cursor line when in normal mode
 
-" Highlight all terms when searched using '/'
-set hlsearch
-
-" Show line under where cursor is
-set cursorline
-
-" Autoread files changed outside vim
-set autoread
-
-" LSP use async for autocompletion
-let g:lsp_async_completion=1
-
-" LSP optimization by reducing duplicate hint windows
-let g:asyncomplete_remove_duplicates = 1
-
-" LSP nable signs for warnings, errors, etc.
-let g:lsp_signs_enabled = 1
-
-" LSP show error of cursor line when in normal mode
-let g:lsp_diagnostics_echo_cursor = 1
 
 " Easier splitting
 nnoremap <C-J> <C-W><C-J>
@@ -92,17 +79,11 @@ nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
-" Colorscheme settings
+
 colorscheme Tomorrow-Night-Bright
 
-" Scroll offset
-set scrolloff=30
 
-" Shortcut to create a split terminal window
-command T 15split | terminal
-
-" Allow exit from terminal mode using ESC
+command T 15split | terminal				" Shortcut to create a split terminal window
 tnoremap <Esc> <C-\><C-n>
-
-" Terminal don't show line numbers
-autocmd TermOpen * setlocal nonumber norelativenumber
+							" Allow exit from terminal mode using ESC
+autocmd TermOpen * setlocal nonumber norelativenumber	" Terminal don't show line numbers
