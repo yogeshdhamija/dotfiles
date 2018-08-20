@@ -83,7 +83,8 @@ set splitright
 colorscheme Tomorrow-Night-Bright
 
 
-command T 15split | terminal				" Shortcut to create a split terminal window
+command T 15split | terminal
+							" Shortcut to create a split terminal window
 tnoremap <Esc> <C-\><C-n>
 							" Allow exit from terminal mode using ESC
 autocmd TermOpen * setlocal nonumber norelativenumber	" Terminal don't show line numbers
