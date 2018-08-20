@@ -54,6 +54,8 @@ endif
 " SETTINGS: 
 " **********************
 
+colorscheme Tomorrow-Night-Bright
+
 set number		" Line numbers
 set mouse=a		" Mouse
 syntax on		" Syntax highlighting
@@ -62,29 +64,36 @@ set cursorline		" Show line under where cursor is
 set autoread		" Autoread files changed outside vim
 set scrolloff=30	" Scroll offset
 nnoremap * *``
-			" Pressing * does not move cursor
+" Pressing * does not move cursor
 
 
-let g:lsp_async_completion=1		" LSP use async for autocompletion
-let g:asyncomplete_remove_duplicates=1	" LSP optimization by reducing duplicate hint windows
-let g:lsp_signs_enabled = 1		" LSP nable signs for warnings, errors, etc.
-let g:lsp_diagnostics_echo_cursor = 1	" LSP show error of cursor line when in normal mode
+let g:lsp_async_completion=1					" LSP use async for autocompletion
+let g:asyncomplete_remove_duplicates=1				" LSP optimization by reducing duplicate hint windows
+let g:lsp_signs_enabled = 1					" LSP enable signs for warnings, errors, etc.
+let g:lsp_diagnostics_echo_cursor = 1				" LSP show error of cursor line when in normal mode
+let g:asyncomplete_smart_completion = 1				" LSP allow fuzzy autocompletion
+let g:asyncomplete_auto_popup = 1				" Allow auto-popup of suggestions (required for fuzzy autocompletion)
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+" Autoclose popup window
+
+imap <c-space> <Plug>(asyncomplete_force_refresh)
+" Ctrl+Space refreshes popup window
 
 
-" Easier splitting
+" Easier splitting ===
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
-
-
-colorscheme Tomorrow-Night-Bright
-
+" ===
 
 command T 15split | terminal
-							" Shortcut to create a split terminal window
+" Shortcut to create a split terminal window
+
 tnoremap <Esc> <C-\><C-n>
-							" Allow exit from terminal mode using ESC
-autocmd TermOpen * setlocal nonumber norelativenumber	" Terminal don't show line numbers
+" Allow exit from terminal mode using ESC
+
+autocmd TermOpen * setlocal nonumber norelativenumber
+" Terminal don't show line numbers
