@@ -72,8 +72,9 @@ let g:asyncomplete_remove_duplicates=1				" LSP optimization by reducing duplica
 let g:lsp_signs_enabled = 1					" LSP enable signs for warnings, errors, etc.
 let g:lsp_diagnostics_echo_cursor = 1				" LSP show error of cursor line when in normal mode
 let g:asyncomplete_smart_completion = 1				" LSP allow fuzzy autocompletion
-let g:asyncomplete_auto_popup = 1				" Allow auto-popup of suggestions (required for fuzzy autocompletion)
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+let g:asyncomplete_auto_popup = 1				" LSP Allow auto-popup of suggestions (required for fuzzy autocompletion)
+set completeopt-=preview					" LSP Disable preview window
+"autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 " Autoclose popup window
 
 imap <c-space> <Plug>(asyncomplete_force_refresh)
