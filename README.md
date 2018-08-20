@@ -25,8 +25,6 @@ This will set up a git repository in the folder `~/.cfg` with a detached working
 
 ### Important:
 
-* **Make sure to install zsh!** Otherwise this'll break all yo' shit.
-
 * __Do **not** use the `config add .` command. This will add all the untracked files in your home directory, which is **everything**.__
 
     Instead, add things individually using `config add <file>`.
@@ -34,6 +32,3 @@ This will set up a git repository in the folder `~/.cfg` with a detached working
     This also applies to other stuff like `config commit -a`. 
 
 
-## Things to remember:
-
- - The `noble_server_utils` file is sourced in `.bashrc`. It's an easy way to run noble servers locally.

@@ -10,7 +10,7 @@ function windows() {
     # If using WSL, run the command as if run from CMD
 
     # I know this implementation is terrible. Fix it if it's causing problems.
-    cmd.exe /C $1 $2 $3 $4 $5 $6 $7 $8 $9 $10
+    cmd.exe /C $1 $2 $3 $4 $5 $6 $7 $8 $9 
 }
 
 # To stop and destroy all docker containers, images, and volumes

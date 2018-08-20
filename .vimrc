@@ -1,4 +1,3 @@
-
 " PLUGINS:
 " **********************
 
@@ -31,11 +30,29 @@ call plug#end()
 
 
 
+
+" REGISTER LSP SERVERS:
+" **********************************
+
+" Python
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+    	\ 'workspace_config': {'pyls': { 'configurationSources': ['flake8', 'pycodestyle'] } },
+        \ 'whitelist': ['python'],
+        \ })
+endif
+
+
+
+
+
+
+
+
 " SETTINGS: 
 " **********************
-
-" Dark background
-set background=dark
 
 " Line numbers
 set number
@@ -51,6 +68,9 @@ set hlsearch
 
 " Show line under where cursor is
 set cursorline
+
+" Autoread files changed outside vim
+set autoread
 
 " LSP use async for autocompletion
 let g:lsp_async_completion=1
@@ -73,26 +93,16 @@ set splitbelow
 set splitright
 
 " Colorscheme settings
-" colorscheme random
-" colorscheme PaperColor
-colorscheme antares
+colorscheme Tomorrow-Night-Bright
 
+" Scroll offset
+set scrolloff=30
 
+" Shortcut to create a split terminal window
+command T 15split | terminal
 
+" Allow exit from terminal mode using ESC
+tnoremap <Esc> <C-\><C-n>
 
-
-
-
-" REGISTER LSP SERVERS:
-" **********************************
-
-" Python
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-    	\ 'workspace_config': {'pyls': { 'configurationSources': ['flake8', 'pycodestyle'] } },
-        \ 'whitelist': ['python'],
-        \ })
-endif
-
+" Terminal don't show line numbers
+autocmd TermOpen * setlocal nonumber norelativenumber
