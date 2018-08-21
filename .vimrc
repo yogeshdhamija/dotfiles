@@ -54,7 +54,14 @@ endif
 " SETTINGS: 
 " **********************
 
-colorscheme Tomorrow-Night-Bright
+" Colorscheme settings ===
+set background=dark			" duh
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1	" enable true color for nvim < 1.5 (I think)
+set termguicolors			" enable true color support for nvim > 1.5 (I think)
+syntax enable				" syntax highlighting (I think)
+colorscheme molokai			" dis da best one
+" ===
+
 
 set number		" Line numbers
 set mouse=a		" Mouse
@@ -64,7 +71,15 @@ set cursorline		" Show line under where cursor is
 set autoread		" Autoread files changed outside vim
 set scrolloff=30	" Scroll offset
 nnoremap * *``
-" Pressing * does not move cursor
+			" Pressing * does not move cursor
+
+
+" Vim jump to the last position when reopening a file ===
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g`\"" | endif
+endif
+" ===
 
 
 let g:lsp_async_completion=1					" LSP use async for autocompletion
@@ -74,12 +89,8 @@ let g:lsp_diagnostics_echo_cursor = 1				" LSP show error of cursor line when in
 let g:asyncomplete_smart_completion = 1				" LSP allow fuzzy autocompletion
 let g:asyncomplete_auto_popup = 1				" LSP Allow auto-popup of suggestions (required for fuzzy autocompletion)
 set completeopt-=preview					" LSP Disable preview window
-"autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-" Autoclose popup window
-
 imap <c-space> <Plug>(asyncomplete_force_refresh)
-" Ctrl+Space refreshes popup window
-
+								" Ctrl+Space refreshes popup window
 
 " Easier splitting ===
 nnoremap <C-J> <C-W><C-J>
@@ -90,8 +101,16 @@ set splitbelow
 set splitright
 " ===
 
-command T 15split | terminal
-" Shortcut to create a split terminal window
 
 autocmd TermOpen * setlocal nonumber norelativenumber
-" Terminal don't show line numbers
+								" Terminal don't show line numbers
+
+command T 15split | terminal
+								" Shortcut to create a split terminal window
+
+command Dr vsplit | LspDefinition
+								" Shortcut to open method definition in a vsplit
+
+command D LspDefinition
+								" Shortcut to open method definition in current window
+
