@@ -16,9 +16,14 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
-" Other
+" Use .editorconfig
 Plug 'editorconfig/editorconfig-vim'
+
+" Show git changes in sign column
 Plug 'mhinz/vim-signify'
+
+" Commenting
+Plug 'scrooloose/nerdcommenter'
 
 " Theme
 Plug 'flazz/vim-colorschemes'
@@ -114,6 +119,7 @@ set autoread		" Autoread files changed outside vim
 set scrolloff=30	" Scroll offset
 nnoremap * *``
 			" Pressing * does not move cursor
+filetype plugin on	" Required for nerdcommenter plugin
 
 
 " Vim jump to the last position when reopening a file ===
