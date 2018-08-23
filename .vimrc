@@ -151,14 +151,16 @@ set splitright
 
 
 autocmd TermOpen * setlocal nonumber norelativenumber
-								" Terminal don't show line numbers
+" Terminal don't show line numbers
 
 command T 15split | terminal
-								" Shortcut to create a split terminal window
+" Shortcut to create a split terminal window
 
 command Dr vsplit | LspDefinition
-								" Shortcut to open method definition in a vsplit
+" Shortcut to open method definition in a vsplit
 
 command D LspDefinition
-								" Shortcut to open method definition in current window
-
+" Shortcut to open method definition in current window
+"
+command F tab split | tabp | close | tabn
+" Open current buffer in new tab
