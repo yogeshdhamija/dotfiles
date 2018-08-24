@@ -95,32 +95,42 @@ endif
 
 
 
-
-
-
 " SETTINGS: 
 " **********************
 
 " Colorscheme settings ===
-set background=dark			" duh
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1	" enable true color for nvim < 1.5 (I think)
-set termguicolors			" enable true color support for nvim > 1.5 (I think)
-syntax enable				" syntax highlighting (I think)
-colorscheme molokai			" dis da best one
+" dark background
+set background=dark		
+" enable true color for nvim < 1.5 (I think)
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" enable true color support for nvim > 1.5 (I think)
+set termguicolors		
+" syntax highlighting (I think)
+syntax enable
+" colorscheme
+colorscheme molokai		
 " ===
 
-
-set number		" Line numbers
-set mouse=a		" Mouse
-syntax on		" Syntax highlighting
-set hlsearch		" Highlight all terms when searched using '/'
-set cursorline		" Show line under where cursor is
-set autoread		" Autoread files changed outside vim
-set scrolloff=30	" Scroll offset
+" General settings ===
+" Line numbers
+set number	
+" Mouse
+set mouse=a	
+" Syntax highlighting
+syntax on	
+" Highlight all terms when searched using '/'
+set hlsearch	
+" Show line under where cursor is
+set cursorline	
+" Autoread files changed outside vim
+set autoread	
+" Scroll offset
+set scrolloff=30
+" Pressing * does not move cursor
 nnoremap * *``
-			" Pressing * does not move cursor
-filetype plugin on	" Required for nerdcommenter plugin
-
+" Required for nerdcommenter plugin
+filetype plugin on
+" ===
 
 " Vim jump to the last position when reopening a file ===
 if has("autocmd")
@@ -129,16 +139,24 @@ if has("autocmd")
 endif
 " ===
 
-
-let g:lsp_async_completion=1					" LSP use async for autocompletion
-let g:asyncomplete_remove_duplicates=1				" LSP optimization by reducing duplicate hint windows
-let g:lsp_signs_enabled = 1					" LSP enable signs for warnings, errors, etc.
-let g:lsp_diagnostics_echo_cursor = 1				" LSP show error of cursor line when in normal mode
-let g:asyncomplete_smart_completion = 1				" LSP allow fuzzy autocompletion
-let g:asyncomplete_auto_popup = 1				" LSP Allow auto-popup of suggestions (required for fuzzy autocompletion)
-set completeopt-=preview					" LSP Disable preview window
+" LSP settings ===
+" LSP use async for autocompletion
+let g:lsp_async_completion=1				
+" LSP optimization by reducing duplicate hint windows
+let g:asyncomplete_remove_duplicates=1			
+" LSP enable signs for warnings, errors, etc.
+let g:lsp_signs_enabled = 1				
+" LSP show error of cursor line when in normal mode
+let g:lsp_diagnostics_echo_cursor = 1			
+" LSP allow fuzzy autocompletion
+let g:asyncomplete_smart_completion = 1			
+" LSP Allow auto-popup of suggestions (required for fuzzy autocompletion)
+let g:asyncomplete_auto_popup = 1			
+" LSP Disable preview window
+set completeopt-=preview				
+" Ctrl+Space refreshes popup window
 imap <c-space> <Plug>(asyncomplete_force_refresh)
-								" Ctrl+Space refreshes popup window
+" ===
 
 " Easier splitting ===
 nnoremap <C-J> <C-W><C-J>
@@ -149,18 +167,28 @@ set splitbelow
 set splitright
 " ===
 
+" Easier tab navigation ===
+nnoremap <C-T> :tabn<CR>
+" ===
 
-autocmd TermOpen * setlocal nonumber norelativenumber
+" Shortcuts ===
 " Terminal don't show line numbers
-
-command T 15split | terminal
+autocmd TermOpen * setlocal nonumber norelativenumber
 " Shortcut to create a split terminal window
-
-command Dr vsplit | LspDefinition
+command T 15split | terminal
 " Shortcut to open method definition in a vsplit
-
-command D LspDefinition
+command Dr vsplit | LspDefinition
 " Shortcut to open method definition in current window
-"
-command F tab split | tabp | close | tabn
-" Open current buffer in new tab
+command D LspDefinition
+
+" WARNING: These commands save the file in the current buffer. ==
+" Move current buffer to new tab
+command B w | tab split | tabp | close | tabn
+" Move current buffer to split in previous tab
+command S w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn
+" Move current buffer to new tab and turn off line numbers (good for copying)
+command Bn w | tab split | tabp | close | tabn | set nonumber
+" Move current buffer to split in previous tab and turn on line numbers
+command Sn w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn | set number
+" ==
+" ===
