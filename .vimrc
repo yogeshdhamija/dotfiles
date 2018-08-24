@@ -134,6 +134,9 @@ nnoremap * *``
 filetype plugin on
 " ===
 
+" Terminal don't show line numbers
+autocmd TermOpen * setlocal nonumber norelativenumber scl=no
+
 " Vim jump to the last position when reopening a file ===
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
@@ -174,8 +177,6 @@ nnoremap <C-T> :tabn<CR>
 " ===
 
 " Shortcuts ===
-" Terminal don't show line numbers
-autocmd TermOpen * setlocal nonumber norelativenumber
 " Shortcut to create a split terminal window
 command T 15split | terminal
 " Shortcut to open method definition in a vsplit
