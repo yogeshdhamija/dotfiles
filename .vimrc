@@ -113,7 +113,9 @@ colorscheme molokai
 
 " General settings ===
 " Line numbers
-set number	
+set number
+" Show sign column
+set scl=yes
 " Mouse
 set mouse=a	
 " Syntax highlighting
@@ -140,19 +142,19 @@ endif
 " ===
 
 " LSP settings ===
-" LSP use async for autocompletion
+" use async for autocompletion
 let g:lsp_async_completion=1				
-" LSP optimization by reducing duplicate hint windows
+" optimization by reducing duplicate hint windows
 let g:asyncomplete_remove_duplicates=1			
-" LSP enable signs for warnings, errors, etc.
+" enable signs for warnings, errors, etc.
 let g:lsp_signs_enabled = 1				
-" LSP show error of cursor line when in normal mode
+" show error of cursor line when in normal mode
 let g:lsp_diagnostics_echo_cursor = 1			
-" LSP allow fuzzy autocompletion
+" allow fuzzy autocompletion
 let g:asyncomplete_smart_completion = 1			
-" LSP Allow auto-popup of suggestions (required for fuzzy autocompletion)
+" Allow auto-popup of suggestions (required for fuzzy autocompletion)
 let g:asyncomplete_auto_popup = 1			
-" LSP Disable preview window
+" Disable preview window
 set completeopt-=preview				
 " Ctrl+Space refreshes popup window
 imap <c-space> <Plug>(asyncomplete_force_refresh)
@@ -187,8 +189,8 @@ command B w | tab split | tabp | close | tabn
 " Move current buffer to split in previous tab
 command S w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn
 " Move current buffer to new tab and turn off line numbers (good for copying)
-command Bn w | tab split | tabp | close | tabn | set nonumber
+command Bn w | tab split | tabp | close | tabn | set nonumber | set scl=no
 " Move current buffer to split in previous tab and turn on line numbers
-command Sn w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn | set number
+command Sn w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn | set number | set scl=yes
 " ==
 " ===
