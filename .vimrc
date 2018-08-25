@@ -22,11 +22,21 @@ Plug 'editorconfig/editorconfig-vim'
 " Show git changes in sign column
 Plug 'mhinz/vim-signify'
 
-" Commenting
+" Commenting using <Leader>cc or <Leader>cu
 Plug 'scrooloose/nerdcommenter'
 
 " Theme
 Plug 'flazz/vim-colorschemes'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'itchyny/lightline.vim'
+
+" NERDTree
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" Fuzzy finder
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -108,7 +118,13 @@ set termguicolors
 " syntax highlighting (I think)
 syntax enable
 " colorscheme
-colorscheme molokai		
+colorscheme molokai
+" make indent lines 1 character wide
+let g:indent_guides_guide_size = 1
+" make indent guide lines subtle
+let g:indent_guides_color_change_percent = 2
+" enable indent guides
+let g:indent_guides_enable_on_vim_startup = 1
 " ===
 
 " General settings ===
@@ -136,6 +152,12 @@ filetype plugin on
 
 " Terminal don't show line numbers
 autocmd TermOpen * setlocal nonumber norelativenumber scl=no
+
+" Vim opens NERDTree if no file specified ===
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" ===
+
 
 " Vim jump to the last position when reopening a file ===
 if has("autocmd")
@@ -183,6 +205,10 @@ command T 15split | terminal
 command Dr vsplit | LspDefinition
 " Shortcut to open method definition in current window
 command D LspDefinition
+" Shortcut to open NERDTree
+command Ft NERDTree
+" Shortcut to use fuzzy finder
+command F Files
 
 " WARNING: These commands save the file in the current buffer. ==
 " Move current buffer to new tab

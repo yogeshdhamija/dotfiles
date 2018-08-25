@@ -76,3 +76,5 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
