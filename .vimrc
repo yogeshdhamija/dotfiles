@@ -22,7 +22,9 @@ Plug 'editorconfig/editorconfig-vim'
 " Show git changes in sign column
 Plug 'mhinz/vim-signify'
 
-" Commenting using <Leader>cc or <Leader>cu
+" Commenting
+" Note: Comment using <Leader>cc. Uncomment using <Leader>cu. <Leader> is \ by
+" default.
 Plug 'scrooloose/nerdcommenter'
 
 " Theme
@@ -37,6 +39,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+" Typescript
+Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
@@ -181,7 +186,7 @@ let g:asyncomplete_smart_completion = 1
 let g:asyncomplete_auto_popup = 1			
 " Disable preview window
 set completeopt-=preview				
-" Ctrl+Space refreshes popup window
+" <C-Space> refreshes popup window
 imap <c-space> <Plug>(asyncomplete_force_refresh)
 " ===
 
@@ -199,7 +204,8 @@ nnoremap <C-T> :tabn<CR>
 " ===
 
 " Shortcuts ===
-" Shortcut to create a split terminal window
+" Shortcut to create a split terminal window.
+" Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
 command T 15split | terminal
 " Shortcut to open method definition in a vsplit
 command Dr vsplit | LspDefinition
