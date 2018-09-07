@@ -27,6 +27,12 @@ To set your default terminal to zsh:
 This will set up a git repository in the folder `~/.cfg` with a detached working tree. This way, you can treat your home directory if as if it were a git repository
 -- using the `config` command, instead of `git` -- but it won't do crazy stuff like interfere with your other git repositories. 
 
+### Useful things to have installed:
+
+* neovim
+* zsh
+* the_silver_searcher
+* desired LSP language servers
 
 ### Important:
 
