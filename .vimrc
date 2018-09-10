@@ -30,7 +30,7 @@ Plug 'scrooloose/nerdcommenter'
 " Theme
 Plug 'flazz/vim-colorschemes'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
 
 " NERDTree
 Plug 'scrooloose/nerdtree'
@@ -130,6 +130,8 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_color_change_percent = 2
 " enable indent guides
 let g:indent_guides_enable_on_vim_startup = 1
+" enable vim-airline tab bar
+let g:airline#extensions#tabline#enabled = 1
 " ===
 
 " General settings ===
@@ -199,8 +201,11 @@ set splitbelow
 set splitright
 " ===
 
-" Easier tab navigation ===
+" Easier navigation ===
+" Tabs
 nnoremap <C-T> :tabn<CR>
+" Buffers
+nnoremap <C-B> :bnext<CR>
 " ===
 
 " Shortcuts ===
