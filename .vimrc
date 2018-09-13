@@ -110,6 +110,31 @@ endif
 
 
 
+" FUNCTIONS:
+" **********************
+" Deletes all unmodified hidden buffers
+function! DeleteHiddenBuffers()
+  let tpbl=[]
+  let closed = 0
+  call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+  for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+    if getbufvar(buf, '&mod') == 0
+      silent execute 'bwipeout' buf
+      let closed += 1
+    endif
+  endfor
+  echo "Closed ".closed." hidden buffers"
+endfunction
+
+
+
+
+
+
+
+
+
+
 
 " SETTINGS: 
 " **********************
@@ -156,6 +181,8 @@ set scrolloff=30
 nnoremap * *``
 " Required for nerdcommenter plugin
 filetype plugin on
+" NERDTree automatically shows hidden files
+let NERDTreeShowHidden=1
 " ===
 
 " Terminal don't show line numbers
@@ -221,6 +248,8 @@ command D LspDefinition
 command Ft NERDTree
 " Shortcut to use fuzzy finder
 command F Files
+" Shortcut to close all hidden buffers
+command C call DeleteHiddenBuffers()
 
 " WARNING: These commands save the file in the current buffer. ==
 " Move current buffer to new tab
