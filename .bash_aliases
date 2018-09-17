@@ -30,5 +30,3 @@ alias "vsplit"="tmux split-window -v"
 alias "envs"="NOBLE_CONFIG_FILE=src/tests/fixtures/unify.json DBURL=mysql://unify:unify@127.0.0.1:3306/unify"
 alias "envs-pp"="NOBLE_CONFIG_FILE=src/tests/fixtures/unify.json DBURL=mysql://unify:unify@127.0.0.1:3306/unify PYTHONPATH=src/"
 
-# Flyway Unify db
-alias "flyway"="~/flyway/flyway -user='unify' -password='unify'"
