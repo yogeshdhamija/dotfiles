@@ -44,6 +44,9 @@ Plug 'junegunn/fzf.vim'
 " Typescript
 Plug 'leafgarland/typescript-vim'
 
+" Go
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 call plug#end()
 
 
@@ -218,6 +221,14 @@ let g:asyncomplete_auto_popup = 1
 set completeopt-=preview				
 " <C-Space> refreshes popup window
 imap <c-space> <Plug>(asyncomplete_force_refresh)
+" ===
+
+" Add slow syntax highlighting features for Go ===
+let g:go_highlight_structs = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 " ===
 
 " Easier splitting ===
