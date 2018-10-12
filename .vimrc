@@ -191,9 +191,12 @@ let NERDTreeShowHidden=1
 " Terminal don't show line numbers
 autocmd TermOpen * setlocal nonumber norelativenumber scl=no
 
-" Vim opens terminal if no file specified ===
+" open ___ if no file specified ===
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'terminal' | setlocal nonumber norelativenumber scl=no | endif
+" Uncomment to open NERDTree
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd l | q | endif
+" Uncomment to open Terminal
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'terminal' | setlocal nonumber norelativenumber scl=no | endif
 " ===
 
 
