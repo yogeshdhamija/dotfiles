@@ -272,3 +272,9 @@ command Bn w | tab split | tabp | close | tabn | set nonumber | set scl=no
 command Sn w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn | set number | set scl=yes
 " ==
 " ===
+
+
+try 
+	source ~/.localvimrc
+catch
+endtry 
