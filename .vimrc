@@ -23,8 +23,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'mhinz/vim-signify'
 
 " Commenting
-" Note: Comment using <Leader>cc. Uncomment using <Leader>cu. <Leader> is \ by
-" default.
+" Note: Toggle comment using <leader>c<space>. <leader> is \ by default.
 Plug 'scrooloose/nerdcommenter'
 
 " Theme
@@ -61,11 +60,11 @@ call plug#end()
 " Python
 if executable('pyls')
     au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-    	\ 'workspace_config': {'pyls': { 'configurationSources': ['flake8', 'pycodestyle'] } },
-        \ 'whitelist': ['python'],
-        \ })
+	\ 'name': 'pyls',
+	\ 'cmd': {server_info->['pyls']},
+	    \ 'workspace_config': {'pyls': { 'configurationSources': ['flake8', 'pycodestyle'] } },
+	\ 'whitelist': ['python'],
+	\ })
 endif
 
 " Typescript (set up to also help with JavaScript)
@@ -191,12 +190,9 @@ let NERDTreeShowHidden=1
 " Terminal don't show line numbers
 autocmd TermOpen * setlocal nonumber norelativenumber scl=no
 
-" open ___ if no file specified ===
+" open NERDTREE and terminal if no file specified ===
 autocmd StdinReadPre * let s:std_in=1
-" Uncomment to open NERDTree
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd l | q | endif
-" Uncomment to open Terminal
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'terminal' | setlocal nonumber norelativenumber scl=no | endif
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'terminal' | setlocal nonumber norelativenumber scl=no | NERDTree | endif
 " ===
 
 
