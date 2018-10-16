@@ -43,9 +43,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-if [ -f ~/.localshellrc ]; then
-    . ~/.localshellrc
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -73,3 +70,8 @@ complete -W "$(_ssh_completion)" ssh
 #fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+
+if [ -f ~/.localshellrc ]; then
+    . ~/.localshellrc
+fi

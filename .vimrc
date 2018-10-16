@@ -26,10 +26,18 @@ Plug 'mhinz/vim-signify'
 " Note: Toggle comment using <leader>c<space>. <leader> is \ by default.
 Plug 'scrooloose/nerdcommenter'
 
-" Theme
+" Colorschemes
 Plug 'flazz/vim-colorschemes'
+
+" Indent guides
 Plug 'nathanaelkane/vim-indent-guides'
+
+" vim-airline
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" show git branch on vim-airline
+Plug 'tpope/vim-fugitive'
 
 " NERDTree
 Plug 'scrooloose/nerdtree'
@@ -40,11 +48,13 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+" Hopefully LSP will replace one day ==
 " Typescript
 Plug 'leafgarland/typescript-vim'
 
 " Go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" ==
 
 call plug#end()
 
@@ -60,11 +70,11 @@ call plug#end()
 " Python
 if executable('pyls')
     au User lsp_setup call lsp#register_server({
-	\ 'name': 'pyls',
-	\ 'cmd': {server_info->['pyls']},
-	    \ 'workspace_config': {'pyls': { 'configurationSources': ['flake8', 'pycodestyle'] } },
-	\ 'whitelist': ['python'],
-	\ })
+    \ 'name': 'pyls',
+    \ 'cmd': {server_info->['pyls']},
+        \ 'workspace_config': {'pyls': { 'configurationSources': ['flake8', 'pycodestyle'] } },
+    \ 'whitelist': ['python'],
+    \ })
 endif
 
 " Typescript (set up to also help with JavaScript)
@@ -138,16 +148,16 @@ endfunction
 
 
 
-" SETTINGS: 
+" SETTINGS:
 " **********************
 
 " Colorscheme settings ===
 " dark background
-set background=dark		
+set background=dark
 " enable true color for nvim < 1.5 (I think)
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " enable true color support for nvim > 1.5 (I think)
-set termguicolors		
+set termguicolors       
 " syntax highlighting (I think)
 syntax enable
 " colorscheme
@@ -158,8 +168,12 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_color_change_percent = 2
 " enable indent guides
 let g:indent_guides_enable_on_vim_startup = 1
+" enable vim-airline powerline font icons
+let g:airline_powerline_fonts = 1
 " enable vim-airline tab bar
 let g:airline#extensions#tabline#enabled = 1
+" vim-airline theme
+let g:airline_theme='molokai'
 " ===
 
 " General settings ===
@@ -168,15 +182,15 @@ set number
 " Show sign column
 set scl=yes
 " Mouse
-set mouse=a	
+set mouse=a 
 " Syntax highlighting
-syntax on	
+syntax on   
 " Highlight all terms when searched using '/'
-set hlsearch	
+set hlsearch    
 " Show line under where cursor is
-set cursorline	
+set cursorline  
 " Autoread files changed outside vim
-set autoread	
+set autoread    
 " Scroll offset
 set scrolloff=30
 " Pressing * does not move cursor
@@ -185,6 +199,12 @@ nnoremap * *``
 filetype plugin on
 " NERDTree automatically shows hidden files
 let NERDTreeShowHidden=1
+" Tab character column size
+set tabstop=4
+" Default indent size
+set shiftwidth=4
+" Set spaces instead of tabs
+set expandtab
 " ===
 
 " Terminal don't show line numbers
@@ -205,29 +225,30 @@ endif
 
 " LSP settings ===
 " use async for autocompletion
-let g:lsp_async_completion=1				
+let g:lsp_async_completion=1                
 " optimization by reducing duplicate hint windows
-let g:asyncomplete_remove_duplicates=1			
+let g:asyncomplete_remove_duplicates=1          
 " enable signs for warnings, errors, etc.
-let g:lsp_signs_enabled = 1				
+let g:lsp_signs_enabled = 1             
 " show error of cursor line when in normal mode
-let g:lsp_diagnostics_echo_cursor = 1			
+let g:lsp_diagnostics_echo_cursor = 1           
 " allow fuzzy autocompletion
-let g:asyncomplete_smart_completion = 1			
+let g:asyncomplete_smart_completion = 1         
 " Allow auto-popup of suggestions (required for fuzzy autocompletion)
-let g:asyncomplete_auto_popup = 1			
+let g:asyncomplete_auto_popup = 1           
 " Disable preview window
-set completeopt-=preview				
+set completeopt-=preview                
 " <C-Space> refreshes popup window
 imap <c-space> <Plug>(asyncomplete_force_refresh)
 " ===
 
 " Add slow syntax highlighting features for Go ===
-let g:go_highlight_structs = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
+" Disabled due to vim-go being disabled ===
+"let g:go_highlight_structs = 1
+"let g:go_highlight_methods = 1
+"let g:go_highlight_functions = 1
+"let g:go_highlight_operators = 1
+"let g:go_highlight_build_constraints = 1
 " ===
 
 " Easier splitting ===
@@ -275,6 +296,6 @@ command Sn w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn
 
 
 try 
-	source ~/.localvimrc
+    source ~/.localvimrc
 catch
-endtry 
+endtry
