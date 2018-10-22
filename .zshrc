@@ -69,15 +69,17 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-eval `dircolors ~/.dircolors-solaraized/dircolors.256dark`
-source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
 
+eval `dircolors ~/.dircolors-solaraized/dircolors.256dark`
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
 
 
 if [ -f ~/.localshellrc ]; then

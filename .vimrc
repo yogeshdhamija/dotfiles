@@ -156,8 +156,6 @@ endfunction
 set background=dark
 " enable true color for nvim < 1.5 (I think)
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" enable true color support for nvim > 1.5 (I think)
-set termguicolors       
 " syntax highlighting (I think)
 syntax enable
 " colorscheme
