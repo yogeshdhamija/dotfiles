@@ -1,0 +1,6 @@
+[submodule "/Users/ydhamija96/.zsh-syntax-highlighting"]
+	path = ~/.zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "/Users/ydhamija96/.dircolors-solarized"]
+	path = ~/.dircolors-solarized
+	url = https://github.com/seebi/dircolors-solarized.git
