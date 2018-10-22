@@ -76,12 +76,11 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
-[ -x dircolors ] && eval `dircolors ~/.dircolors-solarized/dircolors.256dark`
+[ -x '/usr/bin/dircolors' ] && eval `/usr/bin/dircolors ~/.dircolors-solarized/dircolors.256dark`
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
-
 
 if [ -f ~/.localshellrc ]; then
     . ~/.localshellrc
