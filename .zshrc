@@ -75,7 +75,8 @@ if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
 
-eval `dircolors ~/.dircolors-solaraized/dircolors.256dark`
+export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+[ -x dircolors ] && eval `dircolors ~/.dircolors-solaraized/dircolors.256dark`
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
