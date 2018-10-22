@@ -17,7 +17,7 @@ What works best is to follow the method below, which I found in [this article](h
 * `git clone --bare <THIS_REPO-URL> $HOME/.cfg`
 * `alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'`
 * `config config --local status.showUntrackedFiles no`
-* `config checkout && config submodule init && config submodule update`
+* `config checkout; cd ~; config submodule init; config submodule update`
 
 Optional:
 
