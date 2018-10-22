@@ -14,10 +14,10 @@ to become really annoying-- it tracks all your changes, or if you add `*` to the
 
 What works best is to follow the method below, which I found in [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
 
-* `git clone --recurse-submodules --bare <THIS_REPO-URL> $HOME/.cfg`
+* `git clone --bare <THIS_REPO-URL> $HOME/.cfg`
 * `alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'`
 * `config config --local status.showUntrackedFiles no`
-* `config checkout`
+* `config checkout && config submodule init && config submodule update`
 
 Optional:
 
