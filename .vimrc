@@ -197,6 +197,8 @@ nnoremap * *``
 filetype plugin on
 " NERDTree automatically shows hidden files
 let NERDTreeShowHidden=1
+" NERDTree don't collapse directories with one child
+let NERDTreeCascadeSingleChildDir=0
 " Tab character column size
 set tabstop=4
 " Default indent size
