@@ -49,11 +49,11 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Hopefully LSP will replace one day ==
-" Typescript
-Plug 'leafgarland/typescript-vim'
+    " Typescript
+    Plug 'leafgarland/typescript-vim'
 
-" Go
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    " Go
+    "Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " ==
 
 call plug#end()
@@ -132,131 +132,132 @@ endfunction
 " **********************
 
 " Colorscheme settings ===
-" dark background
-set background=dark
-" enable true color for nvim < 1.5 (I think)
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-" syntax highlighting (I think)
-syntax enable
-" colorscheme
-colorscheme molokai
-" make indent lines 1 character wide
-let g:indent_guides_guide_size = 1
-" make indent guide lines subtle
-let g:indent_guides_color_change_percent = 2
-" enable indent guides
-let g:indent_guides_enable_on_vim_startup = 1
-" enable vim-airline powerline font icons
-let g:airline_powerline_fonts = 1
-" enable vim-airline tab bar
-let g:airline#extensions#tabline#enabled = 1
-" vim-airline theme
-let g:airline_theme='molokai'
+    " dark background
+    set background=dark
+    " enable true color for nvim < 1.5 (I think)
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    " syntax highlighting (I think)
+    syntax enable
+    " colorscheme
+    colorscheme molokai
+    " make indent lines 1 character wide
+    let g:indent_guides_guide_size = 1
+    " make indent guide lines subtle
+    let g:indent_guides_color_change_percent = 2
+    " enable indent guides
+    let g:indent_guides_enable_on_vim_startup = 1
+    " enable vim-airline powerline font icons
+    let g:airline_powerline_fonts = 1
+    " enable vim-airline tab bar
+    let g:airline#extensions#tabline#enabled = 1
+    " vim-airline theme
+    let g:airline_theme='molokai'
+    " Line numbers
+    set number
+    " Show sign column
+    set scl=yes
+    " Show line under where cursor is
+    set cursorline  
+    " Use better colors if terminal supports it ==
+        let colorenv=$COLORTERM
+        if colorenv == 'truecolor'
+            set termguicolors
+        endif
+    " ==
 " ===
 
 " General settings ===
-" Remap ; to :
-nnoremap ; :
-" Line numbers
-set number
-" Show sign column
-set scl=yes
-" Mouse
-set mouse=a 
-" Syntax highlighting
-syntax on   
-" Highlight all terms when searched using '/'
-set hlsearch    
-" Show line under where cursor is
-set cursorline  
-" Autoread files changed outside vim
-set autoread    
-" Scroll offset
-set scrolloff=30
-" Pressing * does not move cursor
-nnoremap * *``
-" Required for nerdcommenter plugin
-filetype plugin on
-" NERDTree automatically shows hidden files
-let NERDTreeShowHidden=1
-" NERDTree don't collapse directories with one child
-let NERDTreeCascadeSingleChildDir=0
-" Tab character column size
-set tabstop=4
-" Default indent size
-set shiftwidth=4
-" Set spaces instead of tabs
-set expandtab
-" Keep visual selection after indent change
-vmap < <gv
-vmap > >gv
-" Get rid of ex mode
-nnoremap Q <nop>
-" Get rid of macros
-nnoremap q <nop>
+    " Remap ; to :
+    nnoremap ; :
+    " Remap capitals to navigate faster ==
+        nnoremap H ^
+        nnoremap L $
+        nnoremap J 7j
+        nnoremap K 7k
+    " ==
+    " Mouse
+    set mouse=a 
+    " Syntax highlighting
+    syntax on   
+    " Highlight all terms when searched using '/'
+    set hlsearch    
+    " Autoread files changed outside vim
+    set autoread    
+    " Scroll offset
+    set scrolloff=30
+    " Pressing * does not move cursor
+    nnoremap * *``
+    " Required for nerdcommenter plugin
+    filetype plugin on
+    " NERDTree automatically shows hidden files
+    let NERDTreeShowHidden=1
+    " NERDTree don't collapse directories with one child
+    let NERDTreeCascadeSingleChildDir=0
+    " Tab character column size
+    set tabstop=4
+    " Default indent size
+    set shiftwidth=4
+    " Set spaces instead of tabs
+    set expandtab
+    " Keep visual selection after indent change ==
+        vmap < <gv
+        vmap > >gv
+    " ==
+    " Get rid of ex mode
+    nnoremap Q <nop>
+    " Get rid of macros
+    nnoremap q <nop>
+    " Terminal don't show line numbers
+    autocmd TermOpen * setlocal nonumber norelativenumber scl=no
+    " Easier splitting ==
+        nnoremap <C-J> <C-W><C-J>
+        nnoremap <C-K> <C-W><C-K>
+        nnoremap <C-L> <C-W><C-L>
+        nnoremap <C-H> <C-W><C-H>
+        set splitbelow
+        set splitright
+    " ==
+    " Easier Tabs
+    nnoremap <C-T> :tabn<CR>
+    " Easier Buffers
+    nnoremap <C-B> :bnext<CR>
+    " open NERDTREE and terminal if no file specified ==
+        autocmd StdinReadPre * let s:std_in=1
+        autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'terminal' | setlocal nonumber norelativenumber scl=no | NERDTree | endif
+    " ==
+    " Vim jump to the last position when reopening a file ==
+        if has("autocmd")
+          au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+            \| exe "normal! g`\"" | endif
+        endif
+    " ==
 " ===
-
-" Terminal don't show line numbers
-autocmd TermOpen * setlocal nonumber norelativenumber scl=no
-
-" open NERDTREE and terminal if no file specified ===
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'terminal' | setlocal nonumber norelativenumber scl=no | NERDTree | endif
-" ===
-
-
-" Vim jump to the last position when reopening a file ===
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal! g`\"" | endif
-endif
-" ===
-
 " LSP settings ===
-" use async for autocompletion
-let g:lsp_async_completion=1                
-" optimization by reducing duplicate hint windows
-let g:asyncomplete_remove_duplicates=1          
-" enable signs for warnings, errors, etc.
-let g:lsp_signs_enabled = 1             
-" show error of cursor line when in normal mode
-let g:lsp_diagnostics_echo_cursor = 1           
-" allow fuzzy autocompletion
-let g:asyncomplete_smart_completion = 1         
-" Allow auto-popup of suggestions (required for fuzzy autocompletion)
-let g:asyncomplete_auto_popup = 1           
-" Disable preview window
-set completeopt-=preview                
-" <C-Space> refreshes popup window
-imap <c-space> <Plug>(asyncomplete_force_refresh)
+    " use async for autocompletion
+    let g:lsp_async_completion=1                
+    " optimization by reducing duplicate hint windows
+    let g:asyncomplete_remove_duplicates=1          
+    " enable signs for warnings, errors, etc.
+    let g:lsp_signs_enabled = 1             
+    " show error of cursor line when in normal mode
+    let g:lsp_diagnostics_echo_cursor = 1           
+    " allow fuzzy autocompletion
+    let g:asyncomplete_smart_completion = 1         
+    " Allow auto-popup of suggestions (required for fuzzy autocompletion)
+    let g:asyncomplete_auto_popup = 1           
+    " Disable preview window
+    set completeopt-=preview                
+    " <C-Space> refreshes popup window
+    imap <c-space> <Plug>(asyncomplete_force_refresh)
 " ===
 
-" Add slow syntax highlighting features for Go ===
-" Disabled due to vim-go being disabled ===
-"let g:go_highlight_structs = 1
-"let g:go_highlight_methods = 1
-"let g:go_highlight_functions = 1
-"let g:go_highlight_operators = 1
-"let g:go_highlight_build_constraints = 1
-" ===
 
-" Easier splitting ===
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-set splitbelow
-set splitright
-" ===
 
-" Easier navigation ===
-" Tabs
-nnoremap <C-T> :tabn<CR>
-" Buffers
-nnoremap <C-B> :bnext<CR>
-" ===
 
-" Shortcuts ===
+
+" SHORTCUTS:
+" **********************
+
 " Shortcut to create a split terminal window.
 " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
 command T 15split | terminal
@@ -271,25 +272,24 @@ command F Files
 " Shortcut to close all hidden buffers
 command C call DeleteHiddenBuffers()
 
-" WARNING: These commands save the file in the current buffer. ==
-" Move current buffer to new tab
-command B w | tab split | tabp | close | tabn
-" Move current buffer to split in previous tab
-command S w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn
-" Move current buffer to new tab and turn off line numbers (good for copying)
-command Bn w | tab split | tabp | close | tabn | set nonumber | set scl=no
-" Move current buffer to split in previous tab and turn on line numbers
-command Sn w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn | set number | set scl=yes
-" ==
+" WARNING: These commands save the file in the current buffer. ===
+    " Move current buffer to new tab
+    command B w | tab split | tabp | close | tabn
+    " Move current buffer to split in previous tab
+    command S w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn
+    " Move current buffer to new tab and turn off line numbers (good for copying)
+    command Bn w | tab split | tabp | close | tabn | set nonumber | set scl=no
+    " Move current buffer to split in previous tab and turn on line numbers
+    command Sn w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn | set number | set scl=yes
 " ===
 
-" Use better colors if terminal supports it ===
-let colorenv=$COLORTERM
-if colorenv == 'truecolor'
-    set termguicolors
-endif
-" ===
 
+
+
+
+
+" LOAD LOCAL FILE:
+" **********************
 
 try 
     source ~/.localvimrc
