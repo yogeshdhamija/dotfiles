@@ -155,6 +155,8 @@ let g:airline_theme='molokai'
 " ===
 
 " General settings ===
+" Remap ; to :
+nnoremap ; :
 " Line numbers
 set number
 " Show sign column
@@ -185,6 +187,13 @@ set tabstop=4
 set shiftwidth=4
 " Set spaces instead of tabs
 set expandtab
+" Keep visual selection after indent change
+vmap < <gv
+vmap > >gv
+" Get rid of ex mode
+nnoremap Q <nop>
+" Get rid of macros
+nnoremap q <nop>
 " ===
 
 " Terminal don't show line numbers
