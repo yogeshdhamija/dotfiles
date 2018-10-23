@@ -292,6 +292,13 @@ command Sn w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn
 " ==
 " ===
 
+" Use better colors if terminal supports it ===
+let colorenv=$COLORTERM
+if colorenv == 'truecolor'
+    set termguicolors
+endif
+" ===
+
 
 try 
     source ~/.localvimrc
