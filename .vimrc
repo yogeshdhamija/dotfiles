@@ -170,8 +170,8 @@ endfunction
     " Remap ; to :
     nnoremap ; :
     " Remap capitals to navigate faster ==
-        nnoremap H ^
-        nnoremap L $
+        nnoremap H 7h
+        nnoremap L 7l
         nnoremap J 7j
         nnoremap K 7k
     " ==
