@@ -17,8 +17,8 @@ What works best is to follow the method below, which I found in [this article](h
 * `git clone --bare <THIS_REPO-URL> $HOME/.cfg`
 * `alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'`
 * `config config --local status.showUntrackedFiles no`
-* `config checkout; cd ~; config submodule init; config submodule update`
-* `cd ~; chmod +x .check_environment.sh; ./.check_environment.sh`
+* `config checkout && cd ~ && config submodule init && config submodule update`
+* `cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh`
 
 This will set up a git repository in the folder `~/.cfg` with a detached working tree. This way, you can treat your home directory if as if it were a git repository
 -- using the `config` command, instead of `git` -- but it won't do crazy stuff like interfere with your other git repositories. 
