@@ -196,6 +196,8 @@ endfunction
         noremap L 7l
         noremap J 7j
         noremap K 7k
+        let g:NERDTreeMapJumpLastChild = ''
+        let g:NERDTreeMapJumpFirstChild = ''
     " ==
     " Mouse
     set mouse=a 
