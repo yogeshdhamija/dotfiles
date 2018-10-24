@@ -25,11 +25,13 @@ Plug 'mhinz/vim-signify'
 " Make . work for plugins that support it
 Plug 'tpope/vim-repeat'
 
-" Commenting
+" Commenting 
+" Example: gc2j = go comment 2 down
 " Note: gc = go comment
 Plug 'tpope/vim-commentary'
 
-" Ability to surround objects
+" Ability to surround objects 
+" Example: ysiw] = yes surround inner word with []
 " Note: cs = change surround, ds = delete surround, ys = yes surround
 " Note: [ for space, ] for no space
 Plug 'tpope/vim-surround'
