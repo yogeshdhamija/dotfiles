@@ -183,10 +183,10 @@ endfunction
     " Remap ; to :
     nnoremap ; :
     " Remap capitals to navigate faster ==
-        nnoremap H 7h
-        nnoremap L 7l
-        nnoremap J 7j
-        nnoremap K 7k
+        noremap H 7h
+        noremap L 7l
+        noremap J 7j
+        noremap K 7k
     " ==
     " Mouse
     set mouse=a 
