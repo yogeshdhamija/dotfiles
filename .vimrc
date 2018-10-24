@@ -177,6 +177,10 @@ endfunction
             set termguicolors
         endif
     " ==
+    " Syntax highlighting
+    syntax on   
+    " Change visual highlight color
+    hi Visual term=reverse cterm=reverse guibg=Grey
 " ===
 
 " General settings ===
@@ -190,8 +194,6 @@ endfunction
     " ==
     " Mouse
     set mouse=a 
-    " Syntax highlighting
-    syntax on   
     " Highlight all terms when searched using '/'
     set hlsearch    
     " Autoread files changed outside vim
