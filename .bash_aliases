@@ -15,4 +15,6 @@ alias "git-log"="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yel
 alias "fucking"="sudo"
 
 # Check config status
-alias "check-config"="cd ~; chmod +x .check_environment.sh; ./.check_environment.sh"
+alias "config-check"="cd ~; chmod +x .check_environment.sh; ./.check_environment.sh"
+alias "config-update"="config submodule update --remote"
+
