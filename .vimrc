@@ -23,8 +23,13 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'mhinz/vim-signify'
 
 " Commenting
-" Note: Toggle comment using <leader>c<space>. <leader> is \ by default.
-Plug 'scrooloose/nerdcommenter'
+" Note: gc = go comment
+Plug 'tpope/vim-commentary'
+
+" Ability to surround objects
+" Note: cs = change surround, ds = delete surround, ys = yes surround
+" Note: [ for space, ] for no space
+Plug 'tpope/vim-surround'
 
 " Colorschemes
 Plug 'flazz/vim-colorschemes'
