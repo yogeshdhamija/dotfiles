@@ -58,10 +58,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" Multiple cursors
-" Note: <C-n> to highlight next matching word, c to change
-Plug 'terryma/vim-multiple-cursors'
-
 " Hopefully LSP will replace one day ==
     " Typescript
     Plug 'leafgarland/typescript-vim'
