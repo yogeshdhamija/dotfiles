@@ -18,21 +18,10 @@ What works best is to follow the method below, which I found in [this article](h
 * `alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'`
 * `config config --local status.showUntrackedFiles no`
 * `config checkout; cd ~; config submodule init; config submodule update`
-
-Optional:
-
-To set your default terminal to zsh:
-* `chsh -s $(which zsh)`
+* `cd ~; chmod +x .check_environment.sh; ./.check_environment.sh`
 
 This will set up a git repository in the folder `~/.cfg` with a detached working tree. This way, you can treat your home directory if as if it were a git repository
 -- using the `config` command, instead of `git` -- but it won't do crazy stuff like interfere with your other git repositories. 
-
-### This repo complements these, if you have them installed:
-
-* neovim
-* zsh
-* the_silver_searcher
-* desired LSP language servers
 
 ### Important:
 
@@ -41,5 +30,3 @@ This will set up a git repository in the folder `~/.cfg` with a detached working
     Instead, add things individually using `config add <file>`.
 
     This also applies to other stuff like `config commit -a`. 
-
-
