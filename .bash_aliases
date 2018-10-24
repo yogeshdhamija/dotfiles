@@ -1,15 +1,7 @@
-function in() {
-    # in command searches current directory for filename contining string
-    find . -name "*$1*" -type f | grep -E "[^\/]*$"
-}
-function fin() {
-    # is recursive egrep
-    grep -RE $1 .
-}
 function windows() {
     # If using WSL, run the command as if run from CMD
 
-    # I know this implementation is terrible. Fix it if it's causing problems.
+    # TODO Fix this absurd security hole
     cmd.exe /C $1 $2 $3 $4 $5 $6 $7 $8 $9 
 }
 
@@ -21,3 +13,6 @@ alias "git-log"="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yel
 
 # General stuff
 alias "fucking"="sudo"
+
+# Check config status
+alias "check-config"="cd ~; chmod +x .check_environment.sh; ./.check_environment.sh"
