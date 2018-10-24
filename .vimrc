@@ -22,6 +22,9 @@ Plug 'editorconfig/editorconfig-vim'
 " Show git changes in sign column
 Plug 'mhinz/vim-signify'
 
+" Make . work for plugins that support it
+Plug 'tpope/vim-repeat'
+
 " Commenting
 " Note: gc = go comment
 Plug 'tpope/vim-commentary'
