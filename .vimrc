@@ -249,7 +249,7 @@ endfunction
     nnoremap <C-T> :tabn<CR>
     nnoremap <C-R> :tabp<CR>
     " Get rid of vim-go taking up the <C-T> shortcut
-    let g:go_def_mapping_enabled = 1
+    let g:go_def_mapping_enabled = 0
     " Easier Buffers
     nnoremap <C-B> :bnext<CR>
     nnoremap <C-V> :bprev<CR>
