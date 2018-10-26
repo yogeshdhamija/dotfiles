@@ -68,7 +68,7 @@ Plug 'junegunn/fzf.vim'
     Plug 'leafgarland/typescript-vim'
 
     " Go
-    "Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " ==
 
 call plug#end()
@@ -247,8 +247,12 @@ endfunction
     " ==
     " Easier Tabs
     nnoremap <C-T> :tabn<CR>
+    nnoremap <C-R> :tabp<CR>
+    " Get rid of vim-go taking up the <C-T> shortcut
+    let g:go_def_mapping_enabled = 1
     " Easier Buffers
     nnoremap <C-B> :bnext<CR>
+    nnoremap <C-V> :bprev<CR>
     " open NERDTREE and terminal if no file specified ==
         autocmd StdinReadPre * let s:std_in=1
         autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'terminal' | setlocal nonumber norelativenumber scl=no | NERDTree | endif
