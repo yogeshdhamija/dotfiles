@@ -231,8 +231,6 @@ endfunction
         noremap L 7l
         noremap J 7j
         noremap K 7k
-        let g:NERDTreeMapJumpLastChild = ''
-        let g:NERDTreeMapJumpFirstChild = ''
     " ==
     " Mouse
     set mouse=a 
@@ -297,6 +295,10 @@ endfunction
     let g:go_def_mapping_enabled = 0
     " vim-go taking up the K key
     let g:go_doc_keywordprg_enabled = 0
+    " NERDTree taking up J
+    let g:NERDTreeMapJumpLastChild = ''
+    " NERDTree taking up K
+    let g:NERDTreeMapJumpFirstChild = ''
 " ===
 " LSP settings ===
     " use async for autocompletion
