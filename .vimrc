@@ -277,8 +277,6 @@ endfunction
     " Easier Tabs
     nnoremap <C-T> :tabn<CR>
     nnoremap <C-R> :tabp<CR>
-    " Get rid of vim-go taking up the <C-T> shortcut
-    let g:go_def_mapping_enabled = 0
     " Easier Buffers
     nnoremap <C-B> :bnext<CR>
     nnoremap <C-V> :bprev<CR>
@@ -293,6 +291,12 @@ endfunction
             \| exe "normal! g`\"" | endif
         endif
     " ==
+" ===
+" Getting rid of plugin stuff taking over ma' settings ===
+    " vim-go taking up the <C-T> shortcut
+    let g:go_def_mapping_enabled = 0
+    " vim-go taking up the K key
+    let g:go_doc_keywordprg_enabled = 0
 " ===
 " LSP settings ===
     " use async for autocompletion
