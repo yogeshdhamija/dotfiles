@@ -144,13 +144,14 @@ endfunction
 
 " Opening last session if no arguments when vim is opened ===
     augroup autosession
+      autocmd StdinReadPre * let s:std_in=1
       autocmd VimEnter * nested call s:session_vim_enter()
       autocmd VimLeavePre * NERDTreeClose
-      autocmd VimLeavePre * call s:session_vim_leave()
+      autocmd FileWritePost,VimLeavePre * call s:session_vim_leave()
     augroup END
 
     function! s:session_vim_enter()
-        if bufnr('$') == 1 && bufname('%') == '' && !&mod && getline(1, '$') == ['']
+        if argc() == 0 && !exists("s:std_in")
             execute 'silent source ~/.vim/lastsession.vim'
         else
           let s:session_loaded = 0
@@ -282,7 +283,6 @@ endfunction
     nnoremap <C-B> :bnext<CR>
     nnoremap <C-V> :bprev<CR>
     " open NERDTREE and terminal if no file specified ==
-        " autocmd StdinReadPre * let s:std_in=1
         " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'terminal' | setlocal nonumber norelativenumber scl=no | NERDTree | endif
     " ==
     " Open last session if no file specified
