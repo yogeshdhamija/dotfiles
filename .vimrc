@@ -36,6 +36,10 @@ Plug 'tpope/vim-commentary'
 " Note: [ for space, ] for no space
 Plug 'tpope/vim-surround'
 
+" Adding indent-level as a text object
+" Example: dii = delete inner indent
+Plug 'michaeljsmith/vim-indent-object'
+
 " Colorschemes
 Plug 'flazz/vim-colorschemes'
 
