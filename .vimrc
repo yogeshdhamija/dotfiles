@@ -32,7 +32,8 @@ Plug 'tpope/vim-commentary'
 
 " Ability to surround objects 
 " Example: ysiw] = yes surround inner word with []
-" Note: cs = change surround, ds = delete surround, ys = yes surround
+" Example: cs'" = change surrounding ' to "
+" Example: ds" = delete surrounding "
 " Note: [ for space, ] for no space
 Plug 'tpope/vim-surround'
 
