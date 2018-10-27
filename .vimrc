@@ -330,11 +330,11 @@ endfunction
 " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
 command T 15split | terminal
 " Shortcut to open method definition in a vsplit
-command Dr vsplit | LspDefinition
+command DR vsplit | LspDefinition
 " Shortcut to open method definition in current window
 command D LspDefinition
 " Shortcut to open NERDTree
-command Ft NERDTree
+command FT NERDTree
 " Shortcut to use fuzzy finder
 command F Files
 " Shortcut to close all hidden buffers
@@ -348,9 +348,9 @@ command PDF exe '! pandoc "%:p" -o "%:p:r.pdf"'
     " Move current buffer to split in previous tab
     command S w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn
     " Move current buffer to new tab and turn off line numbers (good for copying)
-    command Bn w | tab split | tabp | close | tabn | set nonumber | set scl=no
+    command BN w | tab split | tabp | close | tabn | set nonumber | set scl=no
     " Move current buffer to split in previous tab and turn on line numbers
-    command Sn w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn | set number | set scl=yes
+    command SN w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn | set number | set scl=yes
 " ===
 
 
