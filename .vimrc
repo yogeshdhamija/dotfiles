@@ -340,7 +340,7 @@ command F Files
 " Shortcut to close all hidden buffers
 command C call DeleteHiddenBuffers()
 " Shortcut to generate .pdf from .md 
-command PDF exe '! pandoc "%:p" -o "%:p:r.pdf"' 
+command PDF w |exe '! pandoc "%:p" -o "%:p:r.pdf" -V fontsize=12pt' 
 
 " WARNING: These commands save the file in the current buffer. ===
     " Move current buffer to new tab
