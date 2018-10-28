@@ -339,10 +339,9 @@ command FT NERDTree
 command F Files
 " Shortcut to close all hidden buffers
 command C call DeleteHiddenBuffers()
-" Shortcut to generate .pdf from .md 
-command PDF w |exe '! pandoc "%:p" -o "%:p:r.pdf" -V fontsize=12pt' 
-
 " WARNING: These commands save the file in the current buffer. ===
+    " Shortcut to generate .pdf from .md 
+    command PDF w |exe '! pandoc "%:p" -o "%:p:r.pdf" -V fontsize=12pt' 
     " Move current buffer to new tab
     command B w | tab split | tabp | close | tabn
     " Move current buffer to split in previous tab
