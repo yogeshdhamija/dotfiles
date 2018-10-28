@@ -339,6 +339,8 @@ command FT NERDTree
 command F Files
 " Shortcut to close all hidden buffers
 command C call DeleteHiddenBuffers()
+" Shortcut to make current file location the current working directory
+command CD cd %:p:h
 " WARNING: These commands save the file in the current buffer. ===
     " Shortcut to generate .pdf from .md 
     command PDF w |exe '! pandoc "%:p" -o "%:p:r.pdf" -V fontsize=12pt' 
