@@ -253,6 +253,8 @@ endfunction
     let NERDTreeShowHidden=1
     " NERDTree don't collapse directories with one child
     let NERDTreeCascadeSingleChildDir=0
+    " Airline don't show whitespace errors
+    let g:airline#extensions#whitespace#enabled = 0
     " Tab character column size
     set tabstop=4
     " Default indent size
