@@ -298,14 +298,15 @@ endfunction
     " ==
 " ===
 " Getting rid of plugin stuff taking over ma' settings ===
-    " vim-go taking up the <C-T> shortcut
-    let g:go_def_mapping_enabled = 0
-    " vim-go taking up the K key
-    let g:go_doc_keywordprg_enabled = 0
-    " NERDTree taking up J
-    let g:NERDTreeMapJumpLastChild = ''
-    " NERDTree taking up K
-    let g:NERDTreeMapJumpFirstChild = ''
+" Disabled for now because trying out 'w0rp/ale' ===
+    " " vim-go taking up the <C-T> shortcut
+    " let g:go_def_mapping_enabled = 0
+    " " vim-go taking up the K key
+    " let g:go_doc_keywordprg_enabled = 0
+    " " NERDTree taking up J
+    " let g:NERDTreeMapJumpLastChild = ''
+    " " NERDTree taking up K
+    " let g:NERDTreeMapJumpFirstChild = ''
 " ===
 " LSP settings ===
 " Disabled for now because trying out 'w0rp/ale' ===
