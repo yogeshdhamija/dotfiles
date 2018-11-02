@@ -6,7 +6,6 @@ declare -a EXECS=(
     "zsh"
     "ag"
     "pyls"
-    "typescript-language-server"
     "go-langserver"
     "bash-language-server"
     "pandoc"
@@ -17,7 +16,6 @@ declare -a NAMES=(
     "ZShell"
     "The Silver Searcher"
     "Python LSP Server"
-    "TypeScript LSP Server"
     "Go LSP Server"
     "Bash LSP Server"
     "Pandoc"
@@ -30,11 +28,9 @@ declare -a ADDITIONAL=(
     ""
     ""
     ""
-    ""
     "Required for vim command to convert .md to .pdf"
     "Required for vim command to convert .md to .pdf"
 )
-
 
 # SCRIPT:
 arraylength=${#EXECS[@]}

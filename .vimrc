@@ -10,11 +10,13 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" VIM LSP Stuff
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" " VIM LSP Stuff ===
+" " Disabled for now because trying out 'w0rp/ale' ===
+    " Plug 'prabirshrestha/asyncomplete.vim'
+    " Plug 'prabirshrestha/async.vim'
+    " Plug 'prabirshrestha/vim-lsp'
+    " Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" ===
 
 " Use .editorconfig
 Plug 'editorconfig/editorconfig-vim'
@@ -25,12 +27,12 @@ Plug 'mhinz/vim-signify'
 " Make . work for plugins that support it
 Plug 'tpope/vim-repeat'
 
-" Commenting 
+" Commenting
 " Example: gc2j = go comment 2 down
 " Note: gc = go comment
 Plug 'tpope/vim-commentary'
 
-" Ability to surround objects 
+" Ability to surround objects
 " Example: ysiw] = yes surround inner word with []
 " Example: cs'" = change surrounding ' to "
 " Example: ds" = delete surrounding "
@@ -64,16 +66,18 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Hopefully LSP will replace one day ==
-    " Typescript
-    Plug 'leafgarland/typescript-vim'
+" " Disabled for now because trying out 'w0rp/ale' ==
+    " " Typescript
+    " Plug 'leafgarland/typescript-vim'
 
-    " Go
-    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    " " Go
+    " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " ==
 
+" LSP and linting
+Plug 'w0rp/ale'
+
 call plug#end()
-
-
 
 
 
@@ -82,44 +86,45 @@ call plug#end()
 " REGISTER LSP SERVERS:
 " **********************************
 
-" Python
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-    \ 'name': 'pyls',
-    \ 'cmd': {server_info->['pyls']},
-        \ 'workspace_config': {'pyls': { 'configurationSources': ['flake8', 'pycodestyle'] } },
-    \ 'whitelist': ['python'],
-    \ })
-endif
+" Disabled for now because trying out 'w0rp/ale' ===
+    " " Python
+    " if executable('pyls')
+    "     au User lsp_setup call lsp#register_server({
+    "     \ 'name': 'pyls',
+    "     \ 'cmd': {server_info->['pyls']},
+    "         \ 'workspace_config': {'pyls': { 'configurationSources': ['flake8', 'pycodestyle'] } },
+    "     \ 'whitelist': ['python'],
+    "     \ })
+    " endif
 
-" Typescript (set up to also help with JavaScript)
-if executable('typescript-language-server')
-    au User lsp_setup call lsp#register_server({
-      \ 'name': 'typescript-language-server',
-      \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-      \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-      \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
-      \ })
-endif
+    " " Typescript (set up to also help with JavaScript)
+    " if executable('typescript-language-server')
+    "     au User lsp_setup call lsp#register_server({
+    "       \ 'name': 'typescript-language-server',
+    "       \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+    "       \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+    "       \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
+    "       \ })
+    " endif
 
-" Go
-if executable('go-langserver')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'go-langserver',
-        \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
-        \ 'whitelist': ['go'],
-        \ })
-endif
+    " " Go
+    " if executable('go-langserver')
+    "     au User lsp_setup call lsp#register_server({
+    "         \ 'name': 'go-langserver',
+    "         \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
+    "         \ 'whitelist': ['go'],
+    "         \ })
+    " endif
 
-" Bash
-if executable('bash-language-server')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'bash-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
-        \ 'whitelist': ['sh'],
-        \ })
-endif
-
+    " " Bash
+    " if executable('bash-language-server')
+    "   au User lsp_setup call lsp#register_server({
+    "         \ 'name': 'bash-language-server',
+    "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
+    "         \ 'whitelist': ['sh'],
+    "         \ })
+    " endif
+" ===
 
 
 
@@ -210,7 +215,7 @@ endfunction
     " Show sign column
     set scl=yes
     " Show line under where cursor is
-    set cursorline  
+    set cursorline
     " Use better colors if terminal supports it ==
         let colorenv=$COLORTERM
         if colorenv == 'truecolor'
@@ -218,7 +223,7 @@ endfunction
         endif
     " ==
     " Syntax highlighting
-    syntax on   
+    syntax on
     " Change visual highlight color
     hi Visual term=reverse cterm=reverse guibg=Grey
 " ===
@@ -233,11 +238,11 @@ endfunction
         noremap K 7k
     " ==
     " Mouse
-    set mouse=a 
+    set mouse=a
     " Highlight all terms when searched using '/'
-    set hlsearch    
+    set hlsearch
     " Autoread files changed outside vim
-    set autoread    
+    set autoread
     " Scroll offset
     set scrolloff=30
     " Pressing * does not move cursor
@@ -301,22 +306,54 @@ endfunction
     let g:NERDTreeMapJumpFirstChild = ''
 " ===
 " LSP settings ===
-    " use async for autocompletion
-    let g:lsp_async_completion=1                
-    " optimization by reducing duplicate hint windows
-    let g:asyncomplete_remove_duplicates=1          
-    " enable signs for warnings, errors, etc.
-    let g:lsp_signs_enabled = 1             
-    " show error of cursor line when in normal mode
-    let g:lsp_diagnostics_echo_cursor = 1           
-    " allow fuzzy autocompletion
-    let g:asyncomplete_smart_completion = 1         
-    " Allow auto-popup of suggestions (required for fuzzy autocompletion)
-    let g:asyncomplete_auto_popup = 1           
-    " Disable preview window
-    set completeopt-=preview                
-    " <C-Space> refreshes popup window
-    imap <c-space> <Plug>(asyncomplete_force_refresh)
+" Disabled for now because trying out 'w0rp/ale' ===
+    " " use async for autocompletion
+    " let g:lsp_async_completion=1
+    " " optimization by reducing duplicate hint windows
+    " let g:asyncomplete_remove_duplicates=1
+    " " enable signs for warnings, errors, etc.
+    " let g:lsp_signs_enabled = 1
+    " " show error of cursor line when in normal mode
+    " let g:lsp_diagnostics_echo_cursor = 1
+    " " allow fuzzy autocompletion
+    " let g:asyncomplete_smart_completion = 1
+    " " Allow auto-popup of suggestions (required for fuzzy autocompletion)
+    " let g:asyncomplete_auto_popup = 1
+    " " Disable preview window
+    " set completeopt-=preview
+    " " <C-Space> refreshes popup window
+    " imap <c-space> <Plug>(asyncomplete_force_refresh)
+" ===
+" 'w0rp/ale' config ===
+    " Override default linter dictionary to always use all linters (muahahaha)
+    let g:ale_linters = {
+        \ 'csh': 'all',
+        \ 'go': 'all',
+        \ 'hack': 'all',
+        \ 'help': 'all',
+        \ 'perl': 'all',
+        \ 'python': 'all',
+        \ 'rust': 'all',
+        \ 'spec': 'all',
+        \ 'text': 'all',
+        \ 'zsh': 'all',
+    \}
+    " Always show sign column"
+    let g:ale_sign_column_always = 1
+    " Change sign column color when errors exist
+    let g:ale_change_sign_column_color = 1
+    " Enable autocomletion
+    " Note: Use <C-N> or <C-P> to traverse
+    let g:ale_completion_enabled = 1
+    " Show errors in status bar
+    let g:airline#extensions#ale#enabled = 1
+    " Change error message format ==
+        let g:ale_echo_msg_error_str = 'E'
+        let g:ale_echo_msg_warning_str = 'W'
+        let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    " ==
+    " Change the default exeucutable from 'golangserver' to 'go-langserver'
+    let g:ale_go_langserver_executable = 'go-langserver'
 " ===
 
 
@@ -329,10 +366,16 @@ endfunction
 " Shortcut to create a split terminal window.
 " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
 command T 15split | terminal
+" Disabled for now because trying out 'w0rp/ale' ===
+    " " Shortcut to open method definition in a vsplit
+    " command DR vsplit | LspDefinition
+    " " Shortcut to open method definition in current window
+    " command D LspDefinition
+" ===
 " Shortcut to open method definition in a vsplit
-command DR vsplit | LspDefinition
+command DR vsplit | ALEGoToDefinition
 " Shortcut to open method definition in current window
-command D LspDefinition
+command D ALEGoToDefinition
 " Shortcut to open NERDTree
 command FT NERDTree
 " Shortcut to use fuzzy finder
@@ -342,8 +385,8 @@ command C call DeleteHiddenBuffers()
 " Shortcut to make current file location the current working directory
 command CD cd %:p:h
 " WARNING: These commands save the file in the current buffer. ===
-    " Shortcut to generate .pdf from .md 
-    command PDF w |exe '! pandoc "%:p" -o "%:p:r.pdf" -V fontsize=12pt' 
+    " Shortcut to generate .pdf from .md
+    command PDF w |exe '! pandoc "%:p" -o "%:p:r.pdf" -V fontsize=12pt'
     " Move current buffer to new tab
     command B w | tab split | tabp | close | tabn
     " Move current buffer to split in previous tab
@@ -362,7 +405,7 @@ command CD cd %:p:h
 " LOAD LOCAL FILE:
 " **********************
 
-try 
+try
     source ~/.localvimrc
 catch
 endtry
