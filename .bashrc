@@ -63,11 +63,6 @@ function _ssh_completion() {
 }
 complete -W "$(_ssh_completion)" ssh
 
-# run zsh
-#export SHELL="$(which zsh)" 
-#if [ -t 1 ]; then
-#  exec zsh
-#fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
