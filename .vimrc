@@ -269,8 +269,11 @@ endfunction
     nnoremap Q <nop>
     " Get rid of macros
     nnoremap q <nop>
-    " Terminal don't show line numbers
-    autocmd TermOpen * setlocal nonumber norelativenumber scl=no
+    " Terminal don't show line numbers ==
+        if has('nvim')
+            autocmd TermOpen * setlocal nonumber norelativenumber scl=no
+        endif
+    " ==
     " Easier splitting ==
         nnoremap <C-J> <C-W><C-J>
         nnoremap <C-K> <C-W><C-K>
@@ -366,9 +369,12 @@ endfunction
 " SHORTCUTS:
 " **********************
 
-" Shortcut to create a split terminal window.
-" Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
-command T 15split | terminal
+" Shortcut to create a split terminal window. ==
+" Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>. ==
+    if has('nvim')
+        command T 15split | terminal
+    endif
+" ==
 " Disabled for now because trying out 'w0rp/ale' ===
     " " Shortcut to open method definition in a vsplit
     " command DR vsplit | LspDefinition
