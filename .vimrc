@@ -311,6 +311,10 @@ endfunction
     let g:NERDTreeMapJumpLastChild = ''
     " NERDTree taking up K
     let g:NERDTreeMapJumpFirstChild = ''
+    " NERDTree taking up <C-k>
+    let g:NERDTreeMapJumpPrevSibling = ''
+    " NERDTree taking up <C-j>
+    let g:NERDTreeMapJumpNextSibling = ''
 " ===
 " LSP settings ===
 " Disabled for now because trying out 'w0rp/ale' ===
