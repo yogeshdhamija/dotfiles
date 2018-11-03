@@ -16,5 +16,7 @@ alias "fucking"="sudo"
 
 # Check config status
 alias "config-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh"
+# Config update submodules
 alias "config-update"="config submodule update --remote"
-
+# Config pretty git log
+alias "config-log"="config log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"

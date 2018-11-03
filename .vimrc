@@ -64,12 +64,12 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Note: If silver searcher is installed, :Ag to search.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+    
+" Typescript support
+Plug 'leafgarland/typescript-vim'
 
 " Hopefully LSP will replace one day ==
 " " Disabled for now because trying out 'w0rp/ale' ==
-    " " Typescript
-    " Plug 'leafgarland/typescript-vim'
-
     " " Go
     " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " ==
