@@ -22,14 +22,14 @@ declare -a NAMES=(
     "TeX Live"
 )
 declare -a ADDITIONAL=(
-    "vim, but with integrated terminal"
-    "\`chsh -s \$(which zsh)\` to change default terminal to zsh"
-    "Provides cross-file fuzzy text searching for vim"
-    "Allows linting, go-to-def, autocomplete, etc. features for Python code"
-    "Allows linting, go-to-def, autocomplete, etc. features for Go code"
-    "Allows linting, go-to-def, autocomplete, etc. features for TypeScript and JavaScript code"
-    "Required for vim command to convert .md to .pdf"
-    "Required for vim command to convert .md to .pdf"
+    "Vim, but with integrated terminal."
+    "Bash, but better. NOTE: \`chsh -s \$(which zsh)\` to change default terminal to zsh."
+    "Provides cross-file fuzzy text searching for vim."
+    "Allows linting, go-to-def, autocomplete, etc. features for Python code."
+    "Allows linting, go-to-def, autocomplete, etc. features for Go code."
+    "Allows linting, go-to-def, autocomplete, etc. features for TypeScript and JavaScript code."
+    "Required for vim command to convert .md to .pdf."
+    "Required for vim command to convert .md to .pdf. NOTE: For mac, install BasicTeX. For debian derivatives, apt install texlive texlive-latex-extra."
 )
 
 # SCRIPT:
