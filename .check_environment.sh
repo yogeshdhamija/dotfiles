@@ -19,7 +19,7 @@ declare -a NAMES=(
     "Go LSP Server"
     "TypeScript LSP-ish Server"
     "Pandoc"
-    "BasicTeX"
+    "TeX Live"
 )
 declare -a ADDITIONAL=(
     "vim, but with integrated terminal"
