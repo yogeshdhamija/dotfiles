@@ -189,6 +189,17 @@ endfunction
 " SETTINGS:
 " **********************
 
+" Remaps ===
+    " Pressing * does not move cursor
+    nnoremap * *``
+    " Easier splitting ==
+        nnoremap <C-J> <C-W><C-J>
+        nnoremap <C-K> <C-W><C-K>
+        nnoremap <C-L> <C-W><C-L>
+        nnoremap <C-H> <C-W><C-H>
+    " ==
+" ===
+
 " Colorscheme settings ===
     " dark background
     set background=dark
@@ -229,24 +240,18 @@ endfunction
 " ===
 
 " General settings ===
-    " Remap ; to :
-    nnoremap ; :
-    " Remap capitals to navigate faster ==
-        noremap H 7h
-        noremap L 7l
-        noremap J 7j
-        noremap K 7k
-    " ==
     " Mouse
     set mouse=a
     " Highlight all terms when searched using '/'
     set hlsearch
     " Autoread files changed outside vim
     set autoread
+    " Set default to split below
+    set splitbelow
+    " Set default to split above
+    set splitright
     " Scroll offset
     set scrolloff=30
-    " Pressing * does not move cursor
-    nnoremap * *``
     " Required for nerdcommenter plugin
     filetype plugin on
     " NERDTree automatically shows hidden files
@@ -261,33 +266,11 @@ endfunction
     set shiftwidth=4
     " Set spaces instead of tabs
     set expandtab
-    " Keep visual selection after indent change ==
-        vmap < <gv
-        vmap > >gv
-    " ==
-    " Get rid of ex mode
-    nnoremap Q <nop>
-    " Get rid of macros
-    nnoremap q <nop>
     " Terminal don't show line numbers ==
         if has('nvim')
             autocmd TermOpen * setlocal nonumber norelativenumber scl=no
         endif
     " ==
-    " Easier splitting ==
-        nnoremap <C-J> <C-W><C-J>
-        nnoremap <C-K> <C-W><C-K>
-        nnoremap <C-L> <C-W><C-L>
-        nnoremap <C-H> <C-W><C-H>
-        set splitbelow
-        set splitright
-    " ==
-    " Easier Tabs
-    nnoremap <C-T> :tabn<CR>
-    nnoremap <C-R> :tabp<CR>
-    " Easier Buffers
-    nnoremap <C-B> :bnext<CR>
-    nnoremap <C-V> :bprev<CR>
     " open NERDTREE and terminal if no file specified ==
         " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'terminal' | setlocal nonumber norelativenumber scl=no | NERDTree | endif
     " ==
@@ -299,22 +282,6 @@ endfunction
             \| exe "normal! g`\"" | endif
         endif
     " ==
-" ===
-" Getting rid of plugin stuff taking over ma' settings ===
-    " Disabled for now because trying out 'w0rp/ale' ==
-        " " vim-go taking up the <C-T> shortcut
-        " let g:go_def_mapping_enabled = 0
-        " " vim-go taking up the K key
-        " let g:go_doc_keywordprg_enabled = 0
-    " ==
-    " NERDTree taking up J
-    let g:NERDTreeMapJumpLastChild = ''
-    " NERDTree taking up K
-    let g:NERDTreeMapJumpFirstChild = ''
-    " NERDTree taking up <C-k>
-    let g:NERDTreeMapJumpPrevSibling = ''
-    " NERDTree taking up <C-j>
-    let g:NERDTreeMapJumpNextSibling = ''
 " ===
 " LSP settings ===
 " Disabled for now because trying out 'w0rp/ale' ===
@@ -395,7 +362,7 @@ command FT NERDTree
 " Shortcut to use fuzzy finder
 command F Files
 " Shortcut to close all hidden buffers
-command C call DeleteHiddenBuffers()
+command CB call DeleteHiddenBuffers()
 " Shortcut to make current file location the current working directory
 command CD cd %:p:h
 " WARNING: These commands save the file in the current buffer. ===
