@@ -250,8 +250,6 @@ endfunction
     set splitbelow
     " Set default to split above
     set splitright
-    " Scroll offset
-    set scrolloff=30
     " Required for nerdcommenter plugin
     filetype plugin on
     " NERDTree automatically shows hidden files
