@@ -10,14 +10,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" " VIM LSP Stuff ===
-" " Disabled for now because trying out 'w0rp/ale' ===
-    " Plug 'prabirshrestha/asyncomplete.vim'
-    " Plug 'prabirshrestha/async.vim'
-    " Plug 'prabirshrestha/vim-lsp'
-    " Plug 'prabirshrestha/asyncomplete-lsp.vim'
-" ===
-
 " Use .editorconfig
 Plug 'editorconfig/editorconfig-vim'
 
@@ -68,12 +60,6 @@ Plug 'junegunn/fzf.vim'
 " Typescript support
 Plug 'leafgarland/typescript-vim'
 
-" Hopefully LSP will replace one day ==
-" " Disabled for now because trying out 'w0rp/ale' ==
-    " " Go
-    " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" ==
-
 " LSP and linting
 Plug 'w0rp/ale'
 
@@ -82,49 +68,6 @@ call plug#end()
 
 
 
-
-" REGISTER LSP SERVERS:
-" **********************************
-
-" Disabled for now because trying out 'w0rp/ale' ===
-    " " Python
-    " if executable('pyls')
-    "     au User lsp_setup call lsp#register_server({
-    "     \ 'name': 'pyls',
-    "     \ 'cmd': {server_info->['pyls']},
-    "         \ 'workspace_config': {'pyls': { 'configurationSources': ['flake8', 'pycodestyle'] } },
-    "     \ 'whitelist': ['python'],
-    "     \ })
-    " endif
-
-    " " Typescript (set up to also help with JavaScript)
-    " if executable('typescript-language-server')
-    "     au User lsp_setup call lsp#register_server({
-    "       \ 'name': 'typescript-language-server',
-    "       \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-    "       \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-    "       \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
-    "       \ })
-    " endif
-
-    " " Go
-    " if executable('go-langserver')
-    "     au User lsp_setup call lsp#register_server({
-    "         \ 'name': 'go-langserver',
-    "         \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
-    "         \ 'whitelist': ['go'],
-    "         \ })
-    " endif
-
-    " " Bash
-    " if executable('bash-language-server')
-    "   au User lsp_setup call lsp#register_server({
-    "         \ 'name': 'bash-language-server',
-    "         \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
-    "         \ 'whitelist': ['sh'],
-    "         \ })
-    " endif
-" ===
 
 
 
@@ -186,19 +129,28 @@ endfunction
 
 
 
-" SETTINGS:
+" MAPPINGS:
 " **********************
 
-" Remaps ===
-    " Pressing * does not move cursor
-    nnoremap * *``
-    " Easier splitting ==
-        nnoremap <C-J> <C-W><C-J>
-        nnoremap <C-K> <C-W><C-K>
-        nnoremap <C-L> <C-W><C-L>
-        nnoremap <C-H> <C-W><C-H>
-    " ==
-" ===
+" Pressing * does not move cursor
+nnoremap * *``
+" Easier splitting ==
+    nnoremap <C-J> <C-W><C-J>
+    nnoremap <C-K> <C-W><C-K>
+    nnoremap <C-L> <C-W><C-L>
+    nnoremap <C-H> <C-W><C-H>
+" ==
+
+
+
+
+
+
+
+
+
+" SETTINGS:
+" **********************
 
 " Colorscheme settings ===
     " dark background
@@ -269,9 +221,6 @@ endfunction
             autocmd TermOpen * setlocal nonumber norelativenumber scl=no
         endif
     " ==
-    " open NERDTREE and terminal if no file specified ==
-        " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'terminal' | setlocal nonumber norelativenumber scl=no | NERDTree | endif
-    " ==
     " Open last session if no file specified
     let s:session_loaded = 1
     " Vim jump to the last position when reopening a file ==
@@ -280,25 +229,6 @@ endfunction
             \| exe "normal! g`\"" | endif
         endif
     " ==
-" ===
-" LSP settings ===
-" Disabled for now because trying out 'w0rp/ale' ===
-    " " use async for autocompletion
-    " let g:lsp_async_completion=1
-    " " optimization by reducing duplicate hint windows
-    " let g:asyncomplete_remove_duplicates=1
-    " " enable signs for warnings, errors, etc.
-    " let g:lsp_signs_enabled = 1
-    " " show error of cursor line when in normal mode
-    " let g:lsp_diagnostics_echo_cursor = 1
-    " " allow fuzzy autocompletion
-    " let g:asyncomplete_smart_completion = 1
-    " " Allow auto-popup of suggestions (required for fuzzy autocompletion)
-    " let g:asyncomplete_auto_popup = 1
-    " " Disable preview window
-    " set completeopt-=preview
-    " " <C-Space> refreshes popup window
-    " imap <c-space> <Plug>(asyncomplete_force_refresh)
 " ===
 " 'w0rp/ale' config ===
     " Override default linter dictionary to always use all linters (muahahaha)
@@ -345,12 +275,6 @@ endfunction
         command T 15split | terminal
     endif
 " ==
-" Disabled for now because trying out 'w0rp/ale' ===
-    " " Shortcut to open method definition in a vsplit
-    " command DR vsplit | LspDefinition
-    " " Shortcut to open method definition in current window
-    " command D LspDefinition
-" ===
 " Shortcut to open method definition in a vsplit
 command DR vsplit | ALEGoToDefinition
 " Shortcut to open method definition in current window
