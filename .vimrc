@@ -1,3 +1,18 @@
+" LOAD LOCAL FILE:
+" **********************
+
+try
+    source ~/.prelocalvimrc
+catch
+endtry
+
+
+
+
+
+
+
+
 " PLUGINS:
 " **********************
 

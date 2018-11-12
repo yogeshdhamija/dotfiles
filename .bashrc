@@ -1,3 +1,6 @@
+if [ -f ~/.prelocalshellrc ]; then
+    . ~/.prelocalshellrc
+fi
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
