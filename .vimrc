@@ -275,6 +275,8 @@ nnoremap * *``
     " ==
     " Change the default exeucutable from 'golangserver' to 'go-langserver'
     let g:ale_go_langserver_executable = 'go-langserver'
+    " Should fix problems with ALE autocompleting as I type (see `:h ale-completion-completopt-bug`)
+    set completeopt=menu,menuone,preview,noselect,noinsert
 " ===
 
 
