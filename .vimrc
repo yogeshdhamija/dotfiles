@@ -289,7 +289,7 @@ nnoremap * *``
 " Shortcut to create a split terminal window. ==
 " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>. ==
     if has('nvim')
-        command T 15split | terminal
+        command T 25split | terminal
     endif
 " ==
 " Shortcut to open method definition in a vsplit
