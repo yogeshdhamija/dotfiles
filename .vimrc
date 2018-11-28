@@ -277,8 +277,6 @@ nnoremap * *``
     let g:ale_go_langserver_executable = 'go-langserver'
     " Should fix problems with ALE autocompleting as I type (see `:h ale-completion-completopt-bug`)
     set completeopt=menu,menuone,preview,noselect,noinsert
-    " Turn off lint on text changed
-    let g:ale_lint_on_text_changed = 0
     " Turn off line highlights
     let g:ale_set_highlights = 0
 " ===
