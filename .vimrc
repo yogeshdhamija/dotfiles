@@ -75,8 +75,11 @@ Plug 'junegunn/fzf.vim'
 " Typescript support
 Plug 'leafgarland/typescript-vim'
 
-" LSP and linting
-Plug 'w0rp/ale'
+" LSP
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+\ }
 
 call plug#end()
 
@@ -245,42 +248,14 @@ nnoremap * *``
         endif
     " ==
 " ===
-" 'w0rp/ale' config ===
-    " Override default linter dictionary to always use all linters (muahahaha)
-    let g:ale_linters = {
-        \ 'csh': 'all',
-        \ 'go': 'all',
-        \ 'hack': 'all',
-        \ 'help': 'all',
-        \ 'perl': 'all',
-        \ 'python': 'all',
-        \ 'rust': 'all',
-        \ 'spec': 'all',
-        \ 'text': 'all',
-        \ 'zsh': 'all',
-    \}
-    " Always show sign column"
-    let g:ale_sign_column_always = 1
-    " Change sign column color when errors exist
-    let g:ale_change_sign_column_color = 1
-    " Enable autocomletion
-    " Note: Use <C-N> or <C-P> to traverse
-    let g:ale_completion_enabled = 1
-    " Show errors in status bar
-    let g:airline#extensions#ale#enabled = 1
-    " Change error message format ==
-        let g:ale_echo_msg_error_str = 'E'
-        let g:ale_echo_msg_warning_str = 'W'
-        let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-    " ==
-    " Change the default exeucutable from 'golangserver' to 'go-langserver'
-    let g:ale_go_langserver_executable = 'go-langserver'
-    " Should fix problems with ALE autocompleting as I type (see `:h ale-completion-completopt-bug`)
-    set completeopt=menu,menuone,preview,noselect,noinsert
-    " Turn off line highlights
-    let g:ale_set_highlights = 0
+" 'autozimu/LanguageClient-neovim' config ===
+    set hidden
+    let g:LanguageClient_serverCommands = {
+        \ 'python': ['pyls'],
+        \ 'java': ['jdtls'],
+        \ 'go': ['go-langserver'],
+    \ }
 " ===
-
 
 
 
@@ -295,9 +270,12 @@ nnoremap * *``
     endif
 " ==
 " Shortcut to open method definition in a vsplit
-command DR vsplit | ALEGoToDefinition
+command DR :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})
 " Shortcut to open method definition in current window
-command D ALEGoToDefinition
+command D :call LanguageClient#textDocument_definition()
+" Shortcut to open LSP context menu
+command M :call LanguageClient_contextMenu()
+
 " Shortcut to open NERDTree
 command FT NERDTree
 " Shortcut to use fuzzy finder

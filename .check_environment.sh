@@ -13,6 +13,7 @@ declare -a EXECS=(
     "pyls"
     "go-langserver"
     "tsserver"
+    "jdtls"
     "pandoc"
     "pdflatex"
 )
@@ -23,6 +24,7 @@ declare -a NAMES=(
     "Python LSP Server"
     "Go LSP Server"
     "TypeScript LSP-ish Server"
+    "Java LSP server"
     "Pandoc"
     "TeX Live"
 )
@@ -33,6 +35,7 @@ declare -a ADDITIONAL=(
     "Allows linting, go-to-def, autocomplete, etc. features for Python code."
     "Allows linting, go-to-def, autocomplete, etc. features for Go code."
     "Allows linting, go-to-def, autocomplete, etc. features for TypeScript and JavaScript code."
+    "Allows linting, go-to-def, autocomplete, etc. features for Java code. NOTE: Add an executable file `jdtls` to your PATH which runs the langserver (see: https://github.com/autozimu/LanguageClient-neovim/wiki/Java)."
     "Required for vim command to convert .md to .pdf."
     "Required for vim command to convert .md to .pdf. NOTE: For mac, install BasicTeX. For debian derivatives, apt install texlive texlive-latex-extra."
 )
