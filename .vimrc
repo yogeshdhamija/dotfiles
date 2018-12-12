@@ -119,8 +119,11 @@ endfunction
     function! s:session_vim_enter()
         if argc() == 0 && !exists("s:std_in")
             execute 'silent source ~/.vim/lastsession.vim'
-        else
-          let s:session_loaded = 0
+
+        " " Disabled because want vim to save sessions even if file was
+        " "   specifically opened
+        " else
+        "   let s:session_loaded = 0
         endif
     endfunction
 
