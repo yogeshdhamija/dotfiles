@@ -120,8 +120,7 @@ endfunction
         if argc() == 0 && !exists("s:std_in")
             execute 'silent source ~/.vim/lastsession.vim'
 
-        " " Disabled because want vim to save sessions even if file was
-        " "   specifically opened
+        " " Disabled cuz want vim to save sessions even if specific file opened
         " else
         "   let s:session_loaded = 0
         endif
@@ -257,6 +256,8 @@ nnoremap * *``
         \ 'python': ['pyls'],
         \ 'java': ['jdtls'],
         \ 'go': ['go-langserver'],
+        \ 'javascript': ['javascript-typescript-stdio'],
+        \ 'typescript': ['javascript-typescript-stdio'],
     \ }
 " ===
 

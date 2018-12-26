@@ -7,10 +7,11 @@ Here is a repository for development-related configuration files, like:
 
 ...etc.
 
-## How to set up:
+## What this does:
 
-It's cool if this repository tracks your home directory (`~`). However, if you make your home directory a git repository, it starts
-to become really annoying-- it tracks all your changes, or if you add `*` to the .gitignore, it will effect your subrepositories.
+It does _*not*_ install anything. It will only clone the files into `~`.
+
+## How to set up:
 
 What works best is to follow the method below, which I found in [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
 
@@ -21,12 +22,11 @@ What works best is to follow the method below, which I found in [this article](h
 * `cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh`
 
 This will set up a git repository in the folder `~/.cfg` with a detached working tree. This way, you can treat your home directory if as if it were a git repository
--- using the `config` command, instead of `git` -- but it won't do crazy stuff like interfere with your other git repositories. 
+-- using the `config` command, instead of `git` -- and it won't do crazy stuff like interfere with your other git repositories.
 
-### Important:
+## Notes:
 
-* __Do **not** use the `config add .` command. This will add all the untracked files in your home directory, which is **everything**.__
-
-    Instead, add things individually using `config add <file>`.
-
-    This also applies to other stuff like `config commit -a`. 
+Do *_not_* use the `config add .` command. This will add all the untracked files in your home directory, which is **everything**.
+- Instead, add things individually using `config add <file>`.
+- This also applies to other stuff like `config commit -a`.
+- If you do this accidentally, you'll have to `Ctrl+C` out of it while it's stuck, or unstage all the files you added if it somehow succeeds.
