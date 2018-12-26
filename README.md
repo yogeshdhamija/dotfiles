@@ -9,7 +9,7 @@ Here is a repository for development-related configuration files, like:
 
 ## What this does:
 
-It does _*not*_ install anything. It will only clone the files into `~`.
+It does **not** install anything. It will only clone the files into `~`.
 
 ## How to set up:
 
@@ -26,7 +26,8 @@ This will set up a git repository in the folder `~/.cfg` with a detached working
 
 ## Notes:
 
-Do *_not_* use the `config add .` command. This will add all the untracked files in your home directory, which is **everything**.
-- Instead, add things individually using `config add <file>`.
-- This also applies to other stuff like `config commit -a`.
-- If you do this accidentally, you'll have to `Ctrl+C` out of it while it's stuck, or unstage all the files you added if it somehow succeeds.
+- There will be many errors the first time you launch vim or neovim. Just skip through them-- it'll automatically install the plugins and then everything will be fine.
+- Do **not** use the `config add .` command. This will add all the untracked files in your home directory, which is **everything**.
+    - Instead, add things individually using `config add <file>`.
+    - This also applies to other stuff like `config commit -a`.
+    - If you do this accidentally, you'll have to `Ctrl+C` out of it while it's stuck, or unstage all the files you added if it somehow succeeds.
