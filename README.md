@@ -15,7 +15,11 @@ It does **not** install anything. It will only clone the files into `~`.
 
 What works best is to follow the method below, which I found in [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
 
-* `git clone --bare <THIS_REPO-URL> $HOME/.cfg`
+* Clone:
+    * HTTPS:
+        * `git clone --bare https://github.com/ydhamija96/config.git $HOME/.cfg`
+    * SSH:
+        * `git clone --bare git@github.com:ydhamija96/config.git $HOME/.cfg`
 * `alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'`
 * `config config --local status.showUntrackedFiles no`
 * `config checkout && cd ~ && config submodule init && config submodule update`
