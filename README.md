@@ -13,6 +13,12 @@ It does **not** install anything. It will only clone the files into `~`.
 
 ## How to set up:
 
+### Quick Start:
+#### SSH: 
+`source <(curl -s https://gist.githubusercontent.com/ydhamija96/d1481c18a463591bdfa199e5f0fdd3f0/raw)`
+#### HTTPS: 
+`source <(curl -s https://gist.githubusercontent.com/ydhamija96/4f56e815a9110b5a0fde4c4a32ad582f/raw)`
+
 What works best is to follow the method below, which I found in [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
 
 * Clone:
