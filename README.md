@@ -9,6 +9,8 @@ Here is a repository for development-related configuration files, like:
 
 ## Quick Start:
 
+This will **not** install anything. Just clone the repo. See the Manual Setup instructions below to find out what's happening.
+
 #### Clone using SSH: 
 `source <(curl -s https://gist.githubusercontent.com/ydhamija96/d1481c18a463591bdfa199e5f0fdd3f0/raw)`
 #### Clone using HTTPS: 
