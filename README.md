@@ -12,16 +12,16 @@ Here is a repository for development-related configuration files, like:
 This will **not** install anything. Just clone the repo. See the Manual Setup instructions below to find out what's happening.
 
 #### Clone using SSH: 
-`source <(curl -s https://gist.githubusercontent.com/ydhamija96/d1481c18a463591bdfa199e5f0fdd3f0/raw)`
+`source <(curl -sL https://raw.githubusercontent.com/ydhamija96/config/master/.cfg_scripts/config_quick_setup__ssh.sh)`
 #### Clone using HTTPS: 
-`source <(curl -s https://gist.githubusercontent.com/ydhamija96/4f56e815a9110b5a0fde4c4a32ad582f/raw)`
+`source <(curl -sL https://raw.githubusercontent.com/ydhamija96/config/master/.cfg_scripts/config_quick_setup__https.sh)`
 
 ## Quick Install:
 
 Optional. After running the quick start, this will install all the stuff I like. **Warning**: This will ruin your current setup.
 
 #### Ubuntu:
-`source <(curl -s https://gist.githubusercontent.com/ydhamija96/62e51be68aaa29d5452d143514843c66/raw)`
+`source <(curl -sL https://raw.githubusercontent.com/ydhamija96/config/master/.cfg_scripts/config_quick_install__ubuntu.sh)`
 
 ## Manual Setup:
 
