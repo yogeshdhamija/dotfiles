@@ -19,7 +19,7 @@ Here is a repository for development-related configuration files, like:
 Optional. After running the quick start, this will install all the stuff I like. **Warning**: This will ruin your current setup.
 
 #### Ubuntu:
-`source <(curl -s https://gist.github.com/ydhamija96/62e51be68aaa29d5452d143514843c66/raw)`
+`source <(curl -s https://gist.githubusercontent.com/ydhamija96/62e51be68aaa29d5452d143514843c66/raw)`
 
 ## Manual Setup:
 
