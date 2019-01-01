@@ -48,4 +48,5 @@ echo "export PATH=$PATH:$(pwd)" >> ~/.localshellrc
 
 cd ~
 
+source ~/.bash_aliases
 config-check
