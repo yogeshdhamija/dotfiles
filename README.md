@@ -21,10 +21,10 @@ This will **not** install anything. Just clone the repo. See the Manual Setup in
 Optional. After running the quick start, this will install all the stuff I like. **Warning**: This will ruin your current setup.
 
 #### Ubuntu:
-`source <(curl -sL https://raw.githubusercontent.com/ydhamija96/config/master/.cfg_scripts/config_quick_install__ubuntu.sh)`
+`bash <(curl -sL https://raw.githubusercontent.com/ydhamija96/config/master/.cfg_scripts/config_quick_install__ubuntu.sh)`
 
 #### Mac OS:
-`source <(curl -sL https://raw.githubusercontent.com/ydhamija96/config/master/.cfg_scripts/config_quick_install__mac.sh)`
+`bash <(curl -sL https://raw.githubusercontent.com/ydhamija96/config/master/.cfg_scripts/config_quick_install__mac.sh)`
 
 ## Manual Setup:
 
