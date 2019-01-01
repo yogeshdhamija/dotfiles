@@ -32,7 +32,7 @@ mkdir $HOME/Stuff/golang_workdir -p
 export GOPATH=$HOME/Stuff/golang_workdir
 echo "export GOPATH=$HOME/Stuff/golang_workdir" >> ~/.localshellrc
 export PATH=$PATH:$(go env GOPATH)/bin
-echo "export PATH=$PATH:$(go env GOPATH)/bin" >> ~/.localshellrc
+echo "export PATH=\$PATH:$(go env GOPATH)/bin" >> ~/.localshellrc
 go get -u github.com/sourcegraph/go-langserver
 
 # jdtls (java language server):
@@ -44,7 +44,7 @@ rm -rf ./jdt-language-server-latest.tar.gz
 echo "#!/usr/bin/env sh\nserver='$(pwd)'\njava -Declipse.application=org.eclipse.jdt.ls.core.id1 -Dosgi.bundles.defaultStartLevel=4 -Declipse.product=org.eclipse.jdt.ls.core.product -noverify -Xms1G -jar $server/plugins/org.eclipse.equinox.launcher_1.*.jar -configuration $server/config_linux/ "$@"\n" > jdtls
 chmod +x ./jdtls
 export PATH=$PATH:$(pwd)
-echo "export PATH=$PATH:$(pwd)" >> ~/.localshellrc
+echo "export PATH=\$PATH:$(pwd)" >> ~/.localshellrc
 
 cd ~
 
