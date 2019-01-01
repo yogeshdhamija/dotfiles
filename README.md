@@ -7,20 +7,21 @@ Here is a repository for development-related configuration files, like:
 
 ...etc.
 
-## What this does:
+## Quick Start:
 
-It does **not** install anything. It will only clone the files into `~`.
-
-## How to set up:
-
-### Quick Start:
-
-#### SSH: 
+#### Clone using SSH: 
 `source <(curl -s https://gist.githubusercontent.com/ydhamija96/d1481c18a463591bdfa199e5f0fdd3f0/raw)`
-#### HTTPS: 
+#### Clone using HTTPS: 
 `source <(curl -s https://gist.githubusercontent.com/ydhamija96/4f56e815a9110b5a0fde4c4a32ad582f/raw)`
 
-### Actual Process:
+## Quick Install:
+
+Optional. After running the quick start, this will install all the stuff I like. **Warning**: This will ruin your current setup.
+
+#### Ubuntu:
+`source <(curl -s https://gist.github.com/ydhamija96/62e51be68aaa29d5452d143514843c66/raw)`
+
+## Manual Setup:
 
 What works best is to follow the method below, which I found in [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
 
