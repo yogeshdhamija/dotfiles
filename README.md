@@ -23,6 +23,9 @@ Optional. After running the quick start, this will install all the stuff I like.
 #### Ubuntu:
 `source <(curl -sL https://raw.githubusercontent.com/ydhamija96/config/master/.cfg_scripts/config_quick_install__ubuntu.sh)`
 
+#### Mac OS:
+`source <(curl -sL https://raw.githubusercontent.com/ydhamija96/config/master/.cfg_scripts/config_quick_install__mac.sh)`
+
 ## Manual Setup:
 
 What works best is to follow the method below, which I found in [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
