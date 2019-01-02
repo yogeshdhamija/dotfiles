@@ -30,8 +30,8 @@ brew cask install java
 sudo npm install -g javascript-typescript-langserver
 
 # pyls:
-sudo pip install -U --system setuptools
-sudo pip install -U --system 'python-language-server[all]'
+sudo pip3 install -U --system setuptools
+sudo pip3 install -U --system 'python-language-server[all]'
 
 # golang, and go-langserver:
 mkdir $HOME/Stuff/golang_workdir -p
