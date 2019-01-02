@@ -34,7 +34,7 @@ sudo pip3 install -U setuptools
 sudo pip3 install -U 'python-language-server[all]'
 
 # golang, and go-langserver:
-mkdir $HOME/Stuff/golang_workdir -p
+mkdir -p $HOME/Stuff/golang_workdir
 export GOPATH=$HOME/Stuff/golang_workdir
 echo "export GOPATH=$HOME/Stuff/golang_workdir" >> ~/.localshellrc
 export PATH=$PATH:$(go env GOPATH)/bin
@@ -42,7 +42,7 @@ echo "export PATH=\$PATH:$(go env GOPATH)/bin" >> ~/.localshellrc
 go get -u github.com/sourcegraph/go-langserver
 
 # jdtls (java language server):
-mkdir $HOME/Stuff/Deps/jdtls
+mkdir -p $HOME/Stuff/Deps/jdtls
 cd $HOME/Stuff/Deps/jdtls
 curl -OL https://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz
 tar -xzvf jdt-language-server-latest.tar.gz
