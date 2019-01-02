@@ -48,5 +48,4 @@ echo "export PATH=\$PATH:$(pwd)" >> ~/.localshellrc
 
 cd ~
 
-source ~/.bash_aliases
-config-check
+cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh
