@@ -47,7 +47,7 @@ cd $HOME/Stuff/Deps/jdtls
 curl -OL https://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz
 tar -xzvf jdt-language-server-latest.tar.gz
 rm -rf ./jdt-language-server-latest.tar.gz
-echo "#!/usr/bin/env sh\nserver='$(pwd)'\njava -Declipse.application=org.eclipse.jdt.ls.core.id1 -Dosgi.bundles.defaultStartLevel=4 -Declipse.product=org.eclipse.jdt.ls.core.product -noverify -Xms1G -jar $server/plugins/org.eclipse.equinox.launcher_1.*.jar -configuration $server/config_mac/ "$@"\n" > jdtls
+echo "#!/usr/bin/env sh\nserver='$(pwd)'\njava -Declipse.application=org.eclipse.jdt.ls.core.id1 -Dosgi.bundles.defaultStartLevel=4 -Declipse.product=org.eclipse.jdt.ls.core.product -noverify -Xms1G -jar \$server/plugins/org.eclipse.equinox.launcher_1.*.jar -configuration \$server/config_mac/ "$@"\n" > jdtls
 chmod +x ./jdtls
 export PATH=$PATH:$(pwd)
 echo "export PATH=\$PATH:$(pwd)" >> ~/.localshellrc
