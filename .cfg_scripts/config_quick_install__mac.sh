@@ -42,7 +42,7 @@ echo "export PATH=\$PATH:$(go env GOPATH)/bin" >> ~/.localshellrc
 go get -u github.com/sourcegraph/go-langserver
 
 # jdtls (java language server):
-mkdir -p $HOME/Stuff/Deps/jdtls
+mkdir $HOME/Stuff/Deps/jdtls
 cd $HOME/Stuff/Deps/jdtls
 curl -OL https://download.eclipse.org/jdtls/snapshots/jdt-language-server-latest.tar.gz
 tar -xzvf jdt-language-server-latest.tar.gz
