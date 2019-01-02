@@ -30,13 +30,13 @@ declare -a NAMES=(
 )
 declare -a ADDITIONAL=(
     ""
-    "NOTE: \`chsh -s \$(which zsh)\` to change default terminal to zsh."
     ""
     ""
-    "NOTE: For mac, install BasicTeX. For debian derivatives, apt install texlive texlive-latex-extra."
     ""
     ""
-    "NOTE: Add an executable file 'jdtls' to your PATH which runs the langserver (see: https://github.com/autozimu/LanguageClient-neovim/wiki/Java)."
+    ""
+    ""
+    ""
     ""
 )
 
@@ -59,7 +59,7 @@ do
     if [ -x "$(command -v ${EXECS[$i-1]})" ]; then
         echo '    -' ${NAMES[$i-1]} '('${EXECS[$i-1]}')'
         [[ ! -z ${ADDITIONAL[$i-1]} ]] && echo '        ' ${ADDITIONAL[$i-1]} 
-        echo ""
+        # echo ""
     fi
 done
 
@@ -71,6 +71,6 @@ do
     if ! [ -x "$(command -v ${EXECS[$i-1]})" ]; then
         echo '    -' ${NAMES[$i-1]} '('${EXECS[$i-1]}')'
         [[ ! -z ${ADDITIONAL[$i-1]} ]] && echo '        ' ${ADDITIONAL[$i-1]}
-        echo ""
+        # echo ""
     fi
 done
