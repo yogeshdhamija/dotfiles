@@ -24,8 +24,6 @@ brew tap homebrew/cask-versions
 brew install vim neovim the_silver_searcher pandoc python go node
 brew cask install java
 
-# BasicTeX: TODO
-
 # javascript-typescript-langserver:
 sudo npm install -g javascript-typescript-langserver
 
@@ -51,6 +49,18 @@ echo "#!/usr/bin/env sh\nserver='$(pwd)'\njava -Declipse.application=org.eclipse
 chmod +x ./jdtls
 export PATH=$PATH:$(pwd)
 echo "export PATH=\$PATH:$(pwd)" >> ~/.localshellrc
+
+# BasicTeX:
+mkdir -p $HOME/Stuff/Deps/basictex
+cd $HOME/Stuff/Deps/basictex
+curl -OL http://tug.org/cgi-bin/mactex-download/BasicTeX.pkg
+sudo installer -verbose -pkg ./BasicTeX.pkg -target /
+cd ..
+rm -rf ./basictex
+cd /usr/local/texlive/*basic/bin/*darwin
+export PATH=$PATH:$(pwd)
+echo "export PATH=\$PATH:$(pwd)" >> ~/.localshellrc
+
 
 cd ~
 
