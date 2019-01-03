@@ -288,18 +288,16 @@ command F Files
 command CB call DeleteHiddenBuffers()
 " Shortcut to make current file location the current working directory
 command CD cd %:p:h
-" WARNING: These commands save the file in the current buffer. ===
-    " Shortcut to generate .pdf from .md
-    command PDF w |exe '! pandoc "%:p" -o "%:p:r.pdf" -V fontsize=12pt'
-    " Move current buffer to new tab
-    command B w | tab split | tabp | close | tabn
-    " Move current buffer to split in previous tab
-    command S w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn
-    " Move current buffer to new tab and turn off line numbers (good for copying)
-    command BN w | tab split | tabp | close | tabn | set nonumber | set scl=no
-    " Move current buffer to split in previous tab and turn on line numbers
-    command SN w | let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn | set number | set scl=yes
-" ===
+" Shortcut to save and generate .pdf from .md
+command PDF w |exe '! pandoc "%:p" -o "%:p:r.pdf" -V fontsize=12pt'
+" Move current buffer to new tab
+command B tab split | tabp | close | tabn
+" Move current buffer to split in previous tab
+command S let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn
+" Move current buffer to new tab and turn off line numbers (good for copying)
+command BN tab split | tabp | close | tabn | set nonumber | set scl=no
+" Move current buffer to split in previous tab and turn on line numbers
+command SN let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn | set number | set scl=yes
 
 
 
