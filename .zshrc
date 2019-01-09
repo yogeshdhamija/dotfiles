@@ -18,7 +18,6 @@ ZSH_THEME="steeef"
 # looking in ~/.oh-my-zsh/themes/
 # An empty array have no effect
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-ZSH_THEME_RANDOM_CANDIDATES=( "rixius" "fino" "steeef" "agnoster_light" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -67,6 +66,10 @@ ZSH_THEME_RANDOM_CANDIDATES=( "rixius" "fino" "steeef" "agnoster_light" )
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  docker
+  docker-compose
+  web-search
+  common-aliases
 )
 
 source $ZSH/oh-my-zsh.sh
