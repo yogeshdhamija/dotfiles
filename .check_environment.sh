@@ -10,7 +10,6 @@ declare -a EXECS=(
     "nvim"
     "zsh"
     "ag"
-    "tmux"
     "pandoc"
     "pdflatex"
     "pyls"
@@ -22,7 +21,6 @@ declare -a NAMES=(
     "NeoVim" 
     "ZShell"
     "The Silver Searcher"
-    "tmux"
     "Pandoc"
     "TeX Live"
     "Python LSP Server"
@@ -31,7 +29,6 @@ declare -a NAMES=(
     "Javascript + Typescript LSP Server"
 )
 declare -a ADDITIONAL=(
-    ""
     ""
     ""
     ""
