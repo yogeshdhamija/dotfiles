@@ -18,7 +18,7 @@ sudo add-apt-repository -y ppa:longsleep/golang-backports
 sudo apt-get update
 
 # Apt packages:
-sudo apt install -y vim neovim silversearcher-ag pandoc texlive texlive-latex-extra python3 python3-pip golang-go npm openjdk-8-jdk
+sudo apt install -y vim neovim silversearcher-ag pandoc texlive texlive-latex-extra python3 python3-pip golang-go npm openjdk-8-jdk tmux
 
 # javascript-typescript-langserver:
 sudo npm install -g javascript-typescript-langserver
