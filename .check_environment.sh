@@ -4,7 +4,6 @@
 declare -a NOTES=(
     "Welcome!"
     "Here is some software integrated into this config (or just that I recommend)."
-    "NOTE: Remember to set your terminal to use one of the provided fonts in the ~/.fonts directory."
 )
 declare -a EXECS=(
     "nvim"

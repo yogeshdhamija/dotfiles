@@ -188,8 +188,6 @@ nnoremap * *``
     let g:indent_guides_color_change_percent = 2
     " enable indent guides
     let g:indent_guides_enable_on_vim_startup = 1
-    " enable vim-airline powerline font icons
-    let g:airline_powerline_fonts = 1
     " enable vim-airline tab bar
     let g:airline#extensions#tabline#enabled = 1
     " vim-airline theme
@@ -290,7 +288,6 @@ command CB call DeleteHiddenBuffers()
 " Shortcut to make current file location the current working directory
 command CD cd %:p:h
 " Shortcut to save and generate .pdf from .md
-" command PDF w |exe '! pandoc "%:p" -o "%:p:r.pdf" -V fontsize=12pt'
 command PDF w |exe '! pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf"'
 " Move current buffer to new tab
 command B tab split | tabp | close | tabn
