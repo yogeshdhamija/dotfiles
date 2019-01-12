@@ -73,11 +73,9 @@ plugins=(
   ssh
   colored-man-pages
   zsh-autosuggestions
+  zsh-syntax-highlighting
 )
-
 source $ZSH/oh-my-zsh.sh
-
-# User configuration
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 if [ -f ~/.bash_aliases ]; then
@@ -89,7 +87,10 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
+# User configuration
+
+bindkey ^f forward-word
+
 
 if [ -f ~/.localshellrc ]; then
     . ~/.localshellrc
