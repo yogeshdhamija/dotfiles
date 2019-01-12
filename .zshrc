@@ -71,6 +71,8 @@ plugins=(
   web-search
   common-aliases
   ssh
+  colored-man-pages
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
