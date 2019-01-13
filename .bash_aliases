@@ -18,7 +18,7 @@ alias "fucking"="sudo"
 alias "config-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh"
 
 # config-update: Pull from repo, check if any submodule updates exist, show status
-alias "config-update"="cd ~ && config remote update && config pull && config checkout && config submodule init && config submodule update && config submodule update --remote && config status && mv ~/.vim/lastsession.vim ~/.vim/lastsession.vim.old && vim +PlugUpgrade +PlugUpdate +ClearSession && mv ~/.vim/lastsession.vim.old ~/.vim/lastsession.vim"
+alias "config-update"="cd ~ && config remote update && config pull && config checkout && config submodule init && config submodule update && config submodule update --remote && config status; mv ~/.vim/lastsession.vim ~/.vim/lastsession.vim.old > /dev/null 2>&1; vim +PlugUpgrade +PlugUpdate +ClearSession; mv ~/.vim/lastsession.vim.old ~/.vim/lastsession.vim > /dev/null 2>&1;"
 
 # Config pretty git log
 alias "config-log"="config log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"

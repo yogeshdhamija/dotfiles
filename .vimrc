@@ -296,7 +296,7 @@ command BN tab split | tabp | close | tabn | set nonumber | set scl=no
 " Move current buffer to split in previous tab and turn on line numbers
 command SN let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn | set number | set scl=yes
 " Delete vim session and quit
-command ClearSession let s:session_loaded = 0 | exe '!rm ~/.vim/lastsession.vim' | qa
+command ClearSession let s:session_loaded = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
 
 
 
