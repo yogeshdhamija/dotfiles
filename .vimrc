@@ -118,11 +118,9 @@ endfunction
 
     function! s:session_vim_enter()
         if argc() == 0 && !exists("s:std_in")
-            execute 'silent source ~/.vim/lastsession.vim'
-
-        " " Disabled cuz want vim to save sessions even if specific file opened
-        " else
-        "   let s:session_loaded = 0
+            if filereadable(expand('~/.vim/lastsession.vim'))
+                execute 'silent source ~/.vim/lastsession.vim'
+            endif
         endif
     endfunction
 
@@ -297,6 +295,8 @@ command S let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | cl
 command BN tab split | tabp | close | tabn | set nonumber | set scl=no
 " Move current buffer to split in previous tab and turn on line numbers
 command SN let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn | set number | set scl=yes
+" Delete vim session and quit
+command ClearSession let s:session_loaded = 0 | exe '!rm ~/.vim/lastsession.vim' | qa
 
 
 
