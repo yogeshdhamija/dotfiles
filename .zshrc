@@ -89,7 +89,7 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
 # User configuration
 
-bindkey ^e forward-word
+bindkey ^f forward-word
 
 
 if [ -f ~/.localshellrc ]; then
