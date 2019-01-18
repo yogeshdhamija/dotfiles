@@ -66,6 +66,7 @@ function _ssh_completion() {
 }
 complete -W "$(_ssh_completion)" ssh
 
+export LESS="-RXF"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 

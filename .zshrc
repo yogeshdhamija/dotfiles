@@ -89,6 +89,7 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
 # User configuration
 
+export LESS="-RXF"
 bindkey ^f forward-word
 
 
