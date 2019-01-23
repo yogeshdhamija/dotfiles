@@ -15,10 +15,10 @@ alias "git-log"="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yel
 alias "fucking"="sudo"
 
 # Check config status
-alias "config-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh"
+alias "config-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh && cd -"
 
 # config-update: Pull from repo, check if any submodule updates exist, show status
-alias "config-update"="cd ~ && config remote update && config pull && config checkout && config submodule init && config submodule update && config submodule update --remote && config status; mv ~/.vim/lastsession.vim ~/.vim/lastsession.vim.old > /dev/null 2>&1; vim +PlugUpgrade +PlugUpdate +ClearSession; mv ~/.vim/lastsession.vim.old ~/.vim/lastsession.vim > /dev/null 2>&1;"
+alias "config-update"="cd ~ && config remote update && config pull && config checkout && config submodule init && config submodule update && config submodule update --remote && config status; mv ~/.vim/lastsession.vim ~/.vim/lastsession.vim.old > /dev/null 2>&1; vim +PlugUpgrade +PlugUpdate +ClearSession; mv ~/.vim/lastsession.vim.old ~/.vim/lastsession.vim > /dev/null 2>&1; cd -"
 
 # Config pretty git log
 alias "config-log"="config log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
