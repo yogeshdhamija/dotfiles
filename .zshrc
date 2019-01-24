@@ -74,6 +74,7 @@ plugins=(
   colored-man-pages
   zsh-autosuggestions
   zsh-syntax-highlighting
+  gradle
 )
 source $ZSH/oh-my-zsh.sh
 
