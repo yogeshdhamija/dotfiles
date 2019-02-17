@@ -1,0 +1,12 @@
+set surround
+
+source ~/.vimrc
+
+map \t :action ActivateTerminalToolWindow<CR>
+map \dr :action VimWindowSplitVertical<CR> :action GotoDeclaration<CR>
+map \d :action GotoDeclaration<CR>
+map \bn :action NextTab<CR>
+map \cb :action CloseAllEditorsButActive<CR>
+map \m :action SearchEverywhere<CR>
+map \o :action SearchEverywhere<CR>
+map \f :action SearchEverywhere<CR>

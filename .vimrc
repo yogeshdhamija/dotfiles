@@ -101,7 +101,7 @@ function! DeleteHiddenBuffers()
   call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
   for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
     if getbufvar(buf, '&mod') == 0
-      silent execute 'bwipeout' buf
+      silent execute 'bwipeout!' buf
       let closed += 1
     endif
   endfor
@@ -209,6 +209,8 @@ nnoremap * *``
 " ===
 
 " General settings ===
+    " Set leader key
+    let mapleader = "\\"
     " Mouse
     set mouse=a
     " Highlight all terms when searched using '/'
@@ -267,26 +269,34 @@ nnoremap * *``
 " Shortcut to create a split terminal window. ==
 " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>. ==
     if has('nvim')
-        command T 25split | terminal
+        map <Leader>t :25split<CR> :terminal<CR>
+    else
+        map <Leader>t :terminal<CR>
     endif
 " ==
 " Shortcut to open method definition in a vsplit
-command DR :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})
+map <Leader>dr :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
 " Shortcut to open method definition in current window
-command D :call LanguageClient#textDocument_definition()
+map <Leader>d :call LanguageClient#textDocument_definition()<CR>
 " Shortcut to open LSP context menu
-command M :call LanguageClient_contextMenu()
+map <Leader>m :call LanguageClient_contextMenu()<CR>
 
 " Shortcut to open NERDTree
-command FT NERDTree
-" Shortcut to use fuzzy finder
-command F Files
+map <Leader>ft :NERDTree<CR>
+" Shortcut to use fuzzy file finder ('o' for 'open')
+map <Leader>o :Files<CR>
+" Shortcut to use default silver searcher commands
+    command! -bang -nargs=+ -complete=dir Rag call fzf#vim#ag_raw(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+    map <Leader>f :Rag 
 " Shortcut to close all hidden buffers
-command CB call DeleteHiddenBuffers()
+map <Leader>cb :call DeleteHiddenBuffers()<CR>
 " Shortcut to make current file location the current working directory
-command CD cd %:p:h
+    command CD cd %:p:h
+    map <Leader>cd :cd<CR> :pwd<CR>
+    map <Leader>CD :CD<CR> :pwd<CR>
+
 " Shortcut to save and generate .pdf from .md
-command PDF w |exe '! pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf"'
+command PDF w | exe '! pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf"'
 " Move current buffer to new tab
 command B tab split | tabp | close | tabn
 " Move current buffer to split in previous tab
