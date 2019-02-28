@@ -294,17 +294,17 @@ map <Leader>cb :call DeleteHiddenBuffers()<CR>
     command CD cd %:p:h
     map <Leader>cd :cd<CR> :pwd<CR>
     map <Leader>CD :CD<CR> :pwd<CR>
-
-" Shortcut to save and generate .pdf from .md
-command PDF w | exe '! pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf"'
 " Move current buffer to new tab
-command B tab split | tabp | close | tabn
+map <Leader>b :tab split<CR> :tabp<CR> :close<CR> :tabn<CR>
 " Move current buffer to split in previous tab
-command S let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn
+map <Leader>s :let bufn = bufname('%')<CR> :tabp<CR> :exe 'vertical sb ' . bufn<CR> :tabn<CR> :close<CR> :tabp<CR> :unlet bufn<CR>
 " Move current buffer to new tab and turn off line numbers (good for copying)
-command BN tab split | tabp | close | tabn | set nonumber | set scl=no
+map <Leader>bn :tab split<CR> :tabp<CR> :close<CR> :tabn<CR> :set nonumber<CR> :set scl=no<CR>
 " Move current buffer to split in previous tab and turn on line numbers
-command SN let bufn = bufname('%') | tabp | exe 'vertical sb ' . bufn | tabn | close | tabp | unlet bufn | set number | set scl=yes
+map <Leader>sn :let bufn = bufname('%')<CR> :tabp<CR> :exe 'vertical sb ' . bufn<CR> :tabn<CR> :close<CR> :tabp<CR> :unlet bufn<CR> :set number<CR> :set scl=yes<CR>
+
+" Command to save and generate .pdf from .md
+command PDF w | exe '! pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf"'
 " Delete vim session and quit
 command ClearSession let s:session_loaded = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
 
