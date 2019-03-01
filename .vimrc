@@ -69,6 +69,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Fuzzy finder
 " Note: If silver searcher is installed, :Ag to search.
+" TODO: Look for better. Silver Searcher (ag) offers better functionality.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
     
@@ -284,10 +285,10 @@ map <Leader>m :call LanguageClient_contextMenu()<CR>
 " Shortcut to open NERDTree
 map <Leader>ft :NERDTree<CR>
 " Shortcut to use fuzzy file finder ('o' for 'open')
-map <Leader>o :Files<CR>
+map <Leader>o :FZF<CR>
 " Shortcut to use default silver searcher commands
-    command! -bang -nargs=+ -complete=dir Rag call fzf#vim#ag_raw(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
-    map <Leader>f :Rag 
+    " command! -bang -nargs=+ -complete=dir Rag call fzf#vim#ag_raw(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+map <Leader>f :Ag<CR>
 " Shortcut to close all hidden buffers
 map <Leader>cb :call DeleteHiddenBuffers()<CR>
 " Shortcut to make current file location the current working directory
