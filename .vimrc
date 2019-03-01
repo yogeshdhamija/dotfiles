@@ -155,7 +155,14 @@ endfunction
 
 " Pressing * does not move cursor
 nnoremap * *``
-
+" Nerdtree change open in vsplit to `v` instead of `s`
+    let NERDTreeMapOpenVSplit='v'
+    let NERDTreeMapPreviewVSplit='gv'
+" Ack.vim change open vsplit to right side
+    " and add 'V' to open in split and close search
+let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
+            \ "gv": "<C-W><CR><C-W>L<C-W>p<C-W>J" ,
+            \ "V": "<C-W><CR><C-W>L<C-W>p:bd<CR><C-W>p"}
 
 
 
@@ -292,7 +299,7 @@ map <Leader>lm :call LanguageClient_contextMenu()<CR>
 " Shortcut to search ('f' for 'find')
 map <Leader>f :LAck!<Space>
 " Shortcut to open dir tree ('d' for 'dirtree')
-map <Leader>d :NERDTree<CR>
+map <Leader>d :NERDTreeToggle<CR>
 " Shortcut to use fuzzy file finder ('o' for 'open')
 map <Leader>o :FZF<CR>
 " Cycle buffers ('r' for 'right')
