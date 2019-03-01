@@ -9,23 +9,23 @@ declare -a EXECS=(
     "nvim"
     "zsh"
     "ag"
-    "pandoc"
-    "pdflatex"
     "pyls"
     "go-langserver"
     "jdtls"
     "javascript-typescript-stdio"
+    "pandoc"
+    "pdflatex"
 )
 declare -a NAMES=(
     "NeoVim" 
     "ZShell"
     "The Silver Searcher"
-    "Pandoc"
-    "TeX Live"
     "Python LSP Server"
     "Go LSP Server"
     "Java LSP Server"
     "Javascript + Typescript LSP Server"
+    "Pandoc"
+    "TeX Live"
 )
 declare -a ADDITIONAL=(
     ""

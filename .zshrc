@@ -89,8 +89,14 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 # User configuration
 
 export LESS="-RXF"
-bindkey ^f forward-word
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
+bindkey ^W forward-word
+bindkey ^B backward-word
+bindkey ^D backward-kill-word
+
+bindkey ^E end-of-line
+bindkey ^A beginning-of-line
 
 if [ -f ~/.localshellrc ]; then
     . ~/.localshellrc

@@ -67,6 +67,7 @@ function _ssh_completion() {
 complete -W "$(_ssh_completion)" ssh
 
 export LESS="-RXF"
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 

@@ -67,9 +67,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+" Search
+Plug 'mileszs/ack.vim'
+
 " Fuzzy finder
-" Note: If silver searcher is installed, :Ag to search.
-" TODO: Look for better. Silver Searcher (ag) offers better functionality.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
     
@@ -149,17 +150,11 @@ endfunction
 
 
 
-" MAPPINGS:
+" REMAPS:
 " **********************
 
 " Pressing * does not move cursor
 nnoremap * *``
-" Easier splitting ==
-    nnoremap <C-J> <C-W><C-J>
-    nnoremap <C-K> <C-W><C-K>
-    nnoremap <C-L> <C-W><C-L>
-    nnoremap <C-H> <C-W><C-H>
-" ==
 
 
 
@@ -211,7 +206,7 @@ nnoremap * *``
 
 " General settings ===
     " Set leader key
-    let mapleader = "\\"
+    let mapleader = ";"
     " Mouse
     set mouse=a
     " Highlight all terms when searched using '/'
@@ -241,6 +236,10 @@ nnoremap * *``
             autocmd TermOpen * setlocal nonumber norelativenumber scl=no
         endif
     " ==
+    " Set search to use silver searcher
+    let g:ackprg = 'ag --nogroup --nocolor --column'
+    " Highlight search results on open
+    let g:ackhighlight = 1
     " Open last session if no file specified
     let s:session_loaded = 1
     " Vim jump to the last position when reopening a file ==
@@ -275,34 +274,38 @@ nnoremap * *``
         map <Leader>t :terminal<CR>
     endif
 " ==
-" Shortcut to open method definition in a vsplit
-map <Leader>dr :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
-" Shortcut to open method definition in current window
-map <Leader>d :call LanguageClient#textDocument_definition()<CR>
-" Shortcut to open LSP context menu
-map <Leader>m :call LanguageClient_contextMenu()<CR>
 
-" Shortcut to open NERDTree
-map <Leader>ft :NERDTree<CR>
-" Shortcut to use fuzzy file finder ('o' for 'open')
-map <Leader>o :FZF<CR>
-" Shortcut to use default silver searcher commands
-    " command! -bang -nargs=+ -complete=dir Rag call fzf#vim#ag_raw(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
-map <Leader>f :Ag<CR>
-" Shortcut to close all hidden buffers
-map <Leader>cb :call DeleteHiddenBuffers()<CR>
+" Alias for buffer delete
+map <Leader>bd :bd<CR>
+" Shortcut to close all hidden buffers ('bca' -> 'buffers close all')
+map <Leader>bca :call DeleteHiddenBuffers()<CR>
 " Shortcut to make current file location the current working directory
     command CD cd %:p:h
     map <Leader>cd :cd<CR> :pwd<CR>
     map <Leader>CD :CD<CR> :pwd<CR>
-" Move current buffer to new tab
-map <Leader>b :tab split<CR> :tabp<CR> :close<CR> :tabn<CR>
-" Move current buffer to split in previous tab
-map <Leader>s :let bufn = bufname('%')<CR> :tabp<CR> :exe 'vertical sb ' . bufn<CR> :tabn<CR> :close<CR> :tabp<CR> :unlet bufn<CR>
+" Open method definition in current window ('ld' -> 'lsp definition')
+map <Leader>ld :call LanguageClient#textDocument_definition()<CR>
+" Shortcut to open method definition in a vsplit
+map <Leader>ldr :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
+" Shortcut to open LSP context menu
+map <Leader>lm :call LanguageClient_contextMenu()<CR>
+" Shortcut to search ('f' for 'find')
+map <Leader>f :LAck!<Space>
+" Shortcut to open dir tree ('d' for 'dirtree')
+map <Leader>d :NERDTree<CR>
+" Shortcut to use fuzzy file finder ('o' for 'open')
+map <Leader>o :FZF<CR>
+" Cycle buffers ('r' for 'right')
+map <Leader>r :bn<CR>
+
+" Move current buffer to new tab ('vb' for 'view big')
+map <Leader>vb :tab split<CR> :tabp<CR> :close<CR> :tabn<CR>
 " Move current buffer to new tab and turn off line numbers (good for copying)
-map <Leader>bn :tab split<CR> :tabp<CR> :close<CR> :tabn<CR> :set nonumber<CR> :set scl=no<CR>
+map <Leader>vbn :tab split<CR> :tabp<CR> :close<CR> :tabn<CR> :set nonumber<CR> :set scl=no<CR>
+" Move current buffer to split in previous tab
+map <Leader>vs :let bufn = bufname('%')<CR> :tabp<CR> :exe 'vertical sb ' . bufn<CR> :tabn<CR> :close<CR> :tabp<CR> :unlet bufn<CR>
 " Move current buffer to split in previous tab and turn on line numbers
-map <Leader>sn :let bufn = bufname('%')<CR> :tabp<CR> :exe 'vertical sb ' . bufn<CR> :tabn<CR> :close<CR> :tabp<CR> :unlet bufn<CR> :set number<CR> :set scl=yes<CR>
+map <Leader>vsn :let bufn = bufname('%')<CR> :tabp<CR> :exe 'vertical sb ' . bufn<CR> :tabn<CR> :close<CR> :tabp<CR> :unlet bufn<CR> :set number<CR> :set scl=yes<CR>
 
 " Command to save and generate .pdf from .md
 command PDF w | exe '! pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf"'
