@@ -182,7 +182,7 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
     " syntax highlighting (I think)
     syntax enable
     " colorscheme
-    colorscheme molokai
+    silent! colorscheme molokai
     " make indent lines 1 character wide
     let g:indent_guides_guide_size = 1
     " make indent guide lines subtle
