@@ -90,6 +90,7 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
 export LESS="-RXF"
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_CTRL_T_COMMAND='ag --hidden --ignore .git -g ""'
 
 bindkey ^W forward-word
 bindkey ^B backward-word
