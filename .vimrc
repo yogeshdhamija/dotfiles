@@ -244,7 +244,9 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
         endif
     " ==
     " Set search to use silver searcher
-    let g:ackprg = 'ag --nogroup --nocolor --column'
+    if executable('ag')
+        let g:ackprg = 'ag --nogroup --nocolor --column'
+    endif
     " Highlight search results on open
     let g:ackhighlight = 1
     " Open last session if no file specified
