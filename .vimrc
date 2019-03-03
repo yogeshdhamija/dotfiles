@@ -113,21 +113,23 @@ endfunction
 " Opening last session if no arguments when vim is opened ===
     augroup autosession
       autocmd StdinReadPre * let s:std_in=1
-      autocmd VimEnter * nested call s:session_vim_enter()
+      autocmd VimEnter * nested call s:load_session_if_no_args()
       autocmd VimLeavePre * NERDTreeClose
-      autocmd FileWritePost,VimLeavePre * call s:session_vim_leave()
+      autocmd FileWritePost,VimLeavePre * call s:save_session_if_flag_set()
     augroup END
 
-    function! s:session_vim_enter()
+    function! s:load_session_if_no_args()
         if argc() == 0 && !exists("s:std_in")
             if filereadable(expand('~/.vim/lastsession.vim'))
                 execute 'silent source ~/.vim/lastsession.vim'
             endif
+        else
+            let s:should_save_session = 0
         endif
     endfunction
 
-    function! s:session_vim_leave()
-      if s:session_loaded == 1
+    function! s:save_session_if_flag_set()
+      if s:should_save_session == 1
         let sessionoptions = &sessionoptions
         try
             set sessionoptions-=options
@@ -230,6 +232,8 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
     filetype plugin on
     " NERDTree automatically shows hidden files
     let NERDTreeShowHidden=1
+    " Enable open last session if no file specified
+    let s:should_save_session = 1
     " NERDTree don't collapse directories with one child
     let NERDTreeCascadeSingleChildDir=0
     " Airline don't show whitespace errors
@@ -251,8 +255,6 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
     endif
     " Highlight search results on open
     let g:ackhighlight = 1
-    " Open last session if no file specified
-    let s:session_loaded = 1
     " Vim jump to the last position when reopening a file ==
         if has("autocmd")
           au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
@@ -321,7 +323,7 @@ map <Leader>vsn :let bufn = bufname('%')<CR> :tabp<CR> :exe 'vertical sb ' . buf
 " Command to save and generate .pdf from .md
 command PDF w | exe '! pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf"'
 " Delete vim session and quit
-command ClearSession let s:session_loaded = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
+command ClearSession let s:should_save_session = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
 
 
 
