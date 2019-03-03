@@ -12,8 +12,9 @@ alias "docker-mininuke"='docker stop $(docker ps -a -q); docker rm $(docker ps -
 # Pretty git log
 alias "git-log"="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 
-# General stuff
-alias "fucking"="sudo"
+# I am Vim
+alias ":q"="exit"
+alias ":e"="vim"
 
 # Check config status
 alias "config-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh && cd -"
