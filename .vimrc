@@ -25,63 +25,42 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" Use .editorconfig
-Plug 'editorconfig/editorconfig-vim'
-
-" Show git changes in sign column
-Plug 'mhinz/vim-signify'
-
-" Make . work for plugins that support it
-Plug 'tpope/vim-repeat'
-
-" Commenting
-" Example: gc2j = go comment 2 down
-" Note: gc = go comment
-Plug 'tpope/vim-commentary'
-
-" Ability to surround objects
-" Example: ysiw] = yes surround inner word with []
-" Example: cs'" = change surrounding ' to "
-" Example: ds" = delete surrounding "
-" Note: [ for space, ] for no space
-Plug 'tpope/vim-surround'
-
-" Adding indent-level as a text object
-" Example: dii = delete inner indent
-Plug 'michaeljsmith/vim-indent-object'
-
-" Colorschemes
-Plug 'flazz/vim-colorschemes'
-
-" Indent guides
-Plug 'nathanaelkane/vim-indent-guides'
-
-" vim-airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" show git branch on vim-airline
-Plug 'tpope/vim-fugitive'
-
-" NERDTree
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
-" Search
-Plug 'mileszs/ack.vim'
-
-" Fuzzy finder
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-    
-" Typescript support
-Plug 'leafgarland/typescript-vim'
-
-" LSP
+Plug 'editorconfig/editorconfig-vim'   " Use .editorconfig
+Plug 'mhinz/vim-signify'               " Show git changes in sign column
+Plug 'tpope/vim-repeat'                " Make . work for plugins that support it
+Plug 'tpope/vim-commentary'            " Commenting
+                                           " Example: gc2j  = go comment 2 down
+Plug 'tpope/vim-surround'              " Ability to surround objects
+                                           " Example: ysiw] = yes surround inner word with []
+                                           " Example: cs'"  = change surrounding ' to "
+                                           " Example: ds"   = delete surrounding "
+                                           " Note: [ for space, ] for no space
+Plug 'michaeljsmith/vim-indent-object' " Adding indent-level as a text object
+                                           " Example: dii   = delete inner indent
+Plug 'flazz/vim-colorschemes'          " Colorschemes
+Plug 'ap/vim-css-color'                " Highlight colors with their color
+Plug 'nathanaelkane/vim-indent-guides' " Indent guides
+Plug 'vim-airline/vim-airline'         " vim-airline
+Plug 'vim-airline/vim-airline-themes'  " vim-airline
+Plug 'tpope/vim-fugitive'              " show git branch on vim-airline
+Plug 'scrooloose/nerdtree'             " NERDTree
+Plug 'Xuyuanp/nerdtree-git-plugin'     " NERDTree
+Plug 'mileszs/ack.vim'                 " Search
+Plug 'junegunn/fzf', { 
+    \ 'dir': '~/.fzf', 
+    \ 'do': './install --all' 
+\ }                                    " Fuzzy finder
+Plug 'junegunn/fzf.vim'                " Fuzzy finder vim wrapper
+Plug 'junegunn/vim-easy-align'         " Easy Align
+                                           " Example: gaip=         = go align inner paragraph around the first =
+                                           " Example: gaip-=        = go align inner paragraph around the last =
+                                           " Example: gaip*=        = go align inner paragraph around all =
+                                           " Example: gaip<Enter>*= = go align inner paragraph, reversed, around all =
+Plug 'leafgarland/typescript-vim'      " Typescript support
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
-\ }
+\ }                                    " LSP
 
 call plug#end()
 
@@ -261,6 +240,10 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
             \| exe "normal! g`\"" | endif
         endif
     " ==
+    " Start interactive EasyAlign in visual mode (e.g. vipga)
+    xmap ga <Plug>(EasyAlign)
+    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+    nmap ga <Plug>(EasyAlign)
 " ===
 " 'autozimu/LanguageClient-neovim' config ===
     set hidden
