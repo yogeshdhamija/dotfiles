@@ -199,6 +199,8 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
     set mouse=a
     " Ignore case on search
     set ignorecase
+    " Line break on word boundry
+    set linebreak
     " Highlight all terms when searched using '/'
     set hlsearch
     " Autoread files changed outside vim
