@@ -258,7 +258,7 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
     " ==
     " Set search to use silver searcher
     if executable('ag')
-        let g:ackprg = 'ag --nogroup --nocolor --column'
+        let g:ackprg = 'ag --nogroup --nocolor --column --hidden'
     endif
     " Highlight search results on open
     let g:ackhighlight = 1
