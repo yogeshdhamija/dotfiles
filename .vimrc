@@ -95,6 +95,8 @@ endfunction
     function! s:goyo_enter()
         set spell
         set nocursorline
+        set noshowmode
+        set noshowcmd
         IndentGuidesDisable
         Limelight
     endfunction
@@ -102,6 +104,8 @@ endfunction
     function! s:goyo_leave()
         set nospell
         set cursorline
+        set showmode
+        set showcmd
         IndentGuidesEnable
         Limelight!
         " Airline starts up weird sometimes...
