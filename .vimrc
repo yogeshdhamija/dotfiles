@@ -104,6 +104,11 @@ endfunction
         set cursorline
         IndentGuidesEnable
         Limelight!
+        " Airline starts up weird sometimes...
+        AirlineRefresh
+        AirlineToggle
+        AirlineToggle
+        AirlineRefresh
     endfunction
 
     autocmd! User GoyoEnter nested call <SID>goyo_enter()
