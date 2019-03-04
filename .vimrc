@@ -332,7 +332,7 @@ map <Leader>vs :let bufn = bufname('%')<CR> :tabp<CR> :exe 'vertical sb ' . bufn
 map <Leader>vsn :let bufn = bufname('%')<CR> :tabp<CR> :exe 'vertical sb ' . bufn<CR> :tabn<CR> :close<CR> :tabp<CR> :unlet bufn<CR> :set number<CR> :set scl=yes<CR>
 
 " Command to enter writing mode
-command Writing Goyo
+command WritingMode Goyo
 " Command to save and generate .pdf from .md
 command PDF w | exe '! pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf"'
 " Delete vim session and quit
