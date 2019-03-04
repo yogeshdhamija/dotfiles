@@ -61,6 +61,8 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
 \ }                                    " LSP
+Plug 'junegunn/goyo.vim'               " :Goyo to enter writing mode
+Plug 'junegunn/limelight.vim'          " :Limelight!! to toggle focus mode
 
 call plug#end()
 
@@ -88,6 +90,25 @@ function! DeleteHiddenBuffers()
   endfor
   echo "Closed ".closed." hidden buffers"
 endfunction
+
+" Writing mode settings ===
+    function! s:goyo_enter()
+        set spell
+        set nocursorline
+        IndentGuidesDisable
+        Limelight
+    endfunction
+
+    function! s:goyo_leave()
+        set nospell
+        set cursorline
+        IndentGuidesEnable
+        Limelight!
+    endfunction
+
+    autocmd! User GoyoEnter nested call <SID>goyo_enter()
+    autocmd! User GoyoLeave nested call <SID>goyo_leave()
+" ===
 
 " Opening last session if no arguments when vim is opened ===
     augroup autosession
@@ -305,6 +326,8 @@ map <Leader>vs :let bufn = bufname('%')<CR> :tabp<CR> :exe 'vertical sb ' . bufn
 " Move current buffer to split in previous tab and turn on line numbers
 map <Leader>vsn :let bufn = bufname('%')<CR> :tabp<CR> :exe 'vertical sb ' . bufn<CR> :tabn<CR> :close<CR> :tabp<CR> :unlet bufn<CR> :set number<CR> :set scl=yes<CR>
 
+" Command to enter writing mode
+command Writing Goyo
 " Command to save and generate .pdf from .md
 command PDF w | exe '! pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf"'
 " Delete vim session and quit
