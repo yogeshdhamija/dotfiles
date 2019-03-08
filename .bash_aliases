@@ -23,7 +23,7 @@ alias "config-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environ
 alias "config-update-repo"="cd ~ && config remote update && config pull && config checkout && config submodule init && config submodule update && config submodule update --remote && config status; cd -"
 alias "config-update-vim"="cd ~ && mv ~/.vim/lastsession.vim ~/.vim/lastsession.vim.old > /dev/null 2>&1; vim +PlugUpgrade +PlugUpdate +ClearSession; mv ~/.vim/lastsession.vim.old ~/.vim/lastsession.vim > /dev/null 2>&1; cd -"
 
-alias "config-update"="config-update-repo; config-update-vim;"
+alias "config-update"="config-update-repo; config-update-vim"
 
 # Config pretty git log
 alias "config-log"="config log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
