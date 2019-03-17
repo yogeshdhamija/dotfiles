@@ -79,12 +79,12 @@ call plug#end()
 " **********************
 " Detects if currently running on Microsoft's Ubuntu on Windows (WSL)
 function! DetectWsl()
-    return filereadable("/proc/version") && (match(readfile("/proc/version"), "*Microsoft*") != -1)
+    return filereadable("/proc/version") && (match(readfile("/proc/version"), "Microsoft") != -1)
 endfunction
 
 " Detects if currently running on regular Ubuntu
 function! DetectUbuntu()
-    return filereadable("/proc/version") && (match(readfile("/proc/version"), "*Ubuntu*") != -1) && (match(readfile("/proc/version"), "*Microsoft*") == -1)
+    return filereadable("/proc/version") && (match(readfile("/proc/version"), "Ubuntu") != -1) && (match(readfile("/proc/version"), "Microsoft") == -1)
 endfunction
 
 " Detects if currently running on Iterm
