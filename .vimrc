@@ -101,7 +101,7 @@ function! DeleteHiddenBuffers()
   echo "Closed ".closed." hidden buffers"
 endfunction
 
-" Writing mode settings ===
+" Overriding Goyo plugin's enter/exit functions
     function! s:goyo_enter()
         set spell
         set nocursorline
@@ -124,9 +124,6 @@ endfunction
         AirlineToggle
         AirlineRefresh
     endfunction
-
-    autocmd! User GoyoEnter nested call <SID>goyo_enter()
-    autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " ===
 
 " Opening last session if no arguments when vim is opened ===
@@ -229,6 +226,9 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
     syntax on
     " Change visual highlight color
     hi Visual term=reverse cterm=reverse guibg=Grey
+    " Goyo settings
+        autocmd! User GoyoEnter nested call <SID>goyo_enter()
+        autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " ===
 
 " General settings ===
