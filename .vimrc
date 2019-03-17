@@ -48,9 +48,9 @@ Plug 'tpope/vim-fugitive'              " show git branch on vim-airline
 Plug 'scrooloose/nerdtree'             " NERDTree
 Plug 'Xuyuanp/nerdtree-git-plugin'     " NERDTree
 Plug 'mileszs/ack.vim'                 " Search
-Plug 'junegunn/fzf', { 
-    \ 'dir': '~/.fzf', 
-    \ 'do': './install --all' 
+Plug 'junegunn/fzf', {
+    \ 'dir': '~/.fzf',
+    \ 'do': './install --all'
 \ }                                    " Fuzzy finder
 Plug 'junegunn/fzf.vim'                " Fuzzy finder vim wrapper
 Plug 'junegunn/vim-easy-align'         " Easy Align
@@ -205,51 +205,51 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
 " =====================================
 
 " Colorscheme
-    set background=dark                      
+    set background=dark
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1                     " enable true color for nvim < 1.5 (I think)
-    silent! colorscheme molokai                     
-    let g:indent_guides_guide_size = 1                 
-    let g:indent_guides_color_change_percent = 2      
-    let g:indent_guides_enable_on_vim_startup = 1    
-    let g:airline#extensions#tabline#enabled = 1      
-    let g:airline_theme='molokai'                        
-    set number                
-    set signcolumn=yes   
-    set cursorline                                       
+    silent! colorscheme molokai
+    let g:indent_guides_guide_size = 1
+    let g:indent_guides_color_change_percent = 2
+    let g:indent_guides_enable_on_vim_startup = 1
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline_theme='molokai'
+    set number
+    set signcolumn=yes
+    set cursorline
     if (DetectUbuntu() || DetectIterm() || DetectWsl())
-        set termguicolors    
+        set termguicolors
     endif
-    syntax on                                             
+    syntax on
     " Change visual highlight color
         hi Visual term=reverse cterm=reverse guibg=Grey
     " Writing mode settings
-        autocmd! User GoyoEnter nested call <SID>goyo_enter() 
+        autocmd! User GoyoEnter nested call <SID>goyo_enter()
         autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " General settings
-    let mapleader = ";"    
-    set mouse=a                   
-    set ignorecase               
-    set linebreak               
-    set hlsearch 
+    let mapleader = ";"
+    set mouse=a
+    set ignorecase
+    set linebreak
+    set hlsearch
     set autoread
-    set splitbelow                          
-    set splitright                         
+    set splitbelow
+    set splitright
     filetype plugin on                              " Required for nerdcommenter plugin
-    let NERDTreeShowHidden=1                      
+    let NERDTreeShowHidden=1
     let s:should_save_session = 1                   " Enable open last session if no file specified
-    let NERDTreeCascadeSingleChildDir=0          
+    let NERDTreeCascadeSingleChildDir=0
     let g:airline#extensions#whitespace#enabled = 0 " Airline don't show whitespace errors
-    set tabstop=4                              
-    set shiftwidth=4                          
-    set expandtab                            
+    set tabstop=4
+    set shiftwidth=4
+    set expandtab
     if has('nvim')                                  " Terminal don't show line numbers
         autocmd TermOpen * setlocal nonumber norelativenumber scl=no
     endif
     if executable('ag')                             " Set ack.vim search to use silver searcher
-        let g:ackprg = 'ag --nogroup --nocolor --column --hidden' 
+        let g:ackprg = 'ag --nogroup --nocolor --column --hidden'
     endif
-    let g:ackhighlight = 1 
+    let g:ackhighlight = 1
         if has("autocmd")                           " Vim jump to the last position when reopening a file
           au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
             \| exe "normal! g`\"" | endif
@@ -296,7 +296,7 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
 " =====================================
 
 " t -> Terminal window
-    " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>. 
+    " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
     if has('nvim')
         map <Leader>t :25split<CR> :terminal<CR>
     else
