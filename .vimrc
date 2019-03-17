@@ -82,6 +82,11 @@ function! DetectWsl()
     return filereadable("/proc/version") && (match(readfile("/proc/version"), "*Microsoft*") != -1)
 endfunction
 
+" Detects if currently running on regular Ubuntu
+function! DetectUbuntu()
+    return filereadable("/proc/version") && (match(readfile("/proc/version"), "*Ubuntu*") != -1) && (match(readfile("/proc/version"), "*Microsoft*") == -1)
+endfunction
+
 " Detects if currently running on Iterm
 function! DetectIterm()
     return $TERM_PROGRAM =~ "iTerm"
@@ -218,7 +223,7 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
     " Show line under where cursor is
     set cursorline
     " Use better colors if terminal supports it ==
-        if (DetectIterm() || DetectWsl())
+        if (DetectUbuntu() || DetectIterm() || DetectWsl())
             set termguicolors
         endif
     " ==
