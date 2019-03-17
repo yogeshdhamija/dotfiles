@@ -84,7 +84,7 @@ endfunction
 
 " Detects if currently running on Iterm
 function! DetectIterm()
-    return match($TERM_PROGRAM, '*iTerm*')
+    return $TERM_PROGRAM =~ "iTerm"
 endfunction
 
 " Deletes all unmodified hidden buffers
