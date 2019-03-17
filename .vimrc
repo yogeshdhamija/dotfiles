@@ -77,6 +77,16 @@ call plug#end()
 
 " FUNCTIONS:
 " **********************
+" Detects if currently running on Microsoft's Ubuntu on Windows (WSL)
+function! DetectWsl()
+    return filereadable("/proc/version") && match(readfile("/proc/version"), "*Microsoft*")
+endfunction
+
+" Detects if currently running on Iterm
+function! DetectIterm()
+    return match($TERM_PROGRAM, '*iTerm*')
+endfunction
+
 " Deletes all unmodified hidden buffers
 function! DeleteHiddenBuffers()
   let tpbl=[]
@@ -211,8 +221,7 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
     " Show line under where cursor is
     set cursorline
     " Use better colors if terminal supports it ==
-        let colorenv=$COLORTERM
-        if colorenv == 'truecolor'
+        if (DetectIterm() || DetectWsl())
             set termguicolors
         endif
     " ==
@@ -287,7 +296,22 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
         \ 'typescript': ['javascript-typescript-stdio'],
     \ }
 " ===
-
+" Set clipboard ===
+if DetectWsl()
+    let g:clipboard = {
+          \   'name': 'WslClipboard',
+          \   'copy': {
+          \      '+': 'clip.exe',
+          \      '*': 'clip.exe',
+          \    },
+          \   'paste': {
+          \      '+': 'powershell.exe -c Get-Clipboard',
+          \      '*': 'powershell.exe -c Get-Clipboard',
+          \   },
+          \   'cache_enabled': 0,
+          \ }
+endif
+" ===
 
 
 
