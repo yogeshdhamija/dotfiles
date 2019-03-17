@@ -295,34 +295,35 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
 " SHORTCUTS:
 " =====================================
 
-" t -> Terminal window
-    " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
-    if has('nvim')
-        map <Leader>t :25split<CR> :terminal<CR>
-    else
-        map <Leader>t :terminal<CR>
-    endif
-" bd -> Buffer Delete
-    map <Leader>bd :bd<CR>
-" bca -> Buffers Close All
-    map <Leader>bca :call DeleteHiddenBuffers()<CR>
-" CD -> Change Directory to current open file
-    command CD cd %:p:h
-    map <Leader>CD :CD<CR> :pwd<CR>
-" ld -> Lsp go-to-Definition
-    map <Leader>ld :call LanguageClient#textDocument_definition()<CR>
-" ldr -> Lsp go-to-Definition in Right split
-    map <Leader>ldr :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
-" lm -> Lsp Menu
-    map <Leader>lm :call LanguageClient_contextMenu()<CR>
-" d -> Directory tree
-    map <Leader>d :NERDTreeToggle<CR>
-" f -> Find
-    map <Leader>f :LAck!<Space>
-" o -> Open
-    map <Leader>o :FZF<CR>
-" r -> Right buffer
-    map <Leader>r :bn<CR>
+" Leader shortcuts
+    " t -> Terminal window
+        " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
+        if has('nvim')
+            map <Leader>t :25split<CR> :terminal<CR>
+        else
+            map <Leader>t :terminal<CR>
+        endif
+    " bd -> Buffer Delete
+        map <Leader>bd :bd<CR>
+    " bca -> Buffers Close All
+        map <Leader>bca :call DeleteHiddenBuffers()<CR>
+    " CD -> Change Directory to current open file
+        command CD cd %:p:h
+        map <Leader>CD :CD<CR> :pwd<CR>
+    " ld -> Lsp go-to-Definition
+        map <Leader>ld :call LanguageClient#textDocument_definition()<CR>
+    " ldr -> Lsp go-to-Definition in Right split
+        map <Leader>ldr :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
+    " lm -> Lsp Menu
+        map <Leader>lm :call LanguageClient_contextMenu()<CR>
+    " d -> Directory tree
+        map <Leader>d :NERDTreeToggle<CR>
+    " f -> Find
+        map <Leader>f :LAck!<Space>
+    " o -> Open
+        map <Leader>o :FZF<CR>
+    " r -> Right buffer
+        map <Leader>r :bn<CR>
 
 " Command to enter writing mode
     command WritingMode Goyo
