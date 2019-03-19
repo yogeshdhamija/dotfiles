@@ -7,6 +7,8 @@ function windows() {
 
 # To stop and destroy all docker containers, images, and volumes
 alias "docker-nuke"='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi $(docker images -q) --force; docker volume rm $(docker volume ls -f dangling=true -q)'
+
+# To stop and destroy all docker containers and volumes (but keep images)
 alias "docker-mininuke"='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker volume rm $(docker volume ls -f dangling=true -q)'
 
 # Pretty git log

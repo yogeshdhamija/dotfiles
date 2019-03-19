@@ -1,6 +1,8 @@
+# Load custom config
 if [ -f ~/.prelocalshellrc ]; then
     . ~/.prelocalshellrc
 fi
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -38,13 +40,10 @@ fi
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
+# Config alias
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
+# Load aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -66,13 +65,17 @@ function _ssh_completion() {
 }
 complete -W "$(_ssh_completion)" ssh
 
+# Set up LESS 
 export LESS="-RXF"
+
+# Set up FZF to use Silver Searcher (ag)
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 export FZF_CTRL_T_COMMAND='ag --hidden --ignore .git -g ""'
 
+# Load FZF configuration
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-
+# Load custom config
 if [ -f ~/.localshellrc ]; then
     . ~/.localshellrc
 fi

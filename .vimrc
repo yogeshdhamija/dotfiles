@@ -296,12 +296,18 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
 " =====================================
 
 " Leader shortcuts
-    " t -> Terminal window
+    " t -> Terminal window, bottom
+    " tj -> Terminal window, down (aka j)
+    " tl -> Terminal window, right (aka l)
         " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
         if has('nvim')
-            map <Leader>t :25split<CR> :terminal<CR>
+            map <Leader>t :25split<CR> :terminal<CR> i
+            map <Leader>tj :25split<CR> :terminal<CR> i
+            map <Leader>tl :vsplit<CR> :terminal<CR> i
         else
             map <Leader>t :terminal<CR>
+            map <Leader>tj :terminal<CR>
+            map <Leader>tl :vsplit<CR> :terminal<CR> <C-W>k :q<CR>
         endif
     " bd -> Buffer Delete
         map <Leader>bd :bd<CR>
@@ -312,8 +318,8 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
         map <Leader>CD :CD<CR> :pwd<CR>
     " ld -> Lsp go-to-Definition
         map <Leader>ld :call LanguageClient#textDocument_definition()<CR>
-    " ldr -> Lsp go-to-Definition in Right split
-        map <Leader>ldr :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
+    " ldl -> Lsp go-to-Definition in right (aka l) split
+        map <Leader>ldl :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
     " lm -> Lsp Menu
         map <Leader>lm :call LanguageClient_contextMenu()<CR>
     " d -> Directory tree
