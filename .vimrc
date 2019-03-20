@@ -34,6 +34,7 @@ Plug 'tpope/vim-commentary'            " Commenting
                                            " Example: gc2j  -> go comment 2 down
 Plug 'tpope/vim-surround'              " Ability to surround objects
                                            " Example: ysiw] -> yes surround inner word with []
+                                           " Example: viwS( -> visual inner word, surround with ( )
                                            " Example: cs'"  -> change surrounding ' to "
                                            " Example: ds"   -> delete surrounding "
                                            " Note: [ for space, ] for no space
@@ -177,17 +178,17 @@ call plug#end()
 " =====================================
 
 " Pressing * does not move cursor
-nnoremap * *``
+    nnoremap * *``
 
 " Nerdtree change open in vsplit to `v` instead of `s`
-let NERDTreeMapOpenVSplit='v'
-let NERDTreeMapPreviewVSplit='gv'
+    let NERDTreeMapOpenVSplit='v'
+    let NERDTreeMapPreviewVSplit='gv'
 
 " Ack.vim change open vsplit to right side
     " and add 'V' to open in split and close search
-let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
-            \ "gv": "<C-W><CR><C-W>L<C-W>p<C-W>J" ,
-            \ "V": "<C-W><CR><C-W>L<C-W>p:bd<CR><C-W>p"}
+    let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
+                \ "gv": "<C-W><CR><C-W>L<C-W>p<C-W>J" ,
+                \ "V": "<C-W><CR><C-W>L<C-W>p:bd<CR><C-W>p"}
 
 
 
@@ -240,6 +241,7 @@ let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
     let s:should_save_session = 1                   " Enable open last session if no file specified
     let NERDTreeCascadeSingleChildDir=0
     let g:airline#extensions#whitespace#enabled = 0 " Airline don't show whitespace errors
+    let g:easy_align_ignore_groups=[]
     set tabstop=4
     set shiftwidth=4
     set expandtab
