@@ -249,7 +249,7 @@ call plug#end()
         autocmd TermOpen * setlocal nonumber norelativenumber scl=no
     endif
     if executable('ag')                             " Set ack.vim search to use silver searcher
-        let g:ackprg = 'ag --nogroup --nocolor --column --hidden'
+        let g:ackprg = 'ag --vimgrep --hidden'
     endif
     let g:ackhighlight = 1
         if has("autocmd")                           " Vim jump to the last position when reopening a file
