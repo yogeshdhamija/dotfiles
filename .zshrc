@@ -86,9 +86,9 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 # Set up LESS 
 export LESS="-RXF"
 
-# Set up FZF to use Silver Searcher (ag)
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-export FZF_CTRL_T_COMMAND='ag --hidden --ignore .git -g ""'
+# Set up FZF to use ripgrep (rg)
+export FZF_DEFAULT_COMMAND='rg --hidden --files'
+export FZF_CTRL_T_COMMAND='rg --hidden --files'
 
 # Bind shortcuts
 bindkey ^W forward-word

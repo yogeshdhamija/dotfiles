@@ -8,7 +8,8 @@ declare -a NOTES=(
 declare -a EXECS=(
     "nvim"
     "zsh"
-    "ag"
+    "rg"
+    "fzf"
     "pyls"
     "go-langserver"
     "jdtls"
@@ -19,7 +20,8 @@ declare -a EXECS=(
 declare -a NAMES=(
     "NeoVim" 
     "ZShell"
-    "The Silver Searcher"
+    "Ripgrep"
+    "FZF"
     "Python LSP Server"
     "Go LSP Server"
     "Java LSP Server"

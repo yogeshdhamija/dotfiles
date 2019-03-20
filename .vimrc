@@ -31,15 +31,15 @@ Plug 'editorconfig/editorconfig-vim'   " Use .editorconfig
 Plug 'mhinz/vim-signify'               " Show git changes in sign column
 Plug 'tpope/vim-repeat'                " Make . work for plugins that support it
 Plug 'tpope/vim-commentary'            " Commenting
-                                           " Example: gc2j  -> go comment 2 down
+                                           " Example: gc2j          -> go comment 2 down
 Plug 'tpope/vim-surround'              " Ability to surround objects
-                                           " Example: ysiw] -> yes surround inner word with []
-                                           " Example: viwS( -> visual inner word, surround with ( )
-                                           " Example: cs'"  -> change surrounding ' to "
-                                           " Example: ds"   -> delete surrounding "
+                                           " Example: ysiw]         -> yes surround inner word with []
+                                           " Example: viwS(         -> visual inner word, surround with ( )
+                                           " Example: cs'"          -> change surrounding ' to "
+                                           " Example: ds"           -> delete surrounding "
                                            " Note: [ for space, ] for no space
 Plug 'michaeljsmith/vim-indent-object' " Adding indent-level as a text object
-                                           " Example: dii   -> delete inner indent
+                                           " Example: dii           -> delete inner indent
 Plug 'flazz/vim-colorschemes'          " Colorschemes
 Plug 'ap/vim-css-color'                " Highlight colors with their color
 Plug 'nathanaelkane/vim-indent-guides' " Indent guides
@@ -49,10 +49,7 @@ Plug 'tpope/vim-fugitive'              " show git branch on vim-airline
 Plug 'scrooloose/nerdtree'             " NERDTree
 Plug 'Xuyuanp/nerdtree-git-plugin'     " NERDTree
 Plug 'mileszs/ack.vim'                 " Search
-Plug 'junegunn/fzf', {
-    \ 'dir': '~/.fzf',
-    \ 'do': './install --all'
-\ }                                    " Fuzzy finder
+Plug 'junegunn/fzf'                    " Fuzzy finder
 Plug 'junegunn/fzf.vim'                " Fuzzy finder vim wrapper
 Plug 'junegunn/vim-easy-align'         " Easy Align
                                            " Example: gaip=         -> go align inner paragraph around the first =
@@ -248,8 +245,8 @@ call plug#end()
     if has('nvim')                                  " Terminal don't show line numbers
         autocmd TermOpen * setlocal nonumber norelativenumber scl=no
     endif
-    if executable('ag')                             " Set ack.vim search to use silver searcher
-        let g:ackprg = 'ag --vimgrep --hidden'
+    if executable('rg')                             " Set ack.vim search to use ripgrep
+        let g:ackprg = 'rg --vimgrep --hidden'
     endif
     let g:ackhighlight = 1
         if has("autocmd")                           " Vim jump to the last position when reopening a file

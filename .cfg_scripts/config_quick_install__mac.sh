@@ -21,7 +21,7 @@ brew update
 brew tap homebrew/cask-versions
 
 # Brew packages:
-brew install vim neovim the_silver_searcher pandoc python go node
+brew install vim neovim ripgrep pandoc python go node
 brew cask install java
 
 # javascript-typescript-langserver:
