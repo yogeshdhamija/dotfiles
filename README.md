@@ -9,7 +9,7 @@ Here is a repository for development-related configuration files, like:
 
 ## Quick Start
 
-This will **not** install anything. Just clone the repo in a fancy manner.
+~~This will **not** install anything~~. It will install FZF, but nothing else. See [Issue #1](https://github.com/ydhamija96/config/issues/1). Just clone the repo in a fancy manner.
 
 **SSH:**
 
