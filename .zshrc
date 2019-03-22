@@ -53,7 +53,6 @@ ZSH_CUSTOM=$HOME/.custom_zsh
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  docker
   docker-compose
   web-search
   ssh
