@@ -64,4 +64,6 @@ echo "export PATH=\$PATH:$(pwd)" >> ~/.localshellrc
 
 cd ~
 
+config-update
+
 cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh
