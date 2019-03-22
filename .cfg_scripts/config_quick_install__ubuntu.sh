@@ -13,12 +13,22 @@ esac
 sudo apt install -y zsh
 chsh -s $(which zsh)
 
+# Ripgrep:
+    # TODO: Post Ubuntu 18.10, this is in apt -- change when script no longer needs to support < 18.10
+mkdir -p $HOME/Stuff/Deps/ripgrep
+cd $HOME/Stuff/Deps/ripgrep
+curl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb
+sudo dpkg -i ripgrep_0.10.0_amd64.deb
+cd ..
+rm -rf ./ripgrep
+cd ~
+
 # Apt repos:
 sudo add-apt-repository -y ppa:longsleep/golang-backports
 sudo apt-get update
 
 # Apt packages:
-sudo apt install -y vim neovim ripgrep pandoc texlive texlive-latex-extra python3 python3-pip golang-go npm openjdk-8-jdk
+sudo apt install -y vim neovim pandoc texlive texlive-latex-extra python3 python3-pip golang-go npm openjdk-8-jdk
 
 # javascript-typescript-langserver:
 sudo npm install -g javascript-typescript-langserver
