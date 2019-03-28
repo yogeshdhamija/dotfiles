@@ -47,7 +47,7 @@ Plug 'vim-airline/vim-airline'         " vim-airline
 Plug 'vim-airline/vim-airline-themes'  " vim-airline
 Plug 'tpope/vim-fugitive'              " show git branch on vim-airline
 Plug 'scrooloose/nerdtree'             " NERDTree
-Plug 'Xuyuanp/nerdtree-git-plugin'     " NERDTree
+Plug 'Xuyuanp/nerdtree-git-plugin'     " NERDTree Git signs
 Plug 'mileszs/ack.vim'                 " Search
 Plug 'junegunn/fzf'                    " Fuzzy finder
 Plug 'junegunn/fzf.vim'                " Fuzzy finder vim wrapper
@@ -56,11 +56,10 @@ Plug 'junegunn/vim-easy-align'         " Easy Align
                                            " Example: gaip-=        -> go align inner paragraph around the last =
                                            " Example: gaip*=        -> go align inner paragraph around all =
                                            " Example: gaip<Enter>*= -> go align inner paragraph, reversed, around all =
-Plug 'leafgarland/typescript-vim'      " Typescript support
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-\ }                                    " LSP
+Plug 'neoclide/coc.nvim', {
+    \'tag': '*', 
+    \'do': { -> coc#util#install()}
+\}                                     " LSP
 Plug 'junegunn/goyo.vim'               " :Goyo to enter writing mode
 Plug 'junegunn/limelight.vim'          " :Limelight!! to toggle focus mode
 
@@ -316,11 +315,11 @@ call plug#end()
         command CD cd %:p:h
         map <Leader>CD :CD<CR> :pwd<CR>
     " ld -> Lsp go-to-Definition
-        map <Leader>ld :call LanguageClient#textDocument_definition()<CR>
+        map <Leader>ld <Plug>(coc-definition)
     " ldl -> Lsp go-to-Definition in right (aka l) split
-        map <Leader>ldl :call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<CR>
+        map <Leader>ldl :vsplit<CR> <Plug>(coc-definition)
     " lm -> Lsp Menu
-        map <Leader>lm :call LanguageClient_contextMenu()<CR>
+        map <Leader>lm <Plug>(coc-action-codeAction)
     " d -> Directory tree
         map <Leader>d :NERDTreeToggle<CR>
     " f -> Find
