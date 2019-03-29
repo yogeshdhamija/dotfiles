@@ -1,6 +1,6 @@
-# Dev Config
+# Config (dotfiles)
 
-Here is a repository for development-related configuration files, like:
+Here is a repository for dotfiles, like:
 
 * `.bashrc`
 * `.bash_aliases`
@@ -9,42 +9,20 @@ Here is a repository for development-related configuration files, like:
 
 ## Quick Start
 
-~~This will **not** install anything~~. It will install FZF, but nothing else. See [Issue #1](https://github.com/ydhamija96/config/issues/1). Just clone the repo in a fancy manner.
-
-**SSH:**
+To clone this repo into your home directory:
 
 ```bash
-source <(curl -sL https://raw.githubusercontent.com/ydhamija96/config/master/.cfg_scripts/config_quick_setup__ssh.sh)
+export REPO_URL=git@github.com:ydhamija96/config.git
+git clone --bare $REPO_URL $HOME/.cfg
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+config config --local status.showUntrackedFiles no
+config checkout && cd ~ && config submodule init && config submodule update
+source ~/.bash_aliases
+config-update
+cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh
 ```
 
-**HTTPS:**
-
-```bash
-source <(curl -sL https://raw.githubusercontent.com/ydhamija96/config/master/.cfg_scripts/config_quick_setup__https.sh)
-```
-
-## Quick Install
-
-Optional. After running the quick start, this will install all the stuff I like. **Warning**: This will ruin your current setup.
-
-**Ubuntu:**
-
-```bash
-~/.cfg_scripts/config_quick_install__ubuntu.sh
-```
-
-**Mac OS:**
-
-```bash
-~/.cfg_scripts/config_quick_install__mac.sh
-```
-
-## Manual Setup
-
-What works best is to follow the method of the quickstart, which I found in [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
-
-This will set up a git repository in the folder `~/.cfg` with a detached working tree. This way, you can treat your home directory if as if it were a git repository
--- using the `config` command, instead of `git` -- and it won't do crazy stuff like interfere with your other git repositories.
+This will set up a git repository in the folder `~/.cfg` with a detached working tree. This way, you can treat your home directory if as if it were a git repository -- using the `config` command, instead of `git` -- and it won't do crazy stuff like interfere with your other git repositories. Source: [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
 
 ### Notes
 
