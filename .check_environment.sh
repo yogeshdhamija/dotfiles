@@ -10,10 +10,6 @@ declare -a EXECS=(
     "zsh"
     "rg"
     "fzf"
-    "pyls"
-    "go-langserver"
-    "jdtls"
-    "javascript-typescript-stdio"
     "pandoc"
     "pdflatex"
 )
@@ -22,10 +18,6 @@ declare -a NAMES=(
     "ZShell"
     "Ripgrep"
     "FZF"
-    "Python LSP Server"
-    "Go LSP Server"
-    "Java LSP Server"
-    "Javascript + Typescript LSP Server"
     "Pandoc"
     "TeX Live"
 )
@@ -35,10 +27,7 @@ declare -a ADDITIONAL=(
     ""
     ""
     ""
-    ""
-    ""
-    ""
-    ""
+    "apt: texlive texlive-latex-extra; BasicTeX mac package"
 )
 
 # SCRIPT:
