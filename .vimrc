@@ -244,8 +244,10 @@ call plug#end()
     if has('nvim')                                  " Terminal don't show line numbers
         autocmd TermOpen * setlocal nonumber norelativenumber scl=no
     endif
-    if executable('rg')                             " Set ack.vim search to use ripgrep
+    if executable('rg')                             " Set ack.vim search to use ripgrep, or silver_searcher
         let g:ackprg = 'rg --vimgrep --hidden'
+    elseif executable('ag')
+        let g:ackprg = 'ag --vimgrep --hidden'
     endif
     let g:ackhighlight = 1
         if has("autocmd")                           " Vim jump to the last position when reopening a file

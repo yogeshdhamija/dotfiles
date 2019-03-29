@@ -65,15 +65,19 @@ function _ssh_completion() {
 }
 complete -W "$(_ssh_completion)" ssh
 
+# Load FZF configuration
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # Set up LESS 
 export LESS="-RXF"
 
+# Set up FZF to use silver searcher (ag)
+[ -x "$(command -v ag)" ] && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+[ -x "$(command -v ag)" ] && export FZF_CTRL_T_COMMAND='ag --hidden --ignore .git -g ""'
 # Set up FZF to use ripgrep (rg)
-export FZF_DEFAULT_COMMAND='rg --hidden --files'
-export FZF_CTRL_T_COMMAND='rg --hidden --files'
+[ -x "$(command -v rg)" ] && export FZF_DEFAULT_COMMAND='rg --hidden --files'
+[ -x "$(command -v rg)" ] && export FZF_CTRL_T_COMMAND='rg --hidden --files'
 
-# Load FZF configuration
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Load custom config
 if [ -f ~/.localshellrc ]; then
