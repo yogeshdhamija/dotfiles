@@ -314,12 +314,6 @@ call plug#end()
     " CD -> Change Directory to current open file
         command CD cd %:p:h
         map <Leader>CD :CD<CR> :pwd<CR>
-    " ld -> Lsp go-to-Definition
-        map <Leader>ld <Plug>(coc-definition)
-    " ldl -> Lsp go-to-Definition in right (aka l) split
-        map <Leader>ldl :vsplit<CR> <Plug>(coc-definition)
-    " lm -> Lsp Menu
-        map <Leader>lm <Plug>(coc-action-codeAction)
     " d -> Directory tree
         map <Leader>d :NERDTreeToggle<CR>
     " f -> Find
@@ -328,14 +322,44 @@ call plug#end()
         map <Leader>o :FZF<CR>
     " r -> Right buffer
         map <Leader>r :bn<CR>
-
+    " LSP
+        " lh -> Lsp Hover info
+            map <Leader>lh :LspDoHover<CR>
+        " lg -> Lsp Go to symbols
+            map <Leader>lg :LspSymbols<CR>
+        " lwh -> Lsp what's Wrong Here
+            map <Leader>lwh :LspDiagnosticInfo<CR>
+        " lw -> Lsp list what's Wrong
+            map <Leader>lw :LspDiagnosticList<CR>
+        " ld -> Lsp go-to-Definition
+            map <Leader>ld :LspJumpDefinition<CR>
+        " ldl -> Lsp go-to-Definition in right (aka L) split
+            map <Leader>ldl :vsplit<CR> :LspJumpDefinition<CR>
+        " lr -> Lsp jump to References
+            map <Leader>lr :LspJumpReferences<CR>
+        " lrl -> Lsp jump to References in right (aka L) split
+            map <Leader>lrl :vsplit<CR> :LspJumpReferences<CR>
 " Command to enter writing mode
     command WritingMode Goyo
 " Command to save and generate .pdf from .md
     command PDF w | exe '! pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf"'
 " Delete vim session and quit
     command ClearSession let s:should_save_session = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
-
+" Map coc.nvim available actions to commands to allow tab completion
+        command LspDiagnosticList      CocList --normal diagnostics
+        command LspDiagnosticInfo      call CocActionAsync("diagnosticInfo")
+        command LspJumpDefinition      call CocActionAsync("jumpDefinition")
+        command LspJumpDeclaration     call CocActionAsync("jumpDeclaration")
+        command LspJumpImplementation  call CocActionAsync("jumpImplementation")
+        command LspJumpTypeDefinition  call CocActionAsync("jumpTypeDefinition")
+        command LspJumpReferences      call CocActionAsync("jumpReferences")
+        command LspDoHover             call CocActionAsync("doHover")
+        command LspRename              call CocActionAsync("rename")
+        command LspSymbols             CocList --interactive symbols
+        command LspFormat              call CocActionAsync("format")
+        command LspCodeAction          call CocActionAsync("codeAction")
+        command LspCodeLensAction      call CocActionAsync("codeLensAction")
+        command LspQuickfixes          call CocActionAsync("quickfixes")
 
 
 
