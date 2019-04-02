@@ -17,7 +17,7 @@ alias "git-log"="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yel
 # I am Vim
 alias ":q"="exit"
 alias ":e"="vim"
-[ -x $(command -v nvim) ] && alias "vim"="nvim"
+command -v nvim > /dev/null && alias "vim"="nvim"
 
 # Check config status
 alias "config-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh && cd -"
