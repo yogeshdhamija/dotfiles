@@ -345,6 +345,8 @@ call plug#end()
     command WritingMode Goyo
 " Command to save and generate .pdf from .md
     command PDF w | exe '! pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf"'
+" Start saving the session
+    command StartKeepingSession let s:should_save_session = 1 | w
 " Delete vim session and quit
     command ClearSession let s:should_save_session = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
 " Map coc.nvim available actions to commands to allow tab completion
