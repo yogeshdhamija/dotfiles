@@ -46,7 +46,7 @@ echo ""
 echo "Already installed:" && echo ""
 for (( i=1; i<${arraylength}+1; i++ ));
 do
-    if [ -x "$(command -v ${EXECS[$i-1]})" ]; then
+    if command -v ${EXECS[$i-1]} > /dev/null ; then
         echo '    -' ${NAMES[$i-1]} '('${EXECS[$i-1]}')'
         [[ ! -z ${ADDITIONAL[$i-1]} ]] && echo '        ' ${ADDITIONAL[$i-1]} 
         # echo ""
@@ -58,7 +58,7 @@ echo ""
 echo "Not found:" && echo ""
 for (( i=1; i<${arraylength}+1; i++ ));
 do
-    if ! [ -x "$(command -v ${EXECS[$i-1]})" ]; then
+    if ! command -v ${EXECS[$i-1]} > /dev/null ; then
         echo '    -' ${NAMES[$i-1]} '('${EXECS[$i-1]}')'
         [[ ! -z ${ADDITIONAL[$i-1]} ]] && echo '        ' ${ADDITIONAL[$i-1]}
         # echo ""

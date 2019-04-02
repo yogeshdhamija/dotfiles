@@ -86,11 +86,11 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 export LESS="-RXF"
 
 # Set up FZF to use silver searcher (ag)
-[ -x "$(command -v ag)" ] && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-[ -x "$(command -v ag)" ] && export FZF_CTRL_T_COMMAND='ag --hidden --ignore .git -g ""'
+command -v ag > /dev/null && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+command -v ag > /dev/null && export FZF_CTRL_T_COMMAND='ag --hidden --ignore .git -g ""'
 # Set up FZF to use ripgrep (rg)
-[ -x "$(command -v rg)" ] && export FZF_DEFAULT_COMMAND='rg --hidden --files'
-[ -x "$(command -v rg)" ] && export FZF_CTRL_T_COMMAND='rg --hidden --files'
+command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --hidden --files'
+command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --hidden --files'
 
 # Bind shortcuts
 bindkey ^W forward-word
