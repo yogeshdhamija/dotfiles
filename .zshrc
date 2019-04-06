@@ -1,6 +1,6 @@
 # Load custom config
-if [ -f ~/.prelocalshellrc ]; then
-    . ~/.prelocalshellrc
+if [ -f ~/.shellrc.local.loadbefore ]; then
+    . ~/.shellrc.local.loadbefore
 fi
 
 # Path to your oh-my-zsh installation.
@@ -100,6 +100,6 @@ bindkey ^E end-of-line
 bindkey ^A beginning-of-line
 
 # Load custom config
-if [ -f ~/.localshellrc ]; then
-    . ~/.localshellrc
+if [ -f ~/.shellrc.local ]; then
+    . ~/.shellrc.local
 fi

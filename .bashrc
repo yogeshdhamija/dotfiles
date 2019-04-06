@@ -1,6 +1,6 @@
 # Load custom config
-if [ -f ~/.prelocalshellrc ]; then
-    . ~/.prelocalshellrc
+if [ -f ~/.shellrc.local.loadbefore ]; then
+    . ~/.shellrc.local.loadbefore
 fi
 
 # If not running interactively, don't do anything
@@ -80,6 +80,6 @@ command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --hidden --files'
 
 
 # Load custom config
-if [ -f ~/.localshellrc ]; then
-    . ~/.localshellrc
+if [ -f ~/.shellrc.local ]; then
+    . ~/.shellrc.local
 fi

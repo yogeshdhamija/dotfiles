@@ -3,7 +3,7 @@
 " =====================================
 
 try
-    source ~/.prelocalvimrc
+    source ~/.vimrc.local.loadbefore
 catch
 endtry
 
@@ -383,6 +383,6 @@ call plug#end()
 " =====================================
 
 try
-    source ~/.localvimrc
+    source ~/.vimrc.local
 catch
 endtry
