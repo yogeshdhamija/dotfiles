@@ -130,6 +130,7 @@ call plug#end()
     endfunction
 
 " Opening last session if no arguments when vim is opened
+    let s:should_save_session = 0
     augroup autosession
       autocmd StdinReadPre * let s:std_in=1
       autocmd VimEnter * nested call s:load_session_if_no_args()
@@ -140,6 +141,7 @@ call plug#end()
         if argc() == 0 && !exists("s:std_in")
             if filereadable(expand('~/.vim/lastsession.vim'))
                 execute 'silent source ~/.vim/lastsession.vim'
+                let s:should_save_session = 1
             endif
         else
             let s:should_save_session = 0
@@ -186,6 +188,8 @@ call plug#end()
                 \ "gv": "<C-W><CR><C-W>L<C-W>p<C-W>J" ,
                 \ "V": "<C-W><CR><C-W>L<C-W>p:bd<CR><C-W>p"}
 
+" Remap left mouse release to put in insert mode
+    nnoremap <LeftRelease> <LeftRelease>i
 
 
 
@@ -234,7 +238,6 @@ call plug#end()
     set splitright
     filetype plugin on                              " Required for nerdcommenter plugin
     let NERDTreeShowHidden=1
-    let s:should_save_session = 1                   " Enable open last session if no file specified
     let NERDTreeCascadeSingleChildDir=0
     let g:airline#extensions#whitespace#enabled = 0 " Airline don't show whitespace errors
     let g:easy_align_ignore_groups=[]
@@ -350,20 +353,20 @@ call plug#end()
 " Delete vim session and quit
     command ClearSession let s:should_save_session = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
 " Map coc.nvim available actions to commands to allow tab completion
-        command LspDiagnosticList      CocList --normal diagnostics
-        command LspDiagnosticInfo      call CocActionAsync("diagnosticInfo")
-        command LspJumpDefinition      call CocActionAsync("jumpDefinition")
-        command LspJumpDeclaration     call CocActionAsync("jumpDeclaration")
-        command LspJumpImplementation  call CocActionAsync("jumpImplementation")
-        command LspJumpTypeDefinition  call CocActionAsync("jumpTypeDefinition")
-        command LspJumpReferences      call CocActionAsync("jumpReferences")
-        command LspDoHover             call CocActionAsync("doHover")
-        command LspRename              call CocActionAsync("rename")
-        command LspSymbols             CocList --interactive symbols
-        command LspFormat              call CocActionAsync("format")
-        command LspCodeAction          call CocActionAsync("codeAction")
-        command LspCodeLensAction      call CocActionAsync("codeLensAction")
-        command LspQuickfixes          call CocActionAsync("quickfixes")
+    command LspDiagnosticList      CocList --normal diagnostics
+    command LspDiagnosticInfo      call CocActionAsync("diagnosticInfo")
+    command LspJumpDefinition      call CocActionAsync("jumpDefinition")
+    command LspJumpDeclaration     call CocActionAsync("jumpDeclaration")
+    command LspJumpImplementation  call CocActionAsync("jumpImplementation")
+    command LspJumpTypeDefinition  call CocActionAsync("jumpTypeDefinition")
+    command LspJumpReferences      call CocActionAsync("jumpReferences")
+    command LspDoHover             call CocActionAsync("doHover")
+    command LspRename              call CocActionAsync("rename")
+    command LspSymbols             CocList --interactive symbols
+    command LspFormat              call CocActionAsync("format")
+    command LspCodeAction          call CocActionAsync("codeAction")
+    command LspCodeLensAction      call CocActionAsync("codeLensAction")
+    command LspQuickfixes          call CocActionAsync("quickfixes")
 
 
 
