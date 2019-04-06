@@ -113,6 +113,7 @@ call plug#end()
         set nocursorline
         set noshowmode
         set noshowcmd
+        let b:coc_suggest_disable = 1
         IndentGuidesDisable
         Limelight
     endfunction
@@ -121,6 +122,7 @@ call plug#end()
         set cursorline
         set showmode
         set showcmd
+        let b:coc_suggest_disable = 0
         IndentGuidesEnable
         Limelight!
         AirlineRefresh " Airline starts up weird sometimes...
