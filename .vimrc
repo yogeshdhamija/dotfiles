@@ -191,7 +191,10 @@ call plug#end()
                 \ "V": "<C-W><CR><C-W>L<C-W>p:bd<CR><C-W>p"}
 
 " Remap left mouse release to put in insert mode
-    nnoremap <LeftRelease> <LeftRelease>i
+    nnoremap <LeftMouse> <C-\><C-n><LeftMouse>
+    inoremap <LeftMouse> <C-\><C-n><LeftMouse>
+    nnoremap <LeftRelease> <C-\><C-n><LeftRelease>i
+    inoremap <LeftRelease> <C-\><C-n><LeftRelease>i
 
 
 
