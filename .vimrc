@@ -196,6 +196,9 @@ call plug#end()
     nnoremap <LeftRelease> <C-\><C-n><LeftRelease>i
     inoremap <LeftRelease> <C-\><C-n><LeftRelease>i
 
+" Remap Control+C in visual mode to copy to clipboard
+    vnoremap <C-c> "+y<C-c>
+    vnoremap <D-c> "+y<D-c>
 
 
 
