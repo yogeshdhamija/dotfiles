@@ -193,8 +193,8 @@ call plug#end()
 " Remap left mouse release to put in insert mode
     nnoremap <LeftMouse> <C-\><C-n><LeftMouse>
     inoremap <LeftMouse> <C-\><C-n><LeftMouse>
-    nnoremap <LeftRelease> <C-\><C-n><LeftRelease>i
-    inoremap <LeftRelease> <C-\><C-n><LeftRelease>i
+    nnoremap <LeftRelease> <C-\><C-n><LeftRelease>a
+    inoremap <LeftRelease> <C-\><C-n><LeftRelease>a
 
 " Remap Control+C in visual mode to copy to clipboard
     vnoremap <C-c> "+y<C-c>
