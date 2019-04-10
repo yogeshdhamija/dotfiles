@@ -320,10 +320,10 @@ call plug#end()
         nnoremap ;tk :25split<CR><C-W>K :exe "term"<CR> :startinsert<CR>
         nnoremap ;tl :vsplit<CR> :exe "term"<CR> :startinsert<CR>
     else
-        nnoremap ;t :term<CR><C-W>\|<C-W>_
+        nnoremap ;t :term ++curwin<CR>
         nnoremap ;th :term<CR><C-W>_<C-W>H
-        nnoremap ;tj :term<CR>25<C-W>_
-        nnoremap ;tk :term<CR>25<C-W>_<C-W>K
+        nnoremap ;tj :term<CR><C-\><C-n>25<C-W>_i
+        nnoremap ;tk :term<CR><C-\><C-n>25<C-W>_<C-W>Ki
         nnoremap ;tl :term<CR><C-W>L
     endif
 " ;d -> Directory listing
