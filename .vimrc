@@ -298,12 +298,12 @@ call plug#end()
 " SHORTCUTS:
 " =====================================
 
-" ;t -> Terminal window, bottom
+" ;t -> Terminal window
 " ;tj -> Terminal window, down (aka j)
 " ;tl -> Terminal window, right (aka l)
     " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
     if has('nvim')
-        nnoremap ;t :25split<CR> :term<CR> :startinsert<CR>
+        nnoremap ;t :term<CR> :startinsert<CR>
         nnoremap ;tj :25split<CR> :exe "term"<CR> :startinsert<CR>
         nnoremap ;tl :vsplit<CR> :exe "term"<CR> :startinsert<CR>
     else
@@ -352,6 +352,8 @@ call plug#end()
     abbreviate CAB call DeleteHiddenBuffers()
 " CD -> Change Directory to current open file
     command CD cd %:p:h
+" CP -> Copy absolute filePath to + register (system clipboard)
+    command CP let @+ = expand("%:p") | echo expand("%:p") "copied"
 " LSP
     " LG -> Lsp Go to symbols
         abbreviate LG LspSymbols
