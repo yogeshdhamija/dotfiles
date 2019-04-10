@@ -223,13 +223,8 @@ call plug#end()
             \| exe "normal! g`\"" | endif
         endif
     set hidden                                      " Needed for LSP
-    let g:LanguageClient_serverCommands = {
-        \ 'python': ['pyls'],
-        \ 'java': ['jdtls'],
-        \ 'go': ['go-langserver'],
-        \ 'javascript': ['javascript-typescript-stdio'],
-        \ 'typescript': ['javascript-typescript-stdio'],
-    \ }
+    let g:netrw_liststyle = 3                       " Directory browser in tree mode
+    let g:netrw_banner = 0                          " Remove directory browser banner
     if DetectWsl()
         let g:clipboard = {
               \   'name': 'WslClipboard',
@@ -251,6 +246,7 @@ call plug#end()
     " Writing mode settings
         autocmd! User GoyoEnter nested call <SID>goyo_enter()
         autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
 
 
 
@@ -315,6 +311,12 @@ call plug#end()
         nnoremap ;tj :25split<CR> :exe "term"<CR> :startinsert<CR>
         nnoremap ;tl :vsplit<CR> :exe "term"<CR> :startinsert<CR>
     endif
+" ;d -> Directory listing
+" ;dh -> Directory listing, left
+" ;dk -> Directory listing, top
+    nnoremap ;d :Explore<CR>
+    nnoremap ;dh :Vexplore<CR><C-W>H
+    nnoremap ;dk :Sexplore<CR><C-W>K
 " ;f -> Find
     nnoremap ;f :LAck!<space>
 " ;o -> Open
