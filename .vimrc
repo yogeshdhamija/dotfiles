@@ -59,6 +59,8 @@ Plug 'neoclide/coc.nvim', {
 \}                                     " LSP
 Plug 'junegunn/goyo.vim'               " :Goyo to enter writing mode
 Plug 'junegunn/limelight.vim'          " :Limelight!! to toggle focus mode
+Plug 'scrooloose/nerdtree'             " Directory explorer
+Plug 'Xuyuanp/nerdtree-git-plugin'     " Git signs for directory explorer
 
 call plug#end()
 
@@ -136,6 +138,7 @@ call plug#end()
     augroup autosession
       autocmd StdinReadPre * let s:std_in=1
       autocmd VimEnter * nested call s:load_session_if_no_args()
+      autocmd VimLeavePre * NERDTreeClose
       autocmd FileWritePost,VimLeavePre * call s:save_session_if_flag_set()
     augroup END
     function s:load_session_if_no_args()
@@ -226,8 +229,8 @@ call plug#end()
             \| exe "normal! g`\"" | endif
         endif
     set hidden                                      " Needed for LSP
-    let g:netrw_liststyle = 3                       " Directory browser in tree mode
-    let g:netrw_banner = 0                          " Remove directory browser banner
+    let NERDTreeShowHidden = 1                      " Directory tree show hidden files
+    let NERDTreeCascaseSingleChildDir = 0           " Directory tree no cascade dirs
     if DetectWsl()
         let g:clipboard = {
               \   'name': 'WslClipboard',
@@ -287,6 +290,9 @@ call plug#end()
     vnoremap <C-c> "+y<C-c>
     vnoremap <D-c> "+y<D-c>
 
+" Directory tree opens in vertical split with v
+    let NERDTreeMapOpenVSplit='v'
+    let NERDTreeMapPreviewVSplit='gv'
 
 
 
@@ -302,24 +308,26 @@ call plug#end()
 " =====================================
 
 " ;t -> Terminal window
+" ;th -> Terminal window, left (aka h)
 " ;tj -> Terminal window, down (aka j)
+" ;tk -> Terminal window, up (aka k)
 " ;tl -> Terminal window, right (aka l)
     " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
     if has('nvim')
         nnoremap ;t :term<CR> :startinsert<CR>
+        nnoremap ;th :vsplit<CR><C-W>H :exe "term"<CR> :startinsert<CR>
         nnoremap ;tj :25split<CR> :exe "term"<CR> :startinsert<CR>
+        nnoremap ;tk :25split<CR><C-W>K :exe "term"<CR> :startinsert<CR>
         nnoremap ;tl :vsplit<CR> :exe "term"<CR> :startinsert<CR>
     else
-        nnoremap ;t :exe "term"<CR> :startinsert<CR>
-        nnoremap ;tj :25split<CR> :exe "term"<CR> :startinsert<CR>
-        nnoremap ;tl :vsplit<CR> :exe "term"<CR> :startinsert<CR>
+        nnoremap ;t :term<CR><C-W>\|<C-W>_
+        nnoremap ;th :term<CR><C-W>_<C-W>H
+        nnoremap ;tj :term<CR>25<C-W>_
+        nnoremap ;tk :term<CR>25<C-W>_<C-W>K
+        nnoremap ;tl :term<CR><C-W>L
     endif
 " ;d -> Directory listing
-" ;dh -> Directory listing, left
-" ;dk -> Directory listing, top
-    nnoremap ;d :Explore<CR>
-    nnoremap ;dh :Vexplore<CR><C-W>H
-    nnoremap ;dk :Sexplore<CR><C-W>K
+    nnoremap ;d :NERDTreeToggle<CR>
 " ;f -> Find
     nnoremap ;f :LAck!<space>
 " ;o -> Open
