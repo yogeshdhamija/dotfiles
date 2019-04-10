@@ -312,6 +312,8 @@ call plug#end()
     nnoremap ;f :LAck!<space>
 " ;o -> Open
     nnoremap ;o :FZF<CR>
+" ;b -> list Buffers
+    nnoremap ;b :Buffers<CR>
 " LSP Stuff
     " ;ld -> Lsp go-to-Definition
         nnoremap ;ld :LspJumpDefinition<CR>
