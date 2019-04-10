@@ -172,23 +172,29 @@ call plug#end()
 " =====================================
 
 " Colorscheme
-    set background=dark
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1                     " enable true color for nvim < 1.5 (I think)
-    silent! colorscheme molokai
-    let g:indent_guides_guide_size = 1
-    let g:indent_guides_color_change_percent = 2
-    let g:indent_guides_enable_on_vim_startup = 1
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline_theme='molokai'
-    set number
-    set signcolumn=yes
-    set cursorline
-    if (DetectUbuntu() || DetectIterm() || DetectWsl())
-        set termguicolors
+    " Note: let g:classic_colors=1 in ~/.vimrc.local.loadbefore to avoid
+        " colorscheme settings
+    if !exists("g:classic_colors") || g:classic_colors == 0
+        set background=dark
+        let $NVIM_TUI_ENABLE_TRUE_COLOR=1                     " enable true color for nvim < 1.5 (I think)
+        silent! colorscheme molokai
+        let g:indent_guides_guide_size = 1
+        let g:indent_guides_color_change_percent = 2
+        let g:indent_guides_enable_on_vim_startup = 1
+        let g:airline#extensions#tabline#enabled = 1
+        let g:airline_theme='molokai'
+        set number
+        set signcolumn=yes
+        set cursorline
+        if (DetectUbuntu() || DetectIterm() || DetectWsl())
+            set termguicolors
+        endif
+        syntax on
+        " Change visual highlight color
+            highlight Visual term=reverse cterm=reverse guibg=Grey
+    else
+        let w:airline_disabled=1
     endif
-    syntax on
-    " Change visual highlight color
-        highlight Visual term=reverse cterm=reverse guibg=Grey
         
 " General settings
     set mouse=a
@@ -349,6 +355,7 @@ call plug#end()
         abbreviate LG LspSymbols
     " LW -> Lsp list what's Wrong
         abbreviate LW LspDiagnosticList
+
 " Command to enter writing mode
     command WritingMode Goyo
 " Command to save and generate .pdf from .md
