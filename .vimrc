@@ -167,40 +167,6 @@ call plug#end()
 
 
 
-
-
-" =====================================
-" REMAPS:
-" =====================================
-
-" Pressing * does not move cursor
-    nnoremap * *``
-
-" Ack.vim change open vsplit to right side
-    " and add 'V' to open in split and close search
-    let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
-                \ "gv": "<C-W><CR><C-W>L<C-W>p<C-W>J" ,
-                \ "V": "<C-W><CR><C-W>L<C-W>p:bd<CR><C-W>p"}
-
-" Remap left mouse release to put in insert mode
-    nnoremap <LeftMouse> <C-\><C-n><LeftMouse>
-    inoremap <LeftMouse> <C-\><C-n><LeftMouse>
-    nnoremap <LeftRelease> <C-\><C-n><LeftRelease>a
-    inoremap <LeftRelease> <C-\><C-n><LeftRelease>a
-
-" Remap Control+C in visual mode to copy to clipboard
-    vnoremap <C-c> "+y<C-c>
-    vnoremap <D-c> "+y<D-c>
-
-
-
-
-
-
-
-
-
-
 " =====================================
 " SETTINGS:
 " =====================================
@@ -228,7 +194,6 @@ call plug#end()
         autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " General settings
-    let mapleader = ";"
     set mouse=a
     set ignorecase
     set linebreak
@@ -291,62 +256,102 @@ call plug#end()
 
 
 
+
+
+" =====================================
+" REMAPS:
+" =====================================
+
+" Pressing * does not move cursor
+    nnoremap * *``
+
+" Ack.vim change open vsplit to right side
+    " and add 'V' to open in split and close search
+    let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
+                \ "gv": "<C-W><CR><C-W>L<C-W>p<C-W>J" ,
+                \ "V": "<C-W><CR><C-W>L<C-W>p:bd<CR><C-W>p"}
+
+" Remap left mouse release to put in insert mode
+    nnoremap <LeftMouse> <C-\><C-n><LeftMouse>
+    inoremap <LeftMouse> <C-\><C-n><LeftMouse>
+    nnoremap <LeftRelease> <C-\><C-n><LeftRelease>a
+    inoremap <LeftRelease> <C-\><C-n><LeftRelease>a
+
+" Remap Control+C in visual mode to copy to clipboard
+    vnoremap <C-c> "+y<C-c>
+    vnoremap <D-c> "+y<D-c>
+
+
+
+
+
+
+
+
+
+
+
 " =====================================
 " SHORTCUTS:
 " =====================================
 
-" Leader shortcuts
-    " t -> Terminal window, bottom
-    " tj -> Terminal window, down (aka j)
-    " tl -> Terminal window, right (aka l)
-        " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
-        if has('nvim')
-            map <Leader>t :25split<CR> :terminal<CR> i
-            map <Leader>tj :25split<CR> :terminal<CR> i
-            map <Leader>tl :vsplit<CR> :terminal<CR> i
-        else
-            map <Leader>t :terminal<CR>
-            map <Leader>tj :terminal<CR>
-            map <Leader>tl :vsplit<CR> :terminal<CR> <C-W>k :q<CR>
-        endif
-    " bd -> Buffer Delete
-        map <Leader>bd :bd<CR>
-    " bca -> Buffers Close All
-        map <Leader>bca :call DeleteHiddenBuffers()<CR>
-    " CD -> Change Directory to current open file
-        command CD cd %:p:h
-        map <Leader>CD :CD<CR> :pwd<CR>
-    " d -> Directory tree
-        " map <Leader>d :NERDTreeToggle<CR>
-    " f -> Find
-        map <Leader>f :LAck!<Space>
-    " o -> Open
-        map <Leader>o :FZF<CR>
-    " r -> Right buffer
-        map <Leader>r :bn<CR>
-    " LSP
-        " lh -> Lsp Hover info
-            map <Leader>lh :LspDoHover<CR>
-        " lg -> Lsp Go to symbols
-            map <Leader>lg :LspSymbols<CR>
-        " lwh -> Lsp what's Wrong Here
-            map <Leader>lwh :LspDiagnosticInfo<CR>
-        " lw -> Lsp list what's Wrong
-            map <Leader>lw :LspDiagnosticList<CR>
-        " ld -> Lsp go-to-Definition
-            map <Leader>ld :LspJumpDefinition<CR>
-        " ldl -> Lsp go-to-Definition in right (aka L) split
-            map <Leader>ldl :vsplit<CR> :LspJumpDefinition<CR>
-        " lr -> Lsp jump to References
-            map <Leader>lr :LspJumpReferences<CR>
-        " lrl -> Lsp jump to References in right (aka L) split
-            map <Leader>lrl :vsplit<CR> :LspJumpReferences<CR>
+" ;t -> Terminal window, bottom
+" ;tj -> Terminal window, down (aka j)
+" ;tl -> Terminal window, right (aka l)
+    " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
+    if has('nvim')
+        nnoremap ;t :25split<CR> :term<CR> :startinsert<CR>
+        nnoremap ;tj :25split<CR> :exe "term"<CR> :startinsert<CR>
+        nnoremap ;tl :vsplit<CR> :exe "term"<CR> :startinsert<CR>
+    else
+        nnoremap ;t :exe "term"<CR> :startinsert<CR>
+        nnoremap ;tj :25split<CR> :exe "term"<CR> :startinsert<CR>
+        nnoremap ;tl :vsplit<CR> :exe "term"<CR> :startinsert<CR>
+    endif
+" ;f -> Find
+    nnoremap ;f :LAck!<space>
+" ;o -> Open
+    nnoremap ;o :FZF<CR>
+" LSP Stuff
+    " ;ld -> Lsp go-to-Definition
+        nnoremap ;ld :LspJumpDefinition<CR>
+    " ;ldl -> Lsp go-to-Definition in right (aka L) split
+        nnoremap ;ldl :vsplit<CR> :LspJumpDefinition<CR>
+    " ;lr -> Lsp jump to References
+        nnoremap ;lr :LspJumpReferences<CR>
+    " ;lrl -> Lsp jump to References in right (aka L) split
+        nnoremap ;lrl :vsplit<CR> :LspJumpReferences<CR>
+    " ;lw -> Lsp what's Wrong here
+        nnoremap ;lw :LspDiagnosticInfo<CR>
+    " ;lh -> Lsp Help<CR>
+        nnoremap ;lh :LspHover<CR>
+
+
+
+
+
+
+
+
+" =====================================
+" COMMANDS:
+" =====================================
+
+" CAB -> Close All Buffers
+    abbreviate CAB call DeleteHiddenBuffers()
+" CD -> Change Directory to current open file
+    command CD cd %:p:h
+" LSP
+    " LG -> Lsp Go to symbols
+        abbreviate LG LspSymbols
+    " LW -> Lsp list what's Wrong
+        abbreviate LW LspDiagnosticList
 " Command to enter writing mode
     command WritingMode Goyo
 " Command to save and generate .pdf from .md
     command PDF w | exe '! pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf"'
 " Start saving the session
-    command StartKeepingSession let s:should_save_session = 1 | w
+    command StartKeepingSession let s:should_save_session = 1
 " Delete vim session and quit
     command ClearSession let s:should_save_session = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
 " Map coc.nvim available actions to commands to allow tab completion
@@ -357,7 +362,7 @@ call plug#end()
     command LspJumpImplementation  call CocActionAsync("jumpImplementation")
     command LspJumpTypeDefinition  call CocActionAsync("jumpTypeDefinition")
     command LspJumpReferences      call CocActionAsync("jumpReferences")
-    command LspDoHover             call CocActionAsync("doHover")
+    command LspHover               call CocActionAsync("doHover")
     command LspRename              call CocActionAsync("rename")
     command LspSymbols             CocList --interactive symbols
     command LspFormat              call CocActionAsync("format")
