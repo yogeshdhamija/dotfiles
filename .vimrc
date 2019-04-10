@@ -272,7 +272,10 @@ call plug#end()
 " =====================================
 
 " Pressing * does not move cursor
-    nnoremap * *``
+    nnoremap * yiw:let@/="<C-R>""<CR>:set hlsearch<CR>
+    
+" Pressing * in visual mode searches for selection
+    vnoremap * y:let@/="<C-R>""<CR>:set hlsearch<CR>
 
 " Ack.vim change open vsplit to right side
     " and add 'V' to open in split and close search
@@ -334,6 +337,8 @@ call plug#end()
     nnoremap ;o :FZF<CR>
 " ;b -> list Buffers
     nnoremap ;b :Buffers<CR>
+" ;w -> list Windows
+    nnoremap ;w :Windows<CR>
 " LSP Stuff
     " ;ld -> Lsp go-to-Definition
         nnoremap ;ld :LspJumpDefinition<CR>
