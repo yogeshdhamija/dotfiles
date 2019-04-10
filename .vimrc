@@ -106,9 +106,6 @@ call plug#end()
       echo "Closed ".closed." hidden buffers"
     endfunction
 
-" Delete annoying netrw buffers before exit
-    autocmd FileType netrw setl bufhidden=delete
-
 " Overriding Goyo plugin's enter/exit functions
     function! s:goyo_enter()
         set spell
@@ -200,6 +197,7 @@ call plug#end()
             highlight Visual term=reverse cterm=reverse guibg=Grey
     else
         let w:airline_disabled=1
+        autocmd WinNew * let w:airline_disabled=1
     endif
         
 " General settings
