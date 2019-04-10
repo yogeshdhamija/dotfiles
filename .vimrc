@@ -46,8 +46,6 @@ Plug 'nathanaelkane/vim-indent-guides' " Indent guides
 Plug 'vim-airline/vim-airline'         " vim-airline
 Plug 'vim-airline/vim-airline-themes'  " vim-airline
 Plug 'tpope/vim-fugitive'              " show git branch on vim-airline
-Plug 'scrooloose/nerdtree'             " NERDTree
-Plug 'Xuyuanp/nerdtree-git-plugin'     " NERDTree Git signs
 Plug 'mileszs/ack.vim'                 " Search
 Plug 'junegunn/fzf'                    " Fuzzy finder
 Plug 'junegunn/fzf.vim'                " Fuzzy finder vim wrapper
@@ -57,7 +55,6 @@ Plug 'junegunn/vim-easy-align'         " Easy Align
                                            " Example: gaip*=        -> go align inner paragraph around all =
                                            " Example: gaip<Enter>*= -> go align inner paragraph, reversed, around all =
 Plug 'neoclide/coc.nvim', {
-    \'tag': '*', 
     \'do': { -> coc#util#install()}
 \}                                     " LSP
 Plug 'junegunn/goyo.vim'               " :Goyo to enter writing mode
@@ -136,7 +133,6 @@ call plug#end()
     augroup autosession
       autocmd StdinReadPre * let s:std_in=1
       autocmd VimEnter * nested call s:load_session_if_no_args()
-      autocmd VimLeavePre * NERDTreeClose
       autocmd FileWritePost,VimLeavePre * call s:save_session_if_flag_set()
     augroup END
     function! s:load_session_if_no_args()
@@ -179,10 +175,6 @@ call plug#end()
 
 " Pressing * does not move cursor
     nnoremap * *``
-
-" Nerdtree change open in vsplit to `v` instead of `s`
-    let NERDTreeMapOpenVSplit='v'
-    let NERDTreeMapPreviewVSplit='gv'
 
 " Ack.vim change open vsplit to right side
     " and add 'V' to open in split and close search
@@ -244,9 +236,6 @@ call plug#end()
     set autoread
     set splitbelow
     set splitright
-    filetype plugin on                              " Required for nerdcommenter plugin
-    let NERDTreeShowHidden=1
-    let NERDTreeCascadeSingleChildDir=0
     let g:airline#extensions#whitespace#enabled = 0 " Airline don't show whitespace errors
     let g:easy_align_ignore_groups=[]
     set tabstop=4
@@ -328,7 +317,7 @@ call plug#end()
         command CD cd %:p:h
         map <Leader>CD :CD<CR> :pwd<CR>
     " d -> Directory tree
-        map <Leader>d :NERDTreeToggle<CR>
+        " map <Leader>d :NERDTreeToggle<CR>
     " f -> Find
         map <Leader>f :LAck!<Space>
     " o -> Open
