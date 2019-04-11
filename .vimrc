@@ -315,20 +315,20 @@ call plug#end()
 " ;tl -> Terminal window, right (aka l)
     " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
     if has('nvim')
-        nnoremap ;t :term<CR> :startinsert<CR>
-        nnoremap ;th :vsplit<CR><C-W>H :exe "term"<CR> :startinsert<CR>
-        nnoremap ;tj :25split<CR> :exe "term"<CR> :startinsert<CR>
-        nnoremap ;tk :25split<CR><C-W>K :exe "term"<CR> :startinsert<CR>
-        nnoremap ;tl :vsplit<CR> :exe "term"<CR> :startinsert<CR>
+        nnoremap ;t :terminal<CR> :startinsert<CR>
+        nnoremap ;th :vsplit<CR><C-W>H :terminal<CR> :startinsert<CR>
+        nnoremap ;tj :25split<CR> :terminal<CR> :startinsert<CR>
+        nnoremap ;tk :split<CR><C-W>K25<C-W>_:terminal<CR> :startinsert<CR>
+        nnoremap ;tl :vsplit<CR> :exe "terminal"<CR> :startinsert<CR>
     else
-        nnoremap ;t :term ++curwin<CR>
-        nnoremap ;th :term<CR><C-W>_<C-W>H
-        nnoremap ;tj :term<CR><C-\><C-n>25<C-W>_i
-        nnoremap ;tk :term<CR><C-\><C-n>25<C-W>_<C-W>Ki
-        nnoremap ;tl :term<CR><C-W>L
+        nnoremap ;t :terminal ++curwin<CR>
+        nnoremap ;th :terminal<CR><C-W>_<C-W>H
+        nnoremap ;tj :terminal<CR><C-\><C-n>25<C-W>_i
+        nnoremap ;tk :terminal<CR><C-\><C-n><C-W>K25<C-W>_i
+        nnoremap ;tl :terminal<CR><C-W>L
     endif
 " ;d -> Directory listing
-    nnoremap ;d :NERDTreeToggle<CR>
+    nnoremap ;d :NERDTreeFind<CR>
 " ;f -> Find
     nnoremap ;f :LAck!<space>
 " ;o -> Open
