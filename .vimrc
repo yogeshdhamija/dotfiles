@@ -328,7 +328,7 @@ call plug#end()
         nnoremap ;tl :terminal<CR><C-W>L
     endif
 " ;d -> Directory listing
-    nnoremap ;d :NERDTreeFind<CR>
+    nnoremap ;d :NERDTreeFind<CR>:NERDTreeFocus<CR>
 " ;f -> Find
     nnoremap ;f :LAck!<space>
 " ;o -> Open
