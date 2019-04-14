@@ -270,10 +270,10 @@ call plug#end()
 " =====================================
 
 " Pressing * does not move cursor
-    nnoremap * yiw:let@/="<C-R>""<CR>:set hlsearch<CR>
+    nnoremap * yiw:let @/=@"<CR>:set hlsearch<CR>
     
 " Pressing * in visual mode searches for selection
-    vnoremap * y:let@/="<C-R>""<CR>:set hlsearch<CR>
+    vnoremap * y:let @/=@"<CR>:set hlsearch<CR>
 
 " Ack.vim change open vsplit to right side
     " and add 'V' to open in split and close search
