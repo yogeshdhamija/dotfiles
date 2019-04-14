@@ -54,13 +54,20 @@ Plug 'junegunn/vim-easy-align'         " Easy Align
                                            " Example: gaip-=        -> go align inner paragraph around the last =
                                            " Example: gaip*=        -> go align inner paragraph around all =
                                            " Example: gaip<Enter>*= -> go align inner paragraph, reversed, around all =
-Plug 'neoclide/coc.nvim', {
-    \'do': { -> coc#util#install()}
-\}                                     " LSP
 Plug 'junegunn/goyo.vim'               " :Goyo to enter writing mode
 Plug 'junegunn/limelight.vim'          " :Limelight!! to toggle focus mode
 Plug 'scrooloose/nerdtree'             " Directory explorer
 Plug 'Xuyuanp/nerdtree-git-plugin'     " Git signs for directory explorer
+
+" Language Server Protocol
+    function! InstallDeps(info)
+        if a:info.status == 'installed' || a:info.force
+            let extensions = ['coc-emmet', 'coc-highlight', 'coc-html', 'coc-css', 'coc-vetur', 'coc-java', 'coc-yaml', 'coc-snippets', 'coc-tsserver', 'coc-json', 'coc-python', 'coc-pyls']
+            call coc#util#install()
+            call coc#util#install_extension(extensions)
+        endif
+    endfunction
+    Plug 'neoclide/coc.nvim', {'do': function('InstallDeps')}
 
 call plug#end()
 
@@ -199,7 +206,7 @@ call plug#end()
         let w:airline_disabled=1
         autocmd WinNew * let w:airline_disabled=1
     endif
-        
+
 " General settings
     set mouse=a
     set ignorecase
@@ -271,7 +278,7 @@ call plug#end()
 
 " Pressing * does not move cursor
     nnoremap * yiw:let @/=@"<CR>:set hlsearch<CR>
-    
+
 " Pressing * in visual mode searches for selection
     vnoremap * y:let @/=@"<CR>:set hlsearch<CR>
 
@@ -346,8 +353,12 @@ call plug#end()
         nnoremap ;lr :LspJumpReferences<CR>
     " ;lrl -> Lsp jump to References in right (aka L) split
         nnoremap ;lrl :vsplit<CR> :LspJumpReferences<CR>
-    " ;lw -> Lsp what's Wrong here
-        nnoremap ;lw :LspDiagnosticInfo<CR>
+    " ;lw -> Lsp what's Wrong list
+        nnoremap ;lw :LspDiagnosticList<CR>
+    " ;lwl -> Lsp what's Wrong List
+        nnoremap ;lwl :LspDiagnosticList<CR>
+    " ;lwh -> Lsp what's Wrong List
+        nnoremap ;lwh :LspDiagnosticInfo<CR>
     " ;lh -> Lsp Help<CR>
         nnoremap ;lh :LspHover<CR>
 
