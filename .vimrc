@@ -235,7 +235,7 @@ call plug#end()
         endif
     set hidden                                      " Needed for LSP
     let NERDTreeShowHidden = 1                      " Directory tree show hidden files
-    let NERDTreeCascaseSingleChildDir = 0           " Directory tree no cascade dirs
+    let NERDTreeCascadeSingleChildDir = 0           " Directory tree no cascade dirs
     if DetectWsl()
         let g:clipboard = {
               \   'name': 'WslClipboard',
