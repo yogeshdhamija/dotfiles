@@ -82,7 +82,7 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 # Load FZF configuration
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Set up LESS 
+# Set up LESS
 export LESS="-RXF"
 
 # Set up FZF to use silver searcher (ag)

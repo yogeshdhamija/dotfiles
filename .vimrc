@@ -60,14 +60,16 @@ Plug 'scrooloose/nerdtree'             " Directory explorer
 Plug 'Xuyuanp/nerdtree-git-plugin'     " Git signs for directory explorer
 
 " Language Server Protocol
-    function! InstallDeps(info)
-        if a:info.status == 'installed' || a:info.force
-            let extensions = ['coc-emmet', 'coc-highlight', 'coc-html', 'coc-css', 'coc-vetur', 'coc-java', 'coc-yaml', 'coc-snippets', 'coc-tsserver', 'coc-json', 'coc-python', 'coc-pyls']
-            call coc#util#install()
-            call coc#util#install_extension(extensions)
-        endif
-    endfunction
-    Plug 'neoclide/coc.nvim', {'do': function('InstallDeps')}
+    if executable("yarn") && executable("node")
+        function! InstallDeps(info)
+            if a:info.status == 'installed' || a:info.force
+                let extensions = ['coc-emmet', 'coc-gocode', 'coc-highlight', 'coc-html', 'coc-css', 'coc-vetur', 'coc-java', 'coc-yaml', 'coc-snippets', 'coc-tsserver', 'coc-json', 'coc-python', 'coc-pyls']
+                call coc#util#install()
+                call coc#util#install_extension(extensions)
+            endif
+        endfunction
+        Plug 'neoclide/coc.nvim', {'do': function('InstallDeps')}
+    endif
 
 call plug#end()
 
