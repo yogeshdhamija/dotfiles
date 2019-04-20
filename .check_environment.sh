@@ -12,22 +12,38 @@ declare -a EXECS=(
     "fzf"
     "pandoc"
     "pdflatex"
+    "node"
+    "yarn"
 )
 declare -a NAMES=(
-    "NeoVim" 
+    "NeoVim"
     "ZShell"
     "Ripgrep"
     "FZF"
     "Pandoc"
     "TeX Live"
+    "node"
+    "yarn"
 )
-declare -a ADDITIONAL=(
+declare -a ADDITIONAL1=(
+    "The Bettitor Editor"
+    "Nicer Shell"
+    "Grep, vim uses for find-in-dir"
+    "Fuzzy finder, vim uses"
+    "Document converter, vim uses for .md -> .pdf"
+    "Document converter, vim uses for .md -> .pdf"
+    "JS runtime, vim uses to install LSP plugin"
+    "package manager, vim uses to install LSP plugin"
+)
+declare -a ADDITIONAL2=(
     ""
     ""
     ""
     ""
     ""
     "apt: texlive texlive-latex-extra; BasicTeX mac package"
+    ""
+    ""
 )
 
 # SCRIPT:
@@ -48,8 +64,9 @@ for (( i=1; i<${arraylength}+1; i++ ));
 do
     if command -v ${EXECS[$i-1]} > /dev/null ; then
         echo '    -' ${NAMES[$i-1]} '('${EXECS[$i-1]}')'
-        [[ ! -z ${ADDITIONAL[$i-1]} ]] && echo '        ' ${ADDITIONAL[$i-1]} 
-        # echo ""
+        [[ ! -z ${ADDITIONAL1[$i-1]} ]] && echo '        ' ${ADDITIONAL1[$i-1]}
+        [[ ! -z ${ADDITIONAL2[$i-1]} ]] && echo '        ' ${ADDITIONAL2[$i-1]}
+        echo ""
     fi
 done
 
@@ -60,7 +77,8 @@ for (( i=1; i<${arraylength}+1; i++ ));
 do
     if ! command -v ${EXECS[$i-1]} > /dev/null ; then
         echo '    -' ${NAMES[$i-1]} '('${EXECS[$i-1]}')'
-        [[ ! -z ${ADDITIONAL[$i-1]} ]] && echo '        ' ${ADDITIONAL[$i-1]}
-        # echo ""
+        [[ ! -z ${ADDITIONAL1[$i-1]} ]] && echo '        ' ${ADDITIONAL1[$i-1]}
+        [[ ! -z ${ADDITIONAL2[$i-1]} ]] && echo '        ' ${ADDITIONAL2[$i-1]}
+        echo ""
     fi
 done
