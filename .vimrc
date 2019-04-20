@@ -202,6 +202,8 @@ call plug#end()
             set termguicolors
         endif
         syntax on
+        set wrap
+        set breakindent
         " Change visual highlight color
             highlight Visual term=reverse cterm=reverse guibg=Grey
     else
