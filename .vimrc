@@ -212,6 +212,7 @@ call plug#end()
         endif
     else
         let g:airline#extensions#tabline#enabled = 0
+        let g:indentLine_enabled = 0
     endif
 
 " General settings
