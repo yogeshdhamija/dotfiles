@@ -40,10 +40,10 @@ Plug 'tpope/vim-surround'              " Ability to surround objects
                                            " Note: [ for space, ] for no space
 Plug 'michaeljsmith/vim-indent-object' " Adding indent-level as a text object
                                            " Example: dii           -> delete inner indent
-Plug 'flazz/vim-colorschemes'          " Colorschemes
+Plug 'joshdick/onedark.vim'            " Colorscheme
 Plug 'ap/vim-css-color'                " Highlight colors with their color
-Plug 'nathanaelkane/vim-indent-guides' " Indent guides
 Plug 'vim-airline/vim-airline'         " vim-airline
+Plug 'Yggdroot/indentLine'             " indent guides
 Plug 'vim-airline/vim-airline-themes'  " vim-airline
 Plug 'tpope/vim-fugitive'              " show git branch on vim-airline
 Plug 'mileszs/ack.vim'                 " Search
@@ -122,7 +122,8 @@ call plug#end()
         set noshowmode
         set noshowcmd
         let b:coc_suggest_disable = 1
-        IndentGuidesDisable
+        IndentLinesDisable
+        set nolist
         Limelight
     endfunction
     function! s:goyo_leave()
@@ -131,7 +132,8 @@ call plug#end()
         set showmode
         set showcmd
         let b:coc_suggest_disable = 0
-        IndentGuidesEnable
+        IndentLinesEnable
+        set list
         Limelight!
         AirlineRefresh " Airline starts up weird sometimes...
         AirlineToggle
@@ -189,26 +191,25 @@ call plug#end()
     if !exists("g:classic_colors") || g:classic_colors == 0
         set background=dark
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1                     " enable true color for nvim < 1.5 (I think)
-        silent! colorscheme molokai
-        let g:indent_guides_guide_size = 1
-        let g:indent_guides_color_change_percent = 2
-        let g:indent_guides_enable_on_vim_startup = 1
+        silent! colorscheme onedark                           " silent to suppress error before plugin installed
         let g:airline#extensions#tabline#enabled = 1
-        let g:airline_theme='molokai'
+        let g:airline_theme='onedark'
         set number
         set signcolumn=yes
-        set cursorline
         if (DetectUbuntu() || DetectIterm() || DetectWsl())
             set termguicolors
         endif
         syntax on
         set wrap
         set breakindent
-        " Change visual highlight color
-            highlight Visual term=reverse cterm=reverse guibg=Grey
+        set listchars=tab:\|\ ,eol:$
+        set list
+        if has('nvim')
+            autocmd TermOpen * set nolist
+            autocmd TermOpen * IndentLinesDisable
+        endif
     else
-        let w:airline_disabled=1
-        autocmd WinNew * let w:airline_disabled=1
+        let g:airline#extensions#tabline#enabled = 0
     endif
 
 " General settings
@@ -233,26 +234,26 @@ call plug#end()
         let g:ackprg = 'ag --vimgrep --hidden'
     endif
     let g:ackhighlight = 1
-        if has("autocmd")                           " Vim jump to the last position when reopening a file
-          au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-            \| exe "normal! g`\"" | endif
-        endif
+    if has("autocmd")                               " Vim jump to the last position when reopening a file
+        au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+            \ | exe "normal! g`\"" | endif
+    endif
     set hidden                                      " Needed for LSP
     let NERDTreeShowHidden = 1                      " Directory tree show hidden files
     let NERDTreeCascadeSingleChildDir = 0           " Directory tree no cascade dirs
     if DetectWsl()
         let g:clipboard = {
-              \   'name': 'WslClipboard',
-              \   'copy': {
-              \      '+': 'clip.exe',
-              \      '*': 'clip.exe',
-              \    },
-              \   'paste': {
-              \      '+': 'powershell.exe -c Get-Clipboard',
-              \      '*': 'powershell.exe -c Get-Clipboard',
-              \   },
-              \   'cache_enabled': 0,
-              \ }
+            \   'name': 'WslClipboard',
+            \   'copy': {
+            \      '+': 'clip.exe',
+            \      '*': 'clip.exe',
+            \    },
+            \   'paste': {
+            \      '+': 'powershell.exe -c Get-Clipboard',
+            \      '*': 'powershell.exe -c Get-Clipboard',
+            \   },
+            \   'cache_enabled': 0,
+            \ }
     endif
     " Start interactive EasyAlign in visual mode (e.g. vipga)
         xmap ga <Plug>(EasyAlign)
