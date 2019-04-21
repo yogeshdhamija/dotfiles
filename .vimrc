@@ -43,8 +43,8 @@ Plug 'michaeljsmith/vim-indent-object' " Adding indent-level as a text object
 Plug 'joshdick/onedark.vim'            " Colorscheme
 Plug 'ap/vim-css-color'                " Highlight colors with their color
 Plug 'vim-airline/vim-airline'         " vim-airline
-Plug 'Yggdroot/indentLine'             " indent guides
 Plug 'vim-airline/vim-airline-themes'  " vim-airline
+Plug 'Yggdroot/indentLine'             " indent guides
 Plug 'tpope/vim-fugitive'              " show git branch on vim-airline
 Plug 'mileszs/ack.vim'                 " Search
 Plug 'junegunn/fzf'                    " Fuzzy finder
@@ -121,6 +121,7 @@ call plug#end()
         set nocursorline
         set noshowmode
         set noshowcmd
+        call css_color#disable()
         let b:coc_suggest_disable = 1
         IndentLinesDisable
         set nolist
@@ -131,6 +132,7 @@ call plug#end()
         set cursorline
         set showmode
         set showcmd
+        call css_color#enable()
         let b:coc_suggest_disable = 0
         IndentLinesEnable
         set list
