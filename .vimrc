@@ -117,25 +117,25 @@ call plug#end()
 
 " Overriding Goyo plugin's enter/exit functions
     function! s:goyo_enter()
-        set spell
-        set nocursorline
-        set noshowmode
-        set noshowcmd
+        setlocal spell
+        setlocal noshowmode
+        setlocal nocursorline
+        setlocal noshowcmd
+        setlocal nolist
         call css_color#disable()
         let b:coc_suggest_disable = 1
         IndentLinesDisable
-        set nolist
         Limelight
     endfunction
     function! s:goyo_leave()
-        set nospell
-        set cursorline
-        set showmode
-        set showcmd
+        set spell<
+        set showmode<
+        set showcmd<
+        set list<
+        set cursorline<
         call css_color#enable()
         let b:coc_suggest_disable = 0
         IndentLinesEnable
-        set list
         Limelight!
         AirlineRefresh " Airline starts up weird sometimes...
         AirlineToggle
