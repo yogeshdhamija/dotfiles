@@ -205,8 +205,8 @@ call plug#end()
     if !exists("g:classic_colors") || g:classic_colors == 0
         set background=dark
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1                     " enable true color for nvim < 1.5 (I think)
-        silent! colorscheme onedark                           " silent to suppress error before plugin installed
         let g:airline#extensions#tabline#enabled = 1
+        silent! colorscheme onedark                           " silent to suppress error before plugin installed
         let g:airline_theme='onedark'
         set number
         set signcolumn=yes
@@ -223,6 +223,10 @@ call plug#end()
             autocmd TermOpen * IndentLinesDisable
         endif
         autocmd! VimEnter * call s:start_writingmode_if_text_or_md_file()
+        if g:colors_name == "onedark" && &background == "dark"
+            highlight Comment guifg=#8C93A0
+            highlight NonText guifg=#5C6370
+        endif
     else
         let g:airline#extensions#tabline#enabled = 0
         let g:indentLine_enabled = 0
