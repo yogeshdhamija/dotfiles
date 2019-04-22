@@ -157,13 +157,6 @@ call plug#end()
     endfunction
 
 " Opening last session if no arguments when vim is opened
-    let s:should_save_session = 0
-    augroup autosession
-      autocmd StdinReadPre * let s:std_in=1
-      autocmd VimEnter * nested call s:load_session_if_no_args()
-      autocmd VimLeavePre * NERDTreeClose
-      autocmd FileWritePost,VimLeavePre * call s:save_session_if_flag_set()
-    augroup END
     function! s:load_session_if_no_args()
         if argc() == 0 && !exists("s:std_in")
             if filereadable(expand('~/.vim/lastsession.vim'))
@@ -188,7 +181,7 @@ call plug#end()
     endfunction
 
 " Start WritingMode if open markdown or text file
-    function! s:set_up_writing_mode()
+    function! s:start_writingmode_if_text_or_md_file()
         if &filetype == "markdown" || &filetype == "text"
             Goyo 80x85%
         endif
@@ -229,6 +222,7 @@ call plug#end()
             autocmd TermOpen * set nolist
             autocmd TermOpen * IndentLinesDisable
         endif
+        autocmd! VimEnter * call s:start_writingmode_if_text_or_md_file()
     else
         let g:airline#extensions#tabline#enabled = 0
         let g:indentLine_enabled = 0
@@ -284,7 +278,14 @@ call plug#end()
     " Writing mode settings
         autocmd! User GoyoEnter nested call <SID>goyo_enter()
         autocmd! User GoyoLeave nested call <SID>goyo_leave()
-        autocmd! VimEnter * call s:set_up_writing_mode()
+    " Setting up session management (autosave sessions)
+        let s:should_save_session = 0
+        augroup autosession
+          autocmd StdinReadPre * let s:std_in=1
+          autocmd VimEnter * nested call s:load_session_if_no_args()
+          autocmd VimLeavePre * NERDTreeClose
+          autocmd FileWritePost,VimLeavePre * call s:save_session_if_flag_set()
+        augroup END
 
 
 
