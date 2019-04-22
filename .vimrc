@@ -219,7 +219,7 @@ call plug#end()
         set listchars=tab:\|\ ,eol:$
         set list
         if has('nvim')
-            autocmd TermOpen * set nolist
+            autocmd TermOpen * setlocal nolist
             autocmd TermOpen * IndentLinesDisable
         endif
         autocmd! VimEnter * call s:start_writingmode_if_text_or_md_file()
