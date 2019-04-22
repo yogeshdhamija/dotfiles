@@ -126,6 +126,11 @@ call plug#end()
         let b:coc_suggest_disable = 1
         IndentLinesDisable
         Limelight
+        " Set up ability to :q from within WritingMode
+            let b:quitting = 0
+            let b:quitting_bang = 0
+            autocmd QuitPre <buffer> let b:quitting = 1
+            cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
     endfunction
     function! s:goyo_leave()
         set spell<
@@ -141,6 +146,14 @@ call plug#end()
         AirlineToggle
         AirlineToggle
         AirlineRefresh
+        " Quit Vim if this is the only remaining buffer
+            if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+                if b:quitting_bang
+                    qa!
+                else
+                    qa
+                endif
+            endif
     endfunction
 
 " Opening last session if no arguments when vim is opened
@@ -174,6 +187,12 @@ call plug#end()
       endif
     endfunction
 
+" Start WritingMode if open markdown or text file
+    function! s:set_up_writing_mode()
+        if &filetype == "markdown" || &filetype == "text"
+            Goyo 80x85%
+        endif
+    endfunction
 
 
 
@@ -265,6 +284,7 @@ call plug#end()
     " Writing mode settings
         autocmd! User GoyoEnter nested call <SID>goyo_enter()
         autocmd! User GoyoLeave nested call <SID>goyo_leave()
+        autocmd! VimEnter * call s:set_up_writing_mode()
 
 
 
@@ -393,8 +413,10 @@ call plug#end()
     " LW -> Lsp list what's Wrong
         abbreviate LW LspDiagnosticList
 
-" Command to enter writing mode
-    command WritingMode Goyo
+" Writing mode
+    command WritingModeOn Goyo 80x85%
+    command WritingModeOff Goyo!
+    command WritingModeToggle Goyo
 " Command to save and generate .pdf from .md
     command PDF w | exe '! pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf"'
 " Start saving the session
