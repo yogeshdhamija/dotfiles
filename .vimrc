@@ -87,22 +87,22 @@ call plug#end()
 " =====================================
 
 " Detects if currently running on Microsoft's Ubuntu on Windows (WSL)
-    function DetectWsl()
+    function! DetectWsl()
         return filereadable("/proc/version") && (match(readfile("/proc/version"), "Microsoft") != -1)
     endfunction
 
 " Detects if currently running on regular Ubuntu
-    function DetectUbuntu()
+    function! DetectUbuntu()
         return filereadable("/proc/version") && (match(readfile("/proc/version"), "Ubuntu") != -1) && (match(readfile("/proc/version"), "Microsoft") == -1)
     endfunction
 
 " Detects if currently running on Iterm
-    function DetectIterm()
+    function! DetectIterm()
         return $TERM_PROGRAM =~ "iTerm"
     endfunction
 
 " Deletes all unmodified hidden buffers
-    function DeleteHiddenBuffers()
+    function! DeleteHiddenBuffers()
       let tpbl=[]
       let closed = 0
       call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
@@ -151,7 +151,7 @@ call plug#end()
       autocmd VimLeavePre * NERDTreeClose
       autocmd FileWritePost,VimLeavePre * call s:save_session_if_flag_set()
     augroup END
-    function s:load_session_if_no_args()
+    function! s:load_session_if_no_args()
         if argc() == 0 && !exists("s:std_in")
             if filereadable(expand('~/.vim/lastsession.vim'))
                 execute 'silent source ~/.vim/lastsession.vim'
@@ -161,7 +161,7 @@ call plug#end()
             let s:should_save_session = 0
         endif
     endfunction
-    function s:save_session_if_flag_set()
+    function! s:save_session_if_flag_set()
       if s:should_save_session == 1
         let sessionoptions = &sessionoptions
         try
