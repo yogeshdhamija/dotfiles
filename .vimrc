@@ -223,10 +223,10 @@ call plug#end()
             autocmd TermOpen * IndentLinesDisable
         endif
         autocmd! VimEnter * call s:start_writingmode_if_text_or_md_file()
-        if g:colors_name == "onedark" && &background == "dark"
+        highlight MatchParen gui=inverse
+        if exists('g:colors_name') && g:colors_name == "onedark" && &background == "dark"
             highlight Comment guifg=#6C7380
             highlight NonText guifg=#414855
-            highlight MatchParen gui=inverse
         endif
     else
         let g:airline#extensions#tabline#enabled = 0
