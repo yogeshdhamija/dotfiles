@@ -123,6 +123,8 @@ call plug#end()
         setlocal noshowcmd
         setlocal nolist
         setlocal signcolumn=no
+        " Fix Airline showing up bug
+            setlocal eventignore=FocusGained
         call css_color#disable()
         let b:coc_suggest_disable = 1
         IndentLinesDisable
@@ -140,6 +142,7 @@ call plug#end()
         set list<
         set cursorline<
         set signcolumn<
+        set eventignore<
         call css_color#enable()
         let b:coc_suggest_disable = 0
         IndentLinesEnable
@@ -219,6 +222,9 @@ call plug#end()
     set listchars=tab:\|\ ,eol:$
     set list
     let g:indentLine_showFirstIndentLevel=1
+    " Indentline conflicts with some other concealed characters.
+        " Workaround: conceal nothing on cursor line
+        let g:indentLine_concealcursor=''
     if has('nvim')
         autocmd TermOpen * setlocal nolist
         autocmd TermOpen * IndentLinesDisable
@@ -421,7 +427,7 @@ call plug#end()
     command WritingModeOff Goyo!
     command WritingModeToggle Goyo
 " Command to save and generate .pdf from .md
-    command PDF w | exe '! pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf"'
+    command PDF w | exe '!pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf" -V geometry:margin=1in'
 " Start saving the session
     command StartKeepingSession let s:should_save_session = 1
 " Delete vim session and quit
