@@ -63,7 +63,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'     " Git signs for directory explorer
     if executable("yarn") && executable("node")
         function! InstallDeps(info)
             if a:info.status == 'installed' || a:info.force
-                let extensions = ['coc-emmet', 'coc-gocode', 'coc-highlight', 'coc-html', 'coc-css', 'coc-vetur', 'coc-java', 'coc-yaml', 'coc-snippets', 'coc-tsserver', 'coc-json', 'coc-python', 'coc-pyls']
+                let extensions = ['coc-gocode', 'coc-json', 'coc-python', 'coc-pyls']
                 call coc#util#install()
                 call coc#util#install_extension(extensions)
             endif
@@ -122,6 +122,7 @@ call plug#end()
         setlocal nocursorline
         setlocal noshowcmd
         setlocal nolist
+        setlocal signcolumn=no
         call css_color#disable()
         let b:coc_suggest_disable = 1
         IndentLinesDisable
@@ -138,6 +139,7 @@ call plug#end()
         set showcmd<
         set list<
         set cursorline<
+        set signcolumn<
         call css_color#enable()
         let b:coc_suggest_disable = 0
         IndentLinesEnable
