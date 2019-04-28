@@ -202,37 +202,32 @@ call plug#end()
 " =====================================
 
 " Colorscheme
-    " Note: let g:classic_colors=1 in ~/.vimrc.local.loadbefore to avoid
-        " colorscheme settings
-    if !exists("g:classic_colors") || g:classic_colors == 0
-        set background=dark
-        let $NVIM_TUI_ENABLE_TRUE_COLOR=1                     " enable true color for nvim < 1.5 (I think)
-        let g:airline#extensions#tabline#enabled = 1
-        silent! colorscheme onedark                           " silent to suppress error before plugin installed
-        let g:airline_theme='onedark'
-        set number
-        set signcolumn=yes
-        if (DetectUbuntu() || DetectIterm() || DetectWsl())
-            set termguicolors
-        endif
-        syntax on
-        set wrap
-        set breakindent
-        set listchars=tab:\|\ ,eol:$
-        set list
-        if has('nvim')
-            autocmd TermOpen * setlocal nolist
-            autocmd TermOpen * IndentLinesDisable
-        endif
-        autocmd! VimEnter * call s:start_writingmode_if_text_or_md_file()
-        highlight MatchParen gui=inverse
-        if exists('g:colors_name') && g:colors_name == "onedark" && &background == "dark"
-            highlight Comment guifg=#6C7380
-            highlight NonText guifg=#414855
-        endif
-    else
-        let g:airline#extensions#tabline#enabled = 0
-        let g:indentLine_enabled = 0
+    " colorscheme settings
+    set background=dark
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1                     " enable true color for nvim < 1.5 (I think)
+    let g:airline#extensions#tabline#enabled = 1
+    silent! colorscheme onedark                           " silent to suppress error before plugin installed
+    let g:airline_theme='onedark'
+    set number
+    set signcolumn=yes
+    if (DetectUbuntu() || DetectIterm() || DetectWsl())
+        set termguicolors
+    endif
+    syntax on
+    set wrap
+    set breakindent
+    set listchars=tab:\|\ ,eol:$
+    set list
+    let g:indentLine_showFirstIndentLevel=1
+    if has('nvim')
+        autocmd TermOpen * setlocal nolist
+        autocmd TermOpen * IndentLinesDisable
+    endif
+    autocmd! VimEnter * call s:start_writingmode_if_text_or_md_file()
+    highlight MatchParen gui=inverse
+    if exists('g:colors_name') && g:colors_name == "onedark" && &background == "dark"
+        highlight Comment guifg=#6C7380
+        highlight NonText guifg=#414855
     endif
 
 " General settings
