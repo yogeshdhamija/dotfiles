@@ -101,6 +101,12 @@ call plug#end()
         return $TERM_PROGRAM =~ "iTerm"
     endfunction
 
+" Enter insert mode. Special case: if buffer is terminal, will only enter
+    " insert mode if cursor location is bottom of buffer or later
+    function! EnterInsertOnClick()
+        startinsert
+    endfunction
+
 " Deletes all unmodified hidden buffers
     function! DeleteHiddenBuffers()
       let tpbl=[]
@@ -328,8 +334,8 @@ call plug#end()
 " Remap left mouse release to put in insert mode
     nnoremap <LeftMouse> <C-\><C-n><LeftMouse>
     inoremap <LeftMouse> <C-\><C-n><LeftMouse>
-    nnoremap <LeftRelease> <C-\><C-n><LeftRelease>a
-    inoremap <LeftRelease> <C-\><C-n><LeftRelease>a
+    nnoremap <LeftRelease> <C-\><C-n><LeftRelease>:call EnterInsertOnClick()<CR>
+    inoremap <LeftRelease> <C-\><C-n><LeftRelease>:call EnterInsertOnClick()<CR>
 
 " Remap Control+C in visual mode to copy to clipboard
     vnoremap <C-c> "+y<C-c>
