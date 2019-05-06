@@ -141,6 +141,7 @@ call plug#end()
         setlocal noshowcmd
         setlocal nolist
         setlocal signcolumn=no
+        setlocal showbreak=
         " Fix Airline showing up bug
             setlocal eventignore=FocusGained
         call css_color#disable()
@@ -161,6 +162,7 @@ call plug#end()
         set cursorline<
         set signcolumn<
         set eventignore<
+        set showbreak=>>>\ 
         call css_color#enable()
         let b:coc_suggest_disable = 0
         IndentLinesEnable
@@ -239,6 +241,7 @@ call plug#end()
     set breakindent
     set listchars=tab:\|\ ,eol:$
     set list
+    set showbreak=>>>\ 
     let g:indentLine_showFirstIndentLevel=1
     " Indentline conflicts with some other concealed characters.
         " Workaround: conceal nothing on cursor line
@@ -307,10 +310,10 @@ call plug#end()
     " Setting up session management (autosave sessions)
         let s:should_save_session = 0
         augroup autosession
-          autocmd StdinReadPre * let s:std_in=1
-          autocmd VimEnter * nested call s:load_session_if_no_args()
-          autocmd VimLeavePre * NERDTreeClose
-          autocmd FileWritePost,VimLeavePre * call s:save_session_if_flag_set()
+            autocmd StdinReadPre * let s:std_in=1
+            autocmd VimEnter * nested call s:load_session_if_no_args()
+            autocmd VimLeavePre * NERDTreeClose
+            autocmd FileWritePost,VimLeavePre * call s:save_session_if_flag_set()
         augroup END
 
 
