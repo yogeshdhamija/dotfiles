@@ -101,12 +101,21 @@ call plug#end()
         return $TERM_PROGRAM =~ "iTerm"
     endfunction
 
+" Special enter insert mode
+    function! EnterInsertAfterCursor()
+        if col('.') == col('$') - 1
+            startinsert!
+        else
+            startinsert
+        endif
+    endfunction
+
 " Enter insert mode. Special case: if buffer is terminal, will only enter
     " insert mode if window location contains bottom of buffer
     function! EnterInsertIfFileOrIfBottomOfTerminal()
         if ( getbufvar(bufname("%"), "&buftype", "NONE") != "terminal" ) 
                 \ || (line('w$') >= line('$'))
-            startinsert
+            call EnterInsertAfterCursor()
         endif
     endfunction
 
