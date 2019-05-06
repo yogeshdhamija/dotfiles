@@ -102,9 +102,12 @@ call plug#end()
     endfunction
 
 " Enter insert mode. Special case: if buffer is terminal, will only enter
-    " insert mode if cursor location is bottom of buffer or later
-    function! EnterInsertOnClick()
-        startinsert
+    " insert mode if window location contains bottom of buffer
+    function! EnterInsertIfFileOrIfBottomOfTerminal()
+        if ( getbufvar(bufname("%"), "&buftype", "NONE") != "terminal" ) 
+                \ || (line('w$') >= line('$'))
+            startinsert
+        endif
     endfunction
 
 " Deletes all unmodified hidden buffers
@@ -334,12 +337,17 @@ call plug#end()
 " Remap left mouse release to put in insert mode
     nnoremap <LeftMouse> <C-\><C-n><LeftMouse>
     inoremap <LeftMouse> <C-\><C-n><LeftMouse>
-    nnoremap <LeftRelease> <C-\><C-n><LeftRelease>:call EnterInsertOnClick()<CR>
-    inoremap <LeftRelease> <C-\><C-n><LeftRelease>:call EnterInsertOnClick()<CR>
+    nnoremap <silent> <LeftRelease> <C-\><C-n><LeftRelease>:call EnterInsertIfFileOrIfBottomOfTerminal()<CR>
+    inoremap <silent> <LeftRelease> <C-\><C-n><LeftRelease>:call EnterInsertIfFileOrIfBottomOfTerminal()<CR>
 
-" Remap Control+C in visual mode to copy to clipboard
-    vnoremap <C-c> "+y<C-c>
-    vnoremap <D-c> "+y<D-c>
+" Remap Control+C in visual mode to copy to system clipboard (and Command+C for some terminals)
+    vnoremap <C-c> "+y
+    vnoremap <D-c> "+y
+" Remap Ctrl+V in insert + visual modes to paste from system clipboard (and Command+C for some terminals)
+    vnoremap <C-v> "+p
+    inoremap <C-v> <C-r>+
+    vnoremap <D-v> "+p
+    inoremap <D-v> <C-r>+
 
 " Directory tree opens in vertical split with v
     let NERDTreeMapOpenVSplit='v'
