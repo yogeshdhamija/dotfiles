@@ -251,7 +251,7 @@ call plug#end()
         autocmd TermOpen * IndentLinesDisable
     endif
     autocmd! VimEnter * call s:start_writingmode_if_text_or_md_file()
-    highlight MatchParen gui=inverse cterm=inverse
+    highlight MatchParen ctermbg=180 ctermfg=59 guibg=#E5C07B guifg=#5C6370
     if exists('g:colors_name') && g:colors_name == "onedark" && &background == "dark"
         highlight Comment guifg=#6C7380
         highlight NonText guifg=#414855
