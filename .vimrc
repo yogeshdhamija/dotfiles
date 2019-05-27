@@ -144,7 +144,9 @@ call plug#end()
         setlocal showbreak=
         " Fix Airline showing up bug
             setlocal eventignore=FocusGained
-        call css_color#disable()
+        " Disable css_color
+            let b:css_color_off = get(b:, 'css_color_off', 1)
+            call css_color#disable()
         let b:coc_suggest_disable = 1
         IndentLinesDisable
         Limelight
