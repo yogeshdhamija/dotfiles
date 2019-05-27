@@ -41,7 +41,6 @@ Plug 'tpope/vim-surround'              " Ability to surround objects
 Plug 'michaeljsmith/vim-indent-object' " Adding indent-level as a text object
                                            " Example: dii           -> delete inner indent
 Plug 'joshdick/onedark.vim'            " Colorscheme
-Plug 'ap/vim-css-color'                " Highlight colors with their color
 Plug 'vim-airline/vim-airline'         " vim-airline
 Plug 'vim-airline/vim-airline-themes'  " vim-airline
 Plug 'Yggdroot/indentLine'             " indent guides
@@ -144,9 +143,6 @@ call plug#end()
         setlocal showbreak=
         " Fix Airline showing up bug
             setlocal eventignore=FocusGained
-        " Disable css_color
-            let b:css_color_off = get(b:, 'css_color_off', 1)
-            call css_color#disable()
         let b:coc_suggest_disable = 1
         IndentLinesDisable
         Limelight
@@ -165,7 +161,6 @@ call plug#end()
         set signcolumn<
         set eventignore<
         set showbreak=>>>\ 
-        call css_color#enable()
         let b:coc_suggest_disable = 0
         IndentLinesEnable
         Limelight!
@@ -227,7 +222,6 @@ call plug#end()
 " =====================================
 
 " Colorscheme
-    " colorscheme settings
     set background=dark
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1                     " enable true color for nvim < 1.5 (I think)
     silent! colorscheme onedark                           " silent to suppress error before plugin installed
