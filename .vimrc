@@ -226,9 +226,6 @@ call plug#end()
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1                     " enable true color for nvim < 1.5 (I think)
     silent! colorscheme onedark                           " silent to suppress error before plugin installed
     let g:airline_theme='onedark'
-    highlight Comment guifg=#6C7380
-    highlight NonText guifg=#414855
-    highlight MatchParen ctermbg=180 ctermfg=59 guibg=#E5C07B guifg=#5C6370
     let g:airline#extensions#tabline#enabled = 1
     set number
     set signcolumn=yes
@@ -236,6 +233,9 @@ call plug#end()
         set termguicolors
     endif
     syntax on
+    highlight Comment guifg=#6C7380
+    highlight NonText guifg=#414855
+    highlight MatchParen ctermbg=180 ctermfg=59 guibg=#E5C07B guifg=#5C6370
     set wrap
     set breakindent
     set listchars=tab:\|\ ,eol:$
