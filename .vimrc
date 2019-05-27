@@ -44,7 +44,7 @@ Plug 'joshdick/onedark.vim'            " Colorscheme
 Plug 'vim-airline/vim-airline'         " vim-airline
 Plug 'vim-airline/vim-airline-themes'  " vim-airline
 Plug 'Yggdroot/indentLine'             " indent guides
-Plug 'tpope/vim-fugitive'              " show git branch on vim-airline
+Plug 'tpope/vim-fugitive'              " git integration
 Plug 'mileszs/ack.vim'                 " Search
 Plug 'junegunn/fzf'                    " Fuzzy finder
 Plug 'junegunn/fzf.vim'                " Fuzzy finder vim wrapper
