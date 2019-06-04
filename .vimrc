@@ -264,6 +264,7 @@ call plug#end()
     set tabstop=4
     set shiftwidth=4
     set expandtab
+    set nomodeline
     if has('nvim')                                  " Terminal don't show line numbers
         autocmd TermOpen * setlocal nonumber norelativenumber scl=no
     endif
