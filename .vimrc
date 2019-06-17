@@ -85,6 +85,30 @@ call plug#end()
 " FUNCTIONS:
 " =====================================
 
+" Displays help for ack.vim, and executes search
+    function! DisplayHelpAndSearch()
+        let helptext = [
+            \ "Using `".g:ackprg."` to search.",
+            \ "USAGE: PATTERN [OPTIONS] [PATH ...]", 
+            \ "", 
+        \ ]
+        if split(g:ackprg)[0] == "rg"
+            let helptext = helptext + [
+                \ "-i                = ignore case",
+                \ "--max-depth <NUM> = Descend at most NUM directories."
+            \ ]
+        elseif split(g:ackprg)[0] == "ag"
+            let helptext = helptext + [
+                \ "-i            = ignore case",
+                \ "--depth <NUM> = Descend at most NUM directories."
+            \ ]
+        endif
+        call inputsave()
+        let searchstring = input(join(helptext, "\n") . "\n\nEnter search: ")
+        call inputrestore()
+        exec "LAck! " . searchstring
+    endfunction
+
 " Detects if currently running on Microsoft's Ubuntu on Windows (WSL)
     function! DetectWsl()
         return filereadable("/proc/version") && (match(readfile("/proc/version"), "Microsoft") != -1)
@@ -264,14 +288,17 @@ call plug#end()
     set tabstop=4
     set shiftwidth=4
     set expandtab
+    set undofile
+    set undodir=~/.vim/undodir
     set nomodeline
     if has('nvim')                                  " Terminal don't show line numbers
         autocmd TermOpen * setlocal nonumber norelativenumber scl=no
     endif
-    if executable('rg')                             " Set ack.vim search to use ripgrep, or silver_searcher
-        let g:ackprg = 'rg --vimgrep --hidden'
+    let g:ack_use_cword_for_empty_search = 0
+    if executable('rg')
+        let g:ackprg = 'rg --vimgrep --hidden -s'
     elseif executable('ag')
-        let g:ackprg = 'ag --vimgrep --hidden'
+        let g:ackprg = 'ag --vimgrep --hidden -s'
     endif
     let g:ackhighlight = 1
     if has("autocmd")                               " Vim jump to the last position when reopening a file
@@ -395,7 +422,7 @@ call plug#end()
 " ;d -> Directory listing
     nnoremap ;d :NERDTreeFind<CR>:NERDTreeFocus<CR>
 " ;f -> Find
-    nnoremap ;f :LAck!<space>
+    nnoremap ;f :call DisplayHelpAndSearch()<CR>
 " ;o -> Open
     nnoremap ;o :FZF<CR>
 " ;b -> list Buffers
