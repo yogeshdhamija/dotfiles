@@ -88,19 +88,27 @@ call plug#end()
 " Displays help for ack.vim, and executes search
     function! DisplayHelpAndSearch()
         let helptext = [
-            \ "Using `".g:ackprg."` to search.",
-            \ "USAGE: PATTERN [OPTIONS] [PATH ...]", 
-            \ "", 
+            \ "Using `".g:ackprg."` to search in ".getcwd(),
         \ ]
         if split(g:ackprg)[0] == "rg"
             let helptext = helptext + [
+                \ "USAGE: PATTERN [OPTIONS] [PATH ...]", 
+                \ "", 
                 \ "-i                = ignore case",
                 \ "--max-depth <NUM> = Descend at most NUM directories."
             \ ]
         elseif split(g:ackprg)[0] == "ag"
             let helptext = helptext + [
+                \ "USAGE: PATTERN [OPTIONS] [PATH ...]", 
+                \ "", 
                 \ "-i            = ignore case",
                 \ "--depth <NUM> = Descend at most NUM directories."
+            \ ]
+        elseif split(g:ackprg)[0] == "grep"
+            let helptext = helptext + [
+                \ "USAGE: PATTERN [OPTIONS] PATH ...", 
+                \ "", 
+                \ "-i            = ignore case",
             \ ]
         endif
         call inputsave()
@@ -299,6 +307,8 @@ call plug#end()
         let g:ackprg = 'rg --vimgrep --hidden -s'
     elseif executable('ag')
         let g:ackprg = 'ag --vimgrep --hidden -s'
+    else
+        let g:ackprg = 'grep -RHn -e'
     endif
     let g:ackhighlight = 1
     if has("autocmd")                               " Vim jump to the last position when reopening a file
