@@ -93,11 +93,9 @@ command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --hidden --files'
 command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --hidden --files'
 
 # Bind shortcuts
-bindkey ^W forward-word
+bindkey ^F forward-word
 bindkey ^B backward-word
-bindkey ^D backward-kill-word
-bindkey ^E end-of-line
-bindkey ^A beginning-of-line
+bindkey ^W backward-kill-word
 
 # Load custom config
 if [ -f ~/.shellrc.local ]; then
