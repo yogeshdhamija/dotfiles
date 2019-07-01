@@ -124,11 +124,8 @@ call plug#end()
 
 " Write file to PDF using Pandoc
     function! WriteToPdf()
-        let current_dir = expand("%:p:h")
-        let listings_file = expand("~/.listings-setup.tex")
-        if filereadable(current_dir . "/.listings-setup.tex")
-           let listings_file = current_dir . "/.listings-setup.tex" 
-        endif
+        let current_dir = escape(expand("%:p:h"), ' ') . ";"
+        let listings_file = findfile(".listings-setup.tex", current_dir)
         exe '!pandoc "%:p" --listings -H "' . listings_file . '" -o "%:p:r.pdf" -V geometry:margin=1in'
     endfunction
 
