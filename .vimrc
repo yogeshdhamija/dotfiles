@@ -122,6 +122,16 @@ call plug#end()
         return filereadable("/proc/version") && (match(readfile("/proc/version"), "Microsoft") != -1)
     endfunction
 
+" Write file to PDF using Pandoc
+    function! WriteToPdf()
+        let current_dir = expand("%:p:h")
+        let listings_file = expand("~/.listings-setup.tex")
+        if filereadable(current_dir . "/.listings-setup.tex")
+           let listings_file = current_dir . "/.listings-setup.tex" 
+        endif
+        exe '!pandoc "%:p" --listings -H "' . listings_file . '" -o "%:p:r.pdf" -V geometry:margin=1in'
+    endfunction
+
 " Detects if currently running on regular Ubuntu
     function! DetectUbuntu()
         return filereadable("/proc/version") && (match(readfile("/proc/version"), "Ubuntu") != -1) && (match(readfile("/proc/version"), "Microsoft") == -1)
@@ -485,7 +495,7 @@ call plug#end()
     command WritingModeOff Goyo!
     command WritingModeToggle Goyo
 " Command to save and generate .pdf from .md
-    command PDF w | exe '!pandoc "%:p" --listings -H ~/.listings-setup.tex -o "%:p:r.pdf" -V geometry:margin=1in'
+    command PDF w | call WriteToPdf()
 " Start saving the session
     command StartKeepingSession let s:should_save_session = 1
 " Delete vim session and quit
