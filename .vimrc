@@ -417,52 +417,52 @@ call plug#end()
 " SHORTCUTS:
 " =====================================
 
-" ;t -> Terminal window
-" ;th -> Terminal window, left (aka h)
-" ;tj -> Terminal window, down (aka j)
-" ;tk -> Terminal window, up (aka k)
-" ;tl -> Terminal window, right (aka l)
+" \t -> Terminal window
+" \th -> Terminal window, left (aka h)
+" \tj -> Terminal window, down (aka j)
+" \tk -> Terminal window, up (aka k)
+" \tl -> Terminal window, right (aka l)
     " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
     if has('nvim')
-        nnoremap ;t :terminal<CR> :startinsert<CR>
-        nnoremap ;th :vsplit<CR><C-W>H :terminal<CR> :startinsert<CR>
-        nnoremap ;tj :25split<CR> :terminal<CR> :startinsert<CR>
-        nnoremap ;tk :split<CR><C-W>K25<C-W>_:terminal<CR> :startinsert<CR>
-        nnoremap ;tl :vsplit<CR> :exe "terminal"<CR> :startinsert<CR>
+        nnoremap \t :terminal<CR> :startinsert<CR>
+        nnoremap \th :vsplit<CR><C-W>H :terminal<CR> :startinsert<CR>
+        nnoremap \tj :25split<CR> :terminal<CR> :startinsert<CR>
+        nnoremap \tk :split<CR><C-W>K25<C-W>_:terminal<CR> :startinsert<CR>
+        nnoremap \tl :vsplit<CR> :exe "terminal"<CR> :startinsert<CR>
     else
-        nnoremap ;t :terminal ++curwin<CR>
-        nnoremap ;th :terminal<CR><C-W>_<C-W>H
-        nnoremap ;tj :terminal<CR><C-\><C-n>25<C-W>_i
-        nnoremap ;tk :terminal<CR><C-\><C-n><C-W>K25<C-W>_i
-        nnoremap ;tl :terminal<CR><C-W>L
+        nnoremap \t :terminal ++curwin<CR>
+        nnoremap \th :terminal<CR><C-W>_<C-W>H
+        nnoremap \tj :terminal<CR><C-\><C-n>25<C-W>_i
+        nnoremap \tk :terminal<CR><C-\><C-n><C-W>K25<C-W>_i
+        nnoremap \tl :terminal<CR><C-W>L
     endif
-" ;d -> Directory listing
-    nnoremap ;d :NERDTreeFind<CR>:NERDTreeFocus<CR>
-" ;f -> Find
-    nnoremap ;f :call DisplayHelpAndSearch()<CR>
-" ;o -> Open
-    nnoremap ;o :FZF<CR>
-" ;b -> list Buffers
-    nnoremap ;b :Buffers<CR>
-" ;w -> list Windows
-    nnoremap ;w :Windows<CR>
+" \d -> Directory listing
+    nnoremap \d :NERDTreeFind<CR>:NERDTreeFocus<CR>
+" \f -> Find
+    nnoremap \f :call DisplayHelpAndSearch()<CR>
+" \o -> Open
+    nnoremap \o :FZF<CR>
+" \b -> list Buffers
+    nnoremap \b :Buffers<CR>
+" \w -> list Windows
+    nnoremap \w :Windows<CR>
 " LSP Stuff
-    " ;ld -> Lsp go-to-Definition
-        nnoremap ;ld :LspJumpDefinition<CR>
-    " ;ldl -> Lsp go-to-Definition in right (aka L) split
-        nnoremap ;ldl :vsplit<CR> :LspJumpDefinition<CR>
-    " ;lr -> Lsp jump to References
-        nnoremap ;lr :LspJumpReferences<CR>
-    " ;lrl -> Lsp jump to References in right (aka L) split
-        nnoremap ;lrl :vsplit<CR> :LspJumpReferences<CR>
-    " ;lw -> Lsp what's Wrong list
-        nnoremap ;lw :LspDiagnosticList<CR>
-    " ;lwl -> Lsp what's Wrong List
-        nnoremap ;lwl :LspDiagnosticList<CR>
-    " ;lwh -> Lsp what's Wrong List
-        nnoremap ;lwh :LspDiagnosticInfo<CR>
-    " ;lh -> Lsp Help<CR>
-        nnoremap ;lh :LspHover<CR>
+    " \ld -> Lsp go-to-Definition
+        nnoremap \ld :LspJumpDefinition<CR>
+    " \ldl -> Lsp go-to-Definition in right (aka L) split
+        nnoremap \ldl :vsplit<CR> :LspJumpDefinition<CR>
+    " \lr -> Lsp jump to References
+        nnoremap \lr :LspJumpReferences<CR>
+    " \lrl -> Lsp jump to References in right (aka L) split
+        nnoremap \lrl :vsplit<CR> :LspJumpReferences<CR>
+    " \lw -> Lsp what's Wrong list
+        nnoremap \lw :LspDiagnosticList<CR>
+    " \lwl -> Lsp what's Wrong List
+        nnoremap \lwl :LspDiagnosticList<CR>
+    " \lwh -> Lsp what's Wrong List
+        nnoremap \lwh :LspDiagnosticInfo<CR>
+    " \lh -> Lsp Help<CR>
+        nnoremap \lh :LspHover<CR>
 
 
 
