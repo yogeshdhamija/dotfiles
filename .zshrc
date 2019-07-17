@@ -1,57 +1,31 @@
 # Load custom config
-if [ -f ~/.shellrc.local.loadbefore ]; then
-    . ~/.shellrc.local.loadbefore
+if [ -f ~/.zshrc.local.loadbefore ]; then
+    source ~/.zshrc.local.loadbefore
+elif [ -f ~/.shellrc.local.loadbefore ]; then
+    source ~/.shellrc.local.loadbefore
 fi
 
-# Path to your oh-my-zsh installation.
+# Load common config
+if [ -f ~/.shellrc ]; then
+    source ~/.shellrc
+fi
+
+# oh my zsh stuff
 export ZSH="$HOME/.oh-my-zsh"
-
-ZSH_THEME="half-life"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
+ZSH_CUSTOM=$HOME/.custom_zsh
 DISABLE_AUTO_UPDATE="true"
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+# Completion settings
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
+# under VCS as dirtysource This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
 HIST_STAMPS="yyyy-mm-dd"
+ZSH_THEME="half-life"
 
-# Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=$HOME/.custom_zsh
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(
   docker-compose
   web-search
@@ -65,39 +39,22 @@ plugins=(
 # Load oh my zsh
 source $ZSH/oh-my-zsh.sh
 
-# Config alias
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-
-# Load aliases
-if [ -f ~/.bash_aliases ]; then
-  . ~/.bash_aliases
-fi
-
-# LSCOLORS in case dircolors doesn't work (on mac) for pretty ls colors
-export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
-
-# Dircolors (on ubuntu) for pretty ls colors
-[ -x '/usr/bin/dircolors' ] && eval `/usr/bin/dircolors ~/.dircolors-solarized/dircolors.256dark`
-
 # Load FZF configuration
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Set up LESS
-export LESS="-RXF"
-
-# Set up FZF to use silver searcher (ag)
-command -v ag > /dev/null && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-command -v ag > /dev/null && export FZF_CTRL_T_COMMAND='ag --hidden --ignore .git -g ""'
-# Set up FZF to use ripgrep (rg)
-command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --hidden --files'
-command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --hidden --files'
 
 # Bind shortcuts
 bindkey ^F forward-word
 bindkey ^B backward-word
 bindkey ^W backward-kill-word
 
+# LSCOLORS in case dircolors doesn't work (on mac) for pretty ls colors
+export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+# Dircolors (on ubuntu) for pretty ls colors
+[ -x '/usr/bin/dircolors' ] && eval `/usr/bin/dircolors ~/.dircolors-solarized/dircolors.256dark`
+
 # Load custom config
-if [ -f ~/.shellrc.local ]; then
-    . ~/.shellrc.local
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+elif [ -f ~/.shellrc.local ]; then
+    source ~/.shellrc.local
 fi

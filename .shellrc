@@ -1,0 +1,17 @@
+# Config alias
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+
+# Load aliases
+if [ -f ~/.bash_aliases ]; then
+  source ~/.bash_aliases
+fi
+
+# Set up LESS 
+export LESS="-RXF"
+
+# Set up FZF to use silver searcher (ag)
+command -v ag > /dev/null && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+command -v ag > /dev/null && export FZF_CTRL_T_COMMAND='ag --hidden --ignore .git -g ""'
+# Set up FZF to use ripgrep (rg)
+command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --hidden --files'
+command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --hidden --files'
