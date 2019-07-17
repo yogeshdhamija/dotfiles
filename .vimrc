@@ -274,7 +274,7 @@ call plug#end()
     syntax on
     highlight Comment guifg=#6C7380
     highlight NonText guifg=#414855
-    highlight MatchParen ctermbg=180 ctermfg=59 guibg=#E5C07B guifg=#5C6370
+    highlight MatchParen ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
     set wrap
     set breakindent
     set listchars=tab:\|\ ,eol:$
