@@ -52,6 +52,10 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 # Dircolors (on ubuntu) for pretty ls colors
 [ -x '/usr/bin/dircolors' ] && eval `/usr/bin/dircolors ~/.dircolors-solarized/dircolors.256dark`
 
+# Get theme to refresh git status on every prompt load
+function my_preexec { PR_GIT_UPDATE=1 }
+add-zsh-hook preexec my_preexec
+
 # Load custom config
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
