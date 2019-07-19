@@ -241,12 +241,6 @@ call plug#end()
       endif
     endfunction
 
-" Start WritingMode if open markdown or text file
-    function! s:start_writingmode_if_text_or_md_file()
-        if &filetype == "markdown" || &filetype == "text"
-            Goyo 80x85%
-        endif
-    endfunction
 
 
 
@@ -288,7 +282,6 @@ call plug#end()
         autocmd TermOpen * setlocal nolist
         autocmd TermOpen * IndentLinesDisable
     endif
-    autocmd! VimEnter * call s:start_writingmode_if_text_or_md_file()
 
 " General settings
     set mouse=a
