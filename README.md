@@ -32,15 +32,14 @@ Primarily, this repo configures the terminal and vim/neovim.
     - `~/.shellrc` - for common settings
     - `~/.bash_aliases` - for aliases
 - If local settings need to be made which shouldn't be committed, the following files will be auto-loaded if they exist:
-    -   
-        - `~/.shellrc.local`
-        - `~/.shellrc.local.loadbefore`
-        - `~/.bashrc.local`
-        - `~/.bashrc.local.loadbefore`
-        - `~/.zshrc.local`
-        - `~/.zshrc.local.loadbefore`
-    - The `*.loadbefore` files are sourced at the top of the committed `*rc` files.
-    - Note that `~/.shellrc.local` will not be loaded on a `zsh` terminal if `~/.zshrc.local` exists.
+    - `~/.shellrc.local`
+    - `~/.bashrc.local`
+    - `~/.zshrc.local`
+    - `~/.shellrc.local.loadbefore`
+    - `~/.bashrc.local.loadbefore`
+    - `~/.zshrc.local.loadbefore`
+        - The `*.loadbefore` files are sourced at the top of the committed `*rc` files.
+        - Note that `~/.shellrc.local` will not be loaded on a `zsh` terminal if `~/.zshrc.local` (more specific to `zsh`) exists.
 - Many `zsh` plugins are included in this repo as submodules. `config-update` will update them.
 
 ### Vim
