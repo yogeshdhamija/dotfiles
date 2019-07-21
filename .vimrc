@@ -70,6 +70,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'     " Git signs for directory explorer
         Plug 'neoclide/coc.nvim', {'do': function('InstallDeps')}
     endif
 
+" Support for languages
+    Plug 'leafgarland/typescript-vim'
+
 call plug#end()
 
 
