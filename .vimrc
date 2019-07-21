@@ -62,7 +62,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'     " Git signs for directory explorer
     if executable("yarn") && executable("node")
         function! InstallDeps(info)
             if a:info.status == 'installed' || a:info.force
-                let extensions = ['coc-gocode', 'coc-json', 'coc-python', 'coc-pyls']
+                let extensions = ['coc-marketplace', 'coc-vimlsp', 'coc-gocode', 'coc-json', 'coc-python', 'coc-pyls', 'coc-tsserver']
                 call coc#util#install()
                 call coc#util#install_extension(extensions)
             endif
