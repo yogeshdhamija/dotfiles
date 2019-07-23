@@ -56,6 +56,12 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 function my_preexec { PR_GIT_UPDATE=1 }
 add-zsh-hook preexec my_preexec
 
+# Get zsh to show Ctrl+C on cancelled command
+TRAPINT() {
+  print -n "^C"
+  return $(( 128 + $1 ))
+}
+
 # Load custom config
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
