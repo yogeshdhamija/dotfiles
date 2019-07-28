@@ -2,8 +2,8 @@
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # Load aliases
-if [ -f ~/.bash_aliases ]; then
-  source ~/.bash_aliases
+if [ -f ~/.shell_aliases ]; then
+  source ~/.shell_aliases
 fi
 
 # Set up LESS 

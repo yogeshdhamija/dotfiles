@@ -13,7 +13,7 @@ git clone --bare $REPO_URL $HOME/.cfg
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
 config checkout && cd ~ && config submodule init && config submodule update
-source ~/.bash_aliases
+source ~/.shell_aliases
 config-update
 cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh
 ```
@@ -33,16 +33,16 @@ Primarily, this repo configures the terminal and vim/neovim.
     - `~/.bashrc` - for bash only settings
     - `~/.zshrc` - for zsh only settings
     - `~/.shellrc` - for common settings
-    - `~/.bash_aliases` - for aliases
-- If local settings need to be made which shouldn't be committed, the following files will be auto-loaded if they exist:
+    - `~/.shell_aliases` - for aliases
+- The following files will be auto-loaded if they exist, so you can make changes you don't want to commit:
     - `~/.shellrc.local`
     - `~/.bashrc.local`
     - `~/.zshrc.local`
     - `~/.shellrc.local.loadbefore`
     - `~/.bashrc.local.loadbefore`
     - `~/.zshrc.local.loadbefore`
-        - The `*.loadbefore` files are sourced at the top of the committed `*rc` files.
-        - Note that `~/.shellrc.local` will not be loaded on a `zsh` terminal if `~/.zshrc.local` (more specific to `zsh`) exists.
+        - The `*.loadbefore` files are sourced before any other config.
+        - Note that `~/.shellrc.local` will not be loaded on a `zsh` terminal if the more specific `~/.zshrc.local` exists (also true for the `*.loadbefore` version, and for bashrc and shellrc).
 - Many `zsh` plugins are included in this repo as submodules. `config-update` will update them.
 
 ### Vim
