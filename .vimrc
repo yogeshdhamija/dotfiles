@@ -375,6 +375,9 @@ call plug#end()
 " Pressing * in visual mode searches for selection
     vnoremap * y:let @/=@"<CR>:set hlsearch<CR>
 
+" Pressing <Esc> in normal mode removes search highlights
+    nnoremap <Esc> <Esc>:noh<CR>
+
 " Ack.vim change open vsplit to right side
     " and add 'V' to open in split and close search
     let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
