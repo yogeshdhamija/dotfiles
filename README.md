@@ -6,6 +6,8 @@ To clone this repo into your home directory:
 
 ```bash
 export REPO_URL=git@github.com:ydhamija96/config.git
+# OR
+export REPO_URL=https://github.com/ydhamija96/config.git
 git clone --bare $REPO_URL $HOME/.cfg
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
