@@ -206,10 +206,11 @@ call plug#end()
         let b:coc_suggest_disable = 0
         IndentLinesEnable
         Limelight!
-        AirlineRefresh " Airline starts up weird sometimes...
-        AirlineToggle
-        AirlineToggle
-        AirlineRefresh
+        " Airline starts up weird sometimes...
+            AirlineRefresh 
+            AirlineToggle
+            AirlineToggle
+            AirlineRefresh
         " Quit Vim if this is the only remaining buffer
             if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
                 if b:quitting_bang
