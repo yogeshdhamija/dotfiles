@@ -37,7 +37,7 @@ Plug 'tpope/vim-surround'              " Ability to surround objects
                                            " Example: viwS(         -> visual inner word, surround with ( )
                                            " Example: cs'"          -> change surrounding ' to "
                                            " Example: ds"           -> delete surrounding "
-                                           " Note: [ for space, ] for no space
+                                           " Use [ for space, ] for no space
 Plug 'michaeljsmith/vim-indent-object' " Adding indent-level as a text object
                                            " Example: dii           -> delete inner indent
 Plug 'joshdick/onedark.vim'            " Colorscheme
@@ -376,7 +376,13 @@ call plug#end()
     vnoremap * y:let @/=@"<CR>:set hlsearch<CR>
 
 " Pressing <Esc> in normal mode removes search highlights
-    nnoremap <Esc> <Esc>:noh<CR>
+    " augroup because of vim issue https://github.com/vim/vim/issues/3080
+    " Note: remapping on every yank might cause lag
+    augroup escape_mapping
+        autocmd!
+        autocmd TextYankPost * nnoremap <Esc> <Esc>:noh<CR>
+    augroup END
+
 
 " Ack.vim change open vsplit to right side
     " and add 'V' to open in split and close search
