@@ -262,7 +262,6 @@ call plug#end()
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1                     " enable true color for nvim < 1.5 (I think)
     silent! colorscheme onedark                           " silent to suppress error before plugin installed
     let g:airline_theme='onedark'
-    let g:airline#extensions#tabline#enabled = 1
     set number
     set signcolumn=yes
     if (DetectUbuntu() || DetectIterm() || DetectWsl())
@@ -382,7 +381,6 @@ call plug#end()
         autocmd!
         autocmd TextYankPost * nnoremap <Esc> <Esc>:noh<CR>
     augroup END
-
 
 " Ack.vim change open vsplit to right side
     " and add 'V' to open in split and close search
