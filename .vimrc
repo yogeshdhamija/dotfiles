@@ -40,9 +40,8 @@ Plug 'tpope/vim-surround'              " Ability to surround objects
                                            " Use [ for space, ] for no space
 Plug 'michaeljsmith/vim-indent-object' " Adding indent-level as a text object
                                            " Example: dii           -> delete inner indent
-Plug 'joshdick/onedark.vim'            " Colorscheme
+Plug 'rakr/vim-one'                    " Colorscheme
 Plug 'vim-airline/vim-airline'         " vim-airline
-Plug 'vim-airline/vim-airline-themes'  " vim-airline
 Plug 'Yggdroot/indentLine'             " indent guides
 Plug 'tpope/vim-fugitive'              " git integration
 Plug 'mileszs/ack.vim'                 " Search
@@ -176,6 +175,8 @@ call plug#end()
 
 " Overriding Goyo plugin's enter/exit functions
     function! s:goyo_enter()
+        set background=light
+        setlocal syntax=off
         setlocal spell
         setlocal noshowmode
         setlocal nocursorline
@@ -195,6 +196,8 @@ call plug#end()
             cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
     endfunction
     function! s:goyo_leave()
+        set background=dark
+        set syntax<
         set spell<
         set showmode<
         set showcmd<
@@ -259,10 +262,10 @@ call plug#end()
 " =====================================
 
 " Colorscheme
+    silent! colorscheme one                           " silent to suppress error before plugin installed
+    let g:airline_theme='one'
     set background=dark
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1                     " enable true color for nvim < 1.5 (I think)
-    silent! colorscheme onedark                           " silent to suppress error before plugin installed
-    let g:airline_theme='onedark'
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1                 " enable true color for nvim < 1.5 (I think)
     set number
     set signcolumn=yes
     if (DetectUbuntu() || DetectIterm() || DetectWsl())
