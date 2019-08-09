@@ -173,14 +173,25 @@ call plug#end()
       echo "Closed ".closed." hidden buffers"
     endfunction
 
+" Initializes colorscheme for the first time
+    function! InitializeColorScheme()
+        autocmd! ColorScheme *
+        call SetDarkColorScheme()
+        let $NVIM_TUI_ENABLE_TRUE_COLOR=1                 " enable true color for nvim < 1.5 (I think)
+        if (DetectUbuntu() || DetectIterm() || DetectWsl())
+            set termguicolors
+        endif
+    endfunction
+
 " Sets colorscheme to slightly modified dark theme
     function! SetDarkColorScheme()
         set background=dark
         highlight Comment guifg=#6C7380
-        highlight NonText guifg=#3E4552
+        highlight NonText guifg=#424956
         highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
         highlight MatchParen ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
     endfunction
+
 " Sets colorscheme to slightly modified light theme
     function! SetLightColorScheme()
         set background=light
@@ -277,13 +288,9 @@ call plug#end()
 " Colorscheme
     silent! colorscheme one                           " silent to suppress error before plugin installed
     let g:airline_theme='one'
-    autocmd VimEnter * call SetDarkColorScheme()
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1                 " enable true color for nvim < 1.5 (I think)
+    autocmd ColorScheme * call InitializeColorScheme()
     set number
     set signcolumn=yes
-    if (DetectUbuntu() || DetectIterm() || DetectWsl())
-        set termguicolors
-    endif
     syntax on
     set wrap
     set breakindent
