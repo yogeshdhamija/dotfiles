@@ -173,9 +173,21 @@ call plug#end()
       echo "Closed ".closed." hidden buffers"
     endfunction
 
+" Sets colorscheme to slightly modified dark theme
+    function! SetDarkColorScheme()
+        set background=dark
+        highlight Comment guifg=#6C7380
+        highlight NonText guifg=#3E4552
+        highlight MatchParen ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
+    endfunction
+" Sets colorscheme to slightly modified light theme
+    function! SetLightColorScheme()
+        set background=light
+    endfunction
+
 " Overriding Goyo plugin's enter/exit functions
     function! s:goyo_enter()
-        set background=light
+        call SetLightColorScheme()
         setlocal syntax=off
         setlocal spell
         setlocal noshowmode
@@ -196,7 +208,7 @@ call plug#end()
             cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
     endfunction
     function! s:goyo_leave()
-        set background=dark
+        call SetDarkColorScheme()
         set syntax<
         set spell<
         set showmode<
@@ -264,7 +276,7 @@ call plug#end()
 " Colorscheme
     silent! colorscheme one                           " silent to suppress error before plugin installed
     let g:airline_theme='one'
-    set background=dark
+    autocmd VimEnter * call SetDarkColorScheme()
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1                 " enable true color for nvim < 1.5 (I think)
     set number
     set signcolumn=yes
@@ -272,9 +284,6 @@ call plug#end()
         set termguicolors
     endif
     syntax on
-    highlight Comment guifg=#6C7380
-    highlight NonText guifg=#414855
-    highlight MatchParen ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
     set wrap
     set breakindent
     set listchars=tab:\|\ ,eol:$
