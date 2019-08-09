@@ -178,6 +178,7 @@ call plug#end()
         set background=dark
         highlight Comment guifg=#6C7380
         highlight NonText guifg=#3E4552
+        highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
         highlight MatchParen ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
     endfunction
 " Sets colorscheme to slightly modified light theme
