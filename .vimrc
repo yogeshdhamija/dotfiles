@@ -391,10 +391,10 @@ call plug#end()
 " =====================================
 
 " Pressing * does not move cursor
-    nnoremap * yiw:let @/=@"<CR>:set hlsearch<CR>
+    nnoremap * :let old=@"<CR>yiw:let @/=@"<CR>:set hlsearch<CR>:let @"=old<CR>
 
 " Pressing * in visual mode searches for selection
-    vnoremap * y:let @/=@"<CR>:set hlsearch<CR>
+    vnoremap * :<C-U>let old=@"<CR>gvy:let @/=@"<CR>:set hlsearch<CR>:let @"=old<CR>
 
 " Pressing <Esc> in normal mode removes search highlights
     " augroup because of vim issue https://github.com/vim/vim/issues/3080
