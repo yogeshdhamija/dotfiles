@@ -278,6 +278,7 @@ call plug#end()
     set breakindent
     set listchars=tab:\|\ ,eol:$
     set list
+    set noshowmode
     set showbreak=>>>\ 
     let g:indentLine_showFirstIndentLevel=1
     " Indentline conflicts with some other concealed characters.
