@@ -174,33 +174,8 @@ call plug#end()
       echo "Closed ".closed." hidden buffers"
     endfunction
 
-" Initializes colorscheme for the first time
-    function! InitializeColorScheme()
-        autocmd! ColorScheme *
-        call SetDarkColorScheme()
-        let $NVIM_TUI_ENABLE_TRUE_COLOR=1                 " enable true color for nvim < 1.5 (I think)
-        if (DetectUbuntu() || DetectIterm() || DetectWsl())
-            set termguicolors
-        endif
-    endfunction
-
-" Sets colorscheme to slightly modified dark theme
-    function! SetDarkColorScheme()
-        set background=dark
-        highlight Comment guifg=#6C7380
-        highlight NonText guifg=#424956
-        highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
-        highlight MatchParen ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
-    endfunction
-
-" Sets colorscheme to slightly modified light theme
-    function! SetLightColorScheme()
-        set background=light
-    endfunction
-
 " Overriding Goyo plugin's enter/exit functions
     function! s:goyo_enter()
-        call SetLightColorScheme()
         setlocal syntax=off
         setlocal spell
         setlocal noshowmode
@@ -219,9 +194,9 @@ call plug#end()
             let b:quitting_bang = 0
             autocmd QuitPre <buffer> let b:quitting = 1
             cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+        set background=light
     endfunction
     function! s:goyo_leave()
-        call SetDarkColorScheme()
         set syntax<
         set spell<
         set showmode<
@@ -247,6 +222,11 @@ call plug#end()
                     qa
                 endif
             endif
+        set background=dark
+        highlight Comment guifg=#6C7380
+        highlight NonText guifg=#424956
+        highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
+        highlight MatchParen ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
     endfunction
 
 " Opening last session if no arguments when vim is opened
@@ -287,9 +267,10 @@ call plug#end()
 " =====================================
 
 " Colorscheme
-    silent! colorscheme one                           " silent to suppress error before plugin installed
-    let g:airline_theme='onedark'
-    autocmd ColorScheme * call InitializeColorScheme()
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1                 " enable true color for nvim < 1.5 (I think)
+    if (DetectUbuntu() || DetectIterm() || DetectWsl())
+        set termguicolors
+    endif
     set number
     set signcolumn=yes
     syntax on
@@ -306,6 +287,13 @@ call plug#end()
         autocmd TermOpen * setlocal nolist
         autocmd TermOpen * IndentLinesDisable
     endif
+    silent! colorscheme one                           " silent to suppress error before plugin installed
+    let g:airline_theme='onedark'
+    set background=dark
+    highlight Comment guifg=#6C7380
+    highlight NonText guifg=#424956
+    highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
+    highlight MatchParen ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
 
 " General settings
     set mouse=a
