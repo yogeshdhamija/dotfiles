@@ -14,6 +14,9 @@ alias "docker-mininuke"='docker stop $(docker ps -a -q); docker rm $(docker ps -
 # Pretty git log
 alias "git-log"="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit "
 
+# Config pretty git log
+alias "config-log"="config log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit "
+
 # I am Vim
 alias ":q"="exit"
 alias ":e"="vim"
@@ -33,6 +36,3 @@ alias "config-update-fzf"="cd ~ && .fzf/install --all && cd -"
 
 # config-update: Pull from repo, check if any submodule updates exist, show status
 alias "config-update"="config-update-repo; config-update-vim; config-update-fzf"
-
-# Config pretty git log
-alias "config-log"="config log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
