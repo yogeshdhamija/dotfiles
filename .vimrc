@@ -87,6 +87,18 @@ call plug#end()
 " FUNCTIONS:
 " =====================================
 
+" Displays grepprg and then uses grep! to search
+    function! DisplayHelpAndSearch()
+        let helptext = "Using ".&grepprg." to search in ".getcwd()."\n\n"
+        call inputsave()
+        let searchstring = input(helptext . "Enter search: ")
+        call inputrestore()
+        if(len(searchstring) > 0)
+            exec "grep! " . searchstring
+            exec "copen"
+        endif
+    endfunction
+
 " Detects if currently running on Microsoft's Ubuntu on Windows (WSL)
     function! DetectWsl()
         return filereadable("/proc/version") && (match(readfile("/proc/version"), "Microsoft") != -1)
@@ -417,6 +429,8 @@ call plug#end()
     endif
 " \d -> Directory listing
     nnoremap \d :NERDTreeFind<CR>:NERDTreeFocus<CR>
+" \f -> Find
+    nnoremap \f :call DisplayHelpAndSearch()<CR>
 " \o -> Open
     nnoremap \o :FZF<CR>
 " \b -> list Buffers
