@@ -45,7 +45,6 @@ Plug 'vim-airline/vim-airline'         " Better status bar
 Plug 'vim-airline/vim-airline-themes'  " Theme for vim-airline
 Plug 'Yggdroot/indentLine'             " indent guides
 Plug 'tpope/vim-fugitive'              " git integration
-Plug 'mileszs/ack.vim'                 " Search
 Plug 'junegunn/fzf'                    " Fuzzy finder
 Plug 'junegunn/fzf.vim'                " Fuzzy finder vim wrapper
 Plug 'junegunn/vim-easy-align'         " Easy Align
@@ -87,38 +86,6 @@ call plug#end()
 " =====================================
 " FUNCTIONS:
 " =====================================
-
-" Displays help for ack.vim, and executes search
-    function! DisplayHelpAndSearch()
-        let helptext = [
-            \ "Using `".g:ackprg."` to search in ".getcwd(),
-        \ ]
-        if split(g:ackprg)[0] == "rg"
-            let helptext = helptext + [
-                \ "USAGE: PATTERN [OPTIONS] [PATH ...]", 
-                \ "", 
-                \ "-i                = ignore case",
-                \ "--max-depth <NUM> = Descend at most NUM directories."
-            \ ]
-        elseif split(g:ackprg)[0] == "ag"
-            let helptext = helptext + [
-                \ "USAGE: PATTERN [OPTIONS] [PATH ...]", 
-                \ "", 
-                \ "-i            = ignore case",
-                \ "--depth <NUM> = Descend at most NUM directories."
-            \ ]
-        elseif split(g:ackprg)[0] == "grep"
-            let helptext = helptext + [
-                \ "USAGE: PATTERN [OPTIONS] PATH ...", 
-                \ "", 
-                \ "-i            = ignore case",
-            \ ]
-        endif
-        call inputsave()
-        let searchstring = input(join(helptext, "\n") . "\n\nEnter search: ")
-        call inputrestore()
-        exec "LAck! " . searchstring
-    endfunction
 
 " Detects if currently running on Microsoft's Ubuntu on Windows (WSL)
     function! DetectWsl()
@@ -317,11 +284,9 @@ call plug#end()
     endif
     let g:ack_use_cword_for_empty_search = 0
     if executable('rg')
-        let g:ackprg = 'rg --vimgrep --hidden -s'
+        set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case\ --hidden
     elseif executable('ag')
-        let g:ackprg = 'ag --vimgrep --hidden -s'
-    else
-        let g:ackprg = 'grep -RHn -e'
+        set grepprg=ag\ --vimgrep\ --noheading\ --smart-case\ --hidden
     endif
     let g:ackhighlight = 1
     if has("autocmd")                               " Vim jump to the last position when reopening a file
@@ -452,8 +417,6 @@ call plug#end()
     endif
 " \d -> Directory listing
     nnoremap \d :NERDTreeFind<CR>:NERDTreeFocus<CR>
-" \f -> Find
-    nnoremap \f :call DisplayHelpAndSearch()<CR>
 " \o -> Open
     nnoremap \o :FZF<CR>
 " \b -> list Buffers
