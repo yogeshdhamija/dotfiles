@@ -296,9 +296,9 @@ call plug#end()
     endif
     let g:ack_use_cword_for_empty_search = 0
     if executable('rg')
-        set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case\ --hidden
+        set grepprg=rg\ --vimgrep\ --no-heading\ --hidden
     elseif executable('ag')
-        set grepprg=ag\ --vimgrep\ --noheading\ --smart-case\ --hidden
+        set grepprg=ag\ --vimgrep\ --noheading\ --hidden
     endif
     let g:ackhighlight = 1
     if has("autocmd")                               " Vim jump to the last position when reopening a file
