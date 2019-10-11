@@ -246,34 +246,39 @@ call plug#end()
 " =====================================
 
 " Colorscheme
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1                 " enable true color for nvim < 1.5 (I think)
-    if (DetectUbuntu() || DetectIterm() || DetectWsl())
-        set termguicolors
+    if (!exists("g:default_colorscheme") || g:default_colorscheme != 1)
+        let $NVIM_TUI_ENABLE_TRUE_COLOR=1                 " enable true color for nvim < 1.5 (I think)
+        if (DetectUbuntu() || DetectIterm() || DetectWsl())
+            set termguicolors
+        endif
+        set number
+        set signcolumn=yes
+        syntax on
+        set wrap
+        set breakindent
+        set listchars=tab:\|\ ,eol:$
+        set list
+        set noshowmode
+        set showbreak=>>>\ 
+        let g:indentLine_showFirstIndentLevel=1
+        " Indentline conflicts with some other concealed characters.
+            " Workaround: conceal nothing on cursor line
+            let g:indentLine_concealcursor=''
+        if has('nvim')
+            autocmd TermOpen * setlocal nolist
+            autocmd TermOpen * IndentLinesDisable
+        endif
+        silent! colorscheme one                           " silent to suppress error before plugin installed
+        let g:airline_theme='onedark'
+        set background=dark
+        highlight Comment guifg=#6C7380
+        highlight NonText guifg=#424956
+        highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
+        highlight MatchParen ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
+    else
+        let g:loaded_airline = 1
+        let g:indentLine_enabled = 0
     endif
-    set number
-    set signcolumn=yes
-    syntax on
-    set wrap
-    set breakindent
-    set listchars=tab:\|\ ,eol:$
-    set list
-    set noshowmode
-    set showbreak=>>>\ 
-    let g:indentLine_showFirstIndentLevel=1
-    " Indentline conflicts with some other concealed characters.
-        " Workaround: conceal nothing on cursor line
-        let g:indentLine_concealcursor=''
-    if has('nvim')
-        autocmd TermOpen * setlocal nolist
-        autocmd TermOpen * IndentLinesDisable
-    endif
-    silent! colorscheme one                           " silent to suppress error before plugin installed
-    let g:airline_theme='onedark'
-    set background=dark
-    highlight Comment guifg=#6C7380
-    highlight NonText guifg=#424956
-    highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
-    highlight MatchParen ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
 
 " General settings
     set mouse=a
@@ -369,12 +374,6 @@ call plug#end()
         autocmd!
         autocmd TextYankPost * nnoremap <Esc> <Esc>:noh<CR>
     augroup END
-
-" Ack.vim change open vsplit to right side
-    " and add 'V' to open in split and close search
-    let g:ack_mappings = { "v": "<C-W><CR><C-W>L<C-W>p<C-W>J<C-W>p" ,
-                \ "gv": "<C-W><CR><C-W>L<C-W>p<C-W>J" ,
-                \ "V": "<C-W><CR><C-W>L<C-W>p:bd<CR><C-W>p"}
 
 " Remap left mouse release to put in insert mode
     nnoremap <LeftMouse> <C-\><C-n><LeftMouse>
