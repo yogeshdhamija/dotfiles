@@ -14,10 +14,13 @@ fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Make up and down arrow use a prefix when cycling through history
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-bind '"\C-F": forward-word'
-bind '"\C-B": backward-word'
+if [ -t 1 ]
+then
+    bind '"\e[A": history-search-backward'
+    bind '"\e[B": history-search-forward'
+    bind '"\C-F": forward-word'
+    bind '"\C-B": backward-word'
+fi
 
 # get current branch in git repo
 function parse_git_branch() {
