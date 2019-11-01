@@ -40,13 +40,14 @@ function parse_git_dirty {
 	declare -a bits
 
 	for I in\
-		'!&&&modified:' '?&&&Untracked files' '*&&&Your branch is ahead of'\
-		'+&&&new file:' '>&&&renamed:' 'x&&&deleted:'
+		' !&&&modified:' ' ?&&&Untracked files'\
+		' *&&&Your branch is ahead of' ' +&&&new file:'\
+		' >&&&renamed:' ' x&&&deleted:'
 	{
 		[[ "$status" == *"${I#*&&&}"* ]] && bits+=("${I%&&&*}")
 	}
 
-	printf " %s" ${bits[@]}
+	printf "%s" "${bits[@]}"
 }
 
 # set nice prompt
