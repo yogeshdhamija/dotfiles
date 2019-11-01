@@ -89,13 +89,13 @@ call plug#end()
 
 " Displays grepprg and then uses grep! to search
     function! DisplayHelpAndSearch()
-        let helptext = "Using ".&grepprg." to search in ".getcwd()."\n\n"
+        let helptext = ":set grepprg?\n    grepprg=".&grepprg."\n:pwd\n    ".getcwd()."\n\n"
         call inputsave()
-        let searchstring = input(helptext . "Enter search: ")
+        let searchstring = input(helptext . ":copen | silent grep! ")
         call inputrestore()
         if(len(searchstring) > 0)
-            exec "grep! " . searchstring
             exec "copen"
+            exec "silent grep! " . searchstring
         endif
     endfunction
 
