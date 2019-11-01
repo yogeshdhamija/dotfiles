@@ -470,15 +470,14 @@ call plug#end()
 " CAB -> Close All Buffers
     abbreviate CAB call DeleteHiddenBuffers()
 " CD -> Change Directory to current open file
-    command CD cd %:p:h
+    command CD echo ":cd %:p:h" | silent cd %:p:h
 " CP -> Copy absolute filePath to + register (system clipboard)
-    command CP let @+ = expand("%:p") | echo expand("%:p") "copied"
+    command CP echo ":let @+ = expand('%:p')" | let @+ = expand("%:p")
 " LSP
     " LG -> Lsp Go to symbols
         abbreviate LG LspSymbols
     " LW -> Lsp list what's Wrong
         abbreviate LW LspDiagnosticList
-
 " Writing mode
     command WritingModeOn Goyo 80x85%
     command WritingModeOff Goyo!
@@ -486,7 +485,7 @@ call plug#end()
 " Command to save and generate .pdf from .md
     command PDF w | call WriteToPdf()
 " Start saving the session
-    command StartKeepingSession let s:should_save_session = 1
+    command StartKeepingSession let s:should_save_session = 1 | echo "Using ':mksession' and ':source' to save and load session."
 " Delete vim session and quit
     command ClearSession let s:should_save_session = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
 " Map coc.nvim available actions to commands to allow tab completion
