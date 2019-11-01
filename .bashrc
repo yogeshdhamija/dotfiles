@@ -22,20 +22,11 @@
 #    bind '"\C-B": backward-word'
 #fi
 
-# get current branch in git repo
-function parse_git_branch() {
-	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-	if [ ! "${BRANCH}" == "" ]
-	then
-		STAT=`parse_git_dirty`
-		echo " on ${BRANCH}${STAT}"
-	else
-		echo ""
-	fi
-}
+# get current branch and status of git repo
+function parse_git {
+	# Read only first line, which should always be the current branch.
+	read branch <<< "$(git branch 2> /dev/null)"
 
-# get current status of git repo
-function parse_git_dirty {
 	status=`git status 2>&1`
 	declare -a bits
 
@@ -47,11 +38,13 @@ function parse_git_dirty {
 		[[ "$status" == *"${I#*&&&}"* ]] && bits+=("${I%&&&*}")
 	}
 
-	printf "%s" "${bits[@]}"
+	# Branch names with spaces shouldn't be an issue here, as only the first
+	# space-delimited field is ignored when reading the 'branch' variable.
+	printf " on %s%s" "${branch#* }" "${bits[@]}"
 }
 
 # set nice prompt
-export PS1="\[\e[35m\]\u\[\e[m\] in \[\e[32m\]\w\[\e[m\]\[\e[36m\]\`parse_git_branch\`\[\e[m\] \\$ "
+export PS1="\[\e[35m\]\u\[\e[m\] in \[\e[32m\]\w\[\e[m\]\[\e[36m\]\`parse_git\`\[\e[m\] \\$ "
 
 ## Load custom config
 #if [ -f ~/.bashrc.local ]; then
