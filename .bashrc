@@ -38,9 +38,13 @@ function parse_git {
 		[[ "$status" == *"${I#*&&&}"* ]] && bits+=("${I%&&&*}")
 	}
 
+	# For removing initial field, but also for the if-empty situation.
+	branch=" on ${branch#* }"
+	[ "$branch" == ' on ' ] && unset branch
+
 	# Branch names with spaces shouldn't be an issue here, as only the first
 	# space-delimited field is ignored when reading the 'branch' variable.
-	printf " on %s%s" "${branch#* }" "${bits[@]}"
+	printf "%s%s" "$branch" "${bits[@]}"
 }
 
 # set nice prompt
