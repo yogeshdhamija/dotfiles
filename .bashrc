@@ -24,27 +24,27 @@ fi
 
 # get current branch and status of git repo
 function parse_git {
-	# Read only first line, which should always be the current branch.
-	read branch <<< "$(git branch 2> /dev/null)"
+    # Read only first line, which should always be the current branch.
+    read branch <<< "$(git branch 2> /dev/null)"
 
-	status=`git status 2>&1`
-	declare -a bits
+    status=`git status 2>&1`
+    declare -a bits
 
-	for I in\
-		' !&&&modified:' ' ?&&&Untracked files'\
-		' *&&&Your branch is ahead of' ' +&&&new file:'\
-		' >&&&renamed:' ' x&&&deleted:'
-	{
-		[[ "$status" == *"${I#*&&&}"* ]] && bits+=("${I%&&&*}")
-	}
+    for I in\
+        ' !&&&modified:' ' ?&&&Untracked files'\
+        ' *&&&Your branch is ahead of' ' +&&&new file:'\
+        ' >&&&renamed:' ' x&&&deleted:'
+    {
+        [[ "$status" == *"${I#*&&&}"* ]] && bits+=("${I%&&&*}")
+    }
 
-	# For removing initial field, but also for the if-empty situation.
-	branch=" on ${branch#* }"
-	[ "$branch" == ' on ' ] && unset branch
+    # For removing initial field, but also for the if-empty situation.
+    branch=" on ${branch#* }"
+    [ "$branch" == ' on ' ] && unset branch
 
-	# Branch names with spaces shouldn't be an issue here, as only the first
-	# space-delimited field is ignored when reading the 'branch' variable.
-	printf "%s%s" "$branch" "${bits[@]}"
+    # Branch names with spaces shouldn't be an issue here, as only the first
+    # space-delimited field is ignored when reading the 'branch' variable.
+    printf "%s%s" "$branch" "${bits[@]}"
 }
 
 # set nice prompt
