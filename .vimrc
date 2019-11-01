@@ -416,11 +416,11 @@ call plug#end()
 " \tl -> Terminal window, right (aka l)
     " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
     if has('nvim')
-        nnoremap \t :terminal<CR> :startinsert<CR>
-        nnoremap \th :vsplit<CR><C-W>H :terminal<CR> :startinsert<CR>
-        nnoremap \tj :25split<CR> :terminal<CR> :startinsert<CR>
-        nnoremap \tk :split<CR><C-W>K25<C-W>_:terminal<CR> :startinsert<CR>
-        nnoremap \tl :vsplit<CR> :exe "terminal"<CR> :startinsert<CR>
+        nnoremap \t :terminal<CR>:startinsert<CR>
+        nnoremap \th :vsplit<CR><C-W>H:terminal<CR>:startinsert<CR>
+        nnoremap \tj :25split<CR>:terminal<CR>:startinsert<CR>
+        nnoremap \tk :split<CR><C-W>K25<C-W>_:terminal<CR>:startinsert<CR>
+        nnoremap \tl :vsplit<CR>:exe "terminal"<CR>:startinsert<CR>
     else
         nnoremap \t :terminal ++curwin<CR>
         nnoremap \th :terminal<CR><C-W>_<C-W>H
