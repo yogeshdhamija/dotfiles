@@ -468,16 +468,11 @@ call plug#end()
 " =====================================
 
 " CAB -> Close All Buffers
-    abbreviate CAB call DeleteHiddenBuffers()
+    abbreviate CloseHiddenBuffers call DeleteHiddenBuffers()
 " CD -> Change Directory to current open file
     command CD echo ":cd %:p:h" | silent cd %:p:h
 " CP -> Copy absolute filePath to + register (system clipboard)
     command CP echo ":let @+ = expand('%:p')" | let @+ = expand("%:p")
-" LSP
-    " LG -> Lsp Go to symbols
-        abbreviate LG LspSymbols
-    " LW -> Lsp list what's Wrong
-        abbreviate LW LspDiagnosticList
 " Writing mode
     command WritingModeOn Goyo 80x85%
     command WritingModeOff Goyo!
