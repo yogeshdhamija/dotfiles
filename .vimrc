@@ -268,6 +268,7 @@ call plug#end()
             autocmd TermOpen * setlocal nolist
             autocmd TermOpen * IndentLinesDisable
         endif
+        autocmd FileType json IndentLinesDisable
         silent! colorscheme one                           " silent to suppress error before plugin installed
         let g:airline_theme='onedark'
         set background=dark
@@ -276,7 +277,6 @@ call plug#end()
         highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
         highlight Pmenu ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
         highlight PmenuSel ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
-        highlight MatchParen ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
     else
         let g:loaded_airline = 1
         let g:indentLine_enabled = 0
