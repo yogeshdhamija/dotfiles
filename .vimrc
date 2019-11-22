@@ -468,7 +468,7 @@ call plug#end()
 " =====================================
 
 " CAB -> Close All Buffers
-    abbreviate CloseHiddenBuffers call DeleteHiddenBuffers()
+    command CloseHiddenBuffers call DeleteHiddenBuffers()
 " CD -> Change Directory to current open file
     command CD echo ":cd %:p:h" | silent cd %:p:h
 " CP -> Copy absolute filePath to + register (system clipboard)
