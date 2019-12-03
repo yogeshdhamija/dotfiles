@@ -205,7 +205,6 @@ call plug#end()
         highlight Comment guifg=#6C7380
         highlight NonText guifg=#424956
         highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
-        highlight MatchParen ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
     endfunction
 
 " Opening last session if no arguments when vim is opened
