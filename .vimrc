@@ -54,8 +54,7 @@ Plug 'junegunn/vim-easy-align'         " Easy Align
                                            " Example: gaip<Enter>*= -> go align inner paragraph, reversed, around all =
 Plug 'junegunn/goyo.vim'               " :Goyo to enter writing mode
 Plug 'junegunn/limelight.vim'          " :Limelight!! to toggle focus mode
-Plug 'scrooloose/nerdtree'             " Directory explorer
-Plug 'Xuyuanp/nerdtree-git-plugin'     " Git signs for directory explorer
+Plug 'justinmk/vim-dirvish'           " Directory explorer
 
 " Language Server Protocol
     if executable("yarn") && executable("node")
@@ -312,8 +311,7 @@ call plug#end()
             \ | exe "normal! g`\"" | endif
     endif
     set hidden                                      " Needed for LSP
-    let NERDTreeShowHidden = 1                      " Directory tree show hidden files
-    let NERDTreeCascadeSingleChildDir = 0           " Directory tree no cascade dirs
+    let g:dirvish_mode = 2                          " Directory do not use suffixes and wildignore
     if DetectWsl()
         let g:clipboard = {
             \   'name': 'WslClipboard',
@@ -340,11 +338,15 @@ call plug#end()
         augroup autosession
             autocmd StdinReadPre * let s:std_in=1
             autocmd VimEnter * nested call s:load_session_if_no_args()
-            autocmd VimLeavePre * NERDTreeClose
             autocmd FileWritePost,VimLeavePre * call s:save_session_if_flag_set()
         augroup END
-
-
+    " Directory tree settings
+    augroup dirvish_config
+        autocmd!
+        " Improve preview
+        autocmd FileType dirvish
+                    \ nnoremap <silent><buffer> p ddO<CR><CR><ESC>k:r ! find "<C-R>"" -maxdepth 1 -print0 \| xargs -0 ls -Fd<CR>
+    augroup END
 
 
 
@@ -391,10 +393,6 @@ call plug#end()
     vnoremap <D-v> "+p
     inoremap <D-v> <C-r>+
 
-" Directory tree opens in vertical split with v
-    let NERDTreeMapOpenVSplit='v'
-    let NERDTreeMapPreviewVSplit='gv'
-
 
 
 
@@ -428,7 +426,7 @@ call plug#end()
         nnoremap \tl :terminal<CR><C-W>L
     endif
 " \d -> Directory listing
-    nnoremap \d :NERDTreeFind<CR>:NERDTreeFocus<CR>
+    nmap \d :if(expand('%'))<CR>Dirvish %<CR>else<CR>Dirvish<CR>endif<CR><CR>:echo ":Dirvish %"<CR>
 " \f -> Find
     nnoremap \f :call DisplayHelpAndSearch()<CR>
 " \o -> Open
