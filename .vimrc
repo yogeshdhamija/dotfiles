@@ -311,7 +311,8 @@ call plug#end()
             \ | exe "normal! g`\"" | endif
     endif
     set hidden                                      " Needed for LSP
-    let g:dirvish_mode = 2                          " Directory do not use suffixes and wildignore
+    let g:dirvish_mode = 2
+    let g:dirvish_relative_paths = 1
     if DetectWsl()
         let g:clipboard = {
             \   'name': 'WslClipboard',
@@ -426,7 +427,7 @@ call plug#end()
         nnoremap \tl :terminal<CR><C-W>L
     endif
 " \d -> Directory listing
-    nmap \d :silent! cd %:p:h<CR>:if(expand('%'))<CR>Dirvish %<CR>else<CR>Dirvish<CR>endif<CR><CR>:echo ":Dirvish %"<CR>:silent! cd -<CR>
+    nmap \d :silent! cd %:p:h<CR>:if(expand('%'))<CR>Dirvish %<CR>else<CR>Dirvish<CR>endif<CR><CR>:echo ":Dirvish %"<CR>:silent! cd -<CR>R
 " \f -> Find
     nnoremap \f :call DisplayHelpAndSearch()<CR>
 " \o -> Open
