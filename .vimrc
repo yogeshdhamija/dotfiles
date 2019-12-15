@@ -345,7 +345,7 @@ call plug#end()
         autocmd!
         " Improve preview
         autocmd FileType dirvish
-                    \ nnoremap <silent><buffer> p ddO<CR><CR><ESC>k:r ! find "<C-R>"" -maxdepth 1 -print0 \| xargs -0 ls -Fd<CR>
+                    \ nnoremap <silent><buffer> p ddk:r ! find "<C-R>"" -maxdepth 1 -print0 \| xargs -0 ls -Fd<CR>:silent! %s/\/\//\//g<CR>:silent! %s/[^a-zA-Z0-9\/]$//g<CR>:noh<CR>
     augroup END
 
 
@@ -426,7 +426,7 @@ call plug#end()
         nnoremap \tl :terminal<CR><C-W>L
     endif
 " \d -> Directory listing
-    nmap \d :if(expand('%'))<CR>Dirvish %<CR>else<CR>Dirvish<CR>endif<CR><CR>:echo ":Dirvish %"<CR>
+    nmap \d :silent! cd %:p:h<CR>:if(expand('%'))<CR>Dirvish %<CR>else<CR>Dirvish<CR>endif<CR><CR>:echo ":Dirvish %"<CR>:silent! cd -<CR>
 " \f -> Find
     nnoremap \f :call DisplayHelpAndSearch()<CR>
 " \o -> Open
