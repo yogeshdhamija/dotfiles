@@ -346,7 +346,7 @@ call plug#end()
         autocmd!
         " Improve preview
         autocmd FileType dirvish
-                    \ nnoremap <silent><buffer> p ddO<Esc>:r ! find "<C-R>"" -maxdepth 1 -print0 \| xargs -0 ls -Fd<CR>:silent! %s/\/\//\//g<CR>:silent! %s/[^a-zA-Z0-9\/]$//g<CR>:silent! g/^$/d<CR>:noh<CR>
+                    \ nnoremap <silent><buffer> p ddO<Esc>:r ! find "<C-R>"" -maxdepth 1 -print0 \| xargs -0 ls -Fd<CR>:silent! keeppatterns %s/\/\//\//g<CR>:silent! keeppatterns %s/[^a-zA-Z0-9\/]$//g<CR>:silent! keeppatterns g/^$/d<CR>:noh<CR>
     augroup END
 
 
