@@ -370,6 +370,9 @@ call plug#end()
 " Pressing * in visual mode searches for selection
     vnoremap * :<C-U>let old=@"<CR>gvy:let @/="\\V".escape(@", '/\')<CR>:set hlsearch<CR>:let @"=old<CR>:echo "/".@/<CR>
 
+" Make pasting from clipboard safer
+    inoremap <C-R>+ <C-R><C-R>+
+
 " Pressing <Esc> in normal mode removes search highlights
     " augroup because of vim issue https://github.com/vim/vim/issues/3080
     " Note: remapping on every yank might cause lag
