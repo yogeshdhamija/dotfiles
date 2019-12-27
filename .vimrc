@@ -18,6 +18,44 @@ endtry
 " PLUGINS:
 " =====================================
 
+" Language Server Protocol
+    function! InstallCocDeps(info)
+        if executable("yarn") && executable("node")
+            if a:info.status == 'installed' || a:info.force
+                let extensions = ['coc-marketplace', 'coc-vimlsp', 'coc-gocode', 'coc-json', 'coc-python', 'coc-pyls', 'coc-tsserver']
+                call coc#util#install()
+                call coc#util#install_extension(extensions)
+            endif
+        endif
+    endfunction
+
+if !exists("plugins")
+    let plugins = [ 
+        \ ['editorconfig/editorconfig-vim', {}],
+        \ ['mhinz/vim-signify', {}],
+        \ ['tpope/vim-repeat', {}],
+        \ ['tpope/vim-commentary', {}],
+        \ ['tpope/vim-surround', {}],
+        \ ['michaeljsmith/vim-indent-object', {}],
+        \ ['rakr/vim-one', {}],
+        \ ['vim-airline/vim-airline', {}],
+        \ ['vim-airline/vim-airline-themes', {}],
+        \ ['Yggdroot/indentLine', {}],
+        \ ['tpope/vim-fugitive', {}],
+        \ ['junegunn/fzf', {}],
+        \ ['junegunn/fzf.vim', {}],
+        \ ['junegunn/vim-easy-align', {}],
+        \ ['junegunn/goyo.vim', {}],
+        \ ['junegunn/limelight.vim', {}],
+        \ ['justinmk/vim-dirvish', {}],
+        \ ['leafgarland/typescript-vim', {}],
+        \ ['neoclide/coc.nvim', {'do': function('InstallCocDeps')}],
+    \]
+endif
+if !exists("disabled_plugins")
+    let disabled_plugins = []
+endif
+
 " Install Plug if not installed
     if empty(glob('~/.vim/autoload/plug.vim'))
       silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -26,51 +64,11 @@ endtry
     endif
 
 call plug#begin('~/.vim/plugged')
-
-Plug 'editorconfig/editorconfig-vim'   " Use .editorconfig
-Plug 'mhinz/vim-signify'               " Show git changes in sign column
-Plug 'tpope/vim-repeat'                " Make . work for plugins that support it
-Plug 'tpope/vim-commentary'            " Commenting
-                                           " Example: gc2j          -> go comment 2 down
-Plug 'tpope/vim-surround'              " Ability to surround objects
-                                           " Example: ysiw]         -> yes surround inner word with []
-                                           " Example: viwS(         -> visual inner word, surround with ( )
-                                           " Example: cs'"          -> change surrounding ' to "
-                                           " Example: ds"           -> delete surrounding "
-                                           " Use [ for space, ] for no space
-Plug 'michaeljsmith/vim-indent-object' " Adding indent-level as a text object
-                                           " Example: dii           -> delete inner indent
-Plug 'rakr/vim-one'                    " Colorscheme
-Plug 'vim-airline/vim-airline'         " Better status bar
-Plug 'vim-airline/vim-airline-themes'  " Theme for vim-airline
-Plug 'Yggdroot/indentLine'             " indent guides
-Plug 'tpope/vim-fugitive'              " git integration
-Plug 'junegunn/fzf'                    " Fuzzy finder
-Plug 'junegunn/fzf.vim'                " Fuzzy finder vim wrapper
-Plug 'junegunn/vim-easy-align'         " Easy Align
-                                           " Example: gaip=         -> go align inner paragraph around the first =
-                                           " Example: gaip-=        -> go align inner paragraph around the last =
-                                           " Example: gaip*=        -> go align inner paragraph around all =
-                                           " Example: gaip<Enter>*= -> go align inner paragraph, reversed, around all =
-Plug 'junegunn/goyo.vim'               " :Goyo to enter writing mode
-Plug 'junegunn/limelight.vim'          " :Limelight!! to toggle focus mode
-Plug 'justinmk/vim-dirvish'           " Directory explorer
-
-" Language Server Protocol
-    if executable("yarn") && executable("node")
-        function! InstallDeps(info)
-            if a:info.status == 'installed' || a:info.force
-                let extensions = ['coc-marketplace', 'coc-vimlsp', 'coc-gocode', 'coc-json', 'coc-python', 'coc-pyls', 'coc-tsserver']
-                call coc#util#install()
-                call coc#util#install_extension(extensions)
-            endif
-        endfunction
-        Plug 'neoclide/coc.nvim', {'do': function('InstallDeps')}
-    endif
-
-" Support for languages
-    Plug 'leafgarland/typescript-vim'
-
+    for plugin in plugins
+        if index(disabled_plugins, plugin[0], 0, 1) == -1
+            Plug plugin[0], plugin[1]
+        endif
+    endfor
 call plug#end()
 
 
