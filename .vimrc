@@ -96,6 +96,11 @@ call plug#end()
         endif
     endfunction
 
+" Check if default color mode is on
+    function! IsColorschemeEnabled()
+        return exists("g:enable_colorscheme") && g:enable_colorscheme == 1
+    endfunction
+
 " Detects if currently running on Microsoft's Ubuntu on Windows (WSL)
     function! DetectWsl()
         return filereadable("/proc/version") && (match(readfile("/proc/version"), "Microsoft") != -1)
@@ -152,56 +157,60 @@ call plug#end()
 
 " Overriding Goyo plugin's enter/exit functions
     function! s:goyo_enter()
-        setlocal syntax=off
-        setlocal spell
-        setlocal noshowmode
-        setlocal nocursorline
-        setlocal noshowcmd
-        setlocal nolist
-        setlocal signcolumn=no
-        setlocal showbreak=
-        " Fix Airline showing up bug
-            setlocal eventignore=FocusGained
-        let b:coc_suggest_disable = 1
-        IndentLinesDisable
-        Limelight
-        " Set up ability to :q from within WritingMode
-            let b:quitting = 0
-            let b:quitting_bang = 0
-            autocmd QuitPre <buffer> let b:quitting = 1
-            cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
-        set background=light
+        if (IsColorschemeEnabled())
+            setlocal syntax=off
+            setlocal spell
+            setlocal noshowmode
+            setlocal nocursorline
+            setlocal noshowcmd
+            setlocal nolist
+            setlocal signcolumn=no
+            setlocal showbreak=
+            " Fix Airline showing up bug
+                setlocal eventignore=FocusGained
+            let b:coc_suggest_disable = 1
+            IndentLinesDisable
+            Limelight
+            " Set up ability to :q from within WritingMode
+                let b:quitting = 0
+                let b:quitting_bang = 0
+                autocmd QuitPre <buffer> let b:quitting = 1
+                cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+            set background=light
+        endif
     endfunction
     function! s:goyo_leave()
-        set syntax<
-        set spell<
-        set showmode<
-        set showcmd<
-        set list<
-        set cursorline<
-        set signcolumn<
-        set eventignore<
-        set showbreak=>>>\ 
-        let b:coc_suggest_disable = 0
-        IndentLinesEnable
-        Limelight!
-        " Airline starts up weird sometimes...
-            AirlineRefresh 
-            AirlineToggle
-            AirlineToggle
-            AirlineRefresh
-        " Quit Vim if this is the only remaining buffer
-            if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-                if b:quitting_bang
-                    qa!
-                else
-                    qa
+        if (IsColorschemeEnabled())
+            set syntax<
+            set spell<
+            set showmode<
+            set showcmd<
+            set list<
+            set cursorline<
+            set signcolumn<
+            set eventignore<
+            set showbreak=>>>\ 
+            let b:coc_suggest_disable = 0
+            IndentLinesEnable
+            Limelight!
+            " Airline starts up weird sometimes...
+                AirlineRefresh 
+                AirlineToggle
+                AirlineToggle
+                AirlineRefresh
+            " Quit Vim if this is the only remaining buffer
+                if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+                    if b:quitting_bang
+                        qa!
+                    else
+                        qa
+                    endif
                 endif
-            endif
-        set background=dark
-        highlight Comment guifg=#6C7380
-        highlight NonText guifg=#424956
-        highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
+            set background=dark
+            highlight Comment guifg=#6C7380
+            highlight NonText guifg=#424956
+            highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
+        endif
     endfunction
 
 " Opening last session if no arguments when vim is opened
@@ -242,7 +251,7 @@ call plug#end()
 " =====================================
 
 " Colorscheme
-    if (!exists("g:default_colorscheme") || g:default_colorscheme != 1)
+    if (IsColorschemeEnabled())
         let $NVIM_TUI_ENABLE_TRUE_COLOR=1                 " enable true color for nvim < 1.5 (I think)
         if (DetectUbuntu() || DetectIterm() || DetectWsl())
             set termguicolors

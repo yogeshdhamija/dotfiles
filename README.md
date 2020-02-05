@@ -1,5 +1,19 @@
 # Config (dotfiles)
 
+## Cheat Sheet
+
+**Vim colorscheme
+File: `~/.vimrc.local.loadbefore`
+Setting: `let g:enable_colorscheme = 1`
+
+**Local-only aliases
+File: `~/.shellrc.local`
+
+```bash
+# Enable vim colorscheme:
+echo "let g:enable_colorscheme = 1" >> ~/.vimrc.local.loadbefore
+```
+
 ## Quick Start
 
 To clone this repo into your home directory:
@@ -30,8 +44,8 @@ Primarily, this repo configures the terminal and vim/neovim.
 - Run `config-update` to get updates.
 - Run `config-check` to see if recommended programs are installed on your system.
 - These are the primary files:
-    - `~/.bashrc` - for bash only settings
-    - `~/.zshrc` - for zsh only settings
+    - `~/.bashrc` - for bash-only settings
+    - `~/.zshrc` - for zsh-only settings
     - `~/.shellrc` - for common settings
     - `~/.shell_aliases` - for aliases
 - The following files will be auto-loaded if they exist, so you can make changes you don't want to commit:
