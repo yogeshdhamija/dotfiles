@@ -2,12 +2,13 @@
 
 ## Cheat Sheet
 
-**Vim colorscheme**
-File: `~/.vimrc.local.loadbefore`
-Setting: `let g:enable_colorscheme = 1`
+**Vim colorscheme**  
+File: `~/.vimrc.local.loadbefore`  
+Setting: `let g:enable_colorscheme = 1`  
 
-**Local-only aliases**
-File: `~/.shellrc.local`
+
+**Local-only aliases**  
+File: `~/.shellrc.local`  
 
 ## Quick Start
 
