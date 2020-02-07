@@ -1,7 +1,8 @@
 # Load custom config
 if [ -f ~/.bashrc.local.loadbefore ]; then
     source ~/.bashrc.local.loadbefore
-elif [ -f ~/.shellrc.local.loadbefore ]; then
+fi
+if [ -f ~/.shellrc.local.loadbefore ]; then
     source ~/.shellrc.local.loadbefore
 fi
 
@@ -51,8 +52,9 @@ function parse_git {
 export PS1="\[\e[35m\]\u\[\e[m\] in \[\e[32m\]\w\[\e[m\]\[\e[36m\]\`parse_git\`\[\e[m\] \\$ "
 
 # Load custom config
+if [ -f ~/.shellrc.local ]; then
+    source ~/.shellrc.local
+fi
 if [ -f ~/.bashrc.local ]; then
     source ~/.bashrc.local
-elif [ -f ~/.shellrc.local ]; then
-    source ~/.shellrc.local
 fi

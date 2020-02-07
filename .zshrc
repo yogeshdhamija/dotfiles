@@ -1,7 +1,8 @@
 # Load custom config
 if [ -f ~/.zshrc.local.loadbefore ]; then
     source ~/.zshrc.local.loadbefore
-elif [ -f ~/.shellrc.local.loadbefore ]; then
+fi
+if [ -f ~/.shellrc.local.loadbefore ]; then
     source ~/.shellrc.local.loadbefore
 fi
 
@@ -77,8 +78,9 @@ zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 
 # Load custom config
+if [ -f ~/.shellrc.local ]; then
+    source ~/.shellrc.local
+fi
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
-elif [ -f ~/.shellrc.local ]; then
-    source ~/.shellrc.local
 fi

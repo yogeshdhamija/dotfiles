@@ -58,7 +58,6 @@ Primarily, this repo configures the terminal and vim/neovim.
     - `~/.bashrc.local.loadbefore`
     - `~/.zshrc.local.loadbefore`
         - The `*.loadbefore` files are sourced before any other config.
-        - Note that `~/.shellrc.local` will not be loaded on a `zsh` terminal if the more specific `~/.zshrc.local` exists (also true for the `*.loadbefore` version, and for bashrc and shellrc).
 - Many `zsh` plugins are included in this repo as submodules. `config-update` will update them.
 
 ### Vim
