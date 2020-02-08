@@ -166,6 +166,8 @@ call plug#end()
             setlocal nolist
             setlocal signcolumn=no
             setlocal showbreak=
+            setlocal norelativenumber
+            setlocal nonumber
             " Fix Airline showing up bug
                 setlocal eventignore=FocusGained
             let b:coc_suggest_disable = 1
@@ -189,6 +191,8 @@ call plug#end()
             set cursorline<
             set signcolumn<
             set eventignore<
+            set relativenumber<
+            set number<
             set showbreak=>>>\ 
             let b:coc_suggest_disable = 0
             IndentLinesEnable
@@ -257,6 +261,7 @@ call plug#end()
             set termguicolors
         endif
         set number
+        set relativenumber
         set signcolumn=yes
         syntax on
         set wrap
