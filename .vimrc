@@ -168,6 +168,9 @@ call plug#end()
             setlocal showbreak=
             setlocal norelativenumber
             setlocal nonumber
+            if has('nvim')
+                set inccommand=
+            endif
             " Fix Airline showing up bug
                 setlocal eventignore=FocusGained
             let b:coc_suggest_disable = 1
@@ -194,6 +197,9 @@ call plug#end()
             set relativenumber<
             set number<
             set showbreak=>>>\ 
+            if has('nvim')
+                set inccommand=nosplit
+            endif
             let b:coc_suggest_disable = 0
             IndentLinesEnable
             Limelight!
@@ -277,6 +283,7 @@ call plug#end()
         if has('nvim')
             autocmd TermOpen * setlocal nolist
             autocmd TermOpen * IndentLinesDisable
+            set inccommand=nosplit
         endif
         autocmd FileType json IndentLinesDisable
         silent! colorscheme one                           " silent to suppress error before plugin installed
