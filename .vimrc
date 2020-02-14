@@ -166,7 +166,6 @@ call plug#end()
             setlocal nolist
             setlocal signcolumn=no
             setlocal showbreak=
-            setlocal norelativenumber
             setlocal nonumber
             if has('nvim')
                 set inccommand=
@@ -194,7 +193,6 @@ call plug#end()
             set cursorline<
             set signcolumn<
             set eventignore<
-            set relativenumber<
             set number<
             set showbreak=>>>\ 
             if has('nvim')
@@ -267,7 +265,6 @@ call plug#end()
             set termguicolors
         endif
         set number
-        set relativenumber
         set signcolumn=yes
         syntax on
         set wrap
