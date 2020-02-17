@@ -4,10 +4,12 @@
 
 **Common settings in** `~/.vimrc.local.loadbefore`:
 ```
-let g:enable_colorscheme = 1
-let g:enable_colorscheme = 0
 let plugins = ["these_plugins_will/override_the_defaults"]
 let disabled_plugins = ["neoclide/coc.nvim"]
+```
+**Common settings in** `~/.vimrc.local`:
+```
+call LoadColors()
 ```
 
 **Common settings in** `~/.shellrc.local`:

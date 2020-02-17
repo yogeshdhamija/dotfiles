@@ -118,8 +118,6 @@ function! EnableLightline()
 endfunction
 
 function! UnloadColors()
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=0                 " enable true color for nvim < 1.5 (I think)
-    set notermguicolors
     set nonumber
     set signcolumn=no
     syntax on
@@ -132,6 +130,8 @@ function! UnloadColors()
     set nolist
     set showmode
     if(!exists("g:writingmode") || g:writingmode != 1)
+        let $NVIM_TUI_ENABLE_TRUE_COLOR=0                 " enable true color for nvim < 1.5 (I think)
+        set notermguicolors
         colorscheme default
         set background=dark
     endif
@@ -185,11 +185,6 @@ endfunction
             exec "copen"
             exec "silent grep! " . searchstring
         endif
-    endfunction
-
-" Check if default color mode is on
-    function! IsColorschemeEnabled()
-        return exists("g:enable_colorscheme") && g:enable_colorscheme == 1
     endfunction
 
 " Detects if currently running on Microsoft's Ubuntu on Windows (WSL)
@@ -249,6 +244,7 @@ endfunction
 " Overriding Goyo plugin's enter/exit functions
     function! s:goyo_enter()
         let g:writingmode=1
+        call LoadColors()
         call UnloadColors()
         setlocal syntax=off
         setlocal spell
@@ -321,11 +317,9 @@ endfunction
 " SETTINGS:
 " =====================================
 
-if (IsColorschemeEnabled())
-    call LoadColors()
-else
-    call UnloadColors()
-endif
+" Preserve default colorscheme
+    call DisableLightline()
+    call DisableIndentLines()
 
 " General settings
     set mouse=a
