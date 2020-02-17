@@ -83,6 +83,20 @@ call plug#end()
 " FUNCTIONS:
 " =====================================
 
+function! EnableIndentLines() 
+    if v:vim_did_enter
+        IndentLinesEnable
+    endif
+    let g:indentLine_enabled=1
+endfunction
+
+function! DisableIndentLines() 
+    if v:vim_did_enter
+        IndentLinesDisable
+    endif
+    let g:indentLine_enabled=0
+endfunction
+
 function! DisableLightline() 
     if v:vim_did_enter
         call lightline#disable()
@@ -136,6 +150,7 @@ function! LoadColors()
     highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
     highlight Pmenu ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
     highlight PmenuSel ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
+    call EnableIndentLines()
 endfunction
 
 " Displays grepprg and then uses grep! to search
@@ -306,6 +321,7 @@ if (IsColorschemeEnabled())
     call LoadColors()
 else
     call DisableLightline()
+    call DisableIndentLines()
 endif
 
 " General settings
