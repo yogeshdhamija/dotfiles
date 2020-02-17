@@ -38,8 +38,7 @@ if !exists("plugins")
         \ ['tpope/vim-surround', {}],
         \ ['michaeljsmith/vim-indent-object', {}],
         \ ['rakr/vim-one', {}],
-        \ ['vim-airline/vim-airline', {}],
-        \ ['vim-airline/vim-airline-themes', {}],
+        \ ['itchyny/lightline.vim', {}],
         \ ['Yggdroot/indentLine', {}],
         \ ['tpope/vim-fugitive', {}],
         \ ['junegunn/fzf', {}],
@@ -84,6 +83,26 @@ call plug#end()
 " FUNCTIONS:
 " =====================================
 
+function! DisableLightline() 
+    if v:vim_did_enter
+        call lightline#disable()
+    endif
+    augroup disable_lightline
+        autocmd!
+        autocmd VimEnter * call lightline#disable()
+    augroup END
+endfunction
+
+function! EnableLightline()
+    if v:vim_did_enter
+        call lightline#enable()
+    endif
+    augroup disable_lightline
+        autocmd!
+        autocmd VimEnter * call lightline#enable()
+    augroup END
+endfunction
+
 function! LoadColors()
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1                 " enable true color for nvim < 1.5 (I think)
     if (DetectUbuntu() || DetectIterm() || DetectWsl())
@@ -109,18 +128,14 @@ function! LoadColors()
     endif
     autocmd FileType json IndentLinesDisable
     silent! colorscheme one                           " silent to suppress error before plugin installed
-    let g:airline_theme='onedark'
+    let g:lightline={'colorscheme': 'one'}
     set background=dark
+    call EnableLightline()
     highlight Comment guifg=#6C7380
     highlight NonText guifg=#424956
     highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
     highlight Pmenu ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
     highlight PmenuSel ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
-endfunction
-
-function! DisableAirlineStatusBar()
-    let g:loaded_airline = 1
-    let g:indentLine_enabled = 0
 endfunction
 
 " Displays grepprg and then uses grep! to search
@@ -209,8 +224,6 @@ endfunction
             if has('nvim')
                 set inccommand=
             endif
-            " Fix Airline showing up bug
-                setlocal eventignore=FocusGained
             let b:coc_suggest_disable = 1
             IndentLinesDisable
             Limelight
@@ -240,11 +253,6 @@ endfunction
             let b:coc_suggest_disable = 0
             IndentLinesEnable
             Limelight!
-            " Airline starts up weird sometimes...
-                AirlineRefresh 
-                AirlineToggle
-                AirlineToggle
-                AirlineRefresh
             " Quit Vim if this is the only remaining buffer
                 if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
                     if b:quitting_bang
@@ -297,7 +305,7 @@ endfunction
 if (IsColorschemeEnabled())
     call LoadColors()
 else
-    call DisableAirlineStatusBar()
+    call DisableLightline()
 endif
 
 " General settings
@@ -308,7 +316,6 @@ endif
     set autoread
     set splitbelow
     set splitright
-    let g:airline#extensions#whitespace#enabled = 0 " Airline don't show whitespace errors
     let g:easy_align_ignore_groups=[]
     set tabstop=4
     set shiftwidth=4
