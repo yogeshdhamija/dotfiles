@@ -7,6 +7,7 @@
 let plugins = ["these_plugins_will/override_the_defaults"]
 let disabled_plugins = ["neoclide/coc.nvim"]
 ```
+
 **Common settings in** `~/.vimrc.local`:
 ```
 call LoadColors()
