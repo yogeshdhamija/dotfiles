@@ -117,6 +117,28 @@ function! EnableLightline()
     augroup END
 endfunction
 
+function! UnloadColors()
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=0                 " enable true color for nvim < 1.5 (I think)
+    set notermguicolors
+    set nonumber
+    set signcolumn=no
+    syntax on
+    if has('nvim')
+        set inccommand=
+    endif
+    set wrap
+    set nobreakindent
+    set showbreak=
+    set nolist
+    set showmode
+    if(!exists("g:writingmode") || g:writingmode != 1)
+        colorscheme default
+        set background=dark
+    endif
+    call DisableLightline()
+    call DisableIndentLines()
+endfunction
+
 function! LoadColors()
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1                 " enable true color for nvim < 1.5 (I think)
     if (DetectUbuntu() || DetectIterm() || DetectWsl())
@@ -226,58 +248,40 @@ endfunction
 
 " Overriding Goyo plugin's enter/exit functions
     function! s:goyo_enter()
-        if (IsColorschemeEnabled())
-            setlocal syntax=off
-            setlocal spell
-            setlocal noshowmode
-            setlocal nocursorline
-            setlocal noshowcmd
-            setlocal nolist
-            setlocal signcolumn=no
-            setlocal showbreak=
-            setlocal nonumber
-            if has('nvim')
-                set inccommand=
-            endif
-            let b:coc_suggest_disable = 1
-            IndentLinesDisable
-            Limelight
-            " Set up ability to :q from within WritingMode
-                let b:quitting = 0
-                let b:quitting_bang = 0
-                autocmd QuitPre <buffer> let b:quitting = 1
-                cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
-            set background=light
-        endif
+        let g:writingmode=1
+        call UnloadColors()
+        setlocal syntax=off
+        setlocal spell
+        setlocal noshowmode
+        setlocal nocursorline
+        setlocal noshowcmd
+        let b:coc_suggest_disable = 1
+        Limelight
+        " Set up ability to :q from within WritingMode
+            let b:quitting = 0
+            let b:quitting_bang = 0
+            autocmd QuitPre <buffer> let b:quitting = 1
+            cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+        set background=light
     endfunction
     function! s:goyo_leave()
-        if (IsColorschemeEnabled())
-            set syntax<
-            set spell<
-            set showmode<
-            set showcmd<
-            set list<
-            set cursorline<
-            set signcolumn<
-            set eventignore<
-            set number<
-            set showbreak=>>>\ 
-            if has('nvim')
-                set inccommand=nosplit
-            endif
-            let b:coc_suggest_disable = 0
-            IndentLinesEnable
-            Limelight!
-            " Quit Vim if this is the only remaining buffer
-                if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-                    if b:quitting_bang
-                        qa!
-                    else
-                        qa
-                    endif
+        let g:writingmode=0
+        set syntax<
+        set spell<
+        set showmode<
+        set showcmd<
+        set cursorline<
+        let b:coc_suggest_disable = 0
+        Limelight!
+        " Quit Vim if this is the only remaining buffer
+            if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+                if b:quitting_bang
+                    qa!
+                else
+                    qa
                 endif
-            call LoadColors()
-        endif
+            endif
+        call LoadColors()
     endfunction
 
 " Opening last session if no arguments when vim is opened
@@ -320,8 +324,7 @@ endfunction
 if (IsColorschemeEnabled())
     call LoadColors()
 else
-    call DisableLightline()
-    call DisableIndentLines()
+    call UnloadColors()
 endif
 
 " General settings
