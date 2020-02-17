@@ -18,45 +18,6 @@ endtry
 " PLUGINS:
 " =====================================
 
-function! LoadColors()
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1                 " enable true color for nvim < 1.5 (I think)
-    if (DetectUbuntu() || DetectIterm() || DetectWsl())
-        set termguicolors
-    endif
-    set number
-    set signcolumn=yes
-    syntax on
-    set wrap
-    set breakindent
-    set listchars=tab:\|\ ,eol:$
-    set list
-    set noshowmode
-    set showbreak=>>>\ 
-    let g:indentLine_showFirstIndentLevel=1
-    " Indentline conflicts with some other concealed characters.
-        " Workaround: conceal nothing on cursor line
-        let g:indentLine_concealcursor=''
-    if has('nvim')
-        autocmd TermOpen * setlocal nolist
-        autocmd TermOpen * IndentLinesDisable
-        set inccommand=nosplit
-    endif
-    autocmd FileType json IndentLinesDisable
-    silent! colorscheme one                           " silent to suppress error before plugin installed
-    let g:airline_theme='onedark'
-    set background=dark
-    highlight Comment guifg=#6C7380
-    highlight NonText guifg=#424956
-    highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
-    highlight Pmenu ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
-    highlight PmenuSel ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
-endfunction
-
-function! DisableAirlineStatusBar()
-    let g:loaded_airline = 1
-    let g:indentLine_enabled = 0
-endfunction
-
 " Language Server Protocol
     function! InstallCocDeps(info)
         if executable("yarn") && executable("node")
@@ -122,6 +83,45 @@ call plug#end()
 " =====================================
 " FUNCTIONS:
 " =====================================
+
+function! LoadColors()
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1                 " enable true color for nvim < 1.5 (I think)
+    if (DetectUbuntu() || DetectIterm() || DetectWsl())
+        set termguicolors
+    endif
+    set number
+    set signcolumn=yes
+    syntax on
+    set wrap
+    set breakindent
+    set listchars=tab:\|\ ,eol:$
+    set list
+    set noshowmode
+    set showbreak=>>>\ 
+    let g:indentLine_showFirstIndentLevel=1
+    " Indentline conflicts with some other concealed characters.
+        " Workaround: conceal nothing on cursor line
+        let g:indentLine_concealcursor=''
+    if has('nvim')
+        autocmd TermOpen * setlocal nolist
+        autocmd TermOpen * IndentLinesDisable
+        set inccommand=nosplit
+    endif
+    autocmd FileType json IndentLinesDisable
+    silent! colorscheme one                           " silent to suppress error before plugin installed
+    let g:airline_theme='onedark'
+    set background=dark
+    highlight Comment guifg=#6C7380
+    highlight NonText guifg=#424956
+    highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
+    highlight Pmenu ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
+    highlight PmenuSel ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
+endfunction
+
+function! DisableAirlineStatusBar()
+    let g:loaded_airline = 1
+    let g:indentLine_enabled = 0
+endfunction
 
 " Displays grepprg and then uses grep! to search
     function! DisplayHelpAndSearch()
