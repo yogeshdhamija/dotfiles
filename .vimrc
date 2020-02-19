@@ -1,33 +1,6 @@
-" =====================================
-" LOAD LOCAL FILE:
-" =====================================
+source ~/.config/vim/functions.vim
 
-try
-    source ~/.vimrc.local.loadbefore
-catch
-endtry
-
-
-
-
-
-
-
-
-" =====================================
-" PLUGINS:
-" =====================================
-
-" Language Server Protocol
-    function! InstallCocDeps(info)
-        if executable("yarn") && executable("node")
-            if a:info.status == 'installed' || a:info.force
-                let extensions = ['coc-marketplace', 'coc-vimlsp', 'coc-gocode', 'coc-json', 'coc-python', 'coc-pyls', 'coc-tsserver']
-                call coc#util#install()
-                call coc#util#install_extension(extensions)
-            endif
-        endif
-    endfunction
+call SourceFileIfExists("~/.vimrc.local.loadbefore")
 
 if !exists("plugins")
     let plugins = [ 
@@ -48,96 +21,14 @@ if !exists("plugins")
         \ ['junegunn/limelight.vim', {}],
         \ ['justinmk/vim-dirvish', {}],
         \ ['leafgarland/typescript-vim', {}],
-        \ ['neoclide/coc.nvim', {'do': function('InstallCocDeps')}],
+        \ ['neoclide/coc.nvim', {'do': function('InstallCocPlugins')}],
     \]
 endif
 if !exists("disabled_plugins")
     let disabled_plugins = []
 endif
 
-" Install Plug if not installed
-    if empty(glob('~/.vim/autoload/plug.vim'))
-      silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-      autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-    endif
-
-call plug#begin('~/.vim/plugged')
-    for plugin in plugins
-        if index(disabled_plugins, plugin[0], 0, 1) == -1
-            Plug plugin[0], plugin[1]
-        endif
-    endfor
-call plug#end()
-
-
-
-
-
-
-
-
-
-
-" =====================================
-" FUNCTIONS:
-" =====================================
-
-function! EnableIndentLines() 
-    if v:vim_did_enter
-        IndentLinesEnable
-    endif
-    let g:indentLine_enabled=1
-endfunction
-
-function! DisableIndentLines() 
-    if v:vim_did_enter
-        IndentLinesDisable
-    endif
-    let g:indentLine_enabled=0
-endfunction
-
-function! DisableLightline() 
-    if v:vim_did_enter
-        call lightline#disable()
-    endif
-    augroup disable_lightline
-        autocmd!
-        autocmd VimEnter * call lightline#disable()
-    augroup END
-endfunction
-
-function! EnableLightline()
-    if v:vim_did_enter
-        call lightline#enable()
-    endif
-    augroup disable_lightline
-        autocmd!
-        autocmd VimEnter * call lightline#enable()
-    augroup END
-endfunction
-
-function! UnloadColors()
-    set nonumber
-    set signcolumn=no
-    syntax on
-    if has('nvim')
-        set inccommand=
-    endif
-    set wrap
-    set nobreakindent
-    set showbreak=
-    set nolist
-    set showmode
-    if(!exists("g:writingmode") || g:writingmode != 1)
-        let $NVIM_TUI_ENABLE_TRUE_COLOR=0                 " enable true color for nvim < 1.5 (I think)
-        set notermguicolors
-        colorscheme default
-        set background=dark
-    endif
-    call DisableLightline()
-    call DisableIndentLines()
-endfunction
+call InstallPlugins(plugins, disabled_plugins)
 
 function! LoadColors()
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1                 " enable true color for nvim < 1.5 (I think)
@@ -546,12 +437,4 @@ endfunction
 
 
 
-
-" =====================================
-" LOAD LOCAL FILE:
-" =====================================
-
-try
-    source ~/.vimrc.local
-catch
-endtry
+call SourceFileIfExists("~/.vimrc.local")
