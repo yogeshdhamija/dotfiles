@@ -199,25 +199,39 @@ function! LoadSessionIfVimNotLaunchedWithArgs() abort
 endfunction
 
 function! SaveSessionIfFlagSet() abort
-  if g:should_save_session == 1
-    let sessionoptions = &sessionoptions
-    try
-        set sessionoptions-=options
-        set sessionoptions+=tabpages
-        execute 'mksession! ~/.vim/lastsession.vim'
-    finally
-        let &sessionoptions = sessionoptions
-    endtry
-  endif
+    if g:should_save_session == 1
+        let sessionoptions = &sessionoptions
+        try
+            set sessionoptions-=options
+            set sessionoptions+=tabpages
+            execute 'mksession! ~/.vim/lastsession.vim'
+        finally
+            let &sessionoptions = sessionoptions
+        endtry
+    endif
 endfunction
 
-
-
-
-
-
-
-
-
-
-
+function! EnterWritingModeGoyoOverride() abort
+    let g:writingmode=1
+    call LoadColors()
+    call UnloadColors()
+    setlocal syntax=off
+    setlocal spell
+    setlocal noshowmode
+    setlocal nocursorline
+    setlocal noshowcmd
+    let b:coc_suggest_disable = 1
+    Limelight
+    set background=light
+endfunction
+function! ExitWritingModeGoyoOverride() abort
+    let g:writingmode=0
+    set syntax<
+    set spell<
+    set showmode<
+    set showcmd<
+    set cursorline<
+    let b:coc_suggest_disable = 0
+    Limelight!
+    call LoadColors()
+endfunction
