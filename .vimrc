@@ -30,72 +30,6 @@ endif
 
 call InstallPlugins(plugins, disabled_plugins)
 
-" Displays grepprg and then uses grep! to search
-    function! DisplayHelpAndSearch()
-        let helptext = ":set grepprg?\n    grepprg=".&grepprg."\n:pwd\n    ".getcwd()."\n\n"
-        call inputsave()
-        let searchstring = input(helptext . ":copen | silent grep! ")
-        call inputrestore()
-        if(len(searchstring) > 0)
-            exec "copen"
-            exec "silent grep! " . searchstring
-        endif
-    endfunction
-
-" Detects if currently running on Microsoft's Ubuntu on Windows (WSL)
-    function! DetectWsl()
-        return filereadable("/proc/version") && (match(readfile("/proc/version"), "Microsoft") != -1)
-    endfunction
-
-" Write file to PDF using Pandoc
-    function! WriteToPdf()
-        let current_dir = escape(expand("%:p:h"), ' ') . ";"
-        let listings_file = findfile(".listings-setup.tex", current_dir)
-        exe '!pandoc "%:p" --listings -H "' . listings_file . '" -o "%:p:r.pdf" -V geometry:margin=1in'
-    endfunction
-
-" Detects if currently running on regular Ubuntu
-    function! DetectUbuntu()
-        return filereadable("/proc/version") && (match(readfile("/proc/version"), "Ubuntu") != -1) && (match(readfile("/proc/version"), "Microsoft") == -1)
-    endfunction
-
-" Detects if currently running on Iterm
-    function! DetectIterm()
-        return $TERM_PROGRAM =~ "iTerm"
-    endfunction
-
-" Special enter insert mode
-    function! EnterInsertAfterCursor()
-        if col('.') == col('$') - 1
-            startinsert!
-        else
-            startinsert
-        endif
-    endfunction
-
-" Enter insert mode. Special case: if buffer is terminal, will only enter
-    " insert mode if window location contains bottom of buffer
-    function! EnterInsertIfFileOrIfBottomOfTerminal()
-        if ( getbufvar(bufname("%"), "&buftype", "NONE") != "terminal" ) 
-                \ || (line('w$') >= line('$'))
-            call EnterInsertAfterCursor()
-        endif
-    endfunction
-
-" Deletes all unmodified hidden buffers
-    function! DeleteHiddenBuffers()
-      let tpbl=[]
-      let closed = 0
-      call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
-      for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
-        if getbufvar(buf, '&mod') == 0
-          silent execute 'bwipeout!' buf
-          let closed += 1
-        endif
-      endfor
-      echo "Closed ".closed." hidden buffers"
-    endfunction
-
 " Overriding Goyo plugin's enter/exit functions
     function! s:goyo_enter()
         let g:writingmode=1
@@ -134,39 +68,6 @@ call InstallPlugins(plugins, disabled_plugins)
             endif
         call LoadColors()
     endfunction
-
-" Opening last session if no arguments when vim is opened
-    function! s:load_session_if_no_args()
-        if argc() == 0 && !exists("s:std_in")
-            if filereadable(expand('~/.vim/lastsession.vim'))
-                execute 'silent source ~/.vim/lastsession.vim'
-                let s:should_save_session = 1
-            endif
-        else
-            let s:should_save_session = 0
-        endif
-    endfunction
-    function! s:save_session_if_flag_set()
-      if s:should_save_session == 1
-        let sessionoptions = &sessionoptions
-        try
-            set sessionoptions-=options
-            set sessionoptions+=tabpages
-            execute 'mksession! ~/.vim/lastsession.vim'
-        finally
-            let &sessionoptions = sessionoptions
-        endtry
-      endif
-    endfunction
-
-
-
-
-
-
-
-
-
 
 " =====================================
 " SETTINGS:
@@ -230,11 +131,11 @@ call InstallPlugins(plugins, disabled_plugins)
         autocmd! User GoyoEnter nested call <SID>goyo_enter()
         autocmd! User GoyoLeave nested call <SID>goyo_leave()
     " Setting up session management (autosave sessions)
-        let s:should_save_session = 0
+        let g:should_save_session = 0
         augroup autosession
             autocmd StdinReadPre * let s:std_in=1
-            autocmd VimEnter * nested call s:load_session_if_no_args()
-            autocmd FileWritePost,VimLeavePre * call s:save_session_if_flag_set()
+            autocmd VimEnter * nested call LoadSessionIfVimNotLaunchedWithArgs()
+            autocmd FileWritePost,VimLeavePre * call SaveSessionIfFlagSet()
         augroup END
     " Directory tree settings
     augroup dirvish_config
@@ -375,9 +276,9 @@ call InstallPlugins(plugins, disabled_plugins)
 " Command to save and generate .pdf from .md
     command PDF w | call WriteToPdf()
 " Start saving the session
-    command StartKeepingSession let s:should_save_session = 1 | echo "Using ':mksession' and ':source' to save and load session."
+    command StartKeepingSession let g:should_save_session = 1 | echo "Using ':mksession' and ':source' to save and load session."
 " Delete vim session and quit
-    command ClearSession let s:should_save_session = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
+    command ClearSession let g:should_save_session = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
 " Map coc.nvim available actions to commands to allow tab completion
     command LspDiagnosticList      CocList --normal diagnostics
     command LspDiagnosticInfo      call CocActionAsync("diagnosticInfo")

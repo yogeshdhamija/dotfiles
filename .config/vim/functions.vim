@@ -5,6 +5,18 @@ function! SourceFileIfExists(filepath) abort
     endtry
 endfunction
 
+function! DetectWsl() abort
+    return filereadable("/proc/version") && (match(readfile("/proc/version"), "Microsoft") != -1)
+endfunction
+
+function! DetectUbuntu() abort
+    return filereadable("/proc/version") && (match(readfile("/proc/version"), "Ubuntu") != -1) && (match(readfile("/proc/version"), "Microsoft") == -1)
+endfunction
+
+function! DetectIterm() abort
+    return $TERM_PROGRAM =~ "iTerm"
+endfunction
+
 function! InstallCocPlugins(info) abort
     if executable("yarn") && executable("node")
         if a:info.status == 'installed' || a:info.force
@@ -17,20 +29,20 @@ endfunction
 
 function! InstallPluginManagerIfNotInstalled() abort
     if empty(glob('~/.vim/autoload/plug.vim'))
-      silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-      autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
     endif
 endfunction
 
 function! InstallPlugins(plugins, disabled_plugins) abort
     call InstallPluginManagerIfNotInstalled()
     call plug#begin('~/.vim/plugged')
-        for plugin in a:plugins
-            if index(a:disabled_plugins, plugin[0], 0, 1) == -1
-                Plug plugin[0], plugin[1]
-            endif
-        endfor
+    for plugin in a:plugins
+        if index(a:disabled_plugins, plugin[0], 0, 1) == -1
+            Plug plugin[0], plugin[1]
+        endif
+    endfor
     call plug#end()
 endfunction
 
@@ -109,8 +121,8 @@ function! LoadColors() abort
     set showbreak=>>>\ 
     let g:indentLine_showFirstIndentLevel=1
     " Indentline conflicts with some other concealed characters.
-        " Workaround: conceal nothing on cursor line
-        let g:indentLine_concealcursor=''
+    " Workaround: conceal nothing on cursor line
+    let g:indentLine_concealcursor=''
     if has('nvim')
         autocmd TermOpen * setlocal nolist
         autocmd TermOpen * IndentLinesDisable
@@ -129,6 +141,78 @@ function! LoadColors() abort
     call EnableIndentLines()
     call winrestview(l:win_view)
 endfunction
+
+function! DisplayHelpAndSearch() abort
+    let helptext = ":set grepprg?\n    grepprg=".&grepprg."\n:pwd\n    ".getcwd()."\n\n"
+    call inputsave()
+    let searchstring = input(helptext . ":copen | silent grep! ")
+    call inputrestore()
+    if(len(searchstring) > 0)
+        exec "copen"
+        exec "silent grep! " . searchstring
+    endif
+endfunction
+
+function! WriteToPdf() abort
+    let current_dir = escape(expand("%:p:h"), ' ') . ";"
+    let listings_file = findfile(".listings-setup.tex", current_dir)
+    exe '!pandoc "%:p" --listings -H "' . listings_file . '" -o "%:p:r.pdf" -V geometry:margin=1in'
+endfunction
+
+function! EnterInsertAfterCursor() abort
+    if col('.') == col('$') - 1
+        startinsert!
+    else
+        startinsert
+    endif
+endfunction
+
+function! EnterInsertIfFileOrIfBottomOfTerminal() abort
+    if ( getbufvar(bufname("%"), "&buftype", "NONE") != "terminal" ) 
+                \ || (line('w$') >= line('$'))
+        call EnterInsertAfterCursor()
+    endif
+endfunction
+
+function! DeleteHiddenBuffers() abort
+    let tpbl=[]
+    let closed = 0
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        if getbufvar(buf, '&mod') == 0
+            silent execute 'bwipeout!' buf
+            let closed += 1
+        endif
+    endfor
+    echo "Closed ".closed." hidden buffers"
+endfunction
+
+function! LoadSessionIfVimNotLaunchedWithArgs() abort
+    if argc() == 0 && !exists("s:std_in")
+        if filereadable(expand('~/.vim/lastsession.vim'))
+            execute 'silent source ~/.vim/lastsession.vim'
+            let g:should_save_session = 1
+        endif
+    else
+        let g:should_save_session = 0
+    endif
+endfunction
+
+function! SaveSessionIfFlagSet() abort
+  if g:should_save_session == 1
+    let sessionoptions = &sessionoptions
+    try
+        set sessionoptions-=options
+        set sessionoptions+=tabpages
+        execute 'mksession! ~/.vim/lastsession.vim'
+    finally
+        let &sessionoptions = sessionoptions
+    endtry
+  endif
+endfunction
+
+
+
 
 
 
