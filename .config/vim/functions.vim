@@ -90,6 +90,43 @@ function! UnloadColors() abort
     call DisableIndentLines()
 endfunction
 
+function! LoadColors() abort
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+    if (DetectUbuntu() || DetectIterm() || DetectWsl())
+        set termguicolors
+    endif
+    tabdo windo set number
+    tabdo windo set signcolumn=yes
+    syntax on
+    tabdo windo set wrap
+    tabdo windo set breakindent
+    set listchars=tab:\|\ ,eol:$
+    tabdo windo set list
+    set noshowmode
+    set showbreak=>>>\ 
+    let g:indentLine_showFirstIndentLevel=1
+    " Indentline conflicts with some other concealed characters.
+        " Workaround: conceal nothing on cursor line
+        let g:indentLine_concealcursor=''
+    if has('nvim')
+        autocmd TermOpen * setlocal nolist
+        autocmd TermOpen * IndentLinesDisable
+        set inccommand=nosplit
+    endif
+    autocmd FileType json IndentLinesDisable
+    silent! colorscheme one                           " silent to suppress error before plugin installed
+    let g:lightline={'colorscheme': 'one'}
+    set background=dark
+    call EnableLightline()
+    highlight Comment guifg=#6C7380
+    highlight NonText guifg=#424956
+    highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
+    highlight Pmenu ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
+    highlight PmenuSel ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
+    call EnableIndentLines()
+endfunction
+
+
 
 
 
