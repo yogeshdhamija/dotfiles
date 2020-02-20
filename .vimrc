@@ -84,9 +84,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         xmap ga <Plug>(EasyAlign)
     " Start interactive EasyAlign for a motion/text object (e.g. gaip)
         nmap ga <Plug>(EasyAlign)
-    " Writing mode settings
-        autocmd! User GoyoEnter nested call EnterWritingModeGoyoOverride()
-        autocmd! User GoyoLeave nested call ExitWritingModeGoyoOverride()
     " Setting up session management (autosave sessions)
         let g:should_save_session = 0
         augroup autosession
@@ -183,10 +180,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         command CD echo ":cd %:p:h" | silent cd %:p:h
     " CP -> Copy absolute filePath to + register (system clipboard)
         command CP echo ":let @+ = expand('%:p')" | let @+ = expand("%:p")
-    " Writing mode
-        command WritingModeOn Goyo 80x85%
-        command WritingModeOff Goyo!
-        command WritingModeToggle Goyo
+    " Writing Mode for distraction free editing
+        command WritingModeOn call EnableWritingMode()
+        command WritingModeOff call DisableWritingMode()
     " Command to save and generate .pdf from .md
         command PDF w | call WriteToPdf()
     " Start saving the session

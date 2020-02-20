@@ -211,27 +211,31 @@ function! SaveSessionIfFlagSet() abort
     endif
 endfunction
 
-function! EnterWritingModeGoyoOverride() abort
+function! EnableWritingMode() abort
     let g:writingmode=1
     call LoadColors()
-    call UnloadColors()
-    setlocal syntax=off
-    setlocal spell
-    setlocal noshowmode
-    setlocal nocursorline
-    setlocal noshowcmd
-    let b:coc_suggest_disable = 1
-    Limelight
     set background=light
+    set syntax=off
+    set spell
+    set noshowmode
+    set noshowcmd
+    set nocursorline
+    let b:coc_suggest_disable = 1
+    set nonumber
+    set nolist
+    call DisableIndentLines()
+    call DisableLightline()
+    Goyo 80x85%
+    Limelight
 endfunction
-function! ExitWritingModeGoyoOverride() abort
+
+function! DisableWritingMode() abort
     let g:writingmode=0
-    set syntax<
-    set spell<
-    set showmode<
-    set showcmd<
-    set cursorline<
-    let b:coc_suggest_disable = 0
     Limelight!
+    Goyo!
+    set showcmd&
+    set nocursorline&
+    set spell&
     call LoadColors()
+    let b:coc_suggest_disable = 0
 endfunction
