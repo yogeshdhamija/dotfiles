@@ -10,7 +10,7 @@ let disabled_plugins = ["neoclide/coc.nvim"]
 
 **Common settings in** `~/.vimrc.local`:
 ```
-call LoadColors()
+ColorSchemeOn
 ```
 
 **Common settings in** `~/.shellrc.local`:

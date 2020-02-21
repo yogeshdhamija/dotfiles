@@ -183,6 +183,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " Writing Mode for distraction free editing
         command WritingModeOn call EnableWritingMode()
         command WritingModeOff call DisableWritingMode()
+    " Colorscheme on/off
+        command ColorSchemeOn call LoadColors()
+        command ColorSChemeOff call UnloadColors()
     " Command to save and generate .pdf from .md
         command PDF w | call WriteToPdf()
     " Start saving the session
