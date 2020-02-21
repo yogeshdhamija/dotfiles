@@ -118,7 +118,7 @@ function! LoadColors() abort
     set listchars=tab:\|\ ,eol:$
     tabdo windo set list
     set noshowmode
-    set showbreak=>>>\ 
+    set showbreak===>\|
     let g:indentLine_showFirstIndentLevel=1
     " Indentline conflicts with some other concealed characters.
     " Workaround: conceal nothing on cursor line
