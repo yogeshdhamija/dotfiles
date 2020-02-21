@@ -56,31 +56,13 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         set grepprg=ag\ --vimgrep\ --noheading\ --hidden
     endif
     let g:ackhighlight = 1
-    if has("autocmd")                               " Vim jump to the last position when reopening a file
-        au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-            \ | exe "normal! g`\"" | endif
-    endif
-    set hidden                                      " Needed for LSP
+    call EnableJumpToLastPositionWhenReOpeningFile()
+    set hidden
     let g:dirvish_mode = 2
     let g:dirvish_relative_paths = 1
     if DetectWsl()
-        let g:clipboard = {
-            \   'name': 'WslClipboard',
-            \   'copy': {
-            \      '+': 'clip.exe',
-            \      '*': 'clip.exe',
-            \    },
-            \   'paste': {
-            \      '+': 'powershell.exe -c Get-Clipboard',
-            \      '*': 'powershell.exe -c Get-Clipboard',
-            \   },
-            \   'cache_enabled': 0,
-            \ }
+        call SetClipboardForWslTerminal()
     endif
-    " Start interactive EasyAlign in visual mode (e.g. vipga)
-        xmap ga <Plug>(EasyAlign)
-    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-        nmap ga <Plug>(EasyAlign)
     " Setting up session management (autosave sessions)
         let g:should_save_session = 0
         augroup autosession
@@ -88,6 +70,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             autocmd VimEnter * nested call LoadSessionIfVimNotLaunchedWithArgs()
             autocmd FileWritePost,VimLeavePre * call SaveSessionIfFlagSet()
         augroup END
+
+" Remaps
     " Directory tree settings
         augroup dirvish_config
             autocmd!
@@ -95,6 +79,10 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             autocmd FileType dirvish
                         \ nnoremap <silent><buffer> p ddO<Esc>:r ! find "<C-R>"" -maxdepth 1 -print0 \| xargs -0 ls -Fd<CR>:silent! keeppatterns %s/\/\//\//g<CR>:silent! keeppatterns %s/[^a-zA-Z0-9\/]$//g<CR>:silent! keeppatterns g/^$/d<CR>:noh<CR>
         augroup END
+    " Start interactive EasyAlign in visual mode (e.g. vipga)
+        xmap ga <Plug>(EasyAlign)
+    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+        nmap ga <Plug>(EasyAlign)
     " Pressing * does not move cursor
         nnoremap * :let old=@"<CR>yiw:let @/="\\V\\<".escape(@", '/\')."\\>"<CR>:set hlsearch<CR>:let @"=old<CR>:echo "/".@/<CR>
     " Pressing * in visual mode searches for selection
@@ -108,8 +96,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             autocmd!
             autocmd TextYankPost * nnoremap <Esc> <Esc>:noh<CR>
         augroup END
-
-" Remaps
     " Remap left mouse release to put in insert mode
         nnoremap <LeftMouse> <C-\><C-n><LeftMouse>
         inoremap <LeftMouse> <C-\><C-n><LeftMouse>
