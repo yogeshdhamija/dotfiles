@@ -82,6 +82,10 @@ endfunction
 
 function! UnloadColors() abort
     let l:win_view = winsaveview()
+    if &term =~ "xterm\\|rxvt"
+      " reset cursor
+      silent !echo -ne "\033]112\007"
+    endif
     tabdo windo set number&
     tabdo windo set signcolumn&
     syntax on
@@ -106,6 +110,13 @@ endfunction
 
 function! LoadColors() abort
     let l:win_view = winsaveview()
+    if &term =~ "xterm\\|rxvt"
+      let &t_SI = "\<Esc>]12;white\x7"
+      let &t_EI = "\<Esc>]12;white\x7"
+      silent !echo -ne "\033]12;white\007"
+      " reset cursor when vim exits
+      autocmd VimLeave * silent !echo -ne "\033]112\007"
+    endif
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
     if (DetectUbuntu() || DetectIterm() || DetectWsl())
         set termguicolors
