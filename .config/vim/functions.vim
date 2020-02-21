@@ -140,7 +140,8 @@ function! LoadColors() abort
     highlight Pmenu ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
     highlight PmenuSel ctermbg=39 ctermfg=59 guibg=#61AFEF guifg=#5C6370
     call EnableIndentLines()
-    set guicursor=a:block-Cursor
+    set guicursor=n-c-v:block-Cursor
+    highlight Cursor guifg=black ctermfg=black
     call winrestview(l:win_view)
 endfunction
 
