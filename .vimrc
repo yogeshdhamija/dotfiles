@@ -49,9 +49,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     set undofile
     set undodir=~/.vim/undodir
     set nomodeline
-    if has('nvim')                                  " Terminal don't show line numbers
-        autocmd WinEnter,TermOpen term://* setlocal nonumber norelativenumber scl=no
-    endif
     let g:ack_use_cword_for_empty_search = 0
     if executable('rg')
         set grepprg=rg\ --vimgrep\ --no-heading\ --hidden
