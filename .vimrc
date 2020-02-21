@@ -22,6 +22,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['junegunn/limelight.vim', {}],
             \ ['justinmk/vim-dirvish', {}],
             \ ['leafgarland/typescript-vim', {}],
+            \ ['vheon/vim-cursormode', {}],
             \ ['neoclide/coc.nvim', {'do': function('InstallCocPlugins')}],
         \]
     endif
