@@ -168,7 +168,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         command WritingModeOff call DisableWritingMode()
     " Colorscheme on/off
         command ColorSchemeOn call LoadColors()
-        command ColorSChemeOff call UnloadColors()
+        command ColorSchemeOff call UnloadColors()
     " Command to save and generate .pdf from .md
         command PDF w | call WriteToPdf()
     " Start saving the session
