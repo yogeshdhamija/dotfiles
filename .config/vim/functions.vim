@@ -226,6 +226,7 @@ function! EnableWritingMode() abort
     call DisableIndentLines()
     call DisableLightline()
     Goyo 80x85%
+    set showbreak=
     Limelight
 endfunction
 
