@@ -59,7 +59,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     call EnableJumpToLastPositionWhenReOpeningFile()
     set hidden
     let g:dirvish_mode = 2
-    let g:dirvish_relative_paths = 1
+    let g:dirvish_relative_paths = 0
     if DetectWsl()
         call SetClipboardForWslTerminal()
     endif
@@ -78,6 +78,10 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             " Improve preview
             autocmd FileType dirvish
                         \ nnoremap <silent><buffer> p ddO<Esc>:r ! find "<C-R>"" -maxdepth 1 -print0 \| xargs -0 ls -Fd<CR>:silent! keeppatterns %s/\/\//\//g<CR>:silent! keeppatterns %s/[^a-zA-Z0-9\/]$//g<CR>:silent! keeppatterns g/^$/d<CR>:noh<CR>
+            autocmd FileType dirvish setlocal nowrap
+            autocmd FileType dirvish setlocal cole=0
+            autocmd FileType dirvish autocmd BufEnter <buffer> setlocal cole=0
+            autocmd FileType dirvish autocmd BufEnter <buffer> setlocal nowrap
         augroup END
     " Start interactive EasyAlign in visual mode (e.g. vipga)
         xmap ga <Plug>(EasyAlign)
@@ -127,7 +131,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             nnoremap \tl :terminal<CR><C-W>L
         endif
     " \d -> Directory listing
-        nmap \d :silent! cd %:p:h<CR>:if(expand('%'))<CR>Dirvish %<CR>else<CR>Dirvish<CR>endif<CR><CR>:echo ":Dirvish %"<CR>:silent! cd -<CR>R
+        nmap \d -
     " \f -> Find
         nnoremap \f :call DisplayHelpAndSearch()<CR>
     " \o -> Open
