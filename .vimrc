@@ -104,11 +104,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " Remap Control+C in visual mode to copy to system clipboard (and Command+C for some terminals)
         vnoremap <C-c> "+y
         vnoremap <D-c> "+y
-    " Remap Ctrl+V in insert + visual modes to paste from system clipboard (and Command+C for some terminals)
+    " Remap Ctrl+V in visual mode to paste from system clipboard (and Command+C for some terminals)
         vnoremap <C-v> "+p
-        inoremap <C-v> <C-r>+
         vnoremap <D-v> "+p
-        inoremap <D-v> <C-r>+
     " \t -> Terminal window
         " \th -> Terminal window, left (aka h)
         " \tj -> Terminal window, down (aka j)
