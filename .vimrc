@@ -10,6 +10,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['tpope/vim-repeat', {}],
             \ ['tpope/vim-commentary', {}],
             \ ['tpope/vim-surround', {}],
+            \ ['tpope/vim-abolish', {}],
             \ ['michaeljsmith/vim-indent-object', {}],
             \ ['rakr/vim-one', {}],
             \ ['itchyny/lightline.vim', {}],
