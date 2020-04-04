@@ -1,8 +1,6 @@
 set surround
 set commentary
 
-source ~/.vimrc
-
 nnoremap :bd<CR> :action CloseContent<CR>
 
 nnoremap * yiw:/<C-R>"<CR>
@@ -10,8 +8,8 @@ vnoremap * y:/<C-R>"<CR>
 
 nnoremap <Esc> <Esc>:noh<CR>:action HideSideWindows<CR>
 
-nnoremap zL 20zl
-nnoremap zH 20zh
+nnoremap zL 40zl
+nnoremap zH 40zh
 
 " \tl -> open Terminal on the right (L)
 nnoremap \tl :action ActivateTerminalToolWindow<CR>
