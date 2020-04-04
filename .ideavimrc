@@ -1,12 +1,35 @@
 set surround
+set commentary
 
 source ~/.vimrc
 
-map ;t :action ActivateTerminalToolWindow<CR>
-map ;ldr :action VimWindowSplitVertical<CR> :action GotoDeclaration<CR>
-map ;ld :action GotoDeclaration<CR>
-map ;r :action NextTab<CR>
-map ;bca :action CloseAllEditorsButActive<CR>
-map ;lm :action SearchEverywhere<CR>
-map ;o :action SearchEverywhere<CR>
-map ;f :action SearchEverywhere<CR>
+nnoremap :bd<CR> :action CloseContent<CR>
+
+nnoremap * yiw:/<C-R>"<CR>
+vnoremap * y:/<C-R>"<CR>
+
+nnoremap <Esc> <Esc>:noh<CR>:action HideSideWindows<CR>
+
+nnoremap zL 20zl
+nnoremap zH 20zh
+
+" \tl -> open Terminal on the right (L)
+nnoremap \tl :action ActivateTerminalToolWindow<CR>
+" \dh -> open Directory on the left (H)
+nnoremap \dh :action ActivateProjectToolWindow<CR>
+" \f -> Find in directory
+nnoremap \f :action FindInPath<CR>
+" \o -> Open file
+nnoremap \o :action SearchEverywhere<CR>
+" \gd -> Goto Definition
+nnoremap \gd :action GotoImplementation<CR>
+" \gr -> Goto References
+nnoremap \gr :action ShowUsages<CR>
+" \h -> Help
+nnoremap \h :action QuickJavaDoc<CR>:action ParameterInfo<CR>
+
+command! Rename action RenameElement
+command! REN Rename
+
+command! CloseHiddenBuffers action CloseAllEditorsButActive
+command! CLO CloseHiddenBuffers

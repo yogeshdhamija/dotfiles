@@ -133,6 +133,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     " \d -> Directory listing
         nmap \d -
+    " \dh -> Directory listing to the left (H)
+        nmap \dh <C-W>v<C-W>H-
     " \f -> Find
         nnoremap \f :call DisplayHelpAndSearch()<CR>
     " \o -> Open
@@ -141,27 +143,24 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         nnoremap \b :Buffers<CR>
     " \w -> list Windows
         nnoremap \w :Windows<CR>
-    " LSP Stuff
-        " \ld -> Lsp go-to-Definition
-            nnoremap \ld :LspJumpDefinition<CR>
-        " \ldl -> Lsp go-to-Definition in right (aka L) split
-            nnoremap \ldl :vsplit<CR> :LspJumpDefinition<CR>
-        " \lr -> Lsp jump to References
-            nnoremap \lr :LspJumpReferences<CR>
-        " \lrl -> Lsp jump to References in right (aka L) split
-            nnoremap \lrl :vsplit<CR> :LspJumpReferences<CR>
-        " \lw -> Lsp what's Wrong list
-            nnoremap \lw :LspDiagnosticList<CR>
-        " \lwl -> Lsp what's Wrong List
-            nnoremap \lwl :LspDiagnosticList<CR>
-        " \lwh -> Lsp what's Wrong List
-            nnoremap \lwh :LspDiagnosticInfo<CR>
-        " \lh -> Lsp Help<CR>
-            nnoremap \lh :LspHover<CR>
+    " \gd -> Goto Definition
+        nnoremap \gd :LspJumpDefinition<CR>
+    " \gdl -> Goto Definition in right (aka L) split
+        nnoremap \gdl :vsplit<CR> :LspJumpDefinition<CR>
+    " \gr -> Goto References
+        nnoremap \gr :LspJumpReferences<CR>
+    " \grl -> Goto References in right (aka L) split
+        nnoremap \grl :vsplit<CR> :LspJumpReferences<CR>
+    " \lw -> Lsp what's Wrong list
+        nnoremap \lw :LspDiagnosticList<CR>
+    " \lwl -> Lsp what's Wrong List
+        nnoremap \lwl :LspDiagnosticList<CR>
+    " \lwh -> Lsp what's Wrong List
+        nnoremap \lwh :LspDiagnosticInfo<CR>
+    " \h -> Help
+        nnoremap \h :LspHover<CR>
 
 " Commands
-    " CAB -> Close All Buffers
-        command CloseHiddenBuffers call DeleteHiddenBuffers()
     " CD -> Change Directory to current open file
         command CD echo ":cd %:p:h" | silent cd %:p:h
     " CP -> Copy absolute filePath to + register (system clipboard)
@@ -178,6 +177,11 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         command StartKeepingSession let g:should_save_session = 1 | echo "Using ':mksession' and ':source' to save and load session."
     " Delete vim session and quit
         command ClearSession let g:should_save_session = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
+    " Often used stuff
+        command Rename call CocActionAsync("rename")
+        command REN Rename
+        command CloseHiddenBuffers call DeleteHiddenBuffers()
+        command CLO CloseHiddenBuffers
     " Map coc.nvim available actions to commands to allow tab completion
         command LspDiagnosticList      CocList --normal diagnostics
         command LspDiagnosticInfo      call CocActionAsync("diagnosticInfo")
