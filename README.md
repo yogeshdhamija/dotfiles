@@ -4,8 +4,15 @@
 
 **Common settings in** `~/.vimrc.local.loadbefore`:
 ```
-let plugins = ["these_plugins_will/override_the_defaults"]
+let plugins = [
+        \["these_plugins_will/override_the_defaults", {}],
+    \]
+let added_plugins = [
+        \["these_plugins_will/be_added_to_the_defaults", {}],
+    \]
 let disabled_plugins = ["neoclide/coc.nvim"]
+let coc_plugins = ["these_will_override_defaults"]
+let added_coc_plugins = ["these_will_be_added_to_defaults"]
 ```
 
 **Common settings in** `~/.vimrc.local`:

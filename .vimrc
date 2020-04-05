@@ -16,6 +16,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     else
         let g:coc_global_extensions = coc_plugins
     endif
+    if exists("added_coc_plugins")
+        let g:coc_global_extensions = g:coc_global_extensions + added_coc_plugins
+    endif
     if !exists("plugins")
         let plugins = [ 
             \ ['editorconfig/editorconfig-vim', {}],
@@ -41,6 +44,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     endif
     if !exists("disabled_plugins")
         let disabled_plugins = []
+    endif
+    if exists("added_plugins")
+        let plugins = plugins + added_plugins
     endif
     call InstallPlugins(plugins, disabled_plugins)
 
