@@ -17,16 +17,6 @@ function! DetectIterm() abort
     return $TERM_PROGRAM =~ "iTerm"
 endfunction
 
-function! InstallCocPlugins(info) abort
-    if executable("yarn") && executable("node")
-        if a:info.status == 'installed' || a:info.force
-            let s:extensions = ['coc-marketplace', 'coc-vimlsp', 'coc-gocode', 'coc-json', 'coc-python', 'coc-pyls', 'coc-tsserver']
-            call coc#util#install()
-            call coc#util#install_extension(s:extensions)
-        endif
-    endif
-endfunction
-
 function! InstallPluginManagerIfNotInstalled() abort
     if empty(glob('~/.vim/autoload/plug.vim'))
         silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
