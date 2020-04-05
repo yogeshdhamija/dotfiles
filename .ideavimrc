@@ -11,10 +11,10 @@ nnoremap <Esc> <Esc>:noh<CR>:action HideSideWindows<CR>
 nnoremap zL 40zl
 nnoremap zH 40zh
 
-" \tl -> open Terminal on the right (L)
-nnoremap \tl :action ActivateTerminalToolWindow<CR>
-" \dh -> open Directory on the left (H)
-nnoremap \dh :action ActivateProjectToolWindow<CR>
+" \t -> open Terminal
+nnoremap \t :action ActivateTerminalToolWindow<CR>
+" \d -> open Directory
+nnoremap \d :action ActivateProjectToolWindow<CR>
 " \f -> Find in directory
 nnoremap \f :action FindInPath<CR>
 " \o -> Open file

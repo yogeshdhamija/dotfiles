@@ -142,9 +142,15 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             nnoremap \tl :terminal<CR><C-W>L
         endif
     " \d -> Directory listing
+        " \dh -> Directory listing, left (aka h)
+        " \dj -> Directory listing, down (aka j)
+        " \dk -> Directory listing, up (aka k)
+        " \dl -> Directory listing, right (aka l)
         nmap \d -
-    " \dh -> Directory listing to the left (H)
         nmap \dh <C-W>v<C-W>H-
+        nmap \dl <C-W>v<C-W>L-
+        nmap \dk <C-W>s<C-W>K-
+        nmap \dj <C-W>s<C-W>J-
     " \f -> Find
         nnoremap \f :call DisplayHelpAndSearch()<CR>
     " \o -> Open
