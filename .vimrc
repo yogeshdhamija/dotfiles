@@ -4,7 +4,15 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 
 " Plugins
     if !exists("coc_plugins")
-        let g:coc_global_extensions = ['coc-marketplace', 'coc-vimlsp', 'coc-gocode', 'coc-json', 'coc-python', 'coc-pyls', 'coc-tsserver']
+        let g:coc_global_extensions = [
+            \ 'coc-marketplace', 
+            \ 'coc-vimlsp', 
+            \ 'coc-gocode', 
+            \ 'coc-json', 
+            \ 'coc-python', 
+            \ 'coc-pyls', 
+            \ 'coc-tsserver'
+        \ ]
     else
         let g:coc_global_extensions = coc_plugins
     endif
@@ -29,7 +37,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['justinmk/vim-dirvish', {}],
             \ ['leafgarland/typescript-vim', {}],
             \ ['neoclide/coc.nvim', {'branch': 'release'}],
-        \]
+        \ ]
     endif
     if !exists("disabled_plugins")
         let disabled_plugins = []
