@@ -63,17 +63,14 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     set undofile
     set undodir=~/.vim/undodir
     set nomodeline
-    let g:ack_use_cword_for_empty_search = 0
     if executable('rg')
         set grepprg=rg\ --vimgrep\ --no-heading\ --hidden
     elseif executable('ag')
         set grepprg=ag\ --vimgrep\ --noheading\ --hidden
     endif
-    let g:ackhighlight = 1
     call EnableJumpToLastPositionWhenReOpeningFile()
     set hidden
     let g:dirvish_mode = 2
-    let g:dirvish_relative_paths = 0
     if DetectWsl()
         call SetClipboardForWslTerminal()
     endif
