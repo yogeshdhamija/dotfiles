@@ -166,21 +166,15 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " \w -> list Windows
         nnoremap \w :Windows<CR>
     " \gd -> Goto Definition
-        nnoremap \gd :LspJumpDefinition<CR>
+        nnoremap \gd :call CocActionAsync("jumpDefinition")<CR>
     " \gdl -> Goto Definition in right (aka L) split
-        nnoremap \gdl :vsplit<CR> :LspJumpDefinition<CR>
+        nnoremap \gdl :vsplit<CR> :call CocActionAsync("jumpDefinition")<CR>
     " \gr -> Goto References
-        nnoremap \gr :LspJumpReferences<CR>
+        nnoremap \gr :call CocActionAsync("jumpReferences")<CR>
     " \grl -> Goto References in right (aka L) split
-        nnoremap \grl :vsplit<CR> :LspJumpReferences<CR>
-    " \lw -> Lsp what's Wrong list
-        nnoremap \lw :LspDiagnosticList<CR>
-    " \lwl -> Lsp what's Wrong List
-        nnoremap \lwl :LspDiagnosticList<CR>
-    " \lwh -> Lsp what's Wrong List
-        nnoremap \lwh :LspDiagnosticInfo<CR>
+        nnoremap \grl :vsplit<CR> :call CocActionAsync("jumpReferences")<CR>
     " \h -> Help
-        nnoremap \h :LspHover<CR>
+        nnoremap \h :call CocActionAsync("doHover")<CR>
 
 " Commands
     " CD -> Change Directory to current open file
@@ -199,25 +193,19 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         command StartKeepingSession let g:should_save_session = 1 | echo "Using ':mksession' and ':source' to save and load session."
     " Delete vim session and quit
         command ClearSession let g:should_save_session = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
-    " Often used stuff
+    " Often used LSP stuff
         command Rename call CocActionAsync("rename")
         command REN Rename
+
         command CloseHiddenBuffers call DeleteHiddenBuffers()
         command CLO CloseHiddenBuffers
-    " Map coc.nvim available actions to commands to allow tab completion
-        command LspDiagnosticList      CocList --normal diagnostics
-        command LspDiagnosticInfo      call CocActionAsync("diagnosticInfo")
-        command LspJumpDefinition      call CocActionAsync("jumpDefinition")
-        command LspJumpDeclaration     call CocActionAsync("jumpDeclaration")
-        command LspJumpImplementation  call CocActionAsync("jumpImplementation")
-        command LspJumpTypeDefinition  call CocActionAsync("jumpTypeDefinition")
-        command LspJumpReferences      call CocActionAsync("jumpReferences")
-        command LspHover               call CocActionAsync("doHover")
-        command LspRename              call CocActionAsync("rename")
-        command LspSymbols             CocList --interactive symbols
-        command LspFormat              call CocActionAsync("format")
-        command LspCodeAction          call CocActionAsync("codeAction")
-        command LspCodeLensAction      call CocActionAsync("codeLensAction")
-        command LspQuickfixes          call CocActionAsync("quickfixes")
+
+        command Format call CocActionAsync("format")
+        command FOR Format
+
+        command Error call CocActionAsync("diagnosticInfo")
+        command Errors CocList --normal diagnostics
+        command ERRS Errors
+        command ERR Error
 
 call SourceFileIfExists("~/.vimrc.local")
