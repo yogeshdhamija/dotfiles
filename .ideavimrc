@@ -1,6 +1,9 @@
 set surround
 set commentary
 
+nnoremap <C-O> :action Back<CR>
+nnoremap <C-I> :action Forward<CR>
+
 nnoremap :bd<CR> :action CloseContent<CR>
 
 nnoremap * yiw:/<C-R>"<CR>
