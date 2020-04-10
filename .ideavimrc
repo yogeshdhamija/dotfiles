@@ -25,8 +25,8 @@ nnoremap \gd :action GotoImplementation<CR>
 nnoremap \gr :action ShowUsages<CR>
 " \h -> Help
 nnoremap \h :action QuickJavaDoc<CR>:action ParameterInfo<CR>
-" \b -> Buffers (searcheverywhere is closest I could get)
-nnoremap \b :action SearchEverywhere<CR>
+" \b -> Buffers
+nnoremap \b :action Switcher<CR>
 
 command! Rename action RenameElement
 command! REN Rename
