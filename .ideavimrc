@@ -25,9 +25,19 @@ nnoremap \gd :action GotoImplementation<CR>
 nnoremap \gr :action ShowUsages<CR>
 " \h -> Help
 nnoremap \h :action QuickJavaDoc<CR>:action ParameterInfo<CR>
+" \b -> Buffers (searcheverywhere is closest I could get)
+nnoremap \b :action SearchEverywhere<CR>
 
 command! Rename action RenameElement
 command! REN Rename
 
 command! CloseHiddenBuffers action CloseAllEditorsButActive
 command! CLO CloseHiddenBuffers
+
+command! Format action ReformatCode
+command! FOR Format
+
+command! Errors action GoToErrorGroup
+command! ERRS Errors
+command! Error action ShowErrorDescription
+command! ERR Error
