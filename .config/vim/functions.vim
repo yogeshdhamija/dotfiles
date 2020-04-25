@@ -74,6 +74,8 @@ function! UnloadColors() abort
     let l:win_view = winsaveview()
     tabdo windo set number&
     tabdo windo set signcolumn&
+    tabdo windo set foldmethod&
+    set foldlevelstart&
     syntax on
     if has('nvim')
         set inccommand&
@@ -100,6 +102,8 @@ function! LoadColors() abort
     if (DetectUbuntu() || DetectIterm() || DetectWsl())
         set termguicolors
     endif
+    tabdo windo set foldmethod=indent
+    set foldlevelstart=99
     tabdo windo set number
     tabdo windo set signcolumn=yes
     syntax on
