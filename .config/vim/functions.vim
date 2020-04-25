@@ -70,12 +70,22 @@ function! EnableLightline() abort
     augroup END
 endfunction
 
+function! CustomFoldText() abort
+    let indent_level = indent(v:foldstart)
+    let indent = repeat(' ', indent_level - 4)
+    let text = substitute(foldtext(), "\+-*", "", "")
+    let text = substitute(text, '^\s*\([^:]*\):\(.*\)', '\2 ... (+\1)', "")
+    return indent . '+-- ' . text
+endfunction
+
 function! UnloadColors() abort
     let l:win_view = winsaveview()
     tabdo windo set number&
     tabdo windo set signcolumn&
     tabdo windo set foldmethod&
     tabdo windo set foldignore&
+    tabdo windo set foldtext&
+    tabdo windo set fillchars&
     set foldlevelstart&
     syntax on
     if has('nvim')
@@ -106,6 +116,8 @@ function! LoadColors() abort
     tabdo windo set foldmethod=indent
     tabdo windo set foldignore=
     set foldlevelstart=99
+    tabdo windo set foldtext=CustomFoldText()
+    tabdo windo set fillchars=fold:\ 
     tabdo windo set number
     tabdo windo set signcolumn=yes
     syntax on
