@@ -26,11 +26,11 @@ declare -a NAMES=(
     "node"
 )
 declare -a ADDITIONAL1=(
-    "The Bettitor Editor"
-    "Nicer Shell"
-    "Grep, vim uses it for find-in-dir"
+    "Text Editor"
+    "Shell"
+    "Grep"
     "JSON Parsing CLI tool"
-    "YAML and XML Parsing CLI tool, it requires jq to be installed"
+    "YAML and XML Parsing CLI tool"
     "Document converter, vim uses it for .md -> .pdf"
     "Document converter, vim uses it for .md -> .pdf"
     "JS runtime, vim uses it to install coc.nvim plugin (https://github.com/neoclide/coc.nvim), used for LSP"
