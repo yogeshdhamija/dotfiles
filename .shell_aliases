@@ -28,4 +28,4 @@ alias "config-update-vim"="cd ~ && mv ~/.vim/lastsession.vim ~/.vim/lastsession.
 alias "config-update-fzf"="cd ~ && .fzf/install --all && cd -"
 
 # config-update: Pull from repo, check if any submodule updates exist, show status
-alias "config-update"="config-update-repo; config-update-vim; config-update-fzf"
+alias "config-update"="config-update-repo; config-update-vim; config-update-fzf; config-check"
