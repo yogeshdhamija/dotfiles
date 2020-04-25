@@ -75,6 +75,7 @@ function! UnloadColors() abort
     tabdo windo set number&
     tabdo windo set signcolumn&
     tabdo windo set foldmethod&
+    tabdo windo set foldignore&
     set foldlevelstart&
     syntax on
     if has('nvim')
@@ -103,6 +104,7 @@ function! LoadColors() abort
         set termguicolors
     endif
     tabdo windo set foldmethod=indent
+    tabdo windo set foldignore=
     set foldlevelstart=99
     tabdo windo set number
     tabdo windo set signcolumn=yes
