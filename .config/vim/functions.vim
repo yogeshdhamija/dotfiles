@@ -73,8 +73,8 @@ endfunction
 function! CustomFoldText() abort
     let indent_level = indent(v:foldstart)
     let indent = repeat(' ', indent_level - 4)
-    let text = substitute(foldtext(), "\+-*", "", "")
-    let text = substitute(text, '^\s*\([^:]*\):\(.*\)', '\2 --+\1', "")
+    let text = substitute(foldtext(), "^\s*\+-*", "", "")
+    let text = substitute(text, '^\s*\([^:]*\):\(.*\)$', '\2 --+ (\1)', "")
     return indent . '+--' . text
 endfunction
 
