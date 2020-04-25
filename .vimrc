@@ -73,6 +73,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         set grepprg=rg\ --vimgrep\ --no-heading\ --hidden
     elseif executable('ag')
         set grepprg=ag\ --vimgrep\ --noheading\ --hidden
+    else
+        set grepprg=grep\ -nR
     endif
     call EnableJumpToLastPositionWhenReOpeningFile()
     set hidden
