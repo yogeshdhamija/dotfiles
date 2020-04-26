@@ -70,9 +70,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     set undodir=~/.vim/undodir
     set nomodeline
     if executable('rg')
-        set grepprg=rg\ --vimgrep\ --no-heading\ --hidden
+        set grepprg=rg\ --follow\ --vimgrep\ --no-heading\ --hidden
     elseif executable('ag')
-        set grepprg=ag\ --vimgrep\ --noheading\ --hidden
+        set grepprg=ag\ --follow\ --vimgrep\ --noheading\ --hidden
     else
         set grepprg=grep\ -nR
     endif
