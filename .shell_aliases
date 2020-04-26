@@ -10,9 +10,10 @@ alias "git-log"="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yel
 # Config pretty git log
 alias "config-log"="config log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit "
 
-# I am Vim
+# Vim aliases
 alias ":q"="exit"
 alias ":e"="vim"
+alias ":ew"="vim +WritingModeOn"
 command -v nvim > /dev/null && alias "vim"="nvim"
 
 # Check config status
