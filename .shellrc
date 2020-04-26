@@ -10,8 +10,8 @@ fi
 export LESS="-RXF"
 
 # Set up FZF to use silver searcher (ag)
-command -v ag > /dev/null && export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
-command -v ag > /dev/null && export FZF_CTRL_T_COMMAND='ag --hidden --ignore .git -g ""'
+command -v ag > /dev/null && export FZF_DEFAULT_COMMAND='ag --follow --hidden --ignore .git -g ""'
+command -v ag > /dev/null && export FZF_CTRL_T_COMMAND='ag --follow --hidden --ignore .git -g ""'
 # Set up FZF to use ripgrep (rg)
-command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --hidden --files'
-command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --hidden --files'
+command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --follow --hidden --files'
+command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --follow --hidden --files'
