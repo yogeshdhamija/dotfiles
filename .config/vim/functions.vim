@@ -235,6 +235,10 @@ function! EnableWritingMode() abort
     Goyo 80x85%
     set showbreak=
     Limelight
+    cabbrev q :call DisableWritingMode()<CR>
+    cabbrev qa :call DisableWritingMode()<CR>
+    cabbrev wq :w<CR>:call DisableWritingMode()<CR>
+    cabbrev wqa :wa<CR>:call DisableWritingMode()<CR>
 endfunction
 
 function! DisableWritingMode() abort
@@ -246,6 +250,10 @@ function! DisableWritingMode() abort
     set spell&
     call LoadColors()
     let b:coc_suggest_disable = 0
+    cunabbrev q
+    cunabbrev qa
+    cunabbrev wq
+    cunabbrev wqa
 endfunction
 
 function! EnableJumpToLastPositionWhenReOpeningFile() abort
