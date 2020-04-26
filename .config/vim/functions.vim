@@ -237,8 +237,12 @@ function! EnableWritingMode() abort
     Limelight
     cabbrev q :call DisableWritingMode()<CR>
     cabbrev qa :call DisableWritingMode()<CR>
+    nnoremap ZQ :call DisableWritingMode()<CR>
     cabbrev wq :w<CR>:call DisableWritingMode()<CR>
+    cabbrev x :w<CR>:call DisableWritingMode()<CR>
+    nnoremap ZZ :w<CR>:call DisableWritingMode()<CR>
     cabbrev wqa :wa<CR>:call DisableWritingMode()<CR>
+    cabbrev xa :wa<CR>:call DisableWritingMode()<CR>
 endfunction
 
 function! DisableWritingMode() abort
@@ -252,8 +256,12 @@ function! DisableWritingMode() abort
     let b:coc_suggest_disable = 0
     cunabbrev q
     cunabbrev qa
+    nunmap ZQ
     cunabbrev wq
+    cunabbrev x
+    nunmap ZZ
     cunabbrev wqa
+    cunabbrev xa
 endfunction
 
 function! EnableJumpToLastPositionWhenReOpeningFile() abort
