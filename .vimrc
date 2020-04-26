@@ -79,6 +79,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     call EnableJumpToLastPositionWhenReOpeningFile()
     set hidden
     let g:dirvish_mode = 2
+    let g:dirvish_relative_paths = 1
     if DetectWsl()
         call SetClipboardForWslTerminal()
     endif
