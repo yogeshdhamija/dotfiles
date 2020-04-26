@@ -235,14 +235,14 @@ function! EnableWritingMode() abort
     Goyo 80x85%
     set showbreak=
     Limelight
-    cabbrev q :call DisableWritingMode()<CR>
-    cabbrev qa :call DisableWritingMode()<CR>
-    nnoremap ZQ :call DisableWritingMode()<CR>
-    cabbrev wq :w<CR>:call DisableWritingMode()<CR>
-    cabbrev x :w<CR>:call DisableWritingMode()<CR>
-    nnoremap ZZ :w<CR>:call DisableWritingMode()<CR>
-    cabbrev wqa :wa<CR>:call DisableWritingMode()<CR>
-    cabbrev xa :wa<CR>:call DisableWritingMode()<CR>
+    cabbrev  q   :WritingModeOff<CR>:q<CR>:WritingModeOn<CR>
+    cabbrev  qa  :WritingModeOff<CR>:qa<CR>:WritingModeOn<CR>
+    nnoremap ZQ  :WritingModeOff<CR>ZQ:WritingModeOn<CR>
+    cabbrev  wq  :WritingModeOff<CR>:wq<CR>:WritingModeOn<CR>
+    cabbrev  x   :WritingModeOff<CR>:x<CR>:WritingModeOn<CR>
+    nnoremap ZZ  :WritingModeOff<CR>ZZ:WritingModeOn<CR>
+    cabbrev  wqa :WritingModeOff<CR>:wqa<CR>:WritingModeOn<CR>
+    cabbrev  xa  :WritingModeOff<CR>:xa<CR>:WritingModeOn<CR>
 endfunction
 
 function! DisableWritingMode() abort
@@ -256,10 +256,10 @@ function! DisableWritingMode() abort
     let b:coc_suggest_disable = 0
     cunabbrev q
     cunabbrev qa
-    nunmap ZQ
+    nunmap    ZQ
     cunabbrev wq
     cunabbrev x
-    nunmap ZZ
+    nunmap    ZZ
     cunabbrev wqa
     cunabbrev xa
 endfunction
