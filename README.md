@@ -86,3 +86,7 @@ Primarily, this repo configures the terminal and vim/neovim.
     - This also applies to other stuff like `config commit -a`.
     - If you do this accidentally, you'll have to `Ctrl+C` out of it while it's stuck, or unstage all the files you added if it somehow succeeds.
 
+## My favorite colors
+- Dark background: `#20242C`
+- Light background: `#FAFAFA`
+- Cursor color: `#8D8F93`
