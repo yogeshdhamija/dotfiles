@@ -90,6 +90,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             autocmd VimEnter * nested call LoadSessionIfVimNotLaunchedWithArgs()
             autocmd FileWritePost,VimLeavePre * call SaveSessionIfFlagSet()
         augroup END
+    call LoadColors()
 
 " Remaps
     " Directory tree settings
