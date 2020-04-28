@@ -13,11 +13,13 @@ let added_plugins = [
 let disabled_plugins = ["neoclide/coc.nvim"]
 let coc_plugins = ["these_will_override_defaults"]
 let added_coc_plugins = ["these_will_be_added_to_defaults"]
+
+let g:is_termguicolors_supported = 1
 ```
 
 **Common settings in** `~/.vimrc.local`:
 ```
-ColorSchemeOn
+ColorSchemeOff
 ```
 
 **Common settings in** `~/.shellrc.local`:

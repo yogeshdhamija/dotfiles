@@ -110,7 +110,8 @@ endfunction
 function! LoadColors() abort
     let l:win_view = winsaveview()
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-    if (DetectUbuntu() || DetectIterm() || DetectWsl())
+    if (DetectUbuntu() || DetectIterm() || DetectWsl() || 
+                \ (exists("g:is_termguicolors_supported") && g:is_termguicolors_supported == 1))
         set termguicolors
     endif
     tabdo windo set foldmethod=indent
