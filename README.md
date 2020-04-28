@@ -31,9 +31,9 @@ export PATH="/add_to_path/:$PATH"
 To clone this repo into your home directory:
 
 ```bash
-export REPO_URL=git@github.com:ydhamija96/config.git
+export CONFIG_REPO_URL=git@github.com:ydhamija96/config.git
 # OR
-export REPO_URL=https://github.com/ydhamija96/config.git
+export CONFIG_REPO_URL=https://github.com/ydhamija96/config.git
 
 bash <(curl -Ls https://gist.githubusercontent.com/ydhamija96/c65eab14d4bfc62f2d3dd490b7f082d5/raw/8fafb174bab823f279eb882b28e67718b1ae9213/run.sh)
 ```
