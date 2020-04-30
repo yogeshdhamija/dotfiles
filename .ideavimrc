@@ -31,6 +31,9 @@ nnoremap \h :action QuickJavaDoc<CR>:action ParameterInfo<CR>
 " \b -> Buffers
 nnoremap \b :action Switcher<CR>
 
+command! Actions action ShowIntentionActions
+command! ACT Actions
+
 command! Rename action RenameElement
 command! REN Rename
 
