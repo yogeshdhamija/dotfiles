@@ -198,6 +198,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " Delete vim session and quit
         command ClearSession let g:should_save_session = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
     " Often used LSP stuff
+        command -range Actions <line1>,<line2>CocAction
+        command -range ACT <line1>,<line2>Actions
+        
         command Rename call CocActionAsync("rename")
         command REN Rename
 
