@@ -38,8 +38,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['junegunn/goyo.vim', {}],
             \ ['junegunn/limelight.vim', {}],
             \ ['justinmk/vim-dirvish', {}],
-            \ ['leafgarland/typescript-vim', {}],
             \ ['neoclide/coc.nvim', {'branch': 'release'}],
+            \ ['leafgarland/typescript-vim', {}],
+            \ ['uiiaoo/java-syntax.vim', {}],
         \ ]
     endif
     if !exists("disabled_plugins")
