@@ -51,10 +51,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     endif
     call InstallPlugins(plugins, disabled_plugins)
 
-" Preserve default look
-    call DisableLightline()
-    call DisableIndentLines()
-
 " General Settings
     set mouse=a
     set ignorecase
@@ -92,6 +88,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             autocmd FileWritePost,VimLeavePre * call SaveSessionIfFlagSet()
         augroup END
     call LoadColors()
+    " uiiaoo/java-syntax.vim -- Remove loud variable highlights
+        highlight link JavaIdentifier NONE
+
 
 " Remaps
     " Directory tree settings
