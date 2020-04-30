@@ -86,5 +86,5 @@ Primarily, this repo configures the terminal and vim/neovim.
 - Dark background: `#20242C`
 - Light background: `#FAFAFA`
 - Cursor color: `#8D8F93`
-- Red accent: `#B86F67`
-- Blue accent: `#2b608f`
+- Red accent: `#e06c75`
+- Blue accent: `#61afef`
