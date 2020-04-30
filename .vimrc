@@ -182,37 +182,37 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 
 " Commands
     " CD -> Change Directory to current open file
-        command CD echo ":cd %:p:h" | silent cd %:p:h
+        command! CD echo ":cd %:p:h" | silent cd %:p:h
     " CP -> Copy absolute filePath to + register (system clipboard)
-        command CP echo ":let @+ = expand('%:p')" | let @+ = expand("%:p")
+        command! CP echo ":let @+ = expand('%:p')" | let @+ = expand("%:p")
     " Writing Mode for distraction free editing
-        command WritingModeOn call EnableWritingMode()
-        command WritingModeOff call DisableWritingMode()
+        command! WritingModeOn call EnableWritingMode()
+        command! WritingModeOff call DisableWritingMode()
     " Colorscheme on/off
-        command ColorSchemeOn call LoadColors()
-        command ColorSchemeOff call UnloadColors()
+        command! ColorSchemeOn call LoadColors()
+        command! ColorSchemeOff call UnloadColors()
     " Command to save and generate .pdf from .md
-        command PDF w | call WriteToPdf()
+        command! PDF w | call WriteToPdf()
     " Start saving the session
-        command StartKeepingSession let g:should_save_session = 1 | echo "Using ':mksession' and ':source' to save and load session."
+        command! StartKeepingSession let g:should_save_session = 1 | echo "Using ':mksession' and ':source' to save and load session."
     " Delete vim session and quit
-        command ClearSession let g:should_save_session = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
+        command! ClearSession let g:should_save_session = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
     " Often used LSP stuff
-        command -range Actions <line1>,<line2>CocAction
-        command -range ACT <line1>,<line2>Actions
+        command! -range Actions <line1>,<line2>CocAction
+        command! -range ACT <line1>,<line2>Actions
         
-        command Rename call CocActionAsync("rename")
-        command REN Rename
+        command! Rename call CocActionAsync("rename")
+        command! REN Rename
 
-        command CloseHiddenBuffers call DeleteHiddenBuffers()
-        command CLO CloseHiddenBuffers
+        command! CloseHiddenBuffers call DeleteHiddenBuffers()
+        command! CLO CloseHiddenBuffers
 
-        command Format call CocActionAsync("format")
-        command FOR Format
+        command! Format call CocActionAsync("format")
+        command! FOR Format
 
-        command Error call CocActionAsync("diagnosticInfo")
-        command Errors CocList --normal diagnostics
-        command ERRS Errors
-        command ERR Error
+        command! Error call CocActionAsync("diagnosticInfo")
+        command! Errors CocList --normal diagnostics
+        command! ERRS Errors
+        command! ERR Error
 
 call SourceFileIfExists("~/.vimrc.local")

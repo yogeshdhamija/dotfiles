@@ -88,3 +88,4 @@ Primarily, this repo configures the terminal and vim/neovim.
 - Cursor color: `#8D8F93`
 - Red accent: `#e06c75`
 - Blue accent: `#61afef`
+- Green accent: `#98c379`
