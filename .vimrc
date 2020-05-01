@@ -207,8 +207,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         command! CloseHiddenBuffers call DeleteHiddenBuffers()
         command! CLO CloseHiddenBuffers
 
-        command! Format call CocActionAsync("format")
-        command! FOR Format
+        command! -range=% Format <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
+        command! -range=% FOR <line1>,<line2>Format
 
         command! Error call CocActionAsync("diagnosticInfo")
         command! Errors CocList --normal diagnostics
