@@ -146,6 +146,7 @@ function! LoadColors() abort
     highlight NonText guifg=#424956
     highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
     highlight Folded guifg=#7C8390 guibg=#232A32
+    highlight SignColumn guibg=#20242C
     call EnableIndentLines()
     call winrestview(l:win_view)
 endfunction
