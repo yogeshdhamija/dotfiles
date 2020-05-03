@@ -128,16 +128,10 @@ function! LoadColors() abort
     tabdo windo set list
     set noshowmode
     set showbreak===>\|
-    let g:indentLine_showFirstIndentLevel=1
-    " Indentline conflicts with some other concealed characters.
-    " Workaround: conceal nothing on cursor line
-    let g:indentLine_concealcursor=''
     if has('nvim')
-        autocmd WinEnter,TermOpen term://* IndentGuidesDisable
         autocmd WinEnter,TermOpen term://* setlocal nolist nonumber norelativenumber scl=no
         set inccommand=nosplit
     endif
-    autocmd FileType json IndentLinesDisable
     silent! colorscheme one                           " silent to suppress error before plugin installed
     let g:lightline={'colorscheme': 'one'}
     set background=dark
