@@ -29,8 +29,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['tpope/vim-abolish', {}],
             \ ['michaeljsmith/vim-indent-object', {}],
             \ ['rakr/vim-one', {}],
+            \ ['nathanaelkane/vim-indent-guides', {}],
             \ ['itchyny/lightline.vim', {}],
-            \ ['Yggdroot/indentLine', {}],
             \ ['tpope/vim-fugitive', {}],
             \ ['junegunn/fzf', {}],
             \ ['junegunn/fzf.vim', {}],
@@ -88,6 +88,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             autocmd FileWritePost,VimLeavePre * call SaveSessionIfFlagSet()
         augroup END
     call LoadColors()
+    let g:indent_guides_enable_on_vim_startup = 1
     " uiiaoo/java-syntax.vim -- Remove loud variable highlights
         highlight link JavaIdentifier NONE
 

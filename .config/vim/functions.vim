@@ -38,14 +38,14 @@ endfunction
 
 function! EnableIndentLines() abort
     if v:vim_did_enter
-        tabdo windo IndentLinesEnable
+        tabdo windo IndentGuidesEnable
     endif
     let g:indentLine_enabled=1
 endfunction
 
 function! DisableIndentLines() abort
     if v:vim_did_enter
-        tabdo windo IndentLinesDisable
+        tabdo windo IndentGuidesDisable
     endif
     let g:indentLine_enabled=0
 endfunction
@@ -147,6 +147,9 @@ function! LoadColors() abort
     highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
     highlight Folded guifg=#7C8390 guibg=#232A32
     highlight SignColumn guibg=#20242C
+    let g:indent_guides_color_change_percent = 3
+    let g:indent_guides_start_level = 2
+    let g:indent_guides_guide_size = 1
     call EnableIndentLines()
     call winrestview(l:win_view)
 endfunction
