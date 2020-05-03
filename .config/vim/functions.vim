@@ -133,7 +133,6 @@ function! LoadColors() abort
     " Workaround: conceal nothing on cursor line
     let g:indentLine_concealcursor=''
     if has('nvim')
-        autocmd WinEnter,TermOpen term://* IndentLinesDisable
         autocmd WinEnter,TermOpen term://* setlocal nolist nonumber norelativenumber scl=no
         set inccommand=nosplit
     endif
