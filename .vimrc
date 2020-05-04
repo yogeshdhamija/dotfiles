@@ -170,6 +170,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         nnoremap \b :Buffers<CR>
     " \w -> list Windows
         nnoremap \w :Windows<CR>
+    " \a -> code Action
+        nnoremap \a :Actions<CR>
+        vnoremap \a :'<,'>Actions<CR>
     " \gd -> Goto Definition
         nnoremap \gd :call CocActionAsync("jumpDefinition")<CR>
     " \gdl -> Goto Definition in right (aka L) split
@@ -201,7 +204,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " Often used LSP stuff
         command! -range Actions <line1>,<line2>CocAction
         command! -range ACT <line1>,<line2>Actions
-        
+
         command! Rename call CocActionAsync("rename")
         command! REN Rename
 
