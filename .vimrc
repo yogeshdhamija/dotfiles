@@ -91,6 +91,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     let g:indent_guides_enable_on_vim_startup = 1
     " uiiaoo/java-syntax.vim -- Remove loud variable highlights
         highlight link JavaIdentifier NONE
+    if !has('nvim')
+        set termkey=<C-\-n>
+    endif
 
 
 " Remaps
@@ -144,13 +147,13 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             nnoremap \th :vsplit<CR><C-W>H:terminal<CR>:startinsert<CR>
             nnoremap \tj :25split<CR>:terminal<CR>:startinsert<CR>
             nnoremap \tk :split<CR><C-W>K25<C-W>_:terminal<CR>:startinsert<CR>
-            nnoremap \tl :vsplit<CR>:exe "terminal"<CR>:startinsert<CR>
+            nnoremap \tl :vsplit<CR>:terminal<CR>:startinsert<CR>
         else
             nnoremap \t :terminal ++curwin<CR>
-            nnoremap \th :terminal<CR><C-W>_<C-W>H
-            nnoremap \tj :terminal<CR><C-\><C-n>25<C-W>_i
-            nnoremap \tk :terminal<CR><C-\><C-n><C-W>K25<C-W>_i
-            nnoremap \tl :terminal<CR><C-W>L
+            nnoremap \th :vsplit<CR><C-W>H:terminal ++curwin<CR>
+            nnoremap \tj :25split<CR>:terminal ++curwin<CR>
+            nnoremap \tk :split<CR><C-W>K25<C-W>_:terminal ++curwin<CR>
+            nnoremap \tl :vsplit<CR>:terminal ++curwin<CR>
         endif
     " \d -> Directory listing
         " \dh -> Directory listing, left (aka h)
