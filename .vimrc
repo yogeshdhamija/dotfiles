@@ -92,7 +92,11 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " uiiaoo/java-syntax.vim -- Remove loud variable highlights
         highlight link JavaIdentifier NONE
     if !has('nvim')
-        set termkey=<C-\-n>
+        if exists('+termwinkey')
+            set termwinkey=<C-\-n>
+        else
+            set termkey=<C-\-n>
+        endif
     endif
 
 
