@@ -14,6 +14,7 @@ declare -a EXECS=(
     "pandoc"
     "pdflatex"
     "node"
+    "npm"
 )
 declare -a NAMES=(
     "NeoVim"
@@ -24,6 +25,7 @@ declare -a NAMES=(
     "Pandoc"
     "TeX Live"
     "node"
+    "npm"
 )
 declare -a ADDITIONAL1=(
     "Text Editor"
@@ -33,7 +35,8 @@ declare -a ADDITIONAL1=(
     "YAML and XML Parsing CLI tool"
     "Document converter, vim uses it for .md -> .pdf"
     "Document converter, vim uses it for .md -> .pdf"
-    "JS runtime, vim uses it to install coc.nvim plugin (https://github.com/neoclide/coc.nvim), used for LSP"
+    "JS runtime, vim uses it to run coc.nvim plugin (https://github.com/neoclide/coc.nvim), used for LSP"
+    "JS package manager, vim uses it to install coc.nvim plugin (https://github.com/neoclide/coc.nvim), used for LSP"
 )
 declare -a ADDITIONAL2=(
     "https://neovim.io/"
@@ -44,6 +47,7 @@ declare -a ADDITIONAL2=(
     "https://pandoc.org/"
     "https://www.tug.org/texlive/ | apt: texlive texlive-latex-extra | BasicTeX mac package"
     "https://nodejs.org/"
+    ""
 )
 
 # SCRIPT:
