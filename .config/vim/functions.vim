@@ -96,6 +96,7 @@ function! UnloadColors() abort
     set showbreak&
     tabdo windo set list&
     set showmode&
+    set laststatus&
     if(!exists("g:writingmode") || g:writingmode != 1)
         let $NVIM_TUI_ENABLE_TRUE_COLOR=0                 " enable true color for nvim < 1.5 (I think)
         set notermguicolors
@@ -127,6 +128,7 @@ function! LoadColors() abort
     set listchars=tab:\|\ ,eol:$
     tabdo windo set list
     set noshowmode
+    set laststatus=2
     set showbreak===>\|
     if has('nvim')
         autocmd WinEnter,TermOpen term://* setlocal nolist nonumber norelativenumber scl=no
