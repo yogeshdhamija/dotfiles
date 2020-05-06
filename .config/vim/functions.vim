@@ -141,7 +141,7 @@ function! LoadColors() abort
     highlight SignColumn ctermfg=223 ctermbg=235 guifg=#ebdbb2 guibg=#282828
     highlight IndentGuidesOdd ctermfg=245 ctermbg=237 guifg=#928374 guibg=#3c3836
     highlight IndentGuidesEven ctermfg=245 ctermbg=237 guifg=#928374 guibg=#3c3836
-    highlight MatchParen cterm=bold,underline,italic ctermbg=239 ctermfg=230 gui=bold,underline,italic guibg=#504945 guifg=#f9f5d7
+    highlight MatchParen term=bold,underline cterm=bold,underline ctermbg=234 ctermfg=14 gui=bold,underline guibg=#1d2021 guifg=#91fff8
     let g:indent_guides_auto_colors = 0
     let g:indent_guides_start_level = 2
     let g:indent_guides_guide_size = 1
