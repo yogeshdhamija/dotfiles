@@ -139,6 +139,7 @@ function! LoadColors() abort
     silent! colorscheme gruvbox                           " silent to suppress error before plugin installed
     let g:lightline={'colorscheme': 'gruvbox'}
     call EnableLightline()
+    highlight SignColumn ctermfg=223 ctermbg=235 guifg=#ebdbb2 guibg=#282828
     highlight IndentGuidesOdd ctermfg=245 ctermbg=237 guifg=#928374 guibg=#3c3836
     highlight IndentGuidesEven ctermfg=245 ctermbg=237 guifg=#928374 guibg=#3c3836
     let g:indent_guides_auto_colors = 0
