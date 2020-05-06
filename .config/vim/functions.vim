@@ -135,7 +135,6 @@ function! LoadColors() abort
         set inccommand=nosplit
     endif
     set background=dark
-    let g:gruvbox_italic=1
     silent! colorscheme gruvbox                           " silent to suppress error before plugin installed
     let g:lightline={'colorscheme': 'gruvbox'}
     call EnableLightline()

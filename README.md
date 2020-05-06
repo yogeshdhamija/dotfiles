@@ -15,6 +15,7 @@ let coc_plugins = ["these_will_override_defaults"]
 let added_coc_plugins = ["these_will_be_added_to_defaults"]
 
 let g:is_termguicolors_supported = 1
+let g:gruvbox_italic=1
 ```
 
 **Common settings in** `~/.vimrc.local`:
