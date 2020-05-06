@@ -28,7 +28,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['tpope/vim-surround', {}],
             \ ['tpope/vim-abolish', {}],
             \ ['michaeljsmith/vim-indent-object', {}],
-            \ ['rakr/vim-one', {}],
+            \ ['morhetz/gruvbox', {}],
             \ ['nathanaelkane/vim-indent-guides', {}],
             \ ['itchyny/lightline.vim', {}],
             \ ['tpope/vim-fugitive', {}],

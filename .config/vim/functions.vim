@@ -134,17 +134,13 @@ function! LoadColors() abort
         autocmd WinEnter,TermOpen term://* setlocal nolist nonumber norelativenumber scl=no
         set inccommand=nosplit
     endif
-    silent! colorscheme one                           " silent to suppress error before plugin installed
-    let g:lightline={'colorscheme': 'one'}
     set background=dark
+    let g:gruvbox_italic=1
+    silent! colorscheme gruvbox                           " silent to suppress error before plugin installed
+    let g:lightline={'colorscheme': 'gruvbox'}
     call EnableLightline()
-    highlight Comment                      guifg=#6C7380
-    highlight NonText                      guifg=#424956
-    highlight Normal           ctermfg=145 guifg=#abb2bf ctermbg=16  guibg=#20242C
-    highlight Folded                       guifg=#7C8390             guibg=#262D35
-    highlight SignColumn                                             guibg=#20242C
-    highlight IndentGuidesOdd                            ctermbg=236 guibg=#262D35
-    highlight IndentGuidesEven                           ctermbg=236 guibg=#262D35
+    highlight IndentGuidesOdd ctermfg=245 ctermbg=237 guifg=#928374 guibg=#3c3836
+    highlight IndentGuidesEven ctermfg=245 ctermbg=237 guifg=#928374 guibg=#3c3836
     let g:indent_guides_auto_colors = 0
     let g:indent_guides_start_level = 2
     let g:indent_guides_guide_size = 1
