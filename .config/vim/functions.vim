@@ -135,7 +135,6 @@ function! LoadColors() abort
         set inccommand=nosplit
     endif
     let g:gruvbox_bold=0
-    let g:gruvbox_sign_column="bg"
     let g:gruvbox_invert_selection = 0
     set background=dark
     silent! colorscheme gruvbox                           " silent to suppress error before plugin installed
@@ -145,6 +144,7 @@ function! LoadColors() abort
     highlight IndentGuidesEven ctermfg=245 ctermbg=237 guifg=#928374 guibg=#3c3836
     highlight MatchParen term=bold,underline cterm=bold,underline ctermbg=234 ctermfg=14 gui=bold,underline guibg=#1d2021 guifg=#91fff8
     highlight String ctermfg=175 guifg=#d3869b
+    highlight SignColumn ctermfg=223 ctermbg=235 guifg=#ebdbb2 guibg=#282828
     let g:indent_guides_auto_colors = 0
     let g:indent_guides_start_level = 2
     let g:indent_guides_guide_size = 1
