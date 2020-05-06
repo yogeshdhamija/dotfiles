@@ -89,8 +89,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         augroup END
     call LoadColors()
     let g:indent_guides_enable_on_vim_startup = 1
-    " uiiaoo/java-syntax.vim -- Remove loud variable highlights
-        highlight link JavaIdentifier NONE
     if !has('nvim')
         if exists('+termwinkey')
             set termwinkey=<C-\-n>
