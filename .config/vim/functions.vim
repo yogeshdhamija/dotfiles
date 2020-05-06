@@ -138,12 +138,14 @@ function! LoadColors() abort
     let g:lightline={'colorscheme': 'one'}
     set background=dark
     call EnableLightline()
-    highlight Comment guifg=#6C7380
-    highlight NonText guifg=#424956
-    highlight Normal ctermfg=145 ctermbg=16 guifg=#abb2bf guibg=#20242C
-    highlight Folded guifg=#7C8390 guibg=#232A32
-    highlight SignColumn guibg=#20242C
-    let g:indent_guides_color_change_percent = 3
+    highlight Comment                      guifg=#6C7380
+    highlight NonText                      guifg=#424956
+    highlight Normal           ctermfg=145 guifg=#abb2bf ctermbg=16  guibg=#20242C
+    highlight Folded                       guifg=#7C8390             guibg=#262D35
+    highlight SignColumn                                             guibg=#20242C
+    highlight IndentGuidesOdd                            ctermbg=236 guibg=#262D35
+    highlight IndentGuidesEven                           ctermbg=236 guibg=#262D35
+    let g:indent_guides_auto_colors = 0
     let g:indent_guides_start_level = 2
     let g:indent_guides_guide_size = 1
     call EnableIndentLines()
