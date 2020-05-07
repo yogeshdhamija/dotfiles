@@ -13,5 +13,5 @@ export LESS="-RXF"
 command -v ag > /dev/null && export FZF_DEFAULT_COMMAND='ag --follow --unrestricted'
 command -v ag > /dev/null && export FZF_CTRL_T_COMMAND='ag --follow --unrestricted'
 # Set up FZF to use ripgrep (rg)
-command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --follow -uuu'
-command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --follow -uuu'
+command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --follow --files --no-messages -uuu'
+command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --follow --files --no-messages -uuu'
