@@ -13,5 +13,5 @@ export LESS="-RXF"
 command -v ag > /dev/null && export FZF_DEFAULT_COMMAND='ag --follow --hidden --ignore .git -g ""'
 command -v ag > /dev/null && export FZF_CTRL_T_COMMAND='ag --follow --hidden --ignore .git -g ""'
 # Set up FZF to use ripgrep (rg)
-command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --follow --hidden --files'
-command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --follow --hidden --files'
+command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --no-messages --follow --files -uu'
+command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --no-messages --follow --files -uu'
