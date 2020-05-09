@@ -41,6 +41,10 @@ function! EnableIndentLines() abort
         tabdo windo IndentGuidesEnable
     endif
     let g:indentLine_enabled=1
+    augroup indentlines_augroup
+        autocmd!
+        autocmd BufWinEnter,WinEnter * if &buftype == 'terminal' | IndentGuidesDisable | else | IndentGuidesEnable | endif
+    augroup END
 endfunction
 
 function! DisableIndentLines() abort
@@ -48,6 +52,9 @@ function! DisableIndentLines() abort
         tabdo windo IndentGuidesDisable
     endif
     let g:indentLine_enabled=0
+    augroup indentlines_augroup
+        autocmd!
+    augroup END
 endfunction
 
 function! DisableLightline() abort
