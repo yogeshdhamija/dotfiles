@@ -43,7 +43,10 @@ function! EnableIndentLines() abort
     let g:indentLine_enabled=1
     augroup indentlines_augroup
         autocmd!
-        autocmd BufWinEnter,WinEnter * if &buftype == 'terminal' | IndentGuidesDisable | else | IndentGuidesEnable | endif
+        if(has('nvim'))
+            autocmd TermEnter *  IndentGuidesDisable 
+            autocmd TermLeave *  IndentGuidesEnable 
+        endif
     augroup END
 endfunction
 
