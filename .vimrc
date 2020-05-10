@@ -181,12 +181,12 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         nnoremap \gd :call CocActionAsync("jumpDefinition")<CR>
         nnoremap \gdd :call CocActionAsync("jumpDefinition")<CR>
     " \gdl -> Goto Definition in right (aka L) split
-        nnoremap \gdl :vsplit<CR> :call CocActionAsync("jumpDefinition")<CR>
+        nnoremap \gdl :vsplit<CR>:call CocActionAsync("jumpDefinition")<CR>
     " \gr -> Goto References
         nnoremap \gr :call CocActionAsync("jumpReferences")<CR>
         nnoremap \grr :call CocActionAsync("jumpReferences")<CR>
     " \grl -> Goto References in right (aka L) split
-        nnoremap \grl :vsplit<CR> :call CocActionAsync("jumpReferences")<CR>
+        nnoremap \grl :vsplit<CR>:call CocActionAsync("jumpReferences")<CR>
     " \h -> Help
         nnoremap \h :call CocActionAsync("doHover")<CR>
 
