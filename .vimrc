@@ -111,9 +111,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " Start interactive EasyAlign for a motion/text object (e.g. gaip)
         nmap ga <Plug>(EasyAlign)
     " Pressing * does not move cursor
-        nnoremap * :let old=@"<CR>yiw:let @/="\\V\\<".escape(@", '/\')."\\>"<CR>:set hlsearch<CR>:let @"=old<CR>:echo "/".@/<CR>
+        nnoremap * :let old=@"<CR>yiw:let @/="\\V\\<".escape(@", '/\')."\\>"<CR>:set hlsearch<CR>:let @"=old<CR>:redraw!<CR>:echo "/".@/<CR>
     " Pressing * in visual mode searches for selection
-        vnoremap * :<C-U>let old=@"<CR>gvy:let @/="\\V".escape(@", '/\')<CR>:set hlsearch<CR>:let @"=old<CR>:echo "/".@/<CR>
+        vnoremap * :<C-U>let old=@"<CR>gvy:let @/="\\V".escape(@", '/\')<CR>:set hlsearch<CR>:let @"=old<CR>:redraw!<CR>:echo "/".@/<CR>
     " Make pasting from clipboard safer
         inoremap <C-R>+ <C-R><C-R>+
     " Pressing <Esc> in normal mode removes search highlights
@@ -187,9 +187,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 
 " Commands
     " CD -> Change Directory to current open file
-        command! CD echo ":cd %:p:h" | silent cd %:p:h
+        command! CD silent cd %:p:h | redraw! | echo ":cd %:p:h" 
     " CP -> Copy absolute filePath to + register (system clipboard)
-        command! CP echo ":let @+ = expand('%:p')" | let @+ = expand("%:p")
+        command! CP let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')" 
     " Writing Mode for distraction free editing
         command! WritingModeOn call EnableWritingMode()
         command! WritingModeOff call DisableWritingMode()

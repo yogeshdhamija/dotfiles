@@ -204,6 +204,7 @@ function! DeleteHiddenBuffers() abort
             let closed += 1
         endif
     endfor
+    redraw!
     echo "Closed ".closed." hidden buffers"
 endfunction
 
@@ -212,6 +213,7 @@ function! LoadSessionIfVimNotLaunchedWithArgs() abort
         if filereadable(expand('.vim/session.vim'))
             execute 'silent source .vim/session.vim'
             silent call StartKeepingSession()
+            redraw!
             echo ":source ".getcwd()."/.vim/session.vim"
         endif
     else
@@ -236,6 +238,7 @@ function! StopKeepingSession() abort
     augroup auto_saving_sessions
         autocmd!
     augroup END
+    redraw!
     echo "Executed '!rm ".getcwd()."/.vim/session.vim' and removed autocmd to mksession"
 endfunction
 
@@ -244,6 +247,7 @@ function! StartKeepingSession() abort
         autocmd!
         autocmd FileWritePost,VimLeavePre * call SaveSession()
     augroup END
+    redraw!
     echo "Added autocmd to execute 'mksession! ".getcwd()."/.vim/session.vim'."
 endfunction
 
