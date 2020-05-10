@@ -80,14 +80,11 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     if DetectWsl()
         call SetClipboardForWslTerminal()
     endif
-    " Setting up session management (autosave sessions)
-        let g:should_save_session = 0
-        augroup autosession
-            autocmd!
-            autocmd StdinReadPre * let s:std_in=1
-            autocmd VimEnter * nested call LoadSessionIfVimNotLaunchedWithArgs()
-            autocmd FileWritePost,VimLeavePre * call SaveSessionIfFlagSet()
-        augroup END
+    augroup load_session
+        autocmd!
+        autocmd StdinReadPre * let g:std_in=1
+        autocmd VimEnter * nested call LoadSessionIfVimNotLaunchedWithArgs()
+    augroup END
     call LoadColors()
     let g:indent_guides_enable_on_vim_startup = 1
     if !has('nvim')
@@ -203,8 +200,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         command! PDF w | call WriteToPdf()
     " Start saving the session
         command! StartKeepingSession call StartKeepingSession()
-    " Delete vim session and quit
-        command! ClearSession call ClearSession()
+    " Delete vim session, and stop saving
+        command! StopKeepingSession call StopKeepingSession()
     " Often used LSP stuff
         command! -range Actions <line1>,<line2>CocAction
         command! -range ACT <line1>,<line2>Actions
