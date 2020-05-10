@@ -142,12 +142,14 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
         if has('nvim')
             nnoremap \t :terminal<CR>:startinsert<CR>
+            nnoremap \tt :terminal<CR>:startinsert<CR>
             nnoremap \th :vsplit<CR><C-W>H:terminal<CR>:startinsert<CR>
             nnoremap \tj :25split<CR>:terminal<CR>:startinsert<CR>
             nnoremap \tk :split<CR><C-W>K25<C-W>_:terminal<CR>:startinsert<CR>
             nnoremap \tl :vsplit<CR>:terminal<CR>:startinsert<CR>
         else
             nnoremap \t :terminal ++curwin<CR>
+            nnoremap \tt :terminal ++curwin<CR>
             nnoremap \th :vsplit<CR><C-W>H:terminal ++curwin<CR>
             nnoremap \tj :25split<CR>:terminal ++curwin<CR>
             nnoremap \tk :split<CR><C-W>K25<C-W>_:terminal ++curwin<CR>
@@ -159,6 +161,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         " \dk -> Directory listing, up (aka k)
         " \dl -> Directory listing, right (aka l)
         nmap \d -
+        nmap \dd -
         nmap \dh <C-W>v<C-W>H-
         nmap \dl <C-W>v<C-W>L-
         nmap \dk <C-W>s<C-W>K-
@@ -176,10 +179,12 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         vnoremap \a :'<,'>Actions<CR>
     " \gd -> Goto Definition
         nnoremap \gd :call CocActionAsync("jumpDefinition")<CR>
+        nnoremap \gdd :call CocActionAsync("jumpDefinition")<CR>
     " \gdl -> Goto Definition in right (aka L) split
         nnoremap \gdl :vsplit<CR> :call CocActionAsync("jumpDefinition")<CR>
     " \gr -> Goto References
         nnoremap \gr :call CocActionAsync("jumpReferences")<CR>
+        nnoremap \grr :call CocActionAsync("jumpReferences")<CR>
     " \grl -> Goto References in right (aka L) split
         nnoremap \grl :vsplit<CR> :call CocActionAsync("jumpReferences")<CR>
     " \h -> Help
