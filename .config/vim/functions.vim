@@ -97,7 +97,7 @@ function! UnloadColors() abort
     tabdo windo set foldtext&
     tabdo windo set fillchars&
     set foldlevelstart&
-    syntax on
+    syntax off
     if has('nvim')
         set inccommand&
     endif
