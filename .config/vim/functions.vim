@@ -278,10 +278,11 @@ function! DisableWritingMode() abort
 endfunction
 
 function! EnableJumpToLastPositionWhenReOpeningFile() abort
-    if has("autocmd")
-        au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    augroup jump_to_last_position_on_open
+        autocmd!
+        au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$")
                     \ | exe "normal! g`\"" | endif
-    endif
+    augroup END
 endfunction
 
 function! SetClipboardForWslTerminal() abort
