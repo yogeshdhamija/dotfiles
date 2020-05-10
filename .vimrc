@@ -83,6 +83,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " Setting up session management (autosave sessions)
         let g:should_save_session = 0
         augroup autosession
+            autocmd!
             autocmd StdinReadPre * let s:std_in=1
             autocmd VimEnter * nested call LoadSessionIfVimNotLaunchedWithArgs()
             autocmd FileWritePost,VimLeavePre * call SaveSessionIfFlagSet()
@@ -201,9 +202,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " Command to save and generate .pdf from .md
         command! PDF w | call WriteToPdf()
     " Start saving the session
-        command! StartKeepingSession let g:should_save_session = 1 | echo "Using ':mksession' and ':source' to save and load session."
+        command! StartKeepingSession call StartKeepingSession()
     " Delete vim session and quit
-        command! ClearSession let g:should_save_session = 0 | exe '!rm ~/.vim/lastsession.vim > /dev/null 2>&1' | qa
+        command! ClearSession call ClearSession()
     " Often used LSP stuff
         command! -range Actions <line1>,<line2>CocAction
         command! -range ACT <line1>,<line2>Actions
