@@ -23,7 +23,7 @@ alias "config-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environ
 alias "config-update-repo"="cd ~ && config remote update && config pull && config checkout && config submodule init && config submodule update && config submodule update --remote && config status; cd -"
 
 # Update vim plugins
-alias "config-update-vim"="cd ~ && mv ~/.vim/lastsession.vim ~/.vim/lastsession.vim.old > /dev/null 2>&1; vim +PlugUpgrade +PlugUpdate +StopKeepingSession; mv ~/.vim/lastsession.vim.old ~/.vim/lastsession.vim > /dev/null 2>&1; cd -"
+alias "config-update-vim"="cd ~ && mv ~/.vim/lastsession.vim ~/.vim/lastsession.vim.old > /dev/null 2>&1; vim +PlugUpgrade +PlugUpdate +StopKeepingSession -c \"qa\"; mv ~/.vim/lastsession.vim.old ~/.vim/lastsession.vim > /dev/null 2>&1; cd -"
 
 # Update fzf
 alias "config-update-fzf"="cd ~ && .fzf/install --all && cd -"
