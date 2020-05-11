@@ -216,8 +216,6 @@ function! LoadSessionIfVimNotLaunchedWithArgs() abort
             redraw!
             echo ":source ".getcwd()."/.vim/session.vim"
         endif
-    else
-        silent call StopKeepingSession()
     endif
 endfunction
 
