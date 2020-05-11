@@ -3,19 +3,6 @@ source ~/.config/vim/functions.vim
 call SourceFileIfExists("~/.vimrc.local.loadbefore")
 
 " Plugins
-    if !exists("coc_plugins")
-        let g:coc_global_extensions = [
-            \ 'coc-marketplace', 
-            \ 'coc-vimlsp', 
-            \ 'coc-json', 
-            \ 'coc-yaml' 
-        \ ]
-    else
-        let g:coc_global_extensions = coc_plugins
-    endif
-    if exists("added_coc_plugins")
-        let g:coc_global_extensions = g:coc_global_extensions + added_coc_plugins
-    endif
     if !exists("plugins")
         let plugins = [ 
             \ ['editorconfig/editorconfig-vim', {}],
@@ -45,6 +32,19 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         let plugins = plugins + added_plugins
     endif
     call InstallPlugins(plugins, disabled_plugins)
+
+    if !exists("coc_plugins")
+        let coc_plugins = [
+            \ 'coc-marketplace', 
+            \ 'coc-vimlsp', 
+            \ 'coc-json', 
+            \ 'coc-yaml' 
+        \ ]
+    endif
+    if exists("added_coc_plugins")
+        let coc_plugins = coc_plugins + added_coc_plugins
+    endif
+    let g:coc_global_extensions = coc_plugins
 
 " General Settings
     set mouse=a
