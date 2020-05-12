@@ -107,12 +107,11 @@ function! UnloadColors() abort
     tabdo windo set list&
     set showmode&
     set laststatus&
-    if(!exists("g:writingmode") || g:writingmode != 1)
-        let $NVIM_TUI_ENABLE_TRUE_COLOR=0                 " enable true color for nvim < 1.5 (I think)
-        set notermguicolors
-        colorscheme default
-        set background=dark
-    endif
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=0
+    set notermguicolors
+    let g:lightline={'colorscheme': 'default'}
+    colorscheme default
+    set background=dark
     call DisableLightline()
     call DisableIndentLines()
     call winrestview(l:win_view)
