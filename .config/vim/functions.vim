@@ -97,6 +97,7 @@ function! UnloadColors() abort
     tabdo windo set foldtext&
     tabdo windo set fillchars&
     set foldlevelstart&
+    tabdo windo set nofoldenable
     syntax off
     if has('nvim')
         set inccommand&
@@ -131,6 +132,7 @@ function! LoadColors() abort
     tabdo windo set fillchars=fold:\ 
     tabdo windo set number
     tabdo windo set signcolumn=yes
+    tabdo windo set nofoldenable
     syntax on
     tabdo windo set wrap
     tabdo windo set breakindent
