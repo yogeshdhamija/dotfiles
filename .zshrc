@@ -6,11 +6,6 @@ if [ -f ~/.shellrc.local.loadbefore ]; then
     source ~/.shellrc.local.loadbefore
 fi
 
-# Load common config
-if [ -f ~/.shellrc ]; then
-    source ~/.shellrc
-fi
-
 # oh my zsh stuff
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM=$HOME/.custom_zsh
@@ -76,6 +71,11 @@ pastefinish() {
 }
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
+
+# Load common config
+if [ -f ~/.shellrc ]; then
+    source ~/.shellrc
+fi
 
 # Load custom config
 if [ -f ~/.shellrc.local ]; then

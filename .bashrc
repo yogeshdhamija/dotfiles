@@ -6,11 +6,6 @@ if [ -f ~/.shellrc.local.loadbefore ]; then
     source ~/.shellrc.local.loadbefore
 fi
 
-# Load common config
-if [ -f ~/.shellrc ]; then
-    source ~/.shellrc
-fi
-
 # Load FZF configuration
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
@@ -50,6 +45,11 @@ function parse_git {
 
 # set nice prompt
 export PS1="\[\e[35m\]\u\[\e[m\] in \[\e[32m\]\w\[\e[m\]\[\e[36m\]\`parse_git\`\[\e[m\] \\$ "
+
+# Load common config
+if [ -f ~/.shellrc ]; then
+    source ~/.shellrc
+fi
 
 # Load custom config
 if [ -f ~/.shellrc.local ]; then

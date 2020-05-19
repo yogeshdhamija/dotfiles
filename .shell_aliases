@@ -1,32 +1,35 @@
+alias "config-log"="config log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit "
+
+alias "config-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh && cd -"
+
+alias "config-update-repo"="cd ~ && config remote update && config pull && config checkout && config submodule init && config submodule update && config submodule update --remote && config status; cd -"
+
+alias "config-update-vim"="cd ~ && mv ~/.vim/lastsession.vim ~/.vim/lastsession.vim.old > /dev/null 2>&1; vim +PlugUpgrade +PlugUpdate +StopKeepingSession -c \"qa\"; mv ~/.vim/lastsession.vim.old ~/.vim/lastsession.vim > /dev/null 2>&1; cd -"
+
+alias "config-update-fzf"="cd ~ && .fzf/install --all && cd -"
+
+alias "config-update"="config-update-repo; config-update-vim; config-update-fzf; config-check"
+
+
+# ============ REPLACEMENTS ==============
+
+command -v nvim > /dev/null && alias "vim"="nvim"
+command -v rg > /dev/null && alias "grep"="rg -uuu"
+
+# ============ GENERAL ==============
+
+alias ":q"="exit"
+alias ":e"="vim"
+alias ":ew"="vim +WritingModeOn"
+
+# ============ GIT ==============
+
+alias "git-log"="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit "
+
+# ============ DOCKER ==============
+
 # To stop and destroy all docker containers, images, and volumes
 alias "docker-nuke"='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi $(docker images -q) --force; docker volume rm $(docker volume ls -f dangling=true -q)'
 
 # To stop and destroy all docker containers and volumes (but keep images)
 alias "docker-mininuke"='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker volume rm $(docker volume ls -f dangling=true -q)'
-
-# Pretty git log
-alias "git-log"="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit "
-
-# Config pretty git log
-alias "config-log"="config log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit "
-
-# Vim aliases
-alias ":q"="exit"
-alias ":e"="vim"
-alias ":ew"="vim +WritingModeOn"
-command -v nvim > /dev/null && alias "vim"="nvim"
-
-# Check config status
-alias "config-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh && cd -"
-
-# Check if repo updates exist (also submodules)
-alias "config-update-repo"="cd ~ && config remote update && config pull && config checkout && config submodule init && config submodule update && config submodule update --remote && config status; cd -"
-
-# Update vim plugins
-alias "config-update-vim"="cd ~ && mv ~/.vim/lastsession.vim ~/.vim/lastsession.vim.old > /dev/null 2>&1; vim +PlugUpgrade +PlugUpdate +StopKeepingSession -c \"qa\"; mv ~/.vim/lastsession.vim.old ~/.vim/lastsession.vim > /dev/null 2>&1; cd -"
-
-# Update fzf
-alias "config-update-fzf"="cd ~ && .fzf/install --all && cd -"
-
-# config-update: Pull from repo, check if any submodule updates exist, show status
-alias "config-update"="config-update-repo; config-update-vim; config-update-fzf; config-check"
