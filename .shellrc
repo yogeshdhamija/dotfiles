@@ -1,3 +1,8 @@
+# Load custom config
+if [ -f ~/.shellrc.local.loadbefore ]; then
+    source ~/.shellrc.local.loadbefore
+fi
+
 # Config alias
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
@@ -15,3 +20,8 @@ command -v ag > /dev/null && export FZF_CTRL_T_COMMAND='ag --follow --unrestrict
 # Set up FZF to use ripgrep (rg)
 command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --follow --files --no-messages -uuu'
 command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --follow --files --no-messages -uuu'
+
+# Load custom config
+if [ -f ~/.shellrc.local ]; then
+    source ~/.shellrc.local
+fi

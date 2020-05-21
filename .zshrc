@@ -2,9 +2,6 @@
 if [ -f ~/.zshrc.local.loadbefore ]; then
     source ~/.zshrc.local.loadbefore
 fi
-if [ -f ~/.shellrc.local.loadbefore ]; then
-    source ~/.shellrc.local.loadbefore
-fi
 
 # oh my zsh stuff
 export ZSH="$HOME/.oh-my-zsh"
@@ -78,9 +75,6 @@ if [ -f ~/.shellrc ]; then
 fi
 
 # Load custom config
-if [ -f ~/.shellrc.local ]; then
-    source ~/.shellrc.local
-fi
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi

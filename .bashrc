@@ -2,9 +2,6 @@
 if [ -f ~/.bashrc.local.loadbefore ]; then
     source ~/.bashrc.local.loadbefore
 fi
-if [ -f ~/.shellrc.local.loadbefore ]; then
-    source ~/.shellrc.local.loadbefore
-fi
 
 # Load FZF configuration
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -52,9 +49,6 @@ if [ -f ~/.shellrc ]; then
 fi
 
 # Load custom config
-if [ -f ~/.shellrc.local ]; then
-    source ~/.shellrc.local
-fi
 if [ -f ~/.bashrc.local ]; then
     source ~/.bashrc.local
 fi
