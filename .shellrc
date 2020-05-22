@@ -1,5 +1,6 @@
 # Load custom config
 if [ -f ~/.shellrc.local.loadbefore ]; then
+    export LOCAL_CONFIG_OVERRIDES="~/.shellrc.local.loadbefore:$LOCAL_CONFIG_OVERRIDES"
     source ~/.shellrc.local.loadbefore
 fi
 
@@ -21,7 +22,12 @@ command -v ag > /dev/null && export FZF_CTRL_T_COMMAND='ag --follow --unrestrict
 command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --follow --files --no-messages -uuu'
 command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --follow --files --no-messages -uuu'
 
+# Set env if vim config overrides set
+[ -f ~/.vimrc.local ] && export LOCAL_CONFIG_OVERRIDES="~/.vimrc.local:$LOCAL_CONFIG_OVERRIDES"
+[ -f ~/.vimrc.local.loadbefore ] && export LOCAL_CONFIG_OVERRIDES="~/.vimrc.local.loadbefore:$LOCAL_CONFIG_OVERRIDES"
+
 # Load custom config
 if [ -f ~/.shellrc.local ]; then
+    export LOCAL_CONFIG_OVERRIDES="~/.shellrc.local:$LOCAL_CONFIG_OVERRIDES"
     source ~/.shellrc.local
 fi

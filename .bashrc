@@ -1,5 +1,7 @@
 # Load custom config
+export LOCAL_CONFIG_OVERRIDES=""
 if [ -f ~/.bashrc.local.loadbefore ]; then
+    export LOCAL_CONFIG_OVERRIDES="~/.bashrc.local.loadbefore:$LOCAL_CONFIG_OVERRIDES"
     source ~/.bashrc.local.loadbefore
 fi
 
@@ -50,5 +52,6 @@ fi
 
 # Load custom config
 if [ -f ~/.bashrc.local ]; then
+    export LOCAL_CONFIG_OVERRIDES="~/.bashrc.local:$LOCAL_CONFIG_OVERRIDES"
     source ~/.bashrc.local
 fi

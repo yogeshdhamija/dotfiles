@@ -86,3 +86,8 @@ do
         echo ""
     fi
 done
+
+echo ""
+
+echo "Local configuration override files loaded:"
+echo $LOCAL_CONFIG_OVERRIDES | tr : "\n"
