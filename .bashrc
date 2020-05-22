@@ -1,8 +1,11 @@
 # Load custom config
-export LOCAL_CONFIG_OVERRIDES=""
+export LOCAL_CONFIG_OVERRIDES_LOADED=""
+export LOCAL_CONFIG_OVERRIDES_NOT_LOADED=""
 if [ -f ~/.bashrc.local.loadbefore ]; then
-    export LOCAL_CONFIG_OVERRIDES="~/.bashrc.local.loadbefore:$LOCAL_CONFIG_OVERRIDES"
+    export LOCAL_CONFIG_OVERRIDES_LOADED="~/.bashrc.local.loadbefore:$LOCAL_CONFIG_OVERRIDES_LOADED"
     source ~/.bashrc.local.loadbefore
+else
+    export LOCAL_CONFIG_OVERRIDES_NOT_LOADED="~/.bashrc.local.loadbefore:$LOCAL_CONFIG_OVERRIDES_NOT_LOADED"
 fi
 
 # Load FZF configuration
@@ -52,6 +55,8 @@ fi
 
 # Load custom config
 if [ -f ~/.bashrc.local ]; then
-    export LOCAL_CONFIG_OVERRIDES="~/.bashrc.local:$LOCAL_CONFIG_OVERRIDES"
+    export LOCAL_CONFIG_OVERRIDES_LOADED="~/.bashrc.local:$LOCAL_CONFIG_OVERRIDES_LOADED"
     source ~/.bashrc.local
+else
+    export LOCAL_CONFIG_OVERRIDES_NOT_LOADED="~/.bashrc.local:$LOCAL_CONFIG_OVERRIDES_NOT_LOADED"
 fi

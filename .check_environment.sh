@@ -44,15 +44,17 @@ declare -a ADDITIONAL2=(
     "https://nodejs.org/"
     ""
 )
+IFS=':' read -r -a local_config_overrides_loaded <<< "$LOCAL_CONFIG_OVERRIDES_LOADED"
+IFS=':' read -r -a local_config_overrides_not_loaded <<< "$LOCAL_CONFIG_OVERRIDES_NOT_LOADED"
 
-arraylength=${#EXECS[@]}
+programs_arraylength=${#EXECS[@]}
 
 echo ""
 echo "***            CONFIGURATION STATUS CHECK            ***"
 echo ""
 
 echo "Programs found in PATH:"
-for (( i=1; i<${arraylength}+1; i++ ));
+for (( i=1; i<${programs_arraylength}+1; i++ ));
 do
     if command -v ${EXECS[$i-1]} > /dev/null ; then
         echo '    -' ${NAMES[$i-1]} '('${EXECS[$i-1]}')'
@@ -60,7 +62,7 @@ do
 done
 
 echo "Programs not found in PATH:" 
-for (( i=1; i<${arraylength}+1; i++ ));
+for (( i=1; i<${programs_arraylength}+1; i++ ));
 do
     if ! command -v ${EXECS[$i-1]} > /dev/null ; then
         echo '    -' ${NAMES[$i-1]} '('${EXECS[$i-1]}')'
@@ -71,4 +73,7 @@ do
 done
 
 echo "Local configuration override files loaded:"
-echo $LOCAL_CONFIG_OVERRIDES | tr : "\n"
+printf '    %s\n' "${local_config_overrides_loaded[@]}"
+
+echo "Local configuration override files checked and did not exist, so not loaded:"
+printf '    %s\n' "${local_config_overrides_not_loaded[@]}"

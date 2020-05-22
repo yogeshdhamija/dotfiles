@@ -1,8 +1,10 @@
 # Load custom config
 export LOCAL_CONFIG_OVERRIDES=""
 if [ -f ~/.zshrc.local.loadbefore ]; then
-    export LOCAL_CONFIG_OVERRIDES="~/.zshrc.local.loadbefore:$LOCAL_CONFIG_OVERRIDES"
+    export LOCAL_CONFIG_OVERRIDES_LOADED="~/.zshrc.local.loadbefore:$LOCAL_CONFIG_OVERRIDES_LOADED"
     source ~/.zshrc.local.loadbefore
+else
+    export LOCAL_CONFIG_OVERRIDES_NOT_LOADED="~/.zshrc.local.loadbefore:$LOCAL_CONFIG_OVERRIDES_NOT_LOADED"
 fi
 
 # oh my zsh stuff
@@ -78,6 +80,8 @@ fi
 
 # Load custom config
 if [ -f ~/.zshrc.local ]; then
-    export LOCAL_CONFIG_OVERRIDES="~/.zshrc.local:$LOCAL_CONFIG_OVERRIDES"
+    export LOCAL_CONFIG_OVERRIDES_LOADED="~/.zshrc.local:$LOCAL_CONFIG_OVERRIDES_LOADED"
     source ~/.zshrc.local
+else
+    export LOCAL_CONFIG_OVERRIDES_NOT_LOADED="~/.zshrc.local:$LOCAL_CONFIG_OVERRIDES_NOT_LOADED"
 fi
