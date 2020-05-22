@@ -73,6 +73,9 @@ pastefinish() {
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 
+# Change prompt character to %
+PROMPT=${PROMPT//λ/'%{$reset_color%}%%'}
+
 # Load common config
 if [ -f ~/.shellrc ]; then
     source ~/.shellrc
