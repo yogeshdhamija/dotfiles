@@ -156,7 +156,7 @@ function! LoadColors() abort
     highlight MatchParen term=bold,underline cterm=bold,underline ctermbg=234 ctermfg=14 gui=bold,underline guibg=#1d2021 guifg=#91fff8
     highlight String ctermfg=175 guifg=#d3869b
     highlight SignColumn ctermfg=223 ctermbg=235 guifg=#ebdbb2 guibg=#282828
-    highlight VertSplit cterm=reverse ctermfg=237 ctermbg=246 gui=reverse guifg=#3c3836 guibg=#a89984
+    highlight VertSplit cterm=reverse ctermfg=237 ctermbg=237 gui=reverse guifg=#3c3836 guibg=#3c3836
     let g:indent_guides_auto_colors = 0
     let g:indent_guides_start_level = 2
     let g:indent_guides_guide_size = 1
