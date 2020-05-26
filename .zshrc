@@ -1,5 +1,6 @@
 # Load custom config
-export LOCAL_CONFIG_OVERRIDES=""
+export LOCAL_CONFIG_OVERRIDES_LOADED=""
+export LOCAL_CONFIG_OVERRIDES_NOT_LOADED=""
 if [ -f ~/.zshrc.local.loadbefore ]; then
     export LOCAL_CONFIG_OVERRIDES_LOADED="~/.zshrc.local.loadbefore:$LOCAL_CONFIG_OVERRIDES_LOADED"
     source ~/.zshrc.local.loadbefore
