@@ -23,6 +23,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['junegunn/limelight.vim', {}],
             \ ['justinmk/vim-dirvish', {}],
             \ ['neoclide/coc.nvim', {'branch': 'release'}],
+            \ ["leafgarland/typescript-vim", {}],
+            \ ["peitalin/vim-jsx-typescript", {}]
         \ ]
     endif
     if !exists("disabled_plugins")
@@ -38,7 +40,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ 'coc-marketplace', 
             \ 'coc-vimlsp', 
             \ 'coc-json', 
-            \ 'coc-yaml' 
+            \ 'coc-yaml',
+            \ 'coc-tsserver'
         \ ]
     endif
     if exists("added_coc_plugins")
