@@ -24,7 +24,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['justinmk/vim-dirvish', {}],
             \ ['neoclide/coc.nvim', {'branch': 'release'}],
             \ ["leafgarland/typescript-vim", {}],
-            \ ["peitalin/vim-jsx-typescript", {}]
+            \ ["peitalin/vim-jsx-typescript", {}],
+            \ ["uiiaoo/java-syntax.vim", {}]
         \ ]
     endif
     if !exists("disabled_plugins")
@@ -41,7 +42,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ 'coc-vimlsp', 
             \ 'coc-json', 
             \ 'coc-yaml',
-            \ 'coc-tsserver'
+            \ 'coc-tsserver',
+            \ 'coc-java'
         \ ]
     endif
     if exists("added_coc_plugins")
