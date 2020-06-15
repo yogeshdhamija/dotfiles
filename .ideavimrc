@@ -24,8 +24,10 @@ nnoremap \f :action FindInPath<CR>
 nnoremap \o :action SearchEverywhere<CR>
 " \gd -> Goto Definition
 nnoremap \gd :action GotoImplementation<CR>
+nnoremap \gdd :action GotoImplementation<CR>
 " \gr -> Goto References
 nnoremap \gr :action ShowUsages<CR>
+nnoremap \grr :action ShowUsages<CR>
 " \h -> Help
 nnoremap \h :action QuickJavaDoc<CR>:action ParameterInfo<CR>
 " \a -> code Actions
