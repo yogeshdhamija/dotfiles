@@ -150,6 +150,10 @@ function! LoadColors() abort
     set background=dark
     silent! colorscheme gruvbox                           " silent to suppress error before plugin installed
     let g:lightline={'colorscheme': 'gruvbox'}
+    let g:lightline.inactive = {
+        \'left': [['filename', 'modified']],
+        \'right': [['lineinfo'], ['percent']] 
+    \}
     call EnableLightline()
     highlight IndentGuidesOdd ctermfg=245 ctermbg=237 guifg=#928374 guibg=#3c3836
     highlight IndentGuidesEven ctermfg=245 ctermbg=237 guifg=#928374 guibg=#3c3836
