@@ -16,6 +16,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['nathanaelkane/vim-indent-guides', {}],
             \ ['itchyny/lightline.vim', {}],
             \ ['tpope/vim-fugitive', {}],
+            \ ['tpope/vim-rhubarb', {}],
             \ ['junegunn/fzf', {}],
             \ ['junegunn/fzf.vim', {}],
             \ ['junegunn/vim-easy-align', {}],
