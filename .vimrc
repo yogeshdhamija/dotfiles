@@ -44,7 +44,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ 'coc-json', 
             \ 'coc-yaml',
             \ 'coc-tsserver',
-            \ 'coc-java'
+            \ 'coc-java',
+            \ 'coc-phpls'
         \ ]
     endif
     if exists("added_coc_plugins")
