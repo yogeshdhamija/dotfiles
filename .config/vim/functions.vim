@@ -137,6 +137,7 @@ function! LoadColors() abort
     tabdo windo set wrap
     tabdo windo set breakindent
     set listchars=tab:\|\ ,eol:$
+    let g:indent_guides_tab_guides = 0
     tabdo windo set list
     set noshowmode
     set laststatus=2
