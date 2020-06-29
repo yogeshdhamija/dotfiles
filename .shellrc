@@ -7,7 +7,7 @@ else
 fi
 
 # Config alias
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # Load aliases
 if [ -f ~/.shell_aliases ]; then
