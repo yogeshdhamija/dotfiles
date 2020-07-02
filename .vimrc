@@ -6,6 +6,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     if !exists("plugins")
         let plugins = [ 
             \ ['editorconfig/editorconfig-vim', {}],
+            \ ['psliwka/vim-smoothie', {}],
             \ ['mhinz/vim-signify', {}],
             \ ['tpope/vim-repeat', {}],
             \ ['tpope/vim-commentary', {}],
@@ -24,9 +25,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['junegunn/limelight.vim', {}],
             \ ['justinmk/vim-dirvish', {}],
             \ ['neoclide/coc.nvim', {'branch': 'release'}],
-            \ ["leafgarland/typescript-vim", {}],
-            \ ["peitalin/vim-jsx-typescript", {}],
-            \ ["uiiaoo/java-syntax.vim", {}]
+            \ ['leafgarland/typescript-vim', {}],
+            \ ['peitalin/vim-jsx-typescript', {}],
+            \ ['uiiaoo/java-syntax.vim', {}]
         \ ]
     endif
     if !exists("disabled_plugins")
