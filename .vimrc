@@ -228,4 +228,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         command! ERRS Errors
         command! ERR Error
 
+if exists('g:fvim_loaded')
+    call SourceFileIfExists("~/.vimrc.fvim")
+endif
 call SourceFileIfExists("~/.vimrc.local")
