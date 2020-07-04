@@ -1,2 +1,3 @@
 FVimCursorSmoothMove v:true
 FVimCursorSmoothBlink v:true
+FVimUIPopupMenu v:false
