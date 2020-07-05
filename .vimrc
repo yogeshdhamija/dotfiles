@@ -5,6 +5,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 " Plugins
     if !exists("plugins")
         let plugins = [ 
+            \ ['ydhamija96/uss-find.vim', {}],
             \ ['ydhamija96/uss-sessions.vim', {}],
             \ ['editorconfig/editorconfig-vim', {}],
             \ ['psliwka/vim-smoothie', {}],
@@ -165,8 +166,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         nmap \dl <C-W>v<C-W>L-
         nmap \dk <C-W>s<C-W>K-
         nmap \dj <C-W>s<C-W>J-
-    " \f -> Find
-        nnoremap \f :call DisplayHelpAndSearch()<CR>
     " \o -> Open
         nnoremap \o :FZF<CR>
     " \b -> list Buffers

@@ -169,17 +169,6 @@ function! LoadColors() abort
     call winrestview(l:win_view)
 endfunction
 
-function! DisplayHelpAndSearch() abort
-    let helptext = ":set grepprg?\n    grepprg=".&grepprg."\n:pwd\n    ".getcwd()."\n\n"
-    call inputsave()
-    let searchstring = input(helptext . ":copen | silent grep! ")
-    call inputrestore()
-    if(len(searchstring) > 0)
-        exec "copen"
-        exec "silent grep! " . searchstring
-    endif
-endfunction
-
 function! WriteToPdf() abort
     let current_dir = escape(expand("%:p:h"), ' ') . ";"
     let listings_file = findfile(".listings-setup.tex", current_dir)
