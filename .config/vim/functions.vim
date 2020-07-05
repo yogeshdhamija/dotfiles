@@ -215,48 +215,6 @@ function! DeleteHiddenBuffers() abort
     echo "Closed ".closed." hidden buffers"
 endfunction
 
-function! LoadSessionIfVimNotLaunchedWithArgs() abort
-    if argc() == 0 && !exists("g:std_in")
-        if filereadable(expand('.vim/session.vim'))
-            silent call StartKeepingSession()
-            execute 'silent source .vim/session.vim'
-            redraw!
-            echo ":source ".g:vim_session_folder."/.vim/session.vim"
-        endif
-    endif
-endfunction
-
-function! SaveSession() abort
-    let sessionoptions = &sessionoptions
-    try
-        set sessionoptions-=options
-        set sessionoptions+=tabpages
-        call mkdir(g:vim_session_folder."/.vim", "p", "0700")
-        execute 'mksession! '.g:vim_session_folder.'/.vim/session.vim'
-    finally
-        let &sessionoptions = sessionoptions
-    endtry
-endfunction
-
-function! StopKeepingSession() abort
-    exe "silent !rm ".g:vim_session_folder."/.vim/session.vim > /dev/null 2>&1"
-    augroup auto_saving_sessions
-        autocmd!
-    augroup END
-    redraw!
-    echo "Executed '!rm ".g:vim_session_folder."/.vim/session.vim' and removed autocmd to mksession"
-endfunction
-
-function! StartKeepingSession() abort
-    augroup auto_saving_sessions
-        autocmd!
-        autocmd FileWritePost,VimLeavePre * call SaveSession()
-    augroup END
-    let g:vim_session_folder = getcwd()
-    redraw!
-    echo "Added autocmd to execute 'mksession! ".g:vim_session_folder."/.vim/session.vim'."
-endfunction
-
 function! EnableWritingMode() abort
     let g:writingmode=1
     call LoadColors()

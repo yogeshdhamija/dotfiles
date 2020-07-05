@@ -5,6 +5,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 " Plugins
     if !exists("plugins")
         let plugins = [ 
+            \ ['ydhamija96/uss-sessions.vim', {}],
             \ ['editorconfig/editorconfig-vim', {}],
             \ ['psliwka/vim-smoothie', {}],
             \ ['mhinz/vim-signify', {}],
@@ -83,11 +84,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     if DetectWsl()
         call SetClipboardForWslTerminal()
     endif
-    augroup load_session
-        autocmd!
-        autocmd StdinReadPre * let g:std_in=1
-        autocmd VimEnter * nested call LoadSessionIfVimNotLaunchedWithArgs()
-    augroup END
     call LoadColors()
     let g:indent_guides_enable_on_vim_startup = 1
     if !has('nvim')
@@ -206,10 +202,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         command! ColorSchemeOff call UnloadColors()
     " Command to save and generate .pdf from .md
         command! PDF w | call WriteToPdf()
-    " Start saving the session
-        command! StartKeepingSession call StartKeepingSession()
-    " Delete vim session, and stop saving
-        command! StopKeepingSession call StopKeepingSession()
     " Often used LSP stuff
         command! -range Actions <line1>,<line2>CocAction
         command! -range ACT <line1>,<line2>Actions
