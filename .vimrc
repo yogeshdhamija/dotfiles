@@ -8,6 +8,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['ydhamija96/uss-find.vim', {}],
             \ ['ydhamija96/uss-sessions.vim', {}],
             \ ['ydhamija96/uss-mouse.vim', {}],
+            \ ['ydhamija96/uss-clean-buffers.vim', {}],
             \ ['editorconfig/editorconfig-vim', {}],
             \ ['psliwka/vim-smoothie', {}],
             \ ['mhinz/vim-signify', {}],
@@ -202,9 +203,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 
         command! Rename call CocActionAsync("rename")
         command! REN Rename
-
-        command! CloseHiddenBuffers call DeleteHiddenBuffers()
-        command! CLO CloseHiddenBuffers
 
         command! -range=% Format <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
         command! -range=% FOR <line1>,<line2>Format
