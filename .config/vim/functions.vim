@@ -175,21 +175,6 @@ function! WriteToPdf() abort
     exe '!pandoc "%:p" --listings -H "' . listings_file . '" -o "%:p:r.pdf" -V geometry:margin=1in'
 endfunction
 
-function! EnterInsertAfterCursor() abort
-    if col('.') == col('$') - 1
-        startinsert!
-    else
-        startinsert
-    endif
-endfunction
-
-function! EnterInsertIfFileOrIfBottomOfTerminal() abort
-    if ( getbufvar(bufname("%"), "&buftype", "NONE") != "terminal" ) 
-                \ || (line('w$') >= line('$'))
-        call EnterInsertAfterCursor()
-    endif
-endfunction
-
 function! DeleteHiddenBuffers() abort
     let tpbl=[]
     let closed = 0

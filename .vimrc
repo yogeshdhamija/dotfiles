@@ -7,6 +7,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         let plugins = [ 
             \ ['ydhamija96/uss-find.vim', {}],
             \ ['ydhamija96/uss-sessions.vim', {}],
+            \ ['ydhamija96/uss-mouse.vim', {}],
             \ ['editorconfig/editorconfig-vim', {}],
             \ ['psliwka/vim-smoothie', {}],
             \ ['mhinz/vim-signify', {}],
@@ -95,7 +96,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     endif
 
-
 " Remaps
     " Directory tree settings
         augroup dirvish_config
@@ -123,11 +123,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             autocmd!
             autocmd TextYankPost * nnoremap <Esc> <Esc>:noh<CR>
         augroup END
-    " Remap left mouse release to put in insert mode
-        nnoremap <LeftMouse> <C-\><C-n><LeftMouse>
-        inoremap <LeftMouse> <C-\><C-n><LeftMouse>
-        nnoremap <silent> <LeftRelease> <C-\><C-n><LeftRelease>:call EnterInsertIfFileOrIfBottomOfTerminal()<CR>
-        inoremap <silent> <LeftRelease> <C-\><C-n><LeftRelease>:call EnterInsertIfFileOrIfBottomOfTerminal()<CR>
     " Remap Control+C in visual mode to copy to system clipboard (and Command+C for some terminals)
         vnoremap <C-c> "+y
         vnoremap <D-c> "+y
