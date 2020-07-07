@@ -4,36 +4,43 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 
 " Plugins
     if !exists("plugins")
-        let plugins = [ 
+        let convenience_plugins = [
             \ ['ydhamija96/uss-find.vim', {}],
-            \ ['ydhamija96/uss-sessions.vim', {}],
             \ ['ydhamija96/uss-mouse.vim', {}],
             \ ['ydhamija96/uss-clean-buffers.vim', {}],
             \ ['ydhamija96/uss-asterisk.vim', {}],
-            \ ['editorconfig/editorconfig-vim', {}],
-            \ ['psliwka/vim-smoothie', {}],
-            \ ['mhinz/vim-signify', {}],
             \ ['tpope/vim-repeat', {}],
             \ ['tpope/vim-commentary', {}],
             \ ['tpope/vim-surround', {}],
             \ ['tpope/vim-abolish', {}],
             \ ['michaeljsmith/vim-indent-object', {}],
-            \ ['morhetz/gruvbox', {}],
-            \ ['nathanaelkane/vim-indent-guides', {}],
-            \ ['itchyny/lightline.vim', {}],
+            \ ['junegunn/vim-easy-align', {}],
+        \ ]
+        let functionality_plugins = [
+            \ ['ydhamija96/uss-sessions.vim', {}],
             \ ['tpope/vim-fugitive', {}],
             \ ['tpope/vim-rhubarb', {}],
             \ ['junegunn/fzf', {}],
             \ ['junegunn/fzf.vim', {}],
-            \ ['junegunn/vim-easy-align', {}],
-            \ ['junegunn/goyo.vim', {}],
-            \ ['junegunn/limelight.vim', {}],
             \ ['justinmk/vim-dirvish', {}],
+            \ ['editorconfig/editorconfig-vim', {}],
+        \ ]
+        let language_plugins = [
             \ ['neoclide/coc.nvim', {'branch': 'release'}],
             \ ['leafgarland/typescript-vim', {}],
             \ ['peitalin/vim-jsx-typescript', {}],
             \ ['uiiaoo/java-syntax.vim', {}]
         \ ]
+        let visual_plugins = [
+            \ ['psliwka/vim-smoothie', {}],
+            \ ['junegunn/goyo.vim', {}],
+            \ ['junegunn/limelight.vim', {}],
+            \ ['morhetz/gruvbox', {}],
+            \ ['nathanaelkane/vim-indent-guides', {}],
+            \ ['itchyny/lightline.vim', {}],
+            \ ['mhinz/vim-signify', {}],
+        \ ]
+        let plugins = convenience_plugins + functionality_plugins + language_plugins + visual_plugins
     endif
     if !exists("disabled_plugins")
         let disabled_plugins = []
