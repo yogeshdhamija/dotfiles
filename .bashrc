@@ -22,8 +22,7 @@ fi
 
 # get current branch and status of git repo
 function parse_git {
-    # Read only first line, which should always be the current branch.
-    read branch <<< "$(git branch 2> /dev/null)"
+    read branch <<< "$(git branch --show-current 2> /dev/null)"
 
     status=`git status 2>&1`
     declare -a bits
