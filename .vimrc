@@ -9,6 +9,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['ydhamija96/uss-sessions.vim', {}],
             \ ['ydhamija96/uss-mouse.vim', {}],
             \ ['ydhamija96/uss-clean-buffers.vim', {}],
+            \ ['ydhamija96/uss-asterisk.vim', {}],
             \ ['editorconfig/editorconfig-vim', {}],
             \ ['psliwka/vim-smoothie', {}],
             \ ['mhinz/vim-signify', {}],
@@ -111,10 +112,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         xmap ga <Plug>(EasyAlign)
     " Start interactive EasyAlign for a motion/text object (e.g. gaip)
         nmap ga <Plug>(EasyAlign)
-    " Pressing * does not move cursor
-        nnoremap * :let old=@"<CR>yiw:let @/="\\V\\C\\<".escape(@", '/\')."\\>"<CR>:set hlsearch<CR>:let @"=old<CR>:redraw!<CR>:echo "/".@/<CR>
-    " Pressing * in visual mode searches for selection
-        vnoremap * :<C-U>let old=@"<CR>gvy:let @/="\\V\\C".escape(@", '/\')<CR>:set hlsearch<CR>:let @"=old<CR>:redraw!<CR>:echo "/".@/<CR>
     " Make pasting from clipboard safer
         inoremap <C-R>+ <C-R><C-R>+
     " Pressing <Esc> in normal mode removes search highlights
