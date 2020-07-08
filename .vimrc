@@ -141,31 +141,12 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         " \tl -> Terminal window, right (aka l)
         " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
         if has('nvim')
-            nnoremap \t :terminal<CR>:startinsert<CR>
-            nnoremap \tt :terminal<CR>:startinsert<CR>
-            nnoremap \th :vsplit<CR><C-W>H:terminal<CR>:startinsert<CR>
-            nnoremap \tj :25split<CR>:terminal<CR>:startinsert<CR>
-            nnoremap \tk :split<CR><C-W>K25<C-W>_:terminal<CR>:startinsert<CR>
-            nnoremap \tl :vsplit<CR>:terminal<CR>:startinsert<CR>
+            call CreateSplitMappings("nnore", "\\t", ":terminal<CR>:startinsert<CR>")
         else
-            nnoremap \t :terminal ++curwin<CR>
-            nnoremap \tt :terminal ++curwin<CR>
-            nnoremap \th :vsplit<CR><C-W>H:terminal ++curwin<CR>
-            nnoremap \tj :25split<CR>:terminal ++curwin<CR>
-            nnoremap \tk :split<CR><C-W>K25<C-W>_:terminal ++curwin<CR>
-            nnoremap \tl :vsplit<CR>:terminal ++curwin<CR>
+            call CreateSplitMappings("nnore", "\\t", ":terminal ++curwin<CR>")
         endif
     " \d -> Directory listing
-        " \dh -> Directory listing, left (aka h)
-        " \dj -> Directory listing, down (aka j)
-        " \dk -> Directory listing, up (aka k)
-        " \dl -> Directory listing, right (aka l)
-        nmap \d -
-        nmap \dd -
-        nmap \dh <C-W>v<C-W>H-
-        nmap \dl <C-W>v<C-W>L-
-        nmap \dk <C-W>s<C-W>K-
-        nmap \dj <C-W>s<C-W>J-
+        call CreateSplitMappings("n", "\\d", "-")
     " \o -> Open
         nnoremap \o :FZF<CR>
     " \b -> list Buffers
@@ -176,15 +157,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         nnoremap \a :Actions<CR>
         vnoremap \a :'<,'>Actions<CR>
     " \gd -> Goto Definition
-        nnoremap \gd :call CocActionAsync("jumpDefinition")<CR>
-        nnoremap \gdd :call CocActionAsync("jumpDefinition")<CR>
-    " \gdl -> Goto Definition in right (aka L) split
-        nnoremap \gdl :vsplit<CR>:call CocActionAsync("jumpDefinition")<CR>
+        call CreateSplitMappings("nnore", "\\gd", ":call CocActionAsync('jumpDefinition')<CR>")
     " \gr -> Goto References
-        nnoremap \gr :call CocActionAsync("jumpReferences")<CR>
-        nnoremap \grr :call CocActionAsync("jumpReferences")<CR>
-    " \grl -> Goto References in right (aka L) split
-        nnoremap \grl :vsplit<CR>:call CocActionAsync("jumpReferences")<CR>
+        call CreateSplitMappings("nnore", "\\gr", ":call CocActionAsync('jumpReferences')<CR>")
     " \h -> Help
         nnoremap \h :call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
         inoremap \h <C-O>:call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
