@@ -186,7 +186,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " \grl -> Goto References in right (aka L) split
         nnoremap \grl :vsplit<CR>:call CocActionAsync("jumpReferences")<CR>
     " \h -> Help
-        nnoremap \h :call CocActionAsync("doHover")<CR>
+        nnoremap \h :call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
+        inoremap \h <C-O>:call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
 
 " Commands
     " CD -> Change Directory to current open file
