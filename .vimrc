@@ -32,7 +32,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['uiiaoo/java-syntax.vim', {}]
         \ ]
         let visual_plugins = [
-            \ ['psliwka/vim-smoothie', {}],
             \ ['junegunn/goyo.vim', {}],
             \ ['junegunn/limelight.vim', {}],
             \ ['morhetz/gruvbox', {}],
@@ -192,7 +191,4 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         command! ERRS Errors
         command! ERR Error
 
-if exists('g:fvim_loaded')
-    call SourceFileIfExists("~/.vimrc.fvim")
-endif
 call SourceFileIfExists("~/.vimrc.local")
