@@ -14,6 +14,9 @@ if [ -f ~/.shell_aliases ]; then
   source ~/.shell_aliases
 fi
 
+
+# ===================== CONTENT ===============================================
+
 # Set up LESS 
 export LESS="-RXF"
 
@@ -23,6 +26,12 @@ command -v ag > /dev/null && export FZF_CTRL_T_COMMAND='ag --follow --unrestrict
 # Set up FZF to use ripgrep (rg)
 command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --follow --files --no-messages -uuu'
 command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --follow --files --no-messages -uuu'
+
+command -v vim > /dev/null && export EDITOR="vim -u NONE"
+command -v nvim > /dev/null && export EDITOR="nvim -u NONE"
+
+
+# ===================== CONFIG STUFF ===============================================
 
 # Set env if vim config overrides set
 if [ -f ~/.vimrc.local ]; then
