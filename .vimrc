@@ -15,7 +15,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['tpope/vim-abolish', {}],
             \ ['michaeljsmith/vim-indent-object', {}],
             \ ['junegunn/vim-easy-align', {}],
-            \ ['kvngvikram/rightclick-macros', {}],
         \ ]
         let functionality_plugins = [
             \ ['ydhamija96/uss-sessions.vim', {}],
@@ -40,7 +39,13 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['itchyny/lightline.vim', {}],
             \ ['mhinz/vim-signify', {}],
         \ ]
+        let nvim_only_plugins = [
+            \ ['kvngvikram/rightclick-macros', {}],
+        \ ]
         let plugins = convenience_plugins + functionality_plugins + language_plugins + visual_plugins
+        if (has('nvim'))
+            let plugins = plugins + nvim_only_plugins
+        endif
     endif
     if !exists("disabled_plugins")
         let disabled_plugins = []
@@ -105,23 +110,19 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     endif
     " kvngvikram/rightclick-macros
-        let g:rightclick_normal_items =  ['undo',     'redo',    'paste (+)']
-        let g:rightclick_normal_macros = ['u',        '',      '"+p'    ]
-        let g:rightclick_visual_items =  ['copy (+)', 'cut (+)', 'paste (+)']
-        let g:rightclick_visual_macros = ['"+y',      '"+d',     '"+p'    ]
-        let g:rightclick_nvim_boarder_nw = "."
-        let g:rightclick_nvim_boarder_ne = "."
-        let g:rightclick_nvim_boarder_sw = "'"
-        let g:rightclick_nvim_boarder_se = "'"
-        let g:rightclick_nvim_boarder_h  = "-"
-        let g:rightclick_nvim_boarder_v  = "|"
+        let g:rightclick_normal_items    = ['undo',     'redo',    'paste (+)']
+        let g:rightclick_normal_macros   = ['u',        '',      '"+p'    ]
+        let g:rightclick_visual_items    = ['copy (+)', 'cut (+)', 'paste (+)']
+        let g:rightclick_visual_macros   = ['"+y',      '"+d',     '"+p'    ]
 
 " Remaps
     " kvngvikram/rightclick-macros
-        let g:rightclick_default_mappings = 0
-        nnoremap <silent> <RightMouse> <LeftMouse>:call Rightclick_normal()<CR>
-        inoremap <silent> <RightMouse> <Esc>:call Rightclick_normal()<CR>
-        vnoremap <silent> <RightMouse> <LeftMouse>:call Rightclick_visual()<CR>
+        if(has('nvim'))
+            let g:rightclick_default_mappings = 0
+            nnoremap <silent> <RightMouse> <LeftMouse>:call Rightclick_normal()<CR>
+            inoremap <silent> <RightMouse> <Esc>:call Rightclick_normal()<CR>
+            vnoremap <silent> <RightMouse> <LeftMouse>:call Rightclick_visual()<CR>
+        endif
     " Directory tree settings
         augroup dirvish_config
             autocmd!
