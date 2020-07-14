@@ -109,6 +109,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             set termkey=<C-\-n>
         endif
     endif
+    set updatetime=300
+    autocmd CursorHold * silent call CocActionAsync('highlight')
     " kvngvikram/rightclick-macros
         let g:rightclick_normal_items    = ['undo',     'redo',    'paste (+)']
         let g:rightclick_normal_macros   = ['u',        '',      '"+p'    ]
