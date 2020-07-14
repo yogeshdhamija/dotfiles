@@ -139,7 +139,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " Start interactive EasyAlign for a motion/text object (e.g. gaip)
         nmap ga <Plug>(EasyAlign)
     " Make pasting from clipboard safer
-        inoremap <C-R>+ <C-R><C-R>+
+        inoremap <C-R> <C-R><C-O>
     " Pressing <Esc> in normal mode removes search highlights
         " augroup because of vim issue https://github.com/vim/vim/issues/3080
         " Note: remapping on every yank might cause lag
