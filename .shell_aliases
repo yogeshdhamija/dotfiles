@@ -19,7 +19,7 @@ command -v rg > /dev/null && alias "grep"="rg -uuu"
 # ============ GENERAL ==============
 
 alias ":q"="exit"
-alias ":e"="vim"
+alias ":e"="$EDITOR"
 alias ":ew"="vim +WritingModeOn"
 
 # ============ GIT ==============

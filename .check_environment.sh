@@ -1,7 +1,7 @@
 #!/bin/bash
 
 declare -a EXECS=(
-    "nvim"
+    "code-insiders"
     "zsh"
     "rg"
     "jq"
@@ -12,7 +12,7 @@ declare -a EXECS=(
     "npm"
 )
 declare -a NAMES=(
-    "NeoVim"
+    "Visual Studio Code (Insiders Edition)"
     "ZShell"
     "Ripgrep"
     "jq"
@@ -23,7 +23,7 @@ declare -a NAMES=(
     "npm"
 )
 declare -a ADDITIONAL1=(
-    "Text Editor"
+    "Code Editor / IDE. Insiders build because it has cloud settings sync."
     "Shell"
     "Grep"
     "JSON Parsing CLI tool"
@@ -34,7 +34,7 @@ declare -a ADDITIONAL1=(
     "JS package manager, vim uses it to install coc.nvim plugin (https://github.com/neoclide/coc.nvim), used for LSP"
 )
 declare -a ADDITIONAL2=(
-    "https://neovim.io/"
+    "https://code.visualstudio.com/"
     ""
     "https://github.com/BurntSushi/ripgrep"
     "https://stedolan.github.io/jq/"
