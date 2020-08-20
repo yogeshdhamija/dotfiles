@@ -1,7 +1,7 @@
 #!/bin/bash
 
 declare -a EXECS=(
-    "code-insiders"
+    "code"
     "zsh"
     "rg"
     "jq"
@@ -12,7 +12,7 @@ declare -a EXECS=(
     "npm"
 )
 declare -a NAMES=(
-    "Visual Studio Code (Insiders Edition)"
+    "Visual Studio Code"
     "ZShell"
     "Ripgrep"
     "jq"
@@ -23,7 +23,7 @@ declare -a NAMES=(
     "npm"
 )
 declare -a ADDITIONAL1=(
-    "Code Editor / IDE. Insiders build because it has cloud settings sync."
+    "Code Editor / IDE"
     "Shell"
     "Grep"
     "JSON Parsing CLI tool"
