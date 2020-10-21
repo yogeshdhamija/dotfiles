@@ -34,11 +34,11 @@ export PATH="/add_to_path/:$PATH"
 To clone this repo into your home directory:
 
 ```bash
-export CONFIG_REPO_URL=git@github.com:ydhamija96/config.git
+export CONFIG_REPO_URL=git@github.com:yogeshdhamija/config.git
 # OR
-export CONFIG_REPO_URL=https://github.com/ydhamija96/config.git
+export CONFIG_REPO_URL=https://github.com/yogeshdhamija/config.git
 
-source <(curl -Ls https://gist.githubusercontent.com/ydhamija96/c65eab14d4bfc62f2d3dd490b7f082d5/raw/8fafb174bab823f279eb882b28e67718b1ae9213/run.sh)
+source <(curl -Ls https://gist.githubusercontent.com/yogeshdhamija/c65eab14d4bfc62f2d3dd490b7f082d5/raw/8fafb174bab823f279eb882b28e67718b1ae9213/run.sh)
 ```
 
 This will set up a git repository in the folder `~/.cfg` with a detached working tree. This way, you can treat your home directory if as if it were a git repository -- using the `config` command, instead of `git` -- and it won't do crazy stuff like interfere with your other git repositories. Source: [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
