@@ -62,21 +62,21 @@ endfunction
 
 function! DisableLightline() abort
     if v:vim_did_enter
-        call lightline#disable()
+        silent! call lightline#disable()
     endif
     augroup lightline_augroup
         autocmd!
-        autocmd VimEnter * call lightline#disable()
+        autocmd VimEnter * silent! call lightline#disable()
     augroup END
 endfunction
 
 function! EnableLightline() abort
     if v:vim_did_enter
-        call lightline#enable()
+        silent! call lightline#enable()
     endif
     augroup lightline_augroup
         autocmd!
-        autocmd VimEnter * call lightline#enable()
+        autocmd VimEnter * silent! call lightline#enable()
     augroup END
 endfunction
 

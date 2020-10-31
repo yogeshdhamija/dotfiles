@@ -4,11 +4,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 
 " Plugins
     if !exists("plugins")
-        let convenience_plugins = [
-            \ ['ydhamija96/uss-find.vim', {}],
-            \ ['ydhamija96/uss-mouse.vim', {}],
-            \ ['ydhamija96/uss-clean-buffers.vim', {}],
-            \ ['ydhamija96/uss-asterisk.vim', {}],
+        let vim_idiomatic_plugins = [
+            \ ['yogeshdhamija/uss-asterisk.vim', {}],
             \ ['tpope/vim-repeat', {}],
             \ ['tpope/vim-commentary', {}],
             \ ['tpope/vim-surround', {}],
@@ -16,7 +13,12 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['michaeljsmith/vim-indent-object', {}],
             \ ['junegunn/vim-easy-align', {}],
         \ ]
-        let functionality_plugins = [
+        let interface_convenience_plugins = [
+            \ ['ydhamija96/uss-find.vim', {}],
+            \ ['ydhamija96/uss-mouse.vim', {}],
+            \ ['ydhamija96/uss-clean-buffers.vim', {}],
+        \ ]
+        let ide_like_functionality_plugins = [
             \ ['ydhamija96/uss-sessions.vim', {}],
             \ ['tpope/vim-fugitive', {}],
             \ ['tpope/vim-rhubarb', {}],
@@ -39,12 +41,10 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['itchyny/lightline.vim', {}],
             \ ['mhinz/vim-signify', {}],
         \ ]
-        let nvim_only_plugins = [
-            \ ['kvngvikram/rightclick-macros', {}],
-        \ ]
-        let plugins = convenience_plugins + functionality_plugins + language_plugins + visual_plugins
-        if (has('nvim'))
-            let plugins = plugins + nvim_only_plugins
+        if(!exists('g:vscode'))
+            let plugins = vim_idiomatic_plugins + interface_convenience_plugins + ide_like_functionality_plugins + language_plugins + visual_plugins
+        else
+            let plugins = vim_idiomatic_plugins
         endif
     endif
     if !exists("disabled_plugins")
@@ -110,21 +110,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     endif
     set updatetime=300
-    autocmd CursorHold * silent call CocActionAsync('highlight')
-    " kvngvikram/rightclick-macros
-        let g:rightclick_normal_items    = ['undo',     'redo',    'paste (+)']
-        let g:rightclick_normal_macros   = ['u',        '',      '"+p'    ]
-        let g:rightclick_visual_items    = ['copy (+)', 'cut (+)', 'paste (+)']
-        let g:rightclick_visual_macros   = ['"+y',      '"+d',     '"+p'    ]
+    autocmd CursorHold * silent! call CocActionAsync('highlight')
 
 " Remaps
-    " kvngvikram/rightclick-macros
-        if(has('nvim'))
-            let g:rightclick_default_mappings = 0
-            nnoremap <silent> <RightMouse> <LeftMouse>:call Rightclick_normal()<CR>
-            inoremap <silent> <RightMouse> <Esc>:call Rightclick_normal()<CR>
-            vnoremap <silent> <RightMouse> <LeftMouse>:call Rightclick_visual()<CR>
-        endif
     " Directory tree settings
         augroup dirvish_config
             autocmd!
