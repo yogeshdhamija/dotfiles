@@ -245,10 +245,17 @@ function! SetClipboardForWslTerminal() abort
 endfunction
 
 function! CreateSplitMappings(mode, mapping, rhs) abort
-    execute a:mode.'map '.a:mapping.' '.a:rhs
-    execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.a:rhs
-    execute a:mode.'map '.a:mapping.'h :aboveleft vsplit<CR>'.a:rhs
-    execute a:mode.'map '.a:mapping.'l :belowright vsplit<CR>'.a:rhs
-    execute a:mode.'map '.a:mapping.'j :belowright split<CR>'.a:rhs
-    execute a:mode.'map '.a:mapping.'k :aboveleft split<CR>'.a:rhs
+    if(exists("g:vscode"))
+        execute a:mode.'map '.a:mapping.' '.a:rhs
+        execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.a:rhs
+        execute a:mode.'map '.a:mapping.'l :vsplit<CR>'.a:rhs
+        execute a:mode.'map '.a:mapping.'j :split<CR>'.a:rhs
+    else
+        execute a:mode.'map '.a:mapping.' '.a:rhs
+        execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.a:rhs
+        execute a:mode.'map '.a:mapping.'h :aboveleft vsplit<CR>'.a:rhs
+        execute a:mode.'map '.a:mapping.'l :belowright vsplit<CR>'.a:rhs
+        execute a:mode.'map '.a:mapping.'j :belowright split<CR>'.a:rhs
+        execute a:mode.'map '.a:mapping.'k :aboveleft split<CR>'.a:rhs
+    endif
 endfunction

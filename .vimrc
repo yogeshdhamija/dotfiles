@@ -151,7 +151,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         " \tl -> Terminal window, right (aka l)
         " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
         if exists('g:vscode')
-            call CreateSplitMappings("nnore", "\\t", ":call VSCodeCall(\"terminal.focus\")<CR>")
+            nnoremap \t :call VSCodeCall("terminal.focus")<CR>
         elseif has('nvim')
             call CreateSplitMappings("nnore", "\\t", ":terminal<CR>:startinsert<CR>")
         else
@@ -159,7 +159,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     " \d -> Directory listing
         if(exists('g:vscode'))
-            call CreateSplitMappings("nnore", "\\d", ":call VSCodeCall(\"workbench.files.action.showActiveFileInExplorer\")<CR>")
+            nnoremap \d :call VSCodeCall("workbench.files.action.showActiveFileInExplorer")<CR>
         else
             call CreateSplitMappings("n", "\\d", "-")
         endif
@@ -195,13 +195,13 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     " \gd -> Goto Definition
         if(exists('g:vscode'))
-            call CreateSplitMappings("nnore", "\\gd", ":call VSCodeCall('editor.action.revealDefinition')<CR>")
+            nnoremap \gd :call VSCodeCall('editor.action.revealDefinition')<CR>
         else
             call CreateSplitMappings("nnore", "\\gd", ":call CocActionAsync('jumpDefinition')<CR>")
         endif
     " \gr -> Goto References
         if(exists('g:vscode'))
-            call CreateSplitMappings("nnore", "\\gr", ":call VSCodeCall('editor.action.goToReferences')<CR>")
+            nnoremap \gr :call VSCodeCall('editor.action.goToReferences')<CR>
         else
             call CreateSplitMappings("nnore", "\\gr", ":call CocActionAsync('jumpReferences')<CR>")
         endif
@@ -217,7 +217,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 " Commands
     " Vscode-specific ":only" command
         if(exists("g:vscode"))
-            command! Only call VSCodeCall("workbench.action.closeSidebar") | call VSCodeCall("workbench.action.closePanel") | only
+            command! Only call VSCodeCall("workbench.action.closeSidebar") | call VSCodeCall("workbench.action.closePanel") | call VSCodeCall("workbench.action.closeEditorsInOtherGroups") | only
         else
             command! Only only
         endif
@@ -243,6 +243,13 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " Command to save and generate .pdf from .md
         if(!exists("g:vscode"))
             command! PDF w | call WriteToPdf()
+        endif
+    " Command to close other editors
+        if(exists("g:vscode"))
+            command! CloseHiddenBuffers call VSCodeCall("workbench.action.closeOtherEditors")
+            command! CLO CloseHiddenBuffers
+        else
+            " provided by plugin
         endif
     " Often used LSP stuff
         if(exists("g:vscode"))
