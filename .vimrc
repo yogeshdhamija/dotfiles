@@ -133,7 +133,10 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         " Note: remapping on every yank might cause lag
         augroup escape_mapping
             autocmd!
-            autocmd TextYankPost * nnoremap <Esc> <Esc>:noh<CR>
+            if(exists('g:vscode'))
+            else
+                autocmd TextYankPost * nnoremap <Esc> <Esc>:noh<CR>
+            endif
         augroup END
     " Remap Control+C in visual mode to copy to system clipboard (and Command+C for some terminals)
         vnoremap <C-c> "+y
@@ -147,56 +150,132 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         " \tk -> Terminal window, up (aka k)
         " \tl -> Terminal window, right (aka l)
         " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
-        if has('nvim')
+        if exists('g:vscode')
+            call CreateSplitMappings("nnore", "\\t", ":call VSCodeCall(\"terminal.focus\")<CR>")
+        elseif has('nvim')
             call CreateSplitMappings("nnore", "\\t", ":terminal<CR>:startinsert<CR>")
         else
             call CreateSplitMappings("nnore", "\\t", ":terminal ++curwin<CR>")
         endif
     " \d -> Directory listing
-        call CreateSplitMappings("n", "\\d", "-")
+        if(exists('g:vscode'))
+            call CreateSplitMappings("nnore", "\\d", ":call VSCodeCall(\"workbench.files.action.showActiveFileInExplorer\")<CR>")
+        else
+            call CreateSplitMappings("n", "\\d", "-")
+        endif
+    " \f -> Find
+        if(exists("g:vscode"))
+            nnoremap \f :call VSCodeCall("workbench.action.findInFiles")<CR>
+        else
+            " functionality provided by plugin
+        endif
     " \o -> Open
-        nnoremap \o :FZF<CR>
+        if(exists('g:vscode'))
+            nnoremap \o :call VSCodeCall("workbench.action.quickOpen")<CR>
+        else
+            nnoremap \o :FZF<CR>
+        endif
     " \b -> list Buffers
-        nnoremap \b :Buffers<CR>
+        if(exists('g:vscode'))
+            nnoremap \b :call VSCodeCall("workbench.files.action.focusOpenEditorsView")<CR>
+        else
+            nnoremap \b :Buffers<CR>
+        endif
     " \w -> list Windows
-        nnoremap \w :Windows<CR>
+        if(!exists('g:vscode'))
+            nnoremap \w :Windows<CR>
+        endif
     " \a -> code Action
-        nnoremap \a :Actions<CR>
-        vnoremap \a :'<,'>Actions<CR>
+        if(exists('g:vscode'))
+            nnoremap \a :Actions<CR>
+            vnoremap \a :Actions<CR>
+        else
+            nnoremap \a :Actions<CR>
+            vnoremap \a :'<,'>Actions<CR>
+        endif
     " \gd -> Goto Definition
-        call CreateSplitMappings("nnore", "\\gd", ":call CocActionAsync('jumpDefinition')<CR>")
+        if(exists('g:vscode'))
+            call CreateSplitMappings("nnore", "\\gd", ":call VSCodeCall('editor.action.revealDefinition')<CR>")
+        else
+            call CreateSplitMappings("nnore", "\\gd", ":call CocActionAsync('jumpDefinition')<CR>")
+        endif
     " \gr -> Goto References
-        call CreateSplitMappings("nnore", "\\gr", ":call CocActionAsync('jumpReferences')<CR>")
+        if(exists('g:vscode'))
+            call CreateSplitMappings("nnore", "\\gr", ":call VSCodeCall('editor.action.goToReferences')<CR>")
+        else
+            call CreateSplitMappings("nnore", "\\gr", ":call CocActionAsync('jumpReferences')<CR>")
+        endif
     " \h -> Help
-        nnoremap \h :call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
-        inoremap \h <C-O>:call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
+        if(exists('g:vscode'))
+            nnoremap \h :call VSCodeCall('editor.action.triggerParameterHints')<CR>
+            inoremap \h <C-O>:call VSCodeCall('editor.action.triggerParameterHints')<CR>
+        else
+            nnoremap \h :call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
+            inoremap \h <C-O>:call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
+        endif
 
 " Commands
+    " Vscode-specific ":only" command
+        if(exists("g:vscode"))
+            command! Only call VSCodeCall("workbench.action.closeSidebar") | call VSCodeCall("workbench.action.closePanel") | only
+        else
+            command! Only only
+        endif
+        command! ON Only
     " CD -> Change Directory to current open file
-        command! CD silent cd %:p:h | redraw! | echo ":cd %:p:h" 
+        if(!exists("g:vscode"))
+            command! CD silent cd %:p:h | redraw! | echo ":cd %:p:h" 
+        endif
     " CP -> Copy absolute filePath to + register (system clipboard)
-        command! CP let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')" 
+        if(!exists("g:vscode"))
+            command! CP let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')" 
+        endif
     " Writing Mode for distraction free editing
-        command! WritingModeOn call EnableWritingMode()
-        command! WritingModeOff call DisableWritingMode()
+        if(!exists("g:vscode"))
+            command! WritingModeOn call EnableWritingMode()
+            command! WritingModeOff call DisableWritingMode()
+        endif
     " Colorscheme on/off
-        command! ColorSchemeOn call LoadColors()
-        command! ColorSchemeOff call UnloadColors()
+        if(!exists("g:vscode"))
+            command! ColorSchemeOn call LoadColors()
+            command! ColorSchemeOff call UnloadColors()
+        endif
     " Command to save and generate .pdf from .md
-        command! PDF w | call WriteToPdf()
+        if(!exists("g:vscode"))
+            command! PDF w | call WriteToPdf()
+        endif
     " Often used LSP stuff
-        command! -range Actions <line1>,<line2>CocAction
-        command! -range ACT <line1>,<line2>Actions
+        if(exists("g:vscode"))
+            command! Actions call VSCodeCall("workbench.action.showCommands")
+            command! ACT Actions
+        else
+            command! -range Actions <line1>,<line2>CocAction
+            command! -range ACT <line1>,<line2>Actions
+        endif
 
-        command! Rename call CocActionAsync("rename")
+        if(exists("g:vscode"))
+            command! Rename call VSCodeCall('editor.action.rename')
+        else
+            command! Rename call CocActionAsync("rename")
+        endif
         command! REN Rename
 
-        command! -range=% Format <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
-        command! -range=% FOR <line1>,<line2>Format
+        if(exists("g:vscode"))
+            command! Format call VSCodeCall('editor.action.formatDocument')
+            command! FOR Format
+        else
+            command! -range=% Format <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
+            command! -range=% FOR <line1>,<line2>Format
+        endif
 
-        command! Error call CocActionAsync("diagnosticInfo")
-        command! Errors CocList --normal diagnostics
-        command! ERRS Errors
-        command! ERR Error
+        if(exists("g:vscode"))
+            command! Errors call VSCodeCall("workbench.actions.view.problems")
+            command! ERRS Errors
+        else
+            command! Error call CocActionAsync("diagnosticInfo")
+            command! Errors CocList --normal diagnostics
+            command! ERRS Errors
+            command! ERR Error
+        endif
 
 call SourceFileIfExists("~/.vimrc.local")
