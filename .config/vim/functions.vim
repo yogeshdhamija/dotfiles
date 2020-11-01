@@ -245,17 +245,24 @@ function! SetClipboardForWslTerminal() abort
 endfunction
 
 function! CreateSplitMappings(mode, mapping, rhs) abort
-    if(exists("g:vscode"))
-        execute a:mode.'map '.a:mapping.' '.a:rhs
-        execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.a:rhs
-        execute a:mode.'map '.a:mapping.'l :vsplit<CR>'.a:rhs
-        execute a:mode.'map '.a:mapping.'j :split<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.' '.a:rhs
+    execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.a:rhs
+    execute a:mode.'map '.a:mapping.'h :aboveleft vsplit<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'l :belowright vsplit<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'j :belowright split<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'k :aboveleft split<CR>'.a:rhs
+endfunction
+
+function! OpenVSCodeCommandsInVisualMode()
+    normal! gv
+    let visualmode = visualmode()
+    if visualmode == "V"
+        let startLine = line("v")
+        let endLine = line(".")
+        call VSCodeNotifyRange("workbench.action.showCommands", startLine, endLine, 1)
     else
-        execute a:mode.'map '.a:mapping.' '.a:rhs
-        execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.a:rhs
-        execute a:mode.'map '.a:mapping.'h :aboveleft vsplit<CR>'.a:rhs
-        execute a:mode.'map '.a:mapping.'l :belowright vsplit<CR>'.a:rhs
-        execute a:mode.'map '.a:mapping.'j :belowright split<CR>'.a:rhs
-        execute a:mode.'map '.a:mapping.'k :aboveleft split<CR>'.a:rhs
+        let startPos = getpos("v")
+        let endPos = getpos(".")
+        call VSCodeNotifyRangePos("workbench.action.showCommands", startPos[1], endPos[1], startPos[2], endPos[2], 1)
     endif
 endfunction
