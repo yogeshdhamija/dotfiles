@@ -128,16 +128,12 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         nmap ga <Plug>(EasyAlign)
     " Make pasting from clipboard safer
         inoremap <C-R> <C-R><C-O>
-    " Pressing <Esc> in normal mode removes search highlights
-        " augroup because of vim issue https://github.com/vim/vim/issues/3080
-        " Note: remapping on every yank might cause lag
-        augroup escape_mapping
-            autocmd!
-            if(exists('g:vscode'))
-            else
-                autocmd TextYankPost * nnoremap <Esc> <Esc>:noh<CR>
-            endif
-        augroup END
+    " \c -> Clear highlights
+        if(exists('g:vscode'))
+            nnoremap \c <Esc>:noh<CR>:call VSCodeCall("workbench.action.closeSidebar")<CR>:call VSCodeCall("workbench.action.closePanel")<CR>
+        else
+            nnoremap \c <Esc>:noh<CR>
+        endif
     " Remap Control+C in visual mode to copy to system clipboard (and Command+C for some terminals)
         vnoremap <C-c> "+y
         vnoremap <D-c> "+y
@@ -207,8 +203,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     " \h -> Help
         if(exists('g:vscode'))
-            nnoremap \h :call VSCodeCall('editor.action.triggerParameterHints')<CR>
-            inoremap \h <C-O>:call VSCodeCall('editor.action.triggerParameterHints')<CR>
+            nnoremap \h :call VSCodeCall('editor.action.showHover')<CR>
         else
             nnoremap \h :call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
             inoremap \h <C-O>:call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
