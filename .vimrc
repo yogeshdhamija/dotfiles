@@ -100,7 +100,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     if DetectWsl()
         call SetClipboardForWslTerminal()
     endif
-    call LoadColors()
+    if(!exists("g:vscode"))
+        call LoadColors()
+    endif
     let g:indent_guides_enable_on_vim_startup = 1
     if !has('nvim')
         if exists('+termwinkey')
