@@ -221,7 +221,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 " Commands
     " Vscode-specific ":only" command
         if(exists("g:vscode"))
-            command! Only call VSCodeCall("workbench.action.closeSidebar") | call VSCodeCall("workbench.action.closePanel") | call VSCodeCall("workbench.action.closeEditorsInOtherGroups") | only
+            command! Only call VSCodeCall("workbench.action.closeSidebar") | call VSCodeCall("workbench.action.closePanel") | call VSCodeCall("workbench.action.joinAllGroups") | only
         else
             command! Only only
         endif
