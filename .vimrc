@@ -115,12 +115,14 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     autocmd CursorHold * silent! call CocActionAsync('highlight')
 
 " Remaps
-    " Get folding working for VSCode
+    " Get folding working with vscode neovim plugin
     if(exists("g:vscode"))
         nnoremap zM :call VSCodeCall('editor.foldAll')<CR>
         nnoremap zR :call VSCodeCall('editor.unfoldAll')<CR>
         nnoremap zm :call VSCodeCall('editor.fold')<CR>
         nnoremap zr :call VSCodeCall('editor.unfold')<CR>
+        nmap j gj
+        nmap k gk
     endif
     " Directory tree settings
         augroup dirvish_config
