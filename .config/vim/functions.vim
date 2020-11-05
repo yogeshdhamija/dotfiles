@@ -253,16 +253,9 @@ function! CreateSplitMappings(mode, mapping, rhs) abort
     execute a:mode.'map '.a:mapping.'k :aboveleft split<CR>'.a:rhs
 endfunction
 
-function! OpenVSCodeCommandsInVisualMode()
+function! ExecuteVSCodeCommandInVisualMode(command_name) abort
     normal! gv
-    let visualmode = visualmode()
-    if visualmode == "V"
-        let startLine = line("v")
-        let endLine = line(".")
-        call VSCodeNotifyRange("workbench.action.showCommands", startLine, endLine, 1)
-    else
-        let startPos = getpos("v")
-        let endPos = getpos(".")
-        call VSCodeNotifyRangePos("workbench.action.showCommands", startPos[1], endPos[1], startPos[2], endPos[2], 1)
-    endif
+    let startPos = getpos("v")
+    let endPos = getpos(".")
+    call VSCodeNotifyRangePos(a:command_name, startPos[1], endPos[1], startPos[2], endPos[2], 1)
 endfunction
