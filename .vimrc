@@ -185,7 +185,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     " \b -> list Buffers
         if(exists('g:vscode'))
-            nnoremap \b :call VSCodeCall("workbench.files.action.focusOpenEditorsView")<CR>
+            nnoremap \b :call VSCodeNotify("open-buffers.openBuffer")<CR>
         else
             nnoremap \b :Buffers<CR>
         endif
