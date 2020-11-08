@@ -185,12 +185,14 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     " \b -> list Buffers
         if(exists('g:vscode'))
-            nnoremap \b :call VSCodeNotify("open-buffers.openBuffer")<CR>
+            nnoremap \b :call VSCodeNotify("workbench.action.openPreviousEditorFromHistory")<CR>
         else
             nnoremap \b :Buffers<CR>
         endif
     " \w -> list Windows
-        if(!exists('g:vscode'))
+        if(exists('g:vscode'))
+            nnoremap \w :call VSCodeNotify("workbench.files.action.focusOpenEditorsView")<CR>
+        else
             nnoremap \w :Windows<CR>
         endif
     " \a -> code Action
@@ -253,7 +255,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     " Command to close other editors
         if(exists("g:vscode"))
-            command! CloseHiddenBuffers call VSCodeCall("workbench.action.closeOtherEditors")
+            command! CloseHiddenBuffers call VSCodeCall("workbench.action.clearEditorHistory")
             command! CLO CloseHiddenBuffers
         else
             " provided by plugin
