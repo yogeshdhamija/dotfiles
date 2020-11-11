@@ -142,7 +142,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         inoremap <C-R> <C-R><C-O>
     " \c -> Clear highlights
         if(exists('g:vscode'))
-            nnoremap \c <Esc>:noh<CR>:call VSCodeCall("workbench.action.closeSidebar")<CR>:call VSCodeCall("workbench.action.closePanel")<CR>
+            nnoremap \c <Esc>:noh<CR>:call VSCodeCall("workbench.action.closeSidebar")<CR>:call VSCodeCall("workbench.action.closePanel")<CR>:call VSCodeCall("notifications.hideToasts")<CR>
         else
             nnoremap \c <Esc>:noh<CR>
         endif
