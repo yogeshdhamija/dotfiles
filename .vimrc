@@ -224,6 +224,13 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
 
 " Commands
+    " Vscode-specific ":only" command
+        if(exists("g:vscode"))
+            command! Only call VSCodeCall("workbench.action.closeSidebar") | call VSCodeCall("workbench.action.closePanel") | call VSCodeCall("workbench.action.closeEditorsInOtherGroups")
+        else
+            command! Only only
+        endif
+        command! ON Only
     " CD -> Change Directory to current open file
         if(!exists("g:vscode"))
             command! CD silent cd %:p:h | redraw! | echo ":cd %:p:h" 
