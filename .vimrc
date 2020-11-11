@@ -120,7 +120,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         nnoremap zM :call VSCodeCall('editor.foldAll')<CR>
         nnoremap zR :call VSCodeCall('editor.unfoldAll')<CR>
         nnoremap zc :call VSCodeCall('editor.fold')<CR>
+        nnoremap zC :call VSCodeCall('editor.foldRecursively')<CR>
         nnoremap zo :call VSCodeCall('editor.unfold')<CR>
+        nnoremap zO :call VSCodeCall('editor.unfoldRecursively')<CR>
         nnoremap za :call VSCodeCall('editor.toggleFold')<CR>
         nmap j gj
         nmap k gk
