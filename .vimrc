@@ -257,7 +257,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     " Command to close other editors
         if(exists("g:vscode"))
-            command! CloseHiddenBuffers call VSCodeCall("workbench.action.clearEditorHistory")
+            command! CloseHiddenBuffers call VSCodeCall("workbench.action.clearEditorHistory") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup")
             command! CLO CloseHiddenBuffers
         else
             " provided by plugin
