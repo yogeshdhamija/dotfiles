@@ -127,6 +127,12 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         nmap j gj
         nmap k gk
     endif
+    "Get navigating marks working with vscode neovim plugin
+        " (also relies on VSCode Bookmarks plugin)
+    if(exists("g:vscode"))
+        nnoremap m :call ExecuteVSCodeCommandInVisualMode('bookmarks.toggleLabeled')<CR>
+        nnoremap ` :call VSCodeCall('bookmarks.listFromAllFiles')<CR>
+    endif
     " Directory tree settings
         augroup dirvish_config
             autocmd!
