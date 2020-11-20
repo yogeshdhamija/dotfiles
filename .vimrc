@@ -239,6 +239,12 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             command! Only only
         endif
         command! ON Only
+    " DM -> Delete all Marks
+        if(exists("g:vscode"))
+            command! DM call VSCodeCall("bookmarks.clearFromAllFiles")
+        else
+            command! DM delmarks a-zA-Z0-9
+        endif
     " CD -> Change Directory to current open file
         if(!exists("g:vscode"))
             command! CD silent cd %:p:h | redraw! | echo ":cd %:p:h" 
