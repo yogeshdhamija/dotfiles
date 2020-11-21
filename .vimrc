@@ -130,7 +130,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     "Get navigating marks working with vscode neovim plugin
         " (also relies on VSCode Bookmarks plugin)
     if(exists("g:vscode"))
-        nnoremap m :call ExecuteVSCodeCommandInVisualMode('bookmarks.toggleLabeled')<CR>
+        nnoremap m v<Esc>:call ExecuteVSCodeCommandInVisualMode('bookmarks.toggleLabeled')<CR><Esc>
         nnoremap ` :call VSCodeCall('bookmarks.listFromAllFiles')<CR>
     endif
     " Directory tree settings
