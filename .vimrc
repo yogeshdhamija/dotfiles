@@ -7,7 +7,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         let vim_idiomatic_plugins = [
             \ ['yogeshdhamija/uss-asterisk.vim', {}],
             \ ['tpope/vim-repeat', {}],
-            \ ['tpope/vim-commentary', {}],
             \ ['tpope/vim-surround', {}],
             \ ['tpope/vim-abolish', {}],
             \ ['michaeljsmith/vim-indent-object', {}],
@@ -19,6 +18,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['ydhamija96/uss-clean-buffers.vim', {}],
         \ ]
         let ide_like_functionality_plugins = [
+            \ ['tpope/vim-commentary', {}],
             \ ['ydhamija96/uss-sessions.vim', {}],
             \ ['tpope/vim-fugitive', {}],
             \ ['tpope/vim-rhubarb', {}],
@@ -133,6 +133,14 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         nnoremap m v<Esc>:call ExecuteVSCodeCommandInVisualMode('bookmarks.toggleLabeled')<CR><Esc>
         nnoremap ` :call VSCodeCall('bookmarks.listFromAllFiles')<CR>
     endif
+    "Add commenting to vscode neovim plugin
+        if(exists("g:vscode"))
+            xmap gc  <Plug>VSCodeCommentary
+            nmap gc  <Plug>VSCodeCommentary
+            omap gc  <Plug>VSCodeCommentary
+            nmap gcc <Plug>VSCodeCommentaryLine
+        endif
+
     " Directory tree settings
         augroup dirvish_config
             autocmd!
