@@ -117,13 +117,13 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 " Remaps
     " Get folding working with vscode neovim plugin
     if(exists("g:vscode"))
-        nnoremap zM :call VSCodeCall('editor.foldAll')<CR>
-        nnoremap zR :call VSCodeCall('editor.unfoldAll')<CR>
-        nnoremap zc :call VSCodeCall('editor.fold')<CR>
-        nnoremap zC :call VSCodeCall('editor.foldRecursively')<CR>
-        nnoremap zo :call VSCodeCall('editor.unfold')<CR>
-        nnoremap zO :call VSCodeCall('editor.unfoldRecursively')<CR>
-        nnoremap za :call VSCodeCall('editor.toggleFold')<CR>
+        nnoremap zM :call VSCodeNotify('editor.foldAll')<CR>
+        nnoremap zR :call VSCodeNotify('editor.unfoldAll')<CR>
+        nnoremap zc :call VSCodeNotify('editor.fold')<CR>
+        nnoremap zC :call VSCodeNotify('editor.foldRecursively')<CR>
+        nnoremap zo :call VSCodeNotify('editor.unfold')<CR>
+        nnoremap zO :call VSCodeNotify('editor.unfoldRecursively')<CR>
+        nnoremap za :call VSCodeNotify('editor.toggleFold')<CR>
         nmap j gj
         nmap k gk
     endif
@@ -131,7 +131,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         " (also relies on VSCode Bookmarks plugin)
     if(exists("g:vscode"))
         nnoremap m v<Esc>:call ExecuteVSCodeCommandInVisualMode('bookmarks.toggleLabeled')<CR><Esc>
-        nnoremap ` :call VSCodeCall('bookmarks.listFromAllFiles')<CR>
+        nnoremap ` :call VSCodeNotify('bookmarks.listFromAllFiles')<CR>
     endif
     "Add commenting to vscode neovim plugin
         if(exists("g:vscode"))
@@ -158,7 +158,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         inoremap <C-R> <C-R><C-O>
     " \c -> Clear highlights
         if(exists('g:vscode'))
-            nnoremap \c <Esc>:noh<CR>:call VSCodeCall("workbench.action.closeSidebar")<CR>:call VSCodeCall("workbench.action.closePanel")<CR>:call VSCodeCall("notifications.hideToasts")<CR>
+            nnoremap \c <Esc>:noh<CR>:call VSCodeNotify("workbench.action.closeSidebar")<CR>:call VSCodeNotify("workbench.action.closePanel")<CR>:call VSCodeNotify("notifications.hideToasts")<CR>
         else
             nnoremap \c <Esc>:noh<CR>
         endif
@@ -175,7 +175,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         " \tl -> Terminal window, right (aka l)
         " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
         if exists('g:vscode')
-            nnoremap \t :call VSCodeCall("terminal.focus")<CR>
+            nnoremap \t :call VSCodeNotify("terminal.focus")<CR>
         elseif has('nvim')
             call CreateSplitMappings("nnore", "\\t", ":terminal<CR>:startinsert<CR>")
         else
@@ -183,19 +183,19 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     " \d -> Directory listing
         if(exists('g:vscode'))
-            nnoremap \d :call VSCodeCall("workbench.files.action.showActiveFileInExplorer")<CR>
+            nnoremap \d :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
         else
             call CreateSplitMappings("n", "\\d", "-")
         endif
     " \f -> Find
         if(exists("g:vscode"))
-            nnoremap \f :call VSCodeCall("workbench.action.findInFiles")<CR>
+            nnoremap \f :call VSCodeNotify("workbench.action.findInFiles")<CR>
         else
             " functionality provided by plugin
         endif
     " \o -> Open
         if(exists('g:vscode'))
-            nnoremap \o :call VSCodeCall("workbench.action.quickOpen")<CR>
+            nnoremap \o :call VSCodeNotify("workbench.action.quickOpen")<CR>
         else
             nnoremap \o :FZF<CR>
         endif
@@ -213,7 +213,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     " \a -> code Action
         if(exists('g:vscode'))
-            nmap \a :call VSCodeCall("workbench.action.showCommands")<CR>
+            nmap \a :call VSCodeNotify("workbench.action.showCommands")<CR>
             vmap \a :call ExecuteVSCodeCommandInVisualMode("workbench.action.showCommands")<CR><Esc>
         else
             nnoremap \a :Actions<CR>
@@ -221,19 +221,19 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     " \gd -> Goto Definition
         if(exists('g:vscode'))
-            nnoremap \gd :call VSCodeCall('editor.action.revealDefinition')<CR>
+            nnoremap \gd :call VSCodeNotify('editor.action.revealDefinition')<CR>
         else
             call CreateSplitMappings("nnore", "\\gd", ":call CocActionAsync('jumpDefinition')<CR>")
         endif
     " \gr -> Goto References
         if(exists('g:vscode'))
-            nnoremap \gr :call VSCodeCall('editor.action.goToReferences')<CR>
+            nnoremap \gr :call VSCodeNotify('editor.action.goToReferences')<CR>
         else
             call CreateSplitMappings("nnore", "\\gr", ":call CocActionAsync('jumpReferences')<CR>")
         endif
     " \h -> Help
         if(exists('g:vscode'))
-            nnoremap \h :call VSCodeCall('editor.action.showHover')<CR>
+            nnoremap \h :call VSCodeNotify('editor.action.showHover')<CR>
         else
             nnoremap \h :call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
             inoremap \h <C-O>:call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
@@ -242,14 +242,14 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 " Commands
     " Vscode-specific ":only" command
         if(exists("g:vscode"))
-            command! Only call VSCodeCall("workbench.action.closeSidebar") | call VSCodeCall("workbench.action.closePanel") | call VSCodeCall("workbench.action.closeEditorsInOtherGroups")
+            command! Only call VSCodeNotify("workbench.action.closeSidebar") | call VSCodeNotify("workbench.action.closePanel") | call VSCodeNotify("workbench.action.closeEditorsInOtherGroups")
         else
             command! Only only
         endif
         command! ON Only
     " DM -> Delete all Marks
         if(exists("g:vscode"))
-            command! DM call VSCodeCall("bookmarks.clearFromAllFiles")
+            command! DM call VSCodeNotify("bookmarks.clearFromAllFiles")
         else
             command! DM delmarks a-zA-Z0-9
         endif
@@ -277,15 +277,15 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     " Command to close other editors
         if(exists("g:vscode"))
-            command! CloseHiddenBuffers call VSCodeCall("workbench.action.clearEditorHistory") | call VSCodeCall("workbench.action.splitEditor") | call VSCodeCall("workbench.action.closeActiveEditor") |
-                \ call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup")
+            command! CloseHiddenBuffers call VSCodeNotify("workbench.action.clearEditorHistory") | call VSCodeNotify("workbench.action.splitEditor") | call VSCodeNotify("workbench.action.closeActiveEditor") |
+                \ call VSCodeNotify("workbench.action.focusNextGroup") | call VSCodeNotify("workbench.action.focusNextGroup") | call VSCodeNotify("workbench.action.focusNextGroup") | call VSCodeNotify("workbench.action.focusNextGroup") | call VSCodeNotify("workbench.action.focusNextGroup") | call VSCodeNotify("workbench.action.focusNextGroup") | call VSCodeNotify("workbench.action.focusNextGroup") | call VSCodeNotify("workbench.action.focusNextGroup") | call VSCodeNotify("workbench.action.focusNextGroup") | call VSCodeNotify("workbench.action.focusNextGroup") | call VSCodeNotify("workbench.action.focusNextGroup") | call VSCodeNotify("workbench.action.focusNextGroup") | call VSCodeNotify("workbench.action.focusNextGroup") | call VSCodeNotify("workbench.action.focusNextGroup") | call VSCodeNotify("workbench.action.focusNextGroup") | call VSCodeNotify("workbench.action.focusNextGroup")
             command! CLO CloseHiddenBuffers
         else
             " provided by plugin
         endif
     " Often used LSP stuff
         if(exists("g:vscode"))
-            command! Actions call VSCodeCall("workbench.action.showCommands")
+            command! Actions call VSCodeNotify("workbench.action.showCommands")
             command! ACT Actions
         else
             command! -range Actions <line1>,<line2>CocAction
@@ -293,14 +293,14 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
 
         if(exists("g:vscode"))
-            command! Rename call VSCodeCall('editor.action.rename')
+            command! Rename call VSCodeNotify('editor.action.rename')
         else
             command! Rename call CocActionAsync("rename")
         endif
         command! REN Rename
 
         if(exists("g:vscode"))
-            command! Format call VSCodeCall('editor.action.formatDocument')
+            command! Format call VSCodeNotify('editor.action.formatDocument')
             command! FOR Format
         else
             command! -range=% Format <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
@@ -308,7 +308,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
 
         if(exists("g:vscode"))
-            command! Errors call VSCodeCall("workbench.actions.view.problems")
+            command! Errors call VSCodeNotify("workbench.actions.view.problems")
             command! ERRS Errors
         else
             command! Error call CocActionAsync("diagnosticInfo")
