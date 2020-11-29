@@ -5,7 +5,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 " Plugins
     if !exists("plugins")
         let vim_idiomatic_plugins = [
-            \ ['yogeshdhamija/uss-asterisk.vim', {}],
+            \ ['yogeshdhamija/better-asterisk-remap.vim', {}],
             \ ['tpope/vim-repeat', {}],
             \ ['tpope/vim-surround', {}],
             \ ['tpope/vim-abolish', {}],
@@ -13,13 +13,13 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['junegunn/vim-easy-align', {}],
         \ ]
         let interface_convenience_plugins = [
-            \ ['ydhamija96/uss-find.vim', {}],
-            \ ['ydhamija96/uss-mouse.vim', {}],
-            \ ['ydhamija96/uss-clean-buffers.vim', {}],
+            \ ['yogeshdhamija/find-in-dir-helper.vim', {}],
+            \ ['yogeshdhamija/enter-insert-on-click.vim', {}],
+            \ ['yogeshdhamija/close-hidden-buffers-command.vim', {}],
         \ ]
         let ide_like_functionality_plugins = [
             \ ['tpope/vim-commentary', {}],
-            \ ['ydhamija96/uss-sessions.vim', {}],
+            \ ['yogeshdhamija/save-sessions-per-directory.vim', {}],
             \ ['tpope/vim-fugitive', {}],
             \ ['tpope/vim-rhubarb', {}],
             \ ['junegunn/fzf', {}],
