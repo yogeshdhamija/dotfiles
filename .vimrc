@@ -187,12 +187,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         else
             call CreateSplitMappings("n", "\\d", "-")
         endif
-    " \f -> Find
-        if(exists("g:vscode"))
-            nnoremap \f :call VSCodeNotify("workbench.action.findInFiles")<CR>
-        else
-            " functionality provided by plugin
-        endif
     " \o -> Open
         if(exists('g:vscode'))
             nnoremap \o :call VSCodeNotify("workbench.action.quickOpen")<CR>
