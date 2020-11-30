@@ -12,10 +12,10 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['michaeljsmith/vim-indent-object', {}],
             \ ['junegunn/vim-easy-align', {}],
             \ ['yogeshdhamija/find-in-dir-helper.vim', {}],
+            \ ['yogeshdhamija/close-hidden-buffers-command.vim', {}],
         \ ]
         let interface_convenience_plugins = [
             \ ['yogeshdhamija/enter-insert-on-click.vim', {}],
-            \ ['yogeshdhamija/close-hidden-buffers-command.vim', {}],
         \ ]
         let ide_like_functionality_plugins = [
             \ ['tpope/vim-commentary', {}],
@@ -268,14 +268,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " Command to save and generate .pdf from .md
         if(!exists("g:vscode"))
             command! PDF w | call WriteToPdf()
-        endif
-    " Command to close other editors
-        if(exists("g:vscode"))
-            command! CloseHiddenBuffers call VSCodeCall("workbench.action.clearEditorHistory") | call VSCodeCall("workbench.action.splitEditor") | call VSCodeCall("workbench.action.closeActiveEditor") |
-                \ call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup") | call VSCodeCall("workbench.action.focusNextGroup")
-            command! CLO CloseHiddenBuffers
-        else
-            " provided by plugin
         endif
     " Often used LSP stuff
         if(exists("g:vscode"))
