@@ -240,13 +240,14 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         else
             command! Only only
         endif
-        command! ON Only
-    " DM -> Delete all Marks
+        command! ONLY Only
+    " DelMarks -> Delete all Marks
         if(exists("g:vscode"))
-            command! DM call VSCodeNotify("bookmarks.clearFromAllFiles")
+            command! DelMarks call VSCodeNotify("bookmarks.clearFromAllFiles")
         else
-            command! DM delmarks a-zA-Z0-9
+            command! DelMarks delmarks a-zA-Z0-9
         endif
+        command! DELMARKS DelMarks
     " CD -> Change Directory to current open file
         if(!exists("g:vscode"))
             command! CD silent cd %:p:h | redraw! | echo ":cd %:p:h" 
@@ -272,10 +273,10 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " Often used LSP stuff
         if(exists("g:vscode"))
             command! Actions call VSCodeNotify("workbench.action.showCommands")
-            command! ACT Actions
+            command! ACTIONS Actions
         else
             command! -range Actions <line1>,<line2>CocAction
-            command! -range ACT <line1>,<line2>Actions
+            command! -range ACTIONS <line1>,<line2>Actions
         endif
 
         if(exists("g:vscode"))
@@ -283,24 +284,26 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         else
             command! Rename call CocActionAsync("rename")
         endif
-        command! REN Rename
+        command! RENAME Rename
 
         if(exists("g:vscode"))
             command! Format call VSCodeNotify('editor.action.formatDocument')
-            command! FOR Format
+            command! FORMAT Format
         else
             command! -range=% Format <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
-            command! -range=% FOR <line1>,<line2>Format
+            command! -range=% FORMAT <line1>,<line2>Format
         endif
 
         if(exists("g:vscode"))
             command! Errors call VSCodeNotify("workbench.actions.view.problems")
+            command! ERRORS Errors
             command! ERRS Errors
         else
             command! Error call CocActionAsync("diagnosticInfo")
             command! Errors CocList --normal diagnostics
+            command! ERRORS Errors
             command! ERRS Errors
-            command! ERR Error
+            command! ERROR Error
         endif
 
 call SourceFileIfExists("~/.vimrc.local")
