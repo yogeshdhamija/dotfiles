@@ -296,14 +296,14 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 
         if(exists("g:vscode"))
             command! Errors call VSCodeNotify("workbench.actions.view.problems")
-            command! ERRORS Errors
-            command! ERRS Errors
+            command! Error Errors
         else
             command! Error call CocActionAsync("diagnosticInfo")
             command! Errors CocList --normal diagnostics
-            command! ERRORS Errors
-            command! ERRS Errors
-            command! ERROR Error
         endif
+        command! ERRORS Errors
+        command! ERROR Error
+        command! ERRS Errors
+        command! ERR Error
 
 call SourceFileIfExists("~/.vimrc.local")
