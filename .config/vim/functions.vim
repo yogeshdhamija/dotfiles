@@ -254,8 +254,14 @@ function! CreateSplitMappings(mode, mapping, rhs) abort
 endfunction
 
 function! ExecuteVSCodeCommandInVisualMode(command_name) abort
-    normal! gv
-    let startPos = getpos("v")
-    let endPos = getpos(".")
-    call VSCodeNotifyRangePos(a:command_name, startPos[1], endPos[1], startPos[2], endPos[2], 1)
+    let visualmode = visualmode()
+    if visualmode ==# 'V'
+        let startLine = line("v")
+        let endLine = line(".")
+        call VSCodeNotifyRange(a:command_name, startLine, endLine, 1)
+    else
+        let startPos = getpos("v")
+        let endPos = getpos(".")
+        call VSCodeNotifyRangePos(a:command_name, startPos[1], endPos[1], startPos[2], endPos[2]+1, 1)
+    endif
 endfunction

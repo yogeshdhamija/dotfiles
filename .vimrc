@@ -207,8 +207,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     " \a -> code Action
         if(exists('g:vscode'))
-            nmap \a :call VSCodeNotify("workbench.action.showCommands")<CR>
-            vmap \a :call ExecuteVSCodeCommandInVisualMode("workbench.action.showCommands")<CR><Esc>
+            nnoremap \a <Cmd>call VSCodeNotify("workbench.action.showCommands")<CR>
+            xnoremap \a <Cmd>call ExecuteVSCodeCommandInVisualMode("workbench.action.showCommands")<CR>
         else
             nnoremap \a :Actions<CR>
             vnoremap \a :'<,'>Actions<CR>
