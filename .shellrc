@@ -33,6 +33,9 @@ if [ -f ~/.shell_aliases ]; then
   source ~/.shell_aliases
 fi
 
+# Set up Git preferences
+git config --global merge.conflictstyle diff3
+
 
 # ===================== CONFIG STUFF ===============================================
 
