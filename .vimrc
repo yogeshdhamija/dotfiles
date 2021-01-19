@@ -176,6 +176,18 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
         if exists('g:vscode')
             nnoremap \t :call VSCodeNotify("terminal.focus")<CR>
+            nnoremap \tt :call VSCodeNotify("terminal.focus")<CR>
+            nnoremap \tv :call VSCodeNotify("workbench.action.terminal.split")<CR>
+            nnoremap \tj :call VSCodeNotify("workbench.action.terminal.new")<CR>
+            nnoremap \t1 :call VSCodeNotify("workbench.action.terminal.focusAtIndex1")<CR>
+            nnoremap \t2 :call VSCodeNotify("workbench.action.terminal.focusAtIndex2")<CR>
+            nnoremap \t3 :call VSCodeNotify("workbench.action.terminal.focusAtIndex3")<CR>
+            nnoremap \t4 :call VSCodeNotify("workbench.action.terminal.focusAtIndex4")<CR>
+            nnoremap \t5 :call VSCodeNotify("workbench.action.terminal.focusAtIndex5")<CR>
+            nnoremap \t6 :call VSCodeNotify("workbench.action.terminal.focusAtIndex6")<CR>
+            nnoremap \t7 :call VSCodeNotify("workbench.action.terminal.focusAtIndex7")<CR>
+            nnoremap \t8 :call VSCodeNotify("workbench.action.terminal.focusAtIndex8")<CR>
+            nnoremap \t9 :call VSCodeNotify("workbench.action.terminal.focusAtIndex9")<CR>
         elseif has('nvim')
             call CreateSplitMappings("nnore", "\\t", ":terminal<CR>:startinsert<CR>")
         else
