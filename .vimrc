@@ -193,6 +193,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " \d -> Directory listing
         if(exists('g:vscode'))
             nnoremap \d :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
+            nnoremap \dd :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
+            nnoremap \dh :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
         else
             call CreateSplitMappings("n", "\\d", "-")
         endif
@@ -225,12 +227,15 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " \gd -> Goto Definition
         if(exists('g:vscode'))
             nnoremap \gd :call VSCodeNotify('editor.action.revealDefinition')<CR>
+            nnoremap \gdd :call VSCodeNotify('editor.action.revealDefinition')<CR>
+            nnoremap \gdl :call VSCodeNotify('editor.action.revealDefinitionAside')<CR>
         else
             call CreateSplitMappings("nnore", "\\gd", ":call CocActionAsync('jumpDefinition')<CR>")
         endif
     " \gr -> Goto References
         if(exists('g:vscode'))
             nnoremap \gr :call VSCodeNotify('editor.action.goToReferences')<CR>
+            nnoremap \grr :call VSCodeNotify('editor.action.goToReferences')<CR>
         else
             call CreateSplitMappings("nnore", "\\gr", ":call CocActionAsync('jumpReferences')<CR>")
         endif
