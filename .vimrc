@@ -169,16 +169,12 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         vnoremap <C-v> "+p
         vnoremap <D-v> "+p
     " \t -> Terminal window
-        " \th -> Terminal window, left (aka h)
-        " \tj -> Terminal window, down (aka j)
-        " \tk -> Terminal window, up (aka k)
-        " \tl -> Terminal window, right (aka l)
         " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
         if exists('g:vscode')
             nnoremap \t :call VSCodeNotify("terminal.focus")<CR>
             nnoremap \tt :call VSCodeNotify("terminal.focus")<CR>
             nnoremap \tv :call VSCodeNotify("workbench.action.terminal.split")<CR>
-            nnoremap \tj :call VSCodeNotify("workbench.action.terminal.new")<CR>
+            nnoremap \ts :call VSCodeNotify("workbench.action.terminal.new")<CR>
             nnoremap \t1 :call VSCodeNotify("workbench.action.terminal.focusAtIndex1")<CR>
             nnoremap \t2 :call VSCodeNotify("workbench.action.terminal.focusAtIndex2")<CR>
             nnoremap \t3 :call VSCodeNotify("workbench.action.terminal.focusAtIndex3")<CR>
