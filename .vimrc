@@ -173,6 +173,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         if exists('g:vscode')
             nnoremap \t :call VSCodeNotify("terminal.focus")<CR>
             nnoremap \tt :call VSCodeNotify("terminal.focus")<CR>
+            nnoremap \tj :call VSCodeNotify("terminal.focus")<CR>
             nnoremap \tv :call VSCodeNotify("workbench.action.terminal.split")<CR>
             nnoremap \ts :call VSCodeNotify("workbench.action.terminal.new")<CR>
             nnoremap \t1 :call VSCodeNotify("workbench.action.terminal.focusAtIndex1")<CR>
