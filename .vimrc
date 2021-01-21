@@ -116,17 +116,22 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 
 " Remaps
     " Get folding working with vscode neovim plugin
-    if(exists("g:vscode"))
-        nnoremap zM :call VSCodeNotify('editor.foldAll')<CR>
-        nnoremap zR :call VSCodeNotify('editor.unfoldAll')<CR>
-        nnoremap zc :call VSCodeNotify('editor.fold')<CR>
-        nnoremap zC :call VSCodeNotify('editor.foldRecursively')<CR>
-        nnoremap zo :call VSCodeNotify('editor.unfold')<CR>
-        nnoremap zO :call VSCodeNotify('editor.unfoldRecursively')<CR>
-        nnoremap za :call VSCodeNotify('editor.toggleFold')<CR>
-        nmap j gj
-        nmap k gk
-    endif
+        if(exists("g:vscode"))
+            nnoremap zM :call VSCodeNotify('editor.foldAll')<CR>
+            nnoremap zR :call VSCodeNotify('editor.unfoldAll')<CR>
+            nnoremap zc :call VSCodeNotify('editor.fold')<CR>
+            nnoremap zC :call VSCodeNotify('editor.foldRecursively')<CR>
+            nnoremap zo :call VSCodeNotify('editor.unfold')<CR>
+            nnoremap zO :call VSCodeNotify('editor.unfoldRecursively')<CR>
+            nnoremap za :call VSCodeNotify('editor.toggleFold')<CR>
+            nmap j gj
+            nmap k gk
+        endif
+    " Map vim's spellcheck to quickfix list in VSCode
+        if(exists('g:vscode'))
+            nnoremap z= viw<Cmd>call VSCodeNotify("editor.action.quickFix")<CR><Esc>
+            xnoremap z= <Cmd>call ExecuteVSCodeCommandInVisualMode("editor.action.quickFix")<CR>
+        endif
     "Get navigating marks working with vscode neovim plugin
         " (also relies on VSCode Bookmarks plugin)
     if(exists("g:vscode"))
