@@ -129,7 +129,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     " Map vim's spellcheck to quickfix list in VSCode
         if(exists('g:vscode'))
-            nnoremap z= viw<Cmd>call VSCodeNotify("editor.action.quickFix")<CR><Esc>
+            nnoremap z= <Cmd>call VSCodeNotify("editor.action.quickFix")<CR>
             xnoremap z= <Cmd>call ExecuteVSCodeCommandInVisualMode("editor.action.quickFix")<CR>
         endif
     "Get navigating marks working with vscode neovim plugin
