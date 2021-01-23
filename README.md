@@ -20,7 +20,7 @@ let g:gruvbox_italic=1
 
 **Common settings in** `~/.vimrc.local`:
 ```
-ColorSchemeOff
+ColorSchemeOn
 ```
 
 **Common settings in** `~/.shellrc.local`:
