@@ -77,6 +77,10 @@ zstyle :bracketed-paste-magic paste-finish pastefinish
 # Change prompt character to %
 PROMPT=${PROMPT//λ/'%{$reset_color%}%%'}
 
+# Change prompt colors to better handle light backgrounds
+limegreen="$fg[green]"
+turquoise="$fg[blue]"
+
 # Load common config
 if [ -f ~/.shellrc ]; then
     source ~/.shellrc
