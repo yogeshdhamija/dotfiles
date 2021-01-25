@@ -34,12 +34,7 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['uiiaoo/java-syntax.vim', {}]
         \ ]
         let visual_plugins = [
-            \ ['junegunn/goyo.vim', {}],
-            \ ['junegunn/limelight.vim', {}],
-            \ ['morhetz/gruvbox', {}],
-            \ ['nathanaelkane/vim-indent-guides', {}],
-            \ ['itchyny/lightline.vim', {}],
-            \ ['mhinz/vim-signify', {}],
+            \ ['mhinz/vim-signify', {}]
         \ ]
         if(!exists('g:vscode'))
             let plugins = vim_idiomatic_plugins + interface_convenience_plugins + ide_like_functionality_plugins + language_plugins + visual_plugins
@@ -100,10 +95,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     if DetectWsl()
         call SetClipboardForWslTerminal()
     endif
-    if(!exists("g:vscode"))
-        call LoadColors()
-    endif
-    let g:indent_guides_enable_on_vim_startup = 1
     if !has('nvim')
         if exists('+termwinkey')
             set termwinkey=<C-\-n>
@@ -274,16 +265,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " CP -> Copy absolute filePath to + register (system clipboard)
         if(!exists("g:vscode"))
             command! CP let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')" 
-        endif
-    " Writing Mode for distraction free editing
-        if(!exists("g:vscode"))
-            command! WritingModeOn call EnableWritingMode()
-            command! WritingModeOff call DisableWritingMode()
-        endif
-    " Colorscheme on/off
-        if(!exists("g:vscode"))
-            command! ColorSchemeOn call LoadColors()
-            command! ColorSchemeOff call UnloadColors()
         endif
     " Command to save and generate .pdf from .md
         if(!exists("g:vscode"))
