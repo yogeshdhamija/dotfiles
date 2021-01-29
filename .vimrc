@@ -129,6 +129,13 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         nnoremap m v<Esc>:call ExecuteVSCodeCommandInVisualMode('bookmarks.toggleLabeled')<CR><Esc>
         nnoremap ` :call VSCodeNotify('bookmarks.listFromAllFiles')<CR>
     endif
+    " Remove vscode neovim plugin's <C-W><C-H> mappings
+    if(exists("g:vscode"))
+        map <C-W><C-H> <C-W>h
+        map <C-W><C-J> <C-W>j
+        map <C-W><C-K> <C-W>k
+        map <C-W><C-L> <C-W>l
+    endif
     "Add commenting to vscode neovim plugin
         if(exists("g:vscode"))
             xmap gc  <Plug>VSCodeCommentary
