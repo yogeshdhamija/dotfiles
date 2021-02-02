@@ -25,7 +25,7 @@ alias ":ew"="vim +WritingModeOn"
 # ============ GIT ==============
 
 alias "git-log"="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit "
-alias "git-clean"="git clean --ffdxi"
+alias "git-clean"="git clean -ffdxi"
 
 # ============ DOCKER ==============
 
