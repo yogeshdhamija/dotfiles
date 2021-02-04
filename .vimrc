@@ -36,10 +36,16 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         let visual_plugins = [
             \ ['mhinz/vim-signify', {}]
         \ ]
+        let embed_to_other_apps_plugins = [
+            \ ['glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }]
+        \ ]
         if(!exists('g:vscode'))
             let plugins = vim_idiomatic_plugins + interface_convenience_plugins + ide_like_functionality_plugins + language_plugins + visual_plugins
         else
             let plugins = vim_idiomatic_plugins
+        endif
+        if(has('nvim'))
+            let plugins = plugins + embed_to_other_apps_plugins
         endif
     endif
     if !exists("disabled_plugins")
@@ -104,6 +110,9 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     endif
     set updatetime=300
     autocmd CursorHold * silent! call CocActionAsync('highlight')
+    if exists('g:started_by_firenvim')
+        set guifont=Jetbrains\ Mono,\ Menlo,\ Monaco,\ Courier\ New,\ monospace:h18
+    endif
 
 " Remaps
     " Get folding working with vscode neovim plugin
