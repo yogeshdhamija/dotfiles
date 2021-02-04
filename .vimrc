@@ -110,9 +110,30 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     endif
     set updatetime=300
     autocmd CursorHold * silent! call CocActionAsync('highlight')
+
+"FireNvim Settings:
     if exists('g:started_by_firenvim')
         set guifont=Jetbrains\ Mono,\ Menlo,\ Monaco,\ Courier\ New,\ monospace:h18
+        au TextChanged * ++nested write
+        au TextChangedI * ++nested write
     endif
+    let g:firenvim_config = { 
+        \ 'globalSettings': {
+            \ 'alt': 'all',
+        \  },
+        \ 'localSettings': {
+            \ '.*': {
+                \ 'cmdline': 'neovim',
+                \ 'content': 'text',
+                \ 'priority': 0,
+                \ 'selector': 'textarea',
+                \ 'takeover': 'never',
+            \ },
+        \ }
+    \ }
+    let fc = g:firenvim_config['localSettings']
+    let fc['.*'] = { 'selector': 'input[type="text"], textarea:not([readonly]), div[role="textbox"]' }
+
 
 " Remaps
     " Get folding working with vscode neovim plugin
