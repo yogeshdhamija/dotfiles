@@ -187,8 +187,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     " \t -> Terminal window
         " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
         if exists('g:vscode')
-            nnoremap \t :call VSCodeNotify("terminal.focus")<CR>
-            nnoremap \tt :call VSCodeNotify("terminal.focus")<CR>
             nnoremap \tj :call VSCodeNotify("terminal.focus")<CR>
             nnoremap \tv :call VSCodeNotify("workbench.action.terminal.split")<CR>
             nnoremap \ts :call VSCodeNotify("workbench.action.terminal.new")<CR>
@@ -208,8 +206,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
         endif
     " \d -> Directory listing
         if(exists('g:vscode'))
-            nnoremap \d :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
-            nnoremap \dd :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
             nnoremap \dh :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
         else
             call CreateSplitMappings("n", "\\d", "-")
