@@ -31,7 +31,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
             \ ['neoclide/coc.nvim', {'branch': 'release'}],
             \ ['leafgarland/typescript-vim', {}],
             \ ['peitalin/vim-jsx-typescript', {}],
-            \ ['uiiaoo/java-syntax.vim', {}]
         \ ]
         let visual_plugins = [
             \ ['mhinz/vim-signify', {}]
