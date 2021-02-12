@@ -4,15 +4,39 @@
 
 **Common settings in** `~/.vimrc.local.loadbefore`:
 ```
-let plugins = [
+" To override the default plugins (list is in vim-plug style):
+    if !exists("plugins")
+        let plugins = []
+    endif
+    let plugins = plugins + [  
         \["these_plugins_will/override_the_defaults", {}],
     \]
-let added_plugins = [
+
+" To add more plugins (list is in vim-plug style):
+    if !exists("added_plugins")
+        let added_plugins = []
+    endif
+    let added_plugins = added_plugins + [      
         \["these_plugins_will/be_added_to_the_defaults", {}],
     \]
-let disabled_plugins = ["neoclide/coc.nvim"]
-let coc_plugins = ["these_will_override_defaults"]
-let added_coc_plugins = ["these_will_be_added_to_defaults"]
+
+" To disable certain plugins (list is just the plugin name):
+    if !exists("disabled_plugins")
+        let disabled_plugins = []
+    endif
+    let disabled_plugins = disabled_plugins + ["neoclide/coc.nvim"]
+
+" To change the coc.nvim default installed plugins:
+    if !exists("coc_plugins")
+        let coc_plugins = []
+    endif
+    let coc_plugins = coc_plugins + ["these_will_override_defaults"]
+
+" To add more coc.nvim default installed plugins:
+    if !exists("added_coc_plugins")
+        let added_coc_plugins = []
+    endif
+    let added_coc_plugins = added_coc_plugins + ["these_will_be_added_to_defaults"]
 ```
 
 **Common settings in** `~/.shellrc.local`:
