@@ -131,11 +131,13 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         let g:indent_guides_guide_size = 1
         let g:indent_guides_tab_guides = 0
 
-        augroup neovim_terminal
-            autocmd!
-            autocmd TermOpen * :set nonumber norelativenumber
-            autocmd TermOpen * :set signcolumn="no"
-        augroup END
+        if(has('nvim'))
+            augroup neovim_terminal
+                autocmd!
+                autocmd TermOpen * :set nonumber norelativenumber
+                autocmd TermOpen * :set signcolumn="no"
+            augroup END
+        endif
 
     endif
 
