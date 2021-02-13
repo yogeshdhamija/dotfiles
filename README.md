@@ -4,6 +4,7 @@
 
 **Common settings in** `~/.vimrc.local.loadbefore`:
 ```
+
 " To override the default plugins (list is in vim-plug style):
     if !exists("plugins")
         let plugins = []
@@ -37,6 +38,7 @@
         let added_coc_plugins = []
     endif
     let added_coc_plugins = added_coc_plugins + ["these_will_be_added_to_defaults"]
+
 ```
 
 **Common settings in** `~/.shellrc.local`:

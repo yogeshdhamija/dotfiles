@@ -30,11 +30,10 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         \ ]
         let language_plugins = [
             \ ['neoclide/coc.nvim', {'branch': 'release'}],
-            \ ['leafgarland/typescript-vim', {}],
-            \ ['peitalin/vim-jsx-typescript', {}],
         \ ]
         let visual_plugins = [
-            \ ['mhinz/vim-signify', {}]
+            \ ['mhinz/vim-signify', {}],
+            \ ["NLKNguyen/papercolor-theme", {}],
         \ ]
         let embed_to_other_apps_plugins = [
         \ ]
@@ -106,6 +105,20 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
     endif
     set updatetime=300
     autocmd CursorHold * silent! call CocActionAsync('highlight')
+
+" Colorscheme
+    if(!exists('g:vscode'))
+        set background=light
+        colorscheme PaperColor
+        set number
+        set scl=yes
+        set foldmethod=indent
+        set foldlevelstart=99
+
+        hi CocErrorSign  ctermfg=Red guifg=#ff0000
+        hi CocWarningSign  ctermfg=Brown guifg=#ff922b
+        hi CocInfoSign  ctermfg=Black guifg=#fab005
+    endif
 
 " Remaps
     " Get folding working with vscode neovim plugin
