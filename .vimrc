@@ -34,7 +34,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         let visual_plugins = [
             \ ['mhinz/vim-signify', {}],
             \ ["NLKNguyen/papercolor-theme", {}],
-            \ ["Yggdroot/indentLine", {}],
+            \ ["nathanaelkane/vim-indent-guides", {}],
         \ ]
         let embed_to_other_apps_plugins = [
         \ ]
@@ -115,6 +115,8 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         set scl=yes
         set foldmethod=indent
         set foldlevelstart=99
+        tabdo windo set foldtext=CustomFoldText()
+        tabdo windo set fillchars=fold:\ 
 
         hi CocErrorSign  ctermfg=Red guifg=#ff0000
         hi CocWarningSign  ctermfg=Brown guifg=#ff922b
@@ -122,6 +124,12 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
 
         set listchars=tab:\|\ 
         set list
+        let g:indent_guides_enable_on_vim_startup = 1
+        let g:indent_guides_auto_colors = 0
+        autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=grey ctermbg=254
+        autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=grey ctermbg=254
+        let g:indent_guides_guide_size = 1
+        let g:indent_guides_tab_guides = 0
 
         augroup neovim_terminal
             autocmd!
