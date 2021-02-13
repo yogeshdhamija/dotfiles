@@ -34,6 +34,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         let visual_plugins = [
             \ ['mhinz/vim-signify', {}],
             \ ["NLKNguyen/papercolor-theme", {}],
+            \ ["Yggdroot/indentLine", {}],
         \ ]
         let embed_to_other_apps_plugins = [
         \ ]
@@ -118,6 +119,16 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         hi CocErrorSign  ctermfg=Red guifg=#ff0000
         hi CocWarningSign  ctermfg=Brown guifg=#ff922b
         hi CocInfoSign  ctermfg=Black guifg=#fab005
+
+        set listchars=tab:\|\ 
+        set list
+
+        augroup neovim_terminal
+            autocmd!
+            autocmd TermOpen * :set nonumber norelativenumber
+            autocmd TermOpen * :set signcolumn="no"
+        augroup END
+
     endif
 
 " Remaps
