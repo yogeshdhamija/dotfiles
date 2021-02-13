@@ -5,6 +5,14 @@ function! SourceFileIfExists(filepath) abort
     endtry
 endfunction
 
+function! LoadLocalVimrc() abort
+    if filereadable(expand('.vim/vimrc.vim'))
+        execute 'silent source .vim/vimrc.vim'
+        redraw!
+        echomsg "Executed ':source .vim/vimrc.vim'"
+    endif
+endfunction
+
 function! DetectWsl() abort
     return filereadable("/proc/version") && (match(readfile("/proc/version"), "Microsoft") != -1)
 endfunction

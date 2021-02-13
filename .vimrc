@@ -105,6 +105,10 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
     endif
     set updatetime=300
     autocmd CursorHold * silent! call CocActionAsync('highlight')
+    augroup load_vimrc_per_directory
+        autocmd!
+        autocmd VimEnter * nested call LoadLocalVimrc()
+    augroup END
 
 " Remaps
     " Get folding working with vscode neovim plugin
