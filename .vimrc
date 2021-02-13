@@ -131,6 +131,8 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         let g:indent_guides_guide_size = 1
         let g:indent_guides_tab_guides = 0
 
+        set laststatus=2
+
         if(has('nvim'))
             augroup neovim_terminal
                 autocmd!
