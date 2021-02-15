@@ -132,15 +132,6 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         let g:indent_guides_tab_guides = 0
 
         set laststatus=2
-
-        if(has('nvim'))
-            augroup neovim_terminal
-                autocmd!
-                autocmd TermOpen * :set nonumber norelativenumber
-                autocmd TermOpen * :set signcolumn="no"
-            augroup END
-        endif
-
     endif
 
 " Remaps
