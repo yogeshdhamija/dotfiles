@@ -107,6 +107,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
     endif
     set updatetime=300
     autocmd CursorHold * silent! call CocActionAsync('highlight')
+    let g:peekaboo_window="vert bo new"
 
 " Colorscheme
     if(!exists('g:vscode'))
