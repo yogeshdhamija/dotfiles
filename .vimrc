@@ -17,6 +17,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         \ ]
         let interface_convenience_plugins = [
             \ ['yogeshdhamija/enter-insert-on-click.vim', {}],
+            \ ['junegunn/vim-peekaboo', {}],
         \ ]
         let ide_like_functionality_plugins = [
             \ ['tpope/vim-commentary', {}],
