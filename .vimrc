@@ -25,7 +25,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
             \ ['yogeshdhamija/save-sessions-per-directory.vim', {}],
             \ ['tpope/vim-fugitive', {}],
             \ ['tpope/vim-rhubarb', {}],
-            \ ['junegunn/fzf', {}],
+            \ ['junegunn/fzf', { 'do': { -> fzf#install() } }],
             \ ['junegunn/fzf.vim', {}],
             \ ['justinmk/vim-dirvish', {}],
             \ ['editorconfig/editorconfig-vim', {}],
