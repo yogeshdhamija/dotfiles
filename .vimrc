@@ -305,6 +305,9 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         if(!exists("g:vscode"))
             command! PDF w | call WriteToPdf()
         endif
+    " Add `git log --graph` command to fugitive
+        command! -nargs=? GITLOG Git log --graph --oneline <args>
+        command! -nargs=? GLOG GITLOG <args>
     " Often used LSP stuff
         if(exists("g:vscode"))
             command! Actions call VSCodeNotify("workbench.action.showCommands")
