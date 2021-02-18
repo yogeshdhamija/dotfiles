@@ -13,6 +13,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
             \ ['michaeljsmith/vim-indent-object', {}],
             \ ['junegunn/vim-easy-align', {}],
             \ ['yogeshdhamija/find-in-dir-helper.vim', {}],
+            \ ['yogeshdhamija/filter-lq-list.vim', {}],
             \ ['yogeshdhamija/close-hidden-buffers-command.vim', {}],
         \ ]
         let interface_convenience_plugins = [
