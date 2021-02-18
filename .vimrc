@@ -233,7 +233,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         if(exists('g:vscode'))
             nnoremap \o :call VSCodeNotify("workbench.action.quickOpen")<CR>
         else
-            nnoremap \o :FZF<CR>
+            nnoremap \o :Files<CR>
         endif
     " \b -> list Buffers
         if(exists('g:vscode'))
