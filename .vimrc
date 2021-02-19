@@ -26,7 +26,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
             \ ['yogeshdhamija/save-sessions-per-directory.vim', {}],
             \ ['tpope/vim-fugitive', {}],
             \ ['tpope/vim-rhubarb', {}],
-            \ ['junegunn/fzf', { 'do': { -> fzf#install() } }],
+            \ ['junegunn/fzf', { 'do': 'fzf#install()' }],
             \ ['junegunn/fzf.vim', {}],
             \ ['justinmk/vim-dirvish', {}],
             \ ['editorconfig/editorconfig-vim', {}],
@@ -114,7 +114,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
 " Colorscheme
     if(!exists('g:vscode'))
         set background=light
-        colorscheme PaperColor
+        silent! colorscheme PaperColor
         set number
         set scl=yes
         set foldmethod=indent
