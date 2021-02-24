@@ -33,6 +33,9 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         \ ]
         let language_plugins = [
             \ ['neoclide/coc.nvim', {'branch': 'release'}],
+            \ ['leafgarland/typescript-vim', {}],
+            \ ['peitalin/vim-jsx-typescript', {}],
+            \ ['jparise/vim-graphql', {}],
         \ ]
         let visual_plugins = [
             \ ['mhinz/vim-signify', {}],
@@ -64,6 +67,10 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
             \ 'coc-vimlsp', 
             \ 'coc-json', 
             \ 'coc-yaml',
+            \ 'coc-tsserver', 
+            \ 'coc-eslint',
+            \ 'coc-apollo',
+            \ 'coc-emmet'
         \ ]
     endif
     if exists("added_coc_plugins")
