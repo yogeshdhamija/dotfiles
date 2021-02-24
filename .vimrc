@@ -307,7 +307,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
             command! PDF w | call WriteToPdf()
         endif
     " Git stuff
-        command! -nargs=? GITLOG Git log --graph --oneline <args>
+        command! -nargs=? GITLOG Git log --graph --oneline --pretty=format:'%h -%d %s (%cs) <%an>' <args>
         command! GITHISTORY BCommits
 
         command! GHISTORY GITHISTORY
