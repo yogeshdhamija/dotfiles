@@ -167,6 +167,9 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         nnoremap m v<Esc>:call ExecuteVSCodeCommandInVisualMode('bookmarks.toggleLabeled')<CR><Esc>
         nnoremap ` :call VSCodeNotify('bookmarks.listFromAllFiles')<CR>
     endif
+    if exists("g:vscode")
+      command! Tabnew call VSCodeNotify("workbench.action.duplicateWorkspaceInNewWindow")
+    endif
     " Remove vscode neovim plugin's <C-W><C-H> mappings
     if(exists("g:vscode"))
         map <C-W><C-H> <C-W>h
