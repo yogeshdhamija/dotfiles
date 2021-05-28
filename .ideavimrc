@@ -2,28 +2,20 @@ set surround
 set commentary
 
 nnoremap :bd<CR> :action CloseContent<CR>
-
 nnoremap \c <Esc>:noh<CR>:action HideSideWindows<CR>
-
-" \t -> open Terminal
 nnoremap \tj :action ActivateTerminalToolWindow<CR>
-" \d -> open Directory
 nnoremap \dh :action ActivateProjectToolWindow<CR>
-" \f -> Find in directory
 nnoremap \f :action FindInPath<CR>
-" \o -> Open file
-nnoremap \o :action SearchEverywhere<CR>
-" \gd -> Goto Definition
+nnoremap \o :action GotoFile<CR>
 nnoremap \gd :action GotoImplementation<CR>
 nnoremap \gdd :action GotoImplementation<CR>
-" \gr -> Goto References
 nnoremap \gr :action ShowUsages<CR>
 nnoremap \grr :action ShowUsages<CR>
-nnoremap \h :action QuickJavaDoc<CR>:action ParameterInfo<CR>
+nnoremap \h :action QuickJavaDoc<CR>
+inoremap \h <Esc>:action ParameterInfo<CR>a
 nnoremap z= :action ShowIntentionActions<CR>
 vnoremap z= :action ShowIntentionActions<CR>
-nnoremap \a :action SearchEverywhere<CR>
-" \b -> Buffers
+nnoremap \a :action GotoAction<CR>
 nnoremap \b :action Switcher<CR>
 
 command! Rename action RenameElement
