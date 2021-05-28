@@ -1,23 +1,14 @@
 set surround
 set commentary
 
-nnoremap <C-O> :action Back<CR>
-nnoremap <C-I> :action Forward<CR>
-
 nnoremap :bd<CR> :action CloseContent<CR>
 
-nnoremap * yiw:/<C-R>"<CR>
-vnoremap * y:/<C-R>"<CR>
-
-nnoremap <Esc> <Esc>:noh<CR>:action HideSideWindows<CR>
-
-nnoremap zL 40zl
-nnoremap zH 40zh
+nnoremap \c <Esc>:noh<CR>:action HideSideWindows<CR>
 
 " \t -> open Terminal
-nnoremap \t :action ActivateTerminalToolWindow<CR>
+nnoremap \tj :action ActivateTerminalToolWindow<CR>
 " \d -> open Directory
-nnoremap \d :action ActivateProjectToolWindow<CR>
+nnoremap \dh :action ActivateProjectToolWindow<CR>
 " \f -> Find in directory
 nnoremap \f :action FindInPath<CR>
 " \o -> Open file
@@ -28,16 +19,12 @@ nnoremap \gdd :action GotoImplementation<CR>
 " \gr -> Goto References
 nnoremap \gr :action ShowUsages<CR>
 nnoremap \grr :action ShowUsages<CR>
-" \h -> Help
 nnoremap \h :action QuickJavaDoc<CR>:action ParameterInfo<CR>
-" \a -> code Actions
-nnoremap \a :ACT<CR>
-vnoremap \a :ACT<CR>
+nnoremap z= :action ShowIntentionActions<CR>
+vnoremap z= :action ShowIntentionActions<CR>
+nnoremap \a :action SearchEverywhere<CR>
 " \b -> Buffers
 nnoremap \b :action Switcher<CR>
-
-command! Actions action ShowIntentionActions
-command! ACT Actions
 
 command! Rename action RenameElement
 command! REN Rename
