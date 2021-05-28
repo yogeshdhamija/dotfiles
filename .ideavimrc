@@ -12,6 +12,7 @@ nnoremap \c <Esc>:noh<CR>:action HideSideWindows<CR>
 nnoremap \tj :action ActivateTerminalToolWindow<CR>
 nnoremap \dh :action ActivateProjectToolWindow<CR>
 nnoremap \f :action FindInPath<CR>
+vmap \f <Action>(FindSelectionInPath)
 nnoremap \o :action GotoFile<CR>
 nnoremap \gd :action GotoDeclaration<CR>
 nnoremap \gdd :action GotoDeclaration<CR>
