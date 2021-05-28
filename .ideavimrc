@@ -10,8 +10,8 @@ nnoremap \tj :action ActivateTerminalToolWindow<CR>
 nnoremap \dh :action ActivateProjectToolWindow<CR>
 nnoremap \f :action FindInPath<CR>
 nnoremap \o :action GotoFile<CR>
-nnoremap \gd :action GotoImplementation<CR>
-nnoremap \gdd :action GotoImplementation<CR>
+nnoremap \gd :action GotoDeclaration<CR>
+nnoremap \gdd :action GotoDeclaration<CR>
 nnoremap \gr :action ShowUsages<CR>
 nnoremap \grr :action ShowUsages<CR>
 nnoremap \h :action QuickJavaDoc<CR>
