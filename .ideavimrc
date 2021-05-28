@@ -10,7 +10,7 @@ nnoremap zH 40zh
 nnoremap :bd<CR> :action CloseContent<CR>
 nnoremap \c <Esc>:noh<CR>:action HideSideWindows<CR>
 nnoremap \tj :action ActivateTerminalToolWindow<CR>
-nnoremap \dh :action ActivateProjectToolWindow<CR>
+nnoremap \dh :action SelectInProjectView<CR>
 nnoremap \f :action FindInPath<CR>
 vmap \f <Action>(FindSelectionInPath)
 nnoremap \o :action GotoFile<CR>
