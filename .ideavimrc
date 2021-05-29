@@ -1,6 +1,7 @@
 set surround
 set commentary
 set ideajoin
+set ideamarks
 
 nnoremap <C-O> :action Back<CR>
 nnoremap <C-I> :action Forward<CR>
