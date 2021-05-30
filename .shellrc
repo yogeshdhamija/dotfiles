@@ -6,8 +6,8 @@ else
     export LOCAL_CONFIG_OVERRIDES_NOT_LOADED="~/.shellrc.local.loadbefore:$LOCAL_CONFIG_OVERRIDES_NOT_LOADED"
 fi
 
-# Config alias
-alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+# Dotfiles alias
+alias dotfiles='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 
 # ===================== CONTENT ===============================================
@@ -38,7 +38,7 @@ fi
 git config --global merge.conflictstyle diff3
 
 
-# ===================== CONFIG STUFF ===============================================
+# ===================== DOTFILES STUFF ===============================================
 
 # Set env if vim config overrides set
 if [ -f ~/.vimrc.local ]; then
