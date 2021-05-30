@@ -1,5 +1,19 @@
 # Dotfiles
 
+## Quick Start
+
+To clone this repo into your home directory:
+
+```bash
+export DOTFILES_REPO_URL=git@github.com:yogeshdhamija/dotfiles.git
+# OR
+export DOTFILES_REPO_URL=https://github.com/yogeshdhamija/dotfiles.git
+
+source <(curl -Ls https://gist.githubusercontent.com/yogeshdhamija/c65eab14d4bfc62f2d3dd490b7f082d5/raw/65891558f1abf858c390654a88bc78b25d5d48dc/dotfiles.sh)
+```
+
+This will set up a git repository in the folder `~/.dotfiles` with a detached working tree. This way, you can treat your home directory if as if it were a git repository -- using the `dotfiles` command, instead of `git` -- and it won't do crazy stuff like interfere with your other git repositories. Source: [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
+
 ## Cheat Sheet
 
 **Common settings in** `~/.vimrc.local.loadbefore`:
@@ -46,20 +60,6 @@
 alias a=b
 export PATH="/add_to_path/:$PATH"
 ```
-
-## Quick Start
-
-To clone this repo into your home directory:
-
-```bash
-export DOTFILES_REPO_URL=git@github.com:yogeshdhamija/dotfiles.git
-# OR
-export DOTFILES_REPO_URL=https://github.com/yogeshdhamija/dotfiles.git
-
-source <(curl -Ls https://gist.githubusercontent.com/yogeshdhamija/c65eab14d4bfc62f2d3dd490b7f082d5/raw/65891558f1abf858c390654a88bc78b25d5d48dc/dotfiles.sh)
-```
-
-This will set up a git repository in the folder `~/.dotfiles` with a detached working tree. This way, you can treat your home directory if as if it were a git repository -- using the `dotfiles` command, instead of `git` -- and it won't do crazy stuff like interfere with your other git repositories. Source: [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
 
 ## What it does
 
