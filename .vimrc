@@ -118,8 +118,8 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
 
 " Colorscheme
     if(!exists('g:vscode'))
-        set background=light
         silent! colorscheme PaperColor
+        set background=dark
         set number
         set scl=yes
         set foldmethod=indent
