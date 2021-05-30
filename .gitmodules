@@ -16,3 +16,6 @@
 [submodule ".fzf"]
 	path = .fzf
 	url = https://github.com/junegunn/fzf.git
+[submodule "fonts/FiraCodeiScript"]
+	path = fonts/FiraCodeiScript
+	url = git@github.com:kencrocken/FiraCodeiScript.git
