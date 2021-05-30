@@ -1,14 +1,14 @@
-alias "config-log"="config log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cs) %C(bold blue)<%an>%Creset' --abbrev-commit "
+alias "dotfiles-log"="dotfiles log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cs) %C(bold blue)<%an>%Creset' --abbrev-commit "
 
-alias "config-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh && cd -"
+alias "dotfiles-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh && cd -"
 
-alias "config-update-repo"="cd ~ && config remote update && config pull && config checkout && config submodule init && config submodule update && config submodule update --remote && config status; cd -"
+alias "dotfiles-update-repo"="cd ~ && dotfiles remote update && dotfiles pull && dotfiles checkout && dotfiles submodule init && dotfiles submodule update && dotfiles submodule update --remote && dotfiles status; cd -"
 
-alias "config-update-vim"="cd ~ && mv ~/.vim/lastsession.vim ~/.vim/lastsession.vim.old > /dev/null 2>&1; vim +PlugUpgrade +PlugUpdate +StopKeepingSession -c \"qa\"; mv ~/.vim/lastsession.vim.old ~/.vim/lastsession.vim > /dev/null 2>&1; cd -"
+alias "dotfiles-update-vim"="cd ~ && mv ~/.vim/lastsession.vim ~/.vim/lastsession.vim.old > /dev/null 2>&1; vim +PlugUpgrade +PlugUpdate +StopKeepingSession -c \"qa\"; mv ~/.vim/lastsession.vim.old ~/.vim/lastsession.vim > /dev/null 2>&1; cd -"
 
-alias "config-update-fzf"="cd ~ && .fzf/install --all && cd -"
+alias "dotfiles-update-fzf"="cd ~ && .fzf/install --all && cd -"
 
-alias "config-update"="config-update-repo; config-update-vim; config-update-fzf; config-check"
+alias "dotfiles-update"="dotfiles-update-repo; dotfiles-update-vim; dotfiles-update-fzf; dotfiles-check"
 
 
 # ============ REPLACEMENTS ==============
