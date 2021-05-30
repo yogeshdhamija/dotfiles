@@ -1,4 +1,4 @@
-# Config (dotfiles)
+# Dotfiles
 
 ## Cheat Sheet
 
@@ -52,14 +52,14 @@ export PATH="/add_to_path/:$PATH"
 To clone this repo into your home directory:
 
 ```bash
-export CONFIG_REPO_URL=git@github.com:yogeshdhamija/config.git
+export DOTFILES_REPO_URL=git@github.com:yogeshdhamija/dotfiles.git
 # OR
-export CONFIG_REPO_URL=https://github.com/yogeshdhamija/config.git
+export DOTFILES_REPO_URL=https://github.com/yogeshdhamija/dotfiles.git
 
-source <(curl -Ls https://gist.githubusercontent.com/yogeshdhamija/c65eab14d4bfc62f2d3dd490b7f082d5/raw/8fafb174bab823f279eb882b28e67718b1ae9213/run.sh)
+source <(curl -Ls https://gist.githubusercontent.com/yogeshdhamija/c65eab14d4bfc62f2d3dd490b7f082d5/raw/65891558f1abf858c390654a88bc78b25d5d48dc/dotfiles.sh)
 ```
 
-This will set up a git repository in the folder `~/.cfg` with a detached working tree. This way, you can treat your home directory if as if it were a git repository -- using the `config` command, instead of `git` -- and it won't do crazy stuff like interfere with your other git repositories. Source: [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
+This will set up a git repository in the folder `~/.dotfiles` with a detached working tree. This way, you can treat your home directory if as if it were a git repository -- using the `dotfiles` command, instead of `git` -- and it won't do crazy stuff like interfere with your other git repositories. Source: [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
 
 ## What it does
 
@@ -68,8 +68,8 @@ Primarily, this repo configures the terminal and vim/neovim.
 ### Terminal
 
 - This repo will configure `zsh` and `bash` terminals. More config for `zsh` than for `bash`.
-- Run `config-update` to get updates.
-- Run `config-check` to see if recommended programs are installed on your system.
+- Run `dotfiles-update` to get updates.
+- Run `dotfiles-check` to see if recommended programs are installed on your system.
 - These are the primary files:
     - `~/.bashrc` - for bash-only settings
     - `~/.zshrc` - for zsh-only settings
@@ -83,20 +83,20 @@ Primarily, this repo configures the terminal and vim/neovim.
     - `~/.bashrc.local.loadbefore`
     - `~/.zshrc.local.loadbefore`
         - The `*.loadbefore` files are sourced before any other config.
-- Many `zsh` plugins are included in this repo as submodules. `config-update` will update them.
+- Many `zsh` plugins are included in this repo as submodules. `dotfiles-update` will update them.
 
 ### Vim
 
 - `~/.vimrc` is where most of the configuration resides.
 - `~/.vimrc.local` and `~/.vimrc.local.loadbefore` will be loaded if they exist.
-- The `config-update` command will install/update all Vim plugins, through the `junegunn/vim-plug` plugin manager.
+- The `dotfiles-update` command will install/update all Vim plugins, through the `junegunn/vim-plug` plugin manager.
 - For IDE-like features, Vim will be configured to use `neoclide/coc.nvim`.
     - Some plugins will be installed by default for Go, JSON, and Python.
     - Configuration for other languages will have to be done manually (`:h coc-nvim.txt@en`).
 
 ## Notes
 
-- Do **not** use the `config add .` command. This will add all the untracked files in your home directory, which is **everything**.
-    - Instead, add things individually using `config add <file>`.
-    - This also applies to other stuff like `config commit -a`.
+- Do **not** use the `dotfiles add .` command. This will add all the untracked files in your home directory, which is **everything**.
+    - Instead, add things individually using `dotfiles add <file>`.
+    - This also applies to other commands like `dotfiles commit -a`.
     - If you do this accidentally, you'll have to `Ctrl+C` out of it while it's stuck, or unstage all the files you added if it somehow succeeds.
