@@ -19,3 +19,6 @@
 [submodule "fonts/FiraCodeiScript"]
 	path = fonts/FiraCodeiScript
 	url = git@github.com:kencrocken/FiraCodeiScript.git
+[submodule "/Users/yogeshdhamija/fonts/FiraCode"]
+	path = /Users/yogeshdhamija/fonts/FiraCode
+	url = git@github.com:tonsky/FiraCode.git
