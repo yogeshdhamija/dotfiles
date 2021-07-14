@@ -32,6 +32,7 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
   gradle
+  kubectl
 )
 
 # Load oh my zsh
