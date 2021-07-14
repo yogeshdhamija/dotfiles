@@ -1,0 +1,182 @@
+{
+    // vim-like buffer management (in conjunction with some settings in ~/.vimrc and vscode-neovim plugin):
+    "workbench.editor.showTabs": false,
+    // "workbench.editor.limit.enabled": true,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.limit.value": 1,
+    "workbench.editor.limit.perEditorGroup": true,
+
+    "gitlens.currentLine.enabled": false,
+    "gitlens.codeLens.enabled": false,
+    "editor.minimap.enabled": false,
+
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "editor.suggestSelection": "first",
+
+    // don't exclude anything
+    "files.exclude": {
+        "**/.DS_Store": false,
+        "**/.git": false,
+        "**/.hg": false,
+        "**/.svn": false,
+        "**/CVS": false
+    },
+    "search.useIgnoreFiles": false,
+    "editor.find.loop": false,
+    "editor.wordWrap": "on",
+    "editor.wrappingIndent": "deepIndent",
+    "workbench.list.horizontalScrolling": true,
+    "workbench.list.smoothScrolling": true,
+    "workbench.fontAliasing": "auto",
+    "workbench.tree.indent": 20,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "scm.alwaysShowRepositories": true,
+    "editor.fontFamily": "'Fira Code', 'Jetbrains Mono', 'Fira Code iScript', Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "window.title": "${activeEditorShort}${dirty}${separator}${activeEditorLong}",
+    "editor.renderWhitespace": "trailing",
+
+    "intelephense.environment.shortOpenTag": true,
+    "intelephense.format.braces": "k&r",
+    "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
+    "intelephense.files.exclude": [
+        "**/.git/**",
+        "**/.svn/**",
+        "**/.hg/**",
+        "**/CVS/**",
+        "**/.DS_Store/**",
+        "**/node_modules/**",
+        "**/bower_components/**",
+        "**/.history/**"
+    ],
+    "intelephense.references.exclude": [],
+    "intelephense.rename.exclude": [],
+    "path-intellisense.absolutePathToWorkspace": false,
+    "path-intellisense.autoSlashAfterDirectory": true,
+    "path-intellisense.showHiddenFiles": true,
+    "php.validate.run": "onType",
+    "php.suggest.basic": false,
+
+    "settingsSync.keybindingsPerPlatform": false,
+    "settingsSync.ignoredExtensions": [
+        "ms-vscode-remote.remote-wsl"
+    ],
+    "settingsSync.ignoredSettings": [
+        "terminal.integrated.shell.windows",
+        "vscode-neovim.neovimExecutablePaths.darwin",
+        "vscode-neovim.neovimExecutablePaths.linux",
+        "vscode-neovim.neovimExecutablePaths.win32",
+        "vscode-neovim.useWSL",
+        "yaml.schemas"
+    ],
+
+    "diffEditor.renderSideBySide": true,
+    "files.autoSave": "off",
+    "explorer.autoReveal": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "source.organizeImports": true
+    },
+    "java.configuration.checkProjectSettingsExclusions": false,
+    "vscode-neovim.mouseSelectionStartVisualMode": true,
+    "vscode-neovim.neovimExecutablePaths.darwin": "/Users/yogeshdhamija/nvim/nvim-osx64/bin/nvim",
+    "editor.scrollBeyondLastLine": false,
+    "explorer.openEditors.visible": 999999999,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+
+    "workbench.editorAssociations": {
+        "*.png": "hediet.vscode-drawio",
+        "git-rebase-todo": "default",
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "git.confirmSync": false,
+    "workbench.editor.untitled.labelFormat": "name",
+    "terminal.integrated.confirmOnExit": true,
+    "terminal.integrated.scrollback": 10000,
+    "gitlens.views.commits.avatars": false,
+    "gitlens.views.fileHistory.avatars": false,
+    "gitlens.views.branches.avatars": false,
+    "git-graph.customBranchGlobPatterns": [
+        {"name": "All Master", "glob": "*/master"},
+        {"name": "All Main", "glob": "*/main"},
+        {"name": "All Dev", "glob": "*/dev*"},
+    ],
+    "git-graph.repository.onLoad.showCheckedOutBranch": true,
+    "git-graph.repository.onLoad.showSpecificBranches": [
+        "--glob=*/master",
+        "--glob=*/main",
+        "--glob=*/dev*",
+    ],
+    "extensions.ignoreRecommendations": true,
+    "editor.semanticHighlighting.enabled": true,
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"/Users/ydhamija96/.vscode/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
+    "hediet.vscode-drawio.local-storage": "eyIuZHJhd2lvLWNvbmZpZyI6IntcImxhbmd1YWdlXCI6XCJcIixcImN1c3RvbUZvbnRzXCI6W10sXCJsaWJyYXJpZXNcIjpcImdlbmVyYWxcIixcImN1c3RvbUxpYnJhcmllc1wiOltcIkwuc2NyYXRjaHBhZFwiXSxcInBsdWdpbnNcIjpbXSxcInJlY2VudENvbG9yc1wiOltcIkNDQ0NDQ1wiLFwiMDAwMDAwXCIsXCJDMkMyQzJcIl0sXCJmb3JtYXRXaWR0aFwiOlwiMjQwXCIsXCJjcmVhdGVUYXJnZXRcIjpmYWxzZSxcInBhZ2VGb3JtYXRcIjp7XCJ4XCI6MCxcInlcIjowLFwid2lkdGhcIjoxMTAwLFwiaGVpZ2h0XCI6ODUwfSxcInNlYXJjaFwiOnRydWUsXCJzaG93U3RhcnRTY3JlZW5cIjp0cnVlLFwiZ3JpZENvbG9yXCI6XCIjZDBkMGQwXCIsXCJkYXJrR3JpZENvbG9yXCI6XCIjNmU2ZTZlXCIsXCJhdXRvc2F2ZVwiOnRydWUsXCJyZXNpemVJbWFnZXNcIjpudWxsLFwib3BlbkNvdW50ZXJcIjowLFwidmVyc2lvblwiOjE4LFwidW5pdFwiOjEsXCJpc1J1bGVyT25cIjpmYWxzZSxcInVpXCI6XCJcIn0ifQ==",
+    "hediet.vscode-drawio.codeLinkActivated": false,
+    "hediet.vscode-drawio.theme": "atlas",
+    "python.languageServer": "Pylance",
+    "window.restoreWindows": "none",
+    "workbench.startupEditor": "newUntitledFile",
+    "git-graph.dialog.cherryPick.recordOrigin": true,
+    "git-graph.repository.onLoad.scrollToHead": true,
+    "python.pythonPath": "/usr/local/opt/python@3.9/bin/python3.9",
+    "python.showStartPage": false,
+    "jupyter.interactiveWindowMode": "perFile",
+    "git-graph.showStatusBarItem": false,
+    "git.enableStatusBarSync": false,
+    "liveshare.showInStatusBar": "whileCollaborating",
+    "yaml.schemas": {
+        "file:///Users/yogeshdhamija/.vscode/extensions/atlassian.atlascode-2.9.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "git.suggestSmartCommit": false,
+    "atlascode.jira.explorer.nestSubtasks": true,
+    "redhat.telemetry.enabled": true,
+    "atlascode.bitbucket.explorer.notifications.pullRequestCreated": false,
+    "atlascode.jira.statusbar.enabled": false,
+    "atlascode.bitbucket.statusbar.enabled": false,
+    "cSpell.showStatus": false,
+    "atlascode.bitbucket.issues.monitorEnabled": false,
+    "atlascode.bitbucket.pipelines.monitorEnabled": false,
+    "atlascode.jira.explorer.monitorEnabled": false,
+    "workbench.colorTheme": "Chandrian Blue",
+    "workbench.colorCustomizations": {
+        "editor.selectionBackground": "#6b420d",
+        "editor.selectionHighlightBackground": "#6b420d57",
+        "editor.findMatchHighlightBackground": "#77741491"
+    },
+    "workbench.editor.untitled.hint": "hidden",
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "githubIssues.assignWhenWorking": false,
+    "githubIssues.useBranchForIssues": "prompt",
+    "gitlens.advanced.fileHistoryFollowsRenames": true,
+    "githubPullRequests.logLevel": "off",
+    "atlascode.jira.jqlList": [
+        {
+            "id": "f11975e7-0d79-4ab1-b448-58e40337eda5",
+            "enabled": true,
+            "name": "Open & Assigned to me",
+            "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+            "siteId": "f676ca6e-dc33-43b1-9baa-f356d484b288",
+            "monitor": true
+        },
+        {
+            "id": "75d285ac-9a4e-4150-b3e4-11c8fadb3488",
+            "siteId": "f676ca6e-dc33-43b1-9baa-f356d484b288",
+            "name": "Reported by me",
+            "query": "reporter=currentUser()",
+            "enabled": true,
+            "monitor": true
+        },
+        {
+            "id": "901ccc37-200e-4e89-90eb-37b28a33d7c1",
+            "siteId": "f676ca6e-dc33-43b1-9baa-f356d484b288",
+            "name": "Participated by me",
+            "query": "summary ~ currentUser() OR description ~ currentUser() OR assignee = currentUser() OR assignee was currentUser() OR comment ~ currentUser() OR text ~ currentUser() OR creator = currentUser() OR reporter = currentUser() OR watcher = currentUser() ORDER BY lastViewed DESC",
+            "enabled": true,
+            "monitor": true
+        }
+    ],
+    "terminal.integrated.tabs.focusMode": "singleClick",
+}
