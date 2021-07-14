@@ -1,0 +1,1 @@
+Normally, these settings are backed up within VSCode using the 'Settings Sync' feature.
