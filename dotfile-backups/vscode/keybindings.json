@@ -43,6 +43,11 @@
         { "key": "ctrl+w l", "when": "terminalFocus", "command": "workbench.action.focusRightGroup" },
         { "key": "ctrl+w v", "when": "terminalFocus", "command": "workbench.action.splitEditorRight" },
         { "key": "ctrl+w s", "when": "terminalFocus", "command": "workbench.action.splitEditorDown" },
+        { "key": "ctrl+w -", "when": "terminalFocus", "command": "workbench.action.decreaseViewHeight" },
+        { "key": "ctrl+w shift+=", "when": "terminalFocus", "command": "workbench.action.increaseViewHeight" },
+        { "key": "ctrl+w shift+,", "when": "terminalFocus", "command": "workbench.action.decreaseViewWidth" },
+        { "key": "ctrl+w shift+.", "when": "terminalFocus", "command": "workbench.action.increaseViewWidth" },
+        { "key": "ctrl+w =", "when": "terminalFocus", "command": "workbench.action.evenEditorWidths" },
 
         // allow ctrl+w default behaviour if you double up, since otherwise it's taken by window management
         { "key": "ctrl+w ctrl+w", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": "\u0017"} },
