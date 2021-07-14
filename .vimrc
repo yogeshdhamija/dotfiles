@@ -259,16 +259,13 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         endif
     " \gd -> Goto Definition
         if(exists('g:vscode'))
-            nnoremap \gd :call VSCodeNotify('editor.action.revealDefinition')<CR>
-            nnoremap \gdd :call VSCodeNotify('editor.action.revealDefinition')<CR>
-            nnoremap \gdl :call VSCodeNotify('editor.action.revealDefinitionAside')<CR>
+            call CreateSplitMappings("nnore", "\\gd", ":call VSCodeNotify('editor.action.revealDefinition')<CR>")
         else
             call CreateSplitMappings("nnore", "\\gd", ":call CocActionAsync('jumpDefinition')<CR>")
         endif
     " \gr -> Goto References
         if(exists('g:vscode'))
-            nnoremap \gr :call VSCodeNotify('editor.action.goToReferences')<CR>
-            nnoremap \grr :call VSCodeNotify('editor.action.goToReferences')<CR>
+            call CreateSplitMappings("nnore", "\\gr", ":call VSCodeNotify('editor.action.goToReferences')<CR>")
         else
             call CreateSplitMappings("nnore", "\\gr", ":call CocActionAsync('jumpReferences')<CR>")
         endif
