@@ -170,8 +170,12 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
     if exists("g:vscode")
       command! Tabnew call VSCodeNotify("workbench.action.duplicateWorkspaceInNewWindow")
     endif
-    " Remove vscode neovim plugin's <C-W><C-H> mappings
+    " Fix the 'vscode neovim' plugin's <C-W> mappings
     if(exists("g:vscode"))
+        nnoremap <C-W>> :call VSCodeNotify("workbench.action.increaseViewWidth")<CR>
+        nnoremap <C-W>< :call VSCodeNotify("workbench.action.decreaseViewWidth")<CR>
+        nnoremap <C-W>+ :call VSCodeNotify("workbench.action.increaseViewHeight")<CR>
+        nnoremap <C-W>- :call VSCodeNotify("workbench.action.decreaseViewHeight")<CR>
         map <C-W><C-H> <C-W>h
         map <C-W><C-J> <C-W>j
         map <C-W><C-K> <C-W>k
