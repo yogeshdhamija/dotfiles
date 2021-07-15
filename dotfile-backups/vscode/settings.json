@@ -79,8 +79,8 @@
     },
     "java.configuration.checkProjectSettingsExclusions": false,
     "vscode-neovim.mouseSelectionStartVisualMode": true,
-    "vscode-neovim.neovimExecutablePaths.darwin": "/Users/yogeshdhamija/nvim/nvim-osx64/bin/nvim",
     "editor.scrollBeyondLastLine": false,
+    "vscode-neovim.neovimExecutablePaths.darwin": "/Users/ydhamija96/nvim-osx64/bin/nvim",
     "explorer.openEditors.visible": 999999999,
     "typescript.updateImportsOnFileMove.enabled": "always",
 
@@ -94,6 +94,7 @@
     "workbench.editor.untitled.labelFormat": "name",
     "terminal.integrated.confirmOnExit": true,
     "terminal.integrated.scrollback": 10000,
+    "window.zoomLevel": 0,
     "gitlens.views.commits.avatars": false,
     "gitlens.views.fileHistory.avatars": false,
     "gitlens.views.branches.avatars": false,
@@ -126,11 +127,12 @@
     "git.enableStatusBarSync": false,
     "liveshare.showInStatusBar": "whileCollaborating",
     "yaml.schemas": {
-        "file:///Users/yogeshdhamija/.vscode/extensions/atlassian.atlascode-2.9.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/ydhamija96/.vscode/extensions/atlassian.atlascode-2.9.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "git.suggestSmartCommit": false,
     "atlascode.jira.explorer.nestSubtasks": true,
     "redhat.telemetry.enabled": true,
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
     "atlascode.bitbucket.explorer.notifications.pullRequestCreated": false,
     "atlascode.jira.statusbar.enabled": false,
     "atlascode.bitbucket.statusbar.enabled": false,
@@ -179,4 +181,6 @@
         }
     ],
     "terminal.integrated.tabs.focusMode": "singleClick",
+    "terminal.integrated.defaultLocation": "editor",
+    "terminal.integrated.defaultProfile.osx": "zsh",
 }

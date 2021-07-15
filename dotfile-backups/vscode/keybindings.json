@@ -59,6 +59,9 @@
         {"key": "\\ w", "when": "terminalFocus", "command": "workbench.files.action.focusOpenEditorsView"},
         {"key": "\\ a", "when": "terminalFocus", "command": "workbench.action.showCommands"},
         {"key": "\\ c", "when": "terminalFocus", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.closeSidebar", "workbench.action.closePanel", "notifications.hideToasts"]}},
+        // allow \ default behaviour if you double up, since otherwise it's taken by other shortcuts
+        { "key": "\\ \\", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": "\\"} },
+        
     
     // Other stuff...
 ]
