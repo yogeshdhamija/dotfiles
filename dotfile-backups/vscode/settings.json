@@ -181,6 +181,6 @@
         }
     ],
     "terminal.integrated.tabs.focusMode": "singleClick",
-    "terminal.integrated.defaultLocation": "editor",
+    "terminal.integrated.defaultLocation": "view",
     "terminal.integrated.defaultProfile.osx": "zsh",
 }
