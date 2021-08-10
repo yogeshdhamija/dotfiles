@@ -48,9 +48,11 @@
         { "key": "ctrl+w shift+,", "when": "terminalFocus", "command": "workbench.action.decreaseViewWidth" },
         { "key": "ctrl+w shift+.", "when": "terminalFocus", "command": "workbench.action.increaseViewWidth" },
         { "key": "ctrl+w =", "when": "terminalFocus", "command": "workbench.action.evenEditorWidths" },
+        { "key": "shift+; q", "when": "terminalFocus", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.focusPreviousGroup", "workbench.action.joinTwoGroups"]}},
 
-        // allow ctrl+w default behaviour if you double up, since otherwise it's taken by window management
+        // allow default behaviour if you double up, since otherwise it's taken by window management
         { "key": "ctrl+w ctrl+w", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": "\u0017"} },
+        { "key": "shift+; shift+;", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": ":"} },
         
         // other stuff
         {"key": "\\ d h", "when": "terminalFocus", "command": "workbench.files.action.showActiveFileInExplorer"},

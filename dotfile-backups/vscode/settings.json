@@ -79,7 +79,7 @@
     },
     "java.configuration.checkProjectSettingsExclusions": false,
     "vscode-neovim.mouseSelectionStartVisualMode": true,
-    "vscode-neovim.neovimExecutablePaths.darwin": "/Users/yogeshdhamija/nvim/nvim-osx64/bin/nvim",
+    "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
     "editor.scrollBeyondLastLine": false,
     "explorer.openEditors.visible": 999999999,
     "typescript.updateImportsOnFileMove.enabled": "always",
@@ -92,7 +92,7 @@
     "javascript.updateImportsOnFileMove.enabled": "always",
     "git.confirmSync": false,
     "workbench.editor.untitled.labelFormat": "name",
-    "terminal.integrated.confirmOnExit": true,
+    "terminal.integrated.confirmOnExit": "hasChildProcesses",
     "terminal.integrated.scrollback": 10000,
     "gitlens.views.commits.avatars": false,
     "gitlens.views.fileHistory.avatars": false,
@@ -179,6 +179,7 @@
         }
     ],
     "terminal.integrated.tabs.focusMode": "singleClick",
-    "terminal.integrated.defaultLocation": "view",
-    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.defaultLocation": "editor",
+    "workbench.editor.sharedViewState": true,
+    "terminal.integrated.confirmOnKill": "always",
 }
