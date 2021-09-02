@@ -1,19 +1,18 @@
 {
-    // vim-like buffer management (in conjunction with some settings in ~/.vimrc and vscode-neovim plugin):
-    "workbench.editor.showTabs": false,
-    // "workbench.editor.limit.enabled": true,
-    "workbench.editor.enablePreview": false,
-    "workbench.editor.limit.value": 1,
-    "workbench.editor.limit.perEditorGroup": true,
+    //// to make vscode behave like vim
+        // "workbench.editor.showTabs": false,
+        // "workbench.editor.enablePreview": false,
+        // "workbench.editor.limit.value": 1,
+        // "workbench.editor.limit.perEditorGroup": true,
+        // "vscode-neovim.mouseSelectionStartVisualMode": true,
+        // "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
+        // "terminal.integrated.defaultLocation": "editor",
 
     "gitlens.currentLine.enabled": false,
     "gitlens.codeLens.enabled": false,
     "editor.minimap.enabled": false,
-
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "editor.suggestSelection": "first",
-
-    // don't exclude anything
     "files.exclude": {
         "**/.DS_Store": false,
         "**/.git": false,
@@ -35,7 +34,6 @@
     "editor.fontLigatures": true,
     "window.title": "${activeEditorShort}${dirty}${separator}${activeEditorLong}",
     "editor.renderWhitespace": "trailing",
-
     "intelephense.environment.shortOpenTag": true,
     "intelephense.format.braces": "k&r",
     "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
@@ -56,7 +54,6 @@
     "path-intellisense.showHiddenFiles": true,
     "php.validate.run": "onType",
     "php.suggest.basic": false,
-
     "settingsSync.keybindingsPerPlatform": false,
     "settingsSync.ignoredExtensions": [
         "ms-vscode-remote.remote-wsl"
@@ -69,7 +66,6 @@
         "vscode-neovim.useWSL",
         "yaml.schemas"
     ],
-
     "diffEditor.renderSideBySide": true,
     "files.autoSave": "off",
     "explorer.autoReveal": false,
@@ -78,12 +74,9 @@
         "source.organizeImports": true
     },
     "java.configuration.checkProjectSettingsExclusions": false,
-    "vscode-neovim.mouseSelectionStartVisualMode": true,
-    "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
     "editor.scrollBeyondLastLine": false,
     "explorer.openEditors.visible": 999999999,
     "typescript.updateImportsOnFileMove.enabled": "always",
-
     "workbench.editorAssociations": {
         "*.png": "hediet.vscode-drawio",
         "git-rebase-todo": "default",
@@ -152,34 +145,7 @@
     "githubIssues.useBranchForIssues": "prompt",
     "gitlens.advanced.fileHistoryFollowsRenames": true,
     "githubPullRequests.logLevel": "off",
-    "atlascode.jira.jqlList": [
-        {
-            "id": "f11975e7-0d79-4ab1-b448-58e40337eda5",
-            "enabled": true,
-            "name": "Open & Assigned to me",
-            "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
-            "siteId": "f676ca6e-dc33-43b1-9baa-f356d484b288",
-            "monitor": true
-        },
-        {
-            "id": "75d285ac-9a4e-4150-b3e4-11c8fadb3488",
-            "siteId": "f676ca6e-dc33-43b1-9baa-f356d484b288",
-            "name": "Reported by me",
-            "query": "reporter=currentUser()",
-            "enabled": true,
-            "monitor": true
-        },
-        {
-            "id": "901ccc37-200e-4e89-90eb-37b28a33d7c1",
-            "siteId": "f676ca6e-dc33-43b1-9baa-f356d484b288",
-            "name": "Participated by me",
-            "query": "summary ~ currentUser() OR description ~ currentUser() OR assignee = currentUser() OR assignee was currentUser() OR comment ~ currentUser() OR text ~ currentUser() OR creator = currentUser() OR reporter = currentUser() OR watcher = currentUser() ORDER BY lastViewed DESC",
-            "enabled": true,
-            "monitor": true
-        }
-    ],
     "terminal.integrated.tabs.focusMode": "singleClick",
-    "terminal.integrated.defaultLocation": "editor",
     "workbench.editor.sharedViewState": true,
     "terminal.integrated.confirmOnKill": "always",
 }

@@ -14,19 +14,6 @@
     { "key": "ctrl+f", "command": "-workbench.action.terminal.focusFind", "when": "terminalFindFocused || terminalFocus" },
     { "key": "ctrl+shift+f", "command": "workbench.action.terminal.focusFind", "when": "terminalFindFocused || terminalFocus" },
 
-    // Map <C-\><C-n> to "exit" focus on any non-editor (similar to how <C-\><C-n> maps to <Esc> in vim/neovim):
-    { "key": "ctrl+\\ ctrl+n", "when": "!terminalFocus", "command": "workbench.action.focusActiveEditorGroup" },
-    { "key": "ctrl+\\ ctrl+n", "when": "terminalFocus", "command": "workbench.action.focusPreviousGroup" },
-    { "key": "escape", "command": "workbench.action.focusActiveEditorGroup", "when": "!editorTextFocus" },
-    
-    // Map "back" and "forward" navigation to vim-like keys:
-    { "key": "ctrl+o", "command": "workbench.action.navigateBack", "when": "!neovim.recording && neovim.mode != 'insert'" },
-    { "key": "ctrl+i", "command": "workbench.action.navigateForward", "when": "!neovim.recording && neovim.mode != 'insert'" },
-    { "key": "ctrl+-", "command": "-workbench.action.navigateBack" },
-    { "key": "ctrl+shift+-", "command": "-workbench.action.navigateForward" },
-    { "key": "ctrl+o", "command": "-vscode-neovim.send", "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'" },
-    { "key": "ctrl+i", "command": "-vscode-neovim.send", "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'" },
-    
     // Make the "enter" key open the file instead of renaming the file:
     { "key": "shift+enter", "command": "renameFile", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus" },
     { "key": "enter", "command": "-renameFile", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus" },
@@ -34,40 +21,54 @@
     { "key": "space", "command": "-filesExplorer.openFilePreserveFocus", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsFolder && !inputFocus" },
     { "key": "ctrl+shift+n", "command": "explorer.newFile" },
     { "key": "ctrl+shift+alt+n", "command": "explorer.newFolder" },
+    
+    //// to make vscode behave like vim
+        // // Map <C-\><C-n> to "exit" focus on any non-editor (similar to how <C-\><C-n> maps to <Esc> in vim/neovim):
+        // { "key": "ctrl+\\ ctrl+n", "when": "!terminalFocus", "command": "workbench.action.focusActiveEditorGroup" },
+        // { "key": "ctrl+\\ ctrl+n", "when": "terminalFocus", "command": "workbench.action.focusPreviousGroup" },
+        // { "key": "escape", "command": "workbench.action.focusActiveEditorGroup", "when": "!editorTextFocus" },
+    
+        // // Map "back" and "forward" navigation to vim-like keys:
+        // { "key": "ctrl+o", "command": "workbench.action.navigateBack", "when": "!neovim.recording && neovim.mode != 'insert'" },
+        // { "key": "ctrl+i", "command": "workbench.action.navigateForward", "when": "!neovim.recording && neovim.mode != 'insert'" },
+        // { "key": "ctrl+-", "command": "-workbench.action.navigateBack" },
+        // { "key": "ctrl+shift+-", "command": "-workbench.action.navigateForward" },
+        // { "key": "ctrl+o", "command": "-vscode-neovim.send", "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'" },
+        // { "key": "ctrl+i", "command": "-vscode-neovim.send", "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'" },
+    
+        // // Add vim shortcuts to terminal (duplicated from ~/.vimrc)
+        //     // window management
+        //     { "key": "ctrl+w h", "when": "terminalFocus", "command": "workbench.action.focusLeftGroup" },
+        //     { "key": "ctrl+w j", "when": "terminalFocus", "command": "workbench.action.focusBelowGroup" },
+        //     { "key": "ctrl+w k", "when": "terminalFocus", "command": "workbench.action.focusAboveGroup" },
+        //     { "key": "ctrl+w l", "when": "terminalFocus", "command": "workbench.action.focusRightGroup" },
+        //     { "key": "ctrl+w s", "when": "terminalFocus", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.newGroupBelow", "workbench.action.files.newUntitledFile"]} },
+        //     { "key": "ctrl+w v", "when": "terminalFocus", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.newGroupRight", "workbench.action.files.newUntitledFile"]} },
+        //     { "key": "ctrl+w -", "when": "terminalFocus", "command": "workbench.action.decreaseViewHeight" },
+        //     { "key": "ctrl+w shift+=", "when": "terminalFocus", "command": "workbench.action.increaseViewHeight" },
+        //     { "key": "ctrl+w shift+,", "when": "terminalFocus", "command": "workbench.action.decreaseViewWidth" },
+        //     { "key": "ctrl+w shift+.", "when": "terminalFocus", "command": "workbench.action.increaseViewWidth" },
+        //     { "key": "ctrl+w =", "when": "terminalFocus", "command": "workbench.action.evenEditorWidths" },
+        //     { "key": "shift+; q", "when": "terminalFocus", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.focusPreviousGroup", "workbench.action.joinTwoGroups"]}},
 
-    // Add vim shortcuts to terminal (duplicated from ~/.vimrc)
-        // window management
-        { "key": "ctrl+w h", "when": "terminalFocus", "command": "workbench.action.focusLeftGroup" },
-        { "key": "ctrl+w j", "when": "terminalFocus", "command": "workbench.action.focusBelowGroup" },
-        { "key": "ctrl+w k", "when": "terminalFocus", "command": "workbench.action.focusAboveGroup" },
-        { "key": "ctrl+w l", "when": "terminalFocus", "command": "workbench.action.focusRightGroup" },
-        { "key": "ctrl+w s", "when": "terminalFocus", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.newGroupBelow", "workbench.action.files.newUntitledFile"]} },
-        { "key": "ctrl+w v", "when": "terminalFocus", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.newGroupRight", "workbench.action.files.newUntitledFile"]} },
-        { "key": "ctrl+w -", "when": "terminalFocus", "command": "workbench.action.decreaseViewHeight" },
-        { "key": "ctrl+w shift+=", "when": "terminalFocus", "command": "workbench.action.increaseViewHeight" },
-        { "key": "ctrl+w shift+,", "when": "terminalFocus", "command": "workbench.action.decreaseViewWidth" },
-        { "key": "ctrl+w shift+.", "when": "terminalFocus", "command": "workbench.action.increaseViewWidth" },
-        { "key": "ctrl+w =", "when": "terminalFocus", "command": "workbench.action.evenEditorWidths" },
-        { "key": "shift+; q", "when": "terminalFocus", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.focusPreviousGroup", "workbench.action.joinTwoGroups"]}},
+        //     // allow default behaviour if you double up, since otherwise it's taken by window management
+        //     { "key": "ctrl+w ctrl+w", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": "\u0017"} },
+        //     { "key": "shift+; shift+;", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": ":"} },
+            
+        //     // other stuff
+        //     {"key": "\\ d h", "when": "terminalFocus", "command": "workbench.files.action.showActiveFileInExplorer"},
+        //     {"key": "\\ o", "when": "terminalFocus", "command": "workbench.action.quickOpen"},
+        //     {"key": "\\ b", "when": "terminalFocus", "command": "workbench.action.openPreviousEditorFromHistory"},
+        //     {"key": "\\ w", "when": "terminalFocus", "command": "workbench.files.action.focusOpenEditorsView"},
+        //     {"key": "\\ a", "when": "terminalFocus", "command": "workbench.action.showCommands"},
+        //     {"key": "\\ c", "when": "terminalFocus", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.closeSidebar", "workbench.action.closePanel", "notifications.hideToasts"]}},
 
-        // allow default behaviour if you double up, since otherwise it's taken by window management
-        { "key": "ctrl+w ctrl+w", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": "\u0017"} },
-        { "key": "shift+; shift+;", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": ":"} },
-        
-        // other stuff
-        {"key": "\\ d h", "when": "terminalFocus", "command": "workbench.files.action.showActiveFileInExplorer"},
-        {"key": "\\ o", "when": "terminalFocus", "command": "workbench.action.quickOpen"},
-        {"key": "\\ b", "when": "terminalFocus", "command": "workbench.action.openPreviousEditorFromHistory"},
-        {"key": "\\ w", "when": "terminalFocus", "command": "workbench.files.action.focusOpenEditorsView"},
-        {"key": "\\ a", "when": "terminalFocus", "command": "workbench.action.showCommands"},
-        {"key": "\\ c", "when": "terminalFocus", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.closeSidebar", "workbench.action.closePanel", "notifications.hideToasts"]}},
+        //     // allow \ default behaviour if you double up, since otherwise it's taken by other shortcuts
+        //     { "key": "\\ \\", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": "\\"} },
 
-        // allow \ default behaviour if you double up, since otherwise it's taken by other shortcuts
-        { "key": "\\ \\", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": "\\"} },
-
-        // back and forward (for some reason they only work as chords???)
-        { "key": "ctrl+o ctrl+o", "command": "workbench.action.navigateBack", "when": "terminalFocus" },
-        { "key": "ctrl+i ctrl+i", "command": "workbench.action.navigateForward", "when": "terminalFocus" },
+        //     // back and forward (for some reason they only work as chords???)
+        //     { "key": "ctrl+o ctrl+o", "command": "workbench.action.navigateBack", "when": "terminalFocus" },
+        //     { "key": "ctrl+i ctrl+i", "command": "workbench.action.navigateForward", "when": "terminalFocus" },
     
     // Other stuff...
 ]
