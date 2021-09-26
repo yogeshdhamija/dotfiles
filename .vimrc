@@ -170,6 +170,8 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
     if exists("g:vscode")
       command! Tabnew call VSCodeNotify("workbench.action.duplicateWorkspaceInNewWindow")
       command! -bang Quit if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.revertAndCloseActiveEditor') | else | call VSCodeNotify('workbench.action.focusPreviousGroup') | call VSCodeNotify('workbench.action.joinTwoGroups') | endif
+      command! Bd call VSCodeNotify('workbench.action.closeActiveEditor')
+      AlterCommand bd Bd
     endif
     " Fix the 'vscode neovim' plugin's <C-W> mappings
     if(exists("g:vscode"))
@@ -240,7 +242,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         endif
     " \b -> list Buffers
         if(exists('g:vscode'))
-            nnoremap \b :call VSCodeNotify("workbench.action.openPreviousEditorFromHistory")<CR>
+            nnoremap \b :call VSCodeNotify("workbench.action.showAllEditors")<CR>
         else
             nnoremap \b :Buffers<CR>
         endif

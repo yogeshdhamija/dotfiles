@@ -1,15 +1,12 @@
 {
-    //// to make vscode behave like vim
-        // "workbench.editor.showTabs": false,
-        // "workbench.editor.enablePreview": false,
-        // "workbench.editor.limit.value": 1,
-        // "workbench.editor.limit.perEditorGroup": true,
-        // "vscode-neovim.mouseSelectionStartVisualMode": true,
-        // "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
-        // "terminal.integrated.defaultLocation": "editor",
-
-    "gitlens.currentLine.enabled": false,
-    "gitlens.codeLens.enabled": false,
+    //to make vscode behave like vim
+        "workbench.editor.showTabs": false,
+        "workbench.editor.enablePreview": false,
+        "workbench.editor.limit.value": 1,
+        "workbench.editor.limit.perEditorGroup": true,
+        "vscode-neovim.mouseSelectionStartVisualMode": true,
+        "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
+        "terminal.integrated.defaultLocation": "editor",
     "editor.minimap.enabled": false,
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "editor.suggestSelection": "first",
@@ -103,10 +100,8 @@
     ],
     "extensions.ignoreRecommendations": true,
     "editor.semanticHighlighting.enabled": true,
-    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"/Users/ydhamija96/.vscode/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
-    "hediet.vscode-drawio.local-storage": "eyIuZHJhd2lvLWNvbmZpZyI6IntcImxhbmd1YWdlXCI6XCJcIixcImN1c3RvbUZvbnRzXCI6W10sXCJsaWJyYXJpZXNcIjpcImdlbmVyYWxcIixcImN1c3RvbUxpYnJhcmllc1wiOltcIkwuc2NyYXRjaHBhZFwiXSxcInBsdWdpbnNcIjpbXSxcInJlY2VudENvbG9yc1wiOltcIkNDQ0NDQ1wiLFwiMDAwMDAwXCIsXCJDMkMyQzJcIl0sXCJmb3JtYXRXaWR0aFwiOlwiMjQwXCIsXCJjcmVhdGVUYXJnZXRcIjpmYWxzZSxcInBhZ2VGb3JtYXRcIjp7XCJ4XCI6MCxcInlcIjowLFwid2lkdGhcIjoxMTAwLFwiaGVpZ2h0XCI6ODUwfSxcInNlYXJjaFwiOnRydWUsXCJzaG93U3RhcnRTY3JlZW5cIjp0cnVlLFwiZ3JpZENvbG9yXCI6XCIjZDBkMGQwXCIsXCJkYXJrR3JpZENvbG9yXCI6XCIjNmU2ZTZlXCIsXCJhdXRvc2F2ZVwiOnRydWUsXCJyZXNpemVJbWFnZXNcIjpudWxsLFwib3BlbkNvdW50ZXJcIjowLFwidmVyc2lvblwiOjE4LFwidW5pdFwiOjEsXCJpc1J1bGVyT25cIjpmYWxzZSxcInVpXCI6XCJcIn0ifQ==",
-    "hediet.vscode-drawio.codeLinkActivated": false,
-    "hediet.vscode-drawio.theme": "atlas",
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"/Users/yogeshdhamija/.vscode/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
+    "hediet.vscode-drawio.local-storage": "eyIuZHJhd2lvLWNvbmZpZyI6IntcImxhbmd1YWdlXCI6XCJcIixcImN1c3RvbUZvbnRzXCI6W10sXCJsaWJyYXJpZXNcIjpcImdlbmVyYWxcIixcImN1c3RvbUxpYnJhcmllc1wiOltcIkwuc2NyYXRjaHBhZFwiXSxcInBsdWdpbnNcIjpbXSxcInJlY2VudENvbG9yc1wiOltcIkNDQ0NDQ1wiLFwiMDAwMDAwXCIsXCJDMkMyQzJcIl0sXCJmb3JtYXRXaWR0aFwiOjI0MCxcImNyZWF0ZVRhcmdldFwiOmZhbHNlLFwicGFnZUZvcm1hdFwiOntcInhcIjowLFwieVwiOjAsXCJ3aWR0aFwiOjExMDAsXCJoZWlnaHRcIjo4NTB9LFwic2VhcmNoXCI6dHJ1ZSxcInNob3dTdGFydFNjcmVlblwiOnRydWUsXCJncmlkQ29sb3JcIjpcIiNkMGQwZDBcIixcImRhcmtHcmlkQ29sb3JcIjpcIiM2ZTZlNmVcIixcImF1dG9zYXZlXCI6dHJ1ZSxcInJlc2l6ZUltYWdlc1wiOm51bGwsXCJvcGVuQ291bnRlclwiOjAsXCJ2ZXJzaW9uXCI6MTgsXCJ1bml0XCI6MSxcImlzUnVsZXJPblwiOmZhbHNlLFwidWlcIjpcIlwifSJ9",
     "python.languageServer": "Pylance",
     "window.restoreWindows": "none",
     "workbench.startupEditor": "newUntitledFile",
@@ -132,11 +127,12 @@
     "atlascode.bitbucket.pipelines.monitorEnabled": false,
     "atlascode.jira.explorer.monitorEnabled": false,
     "workbench.colorTheme": "Chandrian Blue",
-    "workbench.colorCustomizations": {
-        "editor.selectionBackground": "#6b420d",
-        "editor.selectionHighlightBackground": "#6b420d57",
-        "editor.findMatchHighlightBackground": "#77741491"
-    },
+    // Fixing color issues in Chandrian color scheme:
+        "workbench.colorCustomizations": {
+            "editor.selectionBackground": "#6b420d",
+            "editor.selectionHighlightBackground": "#6b420d57",
+            "editor.findMatchHighlightBackground": "#77741491"
+        },
     "workbench.editor.untitled.hint": "hidden",
     "[json]": {
         "editor.defaultFormatter": "vscode.json-language-features"
@@ -148,4 +144,18 @@
     "terminal.integrated.tabs.focusMode": "singleClick",
     "workbench.editor.sharedViewState": true,
     "terminal.integrated.confirmOnKill": "always",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "gitlens.codeLens.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.hovers.enabled": false,
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "python.defaultInterpreterPath": "/usr/local/opt/python@3.9/bin/python3.9",
+    "files.associations": {
+        ".vimrc": "viml"
+    },
 }
