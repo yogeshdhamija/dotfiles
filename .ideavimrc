@@ -9,6 +9,7 @@ nnoremap <C-I> :action Forward<CR>
 nnoremap zL 40zl
 nnoremap zH 40zh
 
+nnoremap `` :action ShowBookmarks<CR>
 nnoremap \c <Esc>:noh<CR>:action HideSideWindows<CR>
 nnoremap \tj :action ActivateTerminalToolWindow<CR>
 nnoremap \dh :action SelectInProjectView<CR>
@@ -42,3 +43,6 @@ command! Errors action GoToErrorGroup
 command! ERRS Errors
 command! Error action ShowErrorDescription
 command! ERR Error
+
+command! DELMARKS action ShowBookmarks
+command! DELM DELMARKS

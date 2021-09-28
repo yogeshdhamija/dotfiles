@@ -242,7 +242,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         endif
     " \b -> list Buffers
         if(exists('g:vscode'))
-            nnoremap \b :call VSCodeNotify("workbench.action.showAllEditors")<CR>
+            nnoremap \b :call VSCodeNotify("workbench.action.showEditorsInActiveGroup")<CR>
         else
             nnoremap \b :Buffers<CR>
         endif
