@@ -9,7 +9,6 @@ nnoremap <C-I> :action Forward<CR>
 nnoremap zL 40zl
 nnoremap zH 40zh
 
-nnoremap :bd<CR> :action CloseContent<CR>
 nnoremap \c <Esc>:noh<CR>:action HideSideWindows<CR>
 nnoremap \tj :action ActivateTerminalToolWindow<CR>
 nnoremap \dh :action SelectInProjectView<CR>
@@ -25,7 +24,7 @@ inoremap \h <Esc>:action ParameterInfo<CR>a
 nnoremap z= :action ShowIntentionActions<CR>
 vnoremap z= :action Refactorings.QuickListPopupAction<CR>
 nnoremap \a :action GotoAction<CR>
-nnoremap \b :action RecentFiles<CR>
+nnoremap \b :action Switcher<CR>
 
 command! Rename action RenameElement
 command! REN Rename
