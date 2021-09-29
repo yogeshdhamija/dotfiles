@@ -9,7 +9,7 @@ nnoremap <C-I> :action Forward<CR>
 nnoremap zL 40zl
 nnoremap zH 40zh
 
-nnoremap `` :action ShowBookmarks<CR>
+nnoremap ` :action ShowBookmarks<CR>
 nnoremap \c <Esc>:noh<CR>:action HideSideWindows<CR>
 nnoremap \tj :action ActivateTerminalToolWindow<CR>
 nnoremap \dh :action SelectInProjectView<CR>

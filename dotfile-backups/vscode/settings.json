@@ -1,8 +1,9 @@
 {
     //to make vscode behave like vim
-        "workbench.editor.showTabs": false,
+        // "workbench.editor.showTabs": false,
         "workbench.editor.enablePreview": false,
         "workbench.editor.limit.value": 1,
+        "workbench.editor.limit.enabled": false,
         "workbench.editor.limit.perEditorGroup": true,
         "vscode-neovim.mouseSelectionStartVisualMode": true,
         "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
