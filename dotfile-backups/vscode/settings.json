@@ -1,14 +1,14 @@
 {
-    //to make vscode behave like vim
-        // "workbench.editor.showTabs": false,
-        "workbench.editor.enablePreview": false,
-        "workbench.editor.limit.value": 1,
-        "workbench.editor.limit.enabled": false,
-        "workbench.editor.limit.perEditorGroup": true,
-        "vscode-neovim.mouseSelectionStartVisualMode": true,
-        "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
-        "terminal.integrated.defaultLocation": "editor",
+    "workbench.editor.showTabs": true,
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.limit.value": 1,
+    "workbench.editor.limit.enabled": false,
+    "workbench.editor.limit.perEditorGroup": true,
+    "vscode-neovim.mouseSelectionStartVisualMode": true,
+    "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
+    "terminal.integrated.defaultLocation": "editor",
     "editor.minimap.enabled": false,
+
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "editor.suggestSelection": "first",
     "files.exclude": {
@@ -130,6 +130,7 @@
     "workbench.colorTheme": "Chandrian Blue",
     // Fixing color issues in Chandrian color scheme:
         "workbench.colorCustomizations": {
+            "tab.activeBackground": "#01526691",
             "editor.selectionBackground": "#6b420d",
             "editor.selectionHighlightBackground": "#6b420d57",
             "editor.findMatchHighlightBackground": "#77741491"
@@ -145,18 +146,8 @@
     "terminal.integrated.tabs.focusMode": "singleClick",
     "workbench.editor.sharedViewState": true,
     "terminal.integrated.confirmOnKill": "always",
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
     "gitlens.codeLens.enabled": false,
     "gitlens.currentLine.enabled": false,
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.hovers.enabled": false,
-    "[yaml]": {
-        "editor.defaultFormatter": "redhat.vscode-yaml"
-    },
-    "python.defaultInterpreterPath": "/usr/local/opt/python@3.9/bin/python3.9",
-    "files.associations": {
-        ".vimrc": "viml"
-    },
 }
