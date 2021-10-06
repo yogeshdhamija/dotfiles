@@ -125,6 +125,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         tabdo windo set foldtext=CustomFoldText()
         tabdo windo set fillchars=fold:\ 
         set laststatus=2
+        highlight MatchParen term=bold,underline cterm=bold,underline ctermbg=234 ctermfg=14 gui=bold,underline guibg=#1d2021 guifg=#91fff8
     endif
 
 " Remaps
