@@ -37,8 +37,9 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         \ ]
         let visual_plugins = [
             \ ['mhinz/vim-signify', {}],
-            \ ["NLKNguyen/papercolor-theme", {}],
-            \ ["nathanaelkane/vim-indent-guides", {}],
+            \ ['wojciechkepka/vim-github-dark', {}],
+            \ ['vim-airline/vim-airline', {}],
+            \ ['vim-airline/vim-airline-themes', {}],
         \ ]
         let embed_to_other_apps_plugins = [
         \ ]
@@ -65,10 +66,6 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
             \ 'coc-vimlsp', 
             \ 'coc-json', 
             \ 'coc-yaml',
-            \ 'coc-tsserver', 
-            \ 'coc-eslint',
-            \ 'coc-apollo',
-            \ 'coc-emmet'
         \ ]
     endif
     if exists("added_coc_plugins")
@@ -114,32 +111,20 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
     endif
     set updatetime=300
     autocmd CursorHold * silent! call CocActionAsync('highlight')
-    let g:peekaboo_window="split new"
+    let g:peekaboo_window="call CreateCenteredFloatingWindow()"
 
 " Colorscheme
     if(!exists('g:vscode'))
-        silent! colorscheme PaperColor
+        set termguicolors
         set background=dark
+        let g:gh_color = "soft"
+        silent! colorscheme ghdark
         set number
         set scl=yes
         set foldmethod=indent
         set foldlevelstart=99
         tabdo windo set foldtext=CustomFoldText()
         tabdo windo set fillchars=fold:\ 
-
-        hi CocErrorSign  ctermfg=Red guifg=#ff0000
-        hi CocWarningSign  ctermfg=Brown guifg=#ff922b
-        hi CocInfoSign  ctermfg=Black guifg=#fab005
-
-        set listchars=tab:\|\ 
-        set list
-        let g:indent_guides_enable_on_vim_startup = 1
-        let g:indent_guides_auto_colors = 0
-        autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#dfdfdf ctermbg=254
-        autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#dfdfdf ctermbg=254
-        let g:indent_guides_guide_size = 1
-        let g:indent_guides_tab_guides = 0
-
         set laststatus=2
     endif
 
