@@ -37,7 +37,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         \ ]
         let visual_plugins = [
             \ ['mhinz/vim-signify', {}],
-            \ ['wojciechkepka/vim-github-dark', {}],
+            \ ['joshdick/onedark.vim', {}],
             \ ['vim-airline/vim-airline', {}],
             \ ['vim-airline/vim-airline-themes', {}],
         \ ]
@@ -117,8 +117,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
     if(!exists('g:vscode'))
         set termguicolors
         set background=dark
-        let g:gh_color = "soft"
-        silent! colorscheme ghdark
+        silent! colorscheme onedark
         set number
         set scl=yes
         set foldmethod=indent
