@@ -40,6 +40,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
             \ ['joshdick/onedark.vim', {}],
             \ ['vim-airline/vim-airline', {}],
             \ ['vim-airline/vim-airline-themes', {}],
+            \ ['lukas-reineke/indent-blankline.nvim', {}],
         \ ]
         let embed_to_other_apps_plugins = [
         \ ]
