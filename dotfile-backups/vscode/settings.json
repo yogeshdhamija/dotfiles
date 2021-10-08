@@ -136,9 +136,6 @@
             "editor.findMatchHighlightBackground": "#77741491"
         },
     "workbench.editor.untitled.hint": "hidden",
-    "[json]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    },
     "githubIssues.assignWhenWorking": false,
     "githubIssues.useBranchForIssues": "prompt",
     "gitlens.advanced.fileHistoryFollowsRenames": true,
@@ -150,4 +147,5 @@
     "gitlens.currentLine.enabled": false,
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.hovers.enabled": false,
+    "workbench.editor.highlightModifiedTabs": true,
 }
