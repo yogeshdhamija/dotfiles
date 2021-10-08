@@ -8,6 +8,9 @@
     "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
     "terminal.integrated.defaultLocation": "editor",
     "editor.minimap.enabled": false,
+    "workbench.editor.autoLockGroups": {
+        "terminalEditor": false
+    },
 
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "editor.suggestSelection": "first",
