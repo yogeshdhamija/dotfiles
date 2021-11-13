@@ -116,7 +116,6 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
 
 " Colorscheme
     if(!exists('g:vscode'))
-        set termguicolors
         set background=dark
         silent! colorscheme onedark
         set number
