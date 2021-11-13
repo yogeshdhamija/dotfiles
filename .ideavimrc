@@ -25,7 +25,8 @@ inoremap \h <Esc>:action ParameterInfo<CR>a
 nnoremap z= :action ShowIntentionActions<CR>
 vnoremap z= :action Refactorings.QuickListPopupAction<CR>
 nnoremap \a :action GotoAction<CR>
-nnoremap \b :action Switcher<CR>
+nnoremap \b :tabn<CR>
+nnoremap \B :tabp<CR>
 
 command! Rename action RenameElement
 command! REN Rename
@@ -46,3 +47,5 @@ command! ERR Error
 
 command! DELMARKS action ShowBookmarks
 command! DELM DELMARKS
+
+nmap :q<CR> <C-W>c
