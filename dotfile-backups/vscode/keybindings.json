@@ -28,14 +28,6 @@
         { "key": "ctrl+\\ ctrl+n", "when": "terminalFocus", "command": "workbench.action.focusPreviousGroup" },
         { "key": "escape", "command": "workbench.action.focusActiveEditorGroup", "when": "!editorTextFocus" },
     
-        // Map "back" and "forward" navigation to vim-like keys:
-        { "key": "ctrl+o", "command": "workbench.action.navigateBack", "when": "!neovim.recording && neovim.mode != 'insert'" },
-        { "key": "ctrl+i", "command": "workbench.action.navigateForward", "when": "!neovim.recording && neovim.mode != 'insert'" },
-        { "key": "ctrl+-", "command": "-workbench.action.navigateBack" },
-        { "key": "ctrl+shift+-", "command": "-workbench.action.navigateForward" },
-        { "key": "ctrl+o", "command": "-vscode-neovim.send", "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'" },
-        { "key": "ctrl+i", "command": "-vscode-neovim.send", "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'" },
-    
         // Add vim shortcuts to terminal (duplicated from ~/.vimrc)
             // window management
             { "key": "ctrl+w h", "when": "terminalFocus", "command": "workbench.action.focusLeftGroup" },
