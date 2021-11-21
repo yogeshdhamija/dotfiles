@@ -164,7 +164,7 @@
     },
     "vim.normalModeKeyBindings": [
         {
-            "before": ["z="],
+            "before": ["z", "="],
             "commands": [ "editor.action.quickFix" ]
         },
         {
@@ -331,7 +331,7 @@
     ],
     "vim.visualModeKeyBindings": [
         {
-            "before": ["z="],
+            "before": ["z", "="],
             "commands": [ "editor.action.quickFix" ]
         },
         {
@@ -350,5 +350,11 @@
             "before": ["\\", "f"],
             "commands": [ "workbench.action.findInFiles" ]
         },
+    ],
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["\\", "h"],
+            "commands": ["editor.action.triggerParameterHints"]
+        }
     ]
 }
