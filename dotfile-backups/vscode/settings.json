@@ -78,7 +78,6 @@
     "explorer.openEditors.visible": 999999999,
     "typescript.updateImportsOnFileMove.enabled": "always",
     "workbench.editorAssociations": {
-        "*.png": "imagePreview.previewEditor",
         "git-rebase-todo": "default",
         "*.ipynb": "jupyter.notebook.ipynb"
     },
@@ -327,6 +326,14 @@
         {
             "before": [":", "C", "L", "O", "<Enter>"],
             "commands": [ "workbench.action.closeOtherEditors" ]
+        },
+        {
+            "before": ["<C-o>"],
+            "commands": [ "workbench.action.navigateBack" ]
+        },
+        {
+            "before": ["<C-i>"],
+            "commands": [ "workbench.action.navigateBack" ]
         },
     ],
     "vim.visualModeKeyBindings": [
