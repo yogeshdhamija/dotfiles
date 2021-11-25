@@ -27,7 +27,7 @@
         { "key": "ctrl+\\ ctrl+n", "when": "!terminalFocus", "command": "workbench.action.focusActiveEditorGroup" },
         { "key": "ctrl+\\ ctrl+n", "when": "terminalFocus", "command": "workbench.action.focusPreviousGroup" },
         { "key": "escape", "command": "workbench.action.focusActiveEditorGroup", "when": "!editorTextFocus" },
-    
+
         // Add vim shortcuts to terminal (duplicated from ~/.vimrc)
             // window management
             { "key": "ctrl+w h", "when": "terminalFocus", "command": "workbench.action.focusLeftGroup" },
@@ -65,6 +65,7 @@
             // back and forward (for some reason they only work as chords???)
             { "key": "ctrl+o ctrl+o", "command": "workbench.action.navigateBack", "when": "terminalFocus" },
             { "key": "ctrl+i ctrl+i", "command": "workbench.action.navigateForward", "when": "terminalFocus" },
+
     
     // Other stuff...
 ]
