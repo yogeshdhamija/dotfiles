@@ -116,7 +116,7 @@
     "git.enableStatusBarSync": false,
     "liveshare.showInStatusBar": "whileCollaborating",
     "yaml.schemas": {
-        "file:///Users/yogeshdhamija/.vscode/extensions/atlassian.atlascode-2.9.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/yogeshdhamija/.vscode/extensions/atlassian.atlascode-2.10.0/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "git.suggestSmartCommit": false,
     "atlascode.jira.explorer.nestSubtasks": true,
