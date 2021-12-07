@@ -103,7 +103,6 @@
     "extensions.ignoreRecommendations": true,
     "editor.semanticHighlighting.enabled": true,
     "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"/Users/yogeshdhamija/.vscode/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
-    "hediet.vscode-drawio.local-storage": "eyIuZHJhd2lvLWNvbmZpZyI6IntcImxhbmd1YWdlXCI6XCJcIixcImN1c3RvbUZvbnRzXCI6W10sXCJsaWJyYXJpZXNcIjpcImdlbmVyYWxcIixcImN1c3RvbUxpYnJhcmllc1wiOltcIkwuc2NyYXRjaHBhZFwiXSxcInBsdWdpbnNcIjpbXSxcInJlY2VudENvbG9yc1wiOltcIkNDQ0NDQ1wiLFwiMDAwMDAwXCIsXCJDMkMyQzJcIl0sXCJmb3JtYXRXaWR0aFwiOjI0MCxcImNyZWF0ZVRhcmdldFwiOmZhbHNlLFwicGFnZUZvcm1hdFwiOntcInhcIjowLFwieVwiOjAsXCJ3aWR0aFwiOjExMDAsXCJoZWlnaHRcIjo4NTB9LFwic2VhcmNoXCI6dHJ1ZSxcInNob3dTdGFydFNjcmVlblwiOnRydWUsXCJncmlkQ29sb3JcIjpcIiNkMGQwZDBcIixcImRhcmtHcmlkQ29sb3JcIjpcIiM2ZTZlNmVcIixcImF1dG9zYXZlXCI6dHJ1ZSxcInJlc2l6ZUltYWdlc1wiOm51bGwsXCJvcGVuQ291bnRlclwiOjAsXCJ2ZXJzaW9uXCI6MTgsXCJ1bml0XCI6MSxcImlzUnVsZXJPblwiOmZhbHNlLFwidWlcIjpcIlwifSJ9",
     "python.languageServer": "Pylance",
     "window.restoreWindows": "none",
     "workbench.startupEditor": "newUntitledFile",
@@ -161,70 +160,5 @@
     "files.associations": {
         ".vimrc": "viml"
     },
-    "vim.normalModeKeyBindings": [
-        // To stop these from being in the jumplist
-            // Note: these keys don't work in macros. Make sure to use up/down arrows instead.
-            { "before": ["j"], "commands": ["cursorDown"]},
-            { "before": ["k"], "commands": ["cursorUp"]},
-        // To get back working with non-vim navigation
-            { "before": ["<C-o>"], "commands": [ "workbench.action.navigateBack" ] },
-            { "before": ["<C-i>"], "commands": [ "workbench.action.navigateForward" ] },
-        // To get window moving around abilities
-            {"before": ["<C-w>", "<S-h>"], "commands": ["workbench.action.moveActiveEditorGroupLeft"]},
-            {"before": ["<C-w>", "<S-j>"], "commands": ["workbench.action.moveActiveEditorGroupDown"]},
-            {"before": ["<C-w>", "<S-k>"], "commands": ["workbench.action.moveActiveEditorGroupUp"]},
-            {"before": ["<C-w>", "<S-l>"], "commands": ["workbench.action.moveActiveEditorGroupRight"]},
-
-        { "before": ["z", "="], "commands": [ "editor.action.quickFix" ] },
-        { "before": ["m"], "commands": [ "bookmarks.toggleLabeled" ] },
-        { "before": ["`"], "commands": [ "bookmarks.listFromAllFiles" ] },
-        { "before": [":", "D", "E", "L", "M", "<Enter>"], "commands": [ "bookmarks.clearFromAllFiles" ] },
-        { "before": [":", "D", "E", "L", "M", "A", "R", "K", "S", "<Enter>"], "commands": [ "bookmarks.clearFromAllFiles" ] },
-        { "before": [":", "q", "<Enter>"], "commands": [ "workbench.action.focusPreviousGroup", "workbench.action.joinTwoGroups" ] },
-        { "before": [":", "b", "d", "<Enter>"], "commands": [ "workbench.action.closeActiveEditor" ] },
-        { "before": ["\\", "c"], "commands": [ ":noh", "workbench.action.closeSidebar", "workbench.action.closePanel", "notifications.hideToasts", "closeParameterHints" ] },
-        { "before": ["\\", "t", "t"], "commands": [ ":term" ] },
-        { "before": ["\\", "t", "h"], "commands": [ "workbench.action.newGroupLeft", ":term" ] },
-        { "before": ["\\", "t", "j"], "commands": [ "workbench.action.newGroupBelow", ":term" ] },
-        { "before": ["\\", "t", "k"], "commands": [ "workbench.action.newGroupAbove", ":term" ] },
-        { "before": ["\\", "t", "l"], "commands": [ "workbench.action.newGroupRight", ":term" ] },
-        { "before": ["\\", "d", "h"], "commands": [ "workbench.files.action.showActiveFileInExplorer" ] },
-        { "before": ["\\", "o"], "commands": [ "workbench.action.quickOpen" ] },
-        { "before": ["\\", "b"], "commands": [ "workbench.action.showEditorsInActiveGroup" ] },
-        { "before": ["\\", "w"], "commands": [ "workbench.files.action.focusOpenEditorsView" ] },
-        { "before": ["\\", "a"], "commands": [ "workbench.action.showCommands" ] },
-        { "before": ["\\", "g", "d", "d"], "commands": [ "editor.action.revealDefinition" ] },
-        { "before": ["\\", "g", "d", "h"], "commands": [ "workbench.action.newGroupLeft", "editor.action.revealDefinition" ] },
-        { "before": ["\\", "g", "d", "j"], "commands": [ "workbench.action.newGroupBelow", "editor.action.revealDefinition" ] },
-        { "before": ["\\", "g", "d", "k"], "commands": [ "workbench.action.newGroupAbove", "editor.action.revealDefinition" ] },
-        { "before": ["\\", "g", "d", "l"], "commands": [ "workbench.action.newGroupRight", "editor.action.revealDefinition" ] },
-        { "before": ["\\", "g", "r", "r"], "commands": [ "editor.action.goToReferences" ] },
-        { "before": ["\\", "g", "r", "h"], "commands": [ "workbench.action.newGroupLeft", "editor.action.goToReferences" ] },
-        { "before": ["\\", "g", "r", "j"], "commands": [ "workbench.action.newGroupBelow", "editor.action.goToReferences" ] },
-        { "before": ["\\", "g", "r", "k"], "commands": [ "workbench.action.newGroupAbove", "editor.action.goToReferences" ] },
-        { "before": ["\\", "g", "r", "l"], "commands": [ "workbench.action.newGroupRight", "editor.action.goToReferences" ] },
-        { "before": ["\\", "h"], "commands": [ "editor.action.showHover" ] },
-        { "before": [":", "O", "N", "L", "Y", "<Enter>"], "commands": [ "workbench.action.closeSidebar", "workbench.action.closePanel", "workbench.action.joinAllGroups" ] },
-        { "before": [":", "O", "N", "<Enter>"], "commands": [ "workbench.action.closeSidebar", "workbench.action.closePanel", "workbench.action.joinAllGroups" ] },
-        { "before": [":", "R", "E", "N", "<Enter>"], "commands": [ "editor.action.rename" ] },
-        { "before": [":", "R", "E", "N", "A", "M", "E", "<Enter>"], "commands": [ "editor.action.rename" ] },
-        { "before": [":", "F", "O", "R", "<Enter>"], "commands": [ "editor.action.formatDocument" ] },
-        { "before": [":", "F", "O", "R", "M", "<Enter>"], "commands": [ "editor.action.formatDocument" ] },
-        { "before": [":", "F", "O", "R", "M", "A", "T", "<Enter>"], "commands": [ "editor.action.formatDocument" ] },
-        { "before": [":", "E", "R", "R", "O", "R", "S", "<Enter>"], "commands": [ "workbench.actions.view.problems" ] },
-        { "before": [":", "E", "R", "R", "S", "<Enter>"], "commands": [ "workbench.actions.view.problems" ] },
-        { "before": ["*"], "after": ["*", "N"], "commands": [ ":set hlsearch" ] },
-        { "before": ["\\", "f"], "commands": [ "workbench.action.findInFiles" ] },
-        { "before": [":", "C", "L", "O", "<Enter>"], "commands": [ "workbench.action.closeOtherEditors" ] },
-    ],
-    "vim.visualModeKeyBindings": [
-        { "before": ["z", "="], "commands": [ "editor.action.quickFix" ] },
-        { "before": ["\\", "a"], "commands": [ "workbench.action.showCommands" ] },
-        { "before": [":", "R", "E", "N", "<Enter>"], "commands": [ "editor.action.rename" ] },
-        { "before": [":", "R", "E", "N", "A", "M", "E", "<Enter>"], "commands": [ "editor.action.rename" ] },
-        { "before": ["\\", "f"], "commands": [ "workbench.action.findInFiles" ] },
-    ],
-    "vim.insertModeKeyBindings": [
-        { "before": ["\\", "h"], "commands": ["editor.action.triggerParameterHints"] }
-    ]
+    "hediet.vscode-drawio.theme": "sketch"
 }
