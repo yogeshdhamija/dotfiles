@@ -44,7 +44,11 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         \ ]
         let embed_to_other_apps_plugins = [
         \ ]
-        let plugins = vim_idiomatic_plugins + interface_convenience_plugins + ide_like_functionality_plugins + language_plugins + visual_plugins
+        if(!exists('g:vscode'))
+            let plugins = vim_idiomatic_plugins + interface_convenience_plugins + ide_like_functionality_plugins + language_plugins + visual_plugins
+        else
+            let plugins = vim_idiomatic_plugins
+        endif
         if(has('nvim'))
             let plugins = plugins + embed_to_other_apps_plugins
         endif
@@ -111,18 +115,68 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
     let g:peekaboo_window="call CreateCenteredFloatingWindow()"
 
 " Colorscheme
-    set background=dark
-    silent! colorscheme onedark
-    set number
-    set scl=yes
-    set foldmethod=indent
-    set foldlevelstart=99
-    tabdo windo set foldtext=CustomFoldText()
-    tabdo windo set fillchars=fold:\ 
-    set laststatus=2
-    highlight MatchParen term=bold,underline cterm=bold,underline ctermbg=234 ctermfg=14 gui=bold,underline guibg=#1d2021 guifg=#91fff8
+    if(!exists('g:vscode'))
+        set background=dark
+        silent! colorscheme onedark
+        set number
+        set scl=yes
+        set foldmethod=indent
+        set foldlevelstart=99
+        tabdo windo set foldtext=CustomFoldText()
+        tabdo windo set fillchars=fold:\ 
+        set laststatus=2
+        highlight MatchParen term=bold,underline cterm=bold,underline ctermbg=234 ctermfg=14 gui=bold,underline guibg=#1d2021 guifg=#91fff8
+    endif
 
 " Remaps
+    " Get folding working with vscode neovim plugin
+        if(exists("g:vscode"))
+            nnoremap zM :call VSCodeNotify('editor.foldAll')<CR>
+            nnoremap zR :call VSCodeNotify('editor.unfoldAll')<CR>
+            nnoremap zc :call VSCodeNotify('editor.fold')<CR>
+            nnoremap zC :call VSCodeNotify('editor.foldRecursively')<CR>
+            nnoremap zo :call VSCodeNotify('editor.unfold')<CR>
+            nnoremap zO :call VSCodeNotify('editor.unfoldRecursively')<CR>
+            nnoremap za :call VSCodeNotify('editor.toggleFold')<CR>
+            nmap j gj
+            nmap k gk
+        endif
+    " Map vim's spellcheck to quickfix list in VSCode
+        if(exists('g:vscode'))
+            nnoremap z= <Cmd>call VSCodeNotify("editor.action.quickFix")<CR>
+            xnoremap z= <Cmd>call ExecuteVSCodeCommandInVisualMode("editor.action.quickFix")<CR>
+        endif
+    "Get navigating marks working with vscode neovim plugin
+        " (also relies on VSCode Bookmarks plugin)
+    if(exists("g:vscode"))
+        nnoremap m v<Esc>:call ExecuteVSCodeCommandInVisualMode('bookmarks.toggleLabeled')<CR><Esc>
+        nnoremap ` :call VSCodeNotify('bookmarks.listFromAllFiles')<CR>
+    endif
+    if exists("g:vscode")
+      command! Tabnew call VSCodeNotify("workbench.action.duplicateWorkspaceInNewWindow")
+      command! -bang Quit if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.revertAndCloseActiveEditor') | else | call VSCodeNotify('workbench.action.focusPreviousGroup') | call VSCodeNotify('workbench.action.joinTwoGroups') | endif
+      command! Bd call VSCodeNotify('workbench.action.closeActiveEditor')
+      AlterCommand bd Bd
+    endif
+    " Fix the 'vscode neovim' plugin's <C-W> mappings
+    if(exists("g:vscode"))
+        nnoremap <C-W>> :call VSCodeNotify("workbench.action.increaseViewWidth")<CR>
+        nnoremap <C-W>< :call VSCodeNotify("workbench.action.decreaseViewWidth")<CR>
+        nnoremap <C-W>+ :call VSCodeNotify("workbench.action.increaseViewHeight")<CR>
+        nnoremap <C-W>- :call VSCodeNotify("workbench.action.decreaseViewHeight")<CR>
+        map <C-W><C-H> <C-W>h
+        map <C-W><C-J> <C-W>j
+        map <C-W><C-K> <C-W>k
+        map <C-W><C-L> <C-W>l
+    endif
+    "Add commenting to vscode neovim plugin
+        if(exists("g:vscode"))
+            xmap gc  <Plug>VSCodeCommentary
+            nmap gc  <Plug>VSCodeCommentary
+            omap gc  <Plug>VSCodeCommentary
+            nmap gcc <Plug>VSCodeCommentaryLine
+        endif
+
     " Directory tree settings
         augroup dirvish_config
             autocmd!
@@ -139,7 +193,11 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
     " Make pasting from clipboard safer
         inoremap <C-R> <C-R><C-O>
     " \c -> Clear highlights
-        nnoremap \c <Esc>:noh<CR>
+        if(exists('g:vscode'))
+            nnoremap \c <Esc>:noh<CR>:call VSCodeNotify("workbench.action.closeSidebar")<CR>:call VSCodeNotify("workbench.action.closePanel")<CR>:call VSCodeNotify("notifications.hideToasts")<CR>:call VSCodeNotify("closeParameterHints")<CR>
+        else
+            nnoremap \c <Esc>:noh<CR>
+        endif
     " Remap Control+C in visual mode to copy to system clipboard (and Command+C for some terminals)
         vnoremap <C-c> "+y
         vnoremap <D-c> "+y
@@ -148,43 +206,92 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         vnoremap <D-v> "+p
     " \t -> Terminal window
         " Note: <Esc> will not move to normal mode in terminal. Use <C-\><C-N>.
-        if has('nvim')
+        if exists('g:vscode')
+            call CreateSplitMappings("n", "\\t", ":call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
+        elseif has('nvim')
             call CreateSplitMappings("nnore", "\\t", ":terminal<CR>:startinsert<CR>")
         else
             call CreateSplitMappings("nnore", "\\t", ":terminal ++curwin<CR>")
         endif
     " \d -> Directory listing
-        call CreateSplitMappings("n", "\\d", "-")
+        if(exists('g:vscode'))
+            nnoremap \dh :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
+        else
+            call CreateSplitMappings("n", "\\d", "-")
+        endif
     " \o -> Open
-        nnoremap \o :Files<CR>
+        if(exists('g:vscode'))
+            nnoremap \o :call VSCodeNotify("workbench.action.quickOpen")<CR>
+        else
+            nnoremap \o :Files<CR>
+        endif
     " \b -> list Buffers
-        nnoremap \b :Buffers<CR>
+        if(exists('g:vscode'))
+            nnoremap \b :call VSCodeNotify("workbench.action.showEditorsInActiveGroup")<CR>
+        else
+            nnoremap \b :Buffers<CR>
+        endif
     " \w -> list Windows
-        nnoremap \w :Windows<CR>
+        if(exists('g:vscode'))
+            nnoremap \w :call VSCodeNotify("workbench.files.action.focusOpenEditorsView")<CR>
+        else
+            nnoremap \w :Windows<CR>
+        endif
     " \a -> code Action
-        nnoremap \a :Actions<CR>
-        vnoremap \a :'<,'>Actions<CR>
+        if(exists('g:vscode'))
+            nnoremap \a <Cmd>call VSCodeNotify("workbench.action.showCommands")<CR>
+            xnoremap \a <Cmd>call ExecuteVSCodeCommandInVisualMode("workbench.action.showCommands")<CR>
+        else
+            nnoremap \a :Actions<CR>
+            vnoremap \a :'<,'>Actions<CR>
+        endif
     " \gd -> Goto Definition
-        call CreateSplitMappings("nnore", "\\gd", ":call CocActionAsync('jumpDefinition')<CR>")
+        if(exists('g:vscode'))
+            call CreateSplitMappings("nnore", "\\gd", ":call VSCodeNotify('editor.action.revealDefinition')<CR>")
+        else
+            call CreateSplitMappings("nnore", "\\gd", ":call CocActionAsync('jumpDefinition')<CR>")
+        endif
     " \gr -> Goto References
-        call CreateSplitMappings("nnore", "\\gr", ":call CocActionAsync('jumpReferences')<CR>")
+        if(exists('g:vscode'))
+            call CreateSplitMappings("nnore", "\\gr", ":call VSCodeNotify('editor.action.goToReferences')<CR>")
+        else
+            call CreateSplitMappings("nnore", "\\gr", ":call CocActionAsync('jumpReferences')<CR>")
+        endif
     " \h -> Help
-        nnoremap \h :call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
-        inoremap \h <C-O>:call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
+        if(exists('g:vscode'))
+            nnoremap \h :call VSCodeNotify('editor.action.showHover')<CR>
+        else
+            nnoremap \h :call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
+            inoremap \h <C-O>:call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
+        endif
 
 " Commands
-    " Capital ":only" command
-        command! Only only
+    " Vscode-specific ":only" command
+        if(exists("g:vscode"))
+            command! Only call VSCodeNotify("workbench.action.closeSidebar") | call VSCodeNotify("workbench.action.closePanel") | call VSCodeNotify("workbench.action.joinAllGroups")
+        else
+            command! Only only
+        endif
         command! ONLY Only
     " DelMarks -> Delete all Marks
-        command! DelMarks delmarks a-zA-Z0-9
+        if(exists("g:vscode"))
+            command! DelMarks call VSCodeNotify("bookmarks.clearFromAllFiles")
+        else
+            command! DelMarks delmarks a-zA-Z0-9
+        endif
         command! DELMARKS DelMarks
     " CD -> Change Directory to current open file
-        command! CD silent cd %:p:h | redraw! | echo ":cd %:p:h" 
+        if(!exists("g:vscode"))
+            command! CD silent cd %:p:h | redraw! | echo ":cd %:p:h" 
+        endif
     " CP -> Copy absolute filePath to + register (system clipboard)
-        command! CP let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')" 
+        if(!exists("g:vscode"))
+            command! CP let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')" 
+        endif
     " Command to save and generate .pdf from .md
-        command! PDF w | call WriteToPdf()
+        if(!exists("g:vscode"))
+            command! PDF w | call WriteToPdf()
+        endif
     " Git stuff
         command! -nargs=? GITLOG Git log --graph --oneline --pretty=format:'%h -%d %s (%cs) <%an>' <args>
         command! GITHISTORY BCommits
@@ -192,17 +299,36 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         command! GHISTORY GITHISTORY
         command! -nargs=? GLOG GITLOG <args>
     " Often used LSP stuff
-        command! -range Actions <line1>,<line2>CocAction
-        command! -range ACTIONS <line1>,<line2>Actions
+        if(exists("g:vscode"))
+            command! Actions call VSCodeNotify("workbench.action.showCommands")
+            command! ACTIONS Actions
+        else
+            command! -range Actions <line1>,<line2>CocAction
+            command! -range ACTIONS <line1>,<line2>Actions
+        endif
 
-        command! Rename call CocActionAsync("rename")
+        if(exists("g:vscode"))
+            command! Rename call VSCodeNotify('editor.action.rename')
+        else
+            command! Rename call CocActionAsync("rename")
+        endif
         command! RENAME Rename
 
-        command! -range=% Format <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
-        command! -range=% FORMAT <line1>,<line2>Format
+        if(exists("g:vscode"))
+            command! Format call VSCodeNotify('editor.action.formatDocument')
+            command! FORMAT Format
+        else
+            command! -range=% Format <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
+            command! -range=% FORMAT <line1>,<line2>Format
+        endif
 
-        command! Error call CocActionAsync("diagnosticInfo")
-        command! Errors CocList --normal diagnostics
+        if(exists("g:vscode"))
+            command! Errors call VSCodeNotify("workbench.actions.view.problems")
+            command! Error Errors
+        else
+            command! Error call CocActionAsync("diagnosticInfo")
+            command! Errors CocList --normal diagnostics
+        endif
         command! ERRORS Errors
         command! ERROR Error
         command! ERRS Errors
