@@ -140,7 +140,7 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
             nnoremap za :call VSCodeNotify('editor.toggleFold')<CR>
             
             function! MoveCursor(direction) abort
-                if(reg_recording() == '')
+                if(reg_recording() == '' && reg_executing() == '')
                     return 'g'.a:direction
                 else
                     return a:direction
