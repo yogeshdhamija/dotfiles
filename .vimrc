@@ -138,8 +138,17 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
             nnoremap zo :call VSCodeNotify('editor.unfold')<CR>
             nnoremap zO :call VSCodeNotify('editor.unfoldRecursively')<CR>
             nnoremap za :call VSCodeNotify('editor.toggleFold')<CR>
-            nmap j gj
-            nmap k gk
+            
+            function! MoveCursor(direction) abort
+                if(reg_recording() == '')
+                    return 'g'.a:direction
+                else
+                    return a:direction
+                endif
+            endfunction
+
+            nmap <expr> j MoveCursor('j')
+            nmap <expr> k MoveCursor('k')
         endif
     " Map vim's spellcheck to quickfix list in VSCode
         if(exists('g:vscode'))
