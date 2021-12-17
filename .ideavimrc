@@ -3,6 +3,9 @@ set commentary
 set ideajoin
 set ideamarks
 
+nnoremap <C-O> :action Back<CR>
+nnoremap <C-I> :action Forward<CR>
+
 nnoremap zL 40zl
 nnoremap zH 40zh
 
