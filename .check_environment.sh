@@ -2,7 +2,6 @@
 
 declare -a EXECS=(
     "nvim"
-    "code"
     "zsh"
     "rg"
     "jq"
@@ -14,7 +13,6 @@ declare -a EXECS=(
 )
 declare -a NAMES=(
     "NeoVim"
-    "VSCode"
     "ZShell"
     "Ripgrep"
     "jq"
@@ -26,7 +24,6 @@ declare -a NAMES=(
 )
 declare -a ADDITIONAL1=(
     "The Bettitor Text Editor"
-    "Also The Bettitor Text Editor"
     "Shell"
     "Grep"
     "JSON Parsing CLI tool"
@@ -38,7 +35,6 @@ declare -a ADDITIONAL1=(
 )
 declare -a ADDITIONAL2=(
     "https://github.com/neovim/neovim"
-    ""
     ""
     "https://github.com/BurntSushi/ripgrep"
     "https://stedolan.github.io/jq/"
