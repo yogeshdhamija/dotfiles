@@ -3,28 +3,28 @@ set commentary
 set ideajoin
 set ideamarks
 
-nnoremap <C-O> :action Back<CR>
-nnoremap <C-I> :action Forward<CR>
+nmap <C-O> <Action>(Back)
+nmap <C-I> <Action>(Forward)
 
 nnoremap zL 40zl
 nnoremap zH 40zh
 
-nnoremap ` :action ShowBookmarks<CR>
+nmap ` <Action>(ShowBookmarks)
 nnoremap \c <Esc>:noh<CR>:action HideSideWindows<CR>
-nnoremap \tj :action ActivateTerminalToolWindow<CR>
-nnoremap \dh :action SelectInProjectView<CR>
-nnoremap \f :action FindInPath<CR>
+nmap \tj <Action>(ActivateTerminalToolWindow)
+nmap \dh <Action>(SelectInProjectView)
+nmap \f <Action>(FindInPath)
 vmap \f <Action>(FindSelectionInPath)
-nnoremap \o :action GotoFile<CR>
-nnoremap \gd :action GotoDeclaration<CR>
-nnoremap \gdd :action GotoDeclaration<CR>
-nnoremap \gr :action ShowUsages<CR>
-nnoremap \grr :action ShowUsages<CR>
-nnoremap \h :action QuickJavaDoc<CR>
+nmap \o <Action>(GotoFile)
+nmap \gd <Action>(GotoDeclaration)
+nmap \gdd <Action>(GotoDeclaration)
+nmap \gr <Action>(ShowUsages)
+nmap \grr <Action>(ShowUsages)
+nmap \h <Action>(QuickJavaDoc)
 inoremap \h <Esc>:action ParameterInfo<CR>a
-nnoremap z= :action ShowIntentionActions<CR>
+nmap z= <Action>(ShowIntentionActions)
 vnoremap z= :action Refactorings.QuickListPopupAction<CR>
-nnoremap \a :action GotoAction<CR>
+nmap \a <Action>(GotoAction)
 nnoremap \b :tabn<CR>
 nnoremap \B :tabp<CR>
 
