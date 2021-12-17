@@ -9,6 +9,9 @@ nmap <C-I> <Action>(Forward)
 nnoremap zL 40zl
 nnoremap zH 40zh
 
+nnoremap * *N
+vmap * <Action>(Find)
+
 nmap ` <Action>(ShowBookmarks)
 nnoremap \c <Esc>:noh<CR>:action HideSideWindows<CR>
 nmap \tj <Action>(ActivateTerminalToolWindow)
