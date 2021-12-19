@@ -2,6 +2,8 @@ set surround
 set commentary
 set ideajoin
 set ideamarks
+set incsearch
+set ideastatusicon=gray
 
 nmap <C-O> <Action>(Back)
 nmap <C-I> <Action>(Forward)
@@ -28,8 +30,7 @@ inoremap \h <Esc>:action ParameterInfo<CR>a
 nmap z= <Action>(ShowIntentionActions)
 vnoremap z= :action Refactorings.QuickListPopupAction<CR>
 nmap \a <Action>(GotoAction)
-nnoremap \b :tabn<CR>
-nnoremap \B :tabp<CR>
+nnoremap \b :ls<CR>:b
 
 command! Rename action RenameElement
 command! REN Rename
@@ -50,5 +51,8 @@ command! ERR Error
 
 command! DELMARKS action ShowBookmarks
 command! DELM DELMARKS
+
+command! START action ToggleDistractionFreeMode
+command! STOP action ToggleDistractionFreeMode
 
 nmap :q<CR> <C-W>c
