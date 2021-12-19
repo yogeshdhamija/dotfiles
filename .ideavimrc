@@ -32,6 +32,7 @@ inoremap \h <Esc>:action ParameterInfo<CR>a
 nmap z= <Action>(ShowIntentionActions)
 vnoremap z= :action Refactorings.QuickListPopupAction<CR>
 nmap \a <Action>(GotoAction)
+vmap \a <Action>(GotoAction)
 nnoremap \b :tabn
 
 command! Rename action RenameElement
