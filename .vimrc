@@ -343,5 +343,5 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
         command! ERRS Errors
         command! ERR Error
 
-call SourceFileIfExists(".vim/vimrc.local")
 call SourceFileIfExists("~/.vimrc.local")
+call SourceFileIfExists(".vim/vimrc.local")
