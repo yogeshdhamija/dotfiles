@@ -5,6 +5,7 @@ set ideamarks
 set incsearch
 set ideastatusicon=gray
 set NERDTree
+set highlightedyank
 
 nmap <C-O> <Action>(Back)
 nmap <C-I> <Action>(Forward)
