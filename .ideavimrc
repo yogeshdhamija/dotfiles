@@ -4,6 +4,7 @@ set ideajoin
 set ideamarks
 set incsearch
 set ideastatusicon=gray
+set NERDTree
 
 nmap <C-O> <Action>(Back)
 nmap <C-I> <Action>(Forward)
