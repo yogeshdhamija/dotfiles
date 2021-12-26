@@ -16,6 +16,7 @@ if !exists("plugins")
         \ ['yogeshdhamija/enter-insert-on-click.vim', {}],
         \ ['junegunn/vim-peekaboo', {}],
         \ ['kshenoy/vim-signature', {}],
+        \ ['machakann/vim-highlightedyank', {}],
     \ ]
     let ide_like_functionality_plugins = [
         \ ['tpope/vim-commentary', {}],
