@@ -32,6 +32,7 @@ source ~/.config/vim/settings.vim
     vnoremap \a :'<,'>Actions<CR>
     nnoremap \h :call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
     inoremap \h <C-O>:call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
+    nnoremap \e :call CocActionAsync("diagnosticInfo")<CR>
     call CreateSplitMappings("n",         "\\d",  "-")
     call CreateSplitMappings("nnore",     "\\gd", ":call CocActionAsync('jumpDefinition')<CR>")
     call CreateSplitMappings("nnore",     "\\gr", ":call CocActionAsync('jumpReferences')<CR>")
@@ -53,9 +54,6 @@ source ~/.config/vim/settings.vim
     command!          Errors CocList --normal diagnostics
     command!          ERRORS Errors
     command!          ERRS Errors
-    command!          Error call CocActionAsync("diagnosticInfo")
-    command!          ERROR Error
-    command!          ERR Error
     command! -range   Actions <line1>,<line2>CocAction
     command! -range   ACTIONS <line1>,<line2>Actions
     command!          CD silent cd %:p:h | redraw! | echo ":cd %:p:h" 

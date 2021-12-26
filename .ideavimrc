@@ -28,12 +28,13 @@ nmap     \gdd <Action>(GotoDeclaration)
 nmap     \gr  <Action>(ShowUsages)
 nmap     \grr <Action>(ShowUsages)
 nmap     \h   <Action>(QuickJavaDoc)
-inoremap \h   <Esc>:action         ParameterInfo<CR>a
+inoremap \h   <Esc>:action ParameterInfo<CR>a
 nmap     z=   <Action>(ShowIntentionActions)
-vnoremap z=   :action              Refactorings.QuickListPopupAction<CR>
+vnoremap z=   :action Refactorings.QuickListPopupAction<CR>
 nmap     \a   <Action>(GotoAction)
 vmap     \a   <Action>(GotoAction)
 nnoremap \b   :tabn
+nnoremap \e   <Action>(ShowErrorDescription)
 
 command! CloseHiddenBuffers action CloseAllEditorsButActive
 command! CLO                CloseHiddenBuffers
@@ -47,5 +48,3 @@ command! Format             action ReformatCode
 command! FOR                Format
 command! Errors             action GoToErrorGroup
 command! ERRS               Errors
-command! Error              action ShowErrorDescription
-command! ERR                Error
