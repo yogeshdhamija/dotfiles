@@ -36,7 +36,7 @@ vnoremap z=   :action Refactorings.QuickListPopupAction<CR>
 nmap     \a   <Action>(GotoAction)
 vmap     \a   <Action>(GotoAction)
 nnoremap \b   :tabn
-nnoremap \e   <Action>(ShowErrorDescription)
+nmap     \e   <Action>(ShowErrorDescription)
 
 command! CloseHiddenBuffers action CloseAllEditorsButActive
 command! CLO                CloseHiddenBuffers
