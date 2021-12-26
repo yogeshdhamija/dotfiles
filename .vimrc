@@ -36,6 +36,7 @@ source ~/.config/vim/settings.vim
     call CreateSplitMappings("n",         "\\d",  "-")
     call CreateSplitMappings("nnore",     "\\gd", ":call CocActionAsync('jumpDefinition')<CR>")
     call CreateSplitMappings("nnore",     "\\gr", ":call CocActionAsync('jumpReferences')<CR>")
+    call CreateSplitMappings("nnore",     "\\gi", ":call CocActionAsync('jumpImplementation')<CR>")
     if has('nvim')
         call CreateSplitMappings("nnore", "\\t",  ":terminal<CR>:startinsert<CR>")
     else
