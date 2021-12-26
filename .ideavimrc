@@ -27,6 +27,8 @@ nmap     \gd  <Action>(GotoDeclaration)
 nmap     \gdd <Action>(GotoDeclaration)
 nmap     \gr  <Action>(ShowUsages)
 nmap     \grr <Action>(ShowUsages)
+nmap     \gi  <Action>(GotoImplementation)
+nmap     \gii <Action>(GotoImplementation)
 nmap     \h   <Action>(QuickJavaDoc)
 inoremap \h   <Esc>:action ParameterInfo<CR>a
 nmap     z=   <Action>(ShowIntentionActions)
