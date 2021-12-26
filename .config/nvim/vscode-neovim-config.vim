@@ -91,6 +91,7 @@ if(exists("g:vscode") && has('nvim'))
     call CreateSplitMappings("n",     "\\t",  ":call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
     call CreateSplitMappings("nnore", "\\gd", ":call VSCodeNotify('editor.action.revealDefinition')<CR>")
     call CreateSplitMappings("nnore", "\\gr", ":call VSCodeNotify('editor.action.goToReferences')<CR>")
+    call CreateSplitMappings("nnore", "\\gi", ":call VSCodeNotify('editor.action.goToImplementation')<CR>")
 
 " Commands
     command! Only call VSCodeNotify("workbench.action.closeSidebar") | call VSCodeNotify("workbench.action.closePanel") | call VSCodeNotify("workbench.action.joinAllGroups")
