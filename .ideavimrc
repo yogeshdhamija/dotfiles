@@ -16,41 +16,36 @@ nnoremap zH 40zh
 nnoremap * *N
 vmap * <Action>(Find)
 
-nmap ` <Action>(ShowBookmarks)
-nnoremap \c <Esc>:noh<CR>:action HideSideWindows<CR>
-nmap \tj <Action>(ActivateTerminalToolWindow)
-nmap \dh <Action>(SelectInProjectView)
-nmap \f <Action>(ReplaceInPath)
-vmap \f <Action>(ReplaceInPath)
-nmap \o <Action>(GotoFile)
-nmap \gd <Action>(GotoDeclaration)
-nmap \gdd <Action>(GotoDeclaration)
-nmap \gr <Action>(ShowUsages)
-nmap \grr <Action>(ShowUsages)
-nmap \h <Action>(QuickJavaDoc)
-inoremap \h <Esc>:action ParameterInfo<CR>a
-nmap z= <Action>(ShowIntentionActions)
-vnoremap z= :action Refactorings.QuickListPopupAction<CR>
-nmap \a <Action>(GotoAction)
-vmap \a <Action>(GotoAction)
-nnoremap \b :tabn
-
-command! Rename action RenameElement
-command! REN Rename
+nmap     `    <Action>(ShowBookmarks)
+nnoremap \c   <Esc>:noh<CR>:action HideSideWindows<CR>
+nmap     \tj  <Action>(ActivateTerminalToolWindow)
+nmap     \dh  <Action>(SelectInProjectView)
+nmap     \f   <Action>(ReplaceInPath)
+vmap     \f   <Action>(ReplaceInPath)
+nmap     \o   <Action>(GotoFile)
+nmap     \gd  <Action>(GotoDeclaration)
+nmap     \gdd <Action>(GotoDeclaration)
+nmap     \gr  <Action>(ShowUsages)
+nmap     \grr <Action>(ShowUsages)
+nmap     \h   <Action>(QuickJavaDoc)
+inoremap \h   <Esc>:action         ParameterInfo<CR>a
+nmap     z=   <Action>(ShowIntentionActions)
+vnoremap z=   :action              Refactorings.QuickListPopupAction<CR>
+nmap     \a   <Action>(GotoAction)
+vmap     \a   <Action>(GotoAction)
+nnoremap \b   :tabn
 
 command! CloseHiddenBuffers action CloseAllEditorsButActive
-command! CLO CloseHiddenBuffers
-
-command! ONLY only
-command! ON ONLY
-
-command! Format action ReformatCode
-command! FOR Format
-
-command! Errors action GoToErrorGroup
-command! ERRS Errors
-command! Error action ShowErrorDescription
-command! ERR Error
-
-command! DELMARKS action ShowBookmarks
-command! DELM DELMARKS
+command! CLO                CloseHiddenBuffers
+command! ONLY               only
+command! ON                 ONLY
+command! DELMARKS           action ShowBookmarks
+command! DELM               DELMARKS
+command! Rename             action RenameElement
+command! REN                Rename
+command! Format             action ReformatCode
+command! FOR                Format
+command! Errors             action GoToErrorGroup
+command! ERRS               Errors
+command! Error              action ShowErrorDescription
+command! ERR                Error
