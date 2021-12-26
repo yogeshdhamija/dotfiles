@@ -1,0 +1,114 @@
+source ~/.config/vim/functions.vim
+
+" g:vscode is set by the vscode-neovim plugin (https://github.com/asvetliakov/vscode-neovim)
+if(exists("g:vscode") && has('nvim'))
+
+
+
+
+" Functions
+    function! CreateSplitMappings(mode, mapping, rhs) abort
+        execute a:mode.'map '.a:mapping.' '.a:rhs
+        execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.a:rhs
+        execute a:mode.'map '.a:mapping.'h :call VSCodeNotify("workbench.action.newGroupLeft")<CR>'.a:rhs
+        execute a:mode.'map '.a:mapping.'l :call VSCodeNotify("workbench.action.newGroupRight")<CR>'.a:rhs
+        execute a:mode.'map '.a:mapping.'j :call VSCodeNotify("workbench.action.newGroupBelow")<CR>'.a:rhs
+        execute a:mode.'map '.a:mapping.'k :call VSCodeNotify("workbench.action.newGroupAbove")<CR>'.a:rhs
+    endfunction
+
+    function! ExecuteVSCodeCommandInVisualMode(command_name) abort
+        let visualmode = visualmode()
+        if visualmode ==# 'V'
+            let startLine = line("v")
+            let endLine = line(".")
+            call VSCodeNotifyRange(a:command_name, startLine, endLine, 1)
+        else
+            let startPos = getpos("v")
+            let endPos = getpos(".")
+            call VSCodeNotifyRangePos(a:command_name, startPos[1], endPos[1], startPos[2], endPos[2]+1, 1)
+        endif
+    endfunction
+
+" Get folding working with vscode neovim plugin
+    nnoremap zM :call VSCodeNotify('editor.foldAll')<CR>
+    nnoremap zR :call VSCodeNotify('editor.unfoldAll')<CR>
+    nnoremap zc :call VSCodeNotify('editor.fold')<CR>
+    nnoremap zC :call VSCodeNotify('editor.foldRecursively')<CR>
+    nnoremap zo :call VSCodeNotify('editor.unfold')<CR>
+    nnoremap zO :call VSCodeNotify('editor.unfoldRecursively')<CR>
+    nnoremap za :call VSCodeNotify('editor.toggleFold')<CR>
+    function! MoveCursor(direction) abort
+        if(reg_recording() == '' && reg_executing() == '')
+            return 'g'.a:direction
+        else
+            return a:direction
+        endif
+    endfunction
+    nmap <expr> j MoveCursor('j')
+    nmap <expr> k MoveCursor('k')
+
+" Map vim's spellcheck to quickfix list in VSCode
+    nnoremap z= <Cmd>call VSCodeNotify("editor.action.quickFix")<CR>
+    xnoremap z= <Cmd>call ExecuteVSCodeCommandInVisualMode("editor.action.quickFix")<CR>
+    
+" Get navigating marks working with vscode neovim plugin
+    " (also relies on VSCode Bookmarks plugin)
+    nnoremap m v<Esc>:call ExecuteVSCodeCommandInVisualMode('bookmarks.toggleLabeled')<CR><Esc>
+    nnoremap ` :call VSCodeNotify('bookmarks.listFromAllFiles')<CR>
+
+" Fix VSCode commands
+    command! Tabnew call VSCodeNotify("workbench.action.duplicateWorkspaceInNewWindow")
+    command! -bang  Quit if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.revertAndCloseActiveEditor') | else | call VSCodeNotify('workbench.action.focusPreviousGroup') | call VSCodeNotify('workbench.action.joinTwoGroups') | endif
+    command! -bang  Bd if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.revertAndCloseActiveEditor') | else | call VSCodeNotify('workbench.action.closeActiveEditor')
+    AlterCommand bd Bd
+
+" Fix the 'vscode neovim' plugin's <C-W> mappings
+    nnoremap <C-W>>     :call VSCodeNotify("workbench.action.increaseViewWidth")<CR>
+    nnoremap <C-W><     :call VSCodeNotify("workbench.action.decreaseViewWidth")<CR>
+    nnoremap <C-W>+     :call VSCodeNotify("workbench.action.increaseViewHeight")<CR>
+    nnoremap <C-W>-     :call VSCodeNotify("workbench.action.decreaseViewHeight")<CR>
+    map      <C-W><C-H> <C-W>h
+    map      <C-W><C-J> <C-W>j
+    map      <C-W><C-K> <C-W>k
+    map      <C-W><C-L> <C-W>l
+    
+" Add commenting to vscode neovim plugin
+    xmap gc  <Plug>VSCodeCommentary
+    nmap gc  <Plug>VSCodeCommentary
+    omap gc  <Plug>VSCodeCommentary
+    nmap gcc <Plug>VSCodeCommentaryLine
+
+" Leader shortcuts
+    nnoremap \c  <Esc>:noh<CR>:call VSCodeNotify("workbench.action.closeSidebar")<CR>:call VSCodeNotify("workbench.action.closePanel")<CR>:call VSCodeNotify("notifications.hideToasts")<CR>:call VSCodeNotify("closeParameterHints")<CR>
+    nnoremap \dh :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
+    nnoremap \o  :call VSCodeNotify("workbench.action.quickOpen")<CR>
+    nnoremap \b  :call VSCodeNotify("workbench.action.showEditorsInActiveGroup")<CR>
+    nnoremap \w  :call VSCodeNotify("workbench.files.action.focusOpenEditorsView")<CR>
+    nnoremap \a  <Cmd>call VSCodeNotify("workbench.action.showCommands")<CR>
+    xnoremap \a  <Cmd>call ExecuteVSCodeCommandInVisualMode("workbench.action.showCommands")<CR>
+    nnoremap \h  :call VSCodeNotify('editor.action.showHover')<CR>
+    nmap     \e  \h
+    call CreateSplitMappings("n",     "\\t",  ":call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
+    call CreateSplitMappings("nnore", "\\gd", ":call VSCodeNotify('editor.action.revealDefinition')<CR>")
+    call CreateSplitMappings("nnore", "\\gr", ":call VSCodeNotify('editor.action.goToReferences')<CR>")
+
+" Commands
+    command! Only call VSCodeNotify("workbench.action.closeSidebar") | call VSCodeNotify("workbench.action.closePanel") | call VSCodeNotify("workbench.action.joinAllGroups")
+    command! ONLY Only
+    command! DelMarks call VSCodeNotify("bookmarks.clearFromAllFiles")
+    command! DELMARKS DelMarks
+    command! Rename call VSCodeNotify('editor.action.rename')
+    command! RENAME Rename
+    command! Format call VSCodeNotify('editor.action.formatDocument')
+    command! FORMAT Format
+    command! Errors call VSCodeNotify("workbench.actions.view.problems")
+    command! ERRORS Errors
+    command! ERRS Errors
+    command! Actions call VSCodeNotify("workbench.action.showCommands")
+    command! ACTIONS Actions
+
+
+
+
+
+endif
