@@ -55,7 +55,7 @@ let g:peekaboo_window="call CreateCenteredFloatingWindow()"
     tabdo windo set foldtext=CustomFoldText()
     tabdo windo set fillchars=fold:\ 
     set laststatus=2
-    highlight MatchParen       ctermfg=14  ctermbg=234 guifg=#91fff8 guibg=#1d2021 term=bold,underline cterm=bold,underline gui=bold,underline
-    highlight Visual           ctermfg=235 ctermbg=219 guifg=#282C34 guibg=#ffafff
-    highlight CocHighlightText ctermfg=15  ctermbg=240 guifg=#ffffff guibg=#262626
+    highlight MatchParen       ctermbg=234 guibg=#1d2021 ctermfg=14  guifg=#91fff8 term=bold,underline cterm=bold,underline gui=bold,underline
+    highlight Visual           ctermbg=219 guibg=#ffafff ctermfg=235 guifg=#282C34
+    highlight CocHighlightText ctermbg=238 guibg=#444444
  
