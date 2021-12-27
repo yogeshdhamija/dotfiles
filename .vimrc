@@ -25,7 +25,7 @@ source ~/.config/vim/settings.vim
 
 " Leader shortcuts
     nnoremap z= <Cmd>CocAction<CR>
-    xnoremap z= <Cmd>CocAction<CR>
+    xnoremap z= <Esc>:'<,'>CocAction<CR>
     nnoremap \c <Esc><Cmd>noh<CR>
     nnoremap \o <Cmd>Files<CR>
     nnoremap \b <Cmd>Buffers<CR>
