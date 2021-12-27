@@ -24,12 +24,14 @@ source ~/.config/vim/settings.vim
     augroup END
 
 " Leader shortcuts
+    nnoremap z= :CocAction<Esc>
+    vnoremap z= :'<,'>CocAction<Esc>
     nnoremap \c <Esc>:noh<CR>
     nnoremap \o :Files<CR>
     nnoremap \b :Buffers<CR>
     nnoremap \w :Windows<CR>
-    nnoremap \a :Actions<CR>
-    vnoremap \a :'<,'>Actions<CR>
+    nnoremap \a :CocList commands<CR>
+    vnoremap \a :'<,'>CocList commands<CR>
     nnoremap \h :call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
     inoremap \h <C-O>:call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
     nnoremap \e :call CocActionAsync("diagnosticInfo")<CR>
@@ -55,8 +57,6 @@ source ~/.config/vim/settings.vim
     command!          Errors CocList --normal diagnostics
     command!          ERRORS Errors
     command!          ERRS Errors
-    command! -range   Actions <line1>,<line2>CocAction
-    command! -range   ACTIONS <line1>,<line2>Actions
     command!          CD silent cd %:p:h | redraw! | echo ":cd %:p:h" 
     command!          CP let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')" 
     command! -nargs=? GITLOG Git log --graph --oneline --pretty=format:'%h -%d %s (%cs) <%an>' <args>
