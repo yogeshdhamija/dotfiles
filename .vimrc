@@ -9,10 +9,10 @@ source ~/.config/vim/plugins.vim
 source ~/.config/vim/settings.vim
 
 " Remaps
-    vnoremap <C-c> "+y
-    vnoremap <D-c> "+y
-    vnoremap <C-v> "+p
-    vnoremap <D-v> "+p
+    xnoremap <C-c> "+y
+    xnoremap <D-c> "+y
+    xnoremap <C-v> "+p
+    xnoremap <D-v> "+p
     xmap     ga    <Plug>(EasyAlign)
     nmap     ga    <Plug>(EasyAlign)
     inoremap <C-R> <C-R><C-O>
@@ -25,13 +25,13 @@ source ~/.config/vim/settings.vim
 
 " Leader shortcuts
     nnoremap z= <Cmd>CocAction<CR>
-    vnoremap z= <Cmd>'<,'>CocAction<CR>
+    xnoremap z= <Cmd>CocAction<CR>
     nnoremap \c <Esc><Cmd>noh<CR>
     nnoremap \o <Cmd>Files<CR>
     nnoremap \b <Cmd>Buffers<CR>
     nnoremap \w <Cmd>Windows<CR>
     nnoremap \a <Cmd>CocList commands<CR>
-    vnoremap \a <Cmd>CocList commands<CR>
+    xnoremap \a <Cmd>CocList commands<CR>
     nnoremap \h <Cmd>call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
     inoremap \h <Cmd>call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
     nnoremap \e <Cmd>call CocActionAsync("diagnosticInfo")<CR>
