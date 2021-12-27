@@ -24,21 +24,21 @@ source ~/.config/vim/settings.vim
     augroup END
 
 " Leader shortcuts
-    nnoremap z= :CocAction<Esc>
-    vnoremap z= :'<,'>CocAction<Esc>
-    nnoremap \c <Esc>:noh<CR>
-    nnoremap \o :Files<CR>
-    nnoremap \b :Buffers<CR>
-    nnoremap \w :Windows<CR>
-    nnoremap \a :CocList commands<CR>
-    vnoremap \a :'<,'>CocList commands<CR>
-    nnoremap \h :call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
-    inoremap \h <C-O>:call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
-    nnoremap \e :call CocActionAsync("diagnosticInfo")<CR>
+    nnoremap z= <Cmd>CocAction<CR>
+    vnoremap z= <Cmd>'<,'>CocAction<CR>
+    nnoremap \c <Esc><Cmd>noh<CR>
+    nnoremap \o <Cmd>Files<CR>
+    nnoremap \b <Cmd>Buffers<CR>
+    nnoremap \w <Cmd>Windows<CR>
+    nnoremap \a <Cmd>CocList commands<CR>
+    vnoremap \a <Cmd>CocList commands<CR>
+    nnoremap \h <Cmd>call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
+    inoremap \h <Cmd>call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
+    nnoremap \e <Cmd>call CocActionAsync("diagnosticInfo")<CR>
     call CreateSplitMappings("n",         "\\d",  "-")
-    call CreateSplitMappings("nnore",     "\\gd", ":call CocActionAsync('jumpDefinition')<CR>")
-    call CreateSplitMappings("nnore",     "\\gr", ":call CocActionAsync('jumpReferences')<CR>")
-    call CreateSplitMappings("nnore",     "\\gi", ":call CocActionAsync('jumpImplementation')<CR>")
+    call CreateSplitMappings("nnore",     "\\gd", "<Cmd>call CocActionAsync('jumpDefinition')<CR>")
+    call CreateSplitMappings("nnore",     "\\gr", "<Cmd>call CocActionAsync('jumpReferences')<CR>")
+    call CreateSplitMappings("nnore",     "\\gi", "<Cmd>call CocActionAsync('jumpImplementation')<CR>")
     if has('nvim')
         call CreateSplitMappings("nnore", "\\t",  ":terminal<CR>:startinsert<CR>")
     else

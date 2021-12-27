@@ -12,8 +12,17 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set undofile
-set undodir=~/.vim/undodir
 set nomodeline
+set hidden
+set updatetime=300
+if(!has('nvim'))
+    set re=0
+endif
+if(has('nvim'))
+    set undodir=~/.nvim/undodir
+else
+    set undodir=~/.vim/undodir
+endif
 if executable('rg')
     set grepprg=rg\ --follow\ --vimgrep\ --no-heading
 elseif executable('ag')
@@ -28,7 +37,6 @@ augroup jump_to_last_position_on_open
             \ | exe "normal! g`\"" 
         \ | endif
 augroup END
-set hidden
 let g:dirvish_mode = 2
 let g:dirvish_relative_paths = 1
 if DetectWsl()
@@ -41,7 +49,6 @@ if !has('nvim')
         set termkey=<C-\-n>
     endif
 endif
-set updatetime=300
 autocmd CursorHold * silent! call CocActionAsync('highlight')
 let g:peekaboo_window="call CreateCenteredFloatingWindow()"
 
