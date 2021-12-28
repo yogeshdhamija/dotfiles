@@ -118,6 +118,13 @@ function! CreateSplitMappings(mode, mapping, rhs) abort
     execute a:mode.'map '.a:mapping.'k :aboveleft split<CR>'.a:rhs
 endfunction
 
+function! CreateMappingsInAllModes(mapping, rhs) abort
+    execute 'map '.a:mapping.' '.a:rhs
+    execute 'map! '.a:mapping.' '.a:rhs
+    execute 'lmap '.a:mapping.' '.a:rhs
+    execute 'tmap '.a:mapping.' '.a:rhs
+endfunction
+
 function! CreateCenteredFloatingWindow()
     if(!has('nvim')) 
         split
