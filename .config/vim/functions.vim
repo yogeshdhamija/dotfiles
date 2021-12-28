@@ -118,11 +118,15 @@ function! CreateSplitMappings(mode, mapping, rhs) abort
     execute a:mode.'map '.a:mapping.'k :aboveleft split<CR>'.a:rhs
 endfunction
 
-function! CreateMappingsInAllModes(mapping, rhs) abort
-    execute 'map '.a:mapping.' '.a:rhs
-    execute 'map! '.a:mapping.' '.a:rhs
-    execute 'lmap '.a:mapping.' '.a:rhs
+function! CreateMappingsInAllModesExceptNormal(mapping, rhs) abort
+    execute 'imap '.a:mapping.' '.a:rhs
+    execute 'cmap '.a:mapping.' '.a:rhs
+    execute 'vmap '.a:mapping.' '.a:rhs
+    execute 'xmap '.a:mapping.' '.a:rhs
+    execute 'smap '.a:mapping.' '.a:rhs
+    execute 'omap '.a:mapping.' '.a:rhs
     execute 'tmap '.a:mapping.' '.a:rhs
+    execute 'lmap '.a:mapping.' '.a:rhs
 endfunction
 
 function! CreateCenteredFloatingWindow()

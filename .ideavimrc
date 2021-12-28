@@ -16,6 +16,11 @@ nnoremap zH 40zh
 nnoremap * *N
 vmap * <Action>(Find)
 
+vmap <S-j><S-k> <Esc>
+vmap <S-k><S-j> <Esc>
+imap <S-j><S-k> <Esc>
+imap <S-k><S-j> <Esc>
+
 nmap     `    <Action>(ShowBookmarks)
 nnoremap \c   <Esc>:noh<CR>:action HideSideWindows<CR>
 nmap     \tj  <Action>(ActivateTerminalToolWindow)
