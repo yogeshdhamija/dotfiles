@@ -22,7 +22,6 @@ command -v ag > /dev/null && export FZF_CTRL_T_COMMAND='ag --follow --unrestrict
 # Set up FZF to use ripgrep (rg)
 command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --follow --files --no-messages -uuu'
 command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --follow --files --no-messages -uuu'
-
 # Set up my code editor preferences, in worst-to-best order:
 command -v code-insiders > /dev/null && export EDITOR="code-insiders -w"
 command -v code > /dev/null && export EDITOR="code -w"

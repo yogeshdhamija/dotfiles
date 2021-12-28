@@ -57,8 +57,8 @@ source ~/.config/vim/settings.vim
     command!          Errors CocList --normal diagnostics
     command!          ERRORS Errors
     command!          ERRS Errors
-    command!          CD silent cd %:p:h | redraw! | echo ":cd %:p:h" 
-    command!          CP let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')" 
+    command!          CD silent cd %:p:h | redraw! | echo ":cd %:p:h"
+    command!          CP let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')"
     command! -nargs=? GITLOG Git log --graph --oneline --pretty=format:'%h -%d %s (%cs) <%an>' <args>
     command! -nargs=? GLOG GITLOG <args>
     command!          GITHISTORY BCommits

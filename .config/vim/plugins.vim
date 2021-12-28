@@ -39,7 +39,11 @@ if !exists("plugins")
         \ ['vim-airline/vim-airline-themes', {}],
         \ ['lukas-reineke/indent-blankline.nvim', {}],
     \ ]
-    let plugins = vim_idiomatic_plugins + interface_convenience_plugins + ide_like_functionality_plugins + language_plugins + visual_plugins
+    let plugins = vim_idiomatic_plugins
+                \ + interface_convenience_plugins
+                \ + ide_like_functionality_plugins
+                \ + language_plugins
+                \ + visual_plugins
 endif
 
 if exists("added_plugins")
@@ -54,9 +58,9 @@ call InstallPlugins(plugins, disabled_plugins)
 
 if !exists("coc_plugins")
     let coc_plugins = [
-        \ 'coc-marketplace', 
-        \ 'coc-vimlsp', 
-        \ 'coc-json', 
+        \ 'coc-marketplace',
+        \ 'coc-vimlsp',
+        \ 'coc-json',
         \ 'coc-yaml',
     \ ]
 endif
