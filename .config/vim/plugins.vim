@@ -11,6 +11,7 @@ if !exists("plugins")
         \ ['yogeshdhamija/find-in-dir-helper.vim', {}],
         \ ['yogeshdhamija/filter-lq-list.vim', {}],
         \ ['yogeshdhamija/close-hidden-buffers-command.vim', {}],
+        \ ['AndrewRadev/splitjoin.vim', {}],
     \ ]
     let interface_convenience_plugins = [
         \ ['yogeshdhamija/enter-insert-on-click.vim', {}],
