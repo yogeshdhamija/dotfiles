@@ -48,8 +48,8 @@ source ~/.config/vim/settings.vim
     endif
 
 " Commands
-    command!          ONLY     Only
-    command!          DELMARKS DelMarks
+    command!          ONLY     only
+    command!          DELMARKS delmarks a-zA-Z0-9
     command!          RENAME   call CocActionAsync("rename")
     command! -range=% FORMAT   <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
     command!          ERRORS   CocList --normal diagnostics
