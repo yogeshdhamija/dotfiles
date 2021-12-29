@@ -16,6 +16,8 @@ nnoremap zH 40zh
 nnoremap * *N
 vmap * <Action>(Find)
 
+nmap <S-k><S-j> <Esc>
+nmap <S-j><S-k> <Esc>
 vmap <S-j><S-k> <Esc>
 vmap <S-k><S-j> <Esc>
 imap <S-j><S-k> <Esc>
@@ -43,15 +45,17 @@ vmap     \a   <Action>(GotoAction)
 nnoremap \b   :tabn
 nmap     \e   <Action>(ShowErrorDescription)
 
-command! CloseHiddenBuffers action CloseAllEditorsButActive
-command! CLO                CloseHiddenBuffers
+command! CLOSEHIDDENBUFFERS action CloseAllEditorsButActive
+command! CLO                CLOSEHIDDENBUFFERS
 command! ONLY               only
 command! ON                 ONLY
 command! DELMARKS           action ShowBookmarks
 command! DELM               DELMARKS
-command! Rename             action RenameElement
-command! REN                Rename
-command! Format             action ReformatCode
-command! FOR                Format
-command! Errors             action GoToErrorGroup
-command! ERRS               Errors
+command! RENAME             action RenameElement
+command! REN                RENAME
+command! FORMAT             action ReformatCode
+command! FOR                FORMAT
+command! ERRORS             action GoToErrorGroup
+command! ERRS               ERRORS
+command! JOIN               j
+command! J                  JOIN

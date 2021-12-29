@@ -5,7 +5,6 @@ if !exists("plugins")
         \ ['yogeshdhamija/better-asterisk-remap.vim', {}],
         \ ['tpope/vim-repeat', {}],
         \ ['tpope/vim-surround', {}],
-        \ ['tpope/vim-abolish', {}],
         \ ['michaeljsmith/vim-indent-object', {}],
         \ ['junegunn/vim-easy-align', {}],
         \ ['yogeshdhamija/find-in-dir-helper.vim', {}],

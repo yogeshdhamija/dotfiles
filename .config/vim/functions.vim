@@ -118,7 +118,8 @@ function! CreateSplitMappings(mode, mapping, rhs) abort
     execute a:mode.'map '.a:mapping.'k :aboveleft split<CR>'.a:rhs
 endfunction
 
-function! CreateMappingsInAllModesExceptNormal(mapping, rhs) abort
+function! CreateMappingsInAllModes(mapping, rhs) abort
+    execute 'nmap '.a:mapping.' '.a:rhs
     execute 'imap '.a:mapping.' '.a:rhs
     execute 'cmap '.a:mapping.' '.a:rhs
     execute 'vmap '.a:mapping.' '.a:rhs

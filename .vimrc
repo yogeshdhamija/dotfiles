@@ -9,12 +9,12 @@ source ~/.config/vim/plugins.vim
 source ~/.config/vim/settings.vim
 
 " Remaps
-    call CreateMappingsInAllModesExceptNormal("<S-j><S-k>", "<C-\\><C-n>")
-    call CreateMappingsInAllModesExceptNormal("<S-k><S-j>", "<C-\\><C-n>")
+    call CreateMappingsInAllModes("<S-j><S-k>", "<C-\\><C-n>")
+    call CreateMappingsInAllModes("<S-k><S-j>", "<C-\\><C-n>")
     xnoremap <C-c> "+y
     xnoremap <D-c> "+y
-    xnoremap <C-v> "+p
-    xnoremap <D-v> "+p
+    inoremap <C-v> <C-R>+
+    inoremap <D-v> <C-R>+
     xmap     ga    <Plug>(EasyAlign)
     nmap     ga    <Plug>(EasyAlign)
     inoremap <C-R> <C-R><C-O>
@@ -48,24 +48,23 @@ source ~/.config/vim/settings.vim
     endif
 
 " Commands
-    command!          Only only
-    command!          ONLY Only
-    command!          DelMarks delmarks a-zA-Z0-9
+    command!          ONLY     Only
     command!          DELMARKS DelMarks
-    command!          Rename call CocActionAsync("rename")
-    command!          RENAME Rename
-    command! -range=% Format <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
-    command! -range=% FORMAT <line1>,<line2>Format
-    command!          Errors CocList --normal diagnostics
-    command!          ERRORS Errors
-    command!          ERRS Errors
-    command!          CD silent cd %:p:h | redraw! | echo ":cd %:p:h"
-    command!          CP let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')"
-    command! -nargs=? GITLOG Git log --graph --oneline --pretty=format:'%h -%d %s (%cs) <%an>' <args>
-    command! -nargs=? GLOG GITLOG <args>
+    command!          RENAME   call CocActionAsync("rename")
+    command! -range=% FORMAT   <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
+    command!          ERRORS   CocList --normal diagnostics
+    command!          ERRS     Errors
+    command!          CD       silent cd %:p:h | redraw! | echo ":cd %:p:h"
+    command!          CP       let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')"
+    command! -nargs=? GITLOG   Git log --graph --oneline --pretty=format:'%h -%d %s (%cs) <%an>' <args>
+    command! -nargs=? GLOG     GITLOG <args>
     command!          GITHISTORY BCommits
     command!          GHISTORY GITHISTORY
-    command!          PDF w | call WriteToPdf()
+    command!          PDF      w | call WriteToPdf()
+    command!          JOIN     SplitjoinJoin
+    command!          J        JOIN
+    command!          SPLIT    SplitjoinSplit
+    command!          S        SPLIT
 
 source ~/.config/nvim/vscode-neovim-config.vim
 
