@@ -9,8 +9,6 @@ source ~/.config/vim/plugins.vim
 source ~/.config/vim/settings.vim
 
 " Remaps
-    call CreateMappingsInAllModes("<S-j><S-k>", "<C-\\><C-n>")
-    call CreateMappingsInAllModes("<S-k><S-j>", "<C-\\><C-n>")
     xnoremap <C-c> "+y
     xnoremap <D-c> "+y
     inoremap <C-v> <C-R>+
