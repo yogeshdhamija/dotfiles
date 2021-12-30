@@ -51,7 +51,7 @@ source ~/.config/vim/settings.vim
     command!          RENAME   call CocActionAsync("rename")
     command! -range=% FORMAT   <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
     command!          ERRORS   CocList --normal diagnostics
-    command!          ERRS     Errors
+    command!          ERRS     ERRORS
     command!          CD       silent cd %:p:h | redraw! | echo ":cd %:p:h"
     command!          CP       let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')"
     command! -nargs=? GITLOG   Git log --graph --oneline --pretty=format:'%h -%d %s (%cs) <%an>' <args>

@@ -13,7 +13,7 @@ nmap <C-I> <Action>(Forward)
 nnoremap zL 40zl
 nnoremap zH 40zh
 
-nnoremap * *N
+nnoremap * *N:set hls<CR>
 vmap * <Action>(Find)
 
 nmap     `    <Action>(ShowBookmarks)
