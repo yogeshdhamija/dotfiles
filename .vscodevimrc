@@ -6,6 +6,37 @@ if(exists("g:vscode") && has('nvim'))
 
 
 
+
+
+
+if !exists("plugins")
+    let plugins = [
+        \ ['yogeshdhamija/better-asterisk-remap.vim', {}],
+        \ ['tpope/vim-repeat', {}],
+        \ ['tpope/vim-surround', {}],
+        \ ['tpope/vim-abolish', {}],
+        \ ['michaeljsmith/vim-indent-object', {}],
+        \ ['junegunn/vim-easy-align', {}],
+        \ ['yogeshdhamija/find-in-dir-helper.vim', {}],
+        \ ['yogeshdhamija/filter-lq-list.vim', {}],
+        \ ['yogeshdhamija/close-hidden-buffers-command.vim', {}],
+    \ ]
+endif
+
+
+
+
+
+
+
+source ~/.config/nvim/init.vim
+
+
+
+
+
+
+
 " Functions
     function! CreateSplitMappings(mode, mapping, rhs) abort
         execute a:mode.'map '.a:mapping.' '.a:rhs
@@ -107,6 +138,12 @@ if(exists("g:vscode") && has('nvim'))
     command! ERRS Errors
     command! Actions call VSCodeNotify("workbench.action.showCommands")
     command! ACTIONS Actions
+
+
+
+
+
+
 
 
 

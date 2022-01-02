@@ -1,7 +1,5 @@
 source ~/.config/vim/functions.vim
 
-source ~/.config/nvim/vscode-neovim-config.loadbefore.vim
-
 call SourceFileIfExists("~/.vimrc.local.loadbefore")
 call SourceFileIfExists(".vim/vimrc.local.loadbefore")
 
@@ -65,8 +63,6 @@ source ~/.config/vim/settings.vim
     command!          J        JOIN
     command!          SPLIT    SplitjoinSplit
     command!          S        SPLIT
-
-source ~/.config/nvim/vscode-neovim-config.vim
 
 call SourceFileIfExists("~/.vimrc.local")
 call SourceFileIfExists(".vim/vimrc.local")
