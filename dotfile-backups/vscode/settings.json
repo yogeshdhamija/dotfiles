@@ -21,7 +21,6 @@
         "**/CVS": false
     },
     "search.useIgnoreFiles": false,
-    "editor.find.loop": false,
     "editor.wordWrap": "on",
     "editor.wrappingIndent": "deepIndent",
     "workbench.list.horizontalScrolling": true,
@@ -115,7 +114,7 @@
     "git.enableStatusBarSync": false,
     "liveshare.showInStatusBar": "whileCollaborating",
     "yaml.schemas": {
-        "file:///Users/yogeshdhamija/.vscode/extensions/atlassian.atlascode-2.10.0/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/yogeshdhamija/.vscode/extensions/atlassian.atlascode-2.10.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "git.suggestSmartCommit": false,
     "atlascode.jira.explorer.nestSubtasks": true,
@@ -128,7 +127,6 @@
     "atlascode.bitbucket.issues.monitorEnabled": false,
     "atlascode.bitbucket.pipelines.monitorEnabled": false,
     "atlascode.jira.explorer.monitorEnabled": false,
-    "workbench.colorTheme": "Chandrian Blue",
     // Fixing color issues in Chandrian color scheme:
         "workbench.colorCustomizations": {
             "tab.activeBackground": "#01526691",
@@ -160,5 +158,9 @@
     "files.associations": {
         ".vimrc": "viml"
     },
-    "hediet.vscode-drawio.theme": "sketch"
+    "hediet.vscode-drawio.theme": "sketch",
+    "workbench.colorTheme": "Chandrian Blue",
+    "vscode-neovim.neovimInitVimPaths.darwin": "~/.vscodevimrc",
+    "vscode-neovim.neovimInitVimPaths.linux": "~/.vscodevimrc",
+    "vscode-neovim.neovimInitVimPaths.win32": "~/.vscodevimrc"
 }
