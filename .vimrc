@@ -7,6 +7,7 @@ source ~/.config/vim/plugins.vim
 source ~/.config/vim/settings.vim
 
 " Remaps
+    nnoremap `     <Cmd>echo ":marks"<CR><Cmd>Marks<CR>
     nmap     J     gJ
     nmap     S     gS
     xnoremap <C-c> "+y
@@ -27,8 +28,8 @@ source ~/.config/vim/settings.vim
     nnoremap z= <Cmd>CocAction<CR>
     xnoremap z= <Esc>:'<,'>CocAction<CR>
     nnoremap \c <Esc><Cmd>noh<CR>
-    nnoremap \o <Cmd>Files<CR>
-    nnoremap \b <Cmd>Buffers<CR>
+    nnoremap \o <Cmd>echo ":edit"<CR><Cmd>Files<CR>
+    nnoremap \b <Cmd>echo ":buffers"<CR><Cmd>Buffers<CR>
     nnoremap \w <Cmd>Windows<CR>
     nnoremap \a <Cmd>CocList commands<CR>
     xnoremap \a <Cmd>CocList commands<CR>
@@ -47,7 +48,7 @@ source ~/.config/vim/settings.vim
 
 " Commands
     command!          ONLY     only
-    command!          DELMARKS delmarks a-zA-Z0-9
+    command!          DELMARKS delmarks a-zA-Z0-9 | echo ":delmarks a-zA-Z0-9"
     command!          RENAME   call CocActionAsync("rename")
     command! -range=% FORMAT   <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
     command!          ERRORS   CocList --normal diagnostics
@@ -59,10 +60,6 @@ source ~/.config/vim/settings.vim
     command!          GITHISTORY BCommits
     command!          GHISTORY GITHISTORY
     command!          PDF      w | call WriteToPdf()
-    command!          JOIN     SplitjoinJoin
-    command!          J        JOIN
-    command!          SPLIT    SplitjoinSplit
-    command!          S        SPLIT
 
 call SourceFileIfExists("~/.vimrc.local")
 call SourceFileIfExists(".vim/vimrc.local")
