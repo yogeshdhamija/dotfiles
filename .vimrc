@@ -7,6 +7,8 @@ source ~/.config/vim/plugins.vim
 source ~/.config/vim/settings.vim
 
 " Remaps
+    nnoremap <silent> \ :WhichKey '\'<CR>
+    vnoremap <silent> \ :<c-u>WhichKeyVisual '\'<CR>
     nnoremap `     <Cmd>echo ":marks"<CR><Cmd>Marks<CR>
     nmap     J     gJ
     nmap     S     gS

@@ -74,6 +74,7 @@ let g:SignatureMap = {
     \ 'ListBufferMarks'    :  "m/",
     \ 'ListBufferMarkers'  :  "m?"
 \ }
+let g:which_key_flatten = 0
 
 " Colorscheme
     set background=dark
