@@ -31,8 +31,8 @@ nmap     \gi  <Action>(GotoImplementation)
 nmap     \gii <Action>(GotoImplementation)
 nmap     \h   <Action>(QuickJavaDoc)
 inoremap \h   <Esc>:action ParameterInfo<CR>a
-nmap     z=   <Action>(ShowIntentionActions)
-vnoremap z=   :action Refactorings.QuickListPopupAction<CR>
+nmap     \q   <Action>(ShowIntentionActions)
+vnoremap \q   :action Refactorings.QuickListPopupAction<CR>
 nmap     \a   <Action>(GotoAction)
 vmap     \a   <Action>(GotoAction)
 nnoremap \b   :tabn

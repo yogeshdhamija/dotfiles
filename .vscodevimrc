@@ -79,8 +79,8 @@ source ~/.config/nvim/init.vim
     nmap <expr> k MoveCursor('k')
 
 " Map vim's spellcheck to quickfix list in VSCode
-    nnoremap z= <Cmd>call VSCodeNotify("editor.action.quickFix")<CR>
-    xnoremap z= <Cmd>call ExecuteVSCodeCommandInVisualMode("editor.action.quickFix")<CR>
+    nnoremap \q <Cmd>call VSCodeNotify("editor.action.quickFix")<CR>
+    xnoremap \q <Cmd>call ExecuteVSCodeCommandInVisualMode("editor.action.quickFix")<CR>
     
 " Get navigating marks working with vscode neovim plugin
     " (also relies on VSCode Bookmarks plugin)

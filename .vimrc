@@ -27,8 +27,8 @@ source ~/.config/vim/settings.vim
     augroup END
 
 " Leader shortcuts
-    nnoremap z= <Cmd>CocAction<CR>
-    xnoremap z= <Esc>:'<,'>CocAction<CR>
+    nnoremap \q <Cmd>CocAction<CR>
+    xnoremap \q <Esc>:'<,'>CocAction<CR>
     nnoremap \c <Esc><Cmd>noh<CR>
     nnoremap \o <Cmd>echo ":edit"<CR><Cmd>Files<CR>
     nnoremap \b <Cmd>echo ":buffers"<CR><Cmd>Buffers<CR>
