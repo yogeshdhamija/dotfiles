@@ -74,7 +74,41 @@ let g:SignatureMap = {
     \ 'ListBufferMarks'    :  "m/",
     \ 'ListBufferMarkers'  :  "m?"
 \ }
+
 let g:which_key_flatten = 0
+let g:which_key_map = {}
+call which_key#register('\', "g:which_key_map")
+let g:which_key_map.q = 'Quick action'
+let g:which_key_map.c = 'Clear screen'
+let g:which_key_map.o = 'Open file'
+let g:which_key_map.b = 'switch Buffer'
+let g:which_key_map.w = 'switch Window'
+let g:which_key_map.a = 'show Actions'
+let g:which_key_map.h = 'show Help in hover'
+let g:which_key_map.e = 'show Error'
+let g:which_key_map.f = 'Find in directory'
+let g:which_key_map.d = {
+    \ 'name': '+show files in Directory',
+    \ 'd': 'here',
+    \ 'h': 'left',
+    \ 'j': 'below',
+    \ 'k': 'above',
+    \ 'l': 'right',
+\ }
+let g:which_key_map.t = {
+    \ 'name': '+Terminal',
+    \ 't': 'here',
+    \ 'h': 'left',
+    \ 'j': 'below',
+    \ 'k': 'above',
+    \ 'l': 'right',
+\ }
+let g:which_key_map.g = {
+    \ 'name': '+Go to...',
+    \ 'd': {'name': '+Definition', 'd': 'here', 'h': 'left', 'j': 'below', 'k': 'above', 'l': 'right'},
+    \ 'i': {'name': '+Implementation', 'i': 'here', 'h': 'left', 'j': 'below', 'k': 'above', 'l': 'right'},
+    \ 'r': {'name': '+References', 'r': 'here', 'h': 'left', 'j': 'below', 'k': 'above', 'l': 'right'},
+\ }
 
 " Colorscheme
     set background=dark
