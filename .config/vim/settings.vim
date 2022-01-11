@@ -110,21 +110,4 @@ let g:which_key_map.g = {
     \ 'r': {'name': '+References', 'r': 'here', 'h': 'left', 'j': 'below', 'k': 'above', 'l': 'right'},
 \ }
 
-" Colorscheme
-    set background=dark
-    silent! colorscheme onedark
-    set number
-    if(has('nvim'))
-        set scl=auto:9
-    else
-        set scl=auto
-    endif
-    set foldmethod=indent
-    set foldlevelstart=99
-    tabdo windo set foldtext=CustomFoldText()
-    tabdo windo set fillchars=fold:\ 
-    set laststatus=2
-    set noshowmode
-    highlight MatchParen       ctermbg=234 guibg=#1d2021 ctermfg=14  guifg=#91fff8 term=bold,underline cterm=bold,underline gui=bold,underline
-    highlight Visual           ctermbg=219 guibg=#ffafff ctermfg=235 guifg=#282C34
-    highlight CocHighlightText ctermbg=238 guibg=#444444
+call SetColors()

@@ -62,8 +62,8 @@ source ~/.config/vim/settings.vim
     command! -range=% GITHISTORY      <line1>,<line2>BCommits
     command! -range=% GHISTORY        <line1>,<line2>GITHISTORY
     command!          PDF             w | call WriteToPdf()
-    command!          WRITINGMODEON   Goyo! | Goyo | Limelight
-    command!          WRITINGMODEOFF  Goyo! | Limelight!
+    command!          WRITINGMODEON   Goyo! | syntax off | Goyo | Limelight
+    command!          WRITINGMODEOFF  Goyo! | Limelight! | call SetColors()
     command!          WON             WRITINGMODEON
     command!          WOFF            WRITINGMODEOFF
 
