@@ -49,19 +49,23 @@ source ~/.config/vim/settings.vim
     endif
 
 " Commands
-    command!          ONLY       only
-    command!          DELMARKS   delmarks a-zA-Z0-9 | echo ":delmarks a-zA-Z0-9"
-    command!          RENAME     call CocActionAsync("rename")
-    command! -range=% FORMAT     <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
-    command!          ERRORS     CocList --normal diagnostics
-    command!          ERRS       ERRORS
-    command!          CD         silent cd %:p:h | redraw! | echo ":cd %:p:h"
-    command!          CP         let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')"
-    command! -nargs=? GITLOG     Git log --graph --oneline --pretty=format:'%h -%d %s (%cs) <%an>' <args>
-    command! -nargs=? GLOG       GITLOG <args>
-    command! -range=% GITHISTORY <line1>,<line2>BCommits
-    command! -range=% GHISTORY   <line1>,<line2>GITHISTORY
-    command!          PDF        w | call WriteToPdf()
+    command!          ONLY            only
+    command!          DELMARKS        delmarks a-zA-Z0-9 | echo ":delmarks a-zA-Z0-9"
+    command!          RENAME          call CocActionAsync("rename")
+    command! -range=% FORMAT          <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
+    command!          ERRORS          CocList --normal diagnostics
+    command!          ERRS            ERRORS
+    command!          CD              silent cd %:p:h | redraw! | echo ":cd %:p:h"
+    command!          CP              let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')"
+    command! -nargs=? GITLOG          Git log --graph --oneline --pretty=format:'%h -%d %s (%cs) <%an>' <args>
+    command! -nargs=? GLOG            GITLOG <args>
+    command! -range=% GITHISTORY      <line1>,<line2>BCommits
+    command! -range=% GHISTORY        <line1>,<line2>GITHISTORY
+    command!          PDF             w | call WriteToPdf()
+    command!          WRITINGMODEON   Goyo! | Goyo | Limelight
+    command!          WRITINGMODEOFF  Goyo! | Limelight!
+    command!          WON             WRITINGMODEON
+    command!          WOFF            WRITINGMODEOFF
 
 call SourceFileIfExists("~/.vimrc.local")
 call SourceFileIfExists(".vim/vimrc.local")

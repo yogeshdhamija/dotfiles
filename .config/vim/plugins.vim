@@ -39,6 +39,8 @@ if !exists("plugins")
         \ ['vim-airline/vim-airline', {}],
         \ ['vim-airline/vim-airline-themes', {}],
         \ ['lukas-reineke/indent-blankline.nvim', {}],
+        \ ['junegunn/goyo.vim', {}],
+        \ ['junegunn/limelight.vim', {}],
     \ ]
     let plugins = vim_idiomatic_plugins
                 \ + interface_convenience_plugins
