@@ -9,7 +9,7 @@ source ~/.config/vim/settings.vim
 " Remaps
     nnoremap <silent> \ :WhichKey '\'<CR>
     vnoremap <silent> \ :<c-u>WhichKeyVisual '\'<CR>
-    nnoremap `     <Cmd>echo ":marks"<CR><Cmd>Marks<CR>
+    nnoremap `     <Cmd>call MarksHelper()<CR>
     nmap     J     gJ
     nmap     S     gS
     xnoremap <C-c> "+y
@@ -62,8 +62,8 @@ source ~/.config/vim/settings.vim
     command! -range=% GITHISTORY      <line1>,<line2>BCommits
     command! -range=% GHISTORY        <line1>,<line2>GITHISTORY
     command!          PDF             w | call WriteToPdf()
-    command!          WRITINGMODEON   Goyo! | syntax off | Goyo | Limelight
-    command!          WRITINGMODEOFF  Goyo! | Limelight! | call SetColors()
+    command!          WRITINGMODEON   Goyo! | syntax off | Goyo | Limelight | IndentBlanklineDisable
+    command!          WRITINGMODEOFF  Goyo! | Limelight! | call SetColors() | IndentBlanklineEnable
     command!          WON             WRITINGMODEON
     command!          WOFF            WRITINGMODEOFF
 

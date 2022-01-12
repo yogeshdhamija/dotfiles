@@ -130,7 +130,7 @@ function! CreateMappingsInAllModes(mapping, rhs) abort
     execute 'lmap '.a:mapping.' '.a:rhs
 endfunction
 
-function! CreateCenteredFloatingWindow()
+function! CreateCenteredFloatingWindow() abort
     if(!has('nvim')) 
         split
         new
@@ -158,7 +158,7 @@ function! CreateCenteredFloatingWindow()
     endif
 endfunction
 
-function! SetColors()
+function! SetColors() abort
     set background=dark
     silent! colorscheme onedark
     set number
@@ -177,4 +177,13 @@ function! SetColors()
     highlight Visual           ctermbg=219 guibg=#ffafff ctermfg=235 guifg=#282C34
     highlight CocHighlightText ctermbg=238 guibg=#444444
     syntax on
+endfunction
+
+function! MarksHelper() abort
+    if(reg_recording() == '' && reg_executing() == '')
+        echo ":marks"
+        Marks
+    else
+        call feedkeys("`", 'nt')
+    endif
 endfunction
