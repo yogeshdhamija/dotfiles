@@ -88,7 +88,7 @@ let g:which_key_map.h = 'show Help in hover'
 let g:which_key_map.e = 'show Error'
 let g:which_key_map.f = 'Find in directory'
 let g:which_key_map.d = {
-    \ 'name': '+show files in Directory',
+    \ 'name': '+show_files_in_Directory',
     \ 'd': 'here',
     \ 'h': 'left',
     \ 'j': 'below',
@@ -104,7 +104,7 @@ let g:which_key_map.t = {
     \ 'l': 'right',
 \ }
 let g:which_key_map.g = {
-    \ 'name': '+Go to...',
+    \ 'name': '+Go_to...',
     \ 'd': {'name': '+Definition', 'd': 'here', 'h': 'left', 'j': 'below', 'k': 'above', 'l': 'right'},
     \ 'i': {'name': '+Implementation', 'i': 'here', 'h': 'left', 'j': 'below', 'k': 'above', 'l': 'right'},
     \ 'r': {'name': '+References', 'r': 'here', 'h': 'left', 'j': 'below', 'k': 'above', 'l': 'right'},
