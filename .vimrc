@@ -8,7 +8,6 @@ source ~/.config/vim/settings.vim
 
 " Remaps
     nnoremap <silent> \ :WhichKey '\'<CR>
-    vnoremap <silent> \ :<c-u>WhichKeyVisual '\'<CR>
     nnoremap `     <Cmd>call MarksHelper()<CR>
     nmap     J     gJ
     nmap     S     gS
