@@ -160,8 +160,9 @@ endfunction
 
 function! SetColors() abort
     set background=dark
-    silent! colorscheme onedark
     set number
+    syntax on
+    silent! colorscheme gruvbox
     if(has('nvim'))
         set scl=auto:9
     else
@@ -173,10 +174,7 @@ function! SetColors() abort
     tabdo windo set fillchars=fold:\ 
     set laststatus=2
     set noshowmode
-    highlight MatchParen       ctermbg=234 guibg=#1d2021 ctermfg=14  guifg=#91fff8 term=bold,underline cterm=bold,underline gui=bold,underline
-    highlight Visual           ctermbg=219 guibg=#ffafff ctermfg=235 guifg=#282C34
-    highlight CocHighlightText ctermbg=238 guibg=#444444
-    syntax on
+    highlight CocHighlightText ctermbg=241 guibg=#665c54
 endfunction
 
 function! MarksHelper() abort

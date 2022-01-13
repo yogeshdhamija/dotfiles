@@ -36,7 +36,7 @@ if !exists("plugins")
     let visual_plugins = [
         \ ['mhinz/vim-signify', {}],
         \ ['joshdick/onedark.vim', {}],
-        \ ['vim-airline/vim-airline', {}],
+        \ ['morhetz/gruvbox', {}],
         \ ['vim-airline/vim-airline-themes', {}],
         \ ['lukas-reineke/indent-blankline.nvim', {}],
         \ ['junegunn/goyo.vim', {}],
