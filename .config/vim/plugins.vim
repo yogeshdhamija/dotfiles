@@ -37,6 +37,7 @@ if !exists("plugins")
         \ ['mhinz/vim-signify', {}],
         \ ['joshdick/onedark.vim', {}],
         \ ['morhetz/gruvbox', {}],
+        \ ['vim-airline/vim-airline', {}],
         \ ['vim-airline/vim-airline-themes', {}],
         \ ['lukas-reineke/indent-blankline.nvim', {}],
         \ ['junegunn/goyo.vim', {}],
