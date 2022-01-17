@@ -11,10 +11,12 @@ source ~/.config/vim/settings.vim
     nnoremap `     <Cmd>call MarksHelper()<CR>
     nmap     J     gJ
     nmap     S     gS
+    nnoremap <C-j> 10j
+    nnoremap <C-k> 10k
     xnoremap <C-c> "+y
     xnoremap <D-c> "+y
-    inoremap <C-v> <C-R>+
-    inoremap <D-v> <C-R>+
+    inoremap <C-v><C-v> <C-R>+
+    inoremap <D-v><D-v> <C-R>+
     xmap     ga    <Plug>(EasyAlign)
     nmap     ga    <Plug>(EasyAlign)
     inoremap <C-R> <C-R><C-O>
