@@ -24,6 +24,7 @@ source ~/.config/vim/settings.vim
         autocmd!
         autocmd FileType dirvish silent! unmap <buffer> q
         autocmd FileType dirvish set conceallevel=0
+        autocmd BufEnter * if exists("b:dirvish") | set conceallevel=0 | endif
         autocmd FileType dirvish nnoremap <silent><buffer> t 0C<Esc>:let @"=substitute(@", '\n', '', 'g')<CR>:r ! find "<C-R>"" -maxdepth 1 -print0 \| xargs -0 ls -Fd<CR>:silent! keeppatterns %s/\/\//\//g<CR>:silent! keeppatterns %s/[^a-zA-Z0-9\/]$//g<CR>:silent! keeppatterns g/^$/d<CR>:noh<CR>
     augroup END
 
