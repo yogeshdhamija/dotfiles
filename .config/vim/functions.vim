@@ -149,6 +149,7 @@ function! SetColors() abort
     set background=dark
     set number
     syntax on
+    set cursorline
     silent! colorscheme gruvbox
     if(has('nvim'))
         set scl=auto:9
