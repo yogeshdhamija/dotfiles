@@ -162,6 +162,7 @@ function! SetColors() abort
     tabdo windo set fillchars=fold:\ 
     set laststatus=2
     set noshowmode
+    let g:lightline = { 'colorscheme': 'one' }
     highlight CocHighlightText ctermbg=241 guibg=#665c54
 endfunction
 

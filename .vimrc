@@ -77,10 +77,6 @@ source ~/.config/vim/settings.vim
     command! -range=% GITHISTORY      <line1>,<line2>BCommits
     command! -range=% GHISTORY        <line1>,<line2>GITHISTORY
     command!          PDF             w | call WriteToPdf()
-    command!          WRITINGMODEON   Goyo! | syntax off | set spell | set nocursorline | Goyo | Limelight | IndentBlanklineDisable
-    command!          WRITINGMODEOFF  Goyo! | Limelight! | set nospell | set cursorline | call SetColors() | IndentBlanklineEnable
-    command!          WON             WRITINGMODEON
-    command!          WOFF            WRITINGMODEOFF
 
 call SourceFileIfExists("~/.vimrc.local")
 call SourceFileIfExists(".vim/vimrc.local")

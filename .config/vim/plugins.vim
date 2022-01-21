@@ -37,11 +37,8 @@ if !exists("plugins")
         \ ['mhinz/vim-signify', {}],
         \ ['joshdick/onedark.vim', {}],
         \ ['morhetz/gruvbox', {}],
-        \ ['vim-airline/vim-airline', {}],
-        \ ['vim-airline/vim-airline-themes', {}],
+        \ ['itchyny/lightline.vim', {}],
         \ ['lukas-reineke/indent-blankline.nvim', {}],
-        \ ['junegunn/goyo.vim', {}],
-        \ ['junegunn/limelight.vim', {}],
     \ ]
     let plugins = vim_idiomatic_plugins
                 \ + interface_convenience_plugins
