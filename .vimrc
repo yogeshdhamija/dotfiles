@@ -7,19 +7,23 @@ source ~/.config/vim/plugins.vim
 source ~/.config/vim/settings.vim
 
 " Remaps
-    nnoremap <silent> \ :WhichKey '\'<CR>
-    nnoremap `     <Cmd>call MarksHelper()<CR>
-    nmap     J     gJ
-    nmap     S     gS
-    nnoremap <C-j> 10j
-    nnoremap <C-k> 10k
-    xnoremap <C-c> "+y
-    xnoremap <D-c> "+y
-    inoremap <C-v><C-v> <C-R>+
-    inoremap <D-v><D-v> <C-R>+
-    xmap     ga    <Plug>(EasyAlign)
-    nmap     ga    <Plug>(EasyAlign)
-    inoremap <C-R> <C-R><C-O>
+    nnoremap <silent> \           :WhichKey '\'<CR>
+    nnoremap          `           <Cmd>call MarksHelper()<CR>
+    
+    " splitjoin plugin configures gJ and gS-- I want to use those
+    nmap              J           gJ
+    nmap              S           gS
+
+    nnoremap          <C-j>       10j
+    nnoremap          <C-k>       10k
+    xnoremap          <C-c>       "+y
+    xnoremap          <D-c>       "+y
+    inoremap          <C-v><C-v> <C-R>+
+    inoremap          <D-v><D-v> <C-R>+
+    xmap              ga         <Plug>(EasyAlign)
+    nmap              ga         <Plug>(EasyAlign)
+    inoremap          <C-R>      <C-R><C-O>
+
     augroup dirvish_config
         autocmd!
         autocmd FileType dirvish silent! unmap <buffer> q
