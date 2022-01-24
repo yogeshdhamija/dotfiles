@@ -109,5 +109,6 @@ let g:which_key_map.g = {
     \ 'i': {'name': '+Implementation', 'i': 'here', 'h': 'left', 'j': 'below', 'k': 'above', 'l': 'right'},
     \ 'r': {'name': '+References', 'r': 'here', 'h': 'left', 'j': 'below', 'k': 'above', 'l': 'right'},
 \ }
+let g:terminal_command_motion_prompt_matcher = '^'.$USER.' in .* %'
 
 call SetColors()
