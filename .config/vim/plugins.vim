@@ -39,7 +39,7 @@ if !exists("plugins")
         \ ['joshdick/onedark.vim', {}],
         \ ['morhetz/gruvbox', {}],
         \ ['itchyny/lightline.vim', {}],
-        \ ['lukas-reineke/indent-blankline.nvim', {}],
+        \ ['Yggdroot/indentLine', {}],
     \ ]
     let plugins = vim_idiomatic_plugins
                 \ + interface_convenience_plugins

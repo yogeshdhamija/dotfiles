@@ -159,6 +159,7 @@ function! SetColors() abort
     set noshowmode
     let g:lightline = { 'colorscheme': 'one' }
     highlight CocHighlightText ctermbg=241 guibg=#665c54
+    set list lcs=tab:\|\ 
 endfunction
 
 function! MarksHelper() abort
