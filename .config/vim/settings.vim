@@ -50,7 +50,9 @@ if !has('nvim')
     endif
 endif
 autocmd CursorHold * silent! call CocActionAsync('highlight')
-let g:peekaboo_window="call CreateCenteredFloatingWindow()"
+if(has('nvim'))
+    let g:peekaboo_window="call NvimOnlyCreateCenteredFloatingWindow()"
+endif
 let g:SignatureMap = {
     \ 'Leader'             :  "m",
     \ 'PlaceNextMark'      :  "m,",

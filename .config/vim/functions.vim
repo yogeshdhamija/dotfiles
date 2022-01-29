@@ -130,19 +130,14 @@ function! CreateMappingsInAllModes(mapping, rhs) abort
     execute 'lmap '.a:mapping.' '.a:rhs
 endfunction
 
-function! CreateCenteredFloatingWindow() abort
-    if(!has('nvim')) 
-        split
-        new
-    else
-        let width = float2nr(&columns * 0.6)
-        let height = float2nr(&lines * 0.6)
-        let top = ((&lines - height) / 2) - 1
-        let left = (&columns - width) / 2
-        let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
-        let s:buf = nvim_create_buf(v:false, v:true)
-        call nvim_open_win(s:buf, v:true, opts)
-    endif
+function! NvimOnlyCreateCenteredFloatingWindow() abort
+    let width = float2nr(&columns * 0.6)
+    let height = float2nr(&lines * 0.6)
+    let top = ((&lines - height) / 2) - 1
+    let left = (&columns - width) / 2
+    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
+    let s:buf = nvim_create_buf(v:false, v:true)
+    call nvim_open_win(s:buf, v:true, opts)
 endfunction
 
 function! SetColors() abort
