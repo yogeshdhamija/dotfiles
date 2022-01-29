@@ -6,21 +6,21 @@ alias "dotfiles-update-repo"="cd ~ && dotfiles remote update && dotfiles pull &&
 
 alias "dotfiles-update-vim"="cd ~ && mv ~/.vim/lastsession.vim ~/.vim/lastsession.vim.old > /dev/null 2>&1; vim +PlugUpgrade +PlugUpdate +StopKeepingSession -c \"qa\"; mv ~/.vim/lastsession.vim.old ~/.vim/lastsession.vim > /dev/null 2>&1; cd -"
 
+alias "dotfiles-update-nvim"="cd ~ && mv ~/.vim/lastsession.nvim ~/.vim/lastsession.nvim.old > /dev/null 2>&1; nvim +PlugUpgrade +PlugUpdate +StopKeepingSession -c \"qa\"; mv ~/.vim/lastsession.vim.old ~/.vim/lastsession.nvim > /dev/null 2>&1; cd -"
+
 alias "dotfiles-update-fzf"="cd ~ && .fzf/install --all && cd -"
 
-alias "dotfiles-update"="dotfiles-update-repo; dotfiles-update-vim; dotfiles-update-fzf; dotfiles-check"
+alias "dotfiles-update"="dotfiles-update-repo; dotfiles-update-vim; dotfiles-update-nvim; dotfiles-update-fzf; dotfiles-check"
 
 
 # ============ REPLACEMENTS ==============
 
-command -v nvim > /dev/null && alias "vim"="nvim"
 command -v rg > /dev/null && alias "grep"="rg -uuu"
 
 # ============ GENERAL ==============
 
 alias ":q"="exit"
 alias ":e"="$EDITOR"
-alias ":ew"="vim +WritingModeOn"
 
 # ============ GIT ==============
 
