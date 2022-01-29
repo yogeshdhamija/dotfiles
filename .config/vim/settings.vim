@@ -112,5 +112,6 @@ let g:which_key_map.g = {
     \ 'r': {'name': '+References', 'r': 'here', 'h': 'left', 'j': 'below', 'k': 'above', 'l': 'right'},
 \ }
 let g:terminal_command_motion_prompt_matcher = '^'.$USER.' in .* %'
+let g:indentLine_setColors = 0
 
 call SetColors()

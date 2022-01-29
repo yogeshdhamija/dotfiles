@@ -82,10 +82,10 @@ endfunction
 
 function! CustomFoldText() abort
     let indent_level = indent(v:foldstart)
-    let indent = repeat(' ', indent_level - 4)
+    let indent = repeat(' ', indent_level - 1)
     let text = substitute(foldtext(), "^\s*\+-*", "", "")
-    let text = substitute(text, '^\s*\([^:]*\):\(.*\)$', '\2 --+ (\1)', "")
-    return indent . '+--' . text
+    let text = substitute(text, '^\s*\([^:]*\):\(.*\)$', '\2 (\1 folded)', "")
+    return indent . text
 endfunction
 
 function! WriteToPdf() abort
@@ -159,6 +159,9 @@ function! SetColors() abort
     set noshowmode
     let g:lightline = { 'colorscheme': 'one' }
     highlight CocHighlightText ctermbg=241 guibg=#665c54
+    highlight Conceal ctermfg=241 guifg=#665c54
+    highlight TrailingWhitespace ctermbg=241 guibg=#665c54
+    match TrailingWhitespace /\s\+$/
     set list lcs=tab:\|\ 
 endfunction
 
