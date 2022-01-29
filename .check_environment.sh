@@ -1,6 +1,8 @@
 #!/bin/bash
 
 declare -a EXECS=(
+    "nvim"
+    "nvr"
     "zsh"
     "rg"
     "jq"
@@ -11,6 +13,8 @@ declare -a EXECS=(
     "npm"
 )
 declare -a NAMES=(
+    "Neovim"
+    "neovim-remote"
     "ZShell"
     "Ripgrep"
     "jq"
@@ -21,6 +25,8 @@ declare -a NAMES=(
     "npm"
 )
 declare -a ADDITIONAL1=(
+    "Widely used rewrite of Vim that has some new features"
+    "Neovim launcher that keeps everything in the same session"
     "Shell"
     "Grep"
     "JSON Parsing CLI tool"
@@ -31,6 +37,8 @@ declare -a ADDITIONAL1=(
     "JS package manager, vim uses it to install coc.nvim plugin (https://github.com/neoclide/coc.nvim), used for LSP"
 )
 declare -a ADDITIONAL2=(
+    "https://neovim.io/"
+    "https://github.com/mhinz/neovim-remote"
     ""
     "https://github.com/BurntSushi/ripgrep"
     "https://stedolan.github.io/jq/"
