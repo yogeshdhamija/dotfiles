@@ -160,9 +160,7 @@ function! SetColors() abort
     let g:lightline = { 'colorscheme': 'one' }
     highlight CocHighlightText ctermbg=241 guibg=#665c54
     highlight Conceal ctermfg=241 guifg=#665c54
-    highlight TrailingWhitespace ctermbg=241 guibg=#665c54
-    match TrailingWhitespace /\s\+$/
-    set list lcs=tab:\|\ 
+    set list lcs=tab:\|\ ,trail:•
 endfunction
 
 function! MarksHelper() abort
