@@ -84,7 +84,7 @@ function! CustomFoldText() abort
     let indent_level = indent(v:foldstart)
     let indent = repeat(' ', indent_level - 1)
     let text = substitute(foldtext(), "^\s*\+-*", "", "")
-    let text = substitute(text, '^\s*\([^:]*\):\(.*\)$', '\2 (\1 folded)', "")
+    let text = substitute(text, '^\s*\([^:]*\):\(.*\)$', '... (\1 folded)', "")
     return indent . text
 endfunction
 
@@ -160,6 +160,7 @@ function! SetColors() abort
     let g:lightline = { 'colorscheme': 'one' }
     highlight CocHighlightText ctermbg=241 guibg=#665c54
     highlight Conceal ctermfg=241 guifg=#665c54
+    highlight Folded ctermbg=235 guibg=#282828
     set list lcs=tab:\|\ ,trail:•
 endfunction
 
