@@ -25,14 +25,10 @@ HIST_STAMPS="yyyy-mm-dd"
 ZSH_THEME="half-life"
 
 plugins=(
-  docker-compose
   web-search
-  ssh
   colored-man-pages
   zsh-autosuggestions
   zsh-syntax-highlighting
-  gradle
-  kubectl
 )
 
 # Load oh my zsh
