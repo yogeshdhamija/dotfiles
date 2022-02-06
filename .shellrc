@@ -36,6 +36,7 @@ fi
 
 # Set up Git preferences
 git config --global merge.conflictstyle diff3
+git config --global pull.ff only
 
 
 # ===================== DOTFILES STUFF ===============================================
