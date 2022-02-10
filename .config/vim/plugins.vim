@@ -33,6 +33,7 @@ if !exists("plugins")
     let language_plugins = [
         \ ['neoclide/coc.nvim', {'branch': 'release'}],
         \ ['sheerun/vim-polyglot', {}],
+        \ ['uiiaoo/java-syntax.vim', {}],
     \ ]
     let visual_plugins = [
         \ ['mhinz/vim-signify', {}],

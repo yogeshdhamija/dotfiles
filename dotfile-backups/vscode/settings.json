@@ -59,7 +59,6 @@
     ],
     "settingsSync.ignoredSettings": [
         "terminal.integrated.shell.windows",
-        "vscode-neovim.neovimExecutablePaths.darwin",
         "vscode-neovim.neovimExecutablePaths.linux",
         "vscode-neovim.neovimExecutablePaths.win32",
         "vscode-neovim.useWSL",
@@ -114,7 +113,7 @@
     "git.enableStatusBarSync": false,
     "liveshare.showInStatusBar": "whileCollaborating",
     "yaml.schemas": {
-        "file:///Users/yogeshdhamija/.vscode/extensions/atlassian.atlascode-2.10.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/yogesh/.vscode/extensions/atlassian.atlascode-2.10.7/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "git.suggestSmartCommit": false,
     "atlascode.jira.explorer.nestSubtasks": true,
@@ -154,7 +153,6 @@
     "liveshare.joinDebugSessionOption": "Prompt",
     "liveshare.presence": false,
     "python.defaultInterpreterPath": "/usr/local/opt/python@3.9/bin/python3.9",
-    "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
     "files.associations": {
         ".vimrc": "viml"
     },
@@ -162,5 +160,6 @@
     "workbench.colorTheme": "Chandrian Blue",
     "vscode-neovim.neovimInitVimPaths.darwin": "~/.vscodevimrc",
     "vscode-neovim.neovimInitVimPaths.linux": "~/.vscodevimrc",
-    "vscode-neovim.neovimInitVimPaths.win32": "~/.vscodevimrc"
+    "vscode-neovim.neovimInitVimPaths.win32": "~/.vscodevimrc",
+    "vscode-neovim.neovimExecutablePaths.darwin": "nvim"
 }
