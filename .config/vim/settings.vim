@@ -79,7 +79,7 @@ let g:SignatureMap = {
 
 let g:which_key_flatten = 0
 let g:which_key_map = {}
-call which_key#register('\', "g:which_key_map")
+silent! call which_key#register('\', "g:which_key_map")
 let g:which_key_map.q = 'Quick action'
 let g:which_key_map.c = 'Clear screen'
 let g:which_key_map.o = 'Open file'
