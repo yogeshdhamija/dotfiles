@@ -158,6 +158,7 @@ function! SetColors() abort
     set laststatus=2
     set noshowmode
     let g:lightline = { 'colorscheme': 'one' }
+    let g:lightline.inactive = {'left': [['filename', 'modified']]}
     highlight CocHighlightText ctermbg=241 guibg=#665c54
     highlight Conceal ctermfg=241 guifg=#665c54
     highlight Folded ctermbg=235 guibg=#282828
