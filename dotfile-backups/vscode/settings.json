@@ -10,6 +10,7 @@
     "workbench.editor.autoLockGroups": {
         "terminalEditor": false
     },
+    "workbench.editor.navigationScope": "editorGroup",
 
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "editor.suggestSelection": "first",
@@ -113,7 +114,7 @@
     "git.enableStatusBarSync": false,
     "liveshare.showInStatusBar": "whileCollaborating",
     "yaml.schemas": {
-        "file:///Users/yogesh/.vscode/extensions/atlassian.atlascode-2.10.7/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/yogeshdhamija/.vscode/extensions/atlassian.atlascode-2.10.9/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "git.suggestSmartCommit": false,
     "atlascode.jira.explorer.nestSubtasks": true,
@@ -126,13 +127,16 @@
     "atlascode.bitbucket.issues.monitorEnabled": false,
     "atlascode.bitbucket.pipelines.monitorEnabled": false,
     "atlascode.jira.explorer.monitorEnabled": false,
-    // Fixing color issues in Chandrian color scheme:
-        "workbench.colorCustomizations": {
+    "workbench.colorTheme": "Chandrian Blue",
+    "workbench.colorCustomizations": {
+        "[Chandrian Blue]": {
             "tab.activeBackground": "#01526691",
             "editor.selectionBackground": "#6b420d",
             "editor.selectionHighlightBackground": "#6b420d57",
-            "editor.findMatchHighlightBackground": "#77741491"
+            "editor.findMatchHighlightBackground": "#77741491",
+            "editor.foldBackground": "#262626"
         },
+    },
     "workbench.editor.untitled.hint": "hidden",
     "githubIssues.assignWhenWorking": false,
     "githubIssues.useBranchForIssues": "prompt",
@@ -153,13 +157,13 @@
     "liveshare.joinDebugSessionOption": "Prompt",
     "liveshare.presence": false,
     "python.defaultInterpreterPath": "/usr/local/opt/python@3.9/bin/python3.9",
+    "vscode-neovim.neovimExecutablePaths.darwin": "nvim",
     "files.associations": {
-        ".vimrc": "viml"
+        ".vimrc": "viml",
+        ".vscodevimrc": "viml"
     },
     "hediet.vscode-drawio.theme": "sketch",
-    "workbench.colorTheme": "Chandrian Blue",
     "vscode-neovim.neovimInitVimPaths.darwin": "~/.vscodevimrc",
     "vscode-neovim.neovimInitVimPaths.linux": "~/.vscodevimrc",
     "vscode-neovim.neovimInitVimPaths.win32": "~/.vscodevimrc",
-    "vscode-neovim.neovimExecutablePaths.darwin": "nvim"
 }

@@ -65,7 +65,6 @@
             // back and forward (for some reason they only work as chords???)
             { "key": "ctrl+o ctrl+o", "command": "workbench.action.navigateBack", "when": "terminalFocus" },
             { "key": "ctrl+i ctrl+i", "command": "workbench.action.navigateForward", "when": "terminalFocus" },
-
     
     // Other stuff...
 ]
