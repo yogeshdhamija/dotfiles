@@ -46,6 +46,7 @@
             { "key": "ctrl+w shift+j", "when": "terminalFocus", "command": "workbench.action.moveActiveEditorGroupDown" },
             { "key": "ctrl+w shift+k", "when": "terminalFocus", "command": "workbench.action.moveActiveEditorGroupUp" },
             { "key": "ctrl+w shift+l", "when": "terminalFocus", "command": "workbench.action.moveActiveEditorGroupRight" },
+            { "key": "shift+; shift+C shift+L shift+O enter", "when": "terminalFocus", "command": "workbench.action.closeOtherEditors"},
 
             // allow default behaviour if you double up, since otherwise it's taken by window management
             { "key": "ctrl+w ctrl+w", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": "\u0017"} },
