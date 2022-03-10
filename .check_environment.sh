@@ -2,7 +2,7 @@
 
 declare -a EXECS=(
     "nvim"
-    "nvr"
+    "code"
     "zsh"
     "rg"
     "jq"
@@ -14,7 +14,7 @@ declare -a EXECS=(
 )
 declare -a NAMES=(
     "Neovim"
-    "neovim-remote"
+    "VS Code"
     "ZShell"
     "Ripgrep"
     "jq"
@@ -26,7 +26,7 @@ declare -a NAMES=(
 )
 declare -a ADDITIONAL1=(
     "Widely used rewrite of Vim that has some new features"
-    "Neovim launcher that keeps everything in the same session"
+    "VSCode that can use nvim under the hood. Note: adding the command to PATH is required after installing VSCode."
     "Shell"
     "Grep"
     "JSON Parsing CLI tool"
