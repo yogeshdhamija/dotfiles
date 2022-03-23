@@ -131,11 +131,14 @@
     "workbench.colorTheme": "Chandrian Blue",
     "workbench.colorCustomizations": {
         "[Chandrian Blue]": {
-            "tab.activeBackground": "#01526691",
-            "editor.selectionBackground": "#6b420d",
-            "editor.selectionHighlightBackground": "#6b420d57",
-            "editor.findMatchHighlightBackground": "#77741491",
-            "editor.foldBackground": "#262626"
+            "tab.activeBackground": "#004a5a91",
+            "editor.selectionBackground": "#965602",
+            "editor.selectionHighlightBackground": "#92550438",
+            "editor.wordHighlightBackground": "#92550438",
+            "editor.wordHighlightStrongBackground": "#92550438",
+            "editor.findMatchHighlightBackground": "#a39e0b91",
+            "editor.foldBackground": "#262626",
+            "tab.activeModifiedBorder": "#ff0000",
         },
     },
     "workbench.editor.untitled.hint": "hidden",
