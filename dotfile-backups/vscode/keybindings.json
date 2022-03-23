@@ -41,7 +41,7 @@
             { "key": "ctrl+w shift+,", "when": "terminalFocus", "command": "workbench.action.decreaseViewWidth" },
             { "key": "ctrl+w shift+.", "when": "terminalFocus", "command": "workbench.action.increaseViewWidth" },
             { "key": "ctrl+w =", "when": "terminalFocus", "command": "workbench.action.evenEditorWidths" },
-            { "key": "shift+; q", "when": "terminalFocus", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.focusPreviousGroup", "workbench.action.joinTwoGroups"]}},
+            { "key": "shift+; q", "when": "terminalFocus", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.joinTwoGroups", "workbench.action.navigateBack"]}},
             { "key": "ctrl+w shift+h", "when": "terminalFocus", "command": "workbench.action.moveActiveEditorGroupLeft" },
             { "key": "ctrl+w shift+j", "when": "terminalFocus", "command": "workbench.action.moveActiveEditorGroupDown" },
             { "key": "ctrl+w shift+k", "when": "terminalFocus", "command": "workbench.action.moveActiveEditorGroupUp" },
@@ -56,8 +56,8 @@
             // other stuff
             {"key": "\\ d h", "when": "terminalFocus", "command": "workbench.files.action.showActiveFileInExplorer"},
             {"key": "\\ o", "when": "terminalFocus", "command": "workbench.action.quickOpen"},
-            {"key": "\\ b", "when": "terminalFocus", "command": "workbench.action.showEditorsInActiveGroup"},
-            {"key": "\\ w", "when": "terminalFocus", "command": "workbench.files.action.focusOpenEditorsView"},
+            {"key": "\\ b", "when": "terminalFocus", "command": "workbench.action.openPreviousEditorFromHistory"},
+            {"key": "\\ w", "when": "terminalFocus", "command": "workbench.action.showAllEditors"},
             {"key": "\\ a", "when": "terminalFocus", "command": "workbench.action.showCommands"},
             {"key": "\\ c", "when": "terminalFocus", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.closeSidebar", "workbench.action.closePanel", "notifications.hideToasts"]}},
 

@@ -65,7 +65,7 @@ if(exists("g:vscode") && has('nvim'))
 
     " Fix VSCode commands
         command! Tabnew call VSCodeNotify("workbench.action.duplicateWorkspaceInNewWindow")
-        command! -bang  Quit if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.revertAndCloseActiveEditor') | else | call VSCodeNotify('workbench.action.focusPreviousGroup') | call VSCodeNotify('workbench.action.joinTwoGroups') | endif
+        command! -bang  Quit if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.revertAndCloseActiveEditor') | else | call VSCodeNotify('workbench.action.joinTwoGroups') | call VSCodeNotify('workbench.action.navigateBack') | endif
         command! -bang  Bd if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.revertAndCloseActiveEditor') | else | call VSCodeNotify('workbench.action.closeActiveEditor')
         AlterCommand bd Bd
 
@@ -92,8 +92,8 @@ if(exists("g:vscode") && has('nvim'))
         nnoremap \c  <Esc>:noh<CR>:call VSCodeNotify("workbench.action.closeSidebar")<CR>:call VSCodeNotify("workbench.action.closePanel")<CR>:call VSCodeNotify("notifications.hideToasts")<CR>:call VSCodeNotify("closeParameterHints")<CR>
         nnoremap \dh :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
         nnoremap \o  :call VSCodeNotify("workbench.action.quickOpen")<CR>
-        nnoremap \b  :call VSCodeNotify("workbench.action.showEditorsInActiveGroup")<CR>
-        nnoremap \w  :call VSCodeNotify("workbench.files.action.focusOpenEditorsView")<CR>
+        nnoremap \b  :call VSCodeNotify("workbench.action.openPreviousEditorFromHistory")<CR>
+        nnoremap \w  :call VSCodeNotify("workbench.action.showAllEditors")<CR>
         nnoremap \a  <Cmd>call VSCodeNotify("workbench.action.showCommands")<CR>
         xnoremap \a  <Cmd>call ExecuteVSCodeCommandInVisualMode("workbench.action.showCommands")<CR>
         nnoremap \h  :call VSCodeNotify('editor.action.showHover')<CR>

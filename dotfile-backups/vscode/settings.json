@@ -78,7 +78,8 @@
     "typescript.updateImportsOnFileMove.enabled": "always",
     "workbench.editorAssociations": {
         "git-rebase-todo": "default",
-        "*.ipynb": "jupyter.notebook.ipynb"
+        "*.ipynb": "jupyter.notebook.ipynb",
+        "*.png": "imagePreview.previewEditor"
     },
     "javascript.updateImportsOnFileMove.enabled": "always",
     "git.confirmSync": false,
