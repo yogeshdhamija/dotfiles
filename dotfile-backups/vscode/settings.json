@@ -115,7 +115,7 @@
     "git.enableStatusBarSync": false,
     "liveshare.showInStatusBar": "whileCollaborating",
     "yaml.schemas": {
-        "file:///Users/yogeshdhamija/.vscode/extensions/atlassian.atlascode-2.10.9/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/yogeshdhamija/.vscode/extensions/atlassian.atlascode-2.10.11/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "git.suggestSmartCommit": false,
     "atlascode.jira.explorer.nestSubtasks": true,
@@ -170,4 +170,5 @@
     "vscode-neovim.neovimInitVimPaths.darwin": "~/.vscodevimrc",
     "vscode-neovim.neovimInitVimPaths.linux": "~/.vscodevimrc",
     "vscode-neovim.neovimInitVimPaths.win32": "~/.vscodevimrc",
+    "editor.cursorBlinking": "solid",
 }

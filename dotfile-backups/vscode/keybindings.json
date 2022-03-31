@@ -56,7 +56,7 @@
             // other stuff
             {"key": "\\ d h", "when": "terminalFocus", "command": "workbench.files.action.showActiveFileInExplorer"},
             {"key": "\\ o", "when": "terminalFocus", "command": "workbench.action.quickOpen"},
-            {"key": "\\ b", "when": "terminalFocus", "command": "workbench.action.openPreviousEditorFromHistory"},
+            {"key": "\\ b", "when": "terminalFocus", "command": "workbench.action.quickOpen"},
             {"key": "\\ w", "when": "terminalFocus", "command": "workbench.action.showAllEditors"},
             {"key": "\\ a", "when": "terminalFocus", "command": "workbench.action.showCommands"},
             {"key": "\\ c", "when": "terminalFocus", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.closeSidebar", "workbench.action.closePanel", "notifications.hideToasts"]}},
