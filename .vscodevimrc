@@ -16,6 +16,8 @@ if(exists("g:vscode") && has('nvim'))
     endif
 
     source ~/.config/nvim/init.vim
+    
+    set showmode
 
     " Functions
         function! CreateSplitMappings(mode, mapping, rhs) abort
