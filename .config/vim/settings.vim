@@ -53,6 +53,10 @@ autocmd CursorHold * silent! call CocActionAsync('highlight')
 if(has('nvim'))
     let g:peekaboo_window="call NvimOnlyCreateCenteredFloatingWindow()"
 endif
+let g:terminal_command_motion_prompt_matcher = '^'.$USER.' in .* %\s*'
+let g:indentLine_setColors = 0
+let g:fzf_preview_window = ['up:50%', 'ctrl-/']
+
 let g:SignatureMap = {
     \ 'Leader'             :  "m",
     \ 'PlaceNextMark'      :  "m,",
@@ -111,7 +115,5 @@ let g:which_key_map.g = {
     \ 'i': {'name': '+Implementation', 'i': 'here', 'h': 'left', 'j': 'below', 'k': 'above', 'l': 'right'},
     \ 'r': {'name': '+References', 'r': 'here', 'h': 'left', 'j': 'below', 'k': 'above', 'l': 'right'},
 \ }
-let g:terminal_command_motion_prompt_matcher = '^'.$USER.' in .* %\s*'
-let g:indentLine_setColors = 0
 
 call SetColors()
