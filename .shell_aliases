@@ -16,6 +16,7 @@ alias "dotfiles-update"="dotfiles-update-repo; dotfiles-update-vim; dotfiles-upd
 # ============ REPLACEMENTS ==============
 
 command -v rg > /dev/null && alias "grep"="rg -uuu"
+command -v bat > /dev/null && alias "cat"="bat"
 
 # ============ GENERAL ==============
 
