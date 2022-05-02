@@ -3,6 +3,7 @@ set commentary
 set ideajoin
 set ideamarks
 set incsearch
+set textobj-indent
 set ideastatusicon=gray
 set NERDTree
 set highlightedyank
@@ -16,12 +17,19 @@ nnoremap zH 40zh
 nnoremap * *N:set hls<CR>
 vmap * <Action>(Find)
 
+fun! CycleThroughActions(counter, ...)
+  execute "action " .. a:000[a:counter % len(a:000)]
+endfunction
+let expand = 300
+nmap zr :let expand += 1<CR>:call CycleThroughActions(expand, 'CollapseAllRegions', 'ExpandAllToLevel1',"ExpandAllToLevel2","ExpandAllToLevel3","ExpandAllToLevel4","ExpandAllToLevel5","ExpandAllRegions")<CR>
+nmap zm :let expand -= 1<CR>:call CycleThroughActions(expand, 'CollapseAllRegions', 'ExpandAllToLevel1',"ExpandAllToLevel2","ExpandAllToLevel3","ExpandAllToLevel4","ExpandAllToLevel5","ExpandAllRegions")<CR>
+
 nmap     `    <Action>(ShowBookmarks)
 nnoremap \c   <Esc>:noh<CR>:action HideSideWindows<CR>
 nmap     \tj  <Action>(ActivateTerminalToolWindow)
 nmap     \dh  <Action>(SelectInProjectView)
-nmap     \f   <Action>(ReplaceInPath)
-vmap     \f   <Action>(ReplaceInPath)
+nmap     \f   <Action>(FindInPath)
+vmap     \f   <Action>(FindInPath)
 nmap     \o   <Action>(GotoFile)
 nmap     \gd  <Action>(GotoDeclaration)
 nmap     \gdd <Action>(GotoDeclaration)
@@ -37,6 +45,7 @@ nmap     \a   <Action>(GotoAction)
 vmap     \a   <Action>(GotoAction)
 nnoremap \b   :tabn
 nmap     \e   <Action>(ShowErrorDescription)
+nmap     :q<CR> <Action>(CloseAllEditors)
 
 command! CLOSEHIDDENBUFFERS action CloseAllEditorsButActive
 command! CLO                CLOSEHIDDENBUFFERS
