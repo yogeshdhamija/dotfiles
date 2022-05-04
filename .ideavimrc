@@ -38,7 +38,7 @@ nmap     \grr <Action>(ShowUsages)
 nmap     \gi  <Action>(GotoImplementation)
 nmap     \gii <Action>(GotoImplementation)
 nmap     \h   <Action>(QuickJavaDoc)
-inoremap \h   <Esc>:action ParameterInfo<CR>a
+inoremap \h   <C-O>: action QuickJavaDoc<CR>
 nmap     \q   <Action>(ShowIntentionActions)
 vnoremap \q   :action Refactorings.QuickListPopupAction<CR>
 nmap     \a   <Action>(GotoAction)
