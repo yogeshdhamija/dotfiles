@@ -12,6 +12,7 @@ if(exists("g:vscode") && has('nvim'))
             \ ['junegunn/vim-easy-align', {}],
             \ ['yogeshdhamija/find-in-dir-helper.vim', {}],
             \ ['yogeshdhamija/close-hidden-buffers-command.vim', {}],
+            \ ['machakann/vim-highlightedyank', {}],
         \ ]
     endif
 
