@@ -11,7 +11,6 @@
         "terminalEditor": false
     },
     "workbench.editor.navigationScope": "editorGroup",
-
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "editor.suggestSelection": "first",
     "files.exclude": {
@@ -90,9 +89,18 @@
     "gitlens.views.fileHistory.avatars": false,
     "gitlens.views.branches.avatars": false,
     "git-graph.customBranchGlobPatterns": [
-        {"name": "All Master", "glob": "*/master"},
-        {"name": "All Main", "glob": "*/main"},
-        {"name": "All Dev", "glob": "*/dev*"},
+        {
+            "name": "All Master",
+            "glob": "*/master"
+        },
+        {
+            "name": "All Main",
+            "glob": "*/main"
+        },
+        {
+            "name": "All Dev",
+            "glob": "*/dev*"
+        },
     ],
     "git-graph.repository.onLoad.showCheckedOutBranch": true,
     "git-graph.repository.onLoad.showSpecificBranches": [
@@ -115,7 +123,7 @@
     "git.enableStatusBarSync": false,
     "liveshare.showInStatusBar": "whileCollaborating",
     "yaml.schemas": {
-        "file:///Users/yogeshdhamija/.vscode/extensions/atlassian.atlascode-2.10.11/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/yogeshdhamija/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "git.suggestSmartCommit": false,
     "atlascode.jira.explorer.nestSubtasks": true,
@@ -171,4 +179,7 @@
     "vscode-neovim.neovimInitVimPaths.linux": "~/.vscodevimrc",
     "vscode-neovim.neovimInitVimPaths.win32": "~/.vscodevimrc",
     "editor.cursorBlinking": "solid",
+    "rust-analyzer.inlayHints.enable": false,
+    "editor.inlayHints.enabled": "onUnlessPressed",
+    "editor.bracketPairColorization.enabled": true
 }

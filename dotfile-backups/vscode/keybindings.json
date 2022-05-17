@@ -28,6 +28,10 @@
         { "key": "ctrl+\\ ctrl+n", "when": "terminalFocus", "command": "workbench.action.focusPreviousGroup" },
         { "key": "escape", "command": "workbench.action.focusActiveEditorGroup", "when": "!editorTextFocus" },
 
+        // Insert mode mappings
+        { "key": "\\ h", "when": "neovim.mode == insert && editorTextFocus", "command": "editor.action.triggerParameterHints" },
+        { "key": "\\ \\", "when": "neovim.mode == insert && editorTextFocus", "command": "editor.action.insertSnippet", "args": {"snippet": "\\"} },
+
         // Add vim shortcuts to terminal (duplicated from ~/.vimrc)
             // window management
             { "key": "ctrl+w h", "when": "terminalFocus", "command": "workbench.action.focusLeftGroup" },
@@ -56,7 +60,7 @@
             // other stuff
             {"key": "\\ d h", "when": "terminalFocus", "command": "workbench.files.action.showActiveFileInExplorer"},
             {"key": "\\ o", "when": "terminalFocus", "command": "workbench.action.quickOpen"},
-            {"key": "\\ b", "when": "terminalFocus", "command": "workbench.action.quickOpen"},
+            {"key": "\\ b", "when": "terminalFocus", "command": "workbench.action.showEditorsInActiveGroup"},
             {"key": "\\ w", "when": "terminalFocus", "command": "workbench.action.showAllEditors"},
             {"key": "\\ a", "when": "terminalFocus", "command": "workbench.action.showCommands"},
             {"key": "\\ c", "when": "terminalFocus", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.closeSidebar", "workbench.action.closePanel", "notifications.hideToasts"]}},
@@ -67,6 +71,4 @@
             // back and forward (for some reason they only work as chords???)
             { "key": "ctrl+o ctrl+o", "command": "workbench.action.navigateBack", "when": "terminalFocus" },
             { "key": "ctrl+i ctrl+i", "command": "workbench.action.navigateForward", "when": "terminalFocus" },
-    
-    // Other stuff...
 ]
