@@ -7,7 +7,6 @@ source ~/.config/vim/plugins.vim
 source ~/.config/vim/settings.vim
 
 " Remaps
-    nnoremap <silent> \           :WhichKey '\'<CR>
     nnoremap          `           <Cmd>call MarksHelper()<CR>
     
     " splitjoin plugin configures gJ and gS-- I want to use those
@@ -51,21 +50,22 @@ source ~/.config/vim/settings.vim
     augroup END
 
 " Leader shortcuts
-    nnoremap \q <Cmd>CocAction<CR>
-    xnoremap \q <Esc>:'<,'>CocAction<CR>
+    nnoremap \q <cmd>QUICKACTION<CR>
+    xnoremap \q <Esc>:'<,'>RANGEQUICKACTION<CR>
     nnoremap \c <Esc><Cmd>noh<CR>
     nnoremap \o <Cmd>echo ":edit"<CR><Cmd>Files<CR>
     nnoremap \b <Cmd>echo ":buffers"<CR><Cmd>Buffers<CR>
     nnoremap \w <Cmd>Windows<CR>
-    nnoremap \a <Cmd>CocList commands<CR>
-    xnoremap \a <Cmd>CocList commands<CR>
-    nnoremap \h <Cmd>call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
-    inoremap \h <Cmd>call CocActionAsync("doHover") \| call CocActionAsync("showSignatureHelp")<CR>
-    nnoremap \e <Cmd>call CocActionAsync("diagnosticInfo")<CR>
+    nmap \a \q
+    xmap \a \q
+    nnoremap \h <cmd>HOVER<CR>
+    inoremap \h <cmd>SIGNATUREHELP<CR>
+    nnoremap \e <Cmd>ERROR<CR>
     call CreateSplitMappings("n",         "\\d",  "-")
-    call CreateSplitMappings("nnore",     "\\gd", "<Cmd>call CocActionAsync('jumpDefinition')<CR>")
-    call CreateSplitMappings("nnore",     "\\gr", "<Cmd>call CocActionAsync('jumpReferences')<CR>")
-    call CreateSplitMappings("nnore",     "\\gi", "<Cmd>call CocActionAsync('jumpImplementation')<CR>")
+    call CreateSplitMappings("nnore",     "\\gd", "<cmd>DEFINITION<CR>")
+    call CreateSplitMappings("nnore",     "\\gD", "<cmd>DECLARATION<CR>")
+    call CreateSplitMappings("nnore",     "\\gr", "<cmd>REFERENCES<CR>")
+    call CreateSplitMappings("nnore",     "\\gi", "<cmd>IMPLEMENTATIONS<CR>")
     if has('nvim')
         call CreateSplitMappings("nnore", "\\t",  ":terminal<CR>:startinsert<CR>")
     else
@@ -75,9 +75,9 @@ source ~/.config/vim/settings.vim
 " Commands
     command!          ONLY            only
     command!          DELMARKS        delmarks a-zA-Z0-9 | echo ":delmarks a-zA-Z0-9"
-    command!          RENAME          call CocActionAsync("rename")
-    command! -range=% FORMAT          <line1>mark < | <line2>mark > | call CocAction("formatSelected", "V")
-    command!          ERRORS          CocList --normal diagnostics
+    command!          RENAME          CHANGESYMBOLNAME
+    command! -range=% FORMAT          AUTOFORMAT
+    command!          ERRORS          DISPLAYERRORS
     command!          ERRS            ERRORS
     command!          CD              silent cd %:p:h | redraw! | echo ":cd %:p:h"
     command!          CP              let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')"

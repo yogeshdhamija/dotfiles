@@ -16,7 +16,9 @@ if(exists("g:vscode") && has('nvim'))
         \ ]
     endif
 
-    source ~/.config/nvim/init.vim
+    set runtimepath^=~/.vim runtimepath+=~/.vim/after
+    let &packpath = &runtimepath
+    source ~/.vimrc
     
     set showmode
 

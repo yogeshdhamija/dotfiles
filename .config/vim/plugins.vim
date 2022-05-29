@@ -10,7 +10,6 @@ if !exists("plugins")
         \ ['yogeshdhamija/find-in-dir-helper.vim', {}],
         \ ['yogeshdhamija/filter-lq-list.vim', {}],
         \ ['yogeshdhamija/close-hidden-buffers-command.vim', {}],
-        \ ['AndrewRadev/splitjoin.vim', {}],
         \ ['yogeshdhamija/terminal-command-motion.vim', {}],
     \ ]
     let interface_convenience_plugins = [
@@ -18,7 +17,6 @@ if !exists("plugins")
         \ ['junegunn/vim-peekaboo', {}],
         \ ['kshenoy/vim-signature', {}],
         \ ['machakann/vim-highlightedyank', {}],
-        \ ['liuchengxu/vim-which-key', {}],
     \ ]
     let ide_like_functionality_plugins = [
         \ ['tpope/vim-commentary', {}],
@@ -31,23 +29,26 @@ if !exists("plugins")
         \ ['editorconfig/editorconfig-vim', {}],
     \ ]
     let language_plugins = [
-        \ ['neoclide/coc.nvim', {'branch': 'release'}],
-        \ ['sheerun/vim-polyglot', {}],
-        \ ['uiiaoo/java-syntax.vim', {}],
     \ ]
     let visual_plugins = [
         \ ['mhinz/vim-signify', {}],
-        \ ['joshdick/onedark.vim', {}],
         \ ['morhetz/gruvbox', {}],
         \ ['itchyny/lightline.vim', {}],
         \ ['Yggdroot/indentLine', {}],
+    \ ]
+    let neovim_only_plugins = [
+        \ ['neovim/nvim-lspconfig', {}],
     \ ]
     let plugins = vim_idiomatic_plugins
                 \ + interface_convenience_plugins
                 \ + ide_like_functionality_plugins
                 \ + language_plugins
                 \ + visual_plugins
+    if has('nvim')
+      let plugins = plugins + neovim_only_plugins
+    endif
 endif
+
 
 if exists("added_plugins")
     let plugins = plugins + added_plugins
@@ -58,18 +59,3 @@ if !exists("disabled_plugins")
 endif
 
 call InstallPlugins(plugins, disabled_plugins)
-
-if !exists("coc_plugins")
-    let coc_plugins = [
-        \ 'coc-marketplace',
-        \ 'coc-vimlsp',
-        \ 'coc-json',
-        \ 'coc-yaml',
-    \ ]
-endif
-
-if exists("added_coc_plugins")
-    let coc_plugins = coc_plugins + added_coc_plugins
-endif
-
-let g:coc_global_extensions = coc_plugins
