@@ -38,7 +38,11 @@ if !exists("plugins")
     \ ]
     let neovim_only_plugins = [
         \ ['neovim/nvim-lspconfig', {}],
-        \ ['ms-jpq/coq_nvim', {'branch': 'coq'}]
+        \ ['hrsh7th/cmp-nvim-lsp', {}],
+        \ ['hrsh7th/cmp-buffer', {}],
+        \ ['hrsh7th/cmp-path', {}],
+        \ ['hrsh7th/cmp-cmdline', {}],
+        \ ['hrsh7th/nvim-cmp', {}],
     \ ]
     let plugins = vim_idiomatic_plugins
                 \ + interface_convenience_plugins

@@ -2,22 +2,45 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
-let g:coq_settings = { 'auto_start': 'shut-up' , 'display.pum.fast_close': v:false, 'display.icons.mode': 'none', 'clients.snippets.warn': [] }
-
 lua << EOF
+local servers = { 'tsserver' }
+
+local cmp = require'cmp'
+
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+  }, {
+    { name = 'buffer' },
+  })
+})
+
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
 
-local servers = { 'tsserver' }
-
-local coq = require "coq"
-
 for _, lsp in pairs(servers) do
-  require('lspconfig')[lsp].setup(coq.lsp_ensure_capabilities({
-    on_attach = on_attach
-  }))
+  require('lspconfig')[lsp].setup({
+    on_attach = on_attach,
+    capabilities = capabilities
+  })
 end
+
 EOF
 
 command! QUICKACTION lua vim.lsp.buf.code_action()
