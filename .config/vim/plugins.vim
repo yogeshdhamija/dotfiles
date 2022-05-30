@@ -38,6 +38,7 @@ if !exists("plugins")
     \ ]
     let neovim_only_plugins = [
         \ ['neovim/nvim-lspconfig', {}],
+        \ ['ms-jpq/coq_nvim', {'branch': 'coq'}]
     \ ]
     let plugins = vim_idiomatic_plugins
                 \ + interface_convenience_plugins

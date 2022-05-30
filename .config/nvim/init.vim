@@ -2,6 +2,8 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
+let g:coq_settings = { 'auto_start': 'shut-up' , 'display.pum.fast_close': v:false, 'display.icons.mode': 'none', 'clients.snippets.warn': [] }
+
 lua << EOF
 local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -9,10 +11,12 @@ end
 
 local servers = { 'tsserver' }
 
+local coq = require "coq"
+
 for _, lsp in pairs(servers) do
-  require('lspconfig')[lsp].setup({
+  require('lspconfig')[lsp].setup(coq.lsp_ensure_capabilities({
     on_attach = on_attach
-  })
+  }))
 end
 EOF
 
