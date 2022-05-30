@@ -3,7 +3,7 @@ let &packpath = &runtimepath
 source ~/.vimrc
 
 lua << EOF
-local servers = { 'tsserver', 'eslint' }
+local servers = { 'tsserver', 'eslint', 'bashls' }
 
 local cmp = require'cmp'
 
@@ -41,6 +41,7 @@ for _, lsp in pairs(servers) do
   })
 end
 
+require"fidget".setup{}
 EOF
 
 command! QUICKACTION lua vim.lsp.buf.code_action()
