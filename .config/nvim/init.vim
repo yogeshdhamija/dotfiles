@@ -3,7 +3,7 @@ let &packpath = &runtimepath
 source ~/.vimrc
 
 lua << EOF
-local servers = { 'tsserver', 'eslint', 'bashls' }
+local servers = { 'tsserver', 'eslint', 'bashls', 'rust_analyzer' }
 
 local cmp = require'cmp'
 
