@@ -3,6 +3,8 @@ let &packpath = &runtimepath
 source ~/.vimrc
 
 lua << EOF
+
+---------------- LSP ------------------------
 local servers = { 'tsserver', 'eslint', 'bashls', 'rust_analyzer' }
 
 local cmp = require'cmp'
@@ -42,6 +44,59 @@ for _, lsp in pairs(servers) do
 end
 
 require"fidget".setup{}
+
+---------------- Tree Sitter ------------------------
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",
+  highlight = {
+    enable = true,
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "vv",
+      node_incremental = "v",
+      node_decremental = "V",
+    },
+  },
+  textobjects = {
+    move = {
+      enable = true,
+      set_jumps = true,
+      goto_next_start = {
+        ["<C-j>"] = "@block.outer",
+      },
+      goto_next_end = {
+      },
+      goto_previous_start = {
+        ["<C-k>"] = "@block.outer",
+      },
+      goto_previous_end = {
+      },
+    },
+    swap = {
+      enable = true,
+      swap_next = {
+        ["gs"] = "@parameter.inner",
+      },
+      swap_previous = {
+        ["gS"] = "@parameter.inner",
+      },
+    },
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+      },
+    },
+  },
+}
+
 EOF
 
 command! QUICKACTION lua vim.lsp.buf.code_action()

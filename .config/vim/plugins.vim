@@ -44,6 +44,8 @@ if !exists("plugins")
         \ ['hrsh7th/cmp-cmdline', {}],
         \ ['hrsh7th/nvim-cmp', {}],
         \ ['j-hui/fidget.nvim', {}],
+        \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
+        \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
     \ ]
     let plugins = vim_idiomatic_plugins
                 \ + interface_convenience_plugins

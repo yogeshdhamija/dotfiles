@@ -150,9 +150,14 @@ function! SetColors() abort
     else
         set scl=auto
     endif
-    set foldmethod=indent
     set foldlevelstart=99
-    tabdo windo set foldtext=CustomFoldText()
+    if(has('nvim'))
+      set foldmethod=expr
+      set foldexpr=nvim_treesitter#foldexpr()
+    else
+      set foldmethod=indent
+      tabdo windo set foldtext=CustomFoldText()
+    endif
     tabdo windo set fillchars=fold:\ 
     set laststatus=2
     set noshowmode
