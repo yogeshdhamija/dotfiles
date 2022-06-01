@@ -36,25 +36,11 @@ if !exists("plugins")
         \ ['itchyny/lightline.vim', {}],
         \ ['Yggdroot/indentLine', {}],
     \ ]
-    let neovim_only_plugins = [
-        \ ['neovim/nvim-lspconfig', {}],
-        \ ['hrsh7th/cmp-nvim-lsp', {}],
-        \ ['hrsh7th/cmp-buffer', {}],
-        \ ['hrsh7th/cmp-path', {}],
-        \ ['hrsh7th/cmp-cmdline', {}],
-        \ ['hrsh7th/nvim-cmp', {}],
-        \ ['j-hui/fidget.nvim', {}],
-        \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
-        \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
-    \ ]
     let plugins = vim_idiomatic_plugins
                 \ + interface_convenience_plugins
                 \ + ide_like_functionality_plugins
                 \ + language_plugins
                 \ + visual_plugins
-    if has('nvim')
-      let plugins = plugins + neovim_only_plugins
-    endif
 endif
 
 

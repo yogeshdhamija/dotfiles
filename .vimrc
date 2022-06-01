@@ -8,11 +8,6 @@ source ~/.config/vim/settings.vim
 
 " Remaps
     nnoremap          `           <Cmd>call MarksHelper()<CR>
-    
-    " splitjoin plugin configures gJ and gS-- I want to use those
-    nmap              J           gJ
-    nmap              S           gS
-
     nnoremap          <C-j>       10j
     nnoremap          <C-k>       10k
     xnoremap          <C-c>       "+y
@@ -66,11 +61,7 @@ source ~/.config/vim/settings.vim
     call CreateSplitMappings("nnore",     "\\gD", "<cmd>DECLARATION<CR>")
     call CreateSplitMappings("nnore",     "\\gr", "<cmd>REFERENCES<CR>")
     call CreateSplitMappings("nnore",     "\\gi", "<cmd>IMPLEMENTATIONS<CR>")
-    if has('nvim')
-        call CreateSplitMappings("nnore", "\\t",  ":terminal<CR>:startinsert<CR>")
-    else
-        call CreateSplitMappings("nnore", "\\t",  ":terminal ++curwin<CR>")
-    endif
+    call CreateSplitMappings("nnore",     "\\t", "<cmd>STARTTERMINAL<CR>")
 
 " Commands
     command!          ONLY            only
@@ -86,6 +77,8 @@ source ~/.config/vim/settings.vim
     command! -range=% GITHISTORY      <line1>,<line2>BCommits
     command! -range=% GHISTORY        <line1>,<line2>GITHISTORY
     command!          PDF             w | call WriteToPdf()
+
+    command! STARTTERMINAL terminal ++curwin
 
 call SourceFileIfExists("~/.vimrc.local")
 call SourceFileIfExists(".vim/vimrc.local")

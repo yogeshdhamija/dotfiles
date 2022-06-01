@@ -1,5 +1,18 @@
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
+
+let added_plugins = [
+    \ ['neovim/nvim-lspconfig', {}],
+    \ ['hrsh7th/cmp-nvim-lsp', {}],
+    \ ['hrsh7th/cmp-buffer', {}],
+    \ ['hrsh7th/cmp-path', {}],
+    \ ['hrsh7th/cmp-cmdline', {}],
+    \ ['hrsh7th/nvim-cmp', {}],
+    \ ['j-hui/fidget.nvim', {}],
+    \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
+    \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
+\ ]
+
 source ~/.vimrc
 
 lua << EOF
@@ -111,3 +124,4 @@ command! IMPLEMENTATIONS lua vim.lsp.buf.implementation()
 command! CHANGESYMBOLNAME lua vim.lsp.buf.rename()
 command! AUTOFORMAT lua vim.lsp.buf.formatting()
 command! DISPLAYERRORS lua vim.diagnostic.setloclist()
+command! STARTTERMINAL exe 'norm :terminal<CR>:startinsert<CR>'
