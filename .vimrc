@@ -10,10 +10,18 @@ function! StartTerminal() abort
     terminal ++curwin
 endfunction
 
+function! MoveUp() abort
+    norm 10k
+endfunction
+
+function! MoveDown() abort
+    norm 10j
+endfunction
+
 " Remaps
     nnoremap          `           <Cmd>call MarksHelper()<CR>
-    nnoremap          <C-j>       10j
-    nnoremap          <C-k>       10k
+    nnoremap          <C-j>       <Cmd>call MoveDown()<CR>
+    nnoremap          <C-k>       <Cmd>call MoveUp()<CR>
     xnoremap          <C-c>       "+y
     xnoremap          <D-c>       "+y
     inoremap          <C-v><C-v> <C-R>+
@@ -21,6 +29,10 @@ endfunction
     xmap              ga         <Plug>(EasyAlign)
     nmap              ga         <Plug>(EasyAlign)
     inoremap          <C-R>      <C-R><C-O>
+    xnoremap          v          <Cmd>call ExpandSelection()<CR>
+    xnoremap          V          <Cmd>call ShrinkSelection()<CR>
+    nnoremap          gs         <Cmd>call SwapWithNextParameter()<CR>
+    nnoremap          gS         <Cmd>call SwapWithPreviousParameter()<CR>
 
     augroup dirvish_config
         autocmd!

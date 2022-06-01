@@ -67,8 +67,8 @@ require'nvim-treesitter.configs'.setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      node_incremental = "v",
-      node_decremental = "V",
+      node_incremental = "<Plug>ExpandSelection",
+      node_decremental = "<Plug>ShrinkSelection",
     },
   },
   textobjects = {
@@ -76,12 +76,12 @@ require'nvim-treesitter.configs'.setup {
       enable = true,
       set_jumps = true,
       goto_next_start = {
-        ["<C-j>"] = "@block.outer",
+        ["<Plug>MoveDown"] = "@block.outer",
       },
       goto_next_end = {
       },
       goto_previous_start = {
-        ["<C-k>"] = "@block.outer",
+        ["<Plug>MoveUp"] = "@block.outer",
       },
       goto_previous_end = {
       },
@@ -89,17 +89,16 @@ require'nvim-treesitter.configs'.setup {
     swap = {
       enable = true,
       swap_next = {
-        ["gs"] = "@parameter.inner",
+        ["<Plug>SwapWithNextParameter"] = "@parameter.inner",
       },
       swap_previous = {
-        ["gS"] = "@parameter.inner",
+        ["<Plug>SwapWithPreviousParameter"] = "@parameter.inner",
       },
     },
     select = {
       enable = true,
       lookahead = true,
       keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
         ["ac"] = "@class.outer",
@@ -164,3 +163,26 @@ function! StartTerminal() abort
     exe "norm :terminal\<CR>:startinsert\<CR>"
 endfunction
 
+function! ExpandSelection() abort
+    exe "norm \<Plug>ExpandSelection"
+endfunction
+
+function! ShrinkSelection() abort
+    exe "norm \<Plug>ShrinkSelection"
+endfunction
+
+function! MoveUp() abort
+    exe "norm \<Plug>MoveUp"
+endfunction
+
+function! MoveDown() abort
+    exe "norm \<Plug>MoveDown"
+endfunction
+
+function! SwapWithNextParameter() abort
+    exe "norm \<Plug>SwapWithNextParameter"
+endfunction
+
+function! SwapWithPreviousParameter() abort
+    exe "norm \<Plug>SwapWithPreviousParameter"
+endfunction
