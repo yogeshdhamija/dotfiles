@@ -6,6 +6,10 @@ call SourceFileIfExists(".vim/vimrc.local.loadbefore")
 source ~/.config/vim/plugins.vim
 source ~/.config/vim/settings.vim
 
+function! StartTerminal() abort
+    terminal ++curwin
+endfunction
+
 " Remaps
     nnoremap          `           <Cmd>call MarksHelper()<CR>
     nnoremap          <C-j>       10j
@@ -45,30 +49,30 @@ source ~/.config/vim/settings.vim
     augroup END
 
 " Leader shortcuts
-    nnoremap \q <cmd>QUICKACTION<CR>
-    xnoremap \q <Esc>:'<,'>RANGEQUICKACTION<CR>
+    nnoremap \q <cmd>call QuickAction()<CR>
+    xnoremap \q <cmd>call RangeQuickAction()<CR>
     nnoremap \c <Esc><Cmd>noh<CR>
     nnoremap \o <Cmd>echo ":edit"<CR><Cmd>Files<CR>
     nnoremap \b <Cmd>echo ":buffers"<CR><Cmd>Buffers<CR>
     nnoremap \w <Cmd>Windows<CR>
     nmap \a \q
     xmap \a \q
-    nnoremap \h <cmd>HOVER<CR>
-    inoremap \h <cmd>SIGNATUREHELP<CR>
-    nnoremap \e <Cmd>ERROR<CR>
+    nnoremap \h <cmd>call Hover()<CR>
+    inoremap \h <cmd>call SignatureHelp()<CR>
+    nnoremap \e <Cmd>call Error()<CR>
     call CreateSplitMappings("n",         "\\d",  "-")
-    call CreateSplitMappings("nnore",     "\\gd", "<cmd>DEFINITION<CR>")
-    call CreateSplitMappings("nnore",     "\\gD", "<cmd>DECLARATION<CR>")
-    call CreateSplitMappings("nnore",     "\\gr", "<cmd>REFERENCES<CR>")
-    call CreateSplitMappings("nnore",     "\\gi", "<cmd>IMPLEMENTATIONS<CR>")
-    call CreateSplitMappings("nnore",     "\\t", "<cmd>STARTTERMINAL<CR>")
+    call CreateSplitMappings("nnore",     "\\gd", "<cmd>call Definition()<CR>")
+    call CreateSplitMappings("nnore",     "\\gD", "<cmd>call Declaration()<CR>")
+    call CreateSplitMappings("nnore",     "\\gr", "<cmd>call References()<CR>")
+    call CreateSplitMappings("nnore",     "\\gi", "<cmd>call Implementations()<CR>")
+    call CreateSplitMappings("nnore",     "\\t", "<cmd>call StartTerminal()<CR>")
 
 " Commands
     command!          ONLY            only
     command!          DELMARKS        delmarks a-zA-Z0-9 | echo ":delmarks a-zA-Z0-9"
-    command!          RENAME          CHANGESYMBOLNAME
-    command! -range=% FORMAT          AUTOFORMAT
-    command!          ERRORS          DISPLAYERRORS
+    command!          RENAME          call ChangeSymbolName()
+    command! -range=% FORMAT          call AutoFormat()
+    command!          ERRORS          call DisplayErrors()
     command!          ERRS            ERRORS
     command!          CD              silent cd %:p:h | redraw! | echo ":cd %:p:h"
     command!          CP              let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')"
@@ -77,8 +81,6 @@ source ~/.config/vim/settings.vim
     command! -range=% GITHISTORY      <line1>,<line2>BCommits
     command! -range=% GHISTORY        <line1>,<line2>GITHISTORY
     command!          PDF             w | call WriteToPdf()
-
-    command! STARTTERMINAL terminal ++curwin
 
 call SourceFileIfExists("~/.vimrc.local")
 call SourceFileIfExists(".vim/vimrc.local")

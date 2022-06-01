@@ -112,16 +112,56 @@ require'nvim-treesitter.configs'.setup {
 
 EOF
 
-command! QUICKACTION lua vim.lsp.buf.code_action()
-command! -range=% RANGEQUICKACTION lua vim.lsp.buf.range_code_action()
-command! HOVER lua vim.lsp.buf.hover()
-command! SIGNATUREHELP lua vim.lsp.buf.signature_help()
-command! ERROR lua vim.diagnostic.open_float()
-command! DEFINITION lua vim.lsp.buf.definition()
-command! DECLARATION lua vim.lsp.buf.declaration()
-command! REFERENCES lua vim.lsp.buf.references()
-command! IMPLEMENTATIONS lua vim.lsp.buf.implementation()
-command! CHANGESYMBOLNAME lua vim.lsp.buf.rename()
-command! AUTOFORMAT lua vim.lsp.buf.formatting()
-command! DISPLAYERRORS lua vim.diagnostic.setloclist()
-command! STARTTERMINAL exe 'norm :terminal<CR>:startinsert<CR>'
+function! QuickAction() abort
+    lua vim.lsp.buf.code_action()
+endfunction
+
+function! RangeQuickAction() abort
+    exe "norm \<Esc>"
+    exe "norm :'\<,'\>lua vim.lsp.buf.range_code_action()\<CR>"
+endfunction
+
+function! Hover() abort
+    lua vim.lsp.buf.hover()
+endfunction
+
+function! SignatureHelp() abort
+    lua vim.lsp.buf.signature_help()
+endfunction
+
+function! Error() abort
+    lua vim.diagnostic.open_float()
+endfunction
+
+function! Definition() abort
+    lua vim.lsp.buf.definition()
+endfunction
+
+function! Declaration() abort
+    lua vim.lsp.buf.declaration()
+endfunction
+
+function! References() abort
+    lua vim.lsp.buf.references()
+endfunction
+
+function! Implementations() abort
+    lua vim.lsp.buf.implementation()
+endfunction
+
+function! ChangeSymbolName() abort
+    lua vim.lsp.buf.rename()
+endfunction
+
+function! AutoFormat() abort
+    lua vim.lsp.buf.formatting()
+endfunction
+
+function! DisplayErrors() abort
+    lua vim.diagnostic.setloclist()
+endfunction
+
+function! StartTerminal() abort
+    exe "norm :terminal\<CR>:startinsert\<CR>"
+endfunction
+
