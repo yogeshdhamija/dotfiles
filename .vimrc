@@ -31,8 +31,6 @@ endfunction
     inoremap          <C-R>      <C-R><C-O>
     xnoremap          v          <Cmd>call ExpandSelection()<CR>
     xnoremap          V          <Cmd>call ShrinkSelection()<CR>
-    nnoremap          gs         <Cmd>call SwapWithNextParameter()<CR>
-    nnoremap          gS         <Cmd>call SwapWithPreviousParameter()<CR>
 
     augroup dirvish_config
         autocmd!
@@ -93,6 +91,8 @@ endfunction
     command! -range=% GITHISTORY      <line1>,<line2>BCommits
     command! -range=% GHISTORY        <line1>,<line2>GITHISTORY
     command!          PDF             w | call WriteToPdf()
+    command!          SWAP            call SwapWithNextParameter()
+    command!          PREVSWAP        call SwapWithPreviousParameter()
 
 call SourceFileIfExists("~/.vimrc.local")
 call SourceFileIfExists(".vim/vimrc.local")
