@@ -140,35 +140,6 @@ function! NvimOnlyCreateCenteredFloatingWindow() abort
     call nvim_open_win(s:buf, v:true, opts)
 endfunction
 
-function! SetColors() abort
-    set background=dark
-    set number
-    syntax on
-    silent! colorscheme gruvbox
-    if(has('nvim'))
-        set scl=auto:9
-    else
-        set scl=auto
-    endif
-    set foldlevelstart=99
-    if(has('nvim'))
-      set foldmethod=expr
-      set foldexpr=nvim_treesitter#foldexpr()
-    else
-      set foldmethod=indent
-      tabdo windo set foldtext=CustomFoldText()
-    endif
-    tabdo windo set fillchars=fold:\ 
-    set laststatus=2
-    set noshowmode
-    let g:lightline = { 'colorscheme': 'one' }
-    let g:lightline.inactive = {'left': [['filename', 'modified']]}
-    highlight CocHighlightText ctermbg=241 guibg=#665c54
-    highlight Conceal ctermfg=241 guifg=#665c54
-    highlight Folded ctermbg=235 guibg=#282828
-    set list lcs=tab:\|\ ,trail:•
-endfunction
-
 function! MarksHelper() abort
     if(reg_recording() == '' && reg_executing() == '')
         echo ":marks"

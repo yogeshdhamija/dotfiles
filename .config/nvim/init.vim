@@ -15,6 +15,10 @@ let added_plugins = [
 
 source ~/.vimrc
 
+set scl=auto:9
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
 lua << EOF
 
 ---------------- LSP ------------------------
