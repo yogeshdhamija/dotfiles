@@ -11,7 +11,7 @@ let added_plugins = [
     \ ['j-hui/fidget.nvim', {}],
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
     \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
-    \ ['navarasu/onedark.nvim', {}],
+    \ ['yogeshdhamija/chandrian-theme.nvim', {}],
 \ ]
 
 source ~/.vimrc
@@ -23,24 +23,13 @@ set foldexpr=nvim_treesitter#foldexpr()
 lua << EOF
 
 ---------------- Colorscheme ------------------------
-local onedark = require('onedark');
-onedark.setup {
-    style = 'warmer',
+local chandrian = require('chandrian');
+chandrian.setup {
     diagnostics = {
         background = false
-    },
-    colors = {
-        bg1 = '#333940'
-    },
-    highlights = {
-        Conceal = {bg = '#1f2329'},
-        Visual = {bg = '#535965'},
-        MatchParen = {bg = '#e55561', fg = 'black'},
-        TSComment = { fg= '#7a818e' }
     }
 }
-onedark.load()
-
+chandrian.load()
 
 ---------------- LSP ------------------------
 local servers = { 'tsserver', 'eslint', 'bashls', 'rust_analyzer' }
