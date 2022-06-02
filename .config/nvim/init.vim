@@ -25,12 +25,12 @@ lua << EOF
 ---------------- Colorscheme ------------------------
 local onedark = require('onedark');
 onedark.setup {
-    style = 'darker',
+    style = 'warmer',
     diagnostics = {
         background = false
     },
     colors = {
-        bg1 = '#30363f'
+        bg1 = '#333940'
     },
     highlights = {
         Conceal = {bg = '#1f2329'},
