@@ -11,6 +11,7 @@ let added_plugins = [
     \ ['j-hui/fidget.nvim', {}],
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
     \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
+    \ ['navarasu/onedark.nvim', {}],
 \ ]
 
 source ~/.vimrc
@@ -20,6 +21,25 @@ set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
 lua << EOF
+
+---------------- Colorscheme ------------------------
+local onedark = require('onedark');
+onedark.setup {
+    style = 'darker',
+    diagnostics = {
+        background = false
+    },
+    colors = {
+        bg1 = '#30363f'
+    },
+    highlights = {
+        Conceal = {bg = '#1f2329'},
+        Visual = {bg = '#535965'},
+        MatchParen = {bg = '#e55561', fg = '#e2b86b'},
+    }
+}
+onedark.load()
+
 
 ---------------- LSP ------------------------
 local servers = { 'tsserver', 'eslint', 'bashls', 'rust_analyzer' }

@@ -87,8 +87,10 @@ let g:SignatureMap = {
     silent! colorscheme gruvbox
     set scl=auto
     set foldlevelstart=99
-    set foldmethod=indent
-    tabdo windo set foldtext=CustomFoldText()
+    if(!has('nvim'))
+        set foldmethod=indent
+        tabdo windo set foldtext=CustomFoldText()
+    endif
     tabdo windo set fillchars=fold:\ 
     set laststatus=2
     set noshowmode
