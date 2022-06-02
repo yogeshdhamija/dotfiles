@@ -35,7 +35,7 @@ onedark.setup {
     highlights = {
         Conceal = {bg = '#1f2329'},
         Visual = {bg = '#535965'},
-        MatchParen = {bg = '#e55561', fg = '#e2b86b'},
+        MatchParen = {bg = '#e55561', fg = 'black'},
         TSComment = { fg= '#7a818e' }
     }
 }
