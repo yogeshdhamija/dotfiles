@@ -10,7 +10,6 @@ set splitright
 let g:easy_align_ignore_groups=[]
 set tabstop=4
 set shiftwidth=4
-set expandtab
 set undofile
 set nomodeline
 set hidden

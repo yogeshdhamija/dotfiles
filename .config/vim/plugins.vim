@@ -11,6 +11,7 @@ if !exists("plugins")
         \ ['yogeshdhamija/filter-lq-list.vim', {}],
         \ ['yogeshdhamija/close-hidden-buffers-command.vim', {}],
         \ ['yogeshdhamija/terminal-command-motion.vim', {}],
+        \ ['tpope/vim-sleuth', {}],
     \ ]
     let interface_convenience_plugins = [
         \ ['yogeshdhamija/enter-insert-on-click.vim', {}],
