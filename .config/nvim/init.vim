@@ -24,11 +24,7 @@ lua << EOF
 
 ---------------- Colorscheme ------------------------
 local chandrian = require('chandrian');
-chandrian.setup {
-    --diagnostics = {
-    --    background = false
-    --}
-}
+chandrian.setup {}
 chandrian.load()
 
 ---------------- LSP ------------------------
