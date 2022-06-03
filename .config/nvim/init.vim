@@ -173,11 +173,19 @@ function! ShrinkSelection() abort
 endfunction
 
 function! MoveUp() abort
+    let l:oldPosition = getcurpos()
     exe "norm \<Plug>MoveUp"
+    if(getcurpos() == l:oldPosition)
+        normal 10k
+    endif
 endfunction
 
 function! MoveDown() abort
+    let l:oldPosition = getcurpos()
     exe "norm \<Plug>MoveDown"
+    if(getcurpos() == l:oldPosition)
+        normal 10j
+    endif
 endfunction
 
 function! SwapWithNextParameter() abort
