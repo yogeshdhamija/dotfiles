@@ -10,7 +10,7 @@ let added_plugins = [
     \ ['hrsh7th/nvim-cmp', {}],
     \ ['j-hui/fidget.nvim', {}],
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
-    \ ['nvim-treesitter/nvim-treesitter', {}],
+    \ ['nvim-treesitter/nvim-treesitter-context', {}],
     \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
     \ ['yogeshdhamija/chandrian-theme.nvim', {}],
 \ ]
