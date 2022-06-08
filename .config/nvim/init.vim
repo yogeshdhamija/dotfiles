@@ -17,6 +17,8 @@ let added_plugins = [
 
 source ~/.vimrc
 
+set termguicolors
+
 set scl=auto:9
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
