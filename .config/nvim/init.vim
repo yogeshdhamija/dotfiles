@@ -3,6 +3,7 @@ let &packpath = &runtimepath
 
 let added_plugins = [
     \ ['neovim/nvim-lspconfig', {}],
+    \ ['williamboman/nvim-lsp-installer', {}],
     \ ['hrsh7th/cmp-nvim-lsp', {}],
     \ ['hrsh7th/cmp-buffer', {}],
     \ ['hrsh7th/cmp-path', {}],
@@ -63,6 +64,10 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
+
+require("nvim-lsp-installer").setup({
+    automatic_installation = true,
+})
 
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup({
