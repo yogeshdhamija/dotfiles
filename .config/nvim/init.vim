@@ -2,13 +2,18 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 
 let added_plugins = [
+    \ ['VonHeikemen/lsp-zero.nvim', {}],
     \ ['neovim/nvim-lspconfig', {}],
-    \ ['williamboman/nvim-lsp-installer', {}],
+    \ ['williamboman/mason.nvim', {}],
+    \ ['williamboman/mason-lspconfig.nvim', {}],
     \ ['hrsh7th/cmp-nvim-lsp', {}],
     \ ['hrsh7th/cmp-buffer', {}],
     \ ['hrsh7th/cmp-path', {}],
     \ ['hrsh7th/cmp-cmdline', {}],
     \ ['hrsh7th/nvim-cmp', {}],
+    \ ['saadparwaiz1/cmp_luasnip', {}],
+    \ ['hrsh7th/cmp-nvim-lua', {}],
+    \ ['L3MON4D3/LuaSnip', {}],
     \ ['j-hui/fidget.nvim', {}],
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
     \ ['nvim-treesitter/nvim-treesitter-context', {}],
@@ -32,49 +37,23 @@ chandrian.setup {}
 chandrian.load()
 
 ---------------- LSP ------------------------
-local servers = { 'tsserver', 'eslint', 'bashls', 'rust_analyzer' }
+local lsp = require('lsp-zero')
+local cmp = require('cmp')
 
-local cmp = require'cmp'
+lsp.preset('recommended')
 
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  }),
-  sources = cmp.config.sources({
-    { name = 'path', option = {trailing_slash = true} },
-    { name = 'nvim_lsp' },
-  }, {
-    { name = 'buffer' },
-  }, {
-    { name = 'vsnip' },
-  })
+lsp.set_preferences({
+  set_lsp_keymaps = false
 })
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-local on_attach = function(client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-end
-
-require("nvim-lsp-installer").setup({
-    automatic_installation = true,
+lsp.setup_nvim_cmp({
+    mapping = {
+        ['<C-n>'] = function() cmp.select_next_item() end,
+        ['<C-p>'] = function() cmp.select_prev_item() end
+    }
 })
 
-for _, lsp in pairs(servers) do
-  require('lspconfig')[lsp].setup({
-    on_attach = on_attach,
-    capabilities = capabilities
-  })
-end
+lsp.setup()
 
 require"fidget".setup{}
 
