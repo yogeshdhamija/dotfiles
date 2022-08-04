@@ -19,6 +19,7 @@ let added_plugins = [
     \ ['nvim-treesitter/nvim-treesitter-context', {}],
     \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
     \ ['yogeshdhamija/chandrian-theme.nvim', {}],
+    \ ['https://git.sr.ht/~whynothugo/lsp_lines.nvim', {}],
 \ ]
 
 source ~/.vimrc
@@ -56,6 +57,7 @@ lsp.setup_nvim_cmp({
 lsp.setup()
 
 require"fidget".setup{}
+require("lsp_lines").setup()
 
 ---------------- Tree Sitter ------------------------
 require'nvim-treesitter.configs'.setup {
