@@ -48,6 +48,9 @@ lsp.set_preferences({
 })
 
 lsp.setup_nvim_cmp({
+    completion = {
+        completeopt = 'menu,menuone,noinsert,noselect',
+    },
     mapping = {
         ['<C-n>'] = function() cmp.select_next_item() end,
         ['<C-p>'] = function() cmp.select_prev_item() end
