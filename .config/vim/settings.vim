@@ -79,6 +79,8 @@ let g:SignatureMap = {
     \ 'ListBufferMarkers'  :  "m?"
 \ }
 
+nnoremap <silent> \ :<c-u>WhichKey '\'<CR>
+
 " Colors
     set background=dark
     set number

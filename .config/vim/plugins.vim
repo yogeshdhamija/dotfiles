@@ -18,6 +18,7 @@ if !exists("plugins")
         \ ['junegunn/vim-peekaboo', {}],
         \ ['kshenoy/vim-signature', {}],
         \ ['machakann/vim-highlightedyank', {}],
+        \ ['liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }],
     \ ]
     let ide_like_functionality_plugins = [
         \ ['tpope/vim-commentary', {}],
