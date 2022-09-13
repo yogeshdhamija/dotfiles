@@ -33,75 +33,88 @@ set foldexpr=nvim_treesitter#foldexpr()
 lua << EOF
 
 ---------------- Colorscheme ------------------------
-local chandrian = require('chandrian');
-chandrian.setup {}
-chandrian.load()
+local status, chandrian = pcall(require, 'chandrian');
+if(status) then
+    chandrian.setup {}
+    chandrian.load()
+end
 
 ---------------- LSP ------------------------
-local lsp = require('lsp-zero')
-local cmp = require('cmp')
+local lspstatus, lsp = pcall(require, 'lsp-zero')
+local cmpstatus, cmp = pcall(require, 'cmp')
+if(cmpstatus and lspstatus) then
 
-lsp.preset('recommended')
+    lsp.preset('recommended')
 
-lsp.set_preferences({
-  set_lsp_keymaps = false
-})
+    lsp.set_preferences({
+      set_lsp_keymaps = false
+    })
 
-lsp.setup_nvim_cmp({
-    completion = {
-        completeopt = 'menu,menuone,noinsert,noselect',
-    },
-    mapping = {
-        ['<C-n>'] = function() cmp.select_next_item() end,
-        ['<C-p>'] = function() cmp.select_prev_item() end
-    }
-})
+    lsp.setup_nvim_cmp({
+        completion = {
+            completeopt = 'menu,menuone,noinsert,noselect',
+        },
+        mapping = {
+            ['<C-n>'] = function() cmp.select_next_item() end,
+            ['<C-p>'] = function() cmp.select_prev_item() end
+        }
+    })
 
-lsp.setup()
+    lsp.setup()
 
-require"fidget".setup{}
-require("lsp_lines").setup()
+    local status, fidget = pcall(require,"fidget")
+    if (status) then
+        fidget.setup{}
+    end
+    local status, lines = pcall(require,"lsp_lines")
+    if(status) then
+        lines.setup()
+    end
+end
 
 ---------------- Tree Sitter ------------------------
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      node_incremental = "<Plug>ExpandSelection",
-      node_decremental = "<Plug>ShrinkSelection",
-    },
-  },
-  textobjects = {
-    move = {
-      enable = true,
-      set_jumps = true,
-      goto_next_start = {
-        ["<Plug>MoveDown"] = "@block.outer",
+local status, ts = pcall(require, 'nvim-treesitter.configs')
+if (status) then
+    ts.setup {
+      ensure_installed = "all",
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false
       },
-      goto_next_end = {
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          node_incremental = "<Plug>ExpandSelection",
+          node_decremental = "<Plug>ShrinkSelection",
+        },
       },
-      goto_previous_start = {
-        ["<Plug>MoveUp"] = "@block.outer",
+      textobjects = {
+        move = {
+          enable = true,
+          set_jumps = true,
+          goto_next_start = {
+            ["<Plug>MoveDown"] = "@block.outer",
+          },
+          goto_next_end = {
+          },
+          goto_previous_start = {
+            ["<Plug>MoveUp"] = "@block.outer",
+          },
+          goto_previous_end = {
+          },
+        },
+        swap = {
+          enable = true,
+          swap_next = {
+            ["<Plug>SwapWithNextParameter"] = "@parameter.inner",
+          },
+          swap_previous = {
+            ["<Plug>SwapWithPreviousParameter"] = "@parameter.inner",
+          },
+        },
       },
-      goto_previous_end = {
-      },
-    },
-    swap = {
-      enable = true,
-      swap_next = {
-        ["<Plug>SwapWithNextParameter"] = "@parameter.inner",
-      },
-      swap_previous = {
-        ["<Plug>SwapWithPreviousParameter"] = "@parameter.inner",
-      },
-    },
-  },
-}
+    }
+end
 
 EOF
 
