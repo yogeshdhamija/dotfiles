@@ -88,10 +88,8 @@ nnoremap <silent> \ :<c-u>WhichKey '\'<CR>
     silent! colorscheme gruvbox
     set scl=auto
     set foldlevelstart=99
-    if(!has('nvim'))
-        set foldmethod=indent
-        tabdo windo set foldtext=CustomFoldText()
-    endif
+    set foldmethod=indent
+    tabdo windo set foldtext=CustomFoldText()
     tabdo windo set fillchars=fold:\ 
     set laststatus=2
     set noshowmode
