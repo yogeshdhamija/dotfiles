@@ -51,7 +51,7 @@ endif
 if(has('nvim'))
     let g:peekaboo_window="call NvimOnlyCreateCenteredFloatingWindow()"
 endif
-let g:terminal_command_motion_prompt_matcher = '^'.$USER.' in .* %\s*'
+let g:terminal_command_motion_prompt_matcher = '^'.$USER.' in .*\n.'
 let g:indentLine_setColors = 0
 let g:fzf_preview_window = ['up:50%', 'ctrl-/']
 
