@@ -22,7 +22,6 @@ HYPHEN_INSENSITIVE="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 HIST_STAMPS="yyyy-mm-dd"
-ZSH_THEME="half-life"
 
 plugins=(
   web-search
@@ -42,17 +41,6 @@ bindkey ^F forward-word
 bindkey ^B backward-word
 bindkey ^W backward-kill-word
 
-# LSCOLORS in case dircolors doesn't work (on mac) for pretty ls colors
-export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
-# Dircolors (on ubuntu) for pretty ls colors
-[ -x '/usr/bin/dircolors' ] && eval `/usr/bin/dircolors ~/.dircolors-solarized/dircolors.256dark`
-
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=245"
-
-# Get theme to refresh git status on every prompt load
-function my_preexec { PR_GIT_UPDATE=1 }
-add-zsh-hook preexec my_preexec
-
 # Get zsh to show Ctrl+C on cancelled command
 TRAPINT() {
   print -n "^C"
@@ -71,13 +59,6 @@ pastefinish() {
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 
-# Change prompt character to %
-PROMPT=${PROMPT//λ/'%{$reset_color%}%%'}
-
-# Change prompt colors to better handle light backgrounds
-limegreen="%{$fg[green]%}"
-turquoise="%{$fg[cyan]%}"
-
 # Load common config
 if [ -f ~/.shellrc ]; then
     source ~/.shellrc
@@ -90,3 +71,6 @@ if [ -f ~/.zshrc.local ]; then
 else
     export LOCAL_CONFIG_OVERRIDES_NOT_LOADED="~/.zshrc.local:$LOCAL_CONFIG_OVERRIDES_NOT_LOADED"
 fi
+
+# Start shell prompt
+command -v starship > /dev/null && eval "$(starship init zsh)"

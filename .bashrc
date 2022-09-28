@@ -20,33 +20,6 @@ then
     bind '"\C-B": backward-word'
 fi
 
-# get current branch and status of git repo
-function parse_git {
-    read branch <<< "$(git branch --show-current 2> /dev/null)"
-
-    status=`git status 2>&1`
-    declare -a bits
-
-    for I in\
-        ' !&&&modified:' ' ?&&&Untracked files'\
-        ' *&&&Your branch is ahead of' ' +&&&new file:'\
-        ' >&&&renamed:' ' x&&&deleted:'
-    {
-        [[ "$status" == *"${I#*&&&}"* ]] && bits+=("${I%&&&*}")
-    }
-
-    # For removing initial field, but also for the if-empty situation.
-    branch=" on ${branch#* }"
-    [ "$branch" == ' on ' ] && unset branch
-
-    # Branch names with spaces shouldn't be an issue here, as only the first
-    # space-delimited field is ignored when reading the 'branch' variable.
-    printf "%s%s" "$branch" "${bits[@]}"
-}
-
-# set nice prompt
-export PS1="\[\e[35m\]\u\[\e[m\] in \[\e[32m\]\w\[\e[m\]\[\e[36m\]\`parse_git\`\[\e[m\] \\$ "
-
 # Load common config
 if [ -f ~/.shellrc ]; then
     source ~/.shellrc
@@ -59,3 +32,6 @@ if [ -f ~/.bashrc.local ]; then
 else
     export LOCAL_CONFIG_OVERRIDES_NOT_LOADED="~/.bashrc.local:$LOCAL_CONFIG_OVERRIDES_NOT_LOADED"
 fi
+
+# Start shell prompt
+command -v starship > /dev/null && eval "$(starship init bash)"
