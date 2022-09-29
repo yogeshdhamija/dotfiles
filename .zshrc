@@ -27,7 +27,6 @@ plugins=(
   web-search
   colored-man-pages
   zsh-autosuggestions
-  zsh-syntax-highlighting
 )
 
 # Load oh my zsh

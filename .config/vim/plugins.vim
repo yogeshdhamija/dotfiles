@@ -34,8 +34,7 @@ if !exists("plugins")
     \ ]
     let visual_plugins = [
         \ ['mhinz/vim-signify', {}],
-        \ ['morhetz/gruvbox', {}],
-        \ ['itchyny/lightline.vim', {}],
+        \ ['jeffkreeftmeijer/vim-dim', {}],
     \ ]
     let plugins = vim_idiomatic_plugins
                 \ + interface_convenience_plugins

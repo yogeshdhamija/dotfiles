@@ -18,26 +18,16 @@ let added_plugins = [
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
     \ ['nvim-treesitter/nvim-treesitter-context', {}],
     \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
-    \ ['yogeshdhamija/chandrian-theme.nvim', {}],
     \ ['https://git.sr.ht/~whynothugo/lsp_lines.nvim', {}],
 \ ]
 
 source ~/.vimrc
-
-set termguicolors
 
 set scl=auto:9
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
 lua << EOF
-
----------------- Colorscheme ------------------------
-local status, chandrian = pcall(require, 'chandrian');
-if(status) then
-    chandrian.setup {}
-    chandrian.load()
-end
 
 ---------------- LSP ------------------------
 local lspstatus, lsp = pcall(require, 'lsp-zero')
