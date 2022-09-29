@@ -53,9 +53,9 @@ endfunction
 
         autocmd FileType dirvish nnoremap <silent><buffer> t 0C<Esc>:let @"=substitute(@", '\n', '', 'g')<CR>:r ! find "<C-R>"" -maxdepth 1 -print0 \| xargs -0 ls -Fd<CR>:silent! keeppatterns %s/\/\//\//g<CR>:silent! keeppatterns %s/[^a-zA-Z0-9\/]$//g<CR>:silent! keeppatterns g/^$/d<CR>:noh<CR>
 
-        autocmd BufEnter,CursorMoved * if exists("b:dirvish") | execute 'match Structure /\v[^\/]+\/?$/' | else | match none | endif
-        autocmd BufEnter,CursorMoved * if exists("b:dirvish") | execute '3match Identifier /\v[^\/]+$/' | else | 3match none | endif
-        autocmd BufEnter,CursorMoved * if exists("b:dirvish") | execute '2match Conceal |'.substitute(expand('%'), getcwd(), '', '')[1:].'|' | else | 2match none | endif
+        autocmd BufEnter,CursorMoved * if exists("b:dirvish") | execute 'match Type /\v[^\/]+\/?$/' | else | match none | endif
+        autocmd BufEnter,CursorMoved * if exists("b:dirvish") | execute '3match Conditional /\v[^\/]+$/' | else | 3match none | endif
+        autocmd BufEnter,CursorMoved * if exists("b:dirvish") | execute '2match Comment |'.substitute(expand('%'), getcwd(), '', '')[1:].'|' | else | 2match none | endif
     augroup END
 
 " Leader shortcuts
