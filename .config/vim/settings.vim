@@ -82,7 +82,7 @@ let g:SignatureMap = {
 nnoremap <silent> \ :<c-u>WhichKey '\'<CR>
 
 " Colors
-    silent! colorscheme grim
+    silent! colorscheme structured-colors
     set number
     set scl=auto
     set foldlevelstart=99
