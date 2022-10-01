@@ -36,50 +36,6 @@ function! InstallPlugins(plugins, disabled_plugins) abort
     call plug#end()
 endfunction
 
-function! EnableIndentLines() abort
-    if v:vim_did_enter
-        tabdo windo IndentGuidesEnable
-    endif
-    let g:indentLine_enabled=1
-    augroup indentlines_augroup
-        autocmd!
-        if(has('nvim'))
-            autocmd TermEnter *  IndentGuidesDisable 
-            autocmd TermLeave *  IndentGuidesEnable 
-        endif
-    augroup END
-endfunction
-
-function! DisableIndentLines() abort
-    if v:vim_did_enter
-        tabdo windo IndentGuidesDisable
-    endif
-    let g:indentLine_enabled=0
-    augroup indentlines_augroup
-        autocmd!
-    augroup END
-endfunction
-
-function! DisableLightline() abort
-    if v:vim_did_enter
-        silent! call lightline#disable()
-    endif
-    augroup lightline_augroup
-        autocmd!
-        autocmd VimEnter * silent! call lightline#disable()
-    augroup END
-endfunction
-
-function! EnableLightline() abort
-    if v:vim_did_enter
-        silent! call lightline#enable()
-    endif
-    augroup lightline_augroup
-        autocmd!
-        autocmd VimEnter * silent! call lightline#enable()
-    augroup END
-endfunction
-
 function! CustomFoldText() abort
     let indent_level = indent(v:foldstart)
     let indent = repeat(' ', indent_level)
