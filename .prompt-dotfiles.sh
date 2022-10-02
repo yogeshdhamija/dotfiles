@@ -13,6 +13,6 @@ if [[ ! "${pushed}" ]]; then
 	printf '%s' " unpushed"
 	allgood=0
 fi
-if ${allgood}; then
+if [[ "${allgood}" == 1 ]]; then
 	printf '%s' " all good"
 fi
