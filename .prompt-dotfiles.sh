@@ -1,5 +1,7 @@
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+
+
 allgood=1
 changes=$(dotfiles status --porcelain)
 pushed=$(dotfiles remote show origin | grep 'master pushes to master (up to date)')
