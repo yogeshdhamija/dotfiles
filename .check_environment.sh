@@ -2,13 +2,13 @@
 
 declare -a EXECS=(
     "nvim"
+    "starship"
     "zsh"
     "rg"
     "bat"
     "exa"
     "jq"
     "yq"
-    "starship"
     "pandoc"
     "pdflatex"
     "node"
@@ -16,13 +16,13 @@ declare -a EXECS=(
 )
 declare -a NAMES=(
     "Neovim"
+    "Starship"
     "ZShell"
     "Ripgrep"
     "Bat"
     "Exa"
     "jq"
     "yq"
-    "Starship"
     "Pandoc"
     "TeX Live"
     "node"
@@ -30,13 +30,13 @@ declare -a NAMES=(
 )
 declare -a ADDITIONAL1=(
     "Widely used rewrite of Vim that has some new features"
+    "Helpful prompt for terminal"
     "Shell"
     "Grep"
     "Like cat, but better"
     "Like ls, but better"
     "JSON Parsing CLI tool"
     "YAML and XML Parsing CLI tool"
-    "Helpful prompt for terminal"
     "Document converter, vim uses it for .md -> .pdf"
     "Document converter, vim uses it for .md -> .pdf"
     "JS runtime, vim uses it to run coc.nvim plugin (https://github.com/neoclide/coc.nvim), used for LSP"
@@ -44,13 +44,13 @@ declare -a ADDITIONAL1=(
 )
 declare -a ADDITIONAL2=(
     "https://neovim.io/"
+    "https://starship.rs"
     ""
     "https://github.com/BurntSushi/ripgrep"
     "https://github.com/sharkdp/bat"
     "https://github.com/ogham/exa"
     "https://stedolan.github.io/jq/"
     "https://github.com/kislyuk/yq"
-    "https://starship.rs"
     "https://pandoc.org/"
     "https://www.tug.org/texlive/ | apt: texlive texlive-latex-extra | BasicTeX mac package"
     "https://nodejs.org/"
