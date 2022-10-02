@@ -55,7 +55,7 @@ endfunction
 
         autocmd BufEnter,CursorMoved * if exists("b:dirvish") | execute 'match Type /\v[^\/]+\/?$/' | else | match none | endif
         autocmd BufEnter,CursorMoved * if exists("b:dirvish") | execute '3match Conditional /\v[^\/]+$/' | else | 3match none | endif
-        autocmd BufEnter,CursorMoved * if exists("b:dirvish") | execute '2match Comment |'.substitute(expand('%'), getcwd(), '', '')[1:].'|' | else | 2match none | endif
+        autocmd BufEnter,CursorMoved * if exists("b:dirvish") | execute '2match LineNr |'.substitute(expand('%'), getcwd(), '', '')[1:].'|' | else | 2match none | endif
     augroup END
 
 " Leader shortcuts
