@@ -2,8 +2,9 @@ alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 allgood=1
 changes=$(dotfiles status --porcelain)
-unpushed=$(dotfiles remote show origin | grep 'master pushes to master (fast-forwardable)')
-unpulled=$(dotfiles remote show origin | grep 'master pushes to master (local out of date)')
+output=$(dotfiles remote show origin)
+unpushed=$(echo "${output}" | grep 'master pushes to master (fast-forwardable)')
+unpulled=$(echo "${output}" | grep 'master pushes to master (local out of date)')
 
 printf '%s' "dotfiles"
 if [[ "${changes}" ]]; then
