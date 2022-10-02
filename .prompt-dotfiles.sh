@@ -1,14 +1,12 @@
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 changes=$(dotfiles status --porcelain)
-unpushed=$(dotfiles remote show origin | grep 'master pushes to master')
+pushed=$(dotfiles remote show origin | grep 'master pushes to master (up to date)')
 
-if [[ "${changes}" || "${unpushed}" ]]; then
-	printf '%s' "dotfiles"
-fi
+printf '%s' "dotfiles"
 if [[ "${changes}" ]]; then
 	printf '%s' " uncommitted"
 fi
-if [[ "${unpushed}" ]]; then
+if [[ ! "${pushed}" ]]; then
 	printf '%s' " unpushed"
 fi
