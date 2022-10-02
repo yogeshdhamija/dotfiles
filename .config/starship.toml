@@ -1,2 +1,7 @@
 [username]
 show_always=true
+
+[custom.dotfiles]
+command="./.prompt-dotfiles.sh"
+detect_files=[".prompt-dotfiles.sh"]
+style="bold blue"
