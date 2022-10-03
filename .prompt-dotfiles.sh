@@ -20,5 +20,5 @@ if [[ "${unpulled}" ]]; then
 	allgood=0
 fi
 if [[ "${allgood}" == 1 ]]; then
-	printf '%s' " all good"
+	printf '%s' " ✓"
 fi
