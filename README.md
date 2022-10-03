@@ -12,51 +12,47 @@ export DOTFILES_REPO_URL=https://github.com/yogeshdhamija/dotfiles.git
 source <(curl -Ls https://raw.githubusercontent.com/yogeshdhamija/dotfiles/master/dotfile-scripts/setup-dotfiles-environment.sh)
 ```
 
-This will set up a git repository in the folder `~/.dotfiles` with a detached working tree. This way, you can treat your home directory if as if it were a git repository -- using the `dotfiles` command, instead of `git` -- and it won't do crazy stuff like interfere with your other git repositories. Source: [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/).
+This will set up a git repository in the folder `~/.dotfiles` with a detached working tree. This way, you can treat your home directory if as if it were a git repository -- using the `dotfiles` command, instead of `git` -- and it won't do crazy stuff like interfere with your other git repositories. Source: [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/). In summary: `dotfiles status`, `dotfiles commit`, `dotfiles push`.
 
 ## Cheat Sheet
 
-**Common settings in** `~/.vimrc.local.loadbefore`:
+**Commands to remember**:
+```bash
+dotfiles-update     # pulls new updates, including for submodules
+dotfiles-check      # checks if recommended programs installed
+
+# use like git:
+dotfiles status
+dotfiles add <file>
+dotfiles commit
+dotfiles push
 ```
 
-" To override the default plugins (list is in vim-plug style):
-    if !exists("plugins")
-        let plugins = []
-    endif
-    let plugins = plugins + [  
-        \["these_plugins_will/override_the_defaults", {}],
-    \]
-
-" To add more plugins (list is in vim-plug style):
+**Common settings in** `~/.vimrc.local.loadbefore`:
+```viml
+" To add more plugins (using vim-plug)
     if !exists("added_plugins")
         let added_plugins = []
     endif
-    let added_plugins = added_plugins + [      
+    let added_plugins = added_plugins + [
         \["these_plugins_will/be_added_to_the_defaults", {}],
     \]
 
-" To disable certain plugins (list is just the plugin name):
+" To disable certain default plugins
     if !exists("disabled_plugins")
         let disabled_plugins = []
     endif
     let disabled_plugins = disabled_plugins + ["neoclide/coc.nvim"]
 
-" To change the coc.nvim default installed plugins:
-    if !exists("coc_plugins")
-        let coc_plugins = []
+" To run with ONLY specified plugins (not recommended)
+    if !exists("plugins")
+        let plugins = []
     endif
-    let coc_plugins = coc_plugins + ["these_will_override_defaults"]
-
-" To add more coc.nvim default installed plugins:
-    if !exists("added_coc_plugins")
-        let added_coc_plugins = []
-    endif
-    let added_coc_plugins = added_coc_plugins + ["these_will_be_added_to_defaults"]
-
+    let plugins = plugins + ["neoclide/coc.nvim"]
 ```
 
 **Common settings in** `~/.shellrc.local`:
-```
+```bash
 alias a=b
 export PATH="/add_to_path/:$PATH"
 ```
@@ -68,8 +64,6 @@ Primarily, this repo configures the terminal and vim/neovim.
 ### Terminal
 
 - This repo will configure `zsh` and `bash` terminals. More config for `zsh` than for `bash`.
-- Run `dotfiles-update` to get updates.
-- Run `dotfiles-check` to see if recommended programs are installed on your system.
 - These are the primary files:
     - `~/.bashrc` - for bash-only settings
     - `~/.zshrc` - for zsh-only settings
@@ -83,16 +77,13 @@ Primarily, this repo configures the terminal and vim/neovim.
     - `~/.bashrc.local.loadbefore`
     - `~/.zshrc.local.loadbefore`
         - The `*.loadbefore` files are sourced before any other config.
-- Many `zsh` plugins are included in this repo as submodules. `dotfiles-update` will update them.
+- Some `zsh` plugins are included in this repo as submodules.
 
 ### Vim
 
 - `~/.vimrc` is where most of the configuration resides.
 - `~/.vimrc.local` and `~/.vimrc.local.loadbefore` will be loaded if they exist.
 - The `dotfiles-update` command will install/update all Vim plugins, through the `junegunn/vim-plug` plugin manager.
-- For IDE-like features, Vim will be configured to use `neoclide/coc.nvim`.
-    - Some plugins will be installed by default for Go, JSON, and Python.
-    - Configuration for other languages will have to be done manually (`:h coc-nvim.txt@en`).
 
 ## Notes
 
