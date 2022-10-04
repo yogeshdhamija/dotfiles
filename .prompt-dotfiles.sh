@@ -6,7 +6,7 @@ output=$(dotfiles remote show origin)
 unpushed=$(echo "${output}" | grep 'master pushes to master (fast-forwardable)')
 unpulled=$(echo "${output}" | grep 'master pushes to master (local out of date)')
 
-printf '%s' "dotfiles"
+printf '%s' "(dotfiles"
 if [[ "${changes}" ]]; then
 	printf '%s' " uncommitted"
 	allgood=0
@@ -22,3 +22,4 @@ fi
 if [[ "${allgood}" == 1 ]]; then
 	printf '%s' " ✓"
 fi
+printf '%s' ")"
