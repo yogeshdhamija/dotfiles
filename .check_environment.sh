@@ -56,7 +56,7 @@ do
         echo '    -' ${NAMES[$i-1]} '('${EXECS[$i-1]}')'
     fi
 done
-echo '   ---'
+echo '   ***'
 
 echo "Programs not found in PATH:" 
 for (( i=1; i<${programs_arraylength}+1; i++ ));
@@ -68,13 +68,15 @@ do
         echo ""
     fi
 done
-echo '   ---'
+echo '   ***'
 
 echo "Local configuration override files loaded:"
 printf '    %s\n' "${local_config_overrides_loaded[@]}"
+printf '   ***\n'
 
 echo "Local configuration override files checked and did not exist, so not loaded:"
 printf '    %s\n' "${local_config_overrides_not_loaded[@]}"
+printf '   ***\n'
 
 echo ""
 echo ""

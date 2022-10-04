@@ -1,3 +1,11 @@
 [custom.dotfiles]
-command="./.prompt-dotfiles.sh"
+command="./.prompt-dotfiles.sh dotfiles"
+detect_files=[".prompt-dotfiles.sh"]
+
+[custom.programs]
+command="./.prompt-dotfiles.sh programs"
+detect_files=[".prompt-dotfiles.sh"]
+
+[custom.locals]
+command="./.prompt-dotfiles.sh locals"
 detect_files=[".prompt-dotfiles.sh"]
