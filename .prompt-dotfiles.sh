@@ -1,16 +1,19 @@
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias "dotfiles-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh && cd -"
 
-if [[ "$((1 + $RANDOM % 10))" == 9 ]]; then
+if [[ "$((1 + $RANDOM % 20))" == 9 ]]; then
 	rm /tmp/dotfiles-prompt-remote.txt
 	dotfiles remote show origin > /tmp/dotfiles-prompt-remote.txt
+
+	rm /tmp/dotfiles-prompt-status.txt
+	dotfiles status --porcelain > /tmp/dotfiles-prompt-status.txt
 fi
 
 if [[ "$1" == "dotfiles" ]]; then
 	printf '%s' "(dotfiles"
 	allgood=1
 
-	changes=$(dotfiles status --porcelain)
+	changes=$(cat /tmp/dotfiles-prompt-status.txt)
 	output=$(cat /tmp/dotfiles-prompt-remote.txt)
 	unpushed=$(echo "${output}" | grep 'master pushes to master (fast-forwardable)')
 	unpulled=$(echo "${output}" | grep 'master pushes to master (local out of date)')
