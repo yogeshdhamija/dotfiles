@@ -18,7 +18,6 @@ let added_plugins = [
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
     \ ['nvim-treesitter/nvim-treesitter-context', {}],
     \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
-    \ ['https://git.sr.ht/~whynothugo/lsp_lines.nvim', {}],
 \ ]
 
 source ~/.vimrc
