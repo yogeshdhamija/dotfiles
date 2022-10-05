@@ -46,7 +46,8 @@ if(cmpstatus and lspstatus) then
         },
         mapping = {
             ['<C-n>'] = function() cmp.select_next_item() end,
-            ['<C-p>'] = function() cmp.select_prev_item() end
+            ['<C-p>'] = function() cmp.select_prev_item() end,
+            ['<CR>'] = cmp.mapping.confirm({ select = false }),
         }
     })
 
