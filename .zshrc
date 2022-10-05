@@ -27,6 +27,7 @@ plugins=(
   web-search
   colored-man-pages
   zsh-autosuggestions
+  rust
 )
 
 # Load oh my zsh
