@@ -91,3 +91,6 @@ nnoremap <silent> \ :<c-u>WhichKey '\'<CR>
     tabdo windo set fillchars=fold:\ 
     set laststatus=2
     set list lcs=tab:\|\ ,trail:•
+    set noshowmode
+    set cmdheight=0
+    set statusline=\|%{mode(1)}\|\ %f\ %h%w%m%r%=%-14.(%l,%c%V%)\ %P
