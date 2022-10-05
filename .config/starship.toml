@@ -1,3 +1,5 @@
+command_timeout=1000
+
 [custom.dotfiles]
 command="./.prompt-dotfiles.sh dotfiles"
 detect_files=[".prompt-dotfiles.sh"]
