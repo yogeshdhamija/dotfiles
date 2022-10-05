@@ -3,42 +3,42 @@
 declare -a EXECS=(
     "nvim"
     "starship"
-    "zsh"
     "rg"
     "bat"
     "exa"
     "jq"
     "yq"
+    "zsh"
 )
 declare -a NAMES=(
     "Neovim"
     "Starship"
-    "ZShell"
     "Ripgrep"
     "Bat"
     "Exa"
     "jq"
     "yq"
+    "ZShell"
 )
 declare -a ADDITIONAL1=(
     "Widely used rewrite of Vim that has some new features"
-    "Helpful prompt for terminal"
-    "Shell"
-    "Grep"
+    "Prompt for terminal, configured to keep an eye on dotfiles status"
+    "Like grep, but better"
     "Like cat, but better"
     "Like ls, but better"
     "JSON Parsing CLI tool"
     "YAML and XML Parsing CLI tool"
+    "Shell"
 )
 declare -a ADDITIONAL2=(
     "https://neovim.io/"
     "https://starship.rs"
-    ""
     "https://github.com/BurntSushi/ripgrep"
     "https://github.com/sharkdp/bat"
     "https://github.com/ogham/exa"
     "https://stedolan.github.io/jq/"
     "https://github.com/kislyuk/yq"
+    ""
 )
 IFS=':' read -r -a local_config_overrides_loaded <<< "$LOCAL_CONFIG_OVERRIDES_LOADED"
 IFS=':' read -r -a local_config_overrides_not_loaded <<< "$LOCAL_CONFIG_OVERRIDES_NOT_LOADED"
