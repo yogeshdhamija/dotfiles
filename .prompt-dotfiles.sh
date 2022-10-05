@@ -1,22 +1,35 @@
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias "dotfiles-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh && cd -"
 
-if [[ "$((1 + $RANDOM % 20))" == 9 ]]; then
-	rm /tmp/dotfiles-prompt-remote.txt
-	dotfiles remote show origin > /tmp/dotfiles-prompt-remote.txt
+random="$((1 + $RANDOM % 20))" 
 
-	rm /tmp/dotfiles-prompt-status.txt
-	dotfiles status --porcelain > /tmp/dotfiles-prompt-status.txt
+if [[ "${random}" == 7 ]]; then
+	rm /tmp/dotfiles-prompt-locals.txt
+	echo "$(dotfiles-check)" | tr -d '\n' | tr -d ' ' | grep "Localconfigurationoverridefilesloaded:.\+\*\*\*Localconfigurationoverridefileschecked" > /tmp/dotfiles-prompt-locals.txt
+
+elif [[ "${random}" == 8 ]]; then
+	rm /tmp/dotfiles-prompt-programs.txt
+	echo "$(dotfiles-check)" | tr -d '\n' | tr -d ' ' | grep "ProgramsnotfoundinPATH:.\+\*\*\*Localconfigurationoverridefilesloaded" > /tmp/dotfiles-prompt-programs.txt
+
+elif [[ "${random}" == 9 ]]; then
+	remote=$(dotfiles remote show origin)
+
+	rm /tmp/dotfiles-prompt-unpushed.txt
+	echo "${remote}" | grep 'master pushes to master (fast-forwardable)' > /tmp/dotfiles-prompt-unpushed.txt
+	rm /tmp/dotfiles-prompt-unpulled.txt
+	echo "${output}" | grep 'master pushes to master (local out of date)' > /tmp/dotfiles-prompt-unpulled.txt
+
+	rm /tmp/dotfiles-prompt-changes.txt
+	dotfiles status --porcelain > /tmp/dotfiles-prompt-changes.txt
 fi
 
 if [[ "$1" == "dotfiles" ]]; then
 	printf '%s' "(dotfiles"
 	allgood=1
 
-	changes=$(cat /tmp/dotfiles-prompt-status.txt)
-	output=$(cat /tmp/dotfiles-prompt-remote.txt)
-	unpushed=$(echo "${output}" | grep 'master pushes to master (fast-forwardable)')
-	unpulled=$(echo "${output}" | grep 'master pushes to master (local out of date)')
+	changes=$(cat /tmp/dotfiles-prompt-changes.txt)
+	unpushed=$(cat /tmp/dotfiles-prompt-unpushed.txt)
+	unpulled=$(cat /tmp/dotfiles-prompt-unpulled.txt)
 
 	if [[ "${changes}" ]]; then
 		printf '%s' " uncommitted"
@@ -37,7 +50,7 @@ if [[ "$1" == "dotfiles" ]]; then
 
 elif [[ "$1" == "programs" ]]; then
 	printf '%s' " (environment"
-	need_programs=$(echo "$(dotfiles-check)" | tr -d '\n' | tr -d ' ' | grep "ProgramsnotfoundinPATH:.\+\*\*\*Localconfigurationoverridefilesloaded")
+	need_programs=$(cat /tmp/dotfiles-prompt-programs.txt)
 	if [[ "${need_programs}" ]]; then
 		printf '%s' " missing programs"
 	else
@@ -46,7 +59,7 @@ elif [[ "$1" == "programs" ]]; then
 	printf '%s' ")"
 
 elif [[ "$1" == "locals" ]]; then
-	has_locals=$(echo "$(dotfiles-check)" | tr -d '\n' | tr -d ' ' | grep "Localconfigurationoverridefilesloaded:.\+\*\*\*Localconfigurationoverridefileschecked")
+	has_locals=$(cat /tmp/dotfiles-prompt-locals.txt)
 
 	if [[ "${has_locals}" ]]; then
 		printf '%s' " (local overrides)"
