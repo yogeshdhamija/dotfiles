@@ -150,7 +150,7 @@ function! ChangeSymbolName() abort
 endfunction
 
 function! AutoFormat() abort
-    lua vim.lsp.buf.formatting()
+    lua vim.lsp.buf.format()
 endfunction
 
 function! DisplayErrors() abort
