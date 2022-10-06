@@ -109,12 +109,7 @@ end
 EOF
 
 function! QuickAction() abort
-    lua vim.lsp.buf.code_action()
-endfunction
-
-function! RangeQuickAction() abort
-    exe "norm \<Esc>"
-    exe "norm :'\<,'\>lua vim.lsp.buf.range_code_action()\<CR>"
+    lua vim.lsp.buf.code_action({range})
 endfunction
 
 function! Hover() abort
@@ -150,7 +145,7 @@ function! ChangeSymbolName() abort
 endfunction
 
 function! AutoFormat() abort
-    lua vim.lsp.buf.format()
+    lua vim.lsp.buf.format({range})
 endfunction
 
 function! DisplayErrors() abort

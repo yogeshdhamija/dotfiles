@@ -60,7 +60,7 @@ endfunction
 
 " Leader shortcuts
     nnoremap \q <cmd>call QuickAction()<CR>
-    xnoremap \q <cmd>call RangeQuickAction()<CR>
+    xnoremap \q <cmd>call QuickAction()<CR>
     nnoremap \c <Esc><Cmd>noh<CR>
     nnoremap \o <Cmd>echo ":edit"<CR><Cmd>Files<CR>
     nnoremap \b <Cmd>echo ":buffers"<CR><Cmd>Buffers<CR>
