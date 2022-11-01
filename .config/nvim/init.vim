@@ -36,7 +36,8 @@ if(cmpstatus and lspstatus) then
     lsp.preset('recommended')
 
     lsp.set_preferences({
-      set_lsp_keymaps = false
+      set_lsp_keymaps = false,
+      configure_diagnostics = false
     })
 
     lsp.setup_nvim_cmp({
