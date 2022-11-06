@@ -4,16 +4,16 @@ command_timeout=1000
 command="./.prompt-dotfiles.sh dotfiles"
 detect_files=[".prompt-dotfiles.sh"]
 description="Status of dotfiles currently installed, and whether they're up to date. Run `dotfiles push/pull/status` for more details."
-style="blue"
+style="underline cyan"
 
 [custom.programs]
 command="./.prompt-dotfiles.sh programs"
 detect_files=[".prompt-dotfiles.sh"]
 description="Indication of whether all the recommended programs are installed. Run `dotfiles-check` for more details."
-style="blue"
+style="underline cyan"
 
 [custom.locals]
 command="./.prompt-dotfiles.sh locals"
 detect_files=[".prompt-dotfiles.sh"]
 description="Indication of whether any local dotfile overrides are loaded. Run `dotfiles-check` for more details."
-style="blue"
+style="underline cyan"
