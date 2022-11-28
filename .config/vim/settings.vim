@@ -90,4 +90,6 @@ nnoremap <silent> \ :<c-u>WhichKey '\'<CR>
     tabdo windo set foldtext=CustomFoldText()
     tabdo windo set fillchars=fold:\ 
     set laststatus=2
-    set list lcs=tab:\|\ ,trail:•
+    set list lcs=tab:\ \ ,trail:•
+    set cursorlineopt=number
+    set cursorline

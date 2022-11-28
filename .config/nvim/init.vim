@@ -17,10 +17,10 @@ let added_plugins = added_plugins + [
     \ ['saadparwaiz1/cmp_luasnip', {}],
     \ ['hrsh7th/cmp-nvim-lua', {}],
     \ ['L3MON4D3/LuaSnip', {}],
-    \ ['j-hui/fidget.nvim', {}],
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
     \ ['nvim-treesitter/nvim-treesitter-context', {}],
     \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
+    \ ['j-hui/fidget.nvim', {}],
 \ ]
 
 source ~/.vimrc
