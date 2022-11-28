@@ -1,7 +1,10 @@
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 
-let added_plugins = [
+if !exists("added_plugins")
+    let added_plugins = []
+endif
+let added_plugins = added_plugins + [
     \ ['VonHeikemen/lsp-zero.nvim', {}],
     \ ['neovim/nvim-lspconfig', {}],
     \ ['williamboman/mason.nvim', {}],
