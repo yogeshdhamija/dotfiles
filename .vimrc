@@ -32,6 +32,10 @@ endfunction
     xnoremap          v          <Cmd>call ExpandSelection()<CR>
     xnoremap          V          <Cmd>call ShrinkSelection()<CR>
 
+    " Fix some terminal issues on iterm
+        tnoremap          <S-Space>  <Space>
+        tnoremap          <S-BS>     <BS>
+
     augroup dirvish_config
         autocmd!
         autocmd FileType dirvish silent! unmap <buffer> q
