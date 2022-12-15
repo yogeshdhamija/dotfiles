@@ -29,7 +29,6 @@ if [ -z "${NVIM}" ]; then
 else
     command -v nvim > /dev/null && export EDITOR="nvim --server /tmp/nvim.sock --remote"
 fi
-command -v idea > /dev/null && export EDITOR="idea --wait"
 
 # Load aliases
 if [ -f ~/.shell_aliases ]; then
