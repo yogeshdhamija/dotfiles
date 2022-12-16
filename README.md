@@ -89,7 +89,7 @@ Primarily, this repo configures the terminal and vim/neovim.
     ~/.config/nvim/init.vim             # only if Neovim
                                             # Mostly used for setting up nvim-specific plugins (Lsp, Treesitter, etc.)
 
-    ~.vim/vimrc.local.loadbefore        # only if exists in the directory vim/nvim was launched from
+    .vim/vimrc.local.loadbefore         # only if exists in the directory vim/nvim was launched from
                                             # Useful variables to set here are:
                                             #   added_plugins = [ ["repo/path.git"], {setting: true} ]
                                             #           (added to defaults, settings are `junegunn/vim-plug` (plugin manager) style dictionaries)
