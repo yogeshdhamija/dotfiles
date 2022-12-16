@@ -1,7 +1,7 @@
 source ~/.config/vim/functions.vim
 
-call SourceFileIfExists("~/.vimrc.local.loadbefore")
 call SourceFileIfExists(".vim/vimrc.local.loadbefore")
+call SourceFileIfExists("~/.vimrc.local.loadbefore")
 
 source ~/.config/vim/plugins.vim
 source ~/.config/vim/settings.vim

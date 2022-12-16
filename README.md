@@ -86,12 +86,10 @@ Primarily, this repo configures the terminal and vim/neovim.
 - File sourcing order (from first to last) is:
 
 ```bash
-    ~/.config/nvim/init.vim                 # only if Neovim
+    ~/.config/nvim/init.vim             # only if Neovim
                                             # Mostly used for setting up nvim-specific plugins (Lsp, Treesitter, etc.)
 
-    ~/.vimrc                                # Mappings, commands, and default settings are defined here.
-
-    ~/.vimrc.local.loadbefore               # Changes here are not commmitted to `dotfiles` repo.
+    ~.vim/vimrc.local.loadbefore        # only if exists in the directory vim/nvim was launched from
                                             # Useful variables to set here are:
                                             #   added_plugins = [ ["repo/path.git"], {setting: true} ]
                                             #           (added to defaults, settings are `junegunn/vim-plug` (plugin manager) style dictionaries)
@@ -100,16 +98,19 @@ Primarily, this repo configures the terminal and vim/neovim.
                                             #   plugins = [ ["repo/path.git"], {setting: true} ]
                                             #           (only these plugins will be used, no defaults)
 
-    ~.vim/vimrc.local.loadbefore            # only if exists in the directory vim/nvim was launched from
-                                            # can use the same variables as above, but will override
-                                            # if you want to extend from the above file, add to the existing arrays instead
+    ~/.vimrc.local.loadbefore               # Changes here are not commmitted to `dotfiles` repo.
+                                            # can use the same variables as above,
+                                            #   but will override the above file
+                                            #   if you want to extend from the above file, add to the existing arrays instead
+
+    ~/.vimrc                                # Mappings, commands, and default settings are defined here.
 
     ~/.vimrc.local                          # Changes here are not committed to `dotfiles` repo.
 
-    .vim/vimrc.local                        # only if exists in the directory nvim/vim was launched from
+    .vim/vimrc.local                    # only if exists in the directory nvim/vim was launched from
 ```
 
-- The `dotfiles-update` command will install/update all Vim plugins, through the `junegunn/vim-plug` plugin manager.
+- The `dotfiles-update` terminal command will install/update all Vim plugins, through the `junegunn/vim-plug` plugin manager.
 
 - `~/.vimrc` uses functions (not defined by default) to execute certain commands/remaps. Example: `AutoFormat()`. If using Neovim, those are defined in `~/.config/nvim/init.vim`. Those may be defined in `~/.vimrc.local`. Reasoning is so that the implementaton can change based on Vim, Neovim, or VScode-Neovim without having to remap every time.
 
