@@ -23,7 +23,7 @@ dotfiles-check      # checks if recommended programs installed
 
 # use like git:
 dotfiles status
-dotfiles add <file>
+dotfiles add file
 dotfiles commit
 dotfiles push
 ```
@@ -48,7 +48,9 @@ dotfiles push
     if !exists("plugins")
         let plugins = []
     endif
-    let plugins = plugins + ["neoclide/coc.nvim"]
+    let plugins = plugins + [
+        \["only_these_plugins/will_be_used", {}],
+    \]
 ```
 
 **Common settings in** `~/.shellrc.local`:
@@ -79,15 +81,32 @@ Primarily, this repo configures the terminal and vim/neovim.
         - The `*.loadbefore` files are sourced before any other config.
 - Some `zsh` plugins are included in this repo as submodules.
 
-### Vim
+### Vim & Neovim
 
-- `~/.vimrc` is where most of the configuration resides.
-- `~/.vimrc.local` and `~/.vimrc.local.loadbefore` will be loaded if they exist.
+- File sourcing order (from first to last) is:
+    - `~/.config/nvim/init.vim` (only if Neovim)
+        - Mostly used for setting up nvim-specific plugins (Lsp, Treesitter, etc.)
+    - `~/.vimrc`
+        - Mappings, commands, and default settings are defined here.
+    - `~/.vimrc.local.loadbefore`
+        - Changes here are not commmitted to `dotfiles` repo.
+        - Useful variables to set here are:
+            - `added_plugins = [ ["repo/path.git"], {setting: true} ]` (added to defaults, settings are `junegunn/vim-plug` (plugin manager) style dictionaries)
+            - `disabled_plugins = [ "repo/path.git" ]` (disabled, if added from defaults or elsewhere)
+            - `plugins = [ ["repo/path.git"], {setting: true} ]` (only these plugins will be used, no defaults)
+    - `.vim/vimrc.local.loadbefore` (only if exists in the directory vim/nvim was launched from)
+        - Can use the same variables as above, but will override. If you want to extend from the above file, add to the existing arrays instead.
+    - `~/.vimrc.local`
+        - Changes here are not committed to `dotfiles` repo
+    - `.vim/vimrc.local` (only if exists in the directory vim/nvim was launched from)
+
 - The `dotfiles-update` command will install/update all Vim plugins, through the `junegunn/vim-plug` plugin manager.
+
+- `~/.vimrc` uses functions (not defined by default) to execute certain commands/remaps. Example: `AutoFormat()`. If using Neovim, those are defined in `~/.config/nvim/init.vim`. Those may be defined in `~/.vimrc.local`.
 
 ## Notes
 
 - Do **not** use the `dotfiles add .` command. This will add all the untracked files in your home directory, which is **everything**.
-    - Instead, add things individually using `dotfiles add <file>`.
+    - Instead, add things individually using `dotfiles add file`.
     - This also applies to other commands like `dotfiles commit -a`.
     - If you do this accidentally, you'll have to `Ctrl+C` out of it while it's stuck, or unstage all the files you added if it somehow succeeds.
