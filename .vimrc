@@ -34,7 +34,11 @@ endfunction
 
     " Fix some terminal issues on iterm
         tnoremap          <S-Space>  <Space>
+        tnoremap          <C-Space>  <Space>
         tnoremap          <S-BS>     <BS>
+        tnoremap          <C-BS>     <BS>
+        tnoremap          <S-CR>     <CR>
+        tnoremap          <C-CR>     <CR>
 
     augroup dirvish_config
         autocmd!
