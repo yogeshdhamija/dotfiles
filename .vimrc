@@ -6,18 +6,6 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 source ~/.config/vim/plugins.vim
 source ~/.config/vim/settings.vim
 
-function! StartTerminal() abort
-    terminal ++curwin
-endfunction
-
-function! MoveUp() abort
-    norm 10k
-endfunction
-
-function! MoveDown() abort
-    norm 10j
-endfunction
-
 " Remaps
     nnoremap          `           <Cmd>call MarksHelper()<CR>
     nnoremap          <C-j>       <Cmd>call MoveDown()<CR>
@@ -102,6 +90,18 @@ endfunction
     command!          PDF             w | call WriteToPdf()
     command!          SWAP            call SwapWithNextParameter()
     command!          PREVSWAP        call SwapWithPreviousParameter()
+
+function! StartTerminal() abort
+    terminal ++curwin
+endfunction
+
+function! MoveUp() abort
+    norm 10k
+endfunction
+
+function! MoveDown() abort
+    norm 10j
+endfunction
 
 call SourceFileIfExists("~/.vimrc.local")
 call SourceFileIfExists(".vim/vimrc.local")
