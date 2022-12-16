@@ -63,6 +63,7 @@ endfunction
     augroup END
 
 " Leader shortcuts
+    xnoremap \p "_dP
     nnoremap \q <cmd>call QuickAction()<CR>
     xnoremap \q <cmd>call QuickAction()<CR>
     nnoremap \c <Esc><Cmd>noh<CR>
