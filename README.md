@@ -83,6 +83,8 @@ Primarily, this repo configures the terminal and vim/neovim.
 
 ### Vim & Neovim
 
+- mappings/remaps in `~/.vimrc`
+
 - File sourcing order (from first to last) is:
 
 ```bash
