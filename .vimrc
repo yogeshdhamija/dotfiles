@@ -1,4 +1,9 @@
-source ~/.config/vim/functions.vim
+if !has('nvim')
+    " Other programs (Neovim, VSCode-Neovim, etc.), when loading vimrc, 
+    "   are responsible for providing their own functions (could be the same file, 
+    "   if they want).
+    source ~/.config/vim/functions.vim
+endif
 
 call SourceFileIfExists(".vim/vimrc.local.loadbefore")
 call SourceFileIfExists("~/.vimrc.local.loadbefore")
@@ -7,18 +12,18 @@ source ~/.config/vim/plugins.vim
 source ~/.config/vim/settings.vim
 
 " Remaps
-    nnoremap          `           <Cmd>call MarksHelper()<CR>
-    nnoremap          <C-j>       <Cmd>call MoveDown()<CR>
-    nnoremap          <C-k>       <Cmd>call MoveUp()<CR>
-    xnoremap          <C-c>       "+y
-    xnoremap          <D-c>       "+y
-    inoremap          <C-v><C-v> <C-R>+
-    inoremap          <D-v><D-v> <C-R>+
-    xmap              ga         <Plug>(EasyAlign)
-    nmap              ga         <Plug>(EasyAlign)
-    inoremap          <C-R>      <C-R><C-O>
-    xnoremap          v          <Cmd>call ExpandSelection()<CR>
-    xnoremap          V          <Cmd>call ShrinkSelection()<CR>
+    xnoremap <C-c>      "+y
+    xnoremap <D-c>      "+y
+    inoremap <C-v><C-v> <C-R>+
+    inoremap <D-v><D-v> <C-R>+
+    xmap     ga         <Plug>(EasyAlign)
+    nmap     ga         <Plug>(EasyAlign)
+    inoremap <C-R>      <C-R><C-O>
+    nnoremap `          <Cmd>call MarksHelper()<CR>
+    nnoremap <C-j>      <Cmd>call MoveDown()<CR>
+    nnoremap <C-k>      <Cmd>call MoveUp()<CR>
+    xnoremap v          <Cmd>call ExpandSelection()<CR>
+    xnoremap V          <Cmd>call ShrinkSelection()<CR>
 
     " Fix some terminal issues on iterm
         tnoremap          <S-Space>  <Space>

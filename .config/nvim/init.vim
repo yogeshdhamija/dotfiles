@@ -23,6 +23,7 @@ let added_plugins = added_plugins + [
     \ ['j-hui/fidget.nvim', {}],
 \ ]
 
+source ~/.config/vim/functions.vim
 source ~/.vimrc
 
 set scl=auto:9
