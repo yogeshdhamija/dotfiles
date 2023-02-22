@@ -88,8 +88,11 @@ Primarily, this repo configures the terminal and vim/neovim.
 - File sourcing order (from first to last) is:
 
 ```bash
-    ~/.config/nvim/init.vim             # only if Neovim
+    ~/.config/nvim/init.vim             # only if pure Neovim
                                             # Mostly used for setting up nvim-specific plugins (Lsp, Treesitter, etc.)
+
+    ~/.vscodevimrc                      # only if Neovim embedded within VSCode
+                                            # Mostly used for allowing only embeddable plugins, and applying VSCode-specific settings
 
     .vim/vimrc.local.loadbefore         # only if exists in the directory vim/nvim was launched from
                                             # Useful variables to set here are:
