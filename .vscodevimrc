@@ -71,7 +71,7 @@ if(exists("g:vscode") && has('nvim'))
     " Fix VSCode commands
         command! Tabnew call VSCodeNotify("workbench.action.duplicateWorkspaceInNewWindow")
         command! -bang  Quit if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.revertAndCloseActiveEditor') | else | call VSCodeNotify('workbench.action.joinTwoGroups') | call VSCodeNotify('workbench.action.navigateBack') | endif
-        command! -bang  Bd if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.revertAndCloseActiveEditor') | else | call VSCodeNotify('workbench.action.closeActiveEditor')
+        command! -bang  Bd if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.revertAndCloseActiveEditor') | else | call VSCodeNotify('workbench.action.closeActiveEditor') | endif
         AlterCommand bd Bd
 
     " Fix the 'vscode neovim' plugin's <C-W> mappings
