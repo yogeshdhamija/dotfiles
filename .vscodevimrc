@@ -15,9 +15,6 @@ if !exists("plugins")
 endif
 
 source ~/.config/vim/functions.vim
-source ~/.vimrc
-
-set showmode
 
 " Functions
     function! CreateSplitMappings(mode, mapping, rhs) abort
@@ -28,7 +25,6 @@ set showmode
         execute a:mode.'map '.a:mapping.'j :call VSCodeNotify("workbench.action.newGroupBelow")<CR>'.a:rhs
         execute a:mode.'map '.a:mapping.'k :call VSCodeNotify("workbench.action.newGroupAbove")<CR>'.a:rhs
     endfunction
-
     function! ExecuteVSCodeCommandInVisualMode(command_name) abort
         let visualmode = visualmode()
         if visualmode ==# 'V'
@@ -41,6 +37,43 @@ set showmode
             call VSCodeNotifyRangePos(a:command_name, startPos[1], endPos[1], startPos[2], endPos[2]+1, 1)
         endif
     endfunction
+
+source ~/.vimrc
+
+set showmode
+
+" Leader shortcuts
+    nnoremap \q <Cmd>call VSCodeNotify("editor.action.quickFix")<CR>
+    xnoremap \q <Cmd>call ExecuteVSCodeCommandInVisualMode("editor.action.quickFix")<CR>
+    
+    nnoremap \c  <Esc>:noh<CR>:call VSCodeNotify("workbench.action.closeSidebar")<CR>:call VSCodeNotify("workbench.action.closePanel")<CR>:call VSCodeNotify("notifications.hideToasts")<CR>:call VSCodeNotify("closeParameterHints")<CR>
+    nnoremap \dh :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
+    nnoremap \o  :call VSCodeNotify("workbench.action.quickOpen")<CR>
+    nnoremap \b  :call VSCodeNotify("workbench.action.showEditorsInActiveGroup")<CR>
+    nnoremap \w  :call VSCodeNotify("workbench.action.showAllEditors")<CR>
+    nnoremap \a  <Cmd>call VSCodeNotify("workbench.action.showCommands")<CR>
+    xnoremap \a  <Cmd>call ExecuteVSCodeCommandInVisualMode("workbench.action.showCommands")<CR>
+    nnoremap \h  :call VSCodeNotify('editor.action.showHover')<CR>
+    nmap     \e  \h
+    call CreateSplitMappings("n",     "\\t",  ":call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
+    call CreateSplitMappings("nnore", "\\gd", ":call VSCodeNotify('editor.action.revealDefinition')<CR>")
+    call CreateSplitMappings("nnore", "\\gr", ":call VSCodeNotify('editor.action.goToReferences')<CR>")
+    call CreateSplitMappings("nnore", "\\gi", ":call VSCodeNotify('editor.action.goToImplementation')<CR>")
+
+" Commands
+    command! Only call VSCodeNotify("workbench.action.closeSidebar") | call VSCodeNotify("workbench.action.closePanel") | call VSCodeNotify("workbench.action.joinAllGroups")
+    command! ONLY Only
+    command! DelMarks call VSCodeNotify("bookmarks.clearFromAllFiles")
+    command! DELMARKS DelMarks
+    command! Rename call VSCodeNotify('editor.action.rename')
+    command! RENAME Rename
+    command! Format call VSCodeNotify('editor.action.formatDocument')
+    command! FORMAT Format
+    command! Errors call VSCodeNotify("workbench.actions.view.problems")
+    command! ERRORS Errors
+    command! ERRS Errors
+    command! Actions call VSCodeNotify("workbench.action.showCommands")
+    command! ACTIONS Actions
 
 " Get folding working with vscode neovim plugin
     nnoremap zM :call VSCodeNotify('editor.foldAll')<CR>
@@ -86,36 +119,3 @@ set showmode
     nmap gc  <Plug>VSCodeCommentary
     omap gc  <Plug>VSCodeCommentary
     nmap gcc <Plug>VSCodeCommentaryLine
-
-" Leader shortcuts
-    nnoremap \q <Cmd>call VSCodeNotify("editor.action.quickFix")<CR>
-    xnoremap \q <Cmd>call ExecuteVSCodeCommandInVisualMode("editor.action.quickFix")<CR>
-    
-    nnoremap \c  <Esc>:noh<CR>:call VSCodeNotify("workbench.action.closeSidebar")<CR>:call VSCodeNotify("workbench.action.closePanel")<CR>:call VSCodeNotify("notifications.hideToasts")<CR>:call VSCodeNotify("closeParameterHints")<CR>
-    nnoremap \dh :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
-    nnoremap \o  :call VSCodeNotify("workbench.action.quickOpen")<CR>
-    nnoremap \b  :call VSCodeNotify("workbench.action.showEditorsInActiveGroup")<CR>
-    nnoremap \w  :call VSCodeNotify("workbench.action.showAllEditors")<CR>
-    nnoremap \a  <Cmd>call VSCodeNotify("workbench.action.showCommands")<CR>
-    xnoremap \a  <Cmd>call ExecuteVSCodeCommandInVisualMode("workbench.action.showCommands")<CR>
-    nnoremap \h  :call VSCodeNotify('editor.action.showHover')<CR>
-    nmap     \e  \h
-    call CreateSplitMappings("n",     "\\t",  ":call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
-    call CreateSplitMappings("nnore", "\\gd", ":call VSCodeNotify('editor.action.revealDefinition')<CR>")
-    call CreateSplitMappings("nnore", "\\gr", ":call VSCodeNotify('editor.action.goToReferences')<CR>")
-    call CreateSplitMappings("nnore", "\\gi", ":call VSCodeNotify('editor.action.goToImplementation')<CR>")
-
-" Commands
-    command! Only call VSCodeNotify("workbench.action.closeSidebar") | call VSCodeNotify("workbench.action.closePanel") | call VSCodeNotify("workbench.action.joinAllGroups")
-    command! ONLY Only
-    command! DelMarks call VSCodeNotify("bookmarks.clearFromAllFiles")
-    command! DELMARKS DelMarks
-    command! Rename call VSCodeNotify('editor.action.rename')
-    command! RENAME Rename
-    command! Format call VSCodeNotify('editor.action.formatDocument')
-    command! FORMAT Format
-    command! Errors call VSCodeNotify("workbench.actions.view.problems")
-    command! ERRORS Errors
-    command! ERRS Errors
-    command! Actions call VSCodeNotify("workbench.action.showCommands")
-    command! ACTIONS Actions
