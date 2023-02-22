@@ -1,5 +1,3 @@
-source ~/.config/vim/functions.vim
-
 set mouse=a
 set ignorecase
 set linebreak

@@ -40,10 +40,10 @@ source ~/.config/vim/settings.vim
     nnoremap \b <Cmd>echo ":buffers"<CR><Cmd>Buffers<CR>
     nnoremap \w <Cmd>Windows<CR>
     call CreateSplitMappings("n",         "\\d",  "-")
-    nmap \a \q
-    xmap \a \q
     nnoremap \q <cmd>call QuickAction()<CR>
     xnoremap \q <cmd>call QuickAction()<CR>
+    nmap \a \q
+    xmap \a \q
     nnoremap \h <cmd>call Hover()<CR>
     inoremap \h <cmd>call SignatureHelp()<CR>
     nnoremap \e <Cmd>call Error()<CR>

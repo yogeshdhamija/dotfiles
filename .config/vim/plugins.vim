@@ -1,5 +1,3 @@
-source ~/.config/vim/functions.vim
-
 if !exists("plugins")
     let vim_idiomatic_plugins = [
         \ ['yogeshdhamija/better-asterisk-remap.vim', {}],

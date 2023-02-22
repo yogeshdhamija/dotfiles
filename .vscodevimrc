@@ -43,22 +43,22 @@ source ~/.vimrc
 set showmode
 
 " Leader shortcuts
-    nnoremap \q <Cmd>call VSCodeNotify("editor.action.quickFix")<CR>
-    xnoremap \q <Cmd>call ExecuteVSCodeCommandInVisualMode("editor.action.quickFix")<CR>
-    
     nnoremap \c  <Esc>:noh<CR>:call VSCodeNotify("workbench.action.closeSidebar")<CR>:call VSCodeNotify("workbench.action.closePanel")<CR>:call VSCodeNotify("notifications.hideToasts")<CR>:call VSCodeNotify("closeParameterHints")<CR>
-    nnoremap \dh :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
     nnoremap \o  :call VSCodeNotify("workbench.action.quickOpen")<CR>
     nnoremap \b  :call VSCodeNotify("workbench.action.showEditorsInActiveGroup")<CR>
     nnoremap \w  :call VSCodeNotify("workbench.action.showAllEditors")<CR>
+    nnoremap \dh :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
+    nnoremap \q <Cmd>call VSCodeNotify("editor.action.quickFix")<CR>
+    xnoremap \q <Cmd>call ExecuteVSCodeCommandInVisualMode("editor.action.quickFix")<CR>
+    
     nnoremap \a  <Cmd>call VSCodeNotify("workbench.action.showCommands")<CR>
     xnoremap \a  <Cmd>call ExecuteVSCodeCommandInVisualMode("workbench.action.showCommands")<CR>
     nnoremap \h  :call VSCodeNotify('editor.action.showHover')<CR>
     nmap     \e  \h
-    call CreateSplitMappings("n",     "\\t",  ":call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
     call CreateSplitMappings("nnore", "\\gd", ":call VSCodeNotify('editor.action.revealDefinition')<CR>")
     call CreateSplitMappings("nnore", "\\gr", ":call VSCodeNotify('editor.action.goToReferences')<CR>")
     call CreateSplitMappings("nnore", "\\gi", ":call VSCodeNotify('editor.action.goToImplementation')<CR>")
+    call CreateSplitMappings("n",     "\\t",  ":call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
 
 " Commands
     command! Only call VSCodeNotify("workbench.action.closeSidebar") | call VSCodeNotify("workbench.action.closePanel") | call VSCodeNotify("workbench.action.joinAllGroups")
