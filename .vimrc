@@ -14,7 +14,8 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 source ~/.config/vim/plugins.vim
 source ~/.config/vim/settings.vim
 
-" Note: many commands and remaps use functions. 
+" Note: many commands and remaps use functions
+"   such as 'AccessMarks()' and 'ExpandSelection()'.
 "   Those functions can be overridden by other
 "   programs (Neovim, VSCode-Neovim, etc.)
 "   when they choose to load this same vimrc.
