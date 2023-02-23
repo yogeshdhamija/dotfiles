@@ -48,8 +48,6 @@ set showmode
     nnoremap \b  :call VSCodeNotify("workbench.action.showEditorsInActiveGroup")<CR>
     nnoremap \w  :call VSCodeNotify("workbench.action.showAllEditors")<CR>
     nnoremap \dh :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
-    nnoremap \q <Cmd>call VSCodeNotify("editor.action.quickFix")<CR>
-    xnoremap \q <Cmd>call ExecuteVSCodeCommandInVisualMode("editor.action.quickFix")<CR>
     
 " Commands
     command! Only call VSCodeNotify("workbench.action.closeSidebar") | call VSCodeNotify("workbench.action.closePanel") | call VSCodeNotify("workbench.action.joinAllGroups")
@@ -143,5 +141,13 @@ function! AllAction() abort
         call VSCodeNotify("workbench.action.showCommands")
     else
         call ExecuteVSCodeCommandInVisualMode("workbench.action.showCommands")
+    endif
+endfunction
+
+function! QuickAction() abort
+    if (mode() == 'n')
+        call VSCodeNotify("editor.action.quickFix")
+    else
+        call ExecuteVSCodeCommandInVisualMode("editor.action.quickFix")
     endif
 endfunction
