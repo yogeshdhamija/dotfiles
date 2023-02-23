@@ -58,7 +58,6 @@ set showmode
     call CreateSplitMappings("nnore", "\\gd", ":call VSCodeNotify('editor.action.revealDefinition')<CR>")
     call CreateSplitMappings("nnore", "\\gr", ":call VSCodeNotify('editor.action.goToReferences')<CR>")
     call CreateSplitMappings("nnore", "\\gi", ":call VSCodeNotify('editor.action.goToImplementation')<CR>")
-    call CreateSplitMappings("n",     "\\t",  ":call VSCodeNotify('workbench.action.createTerminalEditor')<CR>")
 
 " Commands
     command! Only call VSCodeNotify("workbench.action.closeSidebar") | call VSCodeNotify("workbench.action.closePanel") | call VSCodeNotify("workbench.action.joinAllGroups")
@@ -121,4 +120,8 @@ set showmode
 
 function! AccessMarks() abort
     call VSCodeNotify('bookmarks.listFromAllFiles')
+endfunction
+
+function! StartTerminal() abort
+    call VSCodeNotify('workbench.action.createTerminalEditor')
 endfunction
