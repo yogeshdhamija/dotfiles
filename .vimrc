@@ -48,7 +48,7 @@ source ~/.config/vim/settings.vim
 
 " Leader shortcuts
     xnoremap \p "_dP
-    nnoremap \c <Esc><Cmd>noh<CR>
+    nnoremap \c <Esc><Cmd>call ClearScreen()<CR>
     nnoremap \o <Cmd>echo ":edit"<CR><Cmd>Files<CR>
     nnoremap \b <Cmd>echo ":buffers"<CR><Cmd>Buffers<CR>
     nnoremap \w <Cmd>Windows<CR>
@@ -105,6 +105,10 @@ endfunction
 
 function! DirectoryBrowser() abort
     norm -
+endfunction
+
+function! ClearScreen() abort
+    set nohlsearch
 endfunction
 
 call SourceFileIfExists("~/.config/vim/dirvish_config.vim")
