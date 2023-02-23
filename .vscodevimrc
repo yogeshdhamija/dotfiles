@@ -51,9 +51,6 @@ set showmode
     nnoremap \q <Cmd>call VSCodeNotify("editor.action.quickFix")<CR>
     xnoremap \q <Cmd>call ExecuteVSCodeCommandInVisualMode("editor.action.quickFix")<CR>
     
-    nnoremap \a  <Cmd>call VSCodeNotify("workbench.action.showCommands")<CR>
-    xnoremap \a  <Cmd>call ExecuteVSCodeCommandInVisualMode("workbench.action.showCommands")<CR>
-
 " Commands
     command! Only call VSCodeNotify("workbench.action.closeSidebar") | call VSCodeNotify("workbench.action.closePanel") | call VSCodeNotify("workbench.action.joinAllGroups")
     command! ONLY Only
@@ -139,4 +136,12 @@ endfunction
 
 function! Hover() abort
     call VSCodeNotify('editor.action.showHover')
+endfunction
+
+function! AllAction() abort
+    if (mode() == 'n')
+        call VSCodeNotify("workbench.action.showCommands")
+    else
+        call ExecuteVSCodeCommandInVisualMode("workbench.action.showCommands")
+    endif
 endfunction
