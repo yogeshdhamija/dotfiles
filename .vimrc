@@ -42,8 +42,8 @@ source ~/.config/vim/settings.vim
     call CreateSplitMappings("n",         "\\d",  "-")
     nnoremap \q <cmd>call QuickAction()<CR>
     xnoremap \q <cmd>call QuickAction()<CR>
-    nmap \a \q
-    xmap \a \q
+    nnoremap \a <cmd>call AllAction()<CR>
+    xnoremap \a <cmd>call AllAction()<CR>
     nnoremap \h <cmd>call Hover()<CR>
     inoremap \h <cmd>call SignatureHelp()<CR>
     nnoremap \e <Cmd>call Error()<CR>
@@ -80,6 +80,10 @@ endfunction
 
 function! MoveDown() abort
     norm 10j
+endfunction
+
+function! AllAction() abort
+    call QuickAction()
 endfunction
 
 call SourceFileIfExists("~/.config/vim/dirvish_config.vim")
