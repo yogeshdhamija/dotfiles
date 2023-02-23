@@ -1,7 +1,10 @@
 if !has('nvim')
     " Other programs (Neovim, VSCode-Neovim, etc.), when loading vimrc, 
-    "   are responsible for providing their own functions (could be the same file, 
-    "   if they want).
+    "   are responsible for providing their own functions. They could also
+    "   source this same file, if they want, and override some of them.
+    
+    " These functions are those such as 'SourceFileIfExists()' and 'CustomFoldText()'
+    "   which are used throughout this ~/.vimrc and other scripts sourced by it.
     source ~/.config/vim/functions.vim
 endif
 
