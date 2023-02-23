@@ -96,7 +96,6 @@ set showmode
 " Get navigating marks working with vscode neovim plugin
     " (also relies on VSCode Bookmarks plugin)
     nnoremap m v<Esc>:call ExecuteVSCodeCommandInVisualMode('bookmarks.toggleLabeled')<CR><Esc>
-    nnoremap ` :call VSCodeNotify('bookmarks.listFromAllFiles')<CR>
 
 " Fix VSCode commands
     command! Tabnew call VSCodeNotify("workbench.action.duplicateWorkspaceInNewWindow")
@@ -119,3 +118,7 @@ set showmode
     nmap gc  <Plug>VSCodeCommentary
     omap gc  <Plug>VSCodeCommentary
     nmap gcc <Plug>VSCodeCommentaryLine
+
+function! AccessMarks() abort
+    call VSCodeNotify('bookmarks.listFromAllFiles')
+endfunction

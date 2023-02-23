@@ -2,7 +2,7 @@ if !has('nvim')
     " Other programs (Neovim, VSCode-Neovim, etc.), when loading vimrc, 
     "   are responsible for providing their own functions. They could also
     "   source this same file, if they want, and override some of them.
-    
+
     " These functions are those such as 'SourceFileIfExists()' and 'CustomFoldText()'
     "   which are used throughout this ~/.vimrc and other scripts sourced by it.
     source ~/.config/vim/functions.vim
@@ -14,6 +14,16 @@ call SourceFileIfExists("~/.vimrc.local.loadbefore")
 source ~/.config/vim/plugins.vim
 source ~/.config/vim/settings.vim
 
+" Note: many commands and remaps use functions. 
+"   Those functions can be overridden by other
+"   programs (Neovim, VSCode-Neovim, etc.)
+"   when they choose to load this same vimrc.
+"
+" The encouraged pattern here is that all mappings
+"   should be declared in this ~/.vimrc and 
+"   functionality can be implemented depending on
+"   the program by overriding functions.
+
 " Remaps
     xnoremap <C-c>      "+y
     xnoremap <D-c>      "+y
@@ -22,7 +32,7 @@ source ~/.config/vim/settings.vim
     xmap     ga         <Plug>(EasyAlign)
     nmap     ga         <Plug>(EasyAlign)
     inoremap <C-R>      <C-R><C-O>
-    nnoremap `          <Cmd>call MarksHelper()<CR>
+    nnoremap `          <Cmd>call AccessMarks()<CR>
     nnoremap <C-j>      <Cmd>call MoveDown()<CR>
     nnoremap <C-k>      <Cmd>call MoveUp()<CR>
     xnoremap v          <Cmd>call ExpandSelection()<CR>
@@ -87,6 +97,10 @@ endfunction
 
 function! AllAction() abort
     call QuickAction()
+endfunction
+
+function! AccessMarks() abort
+    call MarksHelper()
 endfunction
 
 call SourceFileIfExists("~/.config/vim/dirvish_config.vim")
