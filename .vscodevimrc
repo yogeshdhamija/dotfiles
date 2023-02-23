@@ -42,12 +42,13 @@ source ~/.vimrc
 
 set showmode
 
-" Leader shortcuts
+" Leoader shortcuts
+    unmap \dd
+    unmap \d
     nnoremap \c  <Esc>:noh<CR>:call VSCodeNotify("workbench.action.closeSidebar")<CR>:call VSCodeNotify("workbench.action.closePanel")<CR>:call VSCodeNotify("notifications.hideToasts")<CR>:call VSCodeNotify("closeParameterHints")<CR>
     nnoremap \o  :call VSCodeNotify("workbench.action.quickOpen")<CR>
     nnoremap \b  :call VSCodeNotify("workbench.action.showEditorsInActiveGroup")<CR>
     nnoremap \w  :call VSCodeNotify("workbench.action.showAllEditors")<CR>
-    nnoremap \dh :call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")<CR>
     
 " Commands
     command! Only call VSCodeNotify("workbench.action.closeSidebar") | call VSCodeNotify("workbench.action.closePanel") | call VSCodeNotify("workbench.action.joinAllGroups")
@@ -150,4 +151,9 @@ function! QuickAction() abort
     else
         call ExecuteVSCodeCommandInVisualMode("editor.action.quickFix")
     endif
+endfunction
+
+function! DirectoryBrowser() abort
+    call VSCodeNotify('workbench.action.joinTwoGroups')
+    call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")
 endfunction

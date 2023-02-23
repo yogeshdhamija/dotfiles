@@ -52,7 +52,6 @@ source ~/.config/vim/settings.vim
     nnoremap \o <Cmd>echo ":edit"<CR><Cmd>Files<CR>
     nnoremap \b <Cmd>echo ":buffers"<CR><Cmd>Buffers<CR>
     nnoremap \w <Cmd>Windows<CR>
-    call CreateSplitMappings("n",         "\\d",  "-")
     nnoremap \q <cmd>call QuickAction()<CR>
     xnoremap \q <cmd>call QuickAction()<CR>
     nnoremap \a <cmd>call AllAction()<CR>
@@ -60,6 +59,7 @@ source ~/.config/vim/settings.vim
     nnoremap \h <cmd>call Hover()<CR>
     inoremap \h <cmd>call SignatureHelp()<CR>
     nnoremap \e <Cmd>call Error()<CR>
+    call CreateSplitMappings("nnore",     "\\d",  "<cmd>call DirectoryBrowser()<CR>")
     call CreateSplitMappings("nnore",     "\\gd", "<cmd>call Definition()<CR>")
     call CreateSplitMappings("nnore",     "\\gD", "<cmd>call Declaration()<CR>")
     call CreateSplitMappings("nnore",     "\\gr", "<cmd>call References()<CR>")
@@ -101,6 +101,10 @@ endfunction
 
 function! AccessMarks() abort
     call MarksHelper()
+endfunction
+
+function! DirectoryBrowser() abort
+    norm -
 endfunction
 
 call SourceFileIfExists("~/.config/vim/dirvish_config.vim")
