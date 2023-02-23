@@ -53,10 +53,6 @@ set showmode
     
     nnoremap \a  <Cmd>call VSCodeNotify("workbench.action.showCommands")<CR>
     xnoremap \a  <Cmd>call ExecuteVSCodeCommandInVisualMode("workbench.action.showCommands")<CR>
-    nnoremap \h  :call VSCodeNotify('editor.action.showHover')<CR>
-    nmap     \e  \h
-    call CreateSplitMappings("nnore", "\\gd", ":call VSCodeNotify('editor.action.revealDefinition')<CR>")
-    call CreateSplitMappings("nnore", "\\gr", ":call VSCodeNotify('editor.action.goToReferences')<CR>")
 
 " Commands
     command! Only call VSCodeNotify("workbench.action.closeSidebar") | call VSCodeNotify("workbench.action.closePanel") | call VSCodeNotify("workbench.action.joinAllGroups")
@@ -127,4 +123,20 @@ endfunction
 
 function! Implementations() abort
     call VSCodeNotify('editor.action.goToImplementation')
+endfunction
+
+function! References() abort
+    call VSCodeNotify('editor.action.goToReferences')
+endfunction
+
+function! Definition() abort
+    call VSCodeNotify('editor.action.revealDefinition')
+endfunction
+
+function! Error() abort
+    call Hover()
+endfunction
+
+function! Hover() abort
+    call VSCodeNotify('editor.action.showHover')
 endfunction
