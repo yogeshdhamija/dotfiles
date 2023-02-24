@@ -83,16 +83,18 @@ Primarily, this repo configures the terminal and vim/neovim.
 
 ### Vim & Neovim
 
-- mappings/remaps in `~/.vimrc`
+This repo provides a `~/.vimrc` which defines all custom mappings/commands. The `~/.vimrc` is extended upon by other files to support other programs (Neovim and VSCode-Neovim).
+
+- All mappings/remaps in `~/.vimrc`
 
 - File sourcing order (from first to last) is:
 
 ```bash
     ~/.config/nvim/init.vim             # only if pure Neovim
-                                            # Mostly used for setting up nvim-specific plugins (Lsp, Treesitter, etc.)
+                                            # File mostly used for setting up nvim-specific plugins (Lsp, Treesitter, etc.)
 
     ~/.vscodevimrc                      # only if Neovim embedded within VSCode
-                                            # Mostly used for allowing only embeddable plugins, and applying VSCode-specific settings
+                                            # File mostly used for allowing only embeddable plugins, and applying VSCode-specific settings
 
     .vim/vimrc.local.loadbefore         # only if exists in the directory vim/nvim was launched from
                                             # Useful variables to set here are:
