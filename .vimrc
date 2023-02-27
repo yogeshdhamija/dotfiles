@@ -68,7 +68,7 @@ source ~/.config/vim/settings.vim
     call CreateSplitMappings("nnore",     "\\t", "<cmd>call StartTerminal()<CR>")
 
 " Commands
-    command!          ONLY            only
+    command!          ONLY            call Only()
     command!          DELMARKS        delmarks a-zA-Z0-9 | echo ":delmarks a-zA-Z0-9"
     command!          RENAME          call ChangeSymbolName()
     command! -range=% FORMAT          call AutoFormat()
@@ -83,6 +83,10 @@ source ~/.config/vim/settings.vim
     command!          PDF             w | call WriteToPdf()
     command!          SWAP            call SwapWithNextParameter()
     command!          PREVSWAP        call SwapWithPreviousParameter()
+
+function! Only() abort
+    execute "normal! :only\<CR>"
+endfunction
 
 function! StartTerminal() abort
     terminal ++curwin
