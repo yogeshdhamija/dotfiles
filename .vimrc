@@ -69,7 +69,7 @@ source ~/.config/vim/settings.vim
 
 " Commands
     command!          ONLY            call Only()
-    command!          DELMARKS        delmarks a-zA-Z0-9 | echo ":delmarks a-zA-Z0-9"
+    command!          DELMARKS        call DelMarks()
     command!          RENAME          call ChangeSymbolName()
     command! -range=% FORMAT          call AutoFormat()
     command!          ERRORS          call DisplayErrors()
@@ -83,6 +83,11 @@ source ~/.config/vim/settings.vim
     command!          PDF             w | call WriteToPdf()
     command!          SWAP            call SwapWithNextParameter()
     command!          PREVSWAP        call SwapWithPreviousParameter()
+
+function! DelMarks() abort
+    execute "normal! :delmarks a-zA-Z0-9\<CR>"
+    echo ":delmarks a-zA-Z0-9"
+endfunction
 
 function! Only() abort
     execute "normal! :only\<CR>"

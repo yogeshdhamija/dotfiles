@@ -96,8 +96,6 @@ set showmode
     nmap gcc <Plug>VSCodeCommentaryLine
 
 " Commands
-    command! DelMarks call VSCodeNotify("bookmarks.clearFromAllFiles")
-    command! DELMARKS DelMarks
     command! Rename call VSCodeNotify('editor.action.rename')
     command! RENAME Rename
     command! Format call VSCodeNotify('editor.action.formatDocument')
@@ -109,6 +107,10 @@ set showmode
     command! ACTIONS Actions
 
 " ==================================== ADD FUNCTIONALITY ====================================
+function! DelMarks() abort
+    call VSCodeNotify("bookmarks.clearFromAllFiles")
+endfunction
+
 function! Only() abort
     call VSCodeNotify("workbench.action.closeSidebar")
     call VSCodeNotify("workbench.action.closePanel")
