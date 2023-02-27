@@ -95,18 +95,19 @@ set showmode
     omap gc  <Plug>VSCodeCommentary
     nmap gcc <Plug>VSCodeCommentaryLine
 
-" Commands
-    command! Rename call VSCodeNotify('editor.action.rename')
-    command! RENAME Rename
-    command! Format call VSCodeNotify('editor.action.formatDocument')
-    command! FORMAT Format
-    command! Errors call VSCodeNotify("workbench.actions.view.problems")
-    command! ERRORS Errors
-    command! ERRS Errors
-    command! Actions call VSCodeNotify("workbench.action.showCommands")
-    command! ACTIONS Actions
-
 " ==================================== ADD FUNCTIONALITY ====================================
+function! DisplayErrors() abort
+    call VSCodeNotify("workbench.actions.view.problems")
+endfunction
+
+function! AutoFormat() abort
+    call VSCodeNotify('editor.action.formatDocument')
+endfunction
+
+function! ChangeSymbolName() abort
+    call VSCodeNotify('editor.action.rename')
+endfunction
+
 function! DelMarks() abort
     call VSCodeNotify("bookmarks.clearFromAllFiles")
 endfunction
