@@ -42,12 +42,9 @@ source ~/.vimrc
 
 set showmode
 
-" Leader shortcuts
+" Cannot open directory listing in current "buffer" in VSCode
     unmap \dd
     unmap \d
-    nnoremap \o  :call VSCodeNotify("workbench.action.quickOpen")<CR>
-    nnoremap \b  :call VSCodeNotify("workbench.action.showEditorsInActiveGroup")<CR>
-    nnoremap \w  :call VSCodeNotify("workbench.action.showAllEditors")<CR>
     
 " Commands
     command! Only call VSCodeNotify("workbench.action.closeSidebar") | call VSCodeNotify("workbench.action.closePanel") | call VSCodeNotify("workbench.action.joinAllGroups")
@@ -163,4 +160,16 @@ function! ClearScreen() abort
     call VSCodeNotify("workbench.action.closePanel")
     call VSCodeNotify("notifications.hideToasts")
     call VSCodeNotify("closeParameterHints")
+endfunction
+
+function! OpenFile() abort
+    call VSCodeNotify("workbench.action.quickOpen")
+endfunction
+
+function! ListBuffers() abort
+    call VSCodeNotify("workbench.action.showEditorsInActiveGroup")
+endfunction
+
+function! ListWindows() abort
+    call VSCodeNotify("workbench.action.showAllEditors")
 endfunction
