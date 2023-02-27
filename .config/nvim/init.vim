@@ -1,6 +1,10 @@
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 
+" ====================================== LOAD FUNCTIONS ======================================
+source ~/.config/vim/functions.vim
+
+" ====================================== SET PLUGINS ======================================
 if !exists("added_plugins")
     let added_plugins = []
 endif
@@ -23,13 +27,15 @@ let added_plugins = added_plugins + [
     \ ['j-hui/fidget.nvim', {}],
 \ ]
 
-source ~/.config/vim/functions.vim
+" ====================================== LOAD VIMRC ======================================
 source ~/.vimrc
 
+" ====================================== CHANGE SETTINGS ======================================
 set scl=auto:9
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
+" ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
 
 ---------------- LSP ------------------------
@@ -113,6 +119,7 @@ end
 
 EOF
 
+" ==================================== ADD FUNCTIONALITY ====================================
 function! QuickAction() abort
     lua vim.lsp.buf.code_action({range})
 endfunction

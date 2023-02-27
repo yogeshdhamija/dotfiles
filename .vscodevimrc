@@ -1,6 +1,32 @@
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 
+" ====================================== LOAD FUNCTIONS ======================================
+source ~/.config/vim/functions.vim
+
+function! CreateSplitMappings(mode, mapping, rhs) abort
+    execute a:mode.'map '.a:mapping.' '.a:rhs
+    execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.a:rhs
+    execute a:mode.'map '.a:mapping.'h :call VSCodeNotify("workbench.action.newGroupLeft")<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'l :call VSCodeNotify("workbench.action.newGroupRight")<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'j :call VSCodeNotify("workbench.action.newGroupBelow")<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'k :call VSCodeNotify("workbench.action.newGroupAbove")<CR>'.a:rhs
+endfunction
+
+function! ExecuteVSCodeCommandInVisualMode(command_name) abort
+    let visualmode = visualmode()
+    if visualmode ==# 'V'
+        let startLine = line("v")
+        let endLine = line(".")
+        call VSCodeNotifyRange(a:command_name, startLine, endLine, 1)
+    else
+        let startPos = getpos("v")
+        let endPos = getpos(".")
+        call VSCodeNotifyRangePos(a:command_name, startPos[1], endPos[1], startPos[2], endPos[2]+1, 1)
+    endif
+endfunction
+
+" ====================================== SET PLUGINS ======================================
 if !exists("plugins")
     let plugins = [
         \ ['yogeshdhamija/better-asterisk-remap.vim', {}],
@@ -14,52 +40,16 @@ if !exists("plugins")
     \ ]
 endif
 
-source ~/.config/vim/functions.vim
-
-" Functions
-    function! CreateSplitMappings(mode, mapping, rhs) abort
-        execute a:mode.'map '.a:mapping.' '.a:rhs
-        execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.a:rhs
-        execute a:mode.'map '.a:mapping.'h :call VSCodeNotify("workbench.action.newGroupLeft")<CR>'.a:rhs
-        execute a:mode.'map '.a:mapping.'l :call VSCodeNotify("workbench.action.newGroupRight")<CR>'.a:rhs
-        execute a:mode.'map '.a:mapping.'j :call VSCodeNotify("workbench.action.newGroupBelow")<CR>'.a:rhs
-        execute a:mode.'map '.a:mapping.'k :call VSCodeNotify("workbench.action.newGroupAbove")<CR>'.a:rhs
-    endfunction
-    function! ExecuteVSCodeCommandInVisualMode(command_name) abort
-        let visualmode = visualmode()
-        if visualmode ==# 'V'
-            let startLine = line("v")
-            let endLine = line(".")
-            call VSCodeNotifyRange(a:command_name, startLine, endLine, 1)
-        else
-            let startPos = getpos("v")
-            let endPos = getpos(".")
-            call VSCodeNotifyRangePos(a:command_name, startPos[1], endPos[1], startPos[2], endPos[2]+1, 1)
-        endif
-    endfunction
-
+" ====================================== LOAD VIMRC ======================================
 source ~/.vimrc
 
+" ====================================== CHANGE SETTINGS ======================================
 set showmode
 
+" ==================================== VSCODE-NEOVIM SPECIFICS ====================================
 " Cannot open directory listing in current "buffer" in VSCode
     unmap \dd
     unmap \d
-    
-" Commands
-    command! Only call VSCodeNotify("workbench.action.closeSidebar") | call VSCodeNotify("workbench.action.closePanel") | call VSCodeNotify("workbench.action.joinAllGroups")
-    command! ONLY Only
-    command! DelMarks call VSCodeNotify("bookmarks.clearFromAllFiles")
-    command! DELMARKS DelMarks
-    command! Rename call VSCodeNotify('editor.action.rename')
-    command! RENAME Rename
-    command! Format call VSCodeNotify('editor.action.formatDocument')
-    command! FORMAT Format
-    command! Errors call VSCodeNotify("workbench.actions.view.problems")
-    command! ERRORS Errors
-    command! ERRS Errors
-    command! Actions call VSCodeNotify("workbench.action.showCommands")
-    command! ACTIONS Actions
 
 " Get folding working with vscode neovim plugin
     nnoremap zM :call VSCodeNotify('editor.foldAll')<CR>
@@ -105,6 +95,22 @@ set showmode
     omap gc  <Plug>VSCodeCommentary
     nmap gcc <Plug>VSCodeCommentaryLine
 
+" Commands
+    command! Only call VSCodeNotify("workbench.action.closeSidebar") | call VSCodeNotify("workbench.action.closePanel") | call VSCodeNotify("workbench.action.joinAllGroups")
+    command! ONLY Only
+    command! DelMarks call VSCodeNotify("bookmarks.clearFromAllFiles")
+    command! DELMARKS DelMarks
+    command! Rename call VSCodeNotify('editor.action.rename')
+    command! RENAME Rename
+    command! Format call VSCodeNotify('editor.action.formatDocument')
+    command! FORMAT Format
+    command! Errors call VSCodeNotify("workbench.actions.view.problems")
+    command! ERRORS Errors
+    command! ERRS Errors
+    command! Actions call VSCodeNotify("workbench.action.showCommands")
+    command! ACTIONS Actions
+
+" ==================================== ADD FUNCTIONALITY ====================================
 function! AccessMarks() abort
     call VSCodeNotify('bookmarks.listFromAllFiles')
 endfunction
