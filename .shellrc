@@ -7,7 +7,8 @@ else
 fi
 
 # Dotfiles alias
-alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+export DOTFILES_COMMAND='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dotfiles="${DOTFILES_COMMAND}"
 
 
 # ===================== CONTENT ===============================================
