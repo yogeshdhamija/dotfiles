@@ -1,6 +1,7 @@
-Backburner:
+Blocked:
 2023-04-27 | vscode-neovim | Add 'expand and shrink selection' functionality
-                                    Partially implemented. See ~/.vimrc
+             Partially implemented. See ~/.vimrc `v` shortcut. Blocked on vscode-neovim.
 
 TODO:
 2023-04-27 | vscode-neovim | Make \c clear find widget
+2023-04-27 | vscode-neovim | Make jupyter notebooks work
