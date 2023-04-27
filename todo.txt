@@ -4,4 +4,3 @@ Blocked:
 
 TODO:
 2023-04-27 | vscode-neovim | Make \c clear find widget
-2023-04-27 | vscode-neovim | Make jupyter notebooks work
