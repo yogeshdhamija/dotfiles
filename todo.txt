@@ -1,1 +1,2 @@
-vscode-neovim: Make \c clear finid widget
+vscode-neovim: Look into 'expand and shrink' selection
+vscode-neovim: Make \c clear find widget
