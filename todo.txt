@@ -1,0 +1,1 @@
+vscode-neovim: Make \c clear finid widget
