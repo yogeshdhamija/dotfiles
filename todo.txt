@@ -1,2 +1,6 @@
-vscode-neovim: Look into 'expand and shrink' selection
-vscode-neovim: Make \c clear find widget
+Backburner:
+2023-04-27 | vscode-neovim | Add 'expand and shrink selection' functionality
+                                    Partially implemented. See ~/.vimrc
+
+TODO:
+2023-04-27 | vscode-neovim | Make \c clear find widget

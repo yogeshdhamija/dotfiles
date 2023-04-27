@@ -1,6 +1,6 @@
 alias "dotfiles-log"="dotfiles log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cs) %C(bold blue)<%an>%Creset' --abbrev-commit "
 
-alias "dotfiles-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh && cd -"
+alias "dotfiles-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh && cd - && cat ~/todo.txt"
 
 alias "dotfiles-update-repo"="cd ~ && dotfiles remote update && dotfiles pull && dotfiles checkout && dotfiles submodule init && dotfiles submodule update && dotfiles submodule update --remote && dotfiles status; cd -"
 
