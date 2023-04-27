@@ -41,6 +41,7 @@ git config --global pull.ff only
 
 export BAT_THEME="ansi"
 
+cat ~/todo.txt
 
 # ===================== DOTFILES STUFF ===============================================
 
