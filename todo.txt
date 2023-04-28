@@ -1,3 +1,9 @@
 Blocked:
 2023-04-27 | vscode-neovim | Add 'expand and shrink selection' functionality
              Partially implemented. See ~/.vimrc `v` shortcut. Blocked on vscode-neovim.
+
+TODO:
+2023-04-28 | all vim | Update to prompt before loading settings.
+                Not the `~/.vimrc.local` ones, only the `./.vim/*` ones.
+                See: `call SourceFileIfExists(".vim/vimrc.local.loadbefore")` in `~/.vimrc`.
+                Prompt once, save "marked safe" status somewhere for file hash, don't prompt again.
