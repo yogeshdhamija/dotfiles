@@ -61,7 +61,7 @@ export PATH="/add_to_path/:$PATH"
 
 ## What it does
 
-Primarily, this repo configures the terminal and vim/neovim.
+Primarily, this repo configures the terminal and vim/neovim. It also has configuration for VSCode, but this must be manually imported.
 
 ### Terminal
 
@@ -107,6 +107,14 @@ This repo provides a `~/.vimrc` which defines all custom mappings/commands. The 
 ```
 
 - The `dotfiles-update` terminal command will install/update all Vim plugins, through the `junegunn/vim-plug` plugin manager.
+
+### VSCode
+
+The `~/dotfile-backups/vscode/` folder contains VSCode profile files, which contain all the settings and configuration to make VSCode behave like NeoVim.
+
+This can be imported into VSCode manually.
+
+I should remember to periodically export these profile files from VSCode, in case I make updates/changes. When I do that, I should remember to name the profile "Default" (though the file name can differ), otherwise I'll have trouble re-importing.
 
 ## Notes
 
