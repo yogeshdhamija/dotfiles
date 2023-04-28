@@ -65,7 +65,7 @@ Primarily, this repo configures the terminal and vim/neovim.
 
 ### Terminal
 
-- This repo will configure `zsh` and `bash` terminals. More config for `zsh` than for `bash`.
+- This repo will configure `zsh` and `bash` terminals.
 - These are the primary files:
     - `~/.bashrc` - for bash-only settings
     - `~/.zshrc` - for zsh-only settings
@@ -86,44 +86,31 @@ Primarily, this repo configures the terminal and vim/neovim.
 This repo provides a `~/.vimrc` which defines all custom mappings/commands. The `~/.vimrc` is extended upon by other files to support other programs (Neovim and VSCode-Neovim).
 
 - All mappings/remaps in `~/.vimrc`
+    - These mappings call functions which may be defined in:
+        -  `~/.vimrc` If it's a default implementation (overridden with enhanced functionality elsewhere), or if it's vim-specific
+        -  `~/.config/nvim/init.vim` If it's a neovim specific implementation
+        -  `~/.vscodevimrc` If it's a vscode-neovim specific implementation
+    - Reasoning is so that the implementaton can change based on Vim, Neovim, or VScode-Neovim, but the mapping is only defined once
 
 - File sourcing order (from first to last) is:
 
 ```bash
     ~/.config/nvim/init.vim             # only if pure Neovim
-                                            # File mostly used for setting up nvim-specific plugins (Lsp, Treesitter, etc.)
-
     ~/.vscodevimrc                      # only if Neovim embedded within VSCode
-                                            # File mostly used for allowing only embeddable plugins, and applying VSCode-specific settings
-
     .vim/vimrc.local.loadbefore         # only if exists in the directory vim/nvim was launched from
-                                            # Useful variables to set here are:
-                                            #   added_plugins = [ ["repo/path.git"], {setting: true} ]
-                                            #           (added to defaults, settings are `junegunn/vim-plug` (plugin manager) style dictionaries)
-                                            #   disabled_plugins = [ "repo/path.git" ] 
-                                            #           (disabled, if added from defaults or elsewhere)
-                                            #   plugins = [ ["repo/path.git"], {setting: true} ]
-                                            #           (only these plugins will be used, no defaults)
+    ~/.vimrc.local.loadbefore           # only if exists
 
-    ~/.vimrc.local.loadbefore               # Changes here are not commmitted to `dotfiles` repo.
-                                            # can use the same variables as above,
-                                            #   but will override the above file
-                                            #   if you want to extend from the above file, add to the existing arrays instead
+    ~/.vimrc
 
-    ~/.vimrc                                # Mappings, commands, and default settings are defined here.
-
-    ~/.vimrc.local                          # Changes here are not committed to `dotfiles` repo.
-
+    ~/.vimrc.local                      # only if exists
     .vim/vimrc.local                    # only if exists in the directory nvim/vim was launched from
 ```
 
 - The `dotfiles-update` terminal command will install/update all Vim plugins, through the `junegunn/vim-plug` plugin manager.
-
-- `~/.vimrc` uses functions (not defined by default) to execute certain commands/remaps. Example: `AutoFormat()`. If using Neovim, those are defined in `~/.config/nvim/init.vim`. Those may be defined in `~/.vimrc.local`. Reasoning is so that the implementaton can change based on Vim, Neovim, or VScode-Neovim without having to remap every time.
 
 ## Notes
 
 - Do **not** use the `dotfiles add .` command. This will add all the untracked files in your home directory, which is **everything**.
     - Instead, add things individually using `dotfiles add file`.
     - This also applies to other commands like `dotfiles commit -a`.
-    - If you do this accidentally, you'll have to `Ctrl+C` out of it while it's stuck, or unstage all the files you added if it somehow succeeds.
+    - If you do this accidentally, you'll have to `Ctrl+C` out of it while it's stuck, or unstage all the files if it somehow succeeds.
