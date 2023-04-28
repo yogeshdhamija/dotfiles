@@ -172,6 +172,8 @@ function! ClearScreen() abort
     call VSCodeNotify("workbench.action.closeSidebar")
     call VSCodeNotify("workbench.action.closePanel")
     call VSCodeNotify("notifications.hideToasts")
+    call VSCodeNotify("notifications.hideList")
+    call VSCodeNotify("closeFindWidget")
     call VSCodeNotify("closeParameterHints")
 endfunction
 
