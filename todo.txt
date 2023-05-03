@@ -1,6 +1,6 @@
 Blocked:
-2023-04-27 | vscode-neovim | Add 'expand and shrink selection' functionality
-             Partially implemented. See ~/.vimrc `v` shortcut. Blocked on vscode-neovim.
+2023-05-03 | vscode-neovim | Add 'expand and shrink selection' functionality
+             Partially implemented. See ~/.vimrc `v` shortcut. Blocked on https://github.com/vscode-neovim/vscode-neovim/issues/1212.
 
 TODO:
 2023-04-28 | all vim | Update to prompt before loading settings.
