@@ -24,6 +24,9 @@ if !exists("plugins")
         \ ['yogeshdhamija/find-in-dir-helper.vim', {}],
         \ ['yogeshdhamija/close-hidden-buffers-command.vim', {}],
         \ ['machakann/vim-highlightedyank', {}],
+        \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
+        \ ['nvim-treesitter/nvim-treesitter-context', {}],
+        \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
     \ ]
 endif
 
@@ -34,6 +37,22 @@ source ~/.vimrc
 set showmode
 
 " ==================================== VSCODE-NEOVIM SPECIFICS ====================================
+lua << EOF
+local status, ts = pcall(require, 'nvim-treesitter.configs')
+if (status) then
+    ts.setup {
+      ensure_installed = "all",
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          node_incremental = "<Plug>ExpandSelection",
+          node_decremental = "<Plug>ShrinkSelection",
+        },
+      },
+    }
+end
+EOF
+
 " Cannot open directory listing in current "buffer" in VSCode
     unmap \dd
     unmap \d
@@ -177,9 +196,9 @@ function! ListWindows() abort
 endfunction
 
 function! ExpandSelection() abort
-    call VSCodeNotifyVisual("editor.action.smartSelect.expand", 1)
+    exe "norm \<Plug>ExpandSelection"
 endfunction
 
 function! ShrinkSelection() abort
-    call VSCodeNotifyVisual("editor.action.smartSelect.shrink", 1)
+    exe "norm \<Plug>ShrinkSelection"
 endfunction

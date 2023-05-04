@@ -1,8 +1,3 @@
-Blocked:
-2023-05-03 | vscode-neovim | Add 'expand and shrink selection' functionality
-             Partially implemented. See ~/.vscodevimrc `ExpandSelection` function. Blocked on https://github.com/vscode-neovim/vscode-neovim/issues/553.
-
-TODO:
 2023-04-28 | all vim | Update to prompt before loading settings.
                 Not the `~/.vimrc.local` ones, only the `./.vim/*` ones.
                 See: `call SourceFileIfExists(".vim/vimrc.local.loadbefore")` in `~/.vimrc`.
