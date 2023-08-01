@@ -77,7 +77,7 @@ EOF
 
 " Get navigating marks working with vscode neovim plugin
     " (also relies on VSCode Bookmarks plugin)
-    nnoremap m v<Esc>:call VSCodeNotifyVisual('bookmarks.toggleLabeled', 0)<CR><Esc>
+    nnoremap m v<Esc>:call VSCodeNotify('bookmarks.toggleLabeled', 0)<CR><Esc>
 
 " Fix VSCode commands
     command! Tabnew call VSCodeNotify("workbench.action.duplicateWorkspaceInNewWindow")
@@ -153,19 +153,11 @@ function! Hover() abort
 endfunction
 
 function! AllAction() abort
-    if (mode() == 'n')
-        call VSCodeNotify("workbench.action.showCommands")
-    else
-        call VSCodeNotifyVisual("workbench.action.showCommands", 0)
-    endif
+    call VSCodeNotify("workbench.action.showCommands")
 endfunction
 
 function! QuickAction() abort
-    if (mode() == 'n')
-        call VSCodeNotify("editor.action.quickFix")
-    else
-        call VSCodeNotifyVisual("editor.action.quickFix", 0)
-    endif
+    call VSCodeNotify("editor.action.quickFix")
 endfunction
 
 function! DirectoryBrowser() abort
