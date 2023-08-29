@@ -21,13 +21,12 @@ let added_plugins = added_plugins + [
     \ ['saadparwaiz1/cmp_luasnip', {}],
     \ ['hrsh7th/cmp-nvim-lua', {}],
     \ ['L3MON4D3/LuaSnip', {}],
-    \ ['nvim-treesitter/nvim-treesitter', {}],
-    \ ['nvim-treesitter/nvim-treesitter-context', {}],
-    \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
     \ ['j-hui/fidget.nvim', {}],
 \ ]
 " Disabled because annoying to update treesitter languages so frequently
     " \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
+    " \ ['nvim-treesitter/nvim-treesitter-context', {}],
+    " \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
 
 " ====================================== LOAD VIMRC ======================================
 source ~/.vimrc
