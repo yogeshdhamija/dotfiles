@@ -57,6 +57,11 @@ set showmode
     nmap <expr> j MoveCursor('j')
     nmap <expr> k MoveCursor('k')
 
+" Shortcuts to manupulate Jupyter notebooks
+    nnoremap zz :call VSCodeNotify('notebook.centerActiveCell')<CR>zz
+    nnoremap gg :call VSCodeNotify('notebook.focusTop')<CR>gg
+    nnoremap G :call VSCodeNotify('notebook.focusBottom')<CR>G
+
 " Get navigating marks working with vscode neovim plugin
     " (also relies on VSCode Bookmarks plugin)
     nnoremap m v<Esc>:call VSCodeNotify('bookmarks.toggleLabeled', 0)<CR><Esc>
