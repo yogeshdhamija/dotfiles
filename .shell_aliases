@@ -25,6 +25,9 @@ command -v exa > /dev/null && alias "ls"="exa"
 
 alias ":q"="exit"
 alias ":e"="$EDITOR"
+alias "dot"="dotfiles"
+alias "dootfiles"="dotfiles"
+alias "doot"="dotfiles"
 
 # ============ GIT ==============
 
