@@ -12,7 +12,7 @@ alias "dotfiles-update-fzf"="cd ~ && .fzf/install --all && cd -"
 
 alias "dotfiles-add-submodule-updates"="dotfiles status | grep '^\s+modified:\s+[^\s]+\s+\(new commits\)\s*$' | awk '{print \$2}' | xargs ${DOTFILES_COMMAND} add"
 
-alias "dotfiles-update"="dotfiles-update-repo; dotfiles-update-vim; dotfiles-update-nvim; dotfiles-update-fzf; dotfiles-check; dotfiles-add-submodule-updates"
+alias "dotfiles-update"="dotfiles-update-repo; dotfiles-update-vim; dotfiles-update-nvim; dotfiles-update-fzf; dotfiles-add-submodule-updates; dotfiles-check; dotfiles status;"
 
 
 # ============ REPLACEMENTS ==============
