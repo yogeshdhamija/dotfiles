@@ -9,19 +9,6 @@ if !exists("added_plugins")
     let added_plugins = []
 endif
 let added_plugins = added_plugins + [
-    \ ['VonHeikemen/lsp-zero.nvim', {}],
-    \ ['neovim/nvim-lspconfig', {}],
-    \ ['williamboman/mason.nvim', {}],
-    \ ['williamboman/mason-lspconfig.nvim', {}],
-    \ ['hrsh7th/cmp-nvim-lsp', {}],
-    \ ['hrsh7th/cmp-buffer', {}],
-    \ ['hrsh7th/cmp-path', {}],
-    \ ['hrsh7th/cmp-cmdline', {}],
-    \ ['hrsh7th/nvim-cmp', {}],
-    \ ['saadparwaiz1/cmp_luasnip', {}],
-    \ ['hrsh7th/cmp-nvim-lua', {}],
-    \ ['L3MON4D3/LuaSnip', {}],
-    \ ['j-hui/fidget.nvim', {}],
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
     \ ['nvim-treesitter/nvim-treesitter-context', {}],
     \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
@@ -37,44 +24,9 @@ set foldexpr=nvim_treesitter#foldexpr()
 
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
-
----------------- LSP ------------------------
-local lspstatus, lsp = pcall(require, 'lsp-zero')
-local cmpstatus, cmp = pcall(require, 'cmp')
-if(cmpstatus and lspstatus) then
-
-    lsp.preset('recommended')
-
-    lsp.set_preferences({
-      set_lsp_keymaps = false,
-      configure_diagnostics = false
-    })
-
-    lsp.setup_nvim_cmp({
-        completion = {
-            completeopt = 'menu,menuone,noinsert,noselect',
-        },
-        mapping = {
-            ['<C-n>'] = function() cmp.select_next_item() end,
-            ['<C-p>'] = function() cmp.select_prev_item() end,
-            ['<CR>'] = cmp.mapping.confirm({ select = false }),
-        }
-    })
-
-    lsp.setup()
-
-    local status, fidget = pcall(require,"fidget")
-    if (status) then
-        fidget.setup{}
-    end
-    local status, lines = pcall(require,"lsp_lines")
-    if(status) then
-        lines.setup()
-    end
-end
-
 ---------------- Tree Sitter ------------------------
 local status, ts = pcall(require, 'nvim-treesitter.configs')
+local statuscontext, tscontext = pcall(require, 'treesitter-context')
 if (status) then
     ts.setup {
       ensure_installed = "all",
@@ -115,6 +67,7 @@ if (status) then
         },
       },
     }
+    tscontext.setup { mode='topline' }
 end
 
 EOF
