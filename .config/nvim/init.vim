@@ -12,13 +12,13 @@ let added_plugins = added_plugins + [
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
     \ ['nvim-treesitter/nvim-treesitter-context', {}],
     \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
+    \ ['ncm2/float-preview.nvim', {}],
 \ ]
 
 " ====================================== LOAD VIMRC ======================================
 source ~/.vimrc
 
 " ====================================== CHANGE SETTINGS ======================================
-set scl=auto:9
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
