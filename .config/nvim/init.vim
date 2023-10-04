@@ -24,6 +24,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
+
 ---------------- Tree Sitter ------------------------
 local status, ts = pcall(require, 'nvim-treesitter.configs')
 local statuscontext, tscontext = pcall(require, 'treesitter-context')
@@ -69,6 +70,19 @@ if (status) then
     }
     tscontext.setup { mode='topline' }
 end
+
+---------------- LSP --------------------------------
+
+vim.api.nvim_create_autocmd({"FileType"}, {
+    pattern = {"rust"},
+    callback = function(event)
+      vim.lsp.start({
+        name = 'rust-analyzer',
+        cmd = {'rust-analyzer'},
+        root_dir = vim.fs.dirname(vim.fs.find({'Cargo.lock', 'Cargo.toml'}, { upward = true })[1]),
+      })
+    end
+})
 
 EOF
 
