@@ -22,33 +22,8 @@ source ~/.vimrc
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
-inoremap a a<C-X><C-O>
-inoremap b b<C-X><C-O>
-inoremap c c<C-X><C-O>
-inoremap d d<C-X><C-O>
-inoremap e e<C-X><C-O>
-inoremap f f<C-X><C-O>
-inoremap g g<C-X><C-O>
-inoremap h h<C-X><C-O>
-inoremap i i<C-X><C-O>
-inoremap j j<C-X><C-O>
-inoremap k k<C-X><C-O>
-inoremap l l<C-X><C-O>
-inoremap m m<C-X><C-O>
-inoremap n n<C-X><C-O>
-inoremap o o<C-X><C-O>
-inoremap p p<C-X><C-O>
-inoremap q q<C-X><C-O>
-inoremap r r<C-X><C-O>
-inoremap s s<C-X><C-O>
-inoremap t t<C-X><C-O>
-inoremap u u<C-X><C-O>
-inoremap v v<C-X><C-O>
-inoremap w w<C-X><C-O>
-inoremap x x<C-X><C-O>
-inoremap y y<C-X><C-O>
-inoremap z z<C-X><C-O>
-inoremap . .<C-X><C-O>
+aunmenu PopUp.How-to\ disable\ mouse
+aunmenu PopUp.-1-
 
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF

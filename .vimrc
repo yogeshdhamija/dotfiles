@@ -33,6 +33,7 @@ source ~/.config/vim/settings.vim
     xmap     ga         <Plug>(EasyAlign)
     nmap     ga         <Plug>(EasyAlign)
     inoremap <C-R>      <C-R><C-O>
+    inoremap <C-N>      <C-X><C-O>
     nnoremap `          <Cmd>call AccessMarks()<CR>
     nnoremap <C-j>      <Cmd>call MoveDown()<CR>
     nnoremap <C-k>      <Cmd>call MoveUp()<CR>

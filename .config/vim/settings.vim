@@ -13,7 +13,7 @@ set nomodeline
 set hidden
 set updatetime=300
 let g:float_preview#docked = 0
-set completeopt=noinsert,menuone
+set completeopt=noinsert,noselect,menuone
 if(!has('nvim'))
     set re=0
 endif
