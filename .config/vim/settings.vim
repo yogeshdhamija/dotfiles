@@ -12,13 +12,13 @@ set undofile
 set nomodeline
 set hidden
 set updatetime=300
-set scl=auto:9
 let g:float_preview#docked = 0
 set completeopt=noinsert,menuone
 if(!has('nvim'))
     set re=0
 endif
 if(has('nvim'))
+    set scl=auto:9
     set undodir=~/.nvim/undodir
 else
     set undodir=~/.vim/undodir
