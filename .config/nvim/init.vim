@@ -5,6 +5,10 @@ let &packpath = &runtimepath
 source ~/.config/vim/functions.vim
 
 " ====================================== SET PLUGINS ======================================
+if !exists("disabled_plugins")
+    let disabled_plugins = []
+endif
+let disabled_plugins = disabled_plugins + ["justinmk/vim-dirvish"]
 if !exists("added_plugins")
     let added_plugins = []
 endif
@@ -13,6 +17,7 @@ let added_plugins = added_plugins + [
     \ ['nvim-treesitter/nvim-treesitter-context', {}],
     \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
     \ ['ncm2/float-preview.nvim', {}],
+    \ ['stevearc/oil.nvim', {}],
 \ ]
 
 " ====================================== LOAD VIMRC ======================================
@@ -27,6 +32,17 @@ aunmenu PopUp.-1-
 
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
+
+---------------- File browser -----------------------
+local statusf, f = pcall(require, 'oil')
+if(statusf) then
+    f.setup({
+        cleanup_delay_ms = false,
+        view_options = {
+            show_hidden = true
+        }
+    })
+end
 
 ---------------- Tree Sitter ------------------------
 local status, ts = pcall(require, 'nvim-treesitter.configs')
@@ -169,3 +185,8 @@ endfunction
 function! SwapWithPreviousParameter() abort
     exe "norm \<Plug>SwapWithPreviousParameter"
 endfunction
+
+function! DirectoryBrowser() abort
+    exe "norm \<CMD>Oil\<CR>"
+endfunction
+
