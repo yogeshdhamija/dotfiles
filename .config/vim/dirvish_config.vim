@@ -17,7 +17,8 @@ augroup dirvish_config
     autocmd FileType dirvish set conceallevel=0
     autocmd BufEnter,CursorMoved * if exists("b:dirvish") | set conceallevel=0 | endif
 
-    autocmd FileType dirvish nnoremap <silent><buffer> t 0C<Esc>:let @"=substitute(@", '\n', '', 'g')<CR>:r ! find "<C-R>"" -maxdepth 1 -print0 \| xargs -0 ls -Fd<CR>:silent! keeppatterns %s/\/\//\//g<CR>:silent! keeppatterns %s/[^a-zA-Z0-9\/]$//g<CR>:silent! keeppatterns g/^$/d<CR>:noh<CR>
+    autocmd FileType dirvish
+                \ nnoremap <silent><buffer> t <Esc>:let b:dirvish_old_default_reg = @"<CR>0C<Esc>:let @"=substitute(@", '\n', '', 'g')<CR>:r ! find "<C-R>"" -maxdepth 1 -print0 \| xargs -0 ls -Fd<CR>:silent! keeppatterns %s/\/\//\//g<CR>:silent! keeppatterns %s/[^a-zA-Z0-9\/]$//g<CR>:silent! keeppatterns g/^$/d<CR>:noh<CR>:let @"=b:dirvish_old_default_reg<CR>:unlet b:dirvish_old_default_reg<CR>
 
     autocmd BufEnter,CursorMoved * if exists("b:dirvish") | execute 'match Type /\v[^\/]+\/?$/' | else | match none | endif
     autocmd BufEnter,CursorMoved * if exists("b:dirvish") | execute '3match Conditional /\v[^\/]+$/' | else | 3match none | endif
