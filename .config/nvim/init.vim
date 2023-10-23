@@ -18,6 +18,7 @@ let added_plugins = added_plugins + [
     \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
     \ ['ncm2/float-preview.nvim', {}],
     \ ['stevearc/oil.nvim', {}],
+    \ ['nvim-tree/nvim-web-devicons', {}],
 \ ]
 
 " ====================================== LOAD VIMRC ======================================
@@ -40,7 +41,7 @@ if(statusf) then
         cleanup_delay_ms = false,
         view_options = {
             show_hidden = true
-        }
+        },
     })
 end
 
