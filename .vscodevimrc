@@ -16,7 +16,6 @@ endfunction
 " ====================================== SET PLUGINS ======================================
 if !exists("plugins")
     let plugins = [
-        \ ['yogeshdhamija/better-asterisk-remap.vim', {}],
         \ ['tpope/vim-repeat', {}],
         \ ['tpope/vim-surround', {}],
         \ ['michaeljsmith/vim-indent-object', {}],
