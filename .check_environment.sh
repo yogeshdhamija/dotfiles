@@ -5,7 +5,7 @@ declare -a EXECS=(
     "starship"
     "rg"
     "bat"
-    "exa"
+    "eza"
     "jq"
     "yq"
 )
@@ -14,7 +14,7 @@ declare -a NAMES=(
     "Starship"
     "Ripgrep"
     "Bat"
-    "Exa"
+    "eza"
     "jq"
     "yq"
 )
@@ -32,7 +32,7 @@ declare -a ADDITIONAL2=(
     "https://starship.rs"
     "https://github.com/BurntSushi/ripgrep"
     "https://github.com/sharkdp/bat"
-    "https://github.com/ogham/exa"
+    "https://github.com/eza-community/eza"
     "https://stedolan.github.io/jq/"
     "https://github.com/kislyuk/yq"
 )
