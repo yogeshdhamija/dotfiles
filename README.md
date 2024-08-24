@@ -65,21 +65,17 @@ Primarily, this repo configures the terminal and vim/neovim. It also has configu
 
 ### Terminal
 
-- This repo will configure `zsh` and `bash` terminals.
+- This repo will configure the `bash` terminal.
 - These are the primary files:
     - `~/.bashrc` - for bash-only settings
-    - `~/.zshrc` - for zsh-only settings
-    - `~/.shellrc` - for common settings
+    - `~/.shellrc` - for common settings across all shells (but currently only bash is configured)
     - `~/.shell_aliases` - for aliases
 - The following files will be auto-loaded if they exist, so you can make changes you don't want to commit:
     - `~/.shellrc.local`
     - `~/.bashrc.local`
-    - `~/.zshrc.local`
     - `~/.shellrc.local.loadbefore`
     - `~/.bashrc.local.loadbefore`
-    - `~/.zshrc.local.loadbefore`
         - The `*.loadbefore` files are sourced before any other config.
-- Some `zsh` plugins are included in this repo as submodules.
 
 ### Vim & Neovim
 
@@ -95,15 +91,15 @@ This repo provides a `~/.vimrc` which defines all custom mappings/commands. The 
 - File sourcing order (from first to last) is:
 
 ```bash
-    ~/.config/nvim/init.vim             # only if pure Neovim
-    ~/.vscodevimrc                      # only if Neovim embedded within VSCode
-    .vim/vimrc.local.loadbefore         # only if exists in the directory vim/nvim was launched from
-    ~/.vimrc.local.loadbefore           # only if exists
+    ~/.config/nvim/init.vim             # only if Neovim
+    ~/.vscodevimrc                      # only if VSCode-Neovim
+    .vim/vimrc.local.loadbefore
+    ~/.vimrc.local.loadbefore
 
     ~/.vimrc
 
-    ~/.vimrc.local                      # only if exists
-    .vim/vimrc.local                    # only if exists in the directory nvim/vim was launched from
+    ~/.vimrc.local
+    .vim/vimrc.local
 ```
 
 - The `dotfiles-update` terminal command will install/update all Vim plugins, through the `junegunn/vim-plug` plugin manager.
@@ -119,6 +115,6 @@ I should remember to periodically export these profile files from VSCode, in cas
 ## Notes
 
 - Do **not** use the `dotfiles add .` command. This will add all the untracked files in your home directory, which is **everything**.
-    - Instead, add things individually using `dotfiles add file`.
+    - Instead, add things individually using `dotfiles add <file>`.
     - This also applies to other commands like `dotfiles commit -a`.
     - If you do this accidentally, you'll have to `Ctrl+C` out of it while it's stuck, or unstage all the files if it somehow succeeds.
