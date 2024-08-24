@@ -8,7 +8,6 @@ declare -a EXECS=(
     "exa"
     "jq"
     "yq"
-    "zsh"
 )
 declare -a NAMES=(
     "Neovim"
@@ -18,7 +17,6 @@ declare -a NAMES=(
     "Exa"
     "jq"
     "yq"
-    "ZShell"
 )
 declare -a ADDITIONAL1=(
     "Widely used rewrite of Vim that has some new features"
@@ -28,7 +26,6 @@ declare -a ADDITIONAL1=(
     "Like ls, but better"
     "JSON Parsing CLI tool"
     "YAML and XML Parsing CLI tool"
-    "Shell"
 )
 declare -a ADDITIONAL2=(
     "https://neovim.io/"
@@ -38,7 +35,6 @@ declare -a ADDITIONAL2=(
     "https://github.com/ogham/exa"
     "https://stedolan.github.io/jq/"
     "https://github.com/kislyuk/yq"
-    ""
 )
 IFS=':' read -r -a local_config_overrides_loaded <<< "$LOCAL_CONFIG_OVERRIDES_LOADED"
 IFS=':' read -r -a local_config_overrides_not_loaded <<< "$LOCAL_CONFIG_OVERRIDES_NOT_LOADED"
@@ -46,7 +42,7 @@ IFS=':' read -r -a local_config_overrides_not_loaded <<< "$LOCAL_CONFIG_OVERRIDE
 programs_arraylength=${#EXECS[@]}
 
 echo ""
-echo "***            CONFIGURATION STATUS CHECK            ***"
+echo "---            CONFIGURATION STATUS CHECK            ---"
 echo ""
 
 echo "Programs found in PATH:"
@@ -56,7 +52,7 @@ do
         echo '    -' ${NAMES[$i-1]} '('${EXECS[$i-1]}')'
     fi
 done
-echo '   ***'
+echo '   ---'
 
 echo "Programs not found in PATH:" 
 for (( i=1; i<${programs_arraylength}+1; i++ ));
@@ -68,15 +64,15 @@ do
         echo ""
     fi
 done
-echo '   ***'
+echo '   ---'
 
 echo "Local configuration override files loaded:"
 printf '    %s\n' "${local_config_overrides_loaded[@]}"
-printf '   ***\n'
+printf '   ---\n'
 
 echo "Local configuration override files checked and did not exist, so not loaded:"
 printf '    %s\n' "${local_config_overrides_not_loaded[@]}"
-printf '   ***\n'
+printf '   ---\n'
 
 echo ""
 echo ""
