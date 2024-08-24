@@ -23,7 +23,7 @@ alias "dotfiles-update"="dotfiles-update-dotfiles; echo '\n\n'; dotfiles-update-
 
 command -v rg > /dev/null && alias "grep"="rg -uuu"
 command -v bat > /dev/null && alias "cat"="bat"
-command -v exa > /dev/null && alias "ls"="exa"
+command -v eza > /dev/null && alias "ls"="eza"
 
 # ============ GENERAL ==============
 
