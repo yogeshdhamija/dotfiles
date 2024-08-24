@@ -14,9 +14,9 @@ alias "dotfiles-add-submodule-updates"="dotfiles status | grep '^\s+modified:\s+
 
 alias "dotfiles-update-dotfiles"="dotfiles-update-repo; dotfiles-update-vim; dotfiles-update-nvim; dotfiles-update-fzf; dotfiles-add-submodule-updates; dotfiles-check; dotfiles status;"
 
-alias "dotfiles-update-external"="echo \"RECOMMENDATION:\nUse '~/.shellrc.local' to add an alias for 'dotfiles-update-external' to update software packages using all the package managers (conda, homebrew, apt, etc.) on this machine.\nThis removes this message, and allows using the 'dotfiles-update' command to update everything at once.\""
+alias "dotfiles-update-external"="printf \"RECOMMENDATION:\nUse '~/.shellrc.local' to add an alias for 'dotfiles-update-external' to update software packages using all the package managers (conda, homebrew, apt, etc.) on this machine.\nThis removes this message, and allows using the 'dotfiles-update' command to update everything at once.\";"
 
-alias "dotfiles-update"="dotfiles-update-dotfiles; echo '\n\n'; dotfiles-update-external;"
+alias "dotfiles-update"="dotfiles-update-dotfiles printf '\n\n'; dotfiles-update-external"
 
 
 # ============ REPLACEMENTS ==============
