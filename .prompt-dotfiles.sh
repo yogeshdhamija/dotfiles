@@ -3,6 +3,7 @@ dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 random="$((1 + $RANDOM % 20))" 
 
 if [[ "$1" == "dotfiles" ]]; then
+	printf '%s' "(dotfiles"
 	if [[ "${random}" == 1 ]]; then
 		remote=$($dotfiles remote show origin)
 
@@ -13,9 +14,10 @@ if [[ "$1" == "dotfiles" ]]; then
 
 		rm /tmp/dotfiles-prompt-changes.txt
 		$dotfiles status --porcelain > /tmp/dotfiles-prompt-changes.txt
+
+		printf '%s' "!"
 	fi
 
-	printf '%s' "(dotfiles"
 	allgood=1
 
 	changes=$(cat /tmp/dotfiles-prompt-changes.txt)
@@ -40,13 +42,14 @@ if [[ "$1" == "dotfiles" ]]; then
 	printf '%s' ")"
 
 elif [[ "$1" == "programs" ]]; then
+	printf '%s' " (environment"
 	if [[ "${random}" == 2 ]]; then
 		rm /tmp/dotfiles-prompt-programs.txt
 		res=$(cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh && cd -)
 		echo "${res}" | tr -d '\n' | tr -d ' ' | grep "ProgramsnotfoundinPATH:.\+---Localconfigurationoverridefilesloaded" > /tmp/dotfiles-prompt-programs.txt
+		printf '%s' "!"
 	fi
 
-	printf '%s' " (environment"
 	need_programs=$(cat /tmp/dotfiles-prompt-programs.txt)
 	if [[ "${need_programs}" ]]; then
 		printf '%s' " missing programs"
@@ -56,15 +59,19 @@ elif [[ "$1" == "programs" ]]; then
 	printf '%s' ")"
 
 elif [[ "$1" == "locals" ]]; then
+	printf '%s' " (local overrides"
 	if [[ "${random}" == 3 ]]; then
 		rm /tmp/dotfiles-prompt-locals.txt
 		res=$(cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh && cd -)
 		echo "${res}" | tr -d '\n' | tr -d ' ' | grep "Localconfigurationoverridefilesloaded:.\+---Localconfigurationoverridefileschecked" > /tmp/dotfiles-prompt-locals.txt
+		printf '%s' "!"
 	fi
 
 	has_locals=$(cat /tmp/dotfiles-prompt-locals.txt)
 
 	if [[ "${has_locals}" ]]; then
-		printf '%s' " (local overrides)"
+		printf '%s' " present ✓)"
+	else
+		printf '%s' " absent ✓)"
 	fi
 fi
