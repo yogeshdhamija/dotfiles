@@ -22,6 +22,7 @@ if !exists("plugins")
         \ ['junegunn/vim-easy-align', {}],
         \ ['yogeshdhamija/find-in-dir-helper.vim', {}],
         \ ['yogeshdhamija/close-hidden-buffers-command.vim', {}],
+        \ ['yogeshdhamija/better-asterisk-remap.vim', {}],
         \ ['machakann/vim-highlightedyank', {}],
     \ ]
 endif
