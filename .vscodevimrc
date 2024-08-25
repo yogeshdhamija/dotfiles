@@ -76,10 +76,6 @@ set showmode
     nnoremap <C-W><     :call VSCodeNotify("workbench.action.decreaseViewWidth")<CR>
     nnoremap <C-W>+     :call VSCodeNotify("workbench.action.increaseViewHeight")<CR>
     nnoremap <C-W>-     :call VSCodeNotify("workbench.action.decreaseViewHeight")<CR>
-    map      <C-W><C-H> <C-W>h
-    map      <C-W><C-J> <C-W>j
-    map      <C-W><C-K> <C-W>k
-    map      <C-W><C-L> <C-W>l
     
 " Add commenting to vscode neovim plugin
     xmap gc  <Plug>VSCodeCommentary
