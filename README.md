@@ -65,19 +65,22 @@ Primarily, this repo configures the terminal and vim/neovim. It also has configu
 
 ### Terminal
 
-- This repo will configure the `bash` and `zsh` terminals.
+- This repo will configure the `bash`,`zsh`, and `fish` terminals.
 - These are the primary files:
     - `~/.bashrc` - for bash-only settings
-    - `~/.zshrc` - for bash-only settings
-    - `~/.shellrc` - for common settings across all shells
-    - `~/.shell_aliases` - for aliases
+    - `~/.zshrc` - for zsh-only settings
+    - `~/.config/fish/config.fish` - for fish-only settings
+    - `~/.shellrc` - for common settings across all POSIX shells (`bash` and `zsh`)
+    - `~/.shell_aliases` - for aliases (`bash`, `zsh`, and `fish`)
 - The following files will be auto-loaded if they exist, so you can make changes you don't want to commit:
     - `~/.shellrc.local`
     - `~/.bashrc.local`
     - `~/.zshrc.local`
+    - `~/.config/fish/config.fish.local`
     - `~/.shellrc.local.loadbefore`
     - `~/.bashrc.local.loadbefore`
     - `~/.zshrc.local.loadbefore`
+    - `~/.config/fish/config.fish.local.loadbefore`
         - The `*.loadbefore` files are sourced before any other config.
 
 ### Vim & Neovim

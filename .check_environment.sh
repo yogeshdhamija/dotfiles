@@ -8,7 +8,7 @@ declare -a EXECS=(
     "eza"
     "jq"
     "yq"
-    "zsh"
+    "fish"
 )
 declare -a NAMES=(
     "Neovim"
@@ -18,7 +18,7 @@ declare -a NAMES=(
     "eza"
     "jq"
     "yq"
-    "zsh"
+    "fish"
 )
 declare -a ADDITIONAL1=(
     "Widely used rewrite of Vim that has some new features"

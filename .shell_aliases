@@ -10,11 +10,9 @@ alias "dotfiles-update-nvim"="cd ~ && mv ~/.vim/lastsession.nvim ~/.vim/lastsess
 
 alias "dotfiles-update-fzf"="cd ~ && .fzf/install --all && cd -"
 
-alias "dotfiles-add-submodule-updates"="dotfiles status | grep '^\s+modified:\s+[^\s]+\s+\(new commits\)\s*$' | awk '{print \$2}' | xargs ${DOTFILES_COMMAND} add"
+alias "dotfiles-update-dotfiles"="dotfiles-update-repo; dotfiles-update-vim; dotfiles-update-nvim; dotfiles-update-fzf; dotfiles-check; dotfiles status;"
 
-alias "dotfiles-update-dotfiles"="dotfiles-update-repo; dotfiles-update-vim; dotfiles-update-nvim; dotfiles-update-fzf; dotfiles-add-submodule-updates; dotfiles-check; dotfiles status;"
-
-alias "dotfiles-update-external"="printf \"RECOMMENDATION:\nUse '~/.shellrc.local' to add an alias for 'dotfiles-update-external' to update software packages using all the package managers (conda, homebrew, apt, etc.) on this machine.\nThis removes this message, and allows using the 'dotfiles-update' command to update everything at once.\";"
+alias "dotfiles-update-external"="printf \"RECOMMENDATION:\nUse '~/.shellrc.local' or '~/.config/fish/config.fish.local' to add an alias for 'dotfiles-update-external' to update software packages using all the package managers (conda, homebrew, apt, etc.) on this machine.\nThis removes this message, and allows using the 'dotfiles-update' command to update everything at once.\""
 
 alias "dotfiles-update"="dotfiles-update-dotfiles printf '\n\n'; dotfiles-update-external"
 
@@ -32,16 +30,3 @@ alias ":e"="$EDITOR"
 alias "dot"="dotfiles"
 alias "dootfiles"="dotfiles"
 alias "doot"="dotfiles"
-
-# ============ GIT ==============
-
-alias "git-log"="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cs) %C(bold blue)<%an>%Creset' --abbrev-commit "
-alias "git-clean"="git clean -ffdxi"
-
-# ============ DOCKER ==============
-
-# To stop and destroy all docker containers, images, and volumes
-alias "docker-nuke"='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker rmi $(docker images -q) --force; docker volume rm $(docker volume ls -f dangling=true -q)'
-
-# To stop and destroy all docker containers and volumes (but keep images)
-alias "docker-mininuke"='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q); docker volume rm $(docker volume ls -f dangling=true -q)'
