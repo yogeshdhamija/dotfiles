@@ -93,3 +93,4 @@ nnoremap <silent> \ :<c-u>WhichKey '\'<CR>
     set list lcs=tab:\ \ ,trail:•
     set cursorlineopt=number
     set cursorline
+    set nowrap
