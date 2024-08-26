@@ -9,6 +9,8 @@ if status is-interactive
         set -gx LOCAL_CONFIG_OVERRIDES_NOT_LOADED "~/.config/fish/config.fish.local.loadbefore:$LOCAL_CONFIG_OVERRIDES_NOT_LOADED"
     end
 
+    set -g fish_greeting
+
     #FZF config not necessary (added to fish commands&functions by dotfiles command)
 
     bind \cf forward-word
