@@ -32,7 +32,3 @@ if [ -f ~/.bashrc.local ]; then
 else
     export LOCAL_CONFIG_OVERRIDES_NOT_LOADED="~/.bashrc.local:$LOCAL_CONFIG_OVERRIDES_NOT_LOADED"
 fi
-
-# Start shell prompt
-command -v starship > /dev/null && eval "$(starship init bash)"
-

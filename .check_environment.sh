@@ -2,7 +2,6 @@
 
 declare -a EXECS=(
     "nvim"
-    "starship"
     "rg"
     "bat"
     "eza"
@@ -12,7 +11,6 @@ declare -a EXECS=(
 )
 declare -a NAMES=(
     "Neovim"
-    "Starship"
     "Ripgrep"
     "Bat"
     "eza"
@@ -22,7 +20,6 @@ declare -a NAMES=(
 )
 declare -a ADDITIONAL1=(
     "Widely used rewrite of Vim that has some new features"
-    "Prompt for terminal, configured to keep an eye on dotfiles status"
     "Like grep, but better"
     "Like cat, but better"
     "Like ls, but better"
@@ -32,7 +29,6 @@ declare -a ADDITIONAL1=(
 )
 declare -a ADDITIONAL2=(
     "https://neovim.io/"
-    "https://starship.rs"
     "https://github.com/BurntSushi/ripgrep"
     "https://github.com/sharkdp/bat"
     "https://github.com/eza-community/eza"
