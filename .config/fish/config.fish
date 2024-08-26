@@ -63,4 +63,6 @@ if status is-interactive
     else
         set -gx LOCAL_CONFIG_OVERRIDES_NOT_LOADED "~/.config/fish/config.fish.local:$LOCAL_CONFIG_OVERRIDES_NOT_LOADED"
     end
+
+    starship init fish | source
 end
