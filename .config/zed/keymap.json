@@ -32,7 +32,7 @@
       "\\ q": "editor::ToggleCodeActions",
       "\\ a": ["workspace::SendKeystrokes", ":"],
       "\\ h": "editor::Hover",
-      "\\ e": "editor::Hover",
+      "\\ e": "editor::GoToDiagnostic",
       "\\ d h": "pane::RevealInProjectPanel",
       "\\ t j": ["workspace::SendKeystrokes", "ctrl-`"],
       "\\ g d d": "editor::GoToDefinition",
