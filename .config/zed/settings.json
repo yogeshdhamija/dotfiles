@@ -1,0 +1,13 @@
+{
+  "vim_mode": true,
+  "command_aliases": {
+    "CLO": "pane: close inactive items",
+    "ON": "workspace: close all docks"
+  },
+  "buffer_font_weight": 600,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark"
+  }
+}

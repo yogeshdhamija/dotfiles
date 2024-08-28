@@ -1,0 +1,52 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Dock",
+    "bindings": {
+      "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "ctrl-j": ["workspace::SendKeystrokes", "j j j j j j j j j j"],
+      "ctrl-k": ["workspace::SendKeystrokes", "k k k k k k k k k k"],
+      "\\ c": ["workspace::SendKeystrokes", "escape"],
+      "\\ o": ["workspace::SendKeystrokes", "ctrl-p"],
+      "\\ b": "tab_switcher::Toggle",
+      "\\ q": "editor::ToggleCodeActions",
+      "\\ a": ["workspace::SendKeystrokes", ":"],
+      "\\ h": "editor::Hover",
+      "\\ e": "editor::Hover",
+      "\\ d h": "pane::RevealInProjectPanel",
+      "\\ t j": ["workspace::SendKeystrokes", "ctrl-`"],
+      "\\ g d d": "editor::GoToDefinition",
+      "\\ g shift-d shift-d": "editor::GoToDeclaration",
+      "\\ g i i": "editor::GoToImplementation",
+      "\\ g r r": "editor::FindAllReferences",
+      "ctrl-w v": "pane::SplitRight",
+      "ctrl-w s": "pane::SplitDown"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      "shift-s": ["vim::PushOperator", { "AddSurrounds": {} }]
+    }
+  }
+]
