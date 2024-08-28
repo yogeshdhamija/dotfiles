@@ -20,7 +20,7 @@ if status is-interactive
     set -gx DOTFILES_COMMAND 'git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
     alias dotfiles="$DOTFILES_COMMAND"
 
-    # Set up LESS 
+    # Set up LESS
     set -gx LESS "-RXF"
     set -gx TIMEFMT "\n================\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E"
 
@@ -36,6 +36,7 @@ if status is-interactive
     command -v code > /dev/null && set -gx EDITOR "code -w"
     command -v vim > /dev/null && set -gx EDITOR "vim"
     command -v nvim > /dev/null && set -gx EDITOR "nvim"
+    command -v zed > /dev/null && set -gx EDITOR "zed -w"
 
     if test -f ~/.shell_aliases
       source ~/.shell_aliases

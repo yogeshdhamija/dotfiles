@@ -13,7 +13,7 @@ alias dotfiles="${DOTFILES_COMMAND}"
 
 # ===================== CONTENT ===============================================
 
-# Set up LESS 
+# Set up LESS
 export LESS="-RXF"
 export TIMEFMT=$'\n================\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E'
 
@@ -29,6 +29,7 @@ command -v idea > /dev/null && export EDITOR="idea --wait"
 command -v code > /dev/null && export EDITOR="code -w"
 command -v vim > /dev/null && export EDITOR="vim"
 command -v nvim > /dev/null && export EDITOR="nvim"
+command -v zed > /dev/null && export EDITOR="zed -w"
 
 # Load aliases
 if [ -f ~/.shell_aliases ]; then
