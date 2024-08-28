@@ -5,6 +5,9 @@
     "ON": "workspace: close all docks",
     "q": "close all items"
   },
+  "git": {
+    "inline_blame": { "enabled": false }
+  },
   "buffer_font_weight": 600,
   "theme": {
     "mode": "system",
