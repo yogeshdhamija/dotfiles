@@ -3,8 +3,9 @@
   "command_aliases": {
     "CLO": "pane: close inactive items",
     "ON": "workspace: close all docks",
-    "q": "close all items",
-    "ERRS": "diagnostics: deploy"
+    "q": "pane: close all items",
+    "ERRS": "diagnostics: deploy",
+    "qa": "zed: quit"
   },
   "git": {
     "inline_blame": { "enabled": false }
