@@ -39,6 +39,9 @@
       "\\ g shift-d shift-d": "editor::GoToDeclaration",
       "\\ g i i": "editor::GoToImplementation",
       "\\ g r r": "editor::FindAllReferences",
+      "\\ g d l": "editor::GoToDefinitionSplit",
+      "\\ g shift-d l": "editor::GoToDeclarationSplit",
+      "\\ g i l": "editor::GoToImplementationSplit",
       "ctrl-w v": "pane::SplitRight",
       "ctrl-w s": "pane::SplitDown"
     }
