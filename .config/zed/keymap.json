@@ -7,9 +7,11 @@
 // from the command palette.
 [
   {
-    "context": "Workspace",
     "bindings": {
-      // "shift shift": "file_finder::Toggle"
+      "\\ b": "tab_switcher::Toggle",
+      "\\ o": "file_finder::Toggle",
+      "\\ a": "command_palette::Toggle",
+      "\\ t j": "terminal_panel::ToggleFocus"
     }
   },
   {
@@ -24,17 +26,13 @@
   {
     "context": "Editor && vim_mode == normal",
     "bindings": {
-      "ctrl-j": ["workspace::SendKeystrokes", "j j j j j j j j j j"],
-      "ctrl-k": ["workspace::SendKeystrokes", "k k k k k k k k k k"],
+      "ctrl-j": ["workspace::SendKeystrokes", "1 0 j"],
+      "ctrl-k": ["workspace::SendKeystrokes", "1 0 k"],
       "\\ c": ["workspace::SendKeystrokes", "escape"],
-      "\\ o": ["workspace::SendKeystrokes", "ctrl-p"],
-      "\\ b": "tab_switcher::Toggle",
       "\\ q": "editor::ToggleCodeActions",
-      "\\ a": ["workspace::SendKeystrokes", ":"],
       "\\ h": "editor::Hover",
       "\\ e": "editor::GoToDiagnostic",
       "\\ d h": "pane::RevealInProjectPanel",
-      "\\ t j": ["workspace::SendKeystrokes", "ctrl-`"],
       "\\ g d d": "editor::GoToDefinition",
       "\\ g shift-d shift-d": "editor::GoToDeclaration",
       "\\ g i i": "editor::GoToImplementation",
