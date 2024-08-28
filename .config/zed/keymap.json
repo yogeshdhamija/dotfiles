@@ -49,7 +49,12 @@
   {
     "context": "Editor && vim_mode == visual",
     "bindings": {
-      "shift-s": ["vim::PushOperator", { "AddSurrounds": {} }]
+      "shift-s": ["vim::PushOperator", { "AddSurrounds": {} }],
+      "v": "editor::SelectLargerSyntaxNode",
+      "V": "editor::SelectSmallerSyntaxNode",
+      "\\ q": "editor::ToggleCodeActions",
+      "\\ a": ["workspace::SendKeystrokes", ":"],
+      "\\ h": "editor::Hover"
     }
   }
 ]
