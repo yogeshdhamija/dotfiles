@@ -11,7 +11,8 @@
       "\\ b": "tab_switcher::Toggle",
       "\\ o": "file_finder::Toggle",
       "\\ a": "command_palette::Toggle",
-      "\\ t j": "terminal_panel::ToggleFocus"
+      "\\ t j": "terminal_panel::ToggleFocus",
+      "\\ d h": "project_panel::ToggleFocus"
     }
   },
   {
