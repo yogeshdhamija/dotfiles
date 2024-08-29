@@ -1,4 +1,11 @@
 {
+  "assistant": {
+    "default_model": {
+      "provider": "ollama",
+      "model": "llama3.1:latest"
+    },
+    "version": "2"
+  },
   "vim_mode": true,
   "command_aliases": {
     "CLO": "pane: close inactive items",
