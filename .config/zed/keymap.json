@@ -55,5 +55,11 @@
       "\\ a": ["workspace::SendKeystrokes", ":"],
       "\\ h": "editor::Hover"
     }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-b": ["terminal::SendKeystroke", "ctrl-b"]
+    }
   }
 ]
