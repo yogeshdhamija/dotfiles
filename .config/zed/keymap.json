@@ -11,13 +11,9 @@
       "\\ b": "tab_switcher::Toggle",
       "\\ o": "file_finder::Toggle",
       "\\ a": "command_palette::Toggle",
+      "\\ t t": "workspace::NewCenterTerminal",
       "\\ t j": "terminal_panel::ToggleFocus",
-      "\\ d h": "project_panel::ToggleFocus"
-    }
-  },
-  {
-    "context": "Dock",
-    "bindings": {
+      "\\ d h": "project_panel::ToggleFocus",
       "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
       "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
       "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
@@ -59,7 +55,8 @@
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-b": ["terminal::SendKeystroke", "ctrl-b"]
+      "ctrl-b": ["terminal::SendKeystroke", "ctrl-b"],
+      "\\ t t": "workspace::NewTerminal"
     }
   }
 ]
