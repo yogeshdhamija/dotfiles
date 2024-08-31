@@ -1,19 +1,14 @@
-// Zed keymap
-//
-// For information on binding keys, see the Zed
-// documentation: https://zed.dev/docs/key-bindings
-//
-// To see the default key bindings run `zed: open default keymap`
-// from the command palette.
 [
   {
     "bindings": {
+      ":": "command_palette::Toggle",
       "\\ b": "tab_switcher::Toggle",
       "\\ o": "file_finder::Toggle",
       "\\ a": "command_palette::Toggle",
+      "\\ d": "project_panel::ToggleFocus",
       "\\ d h": "project_panel::ToggleFocus",
+      "\\ t": "workspace::NewCenterTerminal",
       "\\ t t": "workspace::NewCenterTerminal",
-      "\\ t j": "workspace::NewTerminal",
       "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
       "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
       "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
@@ -23,12 +18,11 @@
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-b": ["terminal::SendKeystroke", "ctrl-b"],
-      "ctrl-\\ ctrl-n :": "command_palette::Toggle"
+      "ctrl-b": ["terminal::SendKeystroke", "ctrl-b"]
     }
   },
   {
-    "context": "Editor && vim_mode == normal",
+    "context": "VimControl",
     "bindings": {
       "ctrl-j": ["workspace::SendKeystrokes", "1 0 j"],
       "ctrl-k": ["workspace::SendKeystrokes", "1 0 k"],
@@ -37,15 +31,46 @@
       "\\ h": "editor::Hover",
       "\\ e": "editor::GoToDiagnostic",
       "\\ d h": "pane::RevealInProjectPanel",
-      "\\ g d d": "editor::GoToDefinition",
-      "\\ g shift-d shift-d": "editor::GoToDeclaration",
-      "\\ g i i": "editor::GoToImplementation",
-      "\\ g r r": "editor::FindAllReferences",
-      "\\ g d l": "editor::GoToDefinitionSplit",
-      "\\ g shift-d l": "editor::GoToDeclarationSplit",
-      "\\ g i l": "editor::GoToImplementationSplit",
       "ctrl-w v": "pane::SplitRight",
-      "ctrl-w s": "pane::SplitDown"
+      "ctrl-w s": "pane::SplitDown",
+
+      // \t split mappings
+      "\\ t j": ["workspace::SendKeystrokes", "ctrl-w s \\ t t"],
+      "\\ t h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ t t"],
+      "\\ t k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ t t"],
+      "\\ t l": ["workspace::SendKeystrokes", "ctrl-w v \\ t t"],
+
+      // \gd split mappings
+      "\\ g d": "editor::GoToDefinition",
+      "\\ g d d": "editor::GoToDefinition",
+      "\\ g d j": ["workspace::SendKeystrokes", "ctrl-w s \\ g d d"],
+      "\\ g d h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g d d"],
+      "\\ g d k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g d d"],
+      "\\ g d l": ["workspace::SendKeystrokes", "ctrl-w v \\ g d d"],
+
+      // \gD split mappings
+      "\\ g shift-d": "editor::GoToDeclaration",
+      "\\ g shift-d shift-d": "editor::GoToDeclaration",
+      "\\ g shift-d j": ["workspace::SendKeystrokes", "ctrl-w s \\ g shift-d shift-d"],
+      "\\ g shift-d h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g shift-d shift-d"],
+      "\\ g shift-d k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g shift-d shift-d"],
+      "\\ g shift-d l": ["workspace::SendKeystrokes", "ctrl-w v \\ g shift-d shift-d"],
+
+      // \gi split mappings
+      "\\ g i": "editor::GoToImplementation",
+      "\\ g i i": "editor::GoToImplementation",
+      "\\ g i j": ["workspace::SendKeystrokes", "ctrl-w s \\ g i i"],
+      "\\ g i h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g i i"],
+      "\\ g i k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g i i"],
+      "\\ g i l": ["workspace::SendKeystrokes", "ctrl-w v \\ g i i"],
+
+      // \gr split mappings
+      "\\ g r": "editor::FindAllReferences",
+      "\\ g r r": "editor::FindAllReferences",
+      "\\ g r j": ["workspace::SendKeystrokes", "ctrl-w s \\ g r r"],
+      "\\ g r h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g r r"],
+      "\\ g r k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g r r"],
+      "\\ g r l": ["workspace::SendKeystrokes", "ctrl-w v \\ g r r"]
     }
   },
   {
@@ -53,10 +78,7 @@
     "bindings": {
       "shift-s": ["vim::PushOperator", { "AddSurrounds": {} }],
       "v": "editor::SelectLargerSyntaxNode",
-      "V": "editor::SelectSmallerSyntaxNode",
-      "\\ q": "editor::ToggleCodeActions",
-      "\\ a": ["workspace::SendKeystrokes", ":"],
-      "\\ h": "editor::Hover"
+      "V": "editor::SelectSmallerSyntaxNode"
     }
   }
 ]
