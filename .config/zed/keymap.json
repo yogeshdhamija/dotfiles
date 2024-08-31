@@ -1,10 +1,10 @@
 [
   {
     "bindings": {
-      ":": "command_palette::Toggle",
       "\\ b": "tab_switcher::Toggle",
       "\\ o": "file_finder::Toggle",
       "\\ a": "command_palette::Toggle",
+      "\\ f": "pane::DeploySearch",
       "\\ d": "project_panel::ToggleFocus",
       "\\ d h": "project_panel::ToggleFocus",
       "\\ t": "workspace::NewCenterTerminal",
