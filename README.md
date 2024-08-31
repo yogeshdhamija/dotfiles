@@ -1,6 +1,6 @@
 # Dotfiles
 
-## Quick Start
+My configurations for terminals and code/text editors.
 
 To clone this repo into your home directory:
 
@@ -27,9 +27,10 @@ dotfiles commit
 dotfiles push
 ```
 
-## What it does
-
-Configures terminals and text editors to my preferences.
+- Do **not** use the `dotfiles add .` command. This will add all the untracked files in your home directory, which is **everything**.
+    - Instead, add things individually using `dotfiles add <file>`.
+    - This also applies to other commands like `dotfiles commit -a`.
+    - If you do this accidentally, you'll have to `Ctrl+C` out of it while it's stuck, or unstage all the files if it somehow succeeds.
 
 ## Terminal
 
@@ -120,10 +121,3 @@ The `~/dotfile-backups/vscode/` folder contains VSCode profile files, which cont
 This must be imported into VSCode manually.
 
 I should remember to periodically export these profile files from VSCode, in case I make updates/changes. When I do that, I should remember to name the profile "Default" (though the file name can differ), otherwise I'll have trouble re-importing.
-
-## Notes
-
-- Do **not** use the `dotfiles add .` command. This will add all the untracked files in your home directory, which is **everything**.
-    - Instead, add things individually using `dotfiles add <file>`.
-    - This also applies to other commands like `dotfiles commit -a`.
-    - If you do this accidentally, you'll have to `Ctrl+C` out of it while it's stuck, or unstage all the files if it somehow succeeds.
