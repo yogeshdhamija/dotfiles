@@ -14,9 +14,8 @@ source <(curl -Ls https://raw.githubusercontent.com/yogeshdhamija/dotfiles/maste
 
 This will set up a git repository in the folder `~/.dotfiles` with a detached working tree. This way, you can treat your home directory if as if it were a git repository -- using the `dotfiles` command, instead of `git` -- and it won't do crazy stuff like interfere with your other git repositories. Source: [this article](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/). In summary: `dotfiles status`, `dotfiles commit`, `dotfiles push`.
 
-## Cheat Sheet
+## Commands provided (aliases)
 
-**Commands to remember**:
 ```bash
 dotfiles-update     # pulls new updates, including for submodules
 dotfiles-check      # checks if recommended programs installed
@@ -28,49 +27,18 @@ dotfiles commit
 dotfiles push
 ```
 
-**Common settings in** `~/.vimrc.local.loadbefore`:
-```viml
-" To add more plugins (using vim-plug)
-    if !exists("added_plugins")
-        let added_plugins = []
-    endif
-    let added_plugins = added_plugins + [
-        \["these_plugins_will/be_added_to_the_defaults", {}],
-    \]
-
-" To disable certain default plugins
-    if !exists("disabled_plugins")
-        let disabled_plugins = []
-    endif
-    let disabled_plugins = disabled_plugins + ["neoclide/coc.nvim"]
-
-" To run with ONLY specified plugins (not recommended)
-    if !exists("plugins")
-        let plugins = []
-    endif
-    let plugins = plugins + [
-        \["only_these_plugins/will_be_used", {}],
-    \]
-```
-
-**Common settings in** `~/.shellrc.local`:
-```bash
-alias a=b
-export PATH="/add_to_path/:$PATH"
-```
-
 ## What it does
 
-Primarily, this repo configures the terminal and vim/neovim. It also has configuration for VSCode, but this must be manually imported.
+Configures terminals and text editors to my preferences.
 
 ### Terminal
 
 - This repo will configure the `bash`,`zsh`, and `fish` terminals.
-- These are the primary files:
+- These are the primary files used to configure things:
     - `~/.bashrc` - for bash-only settings
     - `~/.zshrc` - for zsh-only settings
     - `~/.config/fish/config.fish` - for fish-only settings
-    - `~/.shellrc` - for common settings across all POSIX shells (`bash` and `zsh`)
+    - `~/.shellrc` - for common settings across POSIX shells (`bash` and `zsh`)
     - `~/.shell_aliases` - for aliases (`bash`, `zsh`, and `fish`)
 - The following files will be auto-loaded if they exist, so you can make changes you don't want to commit:
     - `~/.shellrc.local`
@@ -83,16 +51,18 @@ Primarily, this repo configures the terminal and vim/neovim. It also has configu
     - `~/.config/fish/config.fish.local.loadbefore`
         - The `*.loadbefore` files are sourced before any other config.
 
-### Vim & Neovim
+### Text Editors
 
-This repo provides a `~/.vimrc` which defines all custom mappings/commands. The `~/.vimrc` is extended upon by other files to support other programs (Neovim and VSCode-Neovim).
+Configures editors to be vim-like. Editors are: Vim, Neovim, VSCode (with the VSCode-Neovim plugin), Jetbrains IDEs (with the IdeaVim plugin), Zed.
 
-- All mappings/remaps in `~/.vimrc`
-    - These mappings call functions which may be defined in:
-        -  `~/.vimrc` If it's a default implementation (overridden with enhanced functionality elsewhere), or if it's vim-specific
-        -  `~/.config/nvim/init.vim` If it's a neovim specific implementation
-        -  `~/.vscodevimrc` If it's a vscode-neovim specific implementation
-    - Reasoning is so that the implementaton can change based on Vim, Neovim, or VScode-Neovim, but the mapping is only defined once
+**For Vim-Like editors (Vim, Neovim, and the VSCode-Neovim plugin):**
+The `~/.vimrc` acts as the base where all mappings and commands are defined. Neovim and VSCode-Neovim configurations extend that file to override or add functionality.
+
+- All mappings and commands in `~/.vimrc`
+    - These mappings call functions which can be defined in:
+        -  `~/.vimrc` If it's vim-specific or default implementation (may be overridden).
+        -  `~/.config/nvim/init.vim` If it's neovim-specific.
+        -  `~/.vscodevimrc` If it's vscode-neovim specific.
 
 - File sourcing order (from first to last) is:
 
@@ -110,11 +80,18 @@ This repo provides a `~/.vimrc` which defines all custom mappings/commands. The 
 
 - The `dotfiles-update` terminal command will install/update all Vim plugins, through the `junegunn/vim-plug` plugin manager.
 
+**For non Vim-like editors (Jetbrains, Zed, VSCode):**
+The settings live in the editor-specific files. They try to duplicate the mappings and commands in `~/.vimrc` as much as possible. Files used are:
+
+- `~/.ideavimrc` for Jetbrains IDEs' IdeaVim plugin.
+- `~/.config/zed/` for Zed.
+- `~/dotfile-backups/vscode/` for VSCode
+
 ### VSCode
 
-The `~/dotfile-backups/vscode/` folder contains VSCode profile files, which contain all the settings and configuration to make VSCode behave like NeoVim.
+The `~/dotfile-backups/vscode/` folder contains VSCode profile files, which contain all the settings and configuration to make VSCode load `~/.vscodevimrc` and behave like NeoVim.
 
-This can be imported into VSCode manually.
+This must be imported into VSCode manually.
 
 I should remember to periodically export these profile files from VSCode, in case I make updates/changes. When I do that, I should remember to name the profile "Default" (though the file name can differ), otherwise I'll have trouble re-importing.
 

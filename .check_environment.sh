@@ -1,7 +1,7 @@
 #!/bin/bash
 
 declare -a EXECS=(
-    "nvim"
+    "zed"
     "starship"
     "rg"
     "bat"
@@ -11,7 +11,7 @@ declare -a EXECS=(
     "fish"
 )
 declare -a NAMES=(
-    "Neovim"
+    "Zed"
     "Starship"
     "Ripgrep"
     "Bat"
@@ -21,8 +21,8 @@ declare -a NAMES=(
     "fish"
 )
 declare -a ADDITIONAL1=(
-    "Widely used rewrite of Vim that has some new features"
-    "Prompt for terminal, configured to keep an eye on dotfiles status"
+    "Text & Code editor"
+    "Prompt for terminal"
     "Like grep, but better"
     "Like cat, but better"
     "Like ls, but better"
@@ -31,7 +31,7 @@ declare -a ADDITIONAL1=(
     "Preferred shell"
 )
 declare -a ADDITIONAL2=(
-    "https://neovim.io/"
+    "https://zed.dev"
     "https://starship.rs"
     "https://github.com/BurntSushi/ripgrep"
     "https://github.com/sharkdp/bat"
@@ -58,7 +58,7 @@ do
 done
 echo '   ---'
 
-echo "Programs not found in PATH:" 
+echo "Programs not found in PATH:"
 for (( i=1; i<${programs_arraylength}+1; i++ ));
 do
     if ! command -v ${EXECS[$i-1]} > /dev/null ; then
