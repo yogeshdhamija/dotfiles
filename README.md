@@ -31,7 +31,7 @@ dotfiles push
 
 Configures terminals and text editors to my preferences.
 
-### Terminal
+## Terminal
 
 - This repo will configure the `bash`,`zsh`, and `fish` terminals.
 - These are the primary files used to configure things:
@@ -51,11 +51,12 @@ Configures terminals and text editors to my preferences.
     - `~/.config/fish/config.fish.local.loadbefore`
         - The `*.loadbefore` files are sourced before any other config.
 
-### Text Editors
+## Text Editors
 
 Configures editors to be vim-like. Editors are: Vim, Neovim, VSCode (with the VSCode-Neovim plugin), Jetbrains IDEs (with the IdeaVim plugin), Zed.
 
-**For Vim-Like editors (Vim, Neovim, and the VSCode-Neovim plugin):**
+### For Vim-Like editors (Vim, Neovim, and the VSCode-Neovim plugin):
+
 The `~/.vimrc` acts as the base where all mappings and commands are defined. Neovim and VSCode-Neovim configurations extend that file to override or add functionality.
 
 - All mappings and commands in `~/.vimrc`
@@ -80,7 +81,32 @@ The `~/.vimrc` acts as the base where all mappings and commands are defined. Neo
 
 - The `dotfiles-update` terminal command will install/update all Vim plugins, through the `junegunn/vim-plug` plugin manager.
 
-**For non Vim-like editors (Jetbrains, Zed, VSCode):**
+**Configuring vim plugins:**
+
+The `*.local.loadbefore` vim files can be used to adjust which plugins are used. Common settings are:
+```viml
+" To add more plugins (using vim-plug)
+    if !exists("added_plugins")
+        let added_plugins = []
+    endif
+    let added_plugins = added_plugins + [
+        \["these_plugins_will/be_added_to_the_defaults", {}],
+    \]
+" To disable certain default plugins
+    if !exists("disabled_plugins")
+        let disabled_plugins = []
+    endif
+    let disabled_plugins = disabled_plugins + ["neoclide/coc.nvim"]
+" To run with ONLY specified plugins (not recommended)
+    if !exists("plugins")
+        let plugins = []
+    endif
+    let plugins = plugins + [
+        \["only_these_plugins/will_be_used", {}],
+    \]
+```
+
+### For non Vim-like editors (Jetbrains, Zed, VSCode):
 The settings live in the editor-specific files. They try to duplicate the mappings and commands in `~/.vimrc` as much as possible. Files used are:
 
 - `~/.ideavimrc` for Jetbrains IDEs' IdeaVim plugin.
