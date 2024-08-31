@@ -18,7 +18,14 @@
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-b": ["terminal::SendKeystroke", "ctrl-b"]
+      "ctrl-b": ["terminal::SendKeystroke", "ctrl-b"],
+      "ctrl-\\ ctrl-n :": "command_palette::Toggle"
+    }
+  },
+  {
+    "context": "ProjectSearchBar",
+    "bindings": {
+      "escape": "pane::CloseActiveItem"
     }
   },
   {
@@ -33,6 +40,7 @@
       "\\ d h": "pane::RevealInProjectPanel",
       "ctrl-w v": "pane::SplitRight",
       "ctrl-w s": "pane::SplitDown",
+      "enter": "editor::OpenExcerpts",
 
       // \t split mappings
       "\\ t j": ["workspace::SendKeystrokes", "ctrl-w s \\ t t"],
