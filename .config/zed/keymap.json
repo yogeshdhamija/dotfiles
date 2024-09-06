@@ -33,7 +33,7 @@
     "bindings": {
       "ctrl-j": ["workspace::SendKeystrokes", "1 0 j"],
       "ctrl-k": ["workspace::SendKeystrokes", "1 0 k"],
-      "\\ c": ["workspace::SendKeystrokes", "escape"],
+      "\\ c": ["workspace::SendKeystrokes", "escape ctrl-alt-y"], // ctrl-alt-y = close all docks
       "\\ q": "editor::ToggleCodeActions",
       "\\ h": "editor::Hover",
       "\\ e": "editor::GoToDiagnostic",

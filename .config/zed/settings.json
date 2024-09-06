@@ -14,7 +14,7 @@
   "pane_split_direction_horizontal": "down",
   "command_aliases": {
     "CLO": "pane: close inactive items",
-    "ON": "workspace: close all docks",
+    "ON": "pane: join into next",
     "q": "pane: close all items",
     "ERRS": "diagnostics: deploy",
     "qa": "zed: quit"
