@@ -22,6 +22,7 @@
   "git": {
     "inline_blame": { "enabled": false }
   },
+  "soft_wrap": "editor_width",
   "buffer_font_weight": 501,
   "preferred_line_length": 120,
   "theme": {
