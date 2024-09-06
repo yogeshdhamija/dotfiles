@@ -29,5 +29,16 @@
     "mode": "system",
     "light": "One Light",
     "dark": "One Dark"
+  },
+  "lsp": {
+    "rust-analyzer": {
+      "binary": {
+        // Setting binary to global rust-analyzer, not the one
+        // auto-downloaded by Zed. Since Zed is in a flatpak,
+        // the auto-downloaded one would be in a sandbox and
+        // that prevents it from accessing some dynamic libraries.
+        "path": "/home/ydhamija/.cargo/bin/rust-analyzer"
+      }
+    }
   }
 }
