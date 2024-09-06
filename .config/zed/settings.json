@@ -13,7 +13,7 @@
   "command_aliases": {
     "CLO": "pane: close inactive items",
     "ON": "workspace: close all docks",
-    "q": "pane: close all items",
+    "q": "pane: join into next",
     "ERRS": "diagnostics: deploy",
     "qa": "zed: quit"
   },
