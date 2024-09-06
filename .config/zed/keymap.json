@@ -83,7 +83,7 @@
     "context": "Editor && vim_mode == normal",
     "bindings": {
       "z shift-m": ["workspace::SendKeystrokes", "g g shift-v shift-g z c escape"],
-      "z shift-o": ["workspace::SendKeystrokes", "g g shift-v shift-g z o escape"]
+      "z shift-r": ["workspace::SendKeystrokes", "g g shift-v shift-g z o escape"]
     }
   },
   {
