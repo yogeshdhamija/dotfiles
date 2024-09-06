@@ -38,8 +38,6 @@
       "\\ h": "editor::Hover",
       "\\ e": "editor::GoToDiagnostic",
       "\\ d h": "pane::RevealInProjectPanel",
-      "ctrl-w v": "pane::SplitRight",
-      "ctrl-w s": "pane::SplitDown",
       "enter": "editor::OpenExcerpts",
 
       // \t split mappings

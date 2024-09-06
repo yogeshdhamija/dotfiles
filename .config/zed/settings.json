@@ -10,6 +10,8 @@
   "vim": {
     "use_system_clipboard": "never"
   },
+  "pane_split_direction_vertical": "right",
+  "pane_split_direction_horizontal": "down",
   "command_aliases": {
     "CLO": "pane: close inactive items",
     "ON": "workspace: close all docks",
