@@ -9,6 +9,17 @@
       "\\ d h": "project_panel::ToggleFocus",
       "\\ t": "workspace::NewCenterTerminal",
       "\\ t t": "workspace::NewCenterTerminal",
+      "ctrl-\\": null,
+      "ctrl-\\ ctrl-n :": "command_palette::Toggle",
+      "ctrl-\\ ctrl-n ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-\\ ctrl-n ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-\\ ctrl-n ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-\\ ctrl-n ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
+    }
+  },
+  {
+    "context": "Dock",
+    "bindings": {
       "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
       "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
       "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
@@ -18,14 +29,7 @@
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-b": ["terminal::SendKeystroke", "ctrl-b"],
-      "ctrl-\\ ctrl-n :": "command_palette::Toggle"
-    }
-  },
-  {
-    "context": "ProjectSearchBar",
-    "bindings": {
-      "escape": "pane::CloseActiveItem"
+      "ctrl-b": ["terminal::SendKeystroke", "ctrl-b"]
     }
   },
   {
