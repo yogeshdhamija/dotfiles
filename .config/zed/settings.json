@@ -25,6 +25,9 @@
   "soft_wrap": "editor_width",
   "buffer_font_weight": 501,
   "preferred_line_length": 120,
+  "buffer_font_family": "UbuntuMono Nerd Font",
+  "buffer_font_size": 16,
+  "cursor_blink": false,
   "inlay_hints": {
     "enabled": true
   },
