@@ -42,13 +42,17 @@
       "\\ h": "editor::Hover",
       "\\ e": "editor::GoToDiagnostic",
       "\\ d h": "pane::RevealInProjectPanel",
-      "enter": "editor::OpenExcerpts",
 
       // \t split mappings
       "\\ t j": ["workspace::SendKeystrokes", "ctrl-w s \\ t t"],
       "\\ t h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ t t"],
       "\\ t k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ t t"],
       "\\ t l": ["workspace::SendKeystrokes", "ctrl-w v \\ t t"],
+
+      // \gf split mappings
+      "\\ g f": "editor::OpenExcerpts",
+      "\\ g f f": "editor::OpenExcerpts",
+      "\\ g f l": "editor::OpenExcerptsSplit",
 
       // \gd split mappings
       "\\ g d": "editor::GoToDefinition",
@@ -86,8 +90,8 @@
   {
     "context": "Editor && vim_mode == normal",
     "bindings": {
-      "z shift-m": ["workspace::SendKeystrokes", "g g shift-v shift-g z c escape"],
-      "z shift-r": ["workspace::SendKeystrokes", "g g shift-v shift-g z o escape"]
+      "z shift-m": ["workspace::SendKeystrokes", "m m g g shift-v shift-g z c escape ` m"],
+      "z shift-r": ["workspace::SendKeystrokes", "m m g g shift-v shift-g z o escape ` m"]
     }
   },
   {
@@ -95,7 +99,15 @@
     "bindings": {
       "shift-s": ["vim::PushOperator", { "AddSurrounds": {} }],
       "v": "editor::SelectLargerSyntaxNode",
-      "V": "editor::SelectSmallerSyntaxNode"
+      "V": "editor::SelectSmallerSyntaxNode",
+
+      // \gf split mappings
+      "\\ g f": "editor::OpenFile",
+      "\\ g f f": "editor::OpenFile",
+      "\\ g f j": ["workspace::SendKeystrokes", "ctrl-w s \\ g f f"],
+      "\\ g f h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"],
+      "\\ g f k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g f f"],
+      "\\ g f l": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"]
     }
   }
 ]
