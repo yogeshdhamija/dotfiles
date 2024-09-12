@@ -29,7 +29,8 @@
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-b": ["terminal::SendKeystroke", "ctrl-b"]
+      "ctrl-b": ["terminal::SendKeystroke", "ctrl-b"],
+      "\\ c": "workspace::CloseAllDocks"
     }
   },
   {
