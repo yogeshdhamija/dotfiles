@@ -28,12 +28,9 @@
   "buffer_font_family": "UbuntuMono Nerd Font",
   "buffer_font_size": 16,
   "cursor_blink": false,
-  "inlay_hints": {
-    "enabled": true
-  },
   "theme": {
     "mode": "system",
-    "light": "One Light",
-    "dark": "One Dark"
+    "light": "Gruvbox Light",
+    "dark": "Gruvbox Dark"
   }
 }

@@ -19,7 +19,7 @@ let added_plugins = added_plugins + [
     \ ['ncm2/float-preview.nvim', {}],
     \ ['stevearc/oil.nvim', {}],
     \ ['nvim-tree/nvim-web-devicons', {}],
-    \ ['Mofiqul/vscode.nvim', {}],
+    \ ['ellisonleao/gruvbox.nvim', {}],
 \ ]
 
 " ====================================== LOAD VIMRC ======================================
@@ -32,7 +32,8 @@ set foldexpr=nvim_treesitter#foldexpr()
 aunmenu PopUp.How-to\ disable\ mouse
 aunmenu PopUp.-1-
 
-silent! colorscheme vscode
+set termguicolors
+silent! colorscheme gruvbox
 
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
