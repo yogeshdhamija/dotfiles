@@ -32,10 +32,10 @@ if status is-interactive
     command -v rg > /dev/null && set -gx FZF_CTRL_T_COMMAND 'rg --follow --files --no-messages -uuu'
 
     # Set up my code editor preferences, in worst-to-best order:
-    command -v idea > /dev/null && set -gx EDITOR "idea --wait"
-    command -v code > /dev/null && set -gx EDITOR "code -w"
     command -v vim > /dev/null && set -gx EDITOR "vim"
     command -v nvim > /dev/null && set -gx EDITOR "nvim"
+    command -v idea > /dev/null && set -gx EDITOR "idea --wait"
+    command -v code > /dev/null && set -gx EDITOR "code -w"
     command -v zed > /dev/null && set -gx EDITOR "zed -w"
 
     if test -f ~/.shell_aliases
