@@ -11,9 +11,6 @@ set highlightedyank
 nmap <C-O> <Action>(Back)
 nmap <C-I> <Action>(Forward)
 
-nnoremap zL 40zl
-nnoremap zH 40zh
-
 nnoremap * *N:set hls<CR>
 vmap * <Action>(Find)
 
@@ -24,38 +21,51 @@ let expand = 300
 nmap zr :let expand += 1<CR>:call CycleThroughActions(expand, 'CollapseAllRegions', 'ExpandAllToLevel1',"ExpandAllToLevel2","ExpandAllToLevel3","ExpandAllToLevel4","ExpandAllToLevel5","ExpandAllRegions")<CR>
 nmap zm :let expand -= 1<CR>:call CycleThroughActions(expand, 'CollapseAllRegions', 'ExpandAllToLevel1',"ExpandAllToLevel2","ExpandAllToLevel3","ExpandAllToLevel4","ExpandAllToLevel5","ExpandAllRegions")<CR>
 
-nmap     `    <Action>(ShowBookmarks)
-nnoremap \c   <Esc>:noh<CR>:action HideSideWindows<CR>
-nmap     \tj  <Action>(ActivateTerminalToolWindow)
-nmap     \dh  <Action>(SelectInProjectView)
-nmap     \f   <Action>(FindInPath)
-vmap     \f   <Action>(FindInPath)
+nnoremap zL 40zl
+nnoremap zH 40zh
+
+nmap ` <Action>(ShowBookmarks)
+nnoremap <C-j> 10j
+nnoremap <C-k> 10k
+xmap v <Action>(EditorSelectWord)
+xmap V <Action>(EditorUnSelectWord)
+
+xnoremap \p "_dP
+nnoremap \c   <Esc>:noh<CR>:action HideSideWindows<CR>:action MarkNotificationsAsRead<CR>
 nmap     \o   <Action>(GotoFile)
+nnoremap \b   :tabn
+nmap     \q   <Action>(ShowIntentionActions)
+vnoremap \q   :action Refactorings.QuickListPopupAction<CR>
+nmap     \a   <Action>(GotoAction)
+vmap     \a   <Action>(GotoAction)
+nmap     \h   <Action>(QuickJavaDoc)
+inoremap \h   <C-O>:action ParameterInfo<CR><C-O>:action QuickJavaDoc<CR>
+nmap     \e   <Action>(ShowErrorDescription)
+
+nmap     \dh  <Action>(SelectInProjectView)
 nmap     \gd  <Action>(GotoDeclaration)
 nmap     \gdd <Action>(GotoDeclaration)
 nmap     \gr  <Action>(ShowUsages)
 nmap     \grr <Action>(ShowUsages)
 nmap     \gi  <Action>(GotoImplementation)
 nmap     \gii <Action>(GotoImplementation)
-nmap     \h   <Action>(QuickJavaDoc)
-inoremap \h   <C-O>:action ParameterInfo<CR><C-O>:action QuickJavaDoc<CR>
-nmap     \q   <Action>(ShowIntentionActions)
-vnoremap \q   :action Refactorings.QuickListPopupAction<CR>
-nmap     \a   <Action>(GotoAction)
-vmap     \a   <Action>(GotoAction)
-nnoremap \b   :tabn
-nmap     \e   <Action>(ShowErrorDescription)
-nmap     :q<CR> <Action>(CloseAllEditors)
+nmap     \tj  <Action>(ActivateTerminalToolWindow)
 
-command! CLOSEHIDDENBUFFERS action CloseAllEditorsButActive
-command! CLO                CLOSEHIDDENBUFFERS
-command! ONLY               only
+nmap     :q<CR> <Action>(Unsplit)
+
+nmap     <C-f>   <Action>(Find)
+nmap     \f      <Action>(FindInPath)
+vmap     \f      <Action>(FindInPath)
+
+command! ONLY               action UnsplitAll
 command! ON                 ONLY
 command! DELMARKS           action ShowBookmarks
 command! DELM               DELMARKS
-command! RENAME             action RenameElement
-command! REN                RENAME
 command! FORMAT             action ReformatCode
 command! FOR                FORMAT
 command! ERRORS             action GoToErrorGroup
 command! ERRS               ERRORS
+command! RENAME             action RenameElement
+command! REN                RENAME
+command! CLOSEHIDDENBUFFERS action CloseAllEditorsButActive
+command! CLO                CLOSEHIDDENBUFFERS
