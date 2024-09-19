@@ -133,7 +133,7 @@
     "atlascode.bitbucket.issues.monitorEnabled": false,
     "atlascode.bitbucket.pipelines.monitorEnabled": false,
     "atlascode.jira.explorer.monitorEnabled": false,
-    "workbench.colorTheme": "Default Light+",
+    "workbench.colorTheme": "Gruvbox Dark Hard",
     "workbench.colorCustomizations": {
         "[Chandrian Blue]": {
             "tab.activeBackground": "#004a5a91",

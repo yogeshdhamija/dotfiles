@@ -11,8 +11,11 @@
     { "key": "ctrl+e ctrl+b", "command": "-sqltools.formatSql", "when": "editorTextFocus && !editorReadonly" },
 
     // Free up ctrl+f so terminal shortcut can be used:
-    { "key": "ctrl+f", "command": "-workbench.action.terminal.focusFind", "when": "terminalFindFocused || terminalFocus" },
-    { "key": "ctrl+shift+f", "command": "workbench.action.terminal.focusFind", "when": "terminalFindFocused || terminalFocus" },
+    { "key": "ctrl+f", "command": "-workbench.action.terminal.focusFind", "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported" },
+    { "key": "ctrl+shift+f", "command": "workbench.action.terminal.focusFind", "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported" },
+
+    // Free up ctrl+w so terminal shortcut can be used:
+    { "key": "ctrl+w", "command": "-workbench.action.terminal.killEditor", "when": "terminalEditorFocus && terminalFocus && terminalHasBeenCreated || terminalEditorFocus && terminalFocus && terminalProcessSupported" },
 
     // Make the "enter" key open the file instead of renaming the file:
     { "key": "shift+enter", "command": "renameFile", "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus" },
@@ -38,8 +41,8 @@
         
         // Simulate yogeshdhamija/terminal-command-motion.vim plugin
             // using cm and CM to navigate previous commands
-            { "key": "ctrl+j", "command": "workbench.action.terminal.scrollToNextCommand", "when": "terminalFocus" },
-            { "key": "ctrl+k", "command": "workbench.action.terminal.scrollToPreviousCommand", "when": "terminalFocus" },
+            { "key": "ctrl+\\ ctrl+n c m", "command": "workbench.action.terminal.scrollToNextCommand", "when": "terminalFocus" },
+            { "key": "ctrl+\\ ctrl+n c shift-m", "command": "workbench.action.terminal.scrollToPreviousCommand", "when": "terminalFocus" },
 
         // Insert mode mappings
         // { "key": "\\ h", "when": "neovim.mode == insert && editorTextFocus", "command": "editor.action.triggerParameterHints" },
@@ -47,35 +50,31 @@
 
         // Add vim shortcuts to terminal and non-text editor buffers (duplicated from ~/.vimrc, which only works for text editor buffers through the vscode-neovim plugin)
             // window management
-            { "key": "ctrl+w h", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.focusLeftGroup" },
-            { "key": "ctrl+w j", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.focusBelowGroup" },
-            { "key": "ctrl+w k", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.focusAboveGroup" },
-            { "key": "ctrl+w l", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.focusRightGroup" },
-            { "key": "ctrl+w ctrl+h", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveEditorToLeftGroup" },
-            { "key": "ctrl+w ctrl+j", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveEditorToBelowGroup" },
-            { "key": "ctrl+w ctrl+k", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveEditorToAboveGroup" },
-            { "key": "ctrl+w ctrl+l", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveEditorToRightGroup" },
-            { "key": "ctrl+w s", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.newGroupBelow", "workbench.action.files.newUntitledFile"]} },
-            { "key": "ctrl+w v", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.newGroupRight", "workbench.action.files.newUntitledFile"]} },
-            { "key": "ctrl+w -", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.decreaseViewHeight" },
-            { "key": "ctrl+w shift+=", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.increaseViewHeight" },
-            { "key": "ctrl+w shift+,", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.decreaseViewWidth" },
-            { "key": "ctrl+w shift+.", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.increaseViewWidth" },
-            { "key": "ctrl+w =", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.evenEditorWidths" },
-            { "key": "ctrl+w shift+h", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveActiveEditorGroupLeft" },
-            { "key": "ctrl+w shift+j", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveActiveEditorGroupDown" },
-            { "key": "ctrl+w shift+k", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveActiveEditorGroupUp" },
-            { "key": "ctrl+w shift+l", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveActiveEditorGroupRight" },
-            // allow default behaviour if you double up, since otherwise it's taken by window management
-            { "key": "ctrl+w ctrl+w", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": "\u0017"} },
+            { "key": "ctrl+\\ ctrl+n ctrl+w h", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.focusLeftGroup" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w j", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.focusBelowGroup" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w k", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.focusAboveGroup" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w l", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.focusRightGroup" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w ctrl+h", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveEditorToLeftGroup" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w ctrl+j", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveEditorToBelowGroup" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w ctrl+k", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveEditorToAboveGroup" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w ctrl+l", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveEditorToRightGroup" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w s", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.newGroupBelow", "workbench.action.files.newUntitledFile"]} },
+            { "key": "ctrl+\\ ctrl+n ctrl+w v", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.newGroupRight", "workbench.action.files.newUntitledFile"]} },
+            { "key": "ctrl+\\ ctrl+n ctrl+w -", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.decreaseViewHeight" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w shift+=", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.increaseViewHeight" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w shift+,", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.decreaseViewWidth" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w shift+.", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.increaseViewWidth" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w =", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.evenEditorWidths" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w shift+h", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveActiveEditorGroupLeft" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w shift+j", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveActiveEditorGroupDown" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w shift+k", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveActiveEditorGroupUp" },
+            { "key": "ctrl+\\ ctrl+n ctrl+w shift+l", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.moveActiveEditorGroupRight" },
             
             // commands
-            { "key": "shift+; q enter", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.joinTwoGroups", "workbench.action.navigateBack"]}},
-            { "key": "shift+; b d enter", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.closeActiveEditor"},
-            { "key": "shift+; shift+C shift+L shift+O enter", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.closeOtherEditors"},
-            { "key": "shift+; shift+O shift+N enter", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.joinAllGroups"},
-            // allow default behaviour if you double up, since otherwise it's taken by window management
-            { "key": "shift+; shift+;", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": ":"} },
+            { "key": "ctrl+\\ ctrl+n shift+; q enter", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.joinTwoGroups", "workbench.action.navigateBack"]}},
+            { "key": "ctrl+\\ ctrl+n shift+; b d enter", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.closeActiveEditor"},
+            { "key": "ctrl+\\ ctrl+n shift+; shift+C shift+L shift+O enter", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.closeOtherEditors"},
+            { "key": "ctrl+\\ ctrl+n shift+; shift+O shift+N enter", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.joinAllGroups"},
             
             // leader shortcuts
             {"key": "\\ d h", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.files.action.showActiveFileInExplorer"},
