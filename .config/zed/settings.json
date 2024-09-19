@@ -14,8 +14,8 @@
   "pane_split_direction_horizontal": "down",
   "command_aliases": {
     "CLO": "pane: close inactive items",
-    "ON": "pane: join into next",
-    "q": "pane: close all items",
+    "ON": "pane: join into next", // TODO: should be "pane: join all" once it lands
+    "q": "pane: join into next",
     "ERRS": "diagnostics: deploy",
     "qa": "zed: quit"
   },
