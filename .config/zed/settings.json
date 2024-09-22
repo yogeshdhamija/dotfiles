@@ -1,11 +1,5 @@
 {
-  "assistant": {
-    "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-20240620"
-    },
-    "version": "2"
-  },
+  // Vim Stuff
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "never"
@@ -19,18 +13,22 @@
     "ERRS": "diagnostics: deploy",
     "qa": "zed: quit"
   },
+  "cursor_blink": false,
+
+  // Git stuff
   "git": {
     "inline_blame": { "enabled": false }
+  },
+
+  // Visual stuff
+  "theme": {
+    "mode": "system",
+    "light": "Gruvbox Light",
+    "dark": "Gruvbox Dark"
   },
   "soft_wrap": "editor_width",
   "buffer_font_weight": 501,
   "preferred_line_length": 120,
   "buffer_font_family": "UbuntuMono Nerd Font",
-  "buffer_font_size": 16,
-  "cursor_blink": false,
-  "theme": {
-    "mode": "system",
-    "light": "Gruvbox Light",
-    "dark": "Gruvbox Dark"
-  }
+  "buffer_font_size": 16
 }
