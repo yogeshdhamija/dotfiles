@@ -1,4 +1,7 @@
 {
+  // General Settings
+  "restore_on_startup": "none",
+
   // Vim Stuff
   "vim_mode": true,
   "vim": {
