@@ -30,7 +30,8 @@
     "context": "Terminal",
     "bindings": {
       "ctrl-b": ["terminal::SendKeystroke", "ctrl-b"],
-      "\\ c": "workspace::CloseAllDocks"
+      "\\ c": "workspace::CloseAllDocks",
+      "\\ m": "assistant::InlineAssist"
     }
   },
   {
@@ -43,6 +44,7 @@
       "\\ h": "editor::Hover",
       "\\ e": "editor::GoToDiagnostic",
       "\\ d h": "pane::RevealInProjectPanel",
+      "\\ m": "assistant::InlineAssist",
 
       // \t split mappings
       "\\ t j": ["workspace::SendKeystrokes", "ctrl-w s \\ t t"],

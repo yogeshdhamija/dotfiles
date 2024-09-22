@@ -1,5 +1,5 @@
 if !has('nvim')
-    " Other programs (Neovim, VSCode-Neovim, etc.), when loading vimrc, 
+    " Other programs (Neovim, VSCode-Neovim, etc.), when loading vimrc,
     "   are responsible for providing their own functions. They could also
     "   source this same file, if they want, and override some of them.
 
@@ -21,7 +21,7 @@ source ~/.config/vim/settings.vim
 "   when they choose to load this same vimrc.
 "
 " The encouraged pattern here is that all mappings
-"   should be declared in this ~/.vimrc and 
+"   should be declared in this ~/.vimrc and
 "   functionality can be implemented depending on
 "   the program by overriding functions.
 
@@ -61,6 +61,8 @@ source ~/.config/vim/settings.vim
     nnoremap \h <cmd>call Hover()<CR>
     inoremap \h <cmd>call SignatureHelp()<CR>
     nnoremap \e <Cmd>call Error()<CR>
+    nnoremap \m <cmd>call InlineAssistThroughAiMagic()<CR>
+    xnoremap \m <cmd>call InlineAssistThroughAiMagic()<CR>
     call CreateSplitMappings("nnore",     "\\d",  "<cmd>call DirectoryBrowser()<CR>")
     call CreateSplitMappings("nnore",     "\\gd", "<cmd>call Definition()<CR>")
     call CreateSplitMappings("nnore",     "\\gD", "<cmd>call Declaration()<CR>")
