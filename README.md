@@ -62,7 +62,7 @@ The `~/.vimrc` acts as the base where all mappings and commands are defined. Neo
 
 - All mappings and commands in `~/.vimrc`
     - These mappings call functions which can be defined in:
-        -  `~/.vimrc` If it's vim-specific or default implementation (may be overridden).
+        -  `~/.vimrc` If it's either vim-specific, or an overrideable default implementation.
         -  `~/.config/nvim/init.vim` If it's neovim-specific.
         -  `~/.vscodevimrc` If it's vscode-neovim specific.
 
@@ -111,13 +111,15 @@ The `*.local.loadbefore` vim files can be used to adjust which plugins are used.
 The settings live in the editor-specific files. They try to duplicate the mappings and commands in `~/.vimrc` as much as possible. Files used are:
 
 - `~/.ideavimrc` for Jetbrains IDEs' IdeaVim plugin.
+  - Once plugin is manually installed, this file is auto-loaded by the default settings.
+
 - `~/.config/zed/` for Zed.
+  - Auto-loaded by Zed.
+
+- `~/.config/Code/User/` for VSCode
+  - Auto-loaded on linux. Can be symlinked to relevant config paths on Windows or OSX.
+  - Assumes `asvetliakov.vscode-neovim`, `alefragnani.Bookmarks`, and `ryuta46.multi-command` plugins have been manually installed.
+
 - `~/dotfile-backups/vscode/` for VSCode
-
-### VSCode
-
-The `~/dotfile-backups/vscode/` folder contains VSCode profile files, which contain all the settings and configuration to make VSCode load `~/.vscodevimrc` and behave like NeoVim.
-
-This must be imported into VSCode manually.
-
-I should remember to periodically export these profile files from VSCode, in case I make updates/changes. When I do that, I should remember to name the profile "Default" (though the file name can differ), otherwise I'll have trouble re-importing.
+  - These have VSCode profiles manually exported periodically, and must be manually imported using the VSCode UI.
+  - Plugins are included so they don't have to be manually installed.
