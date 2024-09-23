@@ -29,8 +29,6 @@
     "diffEditor.ignoreTrimWhitespace": true,
     "scm.alwaysShowRepositories": true,
     "editor.fontFamily": "'UbuntuMono Nerd Font', 'monospace', monospace",
-    "editor.fontSize": 15,
-    "terminal.integrated.fontSize": 17,
     "editor.fontLigatures": false,
     "window.title": "${activeEditorShort}${dirty}${separator}${activeEditorLong}",
     "editor.renderWhitespace": "trailing",
