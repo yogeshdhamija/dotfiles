@@ -29,7 +29,7 @@
         // Map <C-\><C-n> to "exit" focus on any non-editor (similar to how <C-\><C-n> maps to <Esc> in vim/neovim):
             { "key": "ctrl+\\ ctrl+n", "when": "!terminalFocus", "command": "workbench.action.focusActiveEditorGroup" },
             { "key": "ctrl+\\ ctrl+n", "when": "terminalFocus", "command": "workbench.action.focusPreviousGroup" },
-            { "key": "escape", "command": "workbench.action.focusActiveEditorGroup", "when": "(!editorTextFocus) || (focusedView == workbench.panel.output)" },
+            { "key": "escape", "command": "workbench.action.focusActiveEditorGroup", "when": "!inChat && ((!editorTextFocus) || (focusedView == workbench.panel.output))" },
         
         // Make <C-F> still do vscode things.
             { "key": "ctrl+f", "command": "-vscode-neovim.ctrl-f", "when": "editorTextFocus && neovim.ctrlKeysNormal.f && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'" },
@@ -83,12 +83,17 @@
             {"key": "\\ w", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showAllEditors"},
             {"key": "\\ a", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showCommands"},
             {"key": "\\ c", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.closeSidebar", "workbench.action.closePanel", "notifications.hideToasts"]}},
+            { "key": "\\ m", "command": "workbench.action.terminal.chat.start", "when": "terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported" },
             // allow \ default behaviour if you double up, since otherwise it's taken by other shortcuts
             { "key": "\\ \\", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": "\\"} },
 
             // back and forward (for some reason they only work as chords???)
             { "key": "ctrl+o ctrl+o", "command": "workbench.action.navigateBack", "when": "terminalFocus || (!editorTextFocus && !inputFocus)" },
             { "key": "ctrl+i ctrl+i", "command": "workbench.action.navigateForward", "when": "terminalFocus || (!editorTextFocus && !inputFocus)" },
+
+    // enter accepts in inline VSCode Github Chat UI
+    { "key": "enter", "command": "workbench.action.terminal.chat.insertCommand", "when": "inChatInput && (terminalChatResponseContainsCodeBlock && terminalHasBeenCreated && !terminalChatActiveRequest && !terminalChatResponseContainsMultipleCodeBlocks || terminalChatResponseContainsCodeBlock && terminalProcessSupported && !terminalChatActiveRequest && !terminalChatResponseContainsMultipleCodeBlocks)" },
+    { "key": "enter", "command": "inlineChat.acceptChanges", "when": "inlineChatHasProvider && inlineChatVisible && config.inlineChat.mode != 'preview' && inlineChatChangeHasDiff" },
 
 
     // Other stuff...

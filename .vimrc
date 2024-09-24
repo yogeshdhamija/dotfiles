@@ -63,6 +63,7 @@ source ~/.config/vim/settings.vim
     nnoremap \e <Cmd>call Error()<CR>
     nnoremap \m <cmd>call InlineAssistThroughAiMagic()<CR>
     xnoremap \m <cmd>call InlineAssistThroughAiMagic()<CR>
+    inoremap \m <cmd>call InlineAssistThroughAiMagic()<CR>
     call CreateSplitMappings("nnore",     "\\d",  "<cmd>call DirectoryBrowser()<CR>")
     call CreateSplitMappings("nnore",     "\\gd", "<cmd>call Definition()<CR>")
     call CreateSplitMappings("nnore",     "\\gD", "<cmd>call Declaration()<CR>")
