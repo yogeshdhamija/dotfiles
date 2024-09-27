@@ -35,7 +35,7 @@ if status is-interactive
     command -v vim > /dev/null && set -gx EDITOR "vim"
     command -v nvim > /dev/null && set -gx EDITOR "nvim"
     command -v idea > /dev/null && set -gx EDITOR "idea --wait"
-    command -v code > /dev/null && set -gx EDITOR "code -w"
+    command -v code > /dev/null && set -gx EDITOR "code -w --disable-workspace-trust"
     command -v zed > /dev/null && set -gx EDITOR "zed -w"
 
     if test -f ~/.shell_aliases
