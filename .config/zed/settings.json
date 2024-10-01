@@ -35,7 +35,7 @@
   // Visual stuff
   "theme": {
     "mode": "system",
-    "light": "Gruvbox Light",
+    "light": "One Light",
     "dark": "Gruvbox Dark"
   },
   "soft_wrap": "editor_width",
