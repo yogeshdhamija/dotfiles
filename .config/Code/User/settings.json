@@ -131,7 +131,7 @@
     "atlascode.bitbucket.issues.monitorEnabled": false,
     "atlascode.bitbucket.pipelines.monitorEnabled": false,
     "atlascode.jira.explorer.monitorEnabled": false,
-    "workbench.colorTheme": "Gruvbox Dark Hard",
+    "workbench.colorTheme": "Default Light+",
     "workbench.colorCustomizations": {
         "[Chandrian Blue]": {
             "tab.activeBackground": "#004a5a91",
@@ -204,4 +204,10 @@
     "dart.debugSdkLibraries": false,
     "dart.openDevTools": "flutter",
     "window.newWindowProfile": "Default",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    },
 }

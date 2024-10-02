@@ -78,6 +78,7 @@
             
             // leader shortcuts
             {"key": "\\ d h", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.files.action.showActiveFileInExplorer"},
+            {"key": "\\ t t", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.createTerminalEditor"},
             {"key": "\\ o", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.quickOpen"},
             {"key": "\\ b", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showEditorsInActiveGroup"},
             {"key": "\\ w", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showAllEditors"},
