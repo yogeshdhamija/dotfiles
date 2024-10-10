@@ -91,13 +91,6 @@
     }
   },
   {
-    "context": "Editor && vim_mode == normal",
-    "bindings": {
-      "z shift-m": ["workspace::SendKeystrokes", "m m g g shift-v shift-g z c escape ` m"],
-      "z shift-r": ["workspace::SendKeystrokes", "m m g g shift-v shift-g z o escape ` m"]
-    }
-  },
-  {
     "context": "Editor && vim_mode == visual",
     "bindings": {
       "shift-s": ["vim::PushOperator", { "AddSurrounds": {} }],
