@@ -20,6 +20,8 @@ let added_plugins = added_plugins + [
     \ ['stevearc/oil.nvim', {}],
     \ ['nvim-tree/nvim-web-devicons', {}],
     \ ['MysticalDevil/inlay-hints.nvim', {}],
+    \ ['j-hui/fidget.nvim', {}],
+    \ ['nvim-lualine/lualine.nvim', {}],
 \ ]
 
 " ====================================== LOAD VIMRC ======================================
@@ -33,6 +35,7 @@ aunmenu PopUp.How-to\ disable\ mouse
 aunmenu PopUp.-1-
 
 set termguicolors
+set noshowmode
 
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
@@ -96,7 +99,18 @@ end
 
 ---------------- LSP --------------------------------
 
-require("inlay-hints").setup({})
+local statusinlay,inlay = pcall(require, 'inlay-hints')
+if(statusinlay) then
+    inlay.setup({})
+end
+local statusfidget,fidget = pcall(require, 'fidget')
+if(statusfidget) then
+    fidget.setup({})
+end
+local statusline,line = pcall(require, 'lualine')
+if(statusline) then
+    line.setup({})
+end
 
 
 vim.api.nvim_create_autocmd({"FileType"}, {
