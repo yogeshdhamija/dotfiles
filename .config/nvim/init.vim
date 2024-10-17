@@ -19,6 +19,7 @@ let added_plugins = added_plugins + [
     \ ['ncm2/float-preview.nvim', {}],
     \ ['stevearc/oil.nvim', {}],
     \ ['nvim-tree/nvim-web-devicons', {}],
+    \ ['MysticalDevil/inlay-hints.nvim', {}],
 \ ]
 
 " ====================================== LOAD VIMRC ======================================
@@ -94,6 +95,9 @@ if (status) then
 end
 
 ---------------- LSP --------------------------------
+
+require("inlay-hints").setup({})
+
 
 vim.api.nvim_create_autocmd({"FileType"}, {
     pattern = {"rust"},
