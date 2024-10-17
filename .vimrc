@@ -70,6 +70,7 @@ source ~/.config/vim/settings.vim
     call CreateSplitMappings("nnore",     "\\gr", "<cmd>call References()<CR>")
     call CreateSplitMappings("nnore",     "\\gi", "<cmd>call Implementations()<CR>")
     call CreateSplitMappings("nnore",     "\\t", "<cmd>call StartTerminal()<CR>")
+    call CreateSplitMappings("nnore",     "\\gf", "<cmd>call GoToFile()<CR>")
 
 " Commands
     command!          ONLY            call Only()
@@ -133,6 +134,10 @@ endfunction
 
 function! ListWindows() abort
     execute "normal! :Windows\<CR>"
+endfunction
+
+function! GoToFile() abort
+    execute "normal! gf"
 endfunction
 
 call SourceFileIfExists("~/.config/vim/dirvish_config.vim")
