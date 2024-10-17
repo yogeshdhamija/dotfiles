@@ -90,7 +90,6 @@ source ~/.config/vim/settings.vim
 
 function! DelMarks() abort
     execute "normal! :delmarks a-zA-Z0-9\<CR>"
-    echo ":delmarks a-zA-Z0-9"
 endfunction
 
 function! Only() abort

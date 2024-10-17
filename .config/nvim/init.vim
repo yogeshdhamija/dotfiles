@@ -19,7 +19,6 @@ let added_plugins = added_plugins + [
     \ ['ncm2/float-preview.nvim', {}],
     \ ['stevearc/oil.nvim', {}],
     \ ['nvim-tree/nvim-web-devicons', {}],
-    \ ['ellisonleao/gruvbox.nvim', {}],
 \ ]
 
 " ====================================== LOAD VIMRC ======================================
@@ -33,7 +32,6 @@ aunmenu PopUp.How-to\ disable\ mouse
 aunmenu PopUp.-1-
 
 set termguicolors
-silent! colorscheme gruvbox
 
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
@@ -165,22 +163,6 @@ endfunction
 
 function! ShrinkSelection() abort
     exe "norm \<Plug>ShrinkSelection"
-endfunction
-
-function! MoveUp() abort
-    let l:oldPosition = getcurpos()
-    exe "norm \<Plug>MoveUp"
-    if(getcurpos() == l:oldPosition)
-        normal 10k
-    endif
-endfunction
-
-function! MoveDown() abort
-    let l:oldPosition = getcurpos()
-    exe "norm \<Plug>MoveDown"
-    if(getcurpos() == l:oldPosition)
-        normal 10j
-    endif
 endfunction
 
 function! SwapWithNextParameter() abort
