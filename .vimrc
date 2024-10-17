@@ -84,7 +84,6 @@ source ~/.config/vim/settings.vim
     command! -nargs=? GLOG            GITLOG <args>
     command! -range=% GITHISTORY      <line1>,<line2>BCommits
     command! -range=% GHISTORY        <line1>,<line2>GITHISTORY
-    command!          PDF             w | call WriteToPdf()
     command!          SWAP            call SwapWithNextParameter()
     command!          PREVSWAP        call SwapWithPreviousParameter()
 

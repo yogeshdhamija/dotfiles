@@ -44,12 +44,6 @@ function! CustomFoldText() abort
     return indent . text
 endfunction
 
-function! WriteToPdf() abort
-    let current_dir = escape(expand("%:p:h"), ' ') . ";"
-    let listings_file = findfile(".listings-setup.tex", current_dir)
-    exe '!pandoc "%:p" --listings -H "' . listings_file . '" -o "%:p:r.pdf" -V geometry:margin=1in'
-endfunction
-
 function! SetClipboardForWslTerminal() abort
     let g:clipboard = {
                 \   'name': 'WslClipboard',
