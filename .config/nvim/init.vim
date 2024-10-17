@@ -13,12 +13,17 @@ if !exists("added_plugins")
     let added_plugins = []
 endif
 let added_plugins = added_plugins + [
+    \ ['stevearc/oil.nvim', {}],
+    \ ['ncm2/float-preview.nvim', {}],
+    \ ['nvim-tree/nvim-web-devicons', {}],
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
     \ ['nvim-treesitter/nvim-treesitter-context', {}],
     \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
-    \ ['ncm2/float-preview.nvim', {}],
-    \ ['stevearc/oil.nvim', {}],
-    \ ['nvim-tree/nvim-web-devicons', {}],
+    \ ['williamboman/mason.nvim', {}],
+    \ ['williamboman/mason-lspconfig.nvim', {}],
+    \ ['neovim/nvim-lspconfig', {}],
+    \ ['hrsh7th/nvim-cmp', {}],
+    \ ['hrsh7th/cmp-nvim-lsp', {}],
     \ ['MysticalDevil/inlay-hints.nvim', {}],
     \ ['j-hui/fidget.nvim', {}],
     \ ['nvim-lualine/lualine.nvim', {}],
@@ -99,6 +104,50 @@ end
 
 ---------------- LSP --------------------------------
 
+-- Add cmp_nvim_lsp capabilities settings to lspconfig
+-- This should be executed before you configure any language server
+local statuslspconfig, lspconfig = pcall(require, 'lspconfig')
+local statuscmplsp, cmplsp = pcall(require, 'cmp_nvim_lsp')
+local statusmasonl, masonl = pcall(require, 'mason-lspconfig')
+local statusmason, mason = pcall(require, 'mason')
+if(statuslspconfig and statuscmplsp and statusmasonl and statusmason) then
+    local lspconfig_defaults = lspconfig.util.default_config
+    lspconfig_defaults.capabilities = vim.tbl_deep_extend(
+        'force',
+        lspconfig_defaults.capabilities,
+        cmplsp.default_capabilities()
+    )
+
+    mason.setup({})
+    masonl.setup({
+      -- Replace the language servers listed here 
+      -- with the ones you want to install
+      ensure_installed = {'lua_ls', 'rust_analyzer'},
+      handlers = {
+        function(server_name)
+          require('lspconfig')[server_name].setup({})
+        end,
+      },
+    })
+end
+
+local statuscmp, cmp = pcall(require, 'cmp')
+if(statuscmp) then
+    cmp.setup({
+      sources = {
+        {name = 'nvim_lsp'},
+      },
+      snippet = {
+        expand = function(args)
+          -- You need Neovim v0.10 to use vim.snippet
+          vim.snippet.expand(args.body)
+        end,
+      },
+      mapping = cmp.mapping.preset.insert({}),
+    })
+end
+
+
 local statusinlay,inlay = pcall(require, 'inlay-hints')
 if(statusinlay) then
     inlay.setup({})
@@ -112,17 +161,6 @@ if(statusline) then
     line.setup({})
 end
 
-
-vim.api.nvim_create_autocmd({"FileType"}, {
-    pattern = {"rust"},
-    callback = function(event)
-      vim.lsp.start({
-        name = 'rust-analyzer',
-        cmd = {'rust-analyzer'},
-        root_dir = vim.fs.dirname(vim.fs.find({'Cargo.lock', 'Cargo.toml'}, { upward = true })[1]),
-      })
-    end
-})
 
 EOF
 
