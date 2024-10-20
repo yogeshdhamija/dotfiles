@@ -1,7 +1,6 @@
 #!/bin/bash
 
 declare -a EXECS=(
-    "zed"
     "starship"
     "rg"
     "bat"
@@ -11,7 +10,6 @@ declare -a EXECS=(
     "fish"
 )
 declare -a NAMES=(
-    "Zed"
     "Starship"
     "Ripgrep"
     "Bat"
@@ -21,7 +19,6 @@ declare -a NAMES=(
     "fish"
 )
 declare -a ADDITIONAL1=(
-    "Text & Code editor"
     "Prompt for terminal"
     "Like grep, but better"
     "Like cat, but better"
@@ -31,7 +28,6 @@ declare -a ADDITIONAL1=(
     "Preferred shell"
 )
 declare -a ADDITIONAL2=(
-    "https://zed.dev"
     "https://starship.rs"
     "https://github.com/BurntSushi/ripgrep"
     "https://github.com/sharkdp/bat"

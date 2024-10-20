@@ -25,11 +25,11 @@ command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --follow --files --n
 command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --follow --files --no-messages -uuu'
 
 # Set up my code editor preferences, in worst-to-best order:
-command -v idea > /dev/null && export EDITOR="idea --wait"
-command -v code > /dev/null && export EDITOR="code -w --disable-workspace-trust"
-command -v zed > /dev/null && export EDITOR="zed -w"
 command -v vim > /dev/null && export EDITOR="vim"
 command -v nvim > /dev/null && export EDITOR="nvim"
+command -v zed > /dev/null && export EDITOR="zed -w"
+command -v idea > /dev/null && export EDITOR="idea --wait"
+command -v code > /dev/null && export EDITOR="code -w --disable-workspace-trust"
 
 # Load aliases
 if [ -f ~/.shell_aliases ]; then
