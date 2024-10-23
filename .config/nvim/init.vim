@@ -45,6 +45,8 @@ aunmenu PopUp.-1-
 set termguicolors
 set noshowmode
 
+set scrollback=100000
+
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
 
