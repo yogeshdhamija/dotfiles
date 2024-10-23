@@ -13,6 +13,7 @@ if !exists("added_plugins")
     let added_plugins = []
 endif
 let added_plugins = added_plugins + [
+    \ ['nvim-lua/plenary.nvim', {}],
     \ ['stevearc/oil.nvim', {}],
     \ ['ncm2/float-preview.nvim', {}],
     \ ['nvim-tree/nvim-web-devicons', {}],
@@ -22,11 +23,13 @@ let added_plugins = added_plugins + [
     \ ['williamboman/mason.nvim', {}],
     \ ['williamboman/mason-lspconfig.nvim', {}],
     \ ['neovim/nvim-lspconfig', {}],
+    \ ['nvimtools/none-ls.nvim', {}],
     \ ['hrsh7th/nvim-cmp', {}],
     \ ['hrsh7th/cmp-nvim-lsp', {}],
     \ ['MysticalDevil/inlay-hints.nvim', {}],
     \ ['j-hui/fidget.nvim', {}],
     \ ['nvim-lualine/lualine.nvim', {}],
+    \ ['mfussenegger/nvim-jdtls', {}],
 \ ]
 
 " ====================================== LOAD VIMRC ======================================
@@ -62,6 +65,7 @@ local statuscontext, tscontext = pcall(require, 'treesitter-context')
 if (status) then
     ts.setup {
       ensure_installed = "all",
+      ignore_install = {},
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false
@@ -120,16 +124,17 @@ if(statuslspconfig and statuscmplsp and statusmasonl and statusmason) then
 
     mason.setup({})
     masonl.setup({
-      -- Replace the language servers listed here 
-      -- with the ones you want to install
-      ensure_installed = {'lua_ls', 'rust_analyzer'},
+      ensure_installed = {'lua_ls', 'rust_analyzer', 'jdtls'},
+      automatic_installation = true,
       handlers = {
-        function(server_name)
-          require('lspconfig')[server_name].setup({})
+        function(server_name) -- default for all servers, except for named ones
+          lspconfig[server_name].setup({})
         end,
+        jdtls = function() end -- don't use lspconfig for java, use nvim-jdtls (config in ~/.config/nvim/ftplugin/java.lua)
       },
     })
 end
+
 
 local statuscmp, cmp = pcall(require, 'cmp')
 if(statuscmp) then
@@ -139,7 +144,6 @@ if(statuscmp) then
       },
       snippet = {
         expand = function(args)
-          -- You need Neovim v0.10 to use vim.snippet
           vim.snippet.expand(args.body)
         end,
       },

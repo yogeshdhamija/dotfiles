@@ -28,7 +28,7 @@ if executable('rg')
 elseif executable('ag')
     set grepprg=ag\ --follow\ --vimgrep\ --noheading
 else
-    set grepprg=grep\ -nR
+    set grepprg=grep\ -nRIH
 endif
 augroup jump_to_last_position_on_open
     autocmd!
