@@ -14,9 +14,10 @@ if !exists("added_plugins")
 endif
 let added_plugins = added_plugins + [
     \ ['nvim-lua/plenary.nvim', {}],
-    \ ['stevearc/oil.nvim', {}],
-    \ ['ncm2/float-preview.nvim', {}],
+    \ ['MunifTanjim/nui.nvim', {}],
     \ ['nvim-tree/nvim-web-devicons', {}],
+    \ ['nvim-neo-tree/neo-tree.nvim', {'branch': 'v3.x'}],
+    \ ['ncm2/float-preview.nvim', {}],
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
     \ ['nvim-treesitter/nvim-treesitter-context', {}],
     \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
@@ -51,14 +52,148 @@ set scrollback=100000
 lua << EOF
 
 ---------------- File browser -----------------------
-local statusf, f = pcall(require, 'oil')
-if(statusf) then
-    f.setup({
-        cleanup_delay_ms = false,
-        view_options = {
-            show_hidden = true
-        },
-    })
+local neotreestatus, neotree = pcall(require, 'neo-tree')
+if (neotreestatus) then
+  local renderer = require "neo-tree.ui.renderer"
+  local MIN_DEPTH = 2
+
+  local function open_dir(state, dir_node)
+    local fs = require "neo-tree.sources.filesystem"
+    fs.toggle_directory(state, dir_node, nil, true, false)
+  end
+  local function recursive_open(state, node, max_depth)
+    local max_depth_reached = 1
+    local stack = { node }
+    while next(stack) ~= nil do
+      node = table.remove(stack)
+      if node.type == "directory" and not node:is_expanded() then
+        open_dir(state, node)
+      end
+
+      local depth = node:get_depth()
+      max_depth_reached = math.max(depth, max_depth_reached)
+
+      if not max_depth or depth < max_depth - 1 then
+        local children = state.tree:get_nodes(node:get_id())
+        for _, v in ipairs(children) do
+          table.insert(stack, v)
+        end
+      end
+    end
+
+    return max_depth_reached
+  end
+  local function neotree_zo(state, open_all)
+    local node = state.tree:get_node()
+
+    if open_all then
+      recursive_open(state, node)
+    else
+      recursive_open(state, node, node:get_depth() + vim.v.count1)
+    end
+
+    renderer.redraw(state)
+  end
+  local function neotree_zO(state)
+    neotree_zo(state, true)
+  end
+  local function recursive_close(state, node, max_depth)
+    if max_depth == nil or max_depth <= MIN_DEPTH then
+      max_depth = MIN_DEPTH
+    end
+
+    local last = node
+    while node and node:get_depth() >= max_depth do
+      if node:has_children() and node:is_expanded() then
+        node:collapse()
+      end
+      last = node
+      node = state.tree:get_node(node:get_parent_id())
+    end
+
+    return last
+  end
+  local function neotree_zc(state, close_all)
+    local node = state.tree:get_node()
+    if not node then
+      return
+      end
+
+    local max_depth
+    if not close_all then
+      max_depth = node:get_depth() - vim.v.count1
+      if node:has_children() and node:is_expanded() then
+        max_depth = max_depth + 1
+      end
+    end
+
+    local last = recursive_close(state, node, max_depth)
+    renderer.redraw(state)
+    renderer.focus_node(state, last:get_id())
+  end
+
+  require("neo-tree").setup({
+      use_default_mappings = false,
+      auto_clean_after_session_restore = true,
+      window = {mappings = {
+              ["?"] = "show_help",
+              ["<cr>"] = "open",
+              ["<esc>"] = "cancel",
+              ["\\h"] = "show_file_details",
+              ["s"] = {"show_help", nowait=false, config = {title = "Sort by", prefix_key = "s"}},
+              ["sc"] = { "order_by_created", nowait = false },
+              ["sd"] = { "order_by_diagnostics", nowait = false },
+              ["sg"] = { "order_by_git_status", nowait = false },
+              ["sm"] = { "order_by_modified", nowait = false },
+              ["sn"] = { "order_by_name", nowait = false },
+              ["ss"] = { "order_by_size", nowait = false },
+              ["st"] = { "order_by_type", nowait = false },
+      }},
+      filesystem = {
+          window = {mappings = {
+              ["H"] = "toggle_hidden",
+              ["c"] = "rename",
+              ["d"] = "delete",
+              ["o"] = "add",
+              ["y"] = "copy_to_clipboard",
+              ["x"] = "cut_to_clipboard",
+              ["p"] = "paste_from_clipboard",
+              ["zo"] = neotree_zo,
+              ["zc"] = neotree_zc,
+              ["zO"] = neotree_zO,
+              ["zC"] = "close_all_subnodes",
+          }},
+          filtered_items = { visible = true },
+          bind_to_cwd = false
+      },
+      buffers = {
+        window = {mappings = {
+              ["bd"] = "buffer_delete",
+              ["<C-n>"] = "next_buffer",
+              ["<C-p>"] = "previous_buffer",
+        }},
+        show_unloaded = true,
+        bind_to_cwd = false,
+      },
+      commands = {
+        next_buffer = function(state)
+          vim.cmd('let oldSearch = @/')
+          vim.cmd('norm 0')
+          vim.cmd('execute "normal! /#\\<CR>"')
+          vim.cmd('norm n')
+          vim.cmd('let @/ = oldSearch')
+          vim.cmd('noh')
+        end,
+        previous_buffer = function(state)
+          vim.cmd('let oldSearch = @/')
+          vim.cmd('norm $')
+          vim.cmd('execute "normal! ?#\\<CR>"')
+          vim.cmd('norm n')
+          vim.cmd('let @/ = oldSearch')
+          vim.cmd('noh')
+        end,
+      }
+  })
 end
 
 ---------------- Tree Sitter ------------------------
@@ -236,6 +371,22 @@ function! SwapWithPreviousParameter() abort
 endfunction
 
 function! DirectoryBrowser() abort
-    exe "norm \<CMD>Oil\<CR>"
+    let cur = expand('%:p')
+    if stridx(cur, getcwd()) >= 0 && filereadable(cur)
+      exe "norm \<CMD>Neotree filesystem reveal current\<CR>"
+    elseif filereadable(cur)
+      exe "norm \<CMD>Neotree filesystem dir=%:p:h reveal=true current\<CR>"
+    else
+      exe "norm \<CMD>Neotree filesystem reveal=false current\<CR>"
+    endif
+endfunction
+
+function! ListBuffers() abort
+    let alt = expand('#:p')
+    if stridx(alt, getcwd()) >= 0 && filereadable(alt)
+      execute "normal! :Neotree buffers reveal_file=#:p float\<CR>"
+    else
+      execute "normal! :Neotree buffers reveal=false float\<CR>"
+    endif
 endfunction
 
