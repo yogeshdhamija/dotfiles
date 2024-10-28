@@ -41,6 +41,7 @@ let language = [
 \ ]
 let other_stuff = [
     \ ['nvim-lualine/lualine.nvim', {}],
+    \ ['gsuuon/model.nvim', {}],
 \ ]
 let added_plugins = added_plugins + dependencies + file_browser + treesitter + lsp + language + other_stuff
 
@@ -58,6 +59,12 @@ set termguicolors
 set noshowmode
 
 set scrollback=100000
+
+augroup FiletypeMchat
+  autocmd!
+  autocmd FileType mchat nnoremap <buffer> \m <cmd>Mchat<CR>
+  autocmd FileType mchat inoremap <buffer> \m <cmd>Mchat<CR><cmd>stopinsert<CR>
+augroup END
 
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
@@ -403,5 +410,56 @@ function! ListBuffers() abort
     else
       execute "normal! :Neotree buffers reveal=false current\<CR>"
     endif
+endfunction
+
+function! CloseWindowsWithFileType(filetype)
+  " Get the current window number to return to it later.
+  let l:current_win = winnr()
+
+  " Loop through all windows.
+  let l:win_count = winnr('$')
+  for l:i in range(1, l:win_count)
+    " Switch to window i
+    exe l:i . 'wincmd w'
+
+    " Check the filetype of the buffer in that window.
+    if &filetype == a:filetype
+      " Close the window if filetype matches.
+      close
+      " Adjust the window count since one window is closed.
+      let l:win_count -= 1
+
+      " Decrement 'i' since windows have shifted.
+      let l:i -= 1
+    endif
+  endfor
+
+  " Return to the original window
+  exe l:current_win . 'wincmd w'
+endfunction
+
+function! InlineAssistThroughAiMagic() abort
+
+  " If buffer of type mchat already exists, go there and paste contents (if called in visual mode)
+  for l:buf in range(1, bufnr('$'))
+    if bufexists(l:buf) && getbufvar(l:buf, '&filetype') ==# 'mchat'
+      let l:in_visual_mode = mode() ==# 'v' || mode() ==# "V"
+      if l:in_visual_mode
+        normal! y
+      endif
+      call CloseWindowsWithFileType('mchat')
+      vsplit
+      execute 'buffer' l:buf
+      normal G
+      if l:in_visual_mode
+        normal! p
+      endif
+      return
+    endif
+  endfor
+
+  " Else, call :Mchat command (which also pastes contents if called in visual mode)
+  execute "normal! :Mchat openai\<CR>"
+  execute "normal! :set wrap\<CR>"
 endfunction
 
