@@ -440,17 +440,35 @@ endfunction
 
 function! InlineAssistThroughAiMagic() abort
 
-  " If buffer of type mchat already exists, go there and paste contents (if called in visual mode)
+  " If window of type mchat already exists, go there and paste contents (if called in visual mode)
+  for winnr in range(1, winnr('$'))
+    let bufnr = winbufnr(winnr)
+    if getbufvar(bufnr, '&filetype') ==# 'mchat'
+      let l:in_visual_mode = mode() ==# 'v' || mode() ==# "V"
+      if l:in_visual_mode
+        normal! y
+      endif
+      execute winnr . "wincmd w"
+      normal Go
+      stopinsert
+      if l:in_visual_mode
+        normal! p
+      endif
+      return
+    endif
+  endfor
+
+  " If buffer of type mchat already exists, open it and paste contents (if called in visual mode)
   for l:buf in range(1, bufnr('$'))
     if bufexists(l:buf) && getbufvar(l:buf, '&filetype') ==# 'mchat'
       let l:in_visual_mode = mode() ==# 'v' || mode() ==# "V"
       if l:in_visual_mode
         normal! y
       endif
-      call CloseWindowsWithFileType('mchat')
       vsplit
       execute 'buffer' l:buf
-      normal G
+      normal Go
+      stopinsert
       if l:in_visual_mode
         normal! p
       endif
