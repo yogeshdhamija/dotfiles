@@ -38,6 +38,7 @@ set showmode
 " Cannot open directory listing in current "buffer" in VSCode
     unmap \dd
     unmap \d
+    unmap \r
 
 " Get folding working with vscode neovim plugin
     nnoremap zM :call VSCodeNotify('editor.foldAll')<CR>
