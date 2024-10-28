@@ -135,7 +135,9 @@ if (neotreestatus) then
   require("neo-tree").setup({
       use_default_mappings = false,
       auto_clean_after_session_restore = true,
-      window = {mappings = {
+      use_popups_for_input = false,
+      window = {
+        mappings = {
               ["?"] = "show_help",
               ["<cr>"] = "open",
               ["<esc>"] = "cancel",
@@ -148,7 +150,9 @@ if (neotreestatus) then
               ["sn"] = { "order_by_name", nowait = false },
               ["ss"] = { "order_by_size", nowait = false },
               ["st"] = { "order_by_type", nowait = false },
-      }},
+        },
+        position = "current"
+      },
       filesystem = {
           window = {mappings = {
               ["H"] = "toggle_hidden",
@@ -384,9 +388,9 @@ endfunction
 function! ListBuffers() abort
     let alt = expand('#:p')
     if stridx(alt, getcwd()) >= 0 && filereadable(alt)
-      execute "normal! :Neotree buffers reveal_file=#:p float\<CR>"
+      execute "normal! :Neotree buffers reveal_file=#:p current\<CR>"
     else
-      execute "normal! :Neotree buffers reveal=false float\<CR>"
+      execute "normal! :Neotree buffers reveal=false current\<CR>"
     endif
 endfunction
 
