@@ -12,26 +12,37 @@ let disabled_plugins = disabled_plugins + ["justinmk/vim-dirvish"]
 if !exists("added_plugins")
     let added_plugins = []
 endif
-let added_plugins = added_plugins + [
+let dependencies = [
     \ ['nvim-lua/plenary.nvim', {}],
+\ ]
+let file_browser = [
     \ ['MunifTanjim/nui.nvim', {}],
     \ ['nvim-tree/nvim-web-devicons', {}],
     \ ['nvim-neo-tree/neo-tree.nvim', {'branch': 'v3.x'}],
-    \ ['ncm2/float-preview.nvim', {}],
+\ ]
+let treesitter = [
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
     \ ['nvim-treesitter/nvim-treesitter-context', {}],
     \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
+\ ]
+let lsp = [
     \ ['williamboman/mason.nvim', {}],
     \ ['williamboman/mason-lspconfig.nvim', {}],
     \ ['neovim/nvim-lspconfig', {}],
     \ ['nvimtools/none-ls.nvim', {}],
     \ ['hrsh7th/nvim-cmp', {}],
     \ ['hrsh7th/cmp-nvim-lsp', {}],
+    \ ['ncm2/float-preview.nvim', {}],
     \ ['MysticalDevil/inlay-hints.nvim', {}],
     \ ['j-hui/fidget.nvim', {}],
-    \ ['nvim-lualine/lualine.nvim', {}],
+\ ]
+let language = [
     \ ['mfussenegger/nvim-jdtls', {}],
 \ ]
+let other_stuff = [
+    \ ['nvim-lualine/lualine.nvim', {}],
+\ ]
+let added_plugins = added_plugins + dependencies + file_browser + treesitter + lsp + language + other_stuff
 
 " ====================================== LOAD VIMRC ======================================
 source ~/.vimrc
