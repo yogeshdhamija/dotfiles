@@ -99,3 +99,39 @@ function! MarksHelper() abort
     endif
 endfunction
 
+function! RunInTerminal(cmd) range abort
+    let l:foundterm = 0
+
+    " Switch to terminal window, if one is open
+    for winnr in range(1, winnr('$'))
+      let bufnr = winbufnr(winnr)
+      if getbufvar(bufnr, '&buftype') ==# 'terminal'
+        execute winnr . "wincmd w"
+        let l:foundterm = 1
+        break
+      endif
+    endfor
+
+    " Else, switch to terminal buffer in current window, if buffer is open
+    if(!l:foundterm)
+        for l:buffer_nr in reverse(range(1, bufnr('$')))
+            if getbufvar(l:buffer_nr, '&buftype') ==# 'terminal'
+                execute 'buffer' l:buffer_nr
+                let l:foundterm = 1
+                break
+            endif
+        endfor
+    endif
+
+    " Else, start a new terminal buffer in current window
+    if(!l:foundterm)
+        terminal
+    endif
+
+    let l:orig_z = @z
+    let @z = a:cmd
+    stopinsert
+    normal! "zp
+    let @z = l:orig_z
+    normal! i
+endfunction

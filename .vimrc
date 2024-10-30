@@ -64,8 +64,8 @@ source ~/.config/vim/settings.vim
     nnoremap \m <cmd>call InlineAssistThroughAiMagic()<CR>
     xnoremap \m <cmd>call InlineAssistThroughAiMagic()<CR>
     inoremap \m <cmd>call InlineAssistThroughAiMagic()<CR>
-    xnoremap \r y<cmd>call RunInTerminal()<CR>
-    nnoremap \r yy<cmd>call RunInTerminal()<CR>
+    xnoremap \r y<cmd>call RunInTerminal(@")<CR>
+    nnoremap \r yy<cmd>call RunInTerminal(@")<CR>
     call CreateSplitMappings("nnore",     "\\d",  "<cmd>call DirectoryBrowser()<CR>")
     call CreateSplitMappings("nnore",     "\\gd", "<cmd>call Definition()<CR>")
     call CreateSplitMappings("nnore",     "\\gD", "<cmd>call Declaration()<CR>")
@@ -140,36 +140,6 @@ endfunction
 
 function! GoToFile() abort
     execute "normal! gf"
-endfunction
-
-function! RunInTerminal() range abort
-    let l:foundterm = 0
-
-    for winnr in range(1, winnr('$'))
-      let bufnr = winbufnr(winnr)
-      if getbufvar(bufnr, '&buftype') ==# 'terminal'
-        execute winnr . "wincmd w"
-        let l:foundterm = 1
-        break
-      endif
-    endfor
-
-    if(!l:foundterm)
-        for l:buffer_nr in reverse(range(1, bufnr('$')))
-            if getbufvar(l:buffer_nr, '&buftype') ==# 'terminal'
-                execute 'buffer' l:buffer_nr
-                let l:foundterm = 1
-                break
-            endif
-        endfor
-    endif
-
-    if(!l:foundterm)
-        terminal
-    endif
-
-    stopinsert
-    normal! pi
 endfunction
 
 call SourceFileIfExists("~/.config/vim/dirvish_config.vim")

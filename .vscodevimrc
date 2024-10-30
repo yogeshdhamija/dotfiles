@@ -4,6 +4,9 @@ let &packpath = &runtimepath
 " ====================================== LOAD FUNCTIONS ======================================
 source ~/.config/vim/functions.vim
 
+function! RunInTerminal(cmd) range abort
+endfunction
+
 function! CreateSplitMappings(mode, mapping, rhs) abort
     execute a:mode.'map '.a:mapping.' '.a:rhs
     execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.a:rhs
@@ -38,7 +41,6 @@ set showmode
 " Cannot open directory listing in current "buffer" in VSCode
     unmap \dd
     unmap \d
-    unmap \r
 
 " Get folding working with vscode neovim plugin
     nnoremap zM :call VSCodeNotify('editor.foldAll')<CR>
