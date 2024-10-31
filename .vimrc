@@ -64,8 +64,8 @@ source ~/.config/vim/settings.vim
     nnoremap \m <cmd>call InlineAssistThroughAiMagic()<CR>
     xnoremap \m <cmd>call InlineAssistThroughAiMagic()<CR>
     inoremap \m <cmd>call InlineAssistThroughAiMagic()<CR>
-    xnoremap \r y<cmd>call RunInTerminal(@")<CR>
-    nnoremap \r yy<cmd>call RunInTerminal(@")<CR>
+    xnoremap \r y<cmd>call RunInNearestTerminal(@")<CR>
+    nnoremap \r yy<cmd>call RunInNearestTerminal(@")<CR>
     call CreateSplitMappings("nnore",     "\\d",  "<cmd>call DirectoryBrowser()<CR>")
     call CreateSplitMappings("nnore",     "\\gd", "<cmd>call Definition()<CR>")
     call CreateSplitMappings("nnore",     "\\gD", "<cmd>call Declaration()<CR>")

@@ -99,7 +99,7 @@ function! MarksHelper() abort
     endif
 endfunction
 
-function! RunInTerminal(cmd) range abort
+function! RunInNearestTerminal(cmd) range abort
     let l:foundterm = 0
 
     " Switch to terminal window, if one is open
