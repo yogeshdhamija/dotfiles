@@ -7,7 +7,6 @@ declare -a EXECS=(
     "eza"
     "jq"
     "yq"
-    "fish"
 )
 declare -a NAMES=(
     "Starship"
@@ -16,7 +15,6 @@ declare -a NAMES=(
     "eza"
     "jq"
     "yq"
-    "fish"
 )
 declare -a ADDITIONAL1=(
     "Prompt for terminal"
@@ -25,7 +23,6 @@ declare -a ADDITIONAL1=(
     "Like ls, but better"
     "JSON Parsing CLI tool"
     "YAML and XML Parsing CLI tool"
-    "Preferred shell"
 )
 declare -a ADDITIONAL2=(
     "https://starship.rs"
@@ -34,7 +31,6 @@ declare -a ADDITIONAL2=(
     "https://github.com/eza-community/eza"
     "https://stedolan.github.io/jq/"
     "https://github.com/kislyuk/yq"
-    ""
 )
 IFS=':' read -r -a local_config_overrides_loaded <<< "$LOCAL_CONFIG_OVERRIDES_LOADED"
 IFS=':' read -r -a local_config_overrides_not_loaded <<< "$LOCAL_CONFIG_OVERRIDES_NOT_LOADED"
