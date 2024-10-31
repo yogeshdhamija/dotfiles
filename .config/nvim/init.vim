@@ -42,6 +42,7 @@ let language = [
 let other_stuff = [
     \ ['nvim-lualine/lualine.nvim', {}],
     \ ['gsuuon/model.nvim', {}],
+    \ ['samjwill/nvim-unception', {}],
 \ ]
 let added_plugins = added_plugins + dependencies + file_browser + treesitter + lsp + language + other_stuff
 

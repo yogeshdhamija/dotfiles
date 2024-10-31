@@ -36,7 +36,7 @@ if status is-interactive
     command -v idea > /dev/null && set -gx EDITOR "idea --wait"
     command -v code > /dev/null && set -gx EDITOR "code -w --disable-workspace-trust"
     command -v vim > /dev/null && set -gx EDITOR "vim"
-    command -v nvim > /dev/null && set -gx EDITOR "nvim"
+    command -v nvim > /dev/null && set -gx EDITOR "nvim --cmd 'let g:unception_block_while_host_edits=1'"
 
     if test -f ~/.shell_aliases
       source ~/.shell_aliases

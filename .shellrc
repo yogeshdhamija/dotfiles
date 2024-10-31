@@ -29,7 +29,7 @@ command -v zed > /dev/null && export EDITOR="zed -w"
 command -v idea > /dev/null && export EDITOR="idea --wait"
 command -v code > /dev/null && export EDITOR="code -w --disable-workspace-trust"
 command -v vim > /dev/null && export EDITOR="vim"
-command -v nvim > /dev/null && export EDITOR="nvim"
+command -v nvim > /dev/null && export EDITOR="nvim --cmd 'let g:unception_block_while_host_edits=1'"
 
 # Load aliases
 if [ -f ~/.shell_aliases ]; then
