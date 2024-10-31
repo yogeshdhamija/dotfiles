@@ -60,6 +60,7 @@ set termguicolors
 set noshowmode
 
 set scrollback=100000
+let g:unception_open_buffer_in_new_tab=1
 
 augroup FiletypeMchat
   autocmd!
