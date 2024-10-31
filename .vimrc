@@ -35,8 +35,8 @@ source ~/.config/vim/settings.vim
     inoremap <C-R>      <C-R><C-O>
     inoremap <C-N>      <C-X><C-O>
     nnoremap `          <Cmd>call AccessMarks()<CR>
-    nnoremap <C-j>      <Cmd>call MoveDown()<CR>
-    nnoremap <C-k>      <Cmd>call MoveUp()<CR>
+    noremap <C-j>       <Cmd>call MoveDown()<CR>
+    noremap <C-k>       <Cmd>call MoveUp()<CR>
     xnoremap v          <Cmd>call ExpandSelection()<CR>
     xnoremap V          <Cmd>call ShrinkSelection()<CR>
 
