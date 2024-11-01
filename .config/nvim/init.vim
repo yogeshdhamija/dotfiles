@@ -39,12 +39,15 @@ let lsp = [
 let language = [
     \ ['mfussenegger/nvim-jdtls', {}],
 \ ]
-let other_stuff = [
+let interface_stuff = [
     \ ['nvim-lualine/lualine.nvim', {}],
+    \ ['lukas-reineke/indent-blankline.nvim', {}],
+\ ]
+let other_stuff = [
     \ ['gsuuon/model.nvim', {}],
     \ ['samjwill/nvim-unception', {}],
 \ ]
-let added_plugins = added_plugins + dependencies + file_browser + treesitter + lsp + language + other_stuff
+let added_plugins = added_plugins + dependencies + file_browser + treesitter + lsp + language + interface_stuff + other_stuff
 
 " ====================================== LOAD VIMRC ======================================
 source ~/.vimrc
@@ -324,6 +327,10 @@ end
 local statusline,line = pcall(require, 'lualine')
 if(statusline) then
     line.setup({})
+end
+local statusibl,ibl = pcall(require, 'ibl')
+if(statusibl) then
+  ibl.setup()
 end
 
 
