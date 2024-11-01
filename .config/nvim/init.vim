@@ -42,7 +42,6 @@ let language = [
 let interface_stuff = [
     \ ['nvim-lualine/lualine.nvim', {}],
     \ ['lukas-reineke/indent-blankline.nvim', {}],
-    \ ['catppuccin/nvim', { 'as': 'catppuccin' }],
 \ ]
 let other_stuff = [
     \ ['gsuuon/model.nvim', {}],
@@ -323,11 +322,7 @@ if(statusinlay) then
 end
 local statusfidget,fidget = pcall(require, 'fidget')
 if(statusfidget) then
-    fidget.setup({
-      notification = {
-        window = { winblend = 0 },
-      }
-    })
+    fidget.setup({})
 end
 local statusline,line = pcall(require, 'lualine')
 if(statusline) then
@@ -338,21 +333,8 @@ if(statusibl) then
   ibl.setup()
 end
 
-local statuscolors,colors = pcall(require, 'catppuccin')
-if(statuscolors) then
-  colors.setup({
-    dim_inactive = { enabled = true, percentage = .000001 },
-    default_integrations = true,
-    integrations = {
-      fidget = true,
-      mason = true,
-    }
-  })
-  vim.cmd.colorscheme "catppuccin"
-end
 
 EOF
-
 
 " ==================================== ADD FUNCTIONALITY ====================================
 function! QuickAction() abort
