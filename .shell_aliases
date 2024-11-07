@@ -2,7 +2,7 @@ alias "dotfiles-log"="dotfiles log --color --graph --pretty=format:'%Cred%h%Cres
 
 alias "dotfiles-check"="cd ~ && chmod +x .check_environment.sh && ./.check_environment.sh && cd -"
 
-alias "dotfiles-update-repo"="cd ~ && dotfiles remote update && dotfiles pull && dotfiles checkout && dotfiles submodule init && dotfiles submodule update && dotfiles submodule update --remote && dotfiles status; cd -"
+alias "dotfiles-update-repo"="cd ~ && dotfiles remote update && dotfiles fetch --all && dotfiles pull && dotfiles checkout && dotfiles submodule init && dotfiles submodule update && dotfiles submodule update --remote && dotfiles status; cd -"
 
 alias "dotfiles-update-vim"="cd ~ && mv ~/.vim/lastsession.vim ~/.vim/lastsession.vim.old > /dev/null 2>&1; vim +PlugUpgrade +PlugUpdate +StopKeepingSession -c \"qa\"; mv ~/.vim/lastsession.vim.old ~/.vim/lastsession.vim > /dev/null 2>&1; cd -"
 
