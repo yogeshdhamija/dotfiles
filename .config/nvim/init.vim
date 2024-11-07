@@ -330,7 +330,11 @@ if(statusline) then
 end
 local statusibl,ibl = pcall(require, 'ibl')
 if(statusibl) then
-  ibl.setup()
+  ibl.setup({
+    indent = {
+      char = '╎'
+    }
+  })
 end
 
 
