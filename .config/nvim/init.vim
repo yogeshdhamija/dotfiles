@@ -335,6 +335,7 @@ if(statusibl) then
       char = '╎'
     }
   })
+  vim.o.listchars = 'tab:| ,trail:•'
 end
 
 
