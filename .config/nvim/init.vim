@@ -368,8 +368,6 @@ if (dapuistatus and dapstatus and masondapstatus and dapvtstatus) then
   vim.fn.sign_define('DapBreakpointCondition', {text='¿', texthl='', linehl='', numhl=''})
   vim.fn.sign_define('DapStopped', {text='➤', texthl='', linehl='', numhl=''})
   vim.fn.sign_define('DapBreakpointRejected', {text='🚫', texthl='', linehl='', numhl=''})
-
-  vim.api.nvim_create_user_command('DAPTOGGLEUI', function(opts) dapui.toggle() end, {})
 end
 
 ---------------- Other stuff ---------------------------
@@ -544,3 +542,12 @@ function! InlineAssistThroughAiMagic() abort
   execute "normal! :set wrap\<CR>"
 endfunction
 
+function! ToggleBreakpoint() abort
+  execute "normal! :DapToggleBreakpoint\<CR>"
+endfunction
+function! ToggleDebuggerUi() abort
+  lua require('dapui').toggle()
+endfunction
+function! StartDebugger() abort
+  execute "normal! :DapContinue\<CR>"
+endfunction

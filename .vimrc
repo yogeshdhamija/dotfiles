@@ -75,20 +75,23 @@ source ~/.config/vim/settings.vim
     call CreateSplitMappings("nnore",     "\\gf", "<cmd>call GoToFile()<CR>")
 
 " Commands
-    command!          ONLY            call Only()
-    command!          DELMARKS        call DelMarks()
-    command!          RENAME          call ChangeSymbolName()
-    command! -range=% FORMAT          call AutoFormat()
-    command!          ERRORS          call DisplayErrors()
-    command!          ERRS            ERRORS
-    command!          CD              silent cd %:p:h | redraw! | echo ":cd %:p:h"
-    command!          CP              let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')"
-    command! -nargs=? GITLOG          Git log --graph --oneline --pretty=format:'%h -%d %s (%cs) <%an>' <args>
-    command! -nargs=? GLOG            GITLOG <args>
-    command! -range=% GITHISTORY      <line1>,<line2>BCommits
-    command! -range=% GHISTORY        <line1>,<line2>GITHISTORY
-    command!          SWAP            call SwapWithNextParameter()
-    command!          PREVSWAP        call SwapWithPreviousParameter()
+    command!          ONLY             call Only()
+    command!          DELMARKS         call DelMarks()
+    command!          RENAME           call ChangeSymbolName()
+    command! -range=% FORMAT           call AutoFormat()
+    command!          ERRORS           call DisplayErrors()
+    command!          ERRS             ERRORS
+    command!          CD               silent cd %:p:h | redraw! | echo ":cd %:p:h"
+    command!          CP               let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')"
+    command! -nargs=? GITLOG           Git log --graph --oneline --pretty=format:'%h -%d %s (%cs) <%an>' <args>
+    command! -nargs=? GLOG             GITLOG <args>
+    command! -range=% GITHISTORY       <line1>,<line2>BCommits
+    command! -range=% GHISTORY         <line1>,<line2>GITHISTORY
+    command!          SWAP             call SwapWithNextParameter()
+    command!          PREVSWAP         call SwapWithPreviousParameter()
+    command!          BREAKPOINT       call ToggleBreakpoint()
+    command!          TOGGLEDEBUGGERUI call ToggleDebuggerUi()
+    command!          DEBUG            call StartDebugger()
 
 function! DelMarks() abort
     execute "normal! :delmarks a-zA-Z0-9\<CR>"
