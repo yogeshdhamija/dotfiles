@@ -42,6 +42,7 @@ let language = [
 let interface_stuff = [
     \ ['nvim-lualine/lualine.nvim', {}],
     \ ['lukas-reineke/indent-blankline.nvim', {}],
+    \ ['ellisonleao/gruvbox.nvim', {}],
 \ ]
 let other_stuff = [
     \ ['gsuuon/model.nvim', {}],
@@ -78,6 +79,9 @@ augroup FiletypeMchat
   autocmd FileType mchat nnoremap <buffer> \m <cmd>Mchat<CR>
   autocmd FileType mchat inoremap <buffer> \m <cmd>Mchat<CR><cmd>stopinsert<CR>
 augroup END
+
+set background=dark
+silent! colorscheme gruvbox
 
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
