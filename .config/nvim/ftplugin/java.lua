@@ -1,13 +1,15 @@
 local statusjdtls, jdtls = pcall(require, 'jdtls')
-local statusnullls, null_ls = pcall(require,"null-ls")
-if(statusjdtls and statusnullls) then
+local statusnullls, null_ls = pcall(require, "null-ls")
+if (statusjdtls and statusnullls) then
 	local checkstyle_cmd = vim.fn.stdpath('data') .. '/mason/packages/checkstyle/checkstyle'
-	null_ls.setup({sources = {
-		null_ls.builtins.diagnostics.checkstyle.with({
-			extra_args = { "-c", "/google_checks.xml" },
-			command = checkstyle_cmd,
-		}),
-	}})
+	null_ls.setup({
+		sources = {
+			null_ls.builtins.diagnostics.checkstyle.with({
+				extra_args = { "-c", "/google_checks.xml" },
+				command = checkstyle_cmd,
+			}),
+		}
+	})
 
 	local java_path = vim.fn.expand('~/.sdkman/candidates/java/')
 	local jdtls_path = vim.fn.stdpath('data') .. '/mason/packages/jdtls'
@@ -16,6 +18,8 @@ if(statusjdtls and statusnullls) then
 	local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 	local data_dir = vim.fn.expand('~/.cache/jdtls-workspace/') .. workspace_dir
 	local maven_settings_path = vim.fn.expand('~/.m2/settings.xml')
+
+	local javadbg_path = vim.fn.stdpath('data') .. '/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar'
 
 	local function get_config_dir()
 		if vim.fn.has('linux') == 1 then
@@ -58,7 +62,8 @@ if(statusjdtls and statusnullls) then
 				format = {
 					settings = {
 						profile = "GoogleStyle",
-						url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml"
+						url =
+						"https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml"
 					}
 				},
 				eclipse = {
@@ -92,10 +97,23 @@ if(statusjdtls and statusnullls) then
 			},
 		},
 		init_options = {
-			bundles = {}
+			bundles = { javadbg_path }
 		},
 	}
 	-- This starts a new client & server,
 	-- or attaches to an existing client & server depending on the `root_dir`.
 	jdtls.start_or_attach(config)
+end
+
+local dapstatus, dap = pcall(require, 'dap')
+if (dapstatus) then
+	dap.configurations.java = {
+		{
+			type = 'java',
+			request = 'attach',
+			name = "Debug (Attach) - Remote",
+			hostName = "127.0.0.1",
+			port = 9998,
+		},
+	}
 end

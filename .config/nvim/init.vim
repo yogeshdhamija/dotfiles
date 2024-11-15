@@ -342,7 +342,7 @@ local dapvtstatus, dapvt = pcall(require, 'nvim-dap-virtual-text')
 local daprhstatus, daprh = pcall(require, 'nvim-dap-repl-highlights')
 if (dapuistatus and dapstatus and masondapstatus and dapvtstatus and daprhstatus) then
   masondap.setup({
-    ensure_installed = {"python"},
+    ensure_installed = {"python", "javadbg"},
     automatic_installation = true,
     handlers = {}
   })
