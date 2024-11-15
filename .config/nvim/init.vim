@@ -349,7 +349,16 @@ if (dapuistatus and dapstatus and masondapstatus and dapvtstatus) then
     automatic_installation = true,
     handlers = {}
   })
-  dapui.setup()
+  dapui.setup({
+    mappings = {
+      edit = "c",
+      expand = { "zo", "zc" },
+      open = "<CR>",
+      remove = "d",
+      repl = "r",
+      toggle = "t"
+    },
+  })
   dapvt.setup()
   dap.listeners.before.attach.dapui_config = function()
     dapui.open()
