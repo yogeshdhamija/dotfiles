@@ -234,6 +234,10 @@ end
 ---------------- Tree Sitter ------------------------
 local status, ts = pcall(require, 'nvim-treesitter.configs')
 local statuscontext, tscontext = pcall(require, 'treesitter-context')
+local daprhstatus, daprh = pcall(require, 'nvim-dap-repl-highlights')
+if (daprhstatus) then
+  daprh.setup()
+end
 if (status) then
     ts.setup {
       ensure_installed = "all",
@@ -339,8 +343,7 @@ local dapuistatus, dapui = pcall(require, 'dapui')
 local dapstatus, dap = pcall(require, 'dap')
 local masondapstatus, masondap = pcall(require, 'mason-nvim-dap')
 local dapvtstatus, dapvt = pcall(require, 'nvim-dap-virtual-text')
-local daprhstatus, daprh = pcall(require, 'nvim-dap-repl-highlights')
-if (dapuistatus and dapstatus and masondapstatus and dapvtstatus and daprhstatus) then
+if (dapuistatus and dapstatus and masondapstatus and dapvtstatus) then
   masondap.setup({
     ensure_installed = {"python", "javadbg"},
     automatic_installation = true,
@@ -348,7 +351,6 @@ if (dapuistatus and dapstatus and masondapstatus and dapvtstatus and daprhstatus
   })
   dapui.setup()
   dapvt.setup()
-  daprh.setup()
   dap.listeners.before.attach.dapui_config = function()
     dapui.open()
   end
@@ -361,6 +363,13 @@ if (dapuistatus and dapstatus and masondapstatus and dapvtstatus and daprhstatus
   dap.listeners.before.event_exited.dapui_config = function()
     dapui.close()
   end
+
+  vim.fn.sign_define('DapBreakpoint', {text='⬤', texthl='', linehl='', numhl=''})
+  vim.fn.sign_define('DapBreakpointCondition', {text='¿', texthl='', linehl='', numhl=''})
+  vim.fn.sign_define('DapStopped', {text='➤', texthl='', linehl='', numhl=''})
+  vim.fn.sign_define('DapBreakpointRejected', {text='🚫', texthl='', linehl='', numhl=''})
+
+  vim.api.nvim_create_user_command('DAPTOGGLEUI', function(opts) dapui.toggle() end, {})
 end
 
 ---------------- Other stuff ---------------------------
