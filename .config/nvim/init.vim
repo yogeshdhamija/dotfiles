@@ -47,7 +47,15 @@ let other_stuff = [
     \ ['gsuuon/model.nvim', {}],
     \ ['samjwill/nvim-unception', {}],
 \ ]
-let added_plugins = added_plugins + dependencies + file_browser + treesitter + lsp + language + interface_stuff + other_stuff
+let debugging = [
+    \ ['mfussenegger/nvim-dap', {}],
+    \ ['nvim-neotest/nvim-nio', {}],
+    \ ['rcarriga/nvim-dap-ui', {}],
+    \ ['jay-babu/mason-nvim-dap.nvim', {}],
+    \ ['theHamsta/nvim-dap-virtual-text', {}],
+    \ ['LiadOz/nvim-dap-repl-highlights', {}],
+\ ]
+let added_plugins = added_plugins + dependencies + file_browser + treesitter + lsp + language + interface_stuff + other_stuff + debugging
 
 " ====================================== LOAD VIMRC ======================================
 source ~/.vimrc
@@ -288,7 +296,7 @@ if(statuslspconfig and statuscmplsp and statusmasonl and statusmason) then
 
     mason.setup({})
     masonl.setup({
-      ensure_installed = {'lua_ls', 'rust_analyzer', 'jdtls'},
+      ensure_installed = {'lua_ls', 'rust_analyzer', 'jdtls', 'pyright'},
       automatic_installation = true,
       handlers = {
         function(server_name) -- default for all servers, except for named ones
@@ -324,6 +332,38 @@ local statusfidget,fidget = pcall(require, 'fidget')
 if(statusfidget) then
     fidget.setup({})
 end
+
+
+---------------- Debugger ---------------------------
+local dapuistatus, dapui = pcall(require, 'dapui')
+local dapstatus, dap = pcall(require, 'dap')
+local masondapstatus, masondap = pcall(require, 'mason-nvim-dap')
+local dapvtstatus, dapvt = pcall(require, 'nvim-dap-virtual-text')
+local daprhstatus, daprh = pcall(require, 'nvim-dap-repl-highlights')
+if (dapuistatus and dapstatus and masondapstatus and dapvtstatus and daprhstatus) then
+  masondap.setup({
+    ensure_installed = {"python"},
+    automatic_installation = true,
+    handlers = {}
+  })
+  dapui.setup()
+  dapvt.setup()
+  daprh.setup()
+  dap.listeners.before.attach.dapui_config = function()
+    dapui.open()
+  end
+  dap.listeners.before.launch.dapui_config = function()
+    dapui.open()
+  end
+  dap.listeners.before.event_terminated.dapui_config = function()
+    dapui.close()
+  end
+  dap.listeners.before.event_exited.dapui_config = function()
+    dapui.close()
+  end
+end
+
+---------------- Other stuff ---------------------------
 local statusline,line = pcall(require, 'lualine')
 if(statusline) then
     line.setup({})
