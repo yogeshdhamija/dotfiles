@@ -288,8 +288,6 @@ end
 
 ---------------- LSP --------------------------------
 
--- Add cmp_nvim_lsp capabilities settings to lspconfig
--- This should be executed before you configure any language server
 local statuslspconfig, lspconfig = pcall(require, 'lspconfig')
 local statuscmplsp, cmplsp = pcall(require, 'cmp_nvim_lsp')
 local statusmasonl, masonl = pcall(require, 'mason-lspconfig')
