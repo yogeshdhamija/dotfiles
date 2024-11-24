@@ -84,7 +84,6 @@ nnoremap <silent> \ :<c-u>WhichKey '\'<CR>
 
 " Colors
     set number
-    set scl=auto
     set foldlevelstart=99
     set foldmethod=indent
     tabdo windo set foldtext=CustomFoldText()
