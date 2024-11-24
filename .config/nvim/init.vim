@@ -43,6 +43,7 @@ let interface_stuff = [
     \ ['nvim-lualine/lualine.nvim', {}],
     \ ['lukas-reineke/indent-blankline.nvim', {}],
     \ ['ellisonleao/gruvbox.nvim', {}],
+    \ ['shaunsingh/nord.nvim', {}],
 \ ]
 let other_stuff = [
     \ ['gsuuon/model.nvim', {}],
@@ -81,7 +82,7 @@ augroup FiletypeMchat
 augroup END
 
 set background=dark
-silent! colorscheme gruvbox
+silent! colorscheme nord
 
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
