@@ -383,6 +383,9 @@ if (dapuistatus and dapstatus and masondapstatus and dapvtstatus) then
   vim.fn.sign_define('DapBreakpointCondition', {text='¿', texthl='', linehl='', numhl=''})
   vim.fn.sign_define('DapStopped', {text='➤', texthl='', linehl='', numhl=''})
   vim.fn.sign_define('DapBreakpointRejected', {text='🚫', texthl='', linehl='', numhl=''})
+  
+  
+  vim.cmd("au FileType dap-repl lua require('dap.ext.autocompl').attach()")
 end
 
 ---------------- Other stuff ---------------------------
