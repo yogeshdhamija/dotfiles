@@ -288,6 +288,7 @@ if (status) then
       mode='topline',
       multiwindow = true
     })
+    vim.cmd("highlight TreesitterContextBottom gui=underline guisp=Grey")
 end
 
 ---------------- LSP --------------------------------
