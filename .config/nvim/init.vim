@@ -283,7 +283,10 @@ if (status) then
         },
       },
     }
-    tscontext.setup { mode='topline' }
+    tscontext.setup({
+      mode='topline',
+      multiwindow = true
+    })
 end
 
 ---------------- LSP --------------------------------
