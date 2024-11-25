@@ -107,6 +107,7 @@ end
 
 local dapstatus, dap = pcall(require, 'dap')
 if (dapstatus) then
+	if(dap.configurations.java == nil) then
 	dap.configurations.java = {
 		{
 			type = 'java',
@@ -116,4 +117,5 @@ if (dapstatus) then
 			port = 9998,
 		},
 	}
+	end
 end
