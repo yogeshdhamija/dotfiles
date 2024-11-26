@@ -352,7 +352,7 @@ local masondapstatus, masondap = pcall(require, 'mason-nvim-dap')
 local dapvtstatus, dapvt = pcall(require, 'nvim-dap-virtual-text')
 if (dapuistatus and dapstatus and masondapstatus and dapvtstatus) then
   masondap.setup({
-    ensure_installed = {"python", "javadbg"},
+    ensure_installed = {"python", "javadbg", "codelldb"},
     automatic_installation = true,
     handlers = {}
   })
