@@ -112,10 +112,11 @@ function! RunInNearestTerminal(cmd) range abort
       endif
     endfor
 
-    " Else, switch to terminal buffer in current window, if buffer is open
+    " Else, switch to terminal buffer if buffer is open
     if(!l:foundterm)
         for l:buffer_nr in reverse(range(1, bufnr('$')))
             if getbufvar(l:buffer_nr, '&buftype') ==# 'terminal'
+                vsplit
                 execute 'buffer' l:buffer_nr
                 let l:foundterm = 1
                 break
@@ -123,8 +124,9 @@ function! RunInNearestTerminal(cmd) range abort
         endfor
     endif
 
-    " Else, start a new terminal buffer in current window
+    " Else, start a new terminal buffer
     if(!l:foundterm)
+        vsplit
         terminal
     endif
 
