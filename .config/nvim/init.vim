@@ -83,6 +83,8 @@ augroup END
 
 set background=dark
 silent! colorscheme gruvbox
+hi! link SignColumn Normal
+hi! link TreesitterContext Normal
 
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
