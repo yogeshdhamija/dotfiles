@@ -82,7 +82,7 @@ augroup FiletypeMchat
 augroup END
 
 set background=dark
-silent! colorscheme nord
+silent! colorscheme gruvbox
 
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
