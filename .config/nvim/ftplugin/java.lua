@@ -104,18 +104,3 @@ if (statusjdtls and statusnullls) then
 	-- or attaches to an existing client & server depending on the `root_dir`.
 	jdtls.start_or_attach(config)
 end
-
-local dapstatus, dap = pcall(require, 'dap')
-if (dapstatus) then
-	if(dap.configurations.java == nil) then
-	dap.configurations.java = {
-		{
-			type = 'java',
-			request = 'attach',
-			name = "Debug (Attach) - Remote",
-			hostName = "127.0.0.1",
-			port = 9998,
-		},
-	}
-	end
-end

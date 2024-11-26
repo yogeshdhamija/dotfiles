@@ -387,6 +387,17 @@ if (dapuistatus and dapstatus and masondapstatus and dapvtstatus) then
   
   
   vim.cmd("au FileType dap-repl lua require('dap.ext.autocompl').attach()")
+
+  ---------------------- Debugger Configurations -----------------------------------
+	dap.configurations.java = {
+		{
+			type = 'java',
+			request = 'attach',
+			name = "Debug (Attach) - Remote",
+			hostName = "127.0.0.1",
+			port = 9998,
+		},
+	}
 end
 
 ---------------- Other stuff ---------------------------
@@ -570,3 +581,5 @@ endfunction
 function! StartDebugger() abort
   execute "normal! :DapContinue\<CR>"
 endfunction
+
+call SourceFileIfExists(".vim/vimrc.local")
