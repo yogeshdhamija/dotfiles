@@ -4,7 +4,7 @@ let &packpath = &runtimepath
 " ====================================== LOAD FUNCTIONS ======================================
 source ~/.config/vim/functions.vim
 
-function! RunInTerminal(cmd) range abort
+function! RunInNearestTerminal(cmd) range abort
 endfunction
 
 function! CreateSplitMappings(mode, mapping, rhs) abort
