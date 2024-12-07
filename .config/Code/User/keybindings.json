@@ -42,7 +42,7 @@
         // Simulate yogeshdhamija/terminal-command-motion.vim plugin
             // using cm and CM to navigate previous commands
             { "key": "ctrl+\\ ctrl+n c m", "command": "workbench.action.terminal.scrollToNextCommand", "when": "terminalFocus" },
-            { "key": "ctrl+\\ ctrl+n c shift-m", "command": "workbench.action.terminal.scrollToPreviousCommand", "when": "terminalFocus" },
+            { "key": "ctrl+\\ ctrl+n shift-c shift-m", "command": "workbench.action.terminal.scrollToPreviousCommand", "when": "terminalFocus" },
 
         // Insert mode mappings
         // { "key": "\\ h", "when": "neovim.mode == insert && editorTextFocus", "command": "editor.action.triggerParameterHints" },
