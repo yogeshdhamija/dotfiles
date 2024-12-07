@@ -5,6 +5,7 @@ let &packpath = &runtimepath
 source ~/.config/vim/functions.vim
 
 function! RunInNearestTerminal(cmd) range abort
+    lua require("vscode").call("workbench.action.terminal.runSelectedText")
 endfunction
 
 function! CreateSplitMappings(mode, mapping, rhs) abort
