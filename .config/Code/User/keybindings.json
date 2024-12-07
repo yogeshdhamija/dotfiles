@@ -77,16 +77,20 @@
             { "key": "ctrl+\\ ctrl+n shift+; shift+O shift+N enter", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.joinAllGroups"},
             
             // leader shortcuts
-            {"key": "\\ d h", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.files.action.showActiveFileInExplorer"},
-            {"key": "\\ t t", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.createTerminalEditor"},
-            {"key": "\\ o", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.quickOpen"},
-            {"key": "\\ b", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showEditorsInActiveGroup"},
-            {"key": "\\ w", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showAllEditors"},
-            {"key": "\\ a", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showCommands"},
-            {"key": "\\ c", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.closeSidebar", "workbench.action.closePanel", "notifications.hideToasts"]}},
-            { "key": "\\ m", "command": "workbench.action.terminal.chat.start", "when": "terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported" },
+            {"key": "ctrl+\\ ctrl+n \\ d h", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.files.action.showActiveFileInExplorer"},
+            {"key": "ctrl+\\ ctrl+n \\ t t", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.createTerminalEditor"},
+            {"key": "ctrl+\\ ctrl+n \\ t h", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.newGroupLeft","workbench.action.createTerminalEditor"]}},
+            {"key": "ctrl+\\ ctrl+n \\ t l", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.newGroupRight","workbench.action.createTerminalEditor"]}},
+            {"key": "ctrl+\\ ctrl+n \\ t j", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.newGroupBelow","workbench.action.createTerminalEditor"]}},
+            {"key": "ctrl+\\ ctrl+n \\ t k", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.newGroupAbove","workbench.action.createTerminalEditor"]}},
+            {"key": "ctrl+\\ ctrl+n \\ o", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.quickOpen"},
+            {"key": "ctrl+\\ ctrl+n \\ b", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showEditorsInActiveGroup"},
+            {"key": "ctrl+\\ ctrl+n \\ w", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showAllEditors"},
+            {"key": "ctrl+\\ ctrl+n \\ a", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showCommands"},
+            {"key": "ctrl+\\ ctrl+n \\ c", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.closeSidebar", "workbench.action.closePanel", "notifications.hideToasts"]}},
+            {"key": "ctrl+\\ ctrl+n \\ m", "command": "workbench.action.terminal.chat.start", "when": "terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported" },
             // allow \ default behaviour if you double up, since otherwise it's taken by other shortcuts
-            { "key": "\\ \\", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": "\\"} },
+            // { "key": "\\ \\", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": "\\"} },
 
             // back and forward (for some reason they only work as chords???)
             { "key": "ctrl+o ctrl+o", "command": "workbench.action.navigateBack", "when": "terminalFocus || (!editorTextFocus && !inputFocus)" },
