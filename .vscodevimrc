@@ -10,10 +10,10 @@ endfunction
 function! CreateSplitMappings(mode, mapping, rhs) abort
     execute a:mode.'map '.a:mapping.' '.a:rhs
     execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.a:rhs
-    execute a:mode.'map '.a:mapping.'h :call VSCodeNotify("workbench.action.newGroupLeft")<CR>'.a:rhs
-    execute a:mode.'map '.a:mapping.'l :call VSCodeNotify("workbench.action.newGroupRight")<CR>'.a:rhs
-    execute a:mode.'map '.a:mapping.'j :call VSCodeNotify("workbench.action.newGroupBelow")<CR>'.a:rhs
-    execute a:mode.'map '.a:mapping.'k :call VSCodeNotify("workbench.action.newGroupAbove")<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'h :call v:lua.require("vscode").call("workbench.action.newGroupLeft")<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'l :call v:lua.require("vscode").call("workbench.action.newGroupRight")<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'j :call v:lua.require("vscode").call("workbench.action.newGroupBelow")<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'k :call v:lua.require("vscode").call("workbench.action.newGroupAbove")<CR>'.a:rhs
 endfunction
 
 " ====================================== SET PLUGINS ======================================
@@ -43,13 +43,13 @@ set showmode
     unmap \d
 
 " Get folding working with vscode neovim plugin
-    nnoremap zM :call VSCodeNotify('editor.foldAll')<CR>
-    nnoremap zR :call VSCodeNotify('editor.unfoldAll')<CR>
-    nnoremap zc :call VSCodeNotify('editor.fold')<CR>
-    nnoremap zC :call VSCodeNotify('editor.foldRecursively')<CR>
-    nnoremap zo :call VSCodeNotify('editor.unfold')<CR>
-    nnoremap zO :call VSCodeNotify('editor.unfoldRecursively')<CR>
-    nnoremap za :call VSCodeNotify('editor.toggleFold')<CR>
+    nnoremap zM :call v:lua.require("vscode").call('editor.foldAll')<CR>
+    nnoremap zR :call v:lua.require("vscode").call('editor.unfoldAll')<CR>
+    nnoremap zc :call v:lua.require("vscode").call('editor.fold')<CR>
+    nnoremap zC :call v:lua.require("vscode").call('editor.foldRecursively')<CR>
+    nnoremap zo :call v:lua.require("vscode").call('editor.unfold')<CR>
+    nnoremap zO :call v:lua.require("vscode").call('editor.unfoldRecursively')<CR>
+    nnoremap za :call v:lua.require("vscode").call('editor.toggleFold')<CR>
     function! MoveCursor(direction) abort
         if(reg_recording() == '' && reg_executing() == '')
             return 'g'.a:direction
@@ -61,25 +61,25 @@ set showmode
     nmap <expr> k MoveCursor('k')
 
 " Shortcuts to manupulate Jupyter notebooks
-    nnoremap zz :call VSCodeNotify('notebook.centerActiveCell')<CR>zz
-    nnoremap gg :call VSCodeNotify('notebook.focusTop')<CR>gg
-    nnoremap G :call VSCodeNotify('notebook.focusBottom')<CR>G
+    nnoremap zz :call v:lua.require("vscode").call('notebook.centerActiveCell')<CR>zz
+    nnoremap gg :call v:lua.require("vscode").call('notebook.focusTop')<CR>gg
+    nnoremap G :call v:lua.require("vscode").call('notebook.focusBottom')<CR>G
 
 " Get navigating marks working with vscode neovim plugin
     " (also relies on VSCode Bookmarks plugin)
-    nnoremap m v<Esc>:call VSCodeNotify('bookmarks.toggleLabeled', 0)<CR><Esc>
+    nnoremap m v<Esc>:call v:lua.require("vscode").call('bookmarks.toggleLabeled')<CR><Esc>
 
 " Fix VSCode commands
-    command! Tabnew call VSCodeNotify("workbench.action.duplicateWorkspaceInNewWindow")
-    command! -bang  Quit if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.revertAndCloseActiveEditor') | else | call VSCodeNotify('workbench.action.joinTwoGroups') | call VSCodeNotify('workbench.action.navigateBack') | endif
-    command! -bang  Bd if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.revertAndCloseActiveEditor') | else | call VSCodeNotify('workbench.action.closeActiveEditor') | endif
+    command! Tabnew call v:lua.require("vscode").call("workbench.action.duplicateWorkspaceInNewWindow")
+    command! -bang  Quit if <q-bang> ==# '!' | call v:lua.require("vscode").call('workbench.action.revertAndCloseActiveEditor') | else | call v:lua.require("vscode").call('workbench.action.joinTwoGroups') | call v:lua.require("vscode").call('workbench.action.navigateBack') | endif
+    command! -bang  Bd if <q-bang> ==# '!' | call v:lua.require("vscode").call('workbench.action.revertAndCloseActiveEditor') | else | call v:lua.require("vscode").call('workbench.action.closeActiveEditor') | endif
     AlterCommand bd Bd
 
 " Fix the 'vscode neovim' plugin's <C-W> mappings
-    nnoremap <C-W>>     :call VSCodeNotify("workbench.action.increaseViewWidth")<CR>
-    nnoremap <C-W><     :call VSCodeNotify("workbench.action.decreaseViewWidth")<CR>
-    nnoremap <C-W>+     :call VSCodeNotify("workbench.action.increaseViewHeight")<CR>
-    nnoremap <C-W>-     :call VSCodeNotify("workbench.action.decreaseViewHeight")<CR>
+    nnoremap <C-W>>     :call v:lua.require("vscode").call("workbench.action.increaseViewWidth")<CR>
+    nnoremap <C-W><     :call v:lua.require("vscode").call("workbench.action.decreaseViewWidth")<CR>
+    nnoremap <C-W>+     :call v:lua.require("vscode").call("workbench.action.increaseViewHeight")<CR>
+    nnoremap <C-W>-     :call v:lua.require("vscode").call("workbench.action.decreaseViewHeight")<CR>
     
 " Add commenting to vscode neovim plugin
     xmap gc  <Plug>VSCodeCommentary
@@ -89,45 +89,45 @@ set showmode
 
 " ==================================== ADD FUNCTIONALITY ====================================
 function! DisplayErrors() abort
-    call VSCodeNotify("workbench.actions.view.problems")
+    call v:lua.require("vscode").call("workbench.actions.view.problems")
 endfunction
 
 function! AutoFormat() abort
-    call VSCodeNotify('editor.action.formatDocument')
+    call v:lua.require("vscode").call('editor.action.formatDocument')
 endfunction
 
 function! ChangeSymbolName() abort
-    call VSCodeNotify('editor.action.rename')
+    call v:lua.require("vscode").call('editor.action.rename')
 endfunction
 
 function! DelMarks() abort
-    call VSCodeNotify("bookmarks.clearFromAllFiles")
+    call v:lua.require("vscode").call("bookmarks.clearFromAllFiles")
 endfunction
 
 function! Only() abort
-    call VSCodeNotify("workbench.action.closeSidebar")
-    call VSCodeNotify("workbench.action.closePanel")
-    call VSCodeNotify("workbench.action.joinAllGroups")
+    call v:lua.require("vscode").call("workbench.action.closeSidebar")
+    call v:lua.require("vscode").call("workbench.action.closePanel")
+    call v:lua.require("vscode").call("workbench.action.joinAllGroups")
 endfunction
 
 function! AccessMarks() abort
-    call VSCodeNotify('bookmarks.listFromAllFiles')
+    call v:lua.require("vscode").call('bookmarks.listFromAllFiles')
 endfunction
 
 function! StartTerminal() abort
-    call VSCodeNotify('workbench.action.createTerminalEditor')
+    lua require("vscode").call('workbench.action.createTerminalEditor')
 endfunction
 
 function! Implementations() abort
-    call VSCodeNotify('editor.action.goToImplementation')
+    call v:lua.require("vscode").call('editor.action.goToImplementation')
 endfunction
 
 function! References() abort
-    call VSCodeNotify('editor.action.goToReferences')
+    call v:lua.require("vscode").call('editor.action.goToReferences')
 endfunction
 
 function! Definition() abort
-    call VSCodeNotify('editor.action.revealDefinition')
+    call v:lua.require("vscode").call('editor.action.revealDefinition')
 endfunction
 
 function! Error() abort
@@ -135,53 +135,53 @@ function! Error() abort
 endfunction
 
 function! Hover() abort
-    call VSCodeNotify('editor.action.showDefinitionPreviewHover')
+    call v:lua.require("vscode").call('editor.action.showDefinitionPreviewHover')
 endfunction
 
 function! AllAction() abort
-    call VSCodeNotify("workbench.action.showCommands")
+    call v:lua.require("vscode").call("workbench.action.showCommands")
 endfunction
 
 function! QuickAction() abort
-    call VSCodeNotify("editor.action.quickFix")
+    call v:lua.require("vscode").call("editor.action.quickFix")
 endfunction
 
 function! DirectoryBrowser() abort
-    call VSCodeNotify('workbench.action.joinTwoGroups')
-    call VSCodeNotify("workbench.files.action.showActiveFileInExplorer")
+    call v:lua.require("vscode").call('workbench.action.joinTwoGroups')
+    call v:lua.require("vscode").call("workbench.files.action.showActiveFileInExplorer")
 endfunction
 
 function! ClearScreen() abort
     set nohlsearch
-    call VSCodeNotify("workbench.action.closeSidebar")
-    call VSCodeNotify("workbench.action.closePanel")
-    call VSCodeNotify("notifications.hideToasts")
-    call VSCodeNotify("notifications.hideList")
-    call VSCodeNotify("closeFindWidget")
-    call VSCodeNotify("closeParameterHints")
-    call VSCodeNotify("inlineChat.close")
+    call v:lua.require("vscode").call("workbench.action.closeSidebar")
+    call v:lua.require("vscode").call("workbench.action.closePanel")
+    call v:lua.require("vscode").call("notifications.hideToasts")
+    call v:lua.require("vscode").call("notifications.hideList")
+    call v:lua.require("vscode").call("closeFindWidget")
+    call v:lua.require("vscode").call("closeParameterHints")
+    call v:lua.require("vscode").call("inlineChat.close")
 endfunction
 
 function! OpenFile() abort
-    call VSCodeNotify("workbench.action.quickOpen")
+    call v:lua.require("vscode").call("workbench.action.quickOpen")
 endfunction
 
 function! ListBuffers() abort
-    call VSCodeNotify("workbench.action.showEditorsInActiveGroup")
+    call v:lua.require("vscode").call("workbench.action.showEditorsInActiveGroup")
 endfunction
 
 function! ListWindows() abort
-    call VSCodeNotify("workbench.action.showAllEditors")
+    call v:lua.require("vscode").call("workbench.action.showAllEditors")
 endfunction
 
 function! ExpandSelection() abort
-    call VSCodeNotify("editor.action.smartSelect.expand")
+    call v:lua.require("vscode").call("editor.action.smartSelect.expand")
 endfunction
 
 function! ShrinkSelection() abort
-    call VSCodeNotify("editor.action.smartSelect.shrink")
+    call v:lua.require("vscode").call("editor.action.smartSelect.shrink")
 endfunction
 
 function! InlineAssistThroughAiMagic() abort
-    call VSCodeNotify("inlineChat.start")
+    call v:lua.require("vscode").call("inlineChat.start")
 endfunction
