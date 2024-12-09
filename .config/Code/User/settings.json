@@ -212,4 +212,5 @@
     },
     "continue.enableTabAutocomplete": false,
     "continue.showInlineTip": false,
+    "gitlens.plusFeatures.enabled": false,
 }
