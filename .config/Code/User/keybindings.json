@@ -77,7 +77,7 @@
             { "key": "ctrl+\\ ctrl+n shift+; shift+O shift+N enter", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.joinAllGroups"},
             
             // leader shortcuts
-            {"key": "ctrl+\\ ctrl+n \\ d h", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.files.action.showActiveFileInExplorer"},
+            {"key": "ctrl+\\ ctrl+n \\ d h", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.files.action.focusFilesExplorer","workbench.files.action.showActiveFileInExplorer"]}},
             {"key": "ctrl+\\ ctrl+n \\ t t", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.createTerminalEditor"},
             {"key": "ctrl+\\ ctrl+n \\ t h", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.newGroupLeft","workbench.action.createTerminalEditor"]}},
             {"key": "ctrl+\\ ctrl+n \\ t l", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.newGroupRight","workbench.action.createTerminalEditor"]}},
@@ -88,7 +88,7 @@
             {"key": "ctrl+\\ ctrl+n \\ w", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showAllEditors"},
             {"key": "ctrl+\\ ctrl+n \\ a", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showCommands"},
             {"key": "ctrl+\\ ctrl+n \\ c", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.closeSidebar", "workbench.action.closePanel", "notifications.hideToasts"]}},
-            {"key": "ctrl+\\ ctrl+n \\ m", "command": "continue.focusContinueInputWithoutClear", "when": "terminalFocus" },
+            {"key": "ctrl+\\ ctrl+n \\ m", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "continue.focusContinueInputWithoutClear" },
 
             // back and forward (for some reason they only work as chords???)
             { "key": "ctrl+o ctrl+o", "command": "workbench.action.navigateBack", "when": "terminalFocus || (!editorTextFocus && !inputFocus)" },
