@@ -39,6 +39,10 @@ set showmode
 
 " ==================================== VSCODE-NEOVIM SPECIFICS ====================================
 
+" Use VSCode's undo and redo so that LSP actions are undoable
+    nnoremap u :call v:lua.require("vscode").action('undo')<CR>
+    nnoremap <C-R> :call v:lua.require("vscode").action('redo')<CR>
+
 " Cannot open directory listing in current "buffer" in VSCode
     unmap \dd
     unmap \d
