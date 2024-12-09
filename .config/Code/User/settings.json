@@ -210,4 +210,6 @@
         "markdown": false,
         "scminput": false
     },
+    "continue.enableTabAutocomplete": false,
+    "continue.showInlineTip": false,
 }

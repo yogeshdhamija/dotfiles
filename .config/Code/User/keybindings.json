@@ -88,18 +88,11 @@
             {"key": "ctrl+\\ ctrl+n \\ w", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showAllEditors"},
             {"key": "ctrl+\\ ctrl+n \\ a", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showCommands"},
             {"key": "ctrl+\\ ctrl+n \\ c", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.closeSidebar", "workbench.action.closePanel", "notifications.hideToasts"]}},
-            {"key": "ctrl+\\ ctrl+n \\ m", "command": "workbench.action.terminal.chat.start", "when": "terminalChatAgentRegistered && terminalFocusInAny && terminalHasBeenCreated || terminalChatAgentRegistered && terminalFocusInAny && terminalProcessSupported" },
-            // allow \ default behaviour if you double up, since otherwise it's taken by other shortcuts
-            // { "key": "\\ \\", "when": "terminalFocus", "command": "workbench.action.terminal.sendSequence", "args": { "text": "\\"} },
+            {"key": "ctrl+\\ ctrl+n \\ m", "command": "continue.focusContinueInputWithoutClear", "when": "terminalFocus" },
 
             // back and forward (for some reason they only work as chords???)
             { "key": "ctrl+o ctrl+o", "command": "workbench.action.navigateBack", "when": "terminalFocus || (!editorTextFocus && !inputFocus)" },
             { "key": "ctrl+i ctrl+i", "command": "workbench.action.navigateForward", "when": "terminalFocus || (!editorTextFocus && !inputFocus)" },
-
-    // enter accepts in inline VSCode Github Chat UI
-    { "key": "enter", "command": "workbench.action.terminal.chat.insertCommand", "when": "inChatInput && (terminalChatResponseContainsCodeBlock && terminalHasBeenCreated && !terminalChatActiveRequest && !terminalChatResponseContainsMultipleCodeBlocks || terminalChatResponseContainsCodeBlock && terminalProcessSupported && !terminalChatActiveRequest && !terminalChatResponseContainsMultipleCodeBlocks)" },
-    { "key": "enter", "command": "inlineChat.acceptChanges", "when": "inlineChatHasProvider && inlineChatVisible && config.inlineChat.mode != 'preview' && inlineChatChangeHasDiff" },
-
 
     // Other stuff...
         // Navigate cells in jupyter noteboooks

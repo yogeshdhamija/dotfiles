@@ -184,5 +184,5 @@ function! ShrinkSelection() abort
 endfunction
 
 function! InlineAssistThroughAiMagic() abort
-    call v:lua.require("vscode").call("inlineChat.start")
+    call v:lua.require("vscode").call("continue.focusContinueInputWithoutClear")
 endfunction
