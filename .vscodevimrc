@@ -11,10 +11,10 @@ endfunction
 function! CreateSplitMappings(mode, mapping, rhs) abort
     execute a:mode.'map '.a:mapping.' '.a:rhs
     execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.a:rhs
-    execute a:mode.'map '.a:mapping.'h :call v:lua.require("vscode").call("workbench.action.newGroupLeft")<CR>'.a:rhs
-    execute a:mode.'map '.a:mapping.'l :call v:lua.require("vscode").call("workbench.action.newGroupRight")<CR>'.a:rhs
-    execute a:mode.'map '.a:mapping.'j :call v:lua.require("vscode").call("workbench.action.newGroupBelow")<CR>'.a:rhs
-    execute a:mode.'map '.a:mapping.'k :call v:lua.require("vscode").call("workbench.action.newGroupAbove")<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'h <cmd>call v:lua.require("vscode").action("workbench.action.newGroupLeft")<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'l <cmd>call v:lua.require("vscode").action("workbench.action.newGroupRight")<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'j <cmd>call v:lua.require("vscode").action("workbench.action.newGroupBelow")<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'k <cmd>call v:lua.require("vscode").action("workbench.action.newGroupAbove")<CR>'.a:rhs
 endfunction
 
 " ====================================== SET PLUGINS ======================================
@@ -120,19 +120,19 @@ function! AccessMarks() abort
 endfunction
 
 function! StartTerminal() abort
-    lua require("vscode").call('workbench.action.createTerminalEditor')
+    lua require("vscode").action('workbench.action.createTerminalEditor')
 endfunction
 
 function! Implementations() abort
-    call v:lua.require("vscode").call('editor.action.goToImplementation')
+    call v:lua.require("vscode").action('editor.action.goToImplementation')
 endfunction
 
 function! References() abort
-    call v:lua.require("vscode").call('editor.action.goToReferences')
+    call v:lua.require("vscode").action('editor.action.goToReferences')
 endfunction
 
 function! Definition() abort
-    call v:lua.require("vscode").call('editor.action.revealDefinition')
+    call v:lua.require("vscode").action('editor.action.revealDefinition')
 endfunction
 
 function! Error() abort
@@ -155,6 +155,10 @@ function! DirectoryBrowser() abort
     call v:lua.require("vscode").call("workbench.action.joinTwoGroups")
     call v:lua.require("vscode").call("workbench.files.action.focusFilesExplorer")
     call v:lua.require("vscode").call("workbench.files.action.showActiveFileInExplorer")
+endfunction
+
+function! GoToFile() abort
+    call v:lua.require("vscode").action("seito-openfile.openFileFromText")
 endfunction
 
 function! ClearScreen() abort

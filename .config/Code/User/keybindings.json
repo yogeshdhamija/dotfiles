@@ -87,7 +87,7 @@
             {"key": "ctrl+\\ ctrl+n \\ b", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showEditorsInActiveGroup"},
             {"key": "ctrl+\\ ctrl+n \\ w", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showAllEditors"},
             {"key": "ctrl+\\ ctrl+n \\ a", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "workbench.action.showCommands"},
-            {"key": "ctrl+\\ ctrl+n \\ c", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.closeSidebar", "workbench.action.closePanel", "notifications.hideToasts"]}},
+            {"key": "ctrl+\\ ctrl+n \\ c", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "extension.multiCommand.execute", "args": {"sequence": ["workbench.action.closeSidebar", "workbench.action.closePanel", "notifications.hideToasts", "notifications.hideList", "closeFindWidget", "closeParameterHints", "inlineChat.close"]}},
             {"key": "ctrl+\\ ctrl+n \\ m", "when": "terminalFocus || (!editorTextFocus && !inputFocus)", "command": "continue.focusContinueInputWithoutClear" },
 
             // back and forward (for some reason they only work as chords???)

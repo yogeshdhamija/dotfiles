@@ -118,7 +118,7 @@ The settings live in the editor-specific files. They try to duplicate the mappin
 
 - `~/.config/Code/User/` for VSCode
   - Auto-loaded on linux. Can be symlinked to relevant config paths on Windows or OSX.
-  - Assumes `asvetliakov.vscode-neovim`, `alefragnani.Bookmarks`, and `ryuta46.multi-command` plugins have been manually installed.
+  - Assumes `asvetliakov.vscode-neovim`, `alefragnani.Bookmarks`, `Fr43nk.seito-openfile`, and `ryuta46.multi-command` plugins have been manually installed.
 
 - `~/dotfile-backups/vscode/` for VSCode
   - These have VSCode profiles manually exported periodically, and must be manually imported using the VSCode UI.
