@@ -44,6 +44,7 @@ set showmode
     nnoremap <C-R> :call v:lua.require("vscode").action('redo')<CR>
 
 " Can only open directory listing on the left in VSCode
+    unmap \d
     unmap \dd
     unmap \dj
     unmap \dk
