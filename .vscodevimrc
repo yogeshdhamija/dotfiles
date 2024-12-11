@@ -44,11 +44,11 @@ set showmode
     nnoremap <C-R> :call v:lua.require("vscode").action('redo')<CR>
 
 " Can only open directory listing on the left in VSCode
-    unmap \d
-    unmap \dd
-    unmap \dj
-    unmap \dk
-    unmap \dl
+    nnoremap \d <cmd>echomsg "can't open dir browser anywhere except in left panel"<cr>
+    nnoremap \dd <cmd>echomsg "can't open dir browser anywhere except in left panel"<cr>
+    nnoremap \dj <cmd>echomsg "can't open dir browser anywhere except in left panel"<cr>
+    nnoremap \dk <cmd>echomsg "can't open dir browser anywhere except in left panel"<cr>
+    nnoremap \dl <cmd>echomsg "can't open dir browser anywhere except in left panel"<cr>
     nnoremap \dh <cmd>call DirectoryBrowser()<cr>
 
 " Get folding working with vscode neovim plugin
