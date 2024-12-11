@@ -43,9 +43,12 @@ set showmode
     nnoremap u :call v:lua.require("vscode").action('undo')<CR>
     nnoremap <C-R> :call v:lua.require("vscode").action('redo')<CR>
 
-" Cannot open directory listing in current "buffer" in VSCode
+" Can only open directory listing on the left in VSCode
     unmap \dd
-    unmap \d
+    unmap \dj
+    unmap \dk
+    unmap \dl
+    nnoremap \dh <cmd>call DirectoryBrowser()<cr>
 
 " Get folding working with vscode neovim plugin
     nnoremap zM :call v:lua.require("vscode").call('editor.foldAll')<CR>
@@ -152,7 +155,6 @@ function! QuickAction() abort
 endfunction
 
 function! DirectoryBrowser() abort
-    call v:lua.require("vscode").call("workbench.action.joinTwoGroups")
     call v:lua.require("vscode").call("workbench.files.action.focusFilesExplorer")
     call v:lua.require("vscode").call("workbench.files.action.showActiveFileInExplorer")
 endfunction
