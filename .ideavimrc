@@ -14,13 +14,6 @@ nmap <C-I> <Action>(Forward)
 nnoremap * *N:set hls<CR>
 vmap * <Action>(Find)
 
-fun! CycleThroughActions(counter, ...)
-  execute "action " .. a:000[a:counter % len(a:000)]
-endfunction
-let expand = 300
-nmap zr :let expand += 1<CR>:call CycleThroughActions(expand, 'CollapseAllRegions', 'ExpandAllToLevel1',"ExpandAllToLevel2","ExpandAllToLevel3","ExpandAllToLevel4","ExpandAllToLevel5","ExpandAllRegions")<CR>
-nmap zm :let expand -= 1<CR>:call CycleThroughActions(expand, 'CollapseAllRegions', 'ExpandAllToLevel1',"ExpandAllToLevel2","ExpandAllToLevel3","ExpandAllToLevel4","ExpandAllToLevel5","ExpandAllRegions")<CR>
-
 nnoremap zL 40zl
 nnoremap zH 40zh
 
@@ -56,6 +49,10 @@ nmap     :q<CR> <Action>(Unsplit)
 nmap     <C-f>   <Action>(Find)
 nmap     \f      <Action>(FindInPath)
 vmap     \f      <Action>(FindInPath)
+nmap     CM      <Action>(Terminal.SelectLastBlock)
+nmap     cm      <Action>(Terminal.SelectLastBlock)
+
+nmap \m <Action>(ActivateAIAssistantToolWindow)
 
 command! ONLY               action UnsplitAll
 command! ON                 ONLY
