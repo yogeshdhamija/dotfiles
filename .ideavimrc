@@ -49,10 +49,9 @@ nmap     :q<CR> <Action>(Unsplit)
 nmap     <C-f>   <Action>(Find)
 nmap     \f      <Action>(FindInPath)
 vmap     \f      <Action>(FindInPath)
-nmap     \CM      <Action>(Terminal.SelectLastBlock)
-nmap     \cm      <Action>(Terminal.SelectLastBlock)
 
 nmap \m <Action>(ActivateAIAssistantToolWindow)
+vmap \m <Action>(AIAssistant.Editor.AskAiAssistantInEditor)
 
 command! ONLY               action UnsplitAll
 command! ON                 ONLY
