@@ -8,9 +8,6 @@ set ideastatusicon=gray
 set NERDTree
 set highlightedyank
 
-nmap <C-O> <Action>(Back)
-nmap <C-I> <Action>(Forward)
-
 nnoremap * *N:set hls<CR>
 vmap * <Action>(Find)
 
@@ -24,47 +21,60 @@ xmap v <Action>(EditorSelectWord)
 xmap V <Action>(EditorUnSelectWord)
 
 xnoremap \p "_dP
-nnoremap \c   <Esc>:noh<CR>:action HideSideWindows<CR>:action MarkNotificationsAsRead<CR>
-nmap     \o   <Action>(GotoFile)
-nnoremap \b   :tabn
-nmap     \q   <Action>(ShowIntentionActions)
-vnoremap \q   :action Refactorings.QuickListPopupAction<CR>
-nmap     \a   <Action>(GotoAction)
-vmap     \a   <Action>(GotoAction)
-nmap     \h   <Action>(QuickJavaDoc)
-inoremap \h   <C-O>:action ParameterInfo<CR><C-O>:action QuickJavaDoc<CR>
-nmap     \e   <Action>(ShowErrorDescription)
-
-nmap     \dh  <Action>(SelectInProjectView)
-nmap     \gd  <Action>(GotoDeclaration)
-nmap     \gdd <Action>(GotoDeclaration)
-nmap     \gr  <Action>(ShowUsages)
-nmap     \grr <Action>(ShowUsages)
-nmap     \gi  <Action>(GotoImplementation)
-nmap     \gii <Action>(GotoImplementation)
-nmap     \tj  <Action>(ActivateTerminalToolWindow)
-
-nmap     :q<CR> <Action>(Unsplit)
-
-nmap     <C-f>   <Action>(Find)
-nmap     \f      <Action>(FindInPath)
-vmap     \f      <Action>(FindInPath)
-
+nnoremap \c <Esc>:noh<CR>:action HideSideWindows<CR>:action MarkNotificationsAsRead<CR>
+nmap \o <Action>(GotoFile)
+nnoremap \b :tabn
+nmap \q <Action>(ShowIntentionActions)
+vnoremap \q :action Refactorings.QuickListPopupAction<CR>
+nmap \a <Action>(GotoAction)
+xmap \a <Action>(GotoAction)
+nmap \h <Action>(QuickJavaDoc)
+inoremap \h <C-O>:action ParameterInfo<CR><C-O>:action QuickJavaDoc<CR>
+nmap \e <Action>(ShowErrorDescription)
 nmap \m <Action>(ActivateAIAssistantToolWindow)
-vmap \m <Action>(AIAssistant.Editor.AskAiAssistantInEditor)
+xmap \m <Action>(AIAssistant.Editor.AskAiAssistantInEditor)
 
-command! ONLY               action UnsplitAll
-command! ON                 ONLY
-command! DELMARKS           action ShowBookmarks
-command! DELM               DELMARKS
-command! FORMAT             action ReformatCode
-command! FOR                FORMAT
-command! ERRORS             action GoToErrorGroup
-command! ERRS               ERRORS
-command! RENAME             action RenameElement
-command! REN                RENAME
+nmap \dh <Action>(ActivateProjectToolWindow)<Action>(SelectInProjectView)
+nmap \d <Action>(ActivateProjectToolWindow)<Action>(SelectInProjectView)
+
+nmap \gd <Action>(GotoDeclaration)
+nmap \gdd <Action>(GotoDeclaration)
+nmap \gdl <Action>(SplitVertically)<Action>(GotoDeclaration)
+
+nmap \gr <Action>(ShowUsages)
+nmap \grr <Action>(ShowUsages)
+nmap \grl <Action>(SplitVertically)<Action>(ShowUsages)
+
+nmap \gi <Action>(GotoImplementation)
+nmap \gii <Action>(GotoImplementation)
+nmap \gil <Action>(SplitVertically)<Action>(GotoImplementation)
+
+nmap \tj <Action>(ActivateTerminalToolWindow)
+nmap \t <Action>(ActivateTerminalToolWindow)
+
+nmap \gf viW<Action>(GotoFile)
+nmap \gff viW<Action>(GotoFile)
+nmap \gfl <Action>(SplitVertically)
+
+nmap :q<CR> <Action>(CloseAllEditors)
+
+nmap <C-f> <Action>(Find)
+nmap \f <Action>(FindInPath)
+vmap \f <Action>(FindInPath)
+
+
+command! ONLY  action UnsplitAll
+command! ON   ONLY
+command! DELMARKS  action ShowBookmarks
+command! DELM  DELMARKS
+command! FORMAT  action ReformatCode
+command! FOR  FORMAT
+command! ERRORS  action GoToErrorGroup
+command! ERRS  ERRORS
+command! RENAME  action RenameElement
+command! REN  RENAME
 command! CLOSEHIDDENBUFFERS action CloseAllEditorsButActive
-command! CLO                CLOSEHIDDENBUFFERS
+command! CLO  CLOSEHIDDENBUFFERS
 
 sethandler <S-CR> a:vim
 sethandler <C-C> a:ide
