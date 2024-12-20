@@ -66,3 +66,16 @@ command! RENAME             action RenameElement
 command! REN                RENAME
 command! CLOSEHIDDENBUFFERS action CloseAllEditorsButActive
 command! CLO                CLOSEHIDDENBUFFERS
+
+sethandler <S-CR> a:vim
+sethandler <C-C> a:ide
+sethandler <C-I> a:vim
+sethandler <C-J> a:vim
+sethandler <C-K> a:vim
+sethandler <C-L> a:vim
+sethandler <C-N> a:ide
+sethandler <C-P> a:ide
+sethandler <C-R> a:vim
+sethandler <C-V> a:vim
+sethandler <C-W> a:vim
+sethandler <C-]> a:vim
