@@ -1,6 +1,10 @@
 {
   // General Settings
   "restore_on_startup": "none",
+  "remove_trailing_whitespace_on_save": false,
+  "ensure_final_newline_on_save": false,
+  "format_on_save": "off",
+  "hard_tabs": true,
 
   // Vim Stuff
   "vim_mode": true,
@@ -10,37 +14,45 @@
   "pane_split_direction_vertical": "right",
   "pane_split_direction_horizontal": "down",
   "command_aliases": {
+    "q": "pane: join into next",
+    "qa": "zed: quit",
     "CLO": "pane: close inactive items",
     "ON": "pane: join all",
-    "q": "pane: join into next",
-    "ERRS": "diagnostics: deploy",
-    "qa": "zed: quit"
-  },
-  "cursor_blink": false,
-
-  // AI Stuff
-  "assistant": {
-    "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-latest"
-    },
-    "version": "2"
+    "REN": "editor: rename",
+    "FOR": "editor: format",
+    "ERRS": "diagnostics: deploy"
   },
 
-  // Git stuff
-  "git": {
-    "inline_blame": { "enabled": false }
+  // Interface stuff
+  "auto_signature_help": true,
+  "show_signature_help_after_edits": true,
+  "inlay_hints": {
+    "enabled": true
   },
 
   // Visual stuff
-  "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "Gruvbox Dark"
-  },
+  "cursor_blink": false,
   "soft_wrap": "editor_width",
   "buffer_font_weight": 501,
   "preferred_line_length": 120,
   "buffer_font_family": "UbuntuMono Nerd Font",
-  "buffer_font_size": 16
+  "buffer_font_size": 16,
+  "git": {
+    "inline_blame": { "enabled": false }
+  },
+  "current_line_highlight": "gutter",
+  "indent_guides": {
+    "active_line_width": 2,
+    "coloring": "indent_aware"
+  },
+  "vertical_scroll_margin": 0,
+  "tabs": {
+    "git_status": true,
+    "file_icons": true,
+    "activate_on_close": "left_neighbour",
+    "show_diagnostics": "all"
+  },
+  "preview_tabs": {
+    "enabled": false
+  }
 }

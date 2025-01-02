@@ -119,6 +119,8 @@
       "v": "editor::SelectLargerSyntaxNode",
       "V": "editor::SelectSmallerSyntaxNode",
 
+      "\\ r": ["workspace::SendKeystrokes", "\" + y \\ t t"],
+
       // \gf split mappings
       "\\ g f": "editor::OpenFile",
       "\\ g f f": "editor::OpenFile",
