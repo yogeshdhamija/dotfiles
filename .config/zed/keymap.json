@@ -1,21 +1,22 @@
 [
   {
     "bindings": {
-      "\\ b": "tab_switcher::Toggle",
-      "\\ o": "file_finder::Toggle",
-      "\\ a": "command_palette::Toggle",
-      "\\ m": "assistant::InlineAssist",
-      "\\ f": "pane::DeploySearch",
-      "\\ d": "project_panel::ToggleFocus",
-      "\\ d h": "project_panel::ToggleFocus",
-      "\\ t": "workspace::NewCenterTerminal",
-      "\\ t t": "workspace::NewCenterTerminal",
       "ctrl-\\": null,
+      "ctrl-\\ ctrl-n \\ c": "workspace::CloseAllDocks",
+      "ctrl-\\ ctrl-n \\ b": "tab_switcher::Toggle",
+      "ctrl-\\ ctrl-n \\ o": "file_finder::Toggle",
+      "ctrl-\\ ctrl-n \\ a": "command_palette::Toggle",
+      "ctrl-\\ ctrl-n \\ m": "assistant::InlineAssist",
+      "ctrl-\\ ctrl-n \\ f": "pane::DeploySearch",
+      "ctrl-\\ ctrl-n \\ d": "project_panel::ToggleFocus",
+      "ctrl-\\ ctrl-n \\ d h": "project_panel::ToggleFocus",
       "ctrl-\\ ctrl-n :": "command_palette::Toggle",
       "ctrl-\\ ctrl-n ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
       "ctrl-\\ ctrl-n ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
       "ctrl-\\ ctrl-n ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-\\ ctrl-n ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
+      "ctrl-\\ ctrl-n ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"],
+      "ctrl-\\ ctrl-n \\ t": "workspace::NewCenterTerminal",
+      "ctrl-\\ ctrl-n \\ t t": "workspace::NewCenterTerminal"
     }
   },
   {
@@ -32,25 +33,41 @@
     "bindings": {
       "ctrl-b": ["terminal::SendKeystroke", "ctrl-b"],
       "ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
-      "\\ c": "workspace::CloseAllDocks"
+
+      // remaining \t split mappings
+      "ctrl-\\ ctrl-n \\ t j": "pane::SplitDown",
+      "ctrl-\\ ctrl-n \\ t h": "pane::SplitLeft",
+      "ctrl-\\ ctrl-n \\ t k": "pane::SplitUp",
+      "ctrl-\\ ctrl-n \\ t l": "pane::SplitRight"
     }
   },
   {
     "context": "VimControl",
     "bindings": {
-      "ctrl-j": ["workspace::SendKeystrokes", "1 0 j"],
-      "ctrl-k": ["workspace::SendKeystrokes", "1 0 k"],
-      "\\ c": ["workspace::SendKeystrokes", "escape ctrl-alt-y"], // ctrl-alt-y = close all docks
-      "\\ q": "editor::ToggleCodeActions",
-      "\\ h": "editor::Hover",
-      "\\ e": "editor::GoToDiagnostic",
-      "\\ d h": "pane::RevealInProjectPanel",
+      // leader shortcuts, which are shortcuts to the global keybindings:
+      "\\ c": ["workspace::SendKeystrokes", "escape ctrl-\\ ctrl-n \\ c"],
+      "\\ b": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ b"],
+      "\\ o": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ o"],
+      "\\ a": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ a"],
+      "\\ m": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ m"],
+      "\\ f": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ f"],
+      "\\ d": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ d"],
+      "\\ d h": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ d h"],
+      ":": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n :"],
+      "\\ t": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t"],
+      "\\ t t": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t t"],
 
-      // \t split mappings
+      // remaining \t split mappings
       "\\ t j": ["workspace::SendKeystrokes", "ctrl-w s \\ t t"],
       "\\ t h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ t t"],
       "\\ t k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ t t"],
       "\\ t l": ["workspace::SendKeystrokes", "ctrl-w v \\ t t"],
+
+      "ctrl-j": ["workspace::SendKeystrokes", "1 0 j"],
+      "ctrl-k": ["workspace::SendKeystrokes", "1 0 k"],
+      "\\ q": "editor::ToggleCodeActions",
+      "\\ h": "editor::Hover",
+      "\\ e": "editor::GoToDiagnostic",
 
       // \gf split mappings
       "\\ g f": "editor::OpenExcerpts",
