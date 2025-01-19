@@ -122,8 +122,8 @@
       "\\ r": ["workspace::SendKeystrokes", "\" + y \\ t t"],
 
       // \gf split mappings
-      "\\ g f": "editor::OpenFile",
-      "\\ g f f": "editor::OpenFile",
+      "\\ g f": "editor::OpenSelectedFilename",
+      "\\ g f f": "editor::OpenSelectedFilename",
       "\\ g f j": ["workspace::SendKeystrokes", "ctrl-w s \\ g f f"],
       "\\ g f h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"],
       "\\ g f k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g f f"],
