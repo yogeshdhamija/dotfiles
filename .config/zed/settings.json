@@ -38,6 +38,7 @@
 	"buffer_font_family": "UbuntuMono Nerd Font",
 	"buffer_font_size": 16,
 	"show_whitespaces": "all",
+	"tab_size": 4,
 	"git": {
 		"inline_blame": { "enabled": false }
 	},

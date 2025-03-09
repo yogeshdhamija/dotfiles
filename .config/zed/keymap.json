@@ -1,133 +1,133 @@
 [
-  {
-    "bindings": {
-      "ctrl-\\": null,
-      "ctrl-\\ ctrl-n \\ c": "workspace::CloseAllDocks",
-      "ctrl-\\ ctrl-n \\ b": "tab_switcher::Toggle",
-      "ctrl-\\ ctrl-n \\ o": "file_finder::Toggle",
-      "ctrl-\\ ctrl-n \\ a": "command_palette::Toggle",
-      "ctrl-\\ ctrl-n \\ m": "assistant::InlineAssist",
-      "ctrl-\\ ctrl-n \\ f": "pane::DeploySearch",
-      "ctrl-\\ ctrl-n \\ d": "project_panel::ToggleFocus",
-      "ctrl-\\ ctrl-n \\ d h": "project_panel::ToggleFocus",
-      "ctrl-\\ ctrl-n :": "command_palette::Toggle",
-      "ctrl-\\ ctrl-n ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-\\ ctrl-n ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-\\ ctrl-n ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-\\ ctrl-n ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"],
-      "ctrl-\\ ctrl-n \\ t": "workspace::NewCenterTerminal",
-      "ctrl-\\ ctrl-n \\ t t": "workspace::NewCenterTerminal"
-    }
-  },
-  {
-    "context": "Dock",
-    "bindings": {
-      "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
-    }
-  },
-  {
-    "context": "Terminal",
-    "bindings": {
-      "ctrl-b": ["terminal::SendKeystroke", "ctrl-b"],
-      "ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
+	{
+		"bindings": {
+			"ctrl-\\": null,
+			"ctrl-\\ ctrl-n \\ c": "workspace::CloseAllDocks",
+			"ctrl-\\ ctrl-n \\ b": "tab_switcher::Toggle",
+			"ctrl-\\ ctrl-n \\ o": "file_finder::Toggle",
+			"ctrl-\\ ctrl-n \\ a": "command_palette::Toggle",
+			"ctrl-\\ ctrl-n \\ m": "assistant::InlineAssist",
+			"ctrl-\\ ctrl-n \\ f": "pane::DeploySearch",
+			"ctrl-\\ ctrl-n \\ d": "project_panel::ToggleFocus",
+			"ctrl-\\ ctrl-n \\ d h": "project_panel::ToggleFocus",
+			"ctrl-\\ ctrl-n :": "command_palette::Toggle",
+			"ctrl-\\ ctrl-n ctrl-w h": "workspace::ActivatePaneLeft",
+			"ctrl-\\ ctrl-n ctrl-w l": "workspace::ActivatePaneRight",
+			"ctrl-\\ ctrl-n ctrl-w k": "workspace::ActivatePaneUp",
+			"ctrl-\\ ctrl-n ctrl-w j": "workspace::ActivatePaneDown",
+			"ctrl-\\ ctrl-n \\ t": "workspace::NewCenterTerminal",
+			"ctrl-\\ ctrl-n \\ t t": "workspace::NewCenterTerminal"
+		}
+	},
+	{
+		"context": "Dock",
+		"bindings": {
+			"ctrl-w h": "workspace::ActivatePaneLeft",
+			"ctrl-w l": "workspace::ActivatePaneRight",
+			"ctrl-w k": "workspace::ActivatePaneUp",
+			"ctrl-w j": "workspace::ActivatePaneDown"
+		}
+	},
+	{
+		"context": "Terminal",
+		"bindings": {
+			"ctrl-b": ["terminal::SendKeystroke", "ctrl-b"],
+			"ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
 
-      // remaining \t split mappings
-      "ctrl-\\ ctrl-n \\ t j": "pane::SplitDown",
-      "ctrl-\\ ctrl-n \\ t h": "pane::SplitLeft",
-      "ctrl-\\ ctrl-n \\ t k": "pane::SplitUp",
-      "ctrl-\\ ctrl-n \\ t l": "pane::SplitRight"
-    }
-  },
-  {
-    "context": "VimControl",
-    "bindings": {
-      // overwriting some global keybindings:
-      "ctrl-\\ ctrl-n \\ c": ["workspace::SendKeystrokes", "escape ctrl-alt-y"], // ctrl-alt-y = close all docks
-      "ctrl-\\ ctrl-n \\ d": "pane::RevealInProjectPanel",
-      "ctrl-\\ ctrl-n \\ d h": "pane::RevealInProjectPanel",
+			// remaining \t split mappings
+			"ctrl-\\ ctrl-n \\ t j": "pane::SplitDown",
+			"ctrl-\\ ctrl-n \\ t h": "pane::SplitLeft",
+			"ctrl-\\ ctrl-n \\ t k": "pane::SplitUp",
+			"ctrl-\\ ctrl-n \\ t l": "pane::SplitRight"
+		}
+	},
+	{
+		"context": "VimControl",
+		"bindings": {
+			// overwriting some global keybindings:
+			"ctrl-\\ ctrl-n \\ c": ["workspace::SendKeystrokes", "escape ctrl-alt-y"], // ctrl-alt-y = close all docks
+			"ctrl-\\ ctrl-n \\ d": "pane::RevealInProjectPanel",
+			"ctrl-\\ ctrl-n \\ d h": "pane::RevealInProjectPanel",
 
-      // leader shortcuts, which refer to the global keybindings:
-      "\\ c": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ c"],
-      "\\ b": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ b"],
-      "\\ o": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ o"],
-      "\\ a": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ a"],
-      "\\ m": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ m"],
-      "\\ f": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ f"],
-      "\\ d": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ d"],
-      "\\ d h": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ d h"],
-      ":": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n :"],
-      "\\ t": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t"],
-      "\\ t t": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t t"],
+			// leader shortcuts, which refer to the global keybindings:
+			"\\ c": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ c"],
+			"\\ b": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ b"],
+			"\\ o": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ o"],
+			"\\ a": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ a"],
+			"\\ m": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ m"],
+			"\\ f": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ f"],
+			"\\ d": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ d"],
+			"\\ d h": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ d h"],
+			":": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n :"],
+			"\\ t": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t"],
+			"\\ t t": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t t"],
 
-      // remaining \t split mappings
-      "\\ t j": ["workspace::SendKeystrokes", "ctrl-w s \\ t t"],
-      "\\ t h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ t t"],
-      "\\ t k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ t t"],
-      "\\ t l": ["workspace::SendKeystrokes", "ctrl-w v \\ t t"],
+			// remaining \t split mappings
+			"\\ t j": ["workspace::SendKeystrokes", "ctrl-w s \\ t t"],
+			"\\ t h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ t t"],
+			"\\ t k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ t t"],
+			"\\ t l": ["workspace::SendKeystrokes", "ctrl-w v \\ t t"],
 
-      "ctrl-j": ["workspace::SendKeystrokes", "1 0 j"],
-      "ctrl-k": ["workspace::SendKeystrokes", "1 0 k"],
-      "\\ q": "editor::ToggleCodeActions",
-      "\\ h": "editor::Hover",
-      "\\ e": "editor::GoToDiagnostic",
+			"ctrl-j": ["workspace::SendKeystrokes", "1 0 j"],
+			"ctrl-k": ["workspace::SendKeystrokes", "1 0 k"],
+			"\\ q": "editor::ToggleCodeActions",
+			"\\ h": "editor::Hover",
+			"\\ e": "editor::GoToDiagnostic",
 
-      // \gf split mappings
-      "\\ g f": "editor::OpenExcerpts",
-      "\\ g f f": "editor::OpenExcerpts",
-      "\\ g f l": "editor::OpenExcerptsSplit",
+			// \gf split mappings
+			"\\ g f": "editor::OpenExcerpts",
+			"\\ g f f": "editor::OpenExcerpts",
+			"\\ g f l": "editor::OpenExcerptsSplit",
 
-      // \gd split mappings
-      "\\ g d": "editor::GoToDefinition",
-      "\\ g d d": "editor::GoToDefinition",
-      "\\ g d j": ["workspace::SendKeystrokes", "ctrl-w s \\ g d d"],
-      "\\ g d h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g d d"],
-      "\\ g d k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g d d"],
-      "\\ g d l": ["workspace::SendKeystrokes", "ctrl-w v \\ g d d"],
+			// \gd split mappings
+			"\\ g d": "editor::GoToDefinition",
+			"\\ g d d": "editor::GoToDefinition",
+			"\\ g d j": ["workspace::SendKeystrokes", "ctrl-w s \\ g d d"],
+			"\\ g d h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g d d"],
+			"\\ g d k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g d d"],
+			"\\ g d l": ["workspace::SendKeystrokes", "ctrl-w v \\ g d d"],
 
-      // \gD split mappings
-      "\\ g shift-d": "editor::GoToDeclaration",
-      "\\ g shift-d shift-d": "editor::GoToDeclaration",
-      "\\ g shift-d j": ["workspace::SendKeystrokes", "ctrl-w s \\ g shift-d shift-d"],
-      "\\ g shift-d h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g shift-d shift-d"],
-      "\\ g shift-d k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g shift-d shift-d"],
-      "\\ g shift-d l": ["workspace::SendKeystrokes", "ctrl-w v \\ g shift-d shift-d"],
+			// \gD split mappings
+			"\\ g shift-d": "editor::GoToDeclaration",
+			"\\ g shift-d shift-d": "editor::GoToDeclaration",
+			"\\ g shift-d j": ["workspace::SendKeystrokes", "ctrl-w s \\ g shift-d shift-d"],
+			"\\ g shift-d h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g shift-d shift-d"],
+			"\\ g shift-d k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g shift-d shift-d"],
+			"\\ g shift-d l": ["workspace::SendKeystrokes", "ctrl-w v \\ g shift-d shift-d"],
 
-      // \gi split mappings
-      "\\ g i": "editor::GoToImplementation",
-      "\\ g i i": "editor::GoToImplementation",
-      "\\ g i j": ["workspace::SendKeystrokes", "ctrl-w s \\ g i i"],
-      "\\ g i h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g i i"],
-      "\\ g i k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g i i"],
-      "\\ g i l": ["workspace::SendKeystrokes", "ctrl-w v \\ g i i"],
+			// \gi split mappings
+			"\\ g i": "editor::GoToImplementation",
+			"\\ g i i": "editor::GoToImplementation",
+			"\\ g i j": ["workspace::SendKeystrokes", "ctrl-w s \\ g i i"],
+			"\\ g i h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g i i"],
+			"\\ g i k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g i i"],
+			"\\ g i l": ["workspace::SendKeystrokes", "ctrl-w v \\ g i i"],
 
-      // \gr split mappings
-      "\\ g r": "editor::FindAllReferences",
-      "\\ g r r": "editor::FindAllReferences",
-      "\\ g r j": ["workspace::SendKeystrokes", "ctrl-w s \\ g r r"],
-      "\\ g r h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g r r"],
-      "\\ g r k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g r r"],
-      "\\ g r l": ["workspace::SendKeystrokes", "ctrl-w v \\ g r r"]
-    }
-  },
-  {
-    "context": "Editor && vim_mode == visual",
-    "bindings": {
-      "shift-s": ["vim::PushOperator", { "AddSurrounds": {} }],
-      "v": "editor::SelectLargerSyntaxNode",
-      "V": "editor::SelectSmallerSyntaxNode",
+			// \gr split mappings
+			"\\ g r": "editor::FindAllReferences",
+			"\\ g r r": "editor::FindAllReferences",
+			"\\ g r j": ["workspace::SendKeystrokes", "ctrl-w s \\ g r r"],
+			"\\ g r h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g r r"],
+			"\\ g r k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g r r"],
+			"\\ g r l": ["workspace::SendKeystrokes", "ctrl-w v \\ g r r"]
+		}
+	},
+	{
+		"context": "Editor && vim_mode == visual",
+		"bindings": {
+			"shift-s": ["vim::PushAddSurrounds", {}],
+			"v": "editor::SelectLargerSyntaxNode",
+			"V": "editor::SelectSmallerSyntaxNode",
 
-      "\\ r": ["workspace::SendKeystrokes", "\" + y \\ t t"],
+			"\\ r": ["workspace::SendKeystrokes", "\" + y \\ t t"],
 
-      // \gf split mappings
-      "\\ g f": "editor::OpenSelectedFilename",
-      "\\ g f f": "editor::OpenSelectedFilename",
-      "\\ g f j": ["workspace::SendKeystrokes", "ctrl-w s \\ g f f"],
-      "\\ g f h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"],
-      "\\ g f k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g f f"],
-      "\\ g f l": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"]
-    }
-  }
+			// \gf split mappings
+			"\\ g f": "editor::OpenSelectedFilename",
+			"\\ g f f": "editor::OpenSelectedFilename",
+			"\\ g f j": ["workspace::SendKeystrokes", "ctrl-w s \\ g f f"],
+			"\\ g f h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"],
+			"\\ g f k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g f f"],
+			"\\ g f l": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"]
+		}
+	}
 ]
