@@ -16,25 +16,31 @@
 			"ctrl-\\ ctrl-n ctrl-w k": "workspace::ActivatePaneUp",
 			"ctrl-\\ ctrl-n ctrl-w j": "workspace::ActivatePaneDown",
 			"ctrl-\\ ctrl-n \\ t": "workspace::NewCenterTerminal",
-			"ctrl-\\ ctrl-n \\ t t": "workspace::NewCenterTerminal"
+			"ctrl-\\ ctrl-n \\ t t": "workspace::NewCenterTerminal",
+			"ctrl-\\ ctrl-n \\ t j": ["workspace::SendKeystrokes", "ctrl-w s \\ t t"],
+			"ctrl-\\ ctrl-n \\ t h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ t t"],
+			"ctrl-\\ ctrl-n \\ t k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ t t"],
+			"ctrl-\\ ctrl-n \\ t l": ["workspace::SendKeystrokes", "ctrl-w v \\ t t"],
 		}
 	},
 	{
 		"context": "Dock",
 		"bindings": {
-			"ctrl-w h": "workspace::ActivatePaneLeft",
-			"ctrl-w l": "workspace::ActivatePaneRight",
-			"ctrl-w k": "workspace::ActivatePaneUp",
-			"ctrl-w j": "workspace::ActivatePaneDown"
+			// shortcut to global keybinds
+			"ctrl-w h": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n ctrl-w h"],
+			"ctrl-w l": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n ctrl-w l"],
+			"ctrl-w k": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n ctrl-w k"],
+			"ctrl-w j": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n ctrl-w j"]
 		}
 	},
 	{
 		"context": "Terminal",
 		"bindings": {
+			// free up these for terminal to use
 			"ctrl-b": ["terminal::SendKeystroke", "ctrl-b"],
 			"ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
 
-			// remaining \t split mappings
+			// overwrite global \t mappings to work properly
 			"ctrl-\\ ctrl-n \\ t j": "pane::SplitDown",
 			"ctrl-\\ ctrl-n \\ t h": "pane::SplitLeft",
 			"ctrl-\\ ctrl-n \\ t k": "pane::SplitUp",
@@ -61,12 +67,10 @@
 			":": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n :"],
 			"\\ t": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t"],
 			"\\ t t": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t t"],
-
-			// remaining \t split mappings
-			"\\ t j": ["workspace::SendKeystrokes", "ctrl-w s \\ t t"],
-			"\\ t h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ t t"],
-			"\\ t k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ t t"],
-			"\\ t l": ["workspace::SendKeystrokes", "ctrl-w v \\ t t"],
+			"\\ t j": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t j"],
+			"\\ t h": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t h"],
+			"\\ t k": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t k"],
+			"\\ t l": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t l"],
 
 			"ctrl-j": ["workspace::SendKeystrokes", "1 0 j"],
 			"ctrl-k": ["workspace::SendKeystrokes", "1 0 k"],
