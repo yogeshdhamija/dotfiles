@@ -206,7 +206,7 @@ if (neotreestatus) then
               ["zC"] = "close_all_subnodes",
           }},
           filtered_items = { visible = true },
-          bind_to_cwd = false
+          bind_to_cwd = "global"
       },
       buffers = {
         window = {mappings = {
@@ -215,7 +215,7 @@ if (neotreestatus) then
               ["<C-p>"] = "previous_buffer",
         }},
         show_unloaded = true,
-        bind_to_cwd = false,
+        bind_to_cwd = "global",
       },
       commands = {
         next_buffer = function(state)
