@@ -497,12 +497,20 @@ function! DirectoryBrowser() abort
 endfunction
 
 function! ListBuffers() abort
+    let w:cur_buf = expand('%:t')
     let alt = expand('#:p')
+
     if stridx(alt, getcwd()) >= 0 && filereadable(alt)
       execute "normal! :Neotree buffers reveal_file=#:p current\<CR>"
     else
       execute "normal! :Neotree buffers reveal=false current\<CR>"
     endif
+
+    if exists("w:prev_buf") 
+      execute "normal! :/".w:prev_buf."\<CR>"
+    endif
+
+    let w:prev_buf = w:cur_buf
 endfunction
 
 function! CloseWindowsWithFileType(filetype)
