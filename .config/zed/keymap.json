@@ -78,11 +78,6 @@
 			"\\ h": "editor::Hover",
 			"\\ e": "editor::GoToDiagnostic",
 
-			// \gf split mappings
-			"\\ g f": "editor::OpenExcerpts",
-			"\\ g f f": "editor::OpenExcerpts",
-			"\\ g f l": "editor::OpenExcerptsSplit",
-
 			// \gd split mappings
 			"\\ g d": "editor::GoToDefinition",
 			"\\ g d d": "editor::GoToDefinition",
@@ -113,7 +108,15 @@
 			"\\ g r j": ["workspace::SendKeystrokes", "ctrl-w s \\ g r r"],
 			"\\ g r h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g r r"],
 			"\\ g r k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g r r"],
-			"\\ g r l": ["workspace::SendKeystrokes", "ctrl-w v \\ g r r"]
+			"\\ g r l": ["workspace::SendKeystrokes", "ctrl-w v \\ g r r"],
+			
+			// \gf split mappings
+			"\\ g f": "editor::OpenSelectedFilename",
+			"\\ g f f": "editor::OpenSelectedFilename",
+			"\\ g f j": ["workspace::SendKeystrokes", "ctrl-w s \\ g f f"],
+			"\\ g f h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"],
+			"\\ g f k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g f f"],
+			"\\ g f l": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"]
 		}
 	},
 	{
@@ -124,14 +127,14 @@
 			"V": "editor::SelectSmallerSyntaxNode",
 
 			"\\ r": ["workspace::SendKeystrokes", "\" + y \\ t t"],
-
-			// \gf split mappings
-			"\\ g f": "editor::OpenSelectedFilename",
-			"\\ g f f": "editor::OpenSelectedFilename",
-			"\\ g f j": ["workspace::SendKeystrokes", "ctrl-w s \\ g f f"],
-			"\\ g f h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"],
-			"\\ g f k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g f f"],
-			"\\ g f l": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"]
 		}
-	}
+	},
+	{
+		"context": "multibuffer",
+		"bindings": {
+			// \gf split mappings
+			"\\ g f": "editor::OpenExcerpts",
+			"\\ g f f": "editor::OpenExcerpts"
+		}
+	},
 ]
