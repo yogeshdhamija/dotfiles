@@ -1,6 +1,5 @@
 {
 	// General Settings
-	"theme": "Gruvbox Dark",
 	"restore_on_startup": "none",
 	"remove_trailing_whitespace_on_save": false,
 	"ensure_final_newline_on_save": false,
@@ -9,9 +8,7 @@
 
 	// Vim Stuff
 	"vim_mode": true,
-	"vim": {
-		"use_system_clipboard": "never"
-	},
+	"vim": { "use_system_clipboard": "never" },
 	"pane_split_direction_vertical": "right",
 	"pane_split_direction_horizontal": "down",
 	"command_aliases": {
@@ -27,11 +24,10 @@
 	// Interface stuff
 	"auto_signature_help": false,
 	"show_signature_help_after_edits": true,
-	"inlay_hints": {
-		"enabled": true
-	},
+	"inlay_hints": { "enabled": true },
 
 	// Visual stuff
+	"theme": "Gruvbox Dark",
 	"cursor_blink": false,
 	"soft_wrap": "editor_width",
 	"preferred_line_length": 120,
@@ -39,14 +35,9 @@
 	"buffer_font_size": 15,
 	"show_whitespaces": "selection",
 	"tab_size": 4,
-	"git": {
-		"inline_blame": { "enabled": false }
-	},
+	"git": { "inline_blame": { "enabled": false } },
 	"current_line_highlight": "gutter",
-	"indent_guides": {
-		"active_line_width": 2,
-		"coloring": "indent_aware"
-	},
+	"indent_guides": { "active_line_width": 2 },
 	"vertical_scroll_margin": 0,
 	"tabs": {
 		"git_status": true,
@@ -54,7 +45,5 @@
 		"activate_on_close": "left_neighbour",
 		"show_diagnostics": "all"
 	},
-	"preview_tabs": {
-		"enabled": false
-	}
+	"preview_tabs": { "enabled": false }
 }
