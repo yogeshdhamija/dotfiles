@@ -1,6 +1,7 @@
 [
 	{
 		"bindings": {
+			"ctrl-alt-y": "workspace::CloseAllDocks",
 			"ctrl-\\": null,
 			"ctrl-\\ ctrl-n \\ c": "workspace::CloseAllDocks",
 			"ctrl-\\ ctrl-n \\ b": "tab_switcher::Toggle",
