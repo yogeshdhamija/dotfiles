@@ -18,11 +18,11 @@ export LESS="-RXF"
 export TIMEFMT=$'\n================\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E'
 
 # Set up FZF to use silver searcher (ag)
-command -v ag > /dev/null && export FZF_DEFAULT_COMMAND='ag --follow --unrestricted --silent --filename-pattern ""'
-command -v ag > /dev/null && export FZF_CTRL_T_COMMAND='ag --follow --unrestricted --silent --filename-pattern ""'
+command -v ag > /dev/null && export FZF_DEFAULT_COMMAND='ag --follow --silent --filename-pattern ""'
+command -v ag > /dev/null && export FZF_CTRL_T_COMMAND='ag --follow --silent --filename-pattern ""'
 # Set up FZF to use ripgrep (rg)
-command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --follow --files --no-messages -uuu'
-command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --follow --files --no-messages -uuu'
+command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --follow --files --no-messages'
+command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --follow --files --no-messages'
 
 # Set up my code editor preferences, in worst-to-best order:
 command -v code > /dev/null && export EDITOR="code -w --disable-workspace-trust"
