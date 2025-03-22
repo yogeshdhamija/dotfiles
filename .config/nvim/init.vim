@@ -45,10 +45,6 @@ let interface_stuff = [
     \ ['ellisonleao/gruvbox.nvim', {}],
     \ ['shaunsingh/nord.nvim', {}],
 \ ]
-let other_stuff = [
-    \ ['gsuuon/model.nvim', {}],
-    \ ['samjwill/nvim-unception', {}],
-\ ]
 let debugging = [
     \ ['mfussenegger/nvim-dap', {}],
     \ ['nvim-neotest/nvim-nio', {}],
@@ -57,7 +53,11 @@ let debugging = [
     \ ['theHamsta/nvim-dap-virtual-text', {}],
     \ ['LiadOz/nvim-dap-repl-highlights', {}],
 \ ]
-let added_plugins = added_plugins + dependencies + file_browser + treesitter + lsp + language + interface_stuff + other_stuff + debugging
+let other_stuff = [
+    \ ['gsuuon/model.nvim', {}],
+    \ ['samjwill/nvim-unception', {}],
+\ ]
+let added_plugins = added_plugins + dependencies + file_browser + treesitter + lsp + language + interface_stuff + debugging + other_stuff
 
 " ====================================== LOAD VIMRC ======================================
 source ~/.vimrc
@@ -82,7 +82,6 @@ augroup FiletypeMchat
 augroup END
 
 set background=dark
-silent! colorscheme gruvbox
 hi! link SignColumn Normal
 hi! link TreesitterContext Normal
 

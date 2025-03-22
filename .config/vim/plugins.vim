@@ -13,7 +13,6 @@ if !exists("plugins")
         \ ['AndrewRadev/bufferize.vim', {}],
     \ ]
     let interface_convenience_plugins = [
-        \ ['yogeshdhamija/enter-insert-on-click.vim', {}],
         \ ['junegunn/vim-peekaboo', {}],
         \ ['kshenoy/vim-signature', {}],
         \ ['machakann/vim-highlightedyank', {}],
