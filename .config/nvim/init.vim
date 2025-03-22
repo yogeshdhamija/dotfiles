@@ -404,7 +404,9 @@ end
 ---------------- Other stuff ---------------------------
 local statusline,line = pcall(require, 'lualine')
 if(statusline) then
-    line.setup({})
+    line.setup({
+      options = { theme = 'codedark' },
+    })
 end
 local statusibl,ibl = pcall(require, 'ibl')
 if(statusibl) then
