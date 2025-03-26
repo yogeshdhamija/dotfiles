@@ -95,3 +95,4 @@ nnoremap <silent> \ :<c-u>WhichKey '\'<CR>
     set wrap
     tabdo windo set breakindent
     set sbr=>\ \ 
+    hi Folded guibg=NONE
