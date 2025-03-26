@@ -508,7 +508,7 @@ function! ListBuffers() abort
     endif
 
     if exists("w:prev_buf") 
-      execute "normal! :/".w:prev_buf."\<CR>"
+      silent! execute "normal! :/".w:prev_buf."\<CR>"
     endif
 
     let w:prev_buf = w:cur_buf
