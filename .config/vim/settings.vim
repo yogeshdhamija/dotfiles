@@ -92,4 +92,6 @@ nnoremap <silent> \ :<c-u>WhichKey '\'<CR>
     set list lcs=tab:\ \ ,trail:•
     set cursorlineopt=number
     set cursorline
-    set nowrap
+    set wrap
+    tabdo windo set breakindent
+    set sbr=>\ \ 
