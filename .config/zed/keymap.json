@@ -3,35 +3,25 @@
 		"bindings": {
 			"ctrl-alt-y": "workspace::CloseAllDocks",
 			"ctrl-\\": null,
-			"ctrl-\\ ctrl-n \\ c": "workspace::CloseAllDocks",
-			"ctrl-\\ ctrl-n \\ b": "tab_switcher::Toggle",
-			"ctrl-\\ ctrl-n \\ o": "file_finder::Toggle",
-			"ctrl-\\ ctrl-n \\ a": "command_palette::Toggle",
-			"ctrl-\\ ctrl-n \\ m": "assistant::InlineAssist",
-			"ctrl-\\ ctrl-n \\ f": "pane::DeploySearch",
-			"ctrl-\\ ctrl-n \\ d": "project_panel::ToggleFocus",
-			"ctrl-\\ ctrl-n \\ d h": "project_panel::ToggleFocus",
-			"ctrl-\\ ctrl-n :": "command_palette::Toggle",
-			"ctrl-\\ ctrl-n ctrl-w h": "workspace::ActivatePaneLeft",
-			"ctrl-\\ ctrl-n ctrl-w l": "workspace::ActivatePaneRight",
-			"ctrl-\\ ctrl-n ctrl-w k": "workspace::ActivatePaneUp",
-			"ctrl-\\ ctrl-n ctrl-w j": "workspace::ActivatePaneDown",
-			"ctrl-\\ ctrl-n \\ t": "workspace::NewCenterTerminal",
-			"ctrl-\\ ctrl-n \\ t t": "workspace::NewCenterTerminal",
-			"ctrl-\\ ctrl-n \\ t j": ["workspace::SendKeystrokes", "ctrl-w s \\ t t"],
-			"ctrl-\\ ctrl-n \\ t h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ t t"],
-			"ctrl-\\ ctrl-n \\ t k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ t t"],
-			"ctrl-\\ ctrl-n \\ t l": ["workspace::SendKeystrokes", "ctrl-w v \\ t t"],
-		}
-	},
-	{
-		"context": "Dock",
-		"bindings": {
-			// shortcut to global keybinds
-			"ctrl-w h": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n ctrl-w h"],
-			"ctrl-w l": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n ctrl-w l"],
-			"ctrl-w k": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n ctrl-w k"],
-			"ctrl-w j": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n ctrl-w j"]
+			"ctrl-\\ c": "workspace::CloseAllDocks",
+			"ctrl-\\ b": "tab_switcher::Toggle",
+			"ctrl-\\ o": "file_finder::Toggle",
+			"ctrl-\\ a": "command_palette::Toggle",
+			"ctrl-\\ m": "assistant::InlineAssist",
+			"ctrl-\\ f": "pane::DeploySearch",
+			"ctrl-\\ d": "project_panel::ToggleFocus",
+			"ctrl-\\ d h": "project_panel::ToggleFocus",
+			"ctrl-\\ :": "command_palette::Toggle",
+			"ctrl-w h": "workspace::ActivatePaneLeft",
+			"ctrl-w l": "workspace::ActivatePaneRight",
+			"ctrl-w k": "workspace::ActivatePaneUp",
+			"ctrl-w j": "workspace::ActivatePaneDown",
+			"ctrl-\\ t": "workspace::NewCenterTerminal",
+			"ctrl-\\ t t": "workspace::NewCenterTerminal",
+			"ctrl-\\ t j": ["workspace::SendKeystrokes", "ctrl-w s \\ t t"],
+			"ctrl-\\ t h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ t t"],
+			"ctrl-\\ t k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ t t"],
+			"ctrl-\\ t l": ["workspace::SendKeystrokes", "ctrl-w v \\ t t"]
 		}
 	},
 	{
@@ -40,39 +30,49 @@
 			// free up these for terminal to use
 			"ctrl-b": ["terminal::SendKeystroke", "ctrl-b"],
 			"ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
+			"ctrl-w": ["terminal::SendKeystroke", "ctrl-w"],
+			
+			// get window mappings working
+			"ctrl-\\ ctrl-w h": "workspace::ActivatePaneLeft",
+			"ctrl-\\ ctrl-w l": "workspace::ActivatePaneRight",
+			"ctrl-\\ ctrl-w k": "workspace::ActivatePaneUp",
+			"ctrl-\\ ctrl-w j": "workspace::ActivatePaneDown",
+			"ctrl-\\ ctrl-w s": "pane::SplitDown",
+			"ctrl-\\ ctrl-w v": "pane::SplitRight",
 
 			// overwrite global \t mappings to work properly
-			"ctrl-\\ ctrl-n \\ t j": "pane::SplitDown",
-			"ctrl-\\ ctrl-n \\ t h": "pane::SplitLeft",
-			"ctrl-\\ ctrl-n \\ t k": "pane::SplitUp",
-			"ctrl-\\ ctrl-n \\ t l": "pane::SplitRight"
+			"ctrl-\\ t j": "pane::SplitDown",
+			"ctrl-\\ t h": "pane::SplitLeft",
+			"ctrl-\\ t k": "pane::SplitUp",
+			"ctrl-\\ t l": "pane::SplitRight"
 		}
 	},
 	{
 		"context": "VimControl",
 		"bindings": {
 			// overwriting some global keybindings:
-			"ctrl-\\ ctrl-n \\ c": ["workspace::SendKeystrokes", "escape ctrl-alt-y"], // ctrl-alt-y = close all docks
-			"ctrl-\\ ctrl-n \\ d": "pane::RevealInProjectPanel",
-			"ctrl-\\ ctrl-n \\ d h": "pane::RevealInProjectPanel",
-
+			"ctrl-\\ c": ["workspace::SendKeystrokes", "escape ctrl-alt-y"], // ctrl-alt-y = close all docks
+			"ctrl-\\ d": "pane::RevealInProjectPanel",
+			"ctrl-\\ d h": "pane::RevealInProjectPanel",
+			
 			// leader shortcuts, which refer to the global keybindings:
-			"\\ c": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ c"],
-			"\\ b": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ b"],
-			"\\ o": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ o"],
-			"\\ a": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ a"],
-			"\\ m": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ m"],
-			"\\ f": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ f"],
-			"\\ d": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ d"],
-			"\\ d h": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ d h"],
-			":": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n :"],
-			"\\ t": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t"],
-			"\\ t t": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t t"],
-			"\\ t j": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t j"],
-			"\\ t h": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t h"],
-			"\\ t k": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t k"],
-			"\\ t l": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ t l"],
+			"\\ c": ["workspace::SendKeystrokes", "ctrl-\\ c"],
+			"\\ b": ["workspace::SendKeystrokes", "ctrl-\\ b"],
+			"\\ o": ["workspace::SendKeystrokes", "ctrl-\\ o"],
+			"\\ a": ["workspace::SendKeystrokes", "ctrl-\\ a"],
+			"\\ m": ["workspace::SendKeystrokes", "ctrl-\\ m"],
+			"\\ f": ["workspace::SendKeystrokes", "ctrl-\\ f"],
+			"\\ d": ["workspace::SendKeystrokes", "ctrl-\\ d"],
+			"\\ d h": ["workspace::SendKeystrokes", "ctrl-\\ d h"],
+			":": ["workspace::SendKeystrokes", "ctrl-\\ :"],
+			"\\ t": ["workspace::SendKeystrokes", "ctrl-\\ t"],
+			"\\ t t": ["workspace::SendKeystrokes", "ctrl-\\ t t"],
+			"\\ t j": ["workspace::SendKeystrokes", "ctrl-\\ t j"],
+			"\\ t h": ["workspace::SendKeystrokes", "ctrl-\\ t h"],
+			"\\ t k": ["workspace::SendKeystrokes", "ctrl-\\ t k"],
+			"\\ t l": ["workspace::SendKeystrokes", "ctrl-\\ t l"],
 
+			// editor-specific stuff
 			"ctrl-j": ["workspace::SendKeystrokes", "1 0 j"],
 			"ctrl-k": ["workspace::SendKeystrokes", "1 0 k"],
 			"\\ q": "editor::ToggleCodeActions",
