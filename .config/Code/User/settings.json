@@ -12,14 +12,6 @@
     "workbench.editor.navigationScope": "editorGroup",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "editor.suggestSelection": "first",
-    "files.exclude": {
-        "**/.DS_Store": false,
-        "**/.git": false,
-        "**/.hg": false,
-        "**/.svn": false,
-        "**/CVS": false
-    },
-    "search.useIgnoreFiles": false,
     "editor.wordWrap": "on",
     "editor.wrappingIndent": "deepIndent",
     "workbench.list.horizontalScrolling": true,
@@ -32,26 +24,9 @@
     "editor.fontLigatures": false,
     "window.title": "${activeEditorShort}${dirty}${separator}${activeEditorLong}",
     "editor.renderWhitespace": "trailing",
-    "intelephense.environment.shortOpenTag": true,
-    "intelephense.format.braces": "k&r",
-    "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
-    "intelephense.files.exclude": [
-        "**/.git/**",
-        "**/.svn/**",
-        "**/.hg/**",
-        "**/CVS/**",
-        "**/.DS_Store/**",
-        "**/node_modules/**",
-        "**/bower_components/**",
-        "**/.history/**"
-    ],
-    "intelephense.references.exclude": [],
-    "intelephense.rename.exclude": [],
     "path-intellisense.absolutePathToWorkspace": false,
     "path-intellisense.autoSlashAfterDirectory": true,
     "path-intellisense.showHiddenFiles": true,
-    "php.validate.run": "onType",
-    "php.suggest.basic": false,
     "settingsSync.keybindingsPerPlatform": false,
     "settingsSync.ignoredExtensions": [
         "ms-vscode-remote.remote-wsl"
@@ -75,51 +50,20 @@
     "editor.scrollBeyondLastLine": false,
     "explorer.openEditors.visible": 999999999,
     "typescript.updateImportsOnFileMove.enabled": "always",
-    "workbench.editorAssociations": {
-        "git-rebase-todo": "default",
-        "*.ipynb": "jupyter.notebook.ipynb",
-        "*.png": "imagePreview.previewEditor"
-    },
     "javascript.updateImportsOnFileMove.enabled": "always",
-    "git.confirmSync": false,
+    "git.confirmSync": true,
     "workbench.editor.untitled.labelFormat": "name",
     "terminal.integrated.confirmOnExit": "hasChildProcesses",
     "terminal.integrated.scrollback": 10000,
-    "git-graph.customBranchGlobPatterns": [
-        {
-            "name": "All Master",
-            "glob": "*/master"
-        },
-        {
-            "name": "All Main",
-            "glob": "*/main"
-        },
-        {
-            "name": "All Dev",
-            "glob": "*/dev*"
-        }
-    ],
-    "git-graph.repository.onLoad.showCheckedOutBranch": true,
-    "git-graph.repository.onLoad.showSpecificBranches": [
-        "--glob=*/master",
-        "--glob=*/main",
-        "--glob=*/dev*"
-    ],
     "extensions.ignoreRecommendations": true,
     "editor.semanticHighlighting.enabled": true,
     "python.languageServer": "Pylance",
     "window.restoreWindows": "none",
-    "workbench.startupEditor": "newUntitledFile",
-    "git-graph.dialog.cherryPick.recordOrigin": true,
-    "git-graph.repository.onLoad.scrollToHead": true,
+    "workbench.startupEditor": "terminal",
     "python.pythonPath": "/usr/local/opt/python@3.9/bin/python3.9",
     "python.showStartPage": false,
-    "git-graph.showStatusBarItem": false,
     "git.enableStatusBarSync": false,
     "liveshare.showInStatusBar": "whileCollaborating",
-    "yaml.schemas": {
-        "file:///Users/yogeshdhamija/.vscode/extensions/atlassian.atlascode-2.8.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
-    },
     "git.suggestSmartCommit": false,
     "atlascode.jira.explorer.nestSubtasks": true,
     "redhat.telemetry.enabled": true,
