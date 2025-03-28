@@ -59,7 +59,7 @@
     "editor.semanticHighlighting.enabled": true,
     "python.languageServer": "Pylance",
     "window.restoreWindows": "none",
-    "workbench.startupEditor": "terminal",
+    "workbench.startupEditor": "newUntitledFile",
     "python.pythonPath": "/usr/local/opt/python@3.9/bin/python3.9",
     "python.showStartPage": false,
     "git.enableStatusBarSync": false,
