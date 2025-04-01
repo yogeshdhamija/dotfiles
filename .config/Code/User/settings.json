@@ -20,7 +20,7 @@
     "workbench.tree.indent": 20,
     "diffEditor.ignoreTrimWhitespace": true,
     "scm.alwaysShowRepositories": true,
-    "editor.fontFamily": "'UbuntuMono Nerd Font', 'monospace', monospace",
+    "editor.fontFamily": "'JetBrainsMonoNL NFM','UbuntuMono Nerd Font Mono','FiraCode Nerd Font Mono'",
     "editor.fontLigatures": false,
     "window.title": "${activeEditorShort}${dirty}${separator}${activeEditorLong}",
     "editor.renderWhitespace": "trailing",
@@ -160,4 +160,5 @@
     "git.ignoredRepositories": [
         "~/"
     ],
+    "editor.fontSize": 12,
 }

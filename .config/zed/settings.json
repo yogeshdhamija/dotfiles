@@ -27,12 +27,12 @@
 	"inlay_hints": { "enabled": true },
 
 	// Visual stuff
-	"theme": "Gruvbox Dark",
+	"theme": "Neovim default dark",
 	"cursor_blink": false,
 	"soft_wrap": "editor_width",
 	"preferred_line_length": 120,
-	"buffer_font_family": "UbuntuMono Nerd Font Propo",
-	"buffer_font_size": 15,
+	"buffer_font_family": "JetBrainsMonoNL Nerd Font Mono",
+	"buffer_font_size": 14,
 	"show_whitespaces": "selection",
 	"tab_size": 4,
 	"git": { "inline_blame": { "enabled": false } },
