@@ -5,6 +5,10 @@
 	"ensure_final_newline_on_save": false,
 	"format_on_save": "off",
 	"hard_tabs": true,
+	"auto_install_extensions": {
+		"catppuccin": true,
+		"html": true
+	},
 
 	// Vim Stuff
 	"vim_mode": true,
@@ -27,13 +31,17 @@
 	"inlay_hints": { "enabled": true },
 
 	// Visual stuff
-	"theme": "Neovim default dark",
+	"theme": {
+		"mode": "system",
+		"dark": "Catppuccin Mocha",
+		"light": "Catppuccin Latte"
+	},
 	"cursor_blink": false,
 	"soft_wrap": "editor_width",
 	"preferred_line_length": 120,
 	"buffer_font_family": "JetBrainsMonoNL Nerd Font Mono",
 	"buffer_font_size": 14,
-	"show_whitespaces": "selection",
+	"show_whitespaces": "boundary",
 	"tab_size": 4,
 	"git": { "inline_blame": { "enabled": false } },
 	"current_line_highlight": "gutter",
