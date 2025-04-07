@@ -29,6 +29,10 @@
         // Map <C-\><C-n> to "exit" focus on any non-editor (similar to how <C-\><C-n> maps to <Esc> in vim/neovim):
             { "key": "ctrl+\\ ctrl+n", "when": "!terminalFocus", "command": "workbench.action.focusActiveEditorGroup" },
             { "key": "ctrl+\\ ctrl+n", "when": "terminalFocus", "command": "workbench.action.focusPreviousGroup" },
+
+            // backups in case <C-\><C-n> is an incomplete chord
+            { "key": "ctrl+\\ ctrl+n escape", "when": "!terminalFocus", "command": "workbench.action.focusActiveEditorGroup" },
+            { "key": "ctrl+\\ ctrl+n escape", "when": "terminalFocus", "command": "workbench.action.focusPreviousGroup" },
             { "key": "escape", "command": "workbench.action.focusActiveEditorGroup", "when": "!inChat && !inputFocus && ((!editorTextFocus) || (focusedView == workbench.panel.output))" },
         
         // Make <C-F> still do vscode things.
