@@ -166,6 +166,7 @@ function! ClearScreen() abort
     call v:lua.require("vscode").call("notifications.hideToasts")
     call v:lua.require("vscode").call("notifications.hideList")
     call v:lua.require("vscode").call("closeFindWidget")
+    call v:lua.require("vscode").call("closeReferenceSearch")
     call v:lua.require("vscode").call("closeParameterHints")
     call v:lua.require("vscode").call("inlineChat.close")
 endfunction
