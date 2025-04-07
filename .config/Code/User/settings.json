@@ -75,19 +75,6 @@
     "atlascode.bitbucket.issues.monitorEnabled": false,
     "atlascode.bitbucket.pipelines.monitorEnabled": false,
     "atlascode.jira.explorer.monitorEnabled": false,
-    "workbench.colorTheme": "Chandrian Blue",
-    "workbench.colorCustomizations": {
-        "[Chandrian Blue]": {
-            "tab.activeBackground": "#004a5a91",
-            "editor.selectionBackground": "#965602",
-            "editor.selectionHighlightBackground": "#92550438",
-            "editor.wordHighlightBackground": "#92550438",
-            "editor.wordHighlightStrongBackground": "#92550438",
-            "editor.findMatchHighlightBackground": "#a39e0b91",
-            "editor.foldBackground": "#262626",
-            "tab.activeModifiedBorder": "#ff0000"
-        }
-    },
     "githubIssues.assignWhenWorking": false,
     "githubIssues.useBranchForIssues": "prompt",
     "gitlens.advanced.fileHistoryFollowsRenames": true,
@@ -160,5 +147,6 @@
     "git.ignoredRepositories": [
         "~/"
     ],
-    "editor.fontSize": 12,
+    "editor.fontSize": 14,
+    "window.autoDetectColorScheme": true,
 }
