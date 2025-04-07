@@ -21,7 +21,13 @@
 			"ctrl-\\ ctrl-n \\ t j": ["workspace::SendKeystrokes", "ctrl-w s \\ t t"],
 			"ctrl-\\ ctrl-n \\ t h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ t t"],
 			"ctrl-\\ ctrl-n \\ t k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ t t"],
-			"ctrl-\\ ctrl-n \\ t l": ["workspace::SendKeystrokes", "ctrl-w v \\ t t"],
+			"ctrl-\\ ctrl-n \\ t l": ["workspace::SendKeystrokes", "ctrl-w v \\ t t"]
+		}
+	},
+	{
+		"context": "TabSwitcher",
+		"bindings": {
+			"b d": "tab_switcher::CloseSelectedItem"
 		}
 	},
 	{
@@ -110,7 +116,7 @@
 			"\\ g r h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g r r"],
 			"\\ g r k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g r r"],
 			"\\ g r l": ["workspace::SendKeystrokes", "ctrl-w v \\ g r r"],
-			
+
 			// \gf split mappings
 			"\\ g f": "editor::OpenSelectedFilename",
 			"\\ g f f": "editor::OpenSelectedFilename",
@@ -127,7 +133,7 @@
 			"v": "editor::SelectLargerSyntaxNode",
 			"V": "editor::SelectSmallerSyntaxNode",
 
-			"\\ r": ["workspace::SendKeystrokes", "\" + y \\ t t"],
+			"\\ r": ["workspace::SendKeystrokes", "\" + y \\ t t"]
 		}
 	},
 	{
@@ -137,5 +143,5 @@
 			"\\ g f": "editor::OpenExcerpts",
 			"\\ g f f": "editor::OpenExcerpts"
 		}
-	},
+	}
 ]
