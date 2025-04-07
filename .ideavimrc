@@ -15,8 +15,8 @@ nnoremap zL 40zl
 nnoremap zH 40zh
 
 nmap ` <Action>(ShowBookmarks)
-nnoremap <C-j> 10j
-nnoremap <C-k> 10k
+noremap <C-j> 10j
+noremap <C-k> 10k
 xmap v <Action>(EditorSelectWord)
 xmap V <Action>(EditorUnSelectWord)
 
