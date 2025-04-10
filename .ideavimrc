@@ -65,7 +65,7 @@ vmap \f <Action>(FindInPath)
 
 command! ONLY  action UnsplitAll
 command! ON   ONLY
-command! DELMARKS  action ShowBookmarks
+command! DELMARKS delmarks a-zA-Z0-9
 command! DELM  DELMARKS
 command! FORMAT  action ReformatCode
 command! FOR  FORMAT
