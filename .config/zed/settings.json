@@ -6,7 +6,6 @@
 	"format_on_save": "off",
 	"hard_tabs": true,
 	"auto_install_extensions": {
-		"catppuccin": true,
 		"html": true
 	},
 
