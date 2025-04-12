@@ -32,11 +32,6 @@
 	"show_edit_predictions": false,
 
 	// Visual stuff
-	"theme": {
-		"mode": "system",
-		"dark": "Catppuccin Mocha",
-		"light": "Catppuccin Latte"
-	},
 	"cursor_blink": false,
 	"soft_wrap": "editor_width",
 	"preferred_line_length": 120,
