@@ -123,7 +123,9 @@
 			"\\ g f j": ["workspace::SendKeystrokes", "ctrl-w s \\ g f f"],
 			"\\ g f h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"],
 			"\\ g f k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g f f"],
-			"\\ g f l": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"]
+			"\\ g f l": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"],
+			
+			"\\ r": ["workspace::SendKeystrokes", "shift-v \\ r"]
 		}
 	},
 	{
@@ -133,7 +135,7 @@
 			"v": "editor::SelectLargerSyntaxNode",
 			"V": "editor::SelectSmallerSyntaxNode",
 
-			"\\ r": ["workspace::SendKeystrokes", "\" + y \\ t t"]
+			"\\ r": ["task::Spawn", { "task_name": "Run Selected Text" }]
 		}
 	},
 	{
