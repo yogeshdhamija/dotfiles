@@ -15,7 +15,7 @@
 	"pane_split_direction_vertical": "right",
 	"pane_split_direction_horizontal": "down",
 	"command_aliases": {
-		"q": "pane: join into next",
+		"q": "pane: close all items",
 		"qa": "zed: quit",
 		"CLO": "pane: close inactive items",
 		"ON": "pane: join all",
