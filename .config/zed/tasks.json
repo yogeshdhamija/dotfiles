@@ -2,9 +2,9 @@
 	{
 		"label": "Run Selected Text",
 		"command": "${ZED_SELECTED_TEXT}",
-		"use_new_terminal": false,
 		"reveal_target": "center",
 		"allow_concurrent_runs": true,
+		"use_new_terminal": true,
 		"reveal": "always",
 		"hide": "never",
 		"shell": "system"
