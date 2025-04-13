@@ -55,6 +55,14 @@
 		}
 	},
 	{
+		"context": "Editor",
+		"bindings": {
+			"ctrl-c": "editor::Copy",
+			"ctrl-shift-c": "editor::Copy",
+			"ctrl-shift-v": "editor::Paste"
+		}
+	},
+	{
 		"context": "VimControl",
 		"bindings": {
 			// overwriting some global keybindings:
