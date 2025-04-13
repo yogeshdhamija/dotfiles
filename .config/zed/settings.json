@@ -36,11 +36,11 @@
 	"preferred_line_length": 120,
 	"buffer_font_family": "JetBrainsMonoNL Nerd Font Mono",
 	"buffer_font_size": 14,
-	"show_whitespaces": "boundary",
+	"show_whitespaces": "selection",
 	"tab_size": 4,
 	"git": { "inline_blame": { "enabled": false } },
 	"current_line_highlight": "gutter",
-	"indent_guides": { "active_line_width": 2 },
+	"indent_guides": { "active_line_width": 3 },
 	"vertical_scroll_margin": 0,
 	"tabs": {
 		"git_status": true,
