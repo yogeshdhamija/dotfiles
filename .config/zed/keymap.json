@@ -25,6 +25,15 @@
 		}
 	},
 	{
+		"context": "ProjectPanel && not_editing",
+		"bindings": {
+			"ctrl-j": ["workspace::SendKeystrokes", "j j j j j j j j j j"],
+			"ctrl-k": ["workspace::SendKeystrokes", "k k k k k k k k k k"],
+			"ctrl-n": ["workspace::SendKeystrokes", "j"],
+			"ctrl-p": ["workspace::SendKeystrokes", "k"]
+		}
+	},
+	{
 		"context": "TabSwitcher",
 		"bindings": {
 			"b d": "tab_switcher::CloseSelectedItem"
