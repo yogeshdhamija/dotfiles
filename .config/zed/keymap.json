@@ -76,8 +76,8 @@
 		"bindings": {
 			// overwriting some global keybindings:
 			"ctrl-\\ ctrl-n \\ c": ["workspace::SendKeystrokes", "escape ctrl-alt-y"], // ctrl-alt-y = close all docks
-			"ctrl-\\ ctrl-n \\ d": "pane::RevealInProjectPanel",
-			"ctrl-\\ ctrl-n \\ d h": "pane::RevealInProjectPanel",
+			"ctrl-\\ ctrl-n \\ d": ["workspace::SendKeystrokes", ": pane:revealinprojectpanel enter ctrl-w ctrl-l : projectpanel:togglefocus enter"],
+			"ctrl-\\ ctrl-n \\ d h": ["workspace::SendKeystrokes", ": pane:revealinprojectpanel enter ctrl-w ctrl-l : projectpanel:togglefocus enter"],
 
 			// leader shortcuts, which refer to the global keybindings:
 			"\\ c": ["workspace::SendKeystrokes", "ctrl-\\ ctrl-n \\ c"],
