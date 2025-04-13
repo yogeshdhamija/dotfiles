@@ -131,9 +131,14 @@
 			"\\ g f j": ["workspace::SendKeystrokes", "ctrl-w s \\ g f f"],
 			"\\ g f h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"],
 			"\\ g f k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s \\ g f f"],
-			"\\ g f l": ["workspace::SendKeystrokes", "ctrl-w ctrl-v \\ g f f"],
+			"\\ g f l": ["workspace::SendKeystrokes", "ctrl-w v \\ g f f"],
 			
-			"\\ r": ["workspace::SendKeystrokes", "shift-v \\ r"]
+			// \r split mappings
+			"\\ r r": ["workspace::SendKeystrokes", "shift-v \\ r r"],
+			"\\ r h": ["workspace::SendKeystrokes", "shift-v \\ r h"],
+			"\\ r j": ["workspace::SendKeystrokes", "shift-v \\ r j"],
+			"\\ r k": ["workspace::SendKeystrokes", "shift-v \\ r k"],
+			"\\ r l": ["workspace::SendKeystrokes", "shift-v \\ r l"]
 		}
 	},
 	{
@@ -143,7 +148,13 @@
 			"v": "editor::SelectLargerSyntaxNode",
 			"V": "editor::SelectSmallerSyntaxNode",
 
-			"\\ r": ["task::Spawn", { "task_name": "Run Selected Text" }]
+			// \r split mappings
+			"\\ r": ["task::Spawn", { "task_name": "Run Selected Text" }],
+			"\\ r r": ["task::Spawn", { "task_name": "Run Selected Text" }],
+			"\\ r j": ["workspace::SendKeystrokes", "ctrl-w s ctrl-w ctrl-k ctrl-w shift-j \\ r r"],
+			"\\ r h": ["workspace::SendKeystrokes", "ctrl-w ctrl-v ctrl-w ctrl-l ctrl-w shift-H \\ r r"],
+			"\\ r k": ["workspace::SendKeystrokes", "ctrl-w ctrl-s ctrl-w ctrl-j ctrl-w shift-K \\ r r"],
+			"\\ r l": ["workspace::SendKeystrokes", "ctrl-w v ctrl-w ctrl-h ctrl-w shift-L \\ r r"]
 		}
 	},
 	{
