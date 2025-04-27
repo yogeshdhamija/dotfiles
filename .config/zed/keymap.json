@@ -177,5 +177,12 @@
 			"\\ g f": "editor::OpenExcerpts",
 			"\\ g f f": "editor::OpenExcerpts"
 		}
+	},
+	{
+		"context": "ContextEditor > Editor && VimControl && vim_mode == normal",
+		"bindings": {
+			"ctrl-\\ ctrl-n \\ m": "assistant::Assist",
+			"\\ m": "assistant::Assist"
+		}
 	}
 ]
