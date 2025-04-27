@@ -34,7 +34,7 @@
 	"cursor_blink": false,
 	"soft_wrap": "editor_width",
 	"preferred_line_length": 120,
-	"buffer_font_family": "JetBrainsMonoNL Nerd Font Mono",
+	"buffer_font_family": "JetBrainsMono Nerd Font Mono",
 	"buffer_font_size": 14,
 	"show_whitespaces": "selection",
 	"tab_size": 4,
