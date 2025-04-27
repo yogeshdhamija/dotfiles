@@ -7,7 +7,7 @@
 			"ctrl-\\ ctrl-n \\ b": "tab_switcher::Toggle",
 			"ctrl-\\ ctrl-n \\ o": "file_finder::Toggle",
 			"ctrl-\\ ctrl-n \\ a": "command_palette::Toggle",
-			"ctrl-\\ ctrl-n \\ m": "assistant::InlineAssist",
+			"ctrl-\\ ctrl-n \\ m": "assistant::NewChat",
 			"ctrl-\\ ctrl-n \\ f": "pane::DeploySearch",
 			"ctrl-\\ ctrl-n \\ d": "project_panel::ToggleFocus",
 			"ctrl-\\ ctrl-n \\ d h": "project_panel::ToggleFocus",
@@ -56,6 +56,8 @@
 			"ctrl-b": ["terminal::SendKeystroke", "ctrl-b"],
 			"ctrl-t": ["terminal::SendKeystroke", "ctrl-t"],
 
+			"ctrl-\\ ctrl-n \\ m": "assistant::InlineAssist",
+			
 			// overwrite global \t mappings to work properly
 			"ctrl-\\ ctrl-n \\ t j": "pane::SplitDown",
 			"ctrl-\\ ctrl-n \\ t h": "pane::SplitLeft",
@@ -156,6 +158,8 @@
 			"shift-s": ["vim::PushAddSurrounds", {}],
 			"v": "editor::SelectLargerSyntaxNode",
 			"V": "editor::SelectSmallerSyntaxNode",
+			
+			"\\ m": "assistant::InlineAssist",
 
 			// \r split mappings
 			"\\ r": ["task::Spawn", { "task_name": "Run Selected Text" }],
