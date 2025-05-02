@@ -30,7 +30,13 @@
 			"ctrl-j": ["workspace::SendKeystrokes", "j j j j j j j j j j"],
 			"ctrl-k": ["workspace::SendKeystrokes", "k k k k k k k k k k"],
 			"ctrl-n": ["workspace::SendKeystrokes", "j"],
-			"ctrl-p": ["workspace::SendKeystrokes", "k"]
+			"ctrl-p": ["workspace::SendKeystrokes", "k"],
+			"ctrl-o": "project_panel::NewDirectory",
+			"o": "project_panel::NewFile",
+			"z c": "project_panel::CollapseSelectedEntry",
+			"z o": "project_panel::ExpandSelectedEntry",
+			"d d": "project_panel::Delete",
+			"c c": "project_panel::Rename",
 		}
 	},
 	{
