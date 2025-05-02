@@ -36,7 +36,7 @@
 			"z c": "project_panel::CollapseSelectedEntry",
 			"z o": "project_panel::ExpandSelectedEntry",
 			"d d": "project_panel::Delete",
-			"c c": "project_panel::Rename",
+			"c c": "project_panel::Rename"
 		}
 	},
 	{
@@ -181,7 +181,9 @@
 		"bindings": {
 			// \gf split mappings
 			"\\ g f": "editor::OpenExcerpts",
-			"\\ g f f": "editor::OpenExcerpts"
+			"\\ g f f": "editor::OpenExcerpts",
+			"z o": "editor::ExpandExcerpts",
+			"z c": null
 		}
 	},
 	{
