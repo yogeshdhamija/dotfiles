@@ -17,7 +17,7 @@
 	"command_aliases": {
 		"q": "pane: close all items",
 		"qa": "zed: quit",
-		"CLO": "pane: close inactive items",
+		"CLO": "pane: close other items",
 		"ON": "pane: join all",
 		"REN": "editor: rename",
 		"FOR": "editor: format",
