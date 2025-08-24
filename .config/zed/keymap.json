@@ -109,6 +109,7 @@
 			"\\ q": "editor::ToggleCodeActions",
 			"\\ h": "editor::Hover",
 			"\\ e": "editor::GoToDiagnostic",
+			"\\ p": ["workspace::SendKeystrokes", "\" 0 p"],
 
 			// \gd split mappings
 			"\\ g d": "editor::GoToDefinition",
