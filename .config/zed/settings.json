@@ -1,12 +1,13 @@
 {
 	// General Settings
-	"restore_on_startup": "none",
+	"go_to_definition_fallback": "none",
+	"restore_on_startup": "empty_tab",
 	"remove_trailing_whitespace_on_save": false,
 	"ensure_final_newline_on_save": false,
 	"format_on_save": "off",
 	"hard_tabs": true,
 	"auto_install_extensions": {
-		"html": true
+		"html": true,
 	},
 
 	// Vim Stuff
@@ -21,7 +22,7 @@
 		"ON": "pane: join all",
 		"REN": "editor: rename",
 		"FOR": "editor: format",
-		"ERRS": "diagnostics: deploy"
+		"ERRS": "diagnostics: deploy",
 	},
 
 	// Interface stuff
@@ -46,7 +47,11 @@
 		"git_status": true,
 		"file_icons": true,
 		"activate_on_close": "left_neighbour",
-		"show_diagnostics": "all"
+		"show_diagnostics": "all",
 	},
-	"preview_tabs": { "enabled": false }
+	"preview_tabs": { "enabled": false },
+	"which_key": {
+		"delay_ms": 100,
+		"enabled": true,
+	},
 }
