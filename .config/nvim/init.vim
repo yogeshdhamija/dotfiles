@@ -23,7 +23,7 @@ let file_browser = [
 let treesitter = [
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
     \ ['nvim-treesitter/nvim-treesitter-context', {}],
-    \ ['nvim-treesitter/nvim-treesitter-textobjects', {}],
+    \ ['nvim-treesitter/nvim-treesitter-textobjects', {'branch':'main'}],
 \ ]
 let lsp = [
     \ ['williamboman/mason.nvim', {}],
@@ -308,7 +308,7 @@ if(statuslspconfig and statuscmplsp and statusmasonl and statusmason) then
 
     mason.setup({})
     masonl.setup({
-      ensure_installed = {'lua_ls', 'rust_analyzer', 'jdtls', 'pyright'},
+      ensure_installed = {},
       automatic_installation = true,
       handlers = {
         function(server_name) -- default for all servers, except for named ones
@@ -353,7 +353,7 @@ local masondapstatus, masondap = pcall(require, 'mason-nvim-dap')
 local dapvtstatus, dapvt = pcall(require, 'nvim-dap-virtual-text')
 if (dapuistatus and dapstatus and masondapstatus and dapvtstatus) then
   masondap.setup({
-    ensure_installed = {"python", "javadbg", "codelldb"},
+    ensure_installed = {},
     automatic_installation = true,
     handlers = {}
   })
