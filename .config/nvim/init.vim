@@ -85,6 +85,9 @@ set background=dark
 hi! link SignColumn Normal
 hi! link TreesitterContext Normal
 
+nnoremap \f <cmd>GrugFar<CR>
+vnoremap \f <Esc><cmd>'<,'>GrugFar<CR>
+
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
 
@@ -92,6 +95,40 @@ lua << EOF
 
 local farstatus, far = pcall(require, 'grug-far')
 if (farstatus) then
+ far.setup{
+    windowCreationCommand = '',
+    openTargetWindow = {
+      preferredLocation = 'right'
+    },
+    keymaps = {
+      replace = { n = '<localleader>r' },
+      qflist = { n = '' },
+      syncLocations = { n = '' },
+      syncLine = { n = '' },
+      close = { n = '' },
+      historyOpen = { n = '' },
+      historyAdd = { n = '' },
+      refresh = { n = '' },
+      openLocation = { n = '<localleader>gf' },
+      openNextLocation = { n = '<down>' },
+      openPrevLocation = { n = '<up>' },
+      gotoLocation = { n = '<enter>' },
+      pickHistoryEntry = { n = '<enter>' },
+      abort = { n = '<localleader>c' },
+      help = { n = 'g?' },
+      toggleShowCommand = { n = '' },
+      swapEngine = { n = '' },
+      previewLocation = { n = '' },
+      swapReplacementInterpreter = { n = '' },
+      applyNext = { n = '<localleader>n' },
+      applyPrev = { n = '<localleader>p' },
+      syncNext = { n = '' },
+      syncPrev = { n = '' },
+      syncFile = { n = '' },
+      nextInput = { n = '<tab>' },
+      prevInput = { n = '<s-tab>' },
+    },
+ }
 end
 
 
