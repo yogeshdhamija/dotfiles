@@ -17,6 +17,7 @@ let dependencies = [
 \ ]
 let file_browser = [
     \ ['stevearc/oil.nvim', {}],
+    \ ['refractalize/oil-git-status.nvim', {}],
 \ ]
 let treesitter = [
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
@@ -95,6 +96,9 @@ if (oilstatus) then
     view_options = {
       show_hidden = true,
     },
+    win_options = {
+      signcolumn = "auto:2"
+    },
     keymaps = {
       ["gd"] = {
         desc = "Toggle file detail view",
@@ -109,6 +113,10 @@ if (oilstatus) then
       },
     },
   }
+end
+local oilgitstatus, oilgit = pcall(require, 'oil-git-status')
+if (oilgitstatus) then
+  oilgit.setup()
 end
 
 ---------------- Tree Sitter ------------------------
