@@ -21,6 +21,7 @@ let file_browser = [
 \ ]
 let treesitter = [
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
+    \ ['MeanderingProgrammer/treesitter-modules.nvim', {}],
     \ ['nvim-treesitter/nvim-treesitter-context', {}],
     \ ['nvim-treesitter/nvim-treesitter-textobjects', {'branch':'main'}],
 \ ]
@@ -166,7 +167,35 @@ if (oilgitstatus) then
 end
 
 ---------------- Tree Sitter ------------------------
-local status, ts = pcall(require, 'nvim-treesitter.configs')
+local tsstatus, ts = pcall(require, 'nvim-treesitter')
+if (tsstatus) then
+end
+local tsmstatus, tsm = pcall(require, 'treesitter-modules')
+if (tsmstatus) then
+    tsm.setup {
+      ensure_installed = {},
+      ignore_install = {},
+      sync_install = true,
+      auto_install = true,
+      highlight = { enable = true, },
+      fold = { enable = true, },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          node_incremental = "<Plug>ExpandSelection",
+          node_decremental = "<Plug>ShrinkSelection",
+        },
+      },
+    }
+end
+local tsostatus, tso = pcall(require, 'nvim-treesitter-textobjects')
+if (tsostatus) then
+  tso.setup {
+        move = {
+          set_jumps = true,
+        },
+  }
+end
 local statuscontext, tscontext = pcall(require, 'treesitter-context')
 if (statuscontext) then
     tscontext.setup{
@@ -178,48 +207,6 @@ end
 local daprhstatus, daprh = pcall(require, 'nvim-dap-repl-highlights')
 if (daprhstatus) then
   daprh.setup()
-end
-if (status) then
-    ts.setup {
-      ensure_installed = "all",
-      ignore_install = {},
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false
-      },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          node_incremental = "<Plug>ExpandSelection",
-          node_decremental = "<Plug>ShrinkSelection",
-        },
-      },
-      textobjects = {
-        move = {
-          enable = true,
-          set_jumps = true,
-          goto_next_start = {
-            ["<Plug>MoveDown"] = "@block.outer",
-          },
-          goto_next_end = {
-          },
-          goto_previous_start = {
-            ["<Plug>MoveUp"] = "@block.outer",
-          },
-          goto_previous_end = {
-          },
-        },
-        swap = {
-          enable = true,
-          swap_next = {
-            ["<Plug>SwapWithNextParameter"] = "@parameter.inner",
-          },
-          swap_previous = {
-            ["<Plug>SwapWithPreviousParameter"] = "@parameter.inner",
-          },
-        },
-      },
-    }
 end
 
 ---------------- LSP --------------------------------
@@ -409,11 +396,11 @@ function! ShrinkSelection() abort
 endfunction
 
 function! SwapWithNextParameter() abort
-    exe "norm \<Plug>SwapWithNextParameter"
+    lua require("nvim-treesitter-textobjects.swap").swap_next "@parameter.outer"
 endfunction
 
 function! SwapWithPreviousParameter() abort
-    exe "norm \<Plug>SwapWithPreviousParameter"
+    lua require("nvim-treesitter-textobjects.swap").swap_previous "@parameter.outer"
 endfunction
 
 function! DirectoryBrowser() abort
