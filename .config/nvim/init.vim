@@ -89,11 +89,25 @@ lua << EOF
 ---------------- File browser -----------------------
 local oilstatus, oil = pcall(require, 'oil')
 if (oilstatus) then
+  local detail = false
   oil.setup{
     watch_for_changes=true,
     view_options = {
       show_hidden = true,
-    }
+    },
+    keymaps = {
+      ["gd"] = {
+        desc = "Toggle file detail view",
+        callback = function()
+          detail = not detail
+          if detail then
+            require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
+          else
+            require("oil").set_columns({ "icon" })
+          end
+        end,
+      },
+    },
   }
 end
 
