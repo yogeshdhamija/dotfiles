@@ -39,6 +39,7 @@ let language = [
     \ ['mfussenegger/nvim-jdtls', {}],
 \ ]
 let interface_stuff = [
+    \ ['MagicDuck/grug-far.nvim', {}],
     \ ['nvim-lualine/lualine.nvim', {}],
     \ ['lukas-reineke/indent-blankline.nvim', {}],
     \ ['ellisonleao/gruvbox.nvim', {}],
@@ -86,6 +87,14 @@ hi! link TreesitterContext Normal
 
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
+
+
+
+local farstatus, far = pcall(require, 'grug-far')
+if (farstatus) then
+end
+
+
 
 ---------------- File browser -----------------------
 local oilstatus, oil = pcall(require, 'oil')
