@@ -100,6 +100,13 @@ end
 ---------------- Tree Sitter ------------------------
 local status, ts = pcall(require, 'nvim-treesitter.configs')
 local statuscontext, tscontext = pcall(require, 'treesitter-context')
+if (statuscontext) then
+    tscontext.setup{
+      mode='topline',
+      multiwindow = true
+    }
+    vim.cmd("highlight TreesitterContextBottom gui=underline guisp=Grey")
+end
 local daprhstatus, daprh = pcall(require, 'nvim-dap-repl-highlights')
 if (daprhstatus) then
   daprh.setup()
@@ -145,11 +152,6 @@ if (status) then
         },
       },
     }
-    tscontext.setup({
-      mode='topline',
-      multiwindow = true
-    })
-    vim.cmd("highlight TreesitterContextBottom gui=underline guisp=Grey")
 end
 
 ---------------- LSP --------------------------------
