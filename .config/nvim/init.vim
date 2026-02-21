@@ -111,7 +111,7 @@ if (farstatus) then
       historyOpen = { n = '' },
       historyAdd = { n = '' },
       refresh = { n = '' },
-      openLocation = { n = '<localleader>gf' },
+      openLocation = { n = '' },
       openNextLocation = { n = '<down>' },
       openPrevLocation = { n = '<up>' },
       gotoLocation = { n = '<enter>' },
