@@ -18,6 +18,7 @@ let dependencies = [
 let file_browser = [
     \ ['stevearc/oil.nvim', {}],
     \ ['refractalize/oil-git-status.nvim', {}],
+    \ ['nvim-mini/mini.nvim', {}],
 \ ]
 let treesitter = [
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
@@ -135,11 +136,13 @@ end
 
 
 ---------------- File browser -----------------------
+pcall(function() require('mini.icons').setup() end)
 local oilstatus, oil = pcall(require, 'oil')
 if (oilstatus) then
-  local detail = false
+  local detail = true
   oil.setup{
     watch_for_changes=true,
+    columns = {"permissions", "size", "mtime", "icon" },
     view_options = {
       show_hidden = true,
     },
@@ -147,12 +150,12 @@ if (oilstatus) then
       signcolumn = "auto:2"
     },
     keymaps = {
-      ["gd"] = {
+      [ "zc"] = {
         desc = "Toggle file detail view",
         callback = function()
           detail = not detail
           if detail then
-            require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
+            require("oil").set_columns({"permissions", "size", "mtime", "icon" })
           else
             require("oil").set_columns({ "icon" })
           end
