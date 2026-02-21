@@ -24,7 +24,6 @@ let treesitter = [
     \ ['nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}],
     \ ['MeanderingProgrammer/treesitter-modules.nvim', {}],
     \ ['nvim-treesitter/nvim-treesitter-context', {}],
-    \ ['nvim-treesitter/nvim-treesitter-textobjects', {'branch':'main'}],
 \ ]
 let lsp = [
     \ ['williamboman/mason.nvim', {}],
@@ -192,14 +191,6 @@ if (tsmstatus) then
         },
       },
     }
-end
-local tsostatus, tso = pcall(require, 'nvim-treesitter-textobjects')
-if (tsostatus) then
-  tso.setup {
-        move = {
-          set_jumps = true,
-        },
-  }
 end
 local statuscontext, tscontext = pcall(require, 'treesitter-context')
 if (statuscontext) then
@@ -401,11 +392,91 @@ function! ShrinkSelection() abort
 endfunction
 
 function! SwapWithNextParameter() abort
-    lua require("nvim-treesitter-textobjects.swap").swap_next "@parameter.outer"
+  lua << EOF
+    local node = vim.treesitter.get_node()
+    -- Look for common container node names across different languages
+    local patterns = { "list", "arguments", "parameters", "dictionary", "array", "table", "tuple", "class_body", "constructor" }
+    local target = nil
+    
+    -- Traverse up until we find a node whose parent is a container
+    while node do
+      local parent = node:parent()
+      if not parent then break end
+      
+      local p_type = parent:type()
+      for _, pattern in ipairs(patterns) do
+        if p_type:find(pattern) then
+          target = node
+          break
+        end
+      end
+      if target then break end
+      node = parent
+    end
+
+    if target then
+      local sibling = target:next_named_sibling()
+      
+      -- Skip over comments if they happen to be in the middle of arguments
+      while sibling and sibling:type() == "comment" do
+        sibling = sibling:next_named_sibling()
+      end
+
+      if sibling then
+        local text_target = vim.treesitter.get_node_text(target, 0)
+        local text_sibling = vim.treesitter.get_node_text(sibling, 0)
+        local sr1, sc1, er1, ec1 = target:range()
+        local sr2, sc2, er2, ec2 = sibling:range()
+
+        -- Replace sibling (second node) first to avoid shifting coordinates
+        vim.api.nvim_buf_set_text(0, sr2, sc2, er2, ec2, vim.split(text_target, '\n'))
+        vim.api.nvim_buf_set_text(0, sr1, sc1, er1, ec1, vim.split(text_sibling, '\n'))
+      end
+    end
+EOF
 endfunction
 
 function! SwapWithPreviousParameter() abort
-    lua require("nvim-treesitter-textobjects.swap").swap_previous "@parameter.outer"
+  lua << EOF
+    local node = vim.treesitter.get_node()
+    local patterns = { "list", "arguments", "parameters", "dictionary", "array", "table", "tuple", "class_body", "constructor" }
+    local target = nil
+    
+    while node do
+      local parent = node:parent()
+      if not parent then break end
+      
+      local p_type = parent:type()
+      for _, pattern in ipairs(patterns) do
+        if p_type:find(pattern) then
+          target = node
+          break
+        end
+      end
+      if target then break end
+      node = parent
+    end
+
+    if target then
+      local sibling = target:prev_named_sibling()
+      
+      while sibling and sibling:type() == "comment" do
+        sibling = sibling:prev_named_sibling()
+      end
+
+      if sibling then
+        local text_target = vim.treesitter.get_node_text(target, 0)
+        local text_sibling = vim.treesitter.get_node_text(sibling, 0)
+        local sr1, sc1, er1, ec1 = target:range()
+        local sr2, sc2, er2, ec2 = sibling:range()
+
+        -- `sibling` comes BEFORE `target` in the document.
+        -- So `target` is second. Replace `target` first!
+        vim.api.nvim_buf_set_text(0, sr1, sc1, er1, ec1, vim.split(text_sibling, '\n'))
+        vim.api.nvim_buf_set_text(0, sr2, sc2, er2, ec2, vim.split(text_target, '\n'))
+      end
+    end
+EOF
 endfunction
 
 function! DirectoryBrowser() abort
