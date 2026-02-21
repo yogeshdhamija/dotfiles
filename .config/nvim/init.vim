@@ -90,6 +90,8 @@ hi! link TreesitterContext Normal
 nnoremap \f <cmd>GrugFar<CR>
 vnoremap \f <Esc><cmd>'<,'>GrugFar<CR>
 
+set clipboard+=unnamedplus
+
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
 
