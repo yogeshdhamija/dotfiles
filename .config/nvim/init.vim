@@ -154,6 +154,8 @@ if (oilstatus) then
   oil.setup{
     watch_for_changes=true,
     columns = {"permissions", "size", "mtime", "icon" },
+    delete_to_trash = true,
+    cleanup_delay_ms = false,
     view_options = {
       show_hidden = true,
     },
