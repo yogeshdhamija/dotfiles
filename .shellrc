@@ -21,8 +21,8 @@ export TIMEFMT=$'\n================\nCPU\t%P\nuser\t%*U\nsystem\t%*S\ntotal\t%*E
 command -v ag > /dev/null && export FZF_DEFAULT_COMMAND='ag --follow --silent --filename-pattern ""'
 command -v ag > /dev/null && export FZF_CTRL_T_COMMAND='ag --follow --silent --filename-pattern ""'
 # Set up FZF to use ripgrep (rg)
-command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --follow --files --no-messages'
-command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --follow --files --no-messages'
+command -v rg > /dev/null && export FZF_DEFAULT_COMMAND='rg --follow --hidden --files --no-messages'
+command -v rg > /dev/null && export FZF_CTRL_T_COMMAND='rg --follow --hidden --files --no-messages'
 
 # Set up my code editor preferences, in worst-to-best order:
 command -v vim > /dev/null && export EDITOR="vim"
