@@ -33,6 +33,8 @@ else
     export LOCAL_CONFIG_OVERRIDES_NOT_LOADED="~/.bashrc.local:$LOCAL_CONFIG_OVERRIDES_NOT_LOADED"
 fi
 
+set -o emacs # use emacs mode even though maybe EDITOR=vim per ~/.shellrc cuz I want ctrl-A ctrl-E
+
 # Start shell prompt
 command -v starship > /dev/null && eval "$(starship init bash)"
 
