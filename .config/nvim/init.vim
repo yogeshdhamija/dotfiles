@@ -64,11 +64,13 @@ let added_plugins = added_plugins + dependencies + file_browser + treesitter + l
 source ~/.vimrc
 
 " ====================================== CHANGE SETTINGS ======================================
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
 
-aunmenu PopUp.How-to\ disable\ mouse
-aunmenu PopUp.-1-
+" This doesnt work as of 2026-03-07. Will retry someday.
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()
+
+silent! aunmenu PopUp.How-to\ disable\ mouse
+silent! aunmenu PopUp.-1-
 
 set termguicolors
 set noshowmode
