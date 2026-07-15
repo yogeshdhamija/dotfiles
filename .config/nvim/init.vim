@@ -76,7 +76,10 @@ set termguicolors
 set noshowmode
 
 set scrollback=100000
-let g:unception_open_buffer_in_new_tab=1
+" Guarded so an --cmd from the $EDITOR wrapper wins; init.vim is sourced after it.
+if !exists('g:unception_open_buffer_in_new_tab')
+    let g:unception_open_buffer_in_new_tab=1
+endif
 
 augroup FiletypeMchat
   autocmd!
