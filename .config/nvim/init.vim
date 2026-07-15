@@ -133,8 +133,8 @@ if (farstatus) then
       syncNext = { n = '' },
       syncPrev = { n = '' },
       syncFile = { n = '' },
-      nextInput = { n = '<tab>' },
-      prevInput = { n = '<s-tab>' },
+      nextInput = { n = '' },
+      prevInput = { n = '' },
     },
  }
 end
