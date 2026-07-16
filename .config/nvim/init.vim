@@ -103,10 +103,13 @@ lua << EOF
 
 local farstatus, far = pcall(require, 'grug-far')
 if (farstatus) then
+ -- Only true while the <enter> mapping below runs. See the comment on that mapping.
+ local force_new_target = false
  far.setup{
     windowCreationCommand = '',
     openTargetWindow = {
-      preferredLocation = 'right'
+      preferredLocation = 'right',
+      exclude = { function() return force_new_target end },
     },
     keymaps = {
       replace = { n = '<localleader>r' },
@@ -120,7 +123,7 @@ if (farstatus) then
       openLocation = { n = '' },
       openNextLocation = { n = '<down>' },
       openPrevLocation = { n = '<up>' },
-      gotoLocation = { n = '<enter>' },
+      gotoLocation = { n = '' },
       pickHistoryEntry = { n = '<enter>' },
       abort = { n = '<localleader>c' },
       help = { n = 'g?' },
@@ -137,6 +140,40 @@ if (farstatus) then
       prevInput = { n = '' },
     },
  }
+
+  -- goto_location opens into some window other than its own, reusing an existing one at
+  -- preferredLocation if it finds a candidate. Excluding everything for the duration of the call
+  -- forces it to build a throwaway window instead of hijacking one that already has a buffer in it;
+  -- we then pull the result back into the grug-far window and close the throwaway. The exclude is
+  -- scoped to this mapping so <localleader>n/p keep reusing windows as usual. The m' is what
+  -- makes <C-O> land back on the search results: jumplists are per-window, not per-buffer.
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'grug-far',
+    callback = function(ev)
+      vim.keymap.set('n', '<enter>', function()
+        local instance = require('grug-far').get_instance(ev.buf)
+        if not instance then return end
+
+        local farwin = vim.api.nvim_get_current_win()
+        vim.cmd("normal! m'")
+
+        force_new_target = true
+        local ok = pcall(instance.goto_location, instance)
+        force_new_target = false
+        if not ok then return end
+
+        local win = vim.api.nvim_get_current_win()
+        if win == farwin then return end
+        local buf = vim.api.nvim_get_current_buf()
+        local cursor = vim.api.nvim_win_get_cursor(win)
+
+        vim.api.nvim_win_close(win, false)
+        vim.api.nvim_set_current_win(farwin)
+        vim.api.nvim_win_set_buf(farwin, buf)
+        pcall(vim.api.nvim_win_set_cursor, farwin, cursor)
+      end, { buffer = ev.buf, desc = 'Goto location (current window)' })
+    end,
+  })
 end
 
 
