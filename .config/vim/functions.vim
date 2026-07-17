@@ -90,12 +90,131 @@ function! NvimOnlyCreateCenteredFloatingWindow() abort
     call nvim_open_win(s:buf, v:true, opts)
 endfunction
 
+function! MarksHelperAddSection(lines, header, entries) abort
+    if empty(a:entries)
+        return
+    endif
+    if !empty(a:lines)
+        call add(a:lines, '')
+    endif
+    call add(a:lines, a:header)
+    call extend(a:lines, a:entries)
+endfunction
+
+function! MarksHelperLines(buf) abort
+    let l:special_desc = {
+        \ "'": 'position before last jump',
+        \ '"': 'position when last exiting buffer',
+        \ '^': 'position of last insert',
+        \ '.': 'position of last change',
+        \ '[': 'start of last change or yank',
+        \ ']': 'end of last change or yank',
+        \ '<': 'start of last visual selection',
+        \ '>': 'end of last visual selection',
+    \ }
+
+    let l:local = {}
+    let l:special = {}
+    for l:m in getmarklist(a:buf)
+        let l:char = strpart(l:m.mark, 1)
+        if l:char =~# '^[a-z]$'
+            let l:local[l:char] = l:m.pos[1]
+        elseif has_key(l:special_desc, l:char)
+            let l:special[l:char] = l:m.pos[1]
+        endif
+    endfor
+
+    let l:global = {}
+    let l:numbered = {}
+    for l:m in getmarklist()
+        let l:char = strpart(l:m.mark, 1)
+        let l:where = fnamemodify(get(l:m, 'file', ''), ':~') . ':' . l:m.pos[1]
+        if l:char =~# '^[A-Z]$'
+            let l:global[l:char] = l:where
+        elseif l:char =~# '^[0-9]$'
+            let l:numbered[l:char] = l:where
+        endif
+    endfor
+
+    let l:lines = []
+
+    let l:entries = []
+    for l:char in sort(keys(l:local))
+        let l:text = trim(get(getbufline(a:buf, l:local[l:char]), 0, ''))
+        call add(l:entries, printf(' %s  %4d  %s', l:char, l:local[l:char], l:text))
+    endfor
+    call MarksHelperAddSection(l:lines, 'Local (a-z)', l:entries)
+
+    let l:entries = []
+    for l:char in sort(keys(l:global))
+        call add(l:entries, printf(' %s  %s', l:char, l:global[l:char]))
+    endfor
+    call MarksHelperAddSection(l:lines, 'Global (A-Z)', l:entries)
+
+    let l:entries = []
+    for l:char in sort(keys(l:numbered))
+        call add(l:entries, printf(' %s  %s', l:char, l:numbered[l:char]))
+    endfor
+    call MarksHelperAddSection(l:lines, 'Numbered (0-9, previous sessions)', l:entries)
+
+    let l:entries = []
+    for l:char in ["'", '"', '^', '.', '[', ']', '<', '>']
+        if has_key(l:special, l:char)
+            call add(l:entries, printf(' %s  %4d  %s', l:char, l:special[l:char], l:special_desc[l:char]))
+        endif
+    endfor
+    call MarksHelperAddSection(l:lines, 'Special', l:entries)
+
+    if empty(l:lines)
+        let l:lines = ['No marks set']
+    endif
+    return l:lines
+endfunction
+
 function! MarksHelper() abort
-    if(reg_recording() == '' && reg_executing() == '')
-        echo ":marks"
-        Marks
+    if(reg_recording() != '' || reg_executing() != '')
+        call feedkeys("`", 'nti')
+        return
+    endif
+
+    let l:lines = MarksHelperLines(bufnr('%'))
+    let l:origwin = win_getid()
+
+    if has('nvim')
+        call NvimOnlyCreateCenteredFloatingWindow()
     else
-        call feedkeys("`", 'nt')
+        vertical botright 45new
+        setlocal nonumber norelativenumber nolist nocursorline nofoldenable
+    endif
+    setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nowrap
+    call setline(1, l:lines)
+    setlocal nomodifiable
+    syntax match MarksHelperHeader /^\S.*/
+    syntax match MarksHelperKey /^\s\zs\S/
+    syntax match MarksHelperLnum /^\s\S\s\+\zs\d\+/
+    highlight default link MarksHelperHeader Title
+    highlight default link MarksHelperKey Identifier
+    highlight default link MarksHelperLnum Number
+    let l:helperwin = win_getid()
+
+    let l:raw = 27
+    try
+        redraw
+        echo '`'
+        let l:raw = getchar()
+    catch /^Vim:Interrupt$/
+        let l:raw = 27
+    finally
+        call win_gotoid(l:helperwin)
+        close
+        call win_gotoid(l:origwin)
+        redraw
+        echo ''
+    endtry
+
+    let l:char = type(l:raw) == v:t_number ? nr2char(l:raw) : ''
+    if !empty(l:char) && stridx("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`'\"^.[]<>", l:char) >= 0
+        call feedkeys('`' . l:char, 'ni')
     endif
 endfunction
 
