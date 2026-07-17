@@ -134,7 +134,7 @@ function! OpenFile() abort
 endfunction
 
 function! ListBuffers() abort
-    execute "normal! :Buffers\<CR>"
+    execute "normal! :BufferList\<CR>"
 endfunction
 
 function! ListWindows() abort

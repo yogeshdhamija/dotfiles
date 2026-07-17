@@ -7,6 +7,7 @@ if !exists("plugins")
         \ ['junegunn/vim-easy-align', {}],
         \ ['yogeshdhamija/find-in-dir-helper.vim', {}],
         \ ['yogeshdhamija/filter-lq-list.vim', {}],
+        \ ['yogeshdhamija/editable-buffer-list.vim', {'branch': 'main'}],
         \ ['yogeshdhamija/close-hidden-buffers-command.vim', {}],
         \ ['yogeshdhamija/terminal-command-motion.vim', {}],
         \ ['AndrewRadev/bufferize.vim', {}],
