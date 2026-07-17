@@ -177,7 +177,7 @@ function! MarksHelper() abort
         return
     endif
 
-    let l:lines = MarksHelperLines(bufnr('%'))
+    let l:origbuf = bufnr('%')
     let l:origwin = win_getid()
 
     if has('nvim')
@@ -187,7 +187,7 @@ function! MarksHelper() abort
         setlocal nonumber norelativenumber nolist nocursorline nofoldenable
     endif
     setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted nowrap
-    call setline(1, l:lines)
+    call setline(1, MarksHelperLines(l:origbuf))
     setlocal nomodifiable
     syntax match MarksHelperHeader /^\S.*/
     syntax match MarksHelperKey /^\s\zs\S/
@@ -198,10 +198,35 @@ function! MarksHelper() abort
     let l:helperwin = win_getid()
 
     let l:raw = 27
+    let l:prompt = '`'
     try
-        redraw
-        echo '`'
-        let l:raw = getchar()
+        while 1
+            redraw
+            echo l:prompt
+            let l:prompt = '`'
+            let l:raw = getchar()
+            " <BS>/<Del> arrive as special-key strings, or as 8/127 from some terminals
+            let l:isdel = type(l:raw) == v:t_number
+                \ ? (l:raw == 8 || l:raw == 127)
+                \ : (l:raw ==# "\<BS>" || l:raw ==# "\<Del>")
+            if !l:isdel
+                break
+            endif
+
+            redraw
+            let l:marks = trim(input(':DELMARKS '))
+            if !empty(l:marks)
+                try
+                    execute 'DELMARKS' l:marks
+                catch
+                    let l:prompt = substitute(v:exception, '^Vim\%((\a\+)\)\=:', '', '')
+                endtry
+            endif
+            setlocal modifiable
+            silent %delete _
+            call setline(1, MarksHelperLines(l:origbuf))
+            setlocal nomodifiable
+        endwhile
     catch /^Vim:Interrupt$/
         let l:raw = 27
     finally
