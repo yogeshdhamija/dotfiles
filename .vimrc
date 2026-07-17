@@ -52,7 +52,6 @@ source ~/.config/vim/settings.vim
     xnoremap \p "_dP
     nnoremap \c <Esc><Cmd>call ClearScreen()<CR>
     nnoremap \o <Cmd>call OpenFile()<CR>
-    nnoremap \b <Cmd>call ListBuffers()<CR>
     nnoremap \w <Cmd>call ListWindows()<CR>
     nnoremap \q <cmd>call QuickAction()<CR>
     xnoremap \q <cmd>call QuickAction()<CR>
@@ -67,6 +66,7 @@ source ~/.config/vim/settings.vim
     xnoremap \r y<cmd>call RunInNearestTerminal(@")<CR>
     nnoremap \r yy<cmd>call RunInNearestTerminal(@")<CR>
     call CreateSplitMappings("nnore",     "\\d",  "<cmd>call DirectoryBrowser()<CR>")
+    call CreateSplitMappings("nnore",     "\\b",  "<cmd>call ListBuffers()<CR>")
     call CreateSplitMappings("nnore",     "\\gd", "<cmd>call Definition()<CR>")
     call CreateSplitMappings("nnore",     "\\gD", "<cmd>call Declaration()<CR>")
     call CreateSplitMappings("nnore",     "\\gr", "<cmd>call References()<CR>")
