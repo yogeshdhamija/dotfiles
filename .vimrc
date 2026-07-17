@@ -76,7 +76,7 @@ source ~/.config/vim/settings.vim
 
 " Commands
     command!          ONLY             call Only()
-    command!          DELMARKS         call DelMarks()
+    command! -nargs=* DELMARKS         call DelMarks(<q-args>)
     command!          RENAME           call ChangeSymbolName()
     command! -range=% FORMAT           call AutoFormat()
     command!          ERRORS           call DisplayErrors()
@@ -93,8 +93,12 @@ source ~/.config/vim/settings.vim
     command!          TOGGLEDEBUGGERUI call ToggleDebuggerUi()
     command!          DEBUG            call StartDebugger()
 
-function! DelMarks() abort
-    execute "normal! :delmarks a-zA-Z0-9\<CR>"
+function! DelMarks(marks) abort
+    if empty(a:marks)
+        delmarks a-zA-Z0-9
+    else
+        execute 'delmarks' a:marks
+    endif
 endfunction
 
 function! Only() abort
