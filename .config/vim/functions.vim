@@ -5,6 +5,36 @@ function! SourceFileIfExists(filepath) abort
     endtry
 endfunction
 
+" Like SourceFileIfExists(), but for config belonging to the project being
+"   edited rather than to us, so it is never run just because we happened to
+"   start up in that directory.
+"
+" Neovim (including VSCode-Neovim) gates it behind the trust list (:h trust):
+"   vim.secure.read() returns v:null unless the file is trusted, prompting the
+"   first time it sees it and again whenever its contents change -- so it also
+"   covers the "if exists" part. Executing the returned contents, instead of
+"   re-sourcing the path, avoids the TOCTOU window the :trust docs warn about.
+"
+" Vim has no trust list, so it refuses to load these files at all and tells you
+"   how to do it by hand once you've decided the project is trustworthy.
+function! SourceProjectFileIfExists(filepath) abort
+    if has('nvim')
+        let l:contents = v:lua.vim.secure.read(fnamemodify(a:filepath, ':p'))
+        if type(l:contents) != v:t_string
+            return
+        endif
+        try
+            call v:lua.vim.api.nvim_exec2(l:contents, {})
+        catch
+        endtry
+    elseif filereadable(a:filepath)
+        echohl WarningMsg
+        echomsg "did not load untrusted file. Use source "
+                    \ . fnamemodify(a:filepath, ':p:~') . " to load manually"
+        echohl None
+    endif
+endfunction
+
 function! DetectWsl() abort
     return filereadable("/proc/version") && (match(readfile("/proc/version"), "Microsoft") != -1)
 endfunction

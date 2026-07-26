@@ -615,4 +615,4 @@ function! StartDebugger() abort
   execute "normal! :DapContinue\<CR>"
 endfunction
 
-call SourceFileIfExists(".vim/vimrc.local")
+call SourceProjectFileIfExists(".vim/vimrc.local")

@@ -8,7 +8,7 @@ if !has('nvim')
     source ~/.config/vim/functions.vim
 endif
 
-call SourceFileIfExists(".vim/vimrc.local.loadbefore")
+call SourceProjectFileIfExists(".vim/vimrc.local.loadbefore")
 call SourceFileIfExists("~/.vimrc.local.loadbefore")
 
 source ~/.config/vim/plugins.vim
@@ -154,5 +154,5 @@ call SourceFileIfExists("~/.config/vim/dirvish_config.vim")
 call SourceFileIfExists("~/.vimrc.local")
 
 if !has('nvim') " if nvim, call this function after nvim-specific config is loaded
-    call SourceFileIfExists(".vim/vimrc.local")
+    call SourceProjectFileIfExists(".vim/vimrc.local")
 endif
