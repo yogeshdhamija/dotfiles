@@ -303,40 +303,64 @@ function! MarksHelper() abort
     endif
 endfunction
 
-function! RunInNearestTerminal(cmd) range abort
-    let l:foundterm = 0
+" Focuses the nearest buffer that a:Matches accepts -- preferring one already
+"   visible in another window, then any loaded buffer (most recent first), and
+"   finally creating one with a:Create -- then sends a:text to it.
+"
+" a:Matches is called with a buffer number and a:Create opens a new buffer in
+"   the current window. Passing a named function as function('Name') rather than
+"   funcref('Name') resolves the name when it is called rather than when the
+"   funcref is built, so a program loading this file can still override that
+"   function afterwards, the way the rest of this config works.
+"
+" a:text may be empty (or v:null) to mean "just open it".
+function! OpenNearest(Matches, Create, text) abort
+    let l:found = 0
     let l:curbuf = bufnr('%')
 
-    " Switch to terminal window, if one is open (ignoring the current buffer)
-    for winnr in range(1, winnr('$'))
-      let bufnr = winbufnr(winnr)
-      if bufnr != l:curbuf && getbufvar(bufnr, '&buftype') ==# 'terminal'
-        execute winnr . "wincmd w"
-        let l:foundterm = 1
-        break
-      endif
+    " Switch to a window already showing a match (ignoring the current buffer)
+    for l:winnr in range(1, winnr('$'))
+        let l:bufnr = winbufnr(l:winnr)
+        if l:bufnr != l:curbuf && a:Matches(l:bufnr)
+            execute l:winnr . "wincmd w"
+            let l:found = 1
+            break
+        endif
     endfor
 
-    " Else, load an open terminal buffer into the current window
-    if(!l:foundterm)
+    " Else, load a matching buffer into the current window
+    if(!l:found)
         for l:buffer_nr in reverse(range(1, bufnr('$')))
-            if l:buffer_nr != l:curbuf && getbufvar(l:buffer_nr, '&buftype') ==# 'terminal'
+            if l:buffer_nr != l:curbuf && a:Matches(l:buffer_nr)
                 execute 'buffer' l:buffer_nr
-                let l:foundterm = 1
+                let l:found = 1
                 break
             endif
         endfor
     endif
 
-    " Else, start a new terminal buffer in the current window
-    if(!l:foundterm)
-        call StartTerminal()
+    " Else, start a new one in the current window
+    if(!l:found)
+        call a:Create()
     endif
 
+    " Pasting an empty register is a no-op, so the empty a:text case needs no
+    "   special casing beyond normalizing v:null into a string.
     let l:orig_z = @z
-    let @z = a:cmd
+    let @z = empty(a:text) ? '' : a:text
     stopinsert
     normal! "zp
     let @z = l:orig_z
     normal! i
+endfunction
+
+" Model chat buffers are terminals too (see OpenNearestGenAiModelChat), and
+"   sending a shell command into one is never what was meant, so they do not
+"   count as terminals here.
+function! RunInNearestTerminal(cmd) range abort
+    call OpenNearest(
+                \ { bufnr -> getbufvar(bufnr, '&buftype') ==# 'terminal'
+                \            && getbufvar(bufnr, '&filetype') !=# 'mchat' },
+                \ function('StartTerminal'),
+                \ a:cmd)
 endfunction

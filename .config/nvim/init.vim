@@ -593,41 +593,10 @@ function! CloseWindowsWithFileType(filetype)
 endfunction
 
 function! OpenNearestGenAiModelChat(text) range abort
-	let l:found = 0
-	let l:curbuf = bufnr('%')
-
-  " If window of type mchat already exists, go there (ignoring current buffer)
-    for winnr in range(1, winnr('$'))
-      let bufnr = winbufnr(winnr)
-	  if bufnr != l:curbuf && getbufvar(bufnr, '&filetype') ==# 'mchat'
-        execute winnr . "wincmd w"
-        let l:found = 1
-        break
-      endif
-    endfor
-
-    " Else, load an open mchat buffer into the current window
-    if(!l:found)
-        for l:buffer_nr in reverse(range(1, bufnr('$')))
-            if l:buffer_nr != l:curbuf && getbufvar(l:buffer_nr, '&filetype') ==# 'mchat'
-                execute 'buffer' l:buffer_nr
-                let l:found = 1
-                break
-            endif
-        endfor
-    endif
-
-    if(!l:found)
-        terminal claude
-		setlocal filetype=mchat
-    endif
-
-    let l:orig_z = @z
-    let @z = a:text
-    stopinsert
-    normal! "zp
-    let @z = l:orig_z
-    normal! i
+  call OpenNearest(
+        \ { bufnr -> getbufvar(bufnr, '&filetype') ==# 'mchat' },
+        \ { -> execute(['terminal claude', 'setlocal filetype=mchat']) },
+        \ a:text)
 endfunction
 
 function! ToggleBreakpoint() abort
