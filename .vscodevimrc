@@ -190,7 +190,3 @@ endfunction
 function! ShrinkSelection() abort
     call v:lua.require("vscode").call("editor.action.smartSelect.shrink")
 endfunction
-
-function! InlineAssistThroughAiMagic() abort
-    call v:lua.require("vscode").call("continue.focusContinueInputWithoutClear")
-endfunction

@@ -55,7 +55,6 @@ let debugging = [
     \ ['LiadOz/nvim-dap-repl-highlights', {}],
 \ ]
 let other_stuff = [
-    \ ['gsuuon/model.nvim', {}],
     \ ['samjwill/nvim-unception', {}],
 \ ]
 let added_plugins = added_plugins + dependencies + file_browser + treesitter + lsp + language + interface_stuff + debugging + other_stuff
@@ -80,12 +79,6 @@ set scrollback=100000
 if !exists('g:unception_open_buffer_in_new_tab')
     let g:unception_open_buffer_in_new_tab=1
 endif
-
-augroup FiletypeMchat
-  autocmd!
-  autocmd FileType mchat nnoremap <buffer> \m <cmd>Mchat<CR>
-  autocmd FileType mchat inoremap <buffer> \m <cmd>Mchat<CR><cmd>stopinsert<CR>
-augroup END
 
 set background=dark
 hi! link SignColumn Normal
@@ -594,47 +587,42 @@ function! CloseWindowsWithFileType(filetype)
   exe l:current_win . 'wincmd w'
 endfunction
 
-function! InlineAssistThroughAiMagic() abort
+function! OpenNearestGenAiModelChat(text) range abort
+	let l:found = 0
+	let l:curbuf = bufnr('%')
 
-  " If window of type mchat already exists, go there and paste contents (if called in visual mode)
-  for winnr in range(1, winnr('$'))
-    let bufnr = winbufnr(winnr)
-    if getbufvar(bufnr, '&filetype') ==# 'mchat'
-      let l:in_visual_mode = mode() ==# 'v' || mode() ==# "V"
-      if l:in_visual_mode
-        normal! y
+  " If window of type mchat already exists, go there (ignoring current buffer)
+    for winnr in range(1, winnr('$'))
+      let bufnr = winbufnr(winnr)
+	  if bufnr != l:curbuf && getbufvar(bufnr, '&filetype') ==# 'mchat'
+        execute winnr . "wincmd w"
+        let l:found = 1
+        break
       endif
-      execute winnr . "wincmd w"
-      normal Go
-      stopinsert
-      if l:in_visual_mode
-        normal! p
-      endif
-      return
+    endfor
+
+    " Else, load an open mchat buffer into the current window
+    if(!l:found)
+        for l:buffer_nr in reverse(range(1, bufnr('$')))
+            if l:buffer_nr != l:curbuf && getbufvar(l:buffer_nr, '&filetype') ==# 'mchat'
+                execute 'buffer' l:buffer_nr
+                let l:found = 1
+                break
+            endif
+        endfor
     endif
-  endfor
 
-  " If buffer of type mchat already exists, open it and paste contents (if called in visual mode)
-  for l:buf in range(1, bufnr('$'))
-    if bufexists(l:buf) && getbufvar(l:buf, '&filetype') ==# 'mchat'
-      let l:in_visual_mode = mode() ==# 'v' || mode() ==# "V"
-      if l:in_visual_mode
-        normal! y
-      endif
-      vsplit
-      execute 'buffer' l:buf
-      normal Go
-      stopinsert
-      if l:in_visual_mode
-        normal! p
-      endif
-      return
+    if(!l:found)
+        terminal claude
+		setlocal filetype=mchat
     endif
-  endfor
 
-  " Else, call :Mchat command (which also pastes contents if called in visual mode)
-  execute "normal! :Mchat openai\<CR>"
-  execute "normal! :set wrap\<CR>"
+    let l:orig_z = @z
+    let @z = a:text
+    stopinsert
+    normal! "zp
+    let @z = l:orig_z
+    normal! i
 endfunction
 
 function! ToggleBreakpoint() abort

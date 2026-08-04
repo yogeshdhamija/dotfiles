@@ -60,9 +60,8 @@ source ~/.config/vim/settings.vim
     nnoremap \h <cmd>call Hover()<CR>
     inoremap \h <cmd>call SignatureHelp()<CR>
     nnoremap \e <Cmd>call Error()<CR>
-    nnoremap \m <cmd>call InlineAssistThroughAiMagic()<CR>
-    xnoremap \m <cmd>call InlineAssistThroughAiMagic()<CR>
-    inoremap \m <cmd>call InlineAssistThroughAiMagic()<CR>
+    xnoremap \m y<cmd>call OpenNearestGenAiModelChat(@")<CR>
+    nnoremap \m <cmd>call OpenNearestGenAiModelChat("")<CR>
     xnoremap \r y<cmd>call RunInNearestTerminal(@")<CR>
     nnoremap \r yy<cmd>call RunInNearestTerminal(@")<CR>
     call CreateSplitMappings("nnore",     "\\d",  "<cmd>call DirectoryBrowser()<CR>")
