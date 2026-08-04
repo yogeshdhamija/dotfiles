@@ -303,6 +303,30 @@ function! MarksHelper() abort
     endif
 endfunction
 
+" Seconds since epoch that a buffer was last entered, or 0 if it is gone.
+function! s:LastUsed(bufnr) abort
+    let l:info = getbufinfo(a:bufnr)
+    return empty(l:info) ? 0 : l:info[0].lastused
+endfunction
+
+" Orders two windows most recently used first.
+"
+" There is no real most-recently-used window order to read: winnr() is layout
+"   order, and winnr('#') reaches back exactly one window. Rather than keep a
+"   history of our own, approximate it with the last-used time of the buffer
+"   each window is showing, which is updated whenever that window is left.
+"   Since that time only has second granularity, use winnr('#') to settle the
+"   tie it most often loses -- a window split off and jumped out of in one go.
+function! s:CompareWindowUse(x, y) abort
+    let l:prev = winnr('#')
+    if a:x == l:prev
+        return -1
+    elseif a:y == l:prev
+        return 1
+    endif
+    return s:LastUsed(winbufnr(a:y)) - s:LastUsed(winbufnr(a:x))
+endfunction
+
 " Focuses the nearest buffer that a:Matches accepts -- preferring one already
 "   visible in another window, then any loaded buffer (most recent first), and
 "   finally creating one with a:Create -- then sends a:text to it.
@@ -318,8 +342,9 @@ function! OpenNearest(Matches, Create, text) abort
     let l:found = 0
     let l:curbuf = bufnr('%')
 
-    " Switch to a window already showing a match (ignoring the current buffer)
-    for l:winnr in range(1, winnr('$'))
+    " Switch to a window already showing a match (ignoring the current buffer),
+    "   most recently used first
+    for l:winnr in sort(range(1, winnr('$')), function('s:CompareWindowUse'))
         let l:bufnr = winbufnr(l:winnr)
         if l:bufnr != l:curbuf && a:Matches(l:bufnr)
             execute l:winnr . "wincmd w"
@@ -328,9 +353,14 @@ function! OpenNearest(Matches, Create, text) abort
         endif
     endfor
 
-    " Else, load a matching buffer into the current window
+    " Else, load a matching buffer into the current window, most recently used
+    "   first, falling back to most recently created within the same second
     if(!l:found)
-        for l:buffer_nr in reverse(range(1, bufnr('$')))
+        let l:infos = sort(getbufinfo(),
+                    \ { x, y -> y.lastused != x.lastused
+                    \           ? y.lastused - x.lastused
+                    \           : y.bufnr - x.bufnr })
+        for l:buffer_nr in map(l:infos, 'v:val.bufnr')
             if l:buffer_nr != l:curbuf && a:Matches(l:buffer_nr)
                 execute 'buffer' l:buffer_nr
                 let l:found = 1
