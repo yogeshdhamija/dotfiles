@@ -275,22 +275,22 @@ endfunction
 
 function! RunInNearestTerminal(cmd) range abort
     let l:foundterm = 0
+    let l:curbuf = bufnr('%')
 
-    " Switch to terminal window, if one is open
+    " Switch to terminal window, if one is open (ignoring the current buffer)
     for winnr in range(1, winnr('$'))
       let bufnr = winbufnr(winnr)
-      if getbufvar(bufnr, '&buftype') ==# 'terminal'
+      if bufnr != l:curbuf && getbufvar(bufnr, '&buftype') ==# 'terminal'
         execute winnr . "wincmd w"
         let l:foundterm = 1
         break
       endif
     endfor
 
-    " Else, switch to terminal buffer if buffer is open
+    " Else, load an open terminal buffer into the current window
     if(!l:foundterm)
         for l:buffer_nr in reverse(range(1, bufnr('$')))
-            if getbufvar(l:buffer_nr, '&buftype') ==# 'terminal'
-                vsplit
+            if l:buffer_nr != l:curbuf && getbufvar(l:buffer_nr, '&buftype') ==# 'terminal'
                 execute 'buffer' l:buffer_nr
                 let l:foundterm = 1
                 break
@@ -298,10 +298,9 @@ function! RunInNearestTerminal(cmd) range abort
         endfor
     endif
 
-    " Else, start a new terminal buffer
+    " Else, start a new terminal buffer in the current window
     if(!l:foundterm)
-        vsplit
-        terminal
+        call StartTerminal()
     endif
 
     let l:orig_z = @z
