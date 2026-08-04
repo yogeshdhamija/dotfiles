@@ -215,12 +215,17 @@ if (oilstatus) then
     win_options = {
       signcolumn = "auto:2",
         winbar = "%!v:lua.get_oil_winbar()",
+      cursorline = true,
+      cursorlineopt = "both",
     },
     keymaps = {
       -- Keep ` for the marks helper instead of oil's :cd
       ["`"] = false,
       -- No accidental cwd changes (:tcd)
       ["g~"] = false,
+      -- Open in a vertical split with t instead of <C-s>
+      ["<C-s>"] = false,
+      ["t"] = { "actions.select", opts = { vertical = true }, mode = "n" },
       [ "zc"] = {
         desc = "Toggle file detail view",
         callback = function()
