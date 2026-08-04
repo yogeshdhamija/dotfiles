@@ -89,6 +89,36 @@ function! SetClipboardForWslTerminal() abort
                 \ }
 endfunction
 
+" Copies a path into both the system clipboard (+) and the unnamed (") register.
+"   When a:absolute is falsy, the path is shortened to be relative to the cwd,
+"   falling back to the absolute path when it does not live below the cwd.
+function! CopyPathToRegisters(path, absolute) abort
+    if empty(a:path)
+        echohl WarningMsg | echo "Nothing to copy: this buffer has no path" | echohl None
+        return
+    endif
+    " ':p' appends a trailing slash to directories, which is what we want: a
+    "   copied directory path should read as one.
+    let l:absolute_path = fnamemodify(a:path, ':p')
+    " ':.' shortens to a cwd-relative path only when the path is below the cwd,
+    "   and leaves it absolute otherwise. That is exactly the fallback we want.
+    let l:path = a:absolute ? l:absolute_path : fnamemodify(l:absolute_path, ':.')
+    " ':.' reduces the cwd itself to an empty string once it carries a trailing
+    "   slash, so name it explicitly instead of copying nothing.
+    if empty(l:path)
+        let l:path = './'
+    endif
+    let @" = l:path
+    " Vim builds without clipboard support ('vim --version' shows -clipboard)
+    "   throw E354 on any write to @+, so only attempt it when it can work.
+    "   The unnamed register is set first so it survives either way.
+    if has('nvim') || has('clipboard')
+        let @+ = l:path
+    endif
+    redraw!
+    echo "Copied: " . l:path
+endfunction
+
 function! CreateSplitMappings(mode, mapping, rhs) abort
     execute a:mode.'map '.a:mapping.' '.a:rhs
     execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.a:rhs

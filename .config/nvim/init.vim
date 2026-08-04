@@ -190,6 +190,26 @@ if (oilstatus) then
       return vim.api.nvim_buf_get_name(0)
       end
       end
+  -- Absolute path of the entry under the cursor, for :CP. Empty string when the
+  --   buffer has no local path to offer (e.g. oil-ssh:// over a remote).
+  function _G.get_oil_cursor_path()
+    local dir = require("oil").get_current_dir(0)
+    if not dir then
+      return ""
+    end
+    local entry = require("oil").get_cursor_entry()
+    if not entry then
+      -- Cursor is past the last entry: fall back to the directory being shown.
+      return dir
+    end
+    local path = (dir:gsub("/$", "")) .. "/" .. entry.name
+    -- Trailing slash comes from the entry's own type, so it is still correct for
+    --   a directory typed into the buffer that has not been written to disk yet.
+    if entry.type == "directory" then
+      path = path .. "/"
+    end
+    return path
+  end
   local detail = true
   oil.setup{
     watch_for_changes=true,
@@ -204,6 +224,10 @@ if (oilstatus) then
         winbar = "%!v:lua.get_oil_winbar()",
     },
     keymaps = {
+      -- Keep ` for the marks helper instead of oil's :cd
+      ["`"] = false,
+      -- No accidental cwd changes (:tcd)
+      ["g~"] = false,
       [ "zc"] = {
         desc = "Toggle file detail view",
         callback = function()
@@ -534,6 +558,14 @@ endfunction
 
 function! DirectoryBrowser() abort
   execute "normal! :Oil\<CR>"
+endfunction
+
+function! CopyPath(absolute) abort
+  if &filetype ==# 'oil'
+    call CopyPathToRegisters(v:lua.get_oil_cursor_path(), a:absolute)
+  else
+    call CopyPathToRegisters(expand('%:p'), a:absolute)
+  endif
 endfunction
 
 function! CloseWindowsWithFileType(filetype)

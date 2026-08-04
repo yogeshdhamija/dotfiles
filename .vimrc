@@ -82,7 +82,7 @@ source ~/.config/vim/settings.vim
     command!          ERRORS           call DisplayErrors()
     command!          ERRS             ERRORS
     command!          CD               silent cd %:p:h | redraw! | echo ":cd %:p:h"
-    command!          CP               let @+ = expand("%:p") | redraw! | echo ":let @+ = expand('%:p')"
+    command! -bang    CP               call CopyPath(<bang>0)
     command! -nargs=? GITLOG           Git log --graph --oneline --pretty=format:'%h -%d %s (%cs) <%an>' <args>
     command! -nargs=? GLOG             GITLOG <args>
     command! -range=% GITHISTORY       <line1>,<line2>BCommits
@@ -99,6 +99,10 @@ function! DelMarks(marks) abort
     else
         execute 'delmarks' a:marks
     endif
+endfunction
+
+function! CopyPath(absolute) abort
+    call CopyPathToRegisters(expand('%:p'), a:absolute)
 endfunction
 
 function! Only() abort
