@@ -567,33 +567,73 @@ function! CopyPath(absolute) abort
 endfunction
 
 function! CloseWindowsWithFileType(filetype)
-  " Get the current window number to return to it later.
   let l:current_win = winnr()
-
-  " Loop through all windows.
   let l:win_count = winnr('$')
   for l:i in range(1, l:win_count)
-    " Switch to window i
     exe l:i . 'wincmd w'
-
-    " Check the filetype of the buffer in that window.
     if &filetype == a:filetype
-      " Close the window if filetype matches.
       close
-      " Adjust the window count since one window is closed.
       let l:win_count -= 1
-
-      " Decrement 'i' since windows have shifted.
       let l:i -= 1
     endif
   endfor
-
-  " Return to the original window
   exe l:current_win . 'wincmd w'
 endfunction
 
+
+function! SendToNearest(Matches, Create, text) abort
+    let l:found = 0
+    let l:curbuf = bufnr('%')
+
+    " Move cursor to matching window (if any) (mru)
+    for l:winnr in sort(range(1, winnr('$')), function('s:CompareWindowUse'))
+        let l:bufnr = winbufnr(l:winnr)
+        if l:bufnr != l:curbuf && a:Matches(l:bufnr)
+            execute l:winnr . "wincmd w"
+            let l:found = 1
+            break
+        endif
+    endfor
+
+    " Else, switch current window to matching buffer (if any) (mru)
+    if(!l:found)
+        let l:infos = sort(getbufinfo(),
+                    \ { x, y -> y.lastused != x.lastused
+                    \           ? y.lastused - x.lastused
+                    \           : y.bufnr - x.bufnr })
+        for l:buffer_nr in map(l:infos, 'v:val.bufnr')
+            if l:buffer_nr != l:curbuf && a:Matches(l:buffer_nr)
+                execute 'buffer' l:buffer_nr
+                let l:found = 1
+                break
+            endif
+        endfor
+    endif
+
+    " Else, start a new buffer in current window
+    if(!l:found)
+        call a:Create()
+    endif
+
+	" Paste text
+    let l:orig_z = @z
+    let @z = empty(a:text) ? '' : a:text
+    stopinsert
+    normal! "zp
+    let @z = l:orig_z
+    normal! i
+endfunction
+
+function! RunInNearestTerminal(cmd) range abort
+    call SendToNearest(
+                \ { bufnr -> getbufvar(bufnr, '&buftype') ==# 'terminal'
+                \            && getbufvar(bufnr, '&filetype') !=# 'mchat' },
+                \ function('StartTerminal'),
+                \ a:cmd)
+endfunction
+
 function! OpenNearestGenAiModelChat(text) range abort
-  call OpenNearest(
+  call SendToNearest(
         \ { bufnr -> getbufvar(bufnr, '&filetype') ==# 'mchat' },
         \ { -> execute(['terminal claude', 'setlocal filetype=mchat']) },
         \ a:text)
