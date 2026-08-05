@@ -586,7 +586,13 @@ function! SendToNearest(Matches, Create, text) abort
     let l:curbuf = bufnr('%')
 
     " Move cursor to matching window (if any) (mru)
-    for l:winnr in sort(range(1, winnr('$')), function('s:CompareWindowUse'))
+    let l:prev = winnr('#')
+    let l:ByWindowUse = { x, y ->
+                \ x == l:prev ? -1
+                \ : y == l:prev ? 1
+                \ : get(get(getbufinfo(winbufnr(y)), 0, {}), 'lastused', 0)
+                \   - get(get(getbufinfo(winbufnr(x)), 0, {}), 'lastused', 0) }
+    for l:winnr in sort(range(1, winnr('$')), l:ByWindowUse)
         let l:bufnr = winbufnr(l:winnr)
         if l:bufnr != l:curbuf && a:Matches(l:bufnr)
             execute l:winnr . "wincmd w"
@@ -627,15 +633,15 @@ endfunction
 function! RunInNearestTerminal(cmd) range abort
     call SendToNearest(
                 \ { bufnr -> getbufvar(bufnr, '&buftype') ==# 'terminal'
-                \            && getbufvar(bufnr, '&filetype') !=# 'mchat' },
+                \            && !getbufvar(bufnr, 'gen_ai_model_chat', 0) },
                 \ function('StartTerminal'),
                 \ a:cmd)
 endfunction
 
 function! OpenNearestGenAiModelChat(text) range abort
   call SendToNearest(
-        \ { bufnr -> getbufvar(bufnr, '&filetype') ==# 'mchat' },
-        \ { -> execute(['terminal claude', 'setlocal filetype=mchat']) },
+        \ { bufnr -> getbufvar(bufnr, 'gen_ai_model_chat', 0) },
+        \ { -> execute(['terminal claude', 'let b:gen_ai_model_chat = 1']) },
         \ a:text)
 endfunction
 

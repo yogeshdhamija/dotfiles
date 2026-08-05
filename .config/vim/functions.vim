@@ -303,27 +303,3 @@ function! MarksHelper() abort
     endif
 endfunction
 
-" Seconds since epoch that a buffer was last entered, or 0 if it is gone.
-function! s:LastUsed(bufnr) abort
-    let l:info = getbufinfo(a:bufnr)
-    return empty(l:info) ? 0 : l:info[0].lastused
-endfunction
-
-" Orders two windows most recently used first.
-"
-" There is no real most-recently-used window order to read: winnr() is layout
-"   order, and winnr('#') reaches back exactly one window. Rather than keep a
-"   history of our own, approximate it with the last-used time of the buffer
-"   each window is showing, which is updated whenever that window is left.
-"   Since that time only has second granularity, use winnr('#') to settle the
-"   tie it most often loses -- a window split off and jumped out of in one go.
-function! s:CompareWindowUse(x, y) abort
-    let l:prev = winnr('#')
-    if a:x == l:prev
-        return -1
-    elseif a:y == l:prev
-        return 1
-    endif
-    return s:LastUsed(winbufnr(a:y)) - s:LastUsed(winbufnr(a:x))
-endfunction
-
