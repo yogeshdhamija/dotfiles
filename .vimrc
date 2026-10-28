@@ -61,17 +61,18 @@ source ~/.config/vim/settings.vim
     inoremap \h <cmd>call SignatureHelp()<CR>
     nnoremap \e <Cmd>call Error()<CR>
     xnoremap \m y<cmd>call OpenNearestGenAiModelChat(@")<CR>
-    nnoremap \m <cmd>call OpenNearestGenAiModelChat("")<CR>
+	xmap \t \r
     xnoremap \r y<cmd>call RunInNearestTerminal(@")<CR>
     nnoremap \r yy<cmd>call RunInNearestTerminal(@")<CR>
-    call CreateSplitMappings("nnore",     "\\d",  "<cmd>call DirectoryBrowser()<CR>")
-    call CreateSplitMappings("nnore",     "\\b",  "<cmd>call ListBuffers()<CR>")
-    call CreateSplitMappings("nnore",     "\\gd", "<cmd>call Definition()<CR>")
-    call CreateSplitMappings("nnore",     "\\gD", "<cmd>call Declaration()<CR>")
-    call CreateSplitMappings("nnore",     "\\gr", "<cmd>call References()<CR>")
-    call CreateSplitMappings("nnore",     "\\gi", "<cmd>call Implementations()<CR>")
-    call CreateSplitMappings("nnore",     "\\t", "<cmd>call StartTerminal()<CR>")
-    call CreateSplitMappings("nnore",     "\\gf", "<cmd>call GoToFile()<CR>")
+    call CreateSplitMappings("nnore", "\\d",  "<cmd>call DirectoryBrowser()<CR>")
+    call CreateSplitMappings("nnore", "\\b",  "<cmd>call ListBuffers()<CR>")
+    call CreateSplitMappings("nnore", "\\gd", "<cmd>call Definition()<CR>")
+    call CreateSplitMappings("nnore", "\\gD", "<cmd>call Declaration()<CR>")
+    call CreateSplitMappings("nnore", "\\gr", "<cmd>call References()<CR>")
+    call CreateSplitMappings("nnore", "\\gi", "<cmd>call Implementations()<CR>")
+    call CreateSplitMappings("nnore", "\\gf", "<cmd>call GoToFile()<CR>")
+    call CreateSplitMappings("nnore", "\\t",  "<cmd>call StartTerminal()<CR>")
+    call CreateSplitMappings("nnore", "\\m",  "<cmd>call StartGenAiModelChat()<CR>")
 
 " Commands
     command!          ONLY             call Only()

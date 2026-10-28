@@ -458,6 +458,11 @@ function! StartTerminal() abort
     exe "norm :terminal\<CR>:startinsert\<CR>"
 endfunction
 
+function! StartGenAiModelChat() abort
+	terminal claude
+	let b:gen_ai_model_chat = 1
+endfunction
+
 function! ExpandSelection() abort
     exe "norm \<Plug>ExpandSelection"
 endfunction
@@ -641,7 +646,7 @@ endfunction
 function! OpenNearestGenAiModelChat(text) range abort
   call SendToNearest(
         \ { bufnr -> getbufvar(bufnr, 'gen_ai_model_chat', 0) },
-        \ { -> execute(['terminal claude', 'let b:gen_ai_model_chat = 1']) },
+  		\ function('StartGenAiModelChat'),
         \ a:text)
 endfunction
 
