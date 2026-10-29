@@ -41,6 +41,7 @@ let language = [
 \ ]
 let interface_stuff = [
     \ ['MagicDuck/grug-far.nvim', {}],
+    \ ['yogeshdhamija/editable-file-search.nvim', {}],
     \ ['nvim-lualine/lualine.nvim', {}],
     \ ['lukas-reineke/indent-blankline.nvim', {}],
     \ ['ellisonleao/gruvbox.nvim', {}],
@@ -564,6 +565,10 @@ endfunction
 
 function! DirectoryBrowser() abort
   execute "normal! :Oil\<CR>"
+endfunction
+
+function! OpenFile() abort
+  FileSearch
 endfunction
 
 function! CopyPath(absolute) abort
