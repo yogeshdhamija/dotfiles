@@ -92,6 +92,16 @@ source ~/.config/vim/settings.vim
     command!          BREAKPOINT       call ToggleBreakpoint()
     command!          TOGGLEDEBUGGERUI call ToggleDebuggerUi()
     command!          DEBUG            call StartDebugger()
+    " Errors are echoed from here so they read like :bdelete's own one-liner;
+    "   left alone (or re-raised with echoerr) they come with an 'Error detected
+    "   while processing' header line, and so a hit-enter prompt
+    command! -bang -nargs=? -complete=buffer Bd
+                \ try | call CloseBuffer(<q-args>, <bang>0)
+                \ | catch | echohl ErrorMsg | echomsg substitute(v:exception, '^Vim\%((\a\+)\)\=:', '', '')
+                \ | echohl None | endtry
+    " A typed :bd runs Bd instead, so implementations of CloseBuffer() decide
+    "   whether the buffer's windows survive
+    cnoreabbrev <expr> bd getcmdtype() ==# ':' && getcmdline() ==# 'bd' ? 'Bd' : 'bd'
 
 function! DelMarks(marks) abort
     if empty(a:marks)
@@ -107,6 +117,11 @@ endfunction
 
 function! Only() abort
     execute "normal! :only\<CR>"
+endfunction
+
+" Plain :bdelete, which closes every window the buffer is in.
+function! CloseBuffer(buf, force) abort
+    execute 'bdelete' . (a:force ? '!' : '') a:buf
 endfunction
 
 function! StartTerminal() abort

@@ -79,6 +79,8 @@ set scrollback=100000
 if !exists('g:unception_open_buffer_in_new_tab')
     let g:unception_open_buffer_in_new_tab=1
 endif
+" Deleting a line in \b goes through CloseBuffer() too, so it keeps windows open like :bd
+let g:editable_buffer_list_delete_command = 'Bd'
 
 set background=dark
 hi! link SignColumn Normal
@@ -390,6 +392,7 @@ if (dapuistatus and dapstatus and masondapstatus and dapvtstatus) then
 end
 
 ---------------- Other stuff ---------------------------
+pcall(function() require('mini.bufremove').setup() end)
 local statusline,line = pcall(require, 'lualine')
 if(statusline) then
     line.setup({
@@ -569,6 +572,23 @@ function! CopyPath(absolute) abort
   else
     call CopyPathToRegisters(expand('%:p'), a:absolute)
   endif
+endfunction
+
+" Like :bdelete, but every window showing the buffer is switched to another
+"   buffer instead of being closed.
+function! CloseBuffer(buf, force) abort
+  " bufnr('5') would look for a buffer *named* 5
+  let l:buf = empty(a:buf) ? bufnr('%') : a:buf =~# '^\d\+$' ? str2nr(a:buf) : bufnr(a:buf)
+  " Left to :bdelete, which refuses these without closing anything and says
+  "   why: no single buffer matches (E93/E94), or a terminal's job is still
+  "   running (E89). A running terminal is never 'modified', so
+  "   mini.bufremove would go straight to :bdelete! and kill the job.
+  if l:buf < 1 || (!a:force && getbufvar(l:buf, '&buftype') ==# 'terminal'
+        \ && jobwait([getbufvar(l:buf, '&channel')], 0)[0] == -1)
+    execute 'bdelete' a:buf
+    return
+  endif
+  call v:lua.MiniBufremove.delete(l:buf, a:force ? v:true : v:false)
 endfunction
 
 function! CloseWindowsWithFileType(filetype)
