@@ -5,7 +5,10 @@
 # shell, splitting it on spaces, so flags/quotes in $EDITOR itself get mangled
 # into bogus filename arguments. The name keeps "nvim" as a word so callers
 # that sniff $EDITOR still detect a terminal editor and pass +LINE.
+#
+# Use v:false, not 0, to turn an option off: the plugin tests these in Lua,
+# where 0 counts as true.
 exec nvim \
     --cmd 'let g:unception_block_while_host_edits=1' \
-    --cmd 'let g:unception_open_buffer_in_new_tab=0' \
+    --cmd 'let g:unception_open_buffer_in_new_tab=v:false' \
     "$@"
