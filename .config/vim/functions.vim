@@ -119,13 +119,17 @@ function! CopyPathToRegisters(path, absolute) abort
     echo "Copied: " . l:path
 endfunction
 
+" In Visual mode the selection is ended first: a : typed there would give
+"   :split a '<,'> range, which it refuses (E16). The rhs can still get at
+"   the selection through '< and '>.
 function! CreateSplitMappings(mode, mapping, rhs) abort
-    execute a:mode.'map '.a:mapping.' '.a:rhs
-    execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.a:rhs
-    execute a:mode.'map '.a:mapping.'h :aboveleft vsplit<CR>'.a:rhs
-    execute a:mode.'map '.a:mapping.'l :belowright vsplit<CR>'.a:rhs
-    execute a:mode.'map '.a:mapping.'j :belowright split<CR>'.a:rhs
-    execute a:mode.'map '.a:mapping.'k :aboveleft split<CR>'.a:rhs
+    let l:pre = a:mode =~# '^[vx]' ? '<Esc>' : ''
+    execute a:mode.'map '.a:mapping.' '.l:pre.a:rhs
+    execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.l:pre.a:rhs
+    execute a:mode.'map '.a:mapping.'h '.l:pre.':aboveleft vsplit<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'l '.l:pre.':belowright vsplit<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'j '.l:pre.':belowright split<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'k '.l:pre.':aboveleft split<CR>'.a:rhs
 endfunction
 
 function! CreateMappingsInAllModes(mapping, rhs) abort

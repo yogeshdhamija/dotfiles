@@ -51,7 +51,6 @@ source ~/.config/vim/settings.vim
 " Leader shortcuts
     xnoremap \p "_dP
     nnoremap \c <Esc><Cmd>call ClearScreen()<CR>
-    nnoremap \o <Cmd>call OpenFile()<CR>
     nnoremap \w <Cmd>call ListWindows()<CR>
     nnoremap \q <cmd>call QuickAction()<CR>
     xnoremap \q <cmd>call QuickAction()<CR>
@@ -64,6 +63,8 @@ source ~/.config/vim/settings.vim
 	xmap \t \r
     xnoremap \r y<cmd>call RunInNearestTerminal(@")<CR>
     nnoremap \r yy<cmd>call RunInNearestTerminal(@")<CR>
+    call CreateSplitMappings("nnore", "\\o",  "<cmd>call OpenFile()<CR>")
+    call CreateSplitMappings("xnore", "\\o",  "<cmd>call OpenFile(LastVisualSelection())<CR>")
     call CreateSplitMappings("nnore", "\\d",  "<cmd>call DirectoryBrowser()<CR>")
     call CreateSplitMappings("nnore", "\\b",  "<cmd>call ListBuffers()<CR>")
     call CreateSplitMappings("nnore", "\\gd", "<cmd>call Definition()<CR>")
@@ -152,8 +153,20 @@ function! ClearScreen() abort
     set nohlsearch
 endfunction
 
-function! OpenFile() abort
-    execute "normal! :Files\<CR>"
+" {query} prefills the search, if given
+function! OpenFile(query = '') abort
+    if empty(a:query)
+        execute "normal! :Files\<CR>"
+    else
+        call fzf#vim#files('', fzf#vim#with_preview({'options': ['--query', a:query]}))
+    endif
+endfunction
+
+" The text of the last Visual selection, as one line: a selection of several
+"   lines is joined with spaces, without their indentation
+function! LastVisualSelection() abort
+    let l:lines = getregion(getpos("'<"), getpos("'>"), {'type': visualmode()})
+    return trim(join(map(l:lines, 'trim(v:val)'), ' '))
 endfunction
 
 function! ListBuffers() abort

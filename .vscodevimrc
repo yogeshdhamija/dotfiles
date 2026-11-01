@@ -8,13 +8,16 @@ function! RunInNearestTerminal(cmd) range abort
     lua require("vscode").call("workbench.action.terminal.runSelectedText")
 endfunction
 
+" In Visual mode the selection is ended first, as in ~/.config/vim/functions.vim,
+"   so that the rhs finds it in '< and '>, the same as there.
 function! CreateSplitMappings(mode, mapping, rhs) abort
-    execute a:mode.'map '.a:mapping.' '.a:rhs
-    execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.a:rhs
-    execute a:mode.'map '.a:mapping.'h <cmd>call v:lua.require("vscode").action("workbench.action.newGroupLeft")<CR>'.a:rhs
-    execute a:mode.'map '.a:mapping.'l <cmd>call v:lua.require("vscode").action("workbench.action.newGroupRight")<CR>'.a:rhs
-    execute a:mode.'map '.a:mapping.'j <cmd>call v:lua.require("vscode").action("workbench.action.newGroupBelow")<CR>'.a:rhs
-    execute a:mode.'map '.a:mapping.'k <cmd>call v:lua.require("vscode").action("workbench.action.newGroupAbove")<CR>'.a:rhs
+    let l:pre = a:mode =~# '^[vx]' ? '<Esc>' : ''
+    execute a:mode.'map '.a:mapping.' '.l:pre.a:rhs
+    execute a:mode.'map '.a:mapping.a:mapping[-1:].' '.l:pre.a:rhs
+    execute a:mode.'map '.a:mapping.'h '.l:pre.'<cmd>call v:lua.require("vscode").action("workbench.action.newGroupLeft")<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'l '.l:pre.'<cmd>call v:lua.require("vscode").action("workbench.action.newGroupRight")<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'j '.l:pre.'<cmd>call v:lua.require("vscode").action("workbench.action.newGroupBelow")<CR>'.a:rhs
+    execute a:mode.'map '.a:mapping.'k '.l:pre.'<cmd>call v:lua.require("vscode").action("workbench.action.newGroupAbove")<CR>'.a:rhs
 endfunction
 
 " ====================================== SET PLUGINS ======================================
@@ -171,8 +174,13 @@ function! ClearScreen() abort
     call v:lua.require("vscode").call("inlineChat.close")
 endfunction
 
-function! OpenFile() abort
-    call v:lua.require("vscode").call("workbench.action.quickOpen")
+" quickOpen takes a string to prefill the search with
+function! OpenFile(query = '') abort
+    if empty(a:query)
+        call v:lua.require("vscode").call("workbench.action.quickOpen")
+    else
+        call v:lua.require("vscode").call("workbench.action.quickOpen", {'args': [a:query]})
+    endif
 endfunction
 
 function! ListBuffers() abort
