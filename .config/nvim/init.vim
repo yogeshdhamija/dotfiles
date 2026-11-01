@@ -571,7 +571,7 @@ function! DirectoryBrowser() abort
   execute "normal! :Oil\<CR>"
 endfunction
 
-" Through Lua rather than :FileSearch, which would take a | or " in the
+" Through Lua rather than :FILESEARCH, which would take a | or " in the
 "   query as the end of the command
 function! OpenFile(query = '') abort
   call v:lua.require('editable-file-search').open(a:query)
