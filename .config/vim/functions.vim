@@ -74,6 +74,12 @@ function! CustomFoldText() abort
     return indent . text
 endfunction
 
+" For the status line: how many buffers :ls shows (the listed ones), e.g. '3 buffers'
+function! ListedBuffersStatus() abort
+    let l:count = len(getbufinfo({'buflisted': 1}))
+    return l:count . (l:count == 1 ? ' buffer' : ' buffers')
+endfunction
+
 function! SetClipboardForWslTerminal() abort
     let g:clipboard = {
                 \   'name': 'WslClipboard',

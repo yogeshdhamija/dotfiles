@@ -398,6 +398,10 @@ local statusline,line = pcall(require, 'lualine')
 if(statusline) then
     line.setup({
       options = { theme = 'codedark' },
+      sections = {
+        -- lualine's default lualine_x, with the buffer count in front
+        lualine_x = { function() return vim.fn.ListedBuffersStatus() end, 'encoding', 'fileformat', 'filetype' },
+      },
     })
 end
 local statusibl,ibl = pcall(require, 'ibl')

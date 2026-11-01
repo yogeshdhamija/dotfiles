@@ -89,6 +89,10 @@ nnoremap <silent> \ :<c-u>WhichKey '\'<CR>
     tabdo windo set foldtext=CustomFoldText()
     tabdo windo set fillchars=fold:\ 
     set laststatus=2
+    if !has('nvim') " Neovim's comes from lualine, in ~/.config/nvim/init.vim
+        " Vim's default status line (with 'noruler'), plus the buffer count on the right
+        set statusline=%<%f\ %h%w%m%r%=%{ListedBuffersStatus()}\
+    endif
     set list lcs=tab:\ \ ,trail:•
     set cursorlineopt=number
     set cursorline
