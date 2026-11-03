@@ -468,6 +468,7 @@ endfunction
 function! StartGenAiModelChat() abort
 	terminal claude
 	let b:gen_ai_model_chat = 1
+	startinsert
 endfunction
 
 function! ExpandSelection() abort
