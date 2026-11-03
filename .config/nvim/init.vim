@@ -391,6 +391,8 @@ end
 
 ---------------- Other stuff ---------------------------
 pcall(function() require('mini.bufremove').setup() end)
+-- Ended terminals stay open, read-only, until :bd
+require('terminal-exit')
 local statusline,line = pcall(require, 'lualine')
 if(statusline) then
     line.setup({
@@ -679,14 +681,16 @@ endfunction
 function! RunInNearestTerminal(cmd) range abort
     call SendToNearest(
                 \ { bufnr -> getbufvar(bufnr, '&buftype') ==# 'terminal'
-                \            && !getbufvar(bufnr, 'gen_ai_model_chat', 0) },
+                \            && !getbufvar(bufnr, 'gen_ai_model_chat', 0)
+                \            && jobwait([getbufvar(bufnr, '&channel')], 0)[0] == -1 },
                 \ function('StartTerminal'),
                 \ a:cmd)
 endfunction
 
 function! OpenNearestGenAiModelChat(text) range abort
   call SendToNearest(
-        \ { bufnr -> getbufvar(bufnr, 'gen_ai_model_chat', 0) },
+        \ { bufnr -> getbufvar(bufnr, 'gen_ai_model_chat', 0)
+        \            && jobwait([getbufvar(bufnr, '&channel')], 0)[0] == -1 },
   		\ function('StartGenAiModelChat'),
         \ a:text)
 endfunction
