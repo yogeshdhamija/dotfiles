@@ -87,9 +87,6 @@ set background=dark
 hi! link SignColumn Normal
 hi! link TreesitterContext Normal
 
-nnoremap \f <cmd>GrugFar<CR>
-vnoremap \f <Esc><cmd>'<,'>GrugFar<CR>
-
 " ====================================== NEOVIM SPECIFICS ======================================
 lua << EOF
 
@@ -575,6 +572,19 @@ endfunction
 "   query as the end of the command
 function! OpenFile(query = '') abort
   call v:lua.require('editable-file-search').open(a:query)
+endfunction
+
+" Opens in the current window (windowCreationCommand is ''), which is what
+"   lets the split mappings put it in a new one
+function! FindInFiles() abort
+  GrugFar
+endfunction
+
+" The range makes GrugFar read the selection from the '< and '> marks, which
+"   belong to the buffer, so a split mapping's new window still has them.
+"   Prefilled as a fixed string, multi-line if the selection is.
+function! FindSelectedTextInFiles() abort
+  '<,'>GrugFar
 endfunction
 
 function! CopyPath(absolute) abort

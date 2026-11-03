@@ -65,6 +65,8 @@ source ~/.config/vim/settings.vim
     nnoremap \r yy<cmd>call RunInNearestTerminal(@")<CR>
     call CreateSplitMappings("nnore", "\\o",  "<cmd>call OpenFile()<CR>")
     call CreateSplitMappings("xnore", "\\o",  "<cmd>call OpenFile(LastVisualSelection())<CR>")
+    call CreateSplitMappings("nnore", "\\f",  "<cmd>call FindInFiles()<CR>")
+    call CreateSplitMappings("xnore", "\\f",  "<cmd>call FindSelectedTextInFiles()<CR>")
     call CreateSplitMappings("nnore", "\\d",  "<cmd>call DirectoryBrowser()<CR>")
     call CreateSplitMappings("nnore", "\\b",  "<cmd>call ListBuffers()<CR>")
     call CreateSplitMappings("nnore", "\\gd", "<cmd>call Definition()<CR>")
@@ -160,6 +162,18 @@ function! OpenFile(query = '') abort
     else
         call fzf#vim#files('', fzf#vim#with_preview({'options': ['--query', a:query]}))
     endif
+endfunction
+
+" find-in-dir-helper.vim's default \f mappings step aside for the ones above,
+"   so these do what they did. They also handle VSCode-Neovim.
+function! FindInFiles() abort
+    call findInDirHelper#DisplayHelpAndSearch()
+endfunction
+
+" Runs with Visual mode already ended; implementations get the selection
+"   back from the '< and '> marks
+function! FindSelectedTextInFiles() abort
+    call findInDirHelper#FindSelectedTextInDir()
 endfunction
 
 " The text of the last Visual selection, as one line: a selection of several
