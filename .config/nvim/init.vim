@@ -80,8 +80,8 @@ set scrollback=100000
 if !exists('g:unception_open_buffer_in_new_tab')
     let g:unception_open_buffer_in_new_tab=1
 endif
-" Deleting a line in \b goes through CloseBuffer() too, so it keeps windows open like :bd
-let g:editable_buffer_list_delete_command = 'Bd'
+" Deleting a line in \b runs :BL, so windows that showed the buffer show the list instead
+let g:editable_buffer_list_delete_command = 'BL'
 
 set background=dark
 hi! link SignColumn Normal

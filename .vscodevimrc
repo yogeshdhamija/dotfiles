@@ -79,8 +79,11 @@ set showmode
 " Fix VSCode commands
     command! Tabnew call v:lua.require("vscode").call("workbench.action.duplicateWorkspaceInNewWindow")
     command! -bang  Quit if <q-bang> ==# '!' | call v:lua.require("vscode").call('workbench.action.revertAndCloseActiveEditor') | else | call v:lua.require("vscode").call('workbench.action.joinTwoGroups') | call v:lua.require("vscode").call('workbench.action.navigateBack') | endif
-    command! -bang  Bd if <q-bang> ==# '!' | call v:lua.require("vscode").call('workbench.action.revertAndCloseActiveEditor') | else | call v:lua.require("vscode").call('workbench.action.closeActiveEditor') | endif
-    AlterCommand bd Bd
+    " :bd, :BD and :BL all just close the editor, the nearest VSCode has to any of
+    "   them: its group shows another editor, or closes if that was its last
+    command! -bang  BD if <q-bang> ==# '!' | call v:lua.require("vscode").call('workbench.action.revertAndCloseActiveEditor') | else | call v:lua.require("vscode").call('workbench.action.closeActiveEditor') | endif
+    command! -bang  BL BD<bang>
+    AlterCommand bd BD
 
 " Fix the 'vscode neovim' plugin's <C-W> mappings
     nnoremap <C-W>>     :call v:lua.require("vscode").call("workbench.action.increaseViewWidth")<CR>

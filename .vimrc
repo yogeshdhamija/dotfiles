@@ -95,16 +95,20 @@ source ~/.config/vim/settings.vim
     command!          BREAKPOINT       call ToggleBreakpoint()
     command!          TOGGLEDEBUGGERUI call ToggleDebuggerUi()
     command!          DEBUG            call StartDebugger()
+    " Like :bd, which closes the buffer's windows, but these keep them: BD has
+    "   them show other buffers (if CloseBuffer() is implemented that way), BL
+    "   has them show the buffer list.
     " Errors are echoed from here so they read like :bdelete's own one-liner;
     "   left alone (or re-raised with echoerr) they come with an 'Error detected
     "   while processing' header line, and so a hit-enter prompt
-    command! -bang -nargs=? -complete=buffer Bd
+    command! -bang -nargs=? -complete=buffer BD
                 \ try | call CloseBuffer(<q-args>, <bang>0)
                 \ | catch | echohl ErrorMsg | echomsg substitute(v:exception, '^Vim\%((\a\+)\)\=:', '', '')
                 \ | echohl None | endtry
-    " A typed :bd runs Bd instead, so implementations of CloseBuffer() decide
-    "   whether the buffer's windows survive
-    cnoreabbrev <expr> bd getcmdtype() ==# ':' && getcmdline() ==# 'bd' ? 'Bd' : 'bd'
+    command! -bang -nargs=? -complete=buffer BL
+                \ try | call CloseBufferToList(<q-args>, <bang>0)
+                \ | catch | echohl ErrorMsg | echomsg substitute(v:exception, '^Vim\%((\a\+)\)\=:', '', '')
+                \ | echohl None | endtry
 
 function! DelMarks(marks) abort
     if empty(a:marks)
@@ -125,6 +129,40 @@ endfunction
 " Plain :bdelete, which closes every window the buffer is in.
 function! CloseBuffer(buf, force) abort
     execute 'bdelete' . (a:force ? '!' : '') a:buf
+endfunction
+
+" Like :bdelete, but every window showing the buffer switches to the buffer
+"   list instead of closing.
+function! CloseBufferToList(buf, force) abort
+    " bufnr('5') would look for a buffer *named* 5
+    let l:buf = empty(a:buf) ? bufnr('%') : a:buf =~# '^\d\+$' ? str2nr(a:buf) : bufnr(a:buf)
+    " Left to :bdelete, before any window has switched, when it would refuse:
+    "   no single buffer matches (E93/E94), or unsaved changes (E89), which
+    "   'modified' tells exactly -- including a terminal's running job, in Vim
+    "   (E948) but not Nvim, where that's checked separately (E89)
+    if l:buf < 1 || (!a:force && (getbufvar(l:buf, '&modified') || (has('nvim')
+                \ && getbufvar(l:buf, '&buftype') ==# 'terminal'
+                \ && jobwait([getbufvar(l:buf, '&channel')], 0)[0] == -1)))
+        execute 'bdelete' a:buf
+        return
+    endif
+    let l:wins = win_findbuf(l:buf)
+    for l:win in l:wins
+        call win_execute(l:win, 'BufferList')
+    endfor
+    " Still on screen means the list *is* the buffer: it was a list already
+    "   (BufferList from a list redraws it in place), or an empty [No Name]
+    "   one, which the :enew that opens a new list reuses. Either way it's
+    "   unlisted now, and deleting it would close the very windows it's in
+    if !empty(win_findbuf(l:buf))
+        return
+    endif
+    execute 'bdelete' . (a:force ? '!' : '') l:buf
+    " Again, so those lists don't still show it: while the buffer list applies
+    "   a deleted line (which runs this), lists don't update themselves
+    for l:win in l:wins
+        call win_execute(l:win, 'BufferList')
+    endfor
 endfunction
 
 function! StartTerminal() abort
