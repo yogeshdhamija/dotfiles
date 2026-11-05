@@ -593,6 +593,9 @@ endfunction
 function! CopyPath(absolute) abort
   if &filetype ==# 'oil'
     call CopyPathToRegisters(v:lua.get_oil_cursor_path(), a:absolute)
+  elseif &filetype ==# 'bufferlist'
+    " The buffer under the cursor, not the list itself
+    call CopyPathToRegisters(editableBufferList#PathUnderCursor(), a:absolute)
   else
     call CopyPathToRegisters(expand('%:p'), a:absolute)
   endif

@@ -119,7 +119,12 @@ function! DelMarks(marks) abort
 endfunction
 
 function! CopyPath(absolute) abort
-    call CopyPathToRegisters(expand('%:p'), a:absolute)
+    if &filetype ==# 'bufferlist'
+        " The buffer under the cursor, not the list itself
+        call CopyPathToRegisters(editableBufferList#PathUnderCursor(), a:absolute)
+    else
+        call CopyPathToRegisters(expand('%:p'), a:absolute)
+    endif
 endfunction
 
 function! Only() abort
