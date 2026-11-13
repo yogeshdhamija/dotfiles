@@ -52,7 +52,13 @@ endif
 if(has('nvim'))
     let g:peekaboo_window="call NvimOnlyCreateCenteredFloatingWindow()"
 endif
-let g:terminal_command_motion_prompt_matcher = '^.*\n❯\s*'
+" A starship prompt is a blank row, the info line, then the ❯ line. The info line wraps onto
+"   more rows in a narrow terminal, so the match is every non-empty row from just after the
+"   blank one through ❯. The lookbehind is capped at 1 byte and only tried at line starts:
+"   uncapped, it takes seconds to search a long scrollback.
+"   A prompt right after output that didn't end in a newline (e.g. printf foo) has no blank
+"   row above it, so it isn't matched.
+let g:terminal_command_motion_prompt_matcher = '^\%(^\n\)\@1<=\%(.\+\n\)\{-1,}❯\s*'
 let g:indentLine_setColors = 0
 let g:fzf_preview_window = ['up:50%', 'ctrl-/']
 
