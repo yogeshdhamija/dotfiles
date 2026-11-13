@@ -226,6 +226,33 @@ if (oilstatus) then
       -- Open in a vertical split with t instead of <C-s>
       ["<C-s>"] = false,
       ["t"] = { "actions.select", opts = { vertical = true }, mode = "n" },
+      -- Terminal in the directory under the cursor, or the one being shown
+      --   when the cursor is on a file (\t stays in cwd), like gx opens
+      --   externally.
+      ["gt"] = {
+        desc = "Open a terminal in the directory under the cursor",
+        mode = "n",
+        callback = function()
+          local dir = _G.get_oil_cursor_path()
+          if dir == "" then
+            -- No local path (e.g. oil-ssh://): oil's own action, which opens
+            --   in the directory being shown
+            require("oil.actions").open_terminal.callback()
+            -- Insert mode like StartTerminal(); unsupported adapters only
+            --   warn, leaving the oil buffer in place
+            if vim.bo.buftype == "terminal" then
+              vim.cmd.startinsert()
+            end
+            return
+          end
+          -- isdirectory() also follows symlinks to directories, and rejects
+          --   a directory typed into the buffer but not yet written
+          if vim.fn.isdirectory(dir) == 0 then
+            dir = require("oil").get_current_dir()
+          end
+          vim.fn.StartTerminal(dir)
+        end,
+      },
       [ "zc"] = {
         desc = "Toggle file detail view",
         callback = function()
@@ -393,6 +420,8 @@ end
 pcall(function() require('mini.bufremove').setup() end)
 -- Ended terminals stay open, read-only, until :bd
 require('terminal-exit')
+-- Yanks from a terminal don't break where it wrapped long lines
+require('terminal-yank')
 local statusline,line = pcall(require, 'lualine')
 if(statusline) then
     line.setup({
@@ -461,8 +490,17 @@ function! DisplayErrors() abort
     lua vim.diagnostic.setloclist()
 endfunction
 
-function! StartTerminal() abort
-    exe "norm :terminal\<CR>:startinsert\<CR>"
+" dir: where the shell starts, instead of the cwd. Only this Neovim version
+"   takes it, for oil's gt.
+function! StartTerminal(dir = '') abort
+    if empty(a:dir)
+        terminal
+    else
+        " What :terminal itself runs, plus the cwd it has no option for
+        enew
+        call jobstart(&shell, {'cwd': a:dir, 'term': v:true})
+    endif
+    startinsert
 endfunction
 
 function! StartGenAiModelChat() abort
