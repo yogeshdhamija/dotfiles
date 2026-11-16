@@ -84,6 +84,7 @@ endif
 let g:editable_buffer_list_delete_command = 'BL'
 
 set background=dark
+set winborder=bold
 hi! link SignColumn Normal
 hi! link TreesitterContext Normal
 
