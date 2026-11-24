@@ -5,8 +5,8 @@
 --   - A line printed exactly full width on purpose (e.g. a ──── rule) gets joined to the next.
 --   - Scrollback printed while the terminal was another width isn't joined: Nvim doesn't
 --     reflow scrollback, so those rows are as wide as the terminal was then.
---   Programs that wrap their own text, like Claude Code, print real newlines, which look the same
---   as any other line break. So \m chats are left alone: their full-width rows are box borders
+--   Programs that wrap their own text, like the model chat, print real newlines, which look the
+--   same as any other line break. So \m chats are left alone: their full-width rows are box borders
 --   more often than wrapped text. Blockwise yanks keep their rows too.
 
 local group = vim.api.nvim_create_augroup('terminal-yank', { clear = true })

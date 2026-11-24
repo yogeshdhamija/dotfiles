@@ -158,8 +158,8 @@ source ~/.config/vim/settings.vim
         xmenu     ToolBar.󱎸\ Find\ in\ files         \ff
         nmenu     ToolBar.󰉋\ Browse\ directory       \dd
         nmenu     ToolBar.󰈢\ List\ buffers           \bb
-        nmenu     ToolBar.󰚩\ Claude                  \mm
-        xmenu     ToolBar.󰚩\ Claude                  \m
+        nmenu     ToolBar.󰚩\ Model\ chat             \mm
+        xmenu     ToolBar.󰚩\ Model\ chat             \m
         nmenu     ToolBar.󰆍\ Terminal                \tt
         xmenu     ToolBar.󰆍\ Terminal                \t
         anoremenu ToolBar.-windows-                  <Nop>
@@ -181,7 +181,7 @@ source ~/.config/vim/settings.vim
 
         let g:toolbar_menu_state = {
                     \ '󰈢 List buffers': 'ListedBuffersState',
-                    \ '󰚩 Claude':       'GenAiModelChatsState',
+                    \ '󰚩 Model chat':   'GenAiModelChatsState',
                     \ '󰆍 Terminal':     'TerminalsState',
                     \ '󰃀 Marks':        'MarksState',
                     \ }
