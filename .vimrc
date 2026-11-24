@@ -115,8 +115,9 @@ source ~/.config/vim/settings.vim
 "   Right-clicking puts the cursor there first ('mousemodel' in settings.vim)
 "   and opens the PopUp menu, so its items act on what was clicked. The
 "   ToolBar menu is the buttons in Neovim's status line, drawn by
-"   toolbar-menu.nvim: each shows its name up to the first space, and the ones
-"   that don't fit go behind a … that pops them up.
+"   toolbar-menu.nvim: each shows its name up to the first space (some with a
+"   count after it), and the ones that don't fit go behind a … that pops them
+"   up.
 "   Most items run the mappings and commands above, remaps and all, so a
 "   program's overrides of the functions behind them apply to them too.
     if has('menu')
@@ -161,32 +162,45 @@ source ~/.config/vim/settings.vim
         nnoremenu PopUp.Swap\ with\ previous  <Cmd>PREVSWAP<CR>
         xnoremenu PopUp.Swap\ with\ previous  <Nop>
 
-        " Dropped from the end when they don't fit
+        " Dropped from the end when they don't fit, all but Back and Forward
         silent! aunmenu ToolBar
-        nmenu     ToolBar.📄\ Open\ file             \oo
-        xmenu     ToolBar.📄\ Open\ file             \oo
-        nmenu     ToolBar.🔍\ Find\ in\ files        \ff
-        xmenu     ToolBar.🔍\ Find\ in\ files        \ff
-        nmenu     ToolBar.📁\ Browse\ directory      \dd
-        nmenu     ToolBar.📑\ List\ buffers          \bb
-        nmenu     ToolBar.🤖\ Claude                 \mm
-        xmenu     ToolBar.🤖\ Claude                 \m
-        nmenu     ToolBar.💻\ Terminal               \tt
-        xmenu     ToolBar.💻\ Terminal               \t
-        anoremenu ToolBar.-jumps-                    <Nop>
-        nnoremenu ToolBar.👈\ Back                   <C-O>
-        nnoremenu ToolBar.👉\ Forward                <C-I>
+        nmenu     ToolBar.󰈞\ Open\ file              \oo
+        xmenu     ToolBar.󰈞\ Open\ file              \oo
+        nmenu     ToolBar.󱎸\ Find\ in\ files         \ff
+        xmenu     ToolBar.󱎸\ Find\ in\ files         \ff
+        nmenu     ToolBar.󰉋\ Browse\ directory       \dd
+        nmenu     ToolBar.󰈢\ List\ buffers           \bb
+        nmenu     ToolBar.󰚩\ Claude                  \mm
+        xmenu     ToolBar.󰚩\ Claude                  \m
+        nmenu     ToolBar.󰆍\ Terminal                \tt
+        xmenu     ToolBar.󰆍\ Terminal                \t
         anoremenu ToolBar.-windows-                  <Nop>
-        nnoremenu ToolBar.⬓\ Split                   <C-W>s
-        nnoremenu ToolBar.◨\ Split\ vertically       <C-W>v
-        nnoremenu ToolBar.■\ Only\ this\ window      <Cmd>ONLY<CR>
+        nnoremenu ToolBar.󰯋\ Split                   <C-W>s
+        nnoremenu ToolBar.󰯌\ Split\ vertically       <C-W>v
+        nnoremenu ToolBar.󰊓\ Only\ this\ window      <Cmd>ONLY<CR>
+        " Like :q, but asks about unsaved changes rather than fail
+        nnoremenu ToolBar.󰖭\ Quit\ window            <Cmd>confirm quit<CR>
         anoremenu ToolBar.-buffers-                  <Nop>
-        nnoremenu ToolBar.❌\ Close\ buffer          <Cmd>bdelete<CR>
-        nnoremenu ToolBar.❎\ Close\ buffer\ to\ list <Cmd>BL<CR>
+        nnoremenu ToolBar.󰅖\ Close\ buffer           <Cmd>bdelete<CR>
+        nnoremenu ToolBar.󰐓\ Close\ buffer\ to\ list <Cmd>BL<CR>
         anoremenu ToolBar.-marks-                    <Nop>
-        nmenu     ToolBar.🔖\ Marks                  `
+        nmenu     ToolBar.󰃀\ Marks                   `
         " Only a click asks first, not :DELMARKS
-        nnoremenu ToolBar.🧹\ Delete\ all\ marks     <Cmd>if confirm('Delete all marks?', "&Yes\n&No", 2) == 1 <Bar> DELMARKS <Bar> endif<CR>
+        nnoremenu ToolBar.󰧎\ Delete\ all\ marks      <Cmd>if confirm('Delete all marks?', "&Yes\n&No", 2) == 1 <Bar> DELMARKS <Bar> endif<CR>
+        " Last, so they're always at the right edge of the status line, where the
+        "   rest are dropped from before them (keep in ~/.config/nvim/init.vim)
+        anoremenu ToolBar.-jumps-                    <Nop>
+        nnoremenu ToolBar.󰁍\ Back                    <C-O>
+        nnoremenu ToolBar.󰁔\ Forward                 <C-I>
+
+        " Live text after a button's label (toolbar-menu.nvim): a count of what
+        "   it goes to, from the function named, defined below
+        let g:toolbar_menu_state = {
+                    \ '󰈢 List buffers': 'ListedBuffersState',
+                    \ '󰚩 Claude':       'GenAiModelChatsState',
+                    \ '󰆍 Terminal':     'TerminalsState',
+                    \ '󰃀 Marks':        'MarksState',
+                    \ }
     endif
     " The menu has nothing for Insert mode, so it leaves that first
     inoremap <RightMouse> <C-\><C-N><RightMouse>
@@ -197,6 +211,37 @@ function! DelMarks(marks) abort
     else
         execute 'delmarks' a:marks
     endif
+endfunction
+
+" The ToolBar buttons' counts (g:toolbar_menu_state), drawn after their
+"   labels as e.g. '(3)', or not at all when there are none. They're drawn
+"   with every redraw of the status line, so they only count.
+function! ToolBarCount(count) abort
+    return a:count ? '(' . a:count . ')' : ''
+endfunction
+
+" The buffers :ls shows
+function! ListedBuffersState() abort
+    return ToolBarCount(len(getbufinfo({'buflisted': 1})))
+endfunction
+
+" Chats started by StartGenAiModelChat(), ended ones too
+function! GenAiModelChatsState() abort
+    return ToolBarCount(len(filter(getbufinfo({'buflisted': 1}),
+                \ {_, b -> get(b.variables, 'gen_ai_model_chat', 0)})))
+endfunction
+
+" Terminals other than those chats, ended ones too: they stay open until :bd
+function! TerminalsState() abort
+    return ToolBarCount(len(filter(getbufinfo({'buflisted': 1}),
+                \ {_, b -> getbufvar(b.bufnr, '&buftype') ==# 'terminal'
+                \          && !get(b.variables, 'gen_ai_model_chat', 0)})))
+endfunction
+
+" The marks set by hand: this buffer's a-z, and the global A-Z
+function! MarksState() abort
+    return ToolBarCount(len(filter(getmarklist('%'), {_, m -> m.mark =~# "^'[a-z]$"}))
+                \ + len(filter(getmarklist(), {_, m -> m.mark =~# "^'[A-Z]$"})))
 endfunction
 
 function! CopyPath(absolute) abort

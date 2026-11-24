@@ -42,6 +42,7 @@ let language = [
 let interface_stuff = [
     \ ['MagicDuck/grug-far.nvim', {}],
     \ ['yogeshdhamija/editable-file-search.nvim', {}],
+    \ ['yogeshdhamija/toolbar-menu.nvim', {}],
     \ ['lukas-reineke/indent-blankline.nvim', {}],
     \ ['ellisonleao/gruvbox.nvim', {}],
     \ ['shaunsingh/nord.nvim', {}],
@@ -417,18 +418,79 @@ end
 --   MenuPopup handler enables and disables its default items, now gone.
 pcall(vim.api.nvim_clear_autocmds, { group = 'nvim.popupmenu' })
 
--- The file's name and flags, then the toolbar buttons (toolbar-menu.nvim, in
---   the current window only), the buffer count, filetype and line:column. The
---   buttons take the room the rest leaves, which they measure for themselves.
-function _G.get_statusline()
-  local buttons = ''
-  if vim.g.statusline_winid == vim.api.nvim_get_current_win() then
-    local ok, toolbar = pcall(require, 'toolbar-menu')
-    if ok then
-      buttons = toolbar.render()
-    end
+-- The mode, the file's name and flags, filetype and line:column, then the
+--   toolbar buttons (toolbar-menu.nvim). The mode and buttons are in the
+--   current window only. The buttons are last so that they stay put at the
+--   right edge, whatever the width of the rest. They take the room it leaves,
+--   which they measure for themselves; the ones that don't fit go behind a …,
+--   from before Back and Forward, the last two items (keep = 2, and the menu
+--   in ~/.vimrc). The buffer count is on the buffers button
+--   (g:toolbar_menu_state in ~/.vimrc).
+-- The mode replaces 'showmode'. 'showmode' isn't what shows "recording @q",
+--   so that still shows.
+vim.o.showmode = false
+local mode_group = vim.api.nvim_create_augroup('statusline_mode', {})
+
+-- By what mode() starts with, the longest match: its name, and the color
+--   it's in (StatusLineMode<color>)
+local modes = {
+  n = { 'NORMAL', 'Normal' },
+  -- After i_CTRL-O and t_CTRL-\_CTRL-O, as 'showmode' showed them
+  niI = { '(INSERT)', 'Normal' },
+  niR = { '(REPLACE)', 'Normal' },
+  niV = { '(V-REPLACE)', 'Normal' },
+  ntT = { '(TERMINAL)', 'Normal' },
+  i = { 'INSERT', 'Insert' },
+  t = { 'TERMINAL', 'Insert' },
+  v = { 'VISUAL', 'Visual' },
+  V = { 'V-LINE', 'Visual' },
+  ['\22'] = { 'V-BLOCK', 'Visual' },
+  s = { 'SELECT', 'Visual' },
+  S = { 'S-LINE', 'Visual' },
+  ['\19'] = { 'S-BLOCK', 'Visual' },
+  R = { 'REPLACE', 'Replace' },
+  Rv = { 'V-REPLACE', 'Replace' },
+  c = { 'COMMAND', 'Command' },
+  cv = { 'EX', 'Command' },
+  r = { 'PROMPT', 'Command' },
+  ['!'] = { 'SHELL', 'Command' },
+}
+
+-- Neovim's own palette, the one its default colorscheme uses. Set again after
+--   a :colorscheme, which clears them.
+local function set_mode_colors()
+  local colors = {
+    Normal = 'NvimLightBlue',
+    Insert = 'NvimLightGreen',
+    Visual = 'NvimLightMagenta',
+    Replace = 'NvimLightRed',
+    Command = 'NvimLightYellow',
+  }
+  for name, color in pairs(colors) do
+    vim.api.nvim_set_hl(0, 'StatusLineMode' .. name, { fg = 'NvimDarkGrey1', bg = color, bold = true })
   end
-  return ' %<%t %h%w%m%r%=' .. buttons .. '  %{ListedBuffersStatus()}  %{&filetype}  %l:%v '
+end
+set_mode_colors()
+vim.api.nvim_create_autocmd('ColorScheme', { group = mode_group, callback = set_mode_colors })
+
+-- Neovim draws the statusline again whenever the mode changes, except into
+--   Normal mode for an i_CTRL-O or t_CTRL-\_CTRL-O
+vim.api.nvim_create_autocmd('ModeChanged', {
+  group = mode_group,
+  pattern = '*:n[it][IRVT]',
+  command = 'redrawstatus',
+})
+
+function _G.get_statusline()
+  local info = ' %<%t %h%w%m%r%= %{&filetype}  %l:%v '
+  if vim.g.statusline_winid ~= vim.api.nvim_get_current_win() then
+    return info
+  end
+  local m = vim.api.nvim_get_mode().mode
+  local mode = modes[m:sub(1, 3)] or modes[m:sub(1, 2)] or modes[m:sub(1, 1)] or { m, 'Normal' }
+  local ok, toolbar = pcall(require, 'toolbar-menu')
+  local buttons = ok and toolbar.render({ keep = 2 }) or ''
+  return ('%%#StatusLineMode%s# %s %%*'):format(mode[2], mode[1]) .. info .. buttons .. ' '
 end
 vim.o.statusline = '%!v:lua.get_statusline()'
 
