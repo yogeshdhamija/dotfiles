@@ -1,4 +1,7 @@
 set mouse=a
+" Right-click moves the cursor there and opens the menu (PopUp, in ~/.vimrc).
+"   Neovim's default; Vim's extends the selection instead.
+set mousemodel=popup_setpos
 set ignorecase
 set linebreak
 set hlsearch
@@ -95,7 +98,7 @@ nnoremap <silent> \ :<c-u>WhichKey '\'<CR>
     tabdo windo set foldtext=CustomFoldText()
     tabdo windo set fillchars=fold:\ 
     set laststatus=2
-    if !has('nvim') " Neovim's comes from lualine, in ~/.config/nvim/init.vim
+    if !has('nvim') " Neovim has its own, with toolbar buttons, in ~/.config/nvim/init.vim
         " Vim's default status line (with 'noruler'), plus the buffer count on the right
         set statusline=%<%f\ %h%w%m%r%=%{ListedBuffersStatus()}\
     endif

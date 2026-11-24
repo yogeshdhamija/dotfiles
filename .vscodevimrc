@@ -102,7 +102,9 @@ function! DisplayErrors() abort
     call v:lua.require("vscode").call("workbench.actions.view.problems")
 endfunction
 
-function! AutoFormat() abort
+" lines: [first, last] when :FORMAT is given a range. Not used yet, so a
+"   range still formats the whole document.
+function! AutoFormat(lines = []) abort
     call v:lua.require("vscode").call('editor.action.formatDocument')
 endfunction
 

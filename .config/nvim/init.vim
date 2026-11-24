@@ -42,7 +42,6 @@ let language = [
 let interface_stuff = [
     \ ['MagicDuck/grug-far.nvim', {}],
     \ ['yogeshdhamija/editable-file-search.nvim', {}],
-    \ ['nvim-lualine/lualine.nvim', {}],
     \ ['lukas-reineke/indent-blankline.nvim', {}],
     \ ['ellisonleao/gruvbox.nvim', {}],
     \ ['shaunsingh/nord.nvim', {}],
@@ -69,11 +68,7 @@ source ~/.vimrc
 " set foldmethod=expr
 " set foldexpr=nvim_treesitter#foldexpr()
 
-silent! aunmenu PopUp.How-to\ disable\ mouse
-silent! aunmenu PopUp.-1-
-
 set termguicolors
-set noshowmode
 
 set scrollback=100000
 " Guarded so an --cmd from the $EDITOR wrapper wins; init.vim is sourced after it.
@@ -417,22 +412,32 @@ if (dapuistatus and dapstatus and masondapstatus and dapvtstatus) then
 	}
 end
 
+---------------- Mouse ---------------------------------
+-- The right-click menu and toolbar buttons are in ~/.vimrc. Neovim's own
+--   MenuPopup handler enables and disables its default items, now gone.
+pcall(vim.api.nvim_clear_autocmds, { group = 'nvim.popupmenu' })
+
+-- The file's name and flags, then the toolbar buttons (toolbar-menu.nvim, in
+--   the current window only), the buffer count, filetype and line:column. The
+--   buttons take the room the rest leaves, which they measure for themselves.
+function _G.get_statusline()
+  local buttons = ''
+  if vim.g.statusline_winid == vim.api.nvim_get_current_win() then
+    local ok, toolbar = pcall(require, 'toolbar-menu')
+    if ok then
+      buttons = toolbar.render()
+    end
+  end
+  return ' %<%t %h%w%m%r%=' .. buttons .. '  %{ListedBuffersStatus()}  %{&filetype}  %l:%v '
+end
+vim.o.statusline = '%!v:lua.get_statusline()'
+
 ---------------- Other stuff ---------------------------
 pcall(function() require('mini.bufremove').setup() end)
 -- Ended terminals stay open, read-only, until :bd
 require('terminal-exit')
 -- Yanks from a terminal don't break where it wrapped long lines
 require('terminal-yank')
-local statusline,line = pcall(require, 'lualine')
-if(statusline) then
-    line.setup({
-      options = { theme = 'codedark' },
-      sections = {
-        -- lualine's default lualine_x, with the buffer count in front
-        lualine_x = { function() return vim.fn.ListedBuffersStatus() end, 'encoding', 'fileformat', 'filetype' },
-      },
-    })
-end
 local statusibl,ibl = pcall(require, 'ibl')
 if(statusibl) then
   ibl.setup({
@@ -483,8 +488,18 @@ function! ChangeSymbolName() abort
     lua vim.lsp.buf.rename()
 endfunction
 
-function! AutoFormat() abort
-    lua vim.lsp.buf.format({range})
+" lines: [first, last] to format just those, or empty for the whole buffer.
+"   The range runs to the end of the last line, as vim.lsp.buf.format() makes
+"   it for a linewise selection: it only reads the selection itself while
+"   still in Visual mode, which :'<,'>FORMAT no longer is.
+function! AutoFormat(lines = []) abort
+    if empty(a:lines)
+        lua vim.lsp.buf.format()
+    else
+        call v:lua.vim.lsp.buf.format({'range': {
+                    \ 'start': [a:lines[0], 0],
+                    \ 'end': [a:lines[1], strlen(getline(a:lines[1])) - 1]}})
+    endif
 endfunction
 
 function! DisplayErrors() abort

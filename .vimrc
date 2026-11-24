@@ -81,7 +81,8 @@ source ~/.config/vim/settings.vim
     command!          ONLY             call Only()
     command! -nargs=* DELMARKS         call DelMarks(<q-args>)
     command!          RENAME           call ChangeSymbolName()
-    command! -range=% FORMAT           call AutoFormat()
+    " Just the lines in the range when given one, e.g. from Visual mode
+    command! -range=% FORMAT           call AutoFormat(<range> ? [<line1>, <line2>] : [])
     command!          ERRORS           call DisplayErrors()
     command!          ERRS             ERRORS
     command!          CD               silent cd %:p:h | redraw! | echo ":cd %:p:h"
@@ -109,6 +110,86 @@ source ~/.config/vim/settings.vim
                 \ try | call CloseBufferToList(<q-args>, <bang>0)
                 \ | catch | echohl ErrorMsg | echomsg substitute(v:exception, '^Vim\%((\a\+)\)\=:', '', '')
                 \ | echohl None | endtry
+
+" Mouse
+"   Right-clicking puts the cursor there first ('mousemodel' in settings.vim)
+"   and opens the PopUp menu, so its items act on what was clicked. The
+"   ToolBar menu is the buttons in Neovim's status line, drawn by
+"   toolbar-menu.nvim: each shows its name up to the first space, and the ones
+"   that don't fit go behind a … that pops them up.
+"   Most items run the mappings and commands above, remaps and all, so a
+"   program's overrides of the functions behind them apply to them too.
+    if has('menu')
+        " Every item is in both Normal and Visual mode, so the menu's always
+        "   the same; in the one it's no use in, it does nothing. (Disabling
+        "   one would only grey it out in Vim's GUI: Neovim's popup, and Vim's
+        "   in a terminal, leave disabled items out.)
+        silent! aunmenu PopUp
+        nnoremenu PopUp.Expand\ selection     <Nop>
+        xmenu     PopUp.Expand\ selection     v
+        nnoremenu PopUp.Shrink\ selection     <Nop>
+        xmenu     PopUp.Shrink\ selection     V
+        nnoremenu PopUp.Copy                  <Nop>
+        xnoremenu PopUp.Copy                  "+y
+        nnoremenu PopUp.Paste                 "+p
+        xnoremenu PopUp.Paste                 "+p
+        anoremenu PopUp.-1-                   <Nop>
+        nmenu     PopUp.Hover                 \h
+        xnoremenu PopUp.Hover                 <Nop>
+        nmenu     PopUp.Show\ error           \e
+        xnoremenu PopUp.Show\ error           <Nop>
+        nmenu     PopUp.Code\ actions         \q
+        xmenu     PopUp.Code\ actions         \q
+        nmenu     PopUp.Definition            \gdd
+        xnoremenu PopUp.Definition            <Nop>
+        nmenu     PopUp.Declaration           \gDD
+        xnoremenu PopUp.Declaration           <Nop>
+        nmenu     PopUp.References            \grr
+        xnoremenu PopUp.References            <Nop>
+        nmenu     PopUp.Implementations       \gii
+        xnoremenu PopUp.Implementations       <Nop>
+        nmenu     PopUp.Go\ to\ file          \gff
+        xnoremenu PopUp.Go\ to\ file          <Nop>
+        anoremenu PopUp.-2-                   <Nop>
+        nnoremenu PopUp.Rename                <Cmd>RENAME<CR>
+        xnoremenu PopUp.Rename                <Nop>
+        nnoremenu PopUp.Format                <Cmd>FORMAT<CR>
+        " Just the selected lines: : in Visual mode gives the command them
+        xnoremenu PopUp.Format                :FORMAT<CR>
+        nnoremenu PopUp.Swap\ with\ next      <Cmd>SWAP<CR>
+        xnoremenu PopUp.Swap\ with\ next      <Nop>
+        nnoremenu PopUp.Swap\ with\ previous  <Cmd>PREVSWAP<CR>
+        xnoremenu PopUp.Swap\ with\ previous  <Nop>
+
+        " Dropped from the end when they don't fit
+        silent! aunmenu ToolBar
+        nmenu     ToolBar.📄\ Open\ file             \oo
+        xmenu     ToolBar.📄\ Open\ file             \oo
+        nmenu     ToolBar.🔍\ Find\ in\ files        \ff
+        xmenu     ToolBar.🔍\ Find\ in\ files        \ff
+        nmenu     ToolBar.📁\ Browse\ directory      \dd
+        nmenu     ToolBar.📑\ List\ buffers          \bb
+        nmenu     ToolBar.🤖\ Claude                 \mm
+        xmenu     ToolBar.🤖\ Claude                 \m
+        nmenu     ToolBar.💻\ Terminal               \tt
+        xmenu     ToolBar.💻\ Terminal               \t
+        anoremenu ToolBar.-jumps-                    <Nop>
+        nnoremenu ToolBar.👈\ Back                   <C-O>
+        nnoremenu ToolBar.👉\ Forward                <C-I>
+        anoremenu ToolBar.-windows-                  <Nop>
+        nnoremenu ToolBar.⬓\ Split                   <C-W>s
+        nnoremenu ToolBar.◨\ Split\ vertically       <C-W>v
+        nnoremenu ToolBar.■\ Only\ this\ window      <Cmd>ONLY<CR>
+        anoremenu ToolBar.-buffers-                  <Nop>
+        nnoremenu ToolBar.❌\ Close\ buffer          <Cmd>bdelete<CR>
+        nnoremenu ToolBar.❎\ Close\ buffer\ to\ list <Cmd>BL<CR>
+        anoremenu ToolBar.-marks-                    <Nop>
+        nmenu     ToolBar.🔖\ Marks                  `
+        " Only a click asks first, not :DELMARKS
+        nnoremenu ToolBar.🧹\ Delete\ all\ marks     <Cmd>if confirm('Delete all marks?', "&Yes\n&No", 2) == 1 <Bar> DELMARKS <Bar> endif<CR>
+    endif
+    " The menu has nothing for Insert mode, so it leaves that first
+    inoremap <RightMouse> <C-\><C-N><RightMouse>
 
 function! DelMarks(marks) abort
     if empty(a:marks)
