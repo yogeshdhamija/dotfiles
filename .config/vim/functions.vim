@@ -313,3 +313,86 @@ function! MarksHelper() abort
     endif
 endfunction
 
+" confirm(), but its choices can be clicked as well as typed (in a GUI, it's a
+"   dialog already)
+function! ClickableConfirm(msg, choices = "&Ok", default = 1) abort
+    if has('gui_running')
+        return confirm(a:msg, a:choices, a:default)
+    endif
+    " Drawn as confirm() draws them, e.g. '(Y)es, [N]o: ', with where each is
+    let l:prompt = ''
+    let l:choices = []
+    for l:choice in split(a:choices, "\n")
+        let l:key = matchstr(l:choice, '&\zs.')
+        if empty(l:key)
+            let l:key = strcharpart(l:choice, 0, 1)
+            let l:choice = '&' . l:choice
+        endif
+        let l:brackets = len(l:choices) + 1 == a:default ? '[]' : '()'
+        let l:prompt .= empty(l:prompt) ? '' : ', '
+        let l:from = strdisplaywidth(l:prompt) + 1
+        let l:prompt .= substitute(l:choice, '&\(.\)', l:brackets[0] . '\1' . l:brackets[1], '')
+        call add(l:choices, {'key': tolower(l:key), 'from': l:from, 'to': strdisplaywidth(l:prompt)})
+    endfor
+    echohl MoreMsg
+    echo a:msg . "\n" . l:prompt . ': '
+    echohl None
+    " A click picks a choice when the button goes down and up on it
+    let l:pressed = 0
+    try
+        while 1
+            let l:key = getcharstr()
+            if l:key ==# "\<CR>"
+                return a:default
+            elseif l:key ==# "\<Esc>" || l:key ==# "\<C-C>"
+                return 0
+            elseif l:key ==# "\<LeftMouse>" || l:key ==# "\<LeftRelease>"
+                let l:pos = getmousepos()
+                let l:on = 0
+                for l:i in range(len(l:choices))
+                    if l:pos.screenrow == &lines
+                                \ && l:pos.screencol >= l:choices[l:i].from
+                                \ && l:pos.screencol <= l:choices[l:i].to
+                        let l:on = l:i + 1
+                    endif
+                endfor
+                if l:key ==# "\<LeftMouse>"
+                    let l:pressed = l:on
+                elseif l:on && l:on == l:pressed
+                    return l:on
+                endif
+            else
+                let l:i = index(map(copy(l:choices), 'v:val.key'), tolower(l:key))
+                if l:i >= 0
+                    return l:i + 1
+                endif
+            endif
+        endwhile
+    catch /^Vim:Interrupt$/
+        return 0
+    finally
+        redraw
+    endtry
+endfunction
+
+" The text of the last Visual selection, as one line: a selection of several
+"   lines is joined with spaces, without their indentation
+function! LastVisualSelection() abort
+    let l:lines = getregion(getpos("'<"), getpos("'>"), {'type': visualmode()})
+    return trim(join(map(l:lines, 'trim(v:val)'), ' '))
+endfunction
+
+function! CloseWindowsWithFileType(filetype)
+    let l:current_win = winnr()
+    let l:win_count = winnr('$')
+    for l:i in range(1, l:win_count)
+        exe l:i . 'wincmd w'
+        if &filetype == a:filetype
+            close
+            let l:win_count -= 1
+            let l:i -= 1
+        endif
+    endfor
+    exe l:current_win . 'wincmd w'
+endfunction
+

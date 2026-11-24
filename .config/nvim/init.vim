@@ -734,21 +734,6 @@ function! CloseBuffer(buf, force) abort
   call v:lua.MiniBufremove.delete(l:buf, a:force ? v:true : v:false)
 endfunction
 
-function! CloseWindowsWithFileType(filetype)
-  let l:current_win = winnr()
-  let l:win_count = winnr('$')
-  for l:i in range(1, l:win_count)
-    exe l:i . 'wincmd w'
-    if &filetype == a:filetype
-      close
-      let l:win_count -= 1
-      let l:i -= 1
-    endif
-  endfor
-  exe l:current_win . 'wincmd w'
-endfunction
-
-
 function! SendToNearest(Matches, Create, text) abort
     let l:found = 0
     let l:curbuf = bufnr('%')
@@ -823,6 +808,37 @@ function! ToggleDebuggerUi() abort
 endfunction
 function! StartDebugger() abort
   execute "normal! :DapContinue\<CR>"
+endfunction
+
+" The ToolBar buttons' counts (g:toolbar_menu_state in ~/.vimrc), drawn after
+"   their labels as e.g. '(3)', or not at all when there are none. They're
+"   drawn with every redraw of the status line, so they only count.
+function! ToolBarCount(count) abort
+    return a:count ? '(' . a:count . ')' : ''
+endfunction
+
+" The buffers :ls shows
+function! ListedBuffersState() abort
+    return ToolBarCount(len(getbufinfo({'buflisted': 1})))
+endfunction
+
+" Chats started by StartGenAiModelChat(), ended ones too
+function! GenAiModelChatsState() abort
+    return ToolBarCount(len(filter(getbufinfo({'buflisted': 1}),
+                \ {_, b -> get(b.variables, 'gen_ai_model_chat', 0)})))
+endfunction
+
+" Terminals other than those chats, ended ones too: they stay open until :bd
+function! TerminalsState() abort
+    return ToolBarCount(len(filter(getbufinfo({'buflisted': 1}),
+                \ {_, b -> getbufvar(b.bufnr, '&buftype') ==# 'terminal'
+                \          && !get(b.variables, 'gen_ai_model_chat', 0)})))
+endfunction
+
+" The marks set by hand: this buffer's a-z, and the global A-Z
+function! MarksState() abort
+    return ToolBarCount(len(filter(getmarklist('%'), {_, m -> m.mark =~# "^'[a-z]$"}))
+                \ + len(filter(getmarklist(), {_, m -> m.mark =~# "^'[A-Z]$"})))
 endfunction
 
 call SourceProjectFileIfExists(".vim/vimrc.local")

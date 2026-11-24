@@ -101,11 +101,11 @@ source ~/.config/vim/settings.vim
     " Errors are echoed from here so they read like :bdelete's own one-liner;
     "   left alone (or re-raised with echoerr) they come with an 'Error detected
     "   while processing' header line, and so a hit-enter prompt
-    command! -bang -nargs=? -complete=buffer BD
+    command! -bar -bang -nargs=? -complete=buffer BD
                 \ try | call CloseBuffer(<q-args>, <bang>0)
                 \ | catch | echohl ErrorMsg | echomsg substitute(v:exception, '^Vim\%((\a\+)\)\=:', '', '')
                 \ | echohl None | endtry
-    command! -bang -nargs=? -complete=buffer BL
+    command! -bar -bang -nargs=? -complete=buffer BL
                 \ try | call CloseBufferToList(<q-args>, <bang>0)
                 \ | catch | echohl ErrorMsg | echomsg substitute(v:exception, '^Vim\%((\a\+)\)\=:', '', '')
                 \ | echohl None | endtry
@@ -164,11 +164,11 @@ source ~/.config/vim/settings.vim
         nnoremenu ToolBar.󰊓\ Only\ this\ window      <Cmd>ONLY<CR>
         nnoremenu ToolBar.󰖭\ Quit\ window            <Cmd>confirm quit<CR>
         anoremenu ToolBar.-buffers-                  <Nop>
-        nnoremenu ToolBar.󰅖\ Close\ buffer           <Cmd>bdelete<CR>
-        nnoremenu ToolBar.󰐓\ Close\ buffer\ to\ list <Cmd>BL<CR>
+        nnoremenu ToolBar.󰅖\ Close\ buffer           <Cmd>if ClickableConfirm('Close this buffer?', "&Yes\n&No", 2) == 1 <Bar> bdelete <Bar> endif<CR>
+        nnoremenu ToolBar.󰐓\ Close\ buffer\ to\ list <Cmd>if ClickableConfirm('Close this buffer?', "&Yes\n&No", 2) == 1 <Bar> BL <Bar> endif<CR>
         anoremenu ToolBar.-marks-                    <Nop>
         nmenu     ToolBar.󰃀\ Marks                   `
-        nnoremenu ToolBar.󰧎\ Delete\ all\ marks      <Cmd>if confirm('Delete all marks?', "&Yes\n&No", 2) == 1 <Bar> DELMARKS <Bar> endif<CR>
+        nnoremenu ToolBar.󰧎\ Delete\ all\ marks      <Cmd>if ClickableConfirm('Delete all marks?', "&Yes\n&No", 2) == 1 <Bar> DELMARKS <Bar> endif<CR>
         anoremenu ToolBar.-jumps-                    <Nop>
         nnoremenu ToolBar.󰁍\ Back                    <C-O>
         nnoremenu ToolBar.󰁔\ Forward                 <C-I>
@@ -188,37 +188,6 @@ function! DelMarks(marks) abort
     else
         execute 'delmarks' a:marks
     endif
-endfunction
-
-" The ToolBar buttons' counts (g:toolbar_menu_state), drawn after their
-"   labels as e.g. '(3)', or not at all when there are none. They're drawn
-"   with every redraw of the status line, so they only count.
-function! ToolBarCount(count) abort
-    return a:count ? '(' . a:count . ')' : ''
-endfunction
-
-" The buffers :ls shows
-function! ListedBuffersState() abort
-    return ToolBarCount(len(getbufinfo({'buflisted': 1})))
-endfunction
-
-" Chats started by StartGenAiModelChat(), ended ones too
-function! GenAiModelChatsState() abort
-    return ToolBarCount(len(filter(getbufinfo({'buflisted': 1}),
-                \ {_, b -> get(b.variables, 'gen_ai_model_chat', 0)})))
-endfunction
-
-" Terminals other than those chats, ended ones too: they stay open until :bd
-function! TerminalsState() abort
-    return ToolBarCount(len(filter(getbufinfo({'buflisted': 1}),
-                \ {_, b -> getbufvar(b.bufnr, '&buftype') ==# 'terminal'
-                \          && !get(b.variables, 'gen_ai_model_chat', 0)})))
-endfunction
-
-" The marks set by hand: this buffer's a-z, and the global A-Z
-function! MarksState() abort
-    return ToolBarCount(len(filter(getmarklist('%'), {_, m -> m.mark =~# "^'[a-z]$"}))
-                \ + len(filter(getmarklist(), {_, m -> m.mark =~# "^'[A-Z]$"})))
 endfunction
 
 function! CopyPath(absolute) abort
@@ -320,13 +289,6 @@ endfunction
 "   back from the '< and '> marks
 function! FindSelectedTextInFiles() abort
     call findInDirHelper#FindSelectedTextInDir()
-endfunction
-
-" The text of the last Visual selection, as one line: a selection of several
-"   lines is joined with spaces, without their indentation
-function! LastVisualSelection() abort
-    let l:lines = getregion(getpos("'<"), getpos("'>"), {'type': visualmode()})
-    return trim(join(map(l:lines, 'trim(v:val)'), ' '))
 endfunction
 
 function! ListBuffers() abort

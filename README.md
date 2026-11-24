@@ -65,6 +65,7 @@ The `~/.vimrc` acts as the base where all mappings and commands are defined. Neo
         -  `~/.vimrc` If it's either vim-specific, or an overrideable default implementation.
         -  `~/.config/nvim/init.vim` If it's neovim-specific.
         -  `~/.vscodevimrc` If it's vscode-neovim specific.
+    - Helpers those functions use, the same in all of them, are in `~/.config/vim/functions.vim`.
 
 - File sourcing order (from first to last) is:
 
