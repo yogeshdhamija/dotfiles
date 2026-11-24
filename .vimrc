@@ -171,6 +171,7 @@ source ~/.config/vim/settings.vim
         nnoremenu ToolBar.󰅖\ Close\ buffer           <Cmd>if ClickableConfirm('Close this buffer?', "&Yes\n&No", 2) == 1 <Bar> bdelete <Bar> endif<CR>
         nnoremenu ToolBar.󰐓\ Close\ buffer\ to\ list <Cmd>if ClickableConfirm('Close this buffer?', "&Yes\n&No", 2) == 1 <Bar> BL <Bar> endif<CR>
         nnoremenu ToolBar.󰃢\ Close\ hidden\ buffers  <Cmd>if ClickableConfirm('Close hidden buffers?', "&Yes\n&No", 2) == 1 <Bar> execute 'CLOSEHIDDENBUFFERS' <Bar> endif<CR>
+        nnoremenu ToolBar.󰗩\ Close\ hidden\ buffers\ and\ terminals <Cmd>if ClickableConfirm('Close hidden buffers and terminals?', "&Yes\n&No", 2) == 1 <Bar> execute 'CLOSEHIDDENBUFFERS!' <Bar> endif<CR>
         anoremenu ToolBar.-marks-                    <Nop>
         nmenu     ToolBar.󰃀\ Marks                   `
         nnoremenu ToolBar.󰧎\ Delete\ all\ marks      <Cmd>if ClickableConfirm('Delete all marks?', "&Yes\n&No", 2) == 1 <Bar> DELMARKS <Bar> endif<CR>
