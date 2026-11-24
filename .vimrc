@@ -148,6 +148,10 @@ source ~/.config/vim/settings.vim
         xnoremenu PopUp.Swap\ with\ previous  <Nop>
 
         silent! aunmenu ToolBar
+        nnoremenu ToolBar.󰆓\ Save                    <Cmd>write<CR>
+        nnoremenu ToolBar.󰕌\ Undo                    u
+        nnoremenu ToolBar.󰑎\ Redo                    <C-R>
+        anoremenu ToolBar.-open-                     <Nop>
         nmenu     ToolBar.󰈞\ Open\ file              \oo
         xmenu     ToolBar.󰈞\ Open\ file              \oo
         nmenu     ToolBar.󱎸\ Find\ in\ files         \ff
@@ -166,6 +170,7 @@ source ~/.config/vim/settings.vim
         anoremenu ToolBar.-buffers-                  <Nop>
         nnoremenu ToolBar.󰅖\ Close\ buffer           <Cmd>if ClickableConfirm('Close this buffer?', "&Yes\n&No", 2) == 1 <Bar> bdelete <Bar> endif<CR>
         nnoremenu ToolBar.󰐓\ Close\ buffer\ to\ list <Cmd>if ClickableConfirm('Close this buffer?', "&Yes\n&No", 2) == 1 <Bar> BL <Bar> endif<CR>
+        nnoremenu ToolBar.󰃢\ Close\ hidden\ buffers  <Cmd>if ClickableConfirm('Close hidden buffers?', "&Yes\n&No", 2) == 1 <Bar> execute 'CLOSEHIDDENBUFFERS' <Bar> endif<CR>
         anoremenu ToolBar.-marks-                    <Nop>
         nmenu     ToolBar.󰃀\ Marks                   `
         nnoremenu ToolBar.󰧎\ Delete\ all\ marks      <Cmd>if ClickableConfirm('Delete all marks?', "&Yes\n&No", 2) == 1 <Bar> DELMARKS <Bar> endif<CR>
