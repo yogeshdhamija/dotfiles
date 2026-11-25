@@ -26,19 +26,20 @@ source ~/.config/vim/settings.vim
 "   the program by overriding functions.
 
 " Remaps
-    xnoremap <C-c>      "+y
-    xnoremap <D-c>      "+y
-    inoremap <C-v><C-v> <C-R>+
-    inoremap <D-v><D-v> <C-R>+
-    xmap     ga         <Plug>(EasyAlign)
-    nmap     ga         <Plug>(EasyAlign)
-    inoremap <C-R>      <C-R><C-O>
-    inoremap <C-N>      <C-X><C-O>
-    nnoremap `          <Cmd>call AccessMarks()<CR>
-    noremap <C-j>       <Cmd>call MoveDown()<CR>
-    noremap <C-k>       <Cmd>call MoveUp()<CR>
-    xnoremap v          <Cmd>call ExpandSelection()<CR>
-    xnoremap V          <Cmd>call ShrinkSelection()<CR>
+    xnoremap <C-c>        "+y
+    xnoremap <D-c>        "+y
+    inoremap <C-v><C-v>   <C-R>+
+    inoremap <D-v><D-v>   <C-R>+
+    xmap     ga           <Plug>(EasyAlign)
+    nmap     ga           <Plug>(EasyAlign)
+    inoremap <C-R>        <C-R><C-O>
+    inoremap <C-N>        <C-X><C-O>
+    nnoremap `            <Cmd>call AccessMarks()<CR>
+    noremap <C-j>         <Cmd>call MoveDown()<CR>
+    noremap <C-k>         <Cmd>call MoveUp()<CR>
+    xnoremap v            <Cmd>call ExpandSelection()<CR>
+    xnoremap V            <Cmd>call ShrinkSelection()<CR>
+    inoremap <RightMouse> <C-\><C-N><RightMouse>
 
     " Fix some terminal issues on iterm
         tnoremap          <S-Space>  <Space>
@@ -163,7 +164,6 @@ source ~/.config/vim/settings.vim
 		call PopUpItem('nnoremenu', 'Swap with previous', '<Cmd>PREVSWAP<CR>')
 		call PopUpItem('xnoremenu', 'Swap with previous', '<Nop>')
 	endfunction
-    inoremap <RightMouse> <C-\><C-N><RightMouse>
     if has('menu')
         call DefaultPopUp()
         augroup PopUpMenu
