@@ -250,6 +250,30 @@ if (oilstatus) then
           vim.fn.StartTerminal(dir)
         end,
       },
+      -- The directory being shown, in the default app (the file manager),
+      --   as gx opens the entry under the cursor
+      ["gX"] = {
+        desc = "Open the directory being shown in the default app",
+        mode = "n",
+        callback = function()
+          local dir = require("oil").get_current_dir()
+          if dir then
+            vim.ui.open(dir)
+          else
+            vim.notify("No local directory to open", vim.log.levels.WARN)
+          end
+        end,
+      },
+      -- Like <CR>, on an entry. Anywhere else, such as the winbar or past
+      --   the last entry, the usual double-click
+      ["<2-LeftMouse>"] = {
+        desc = "Open the entry double-clicked",
+        mode = "n",
+        expr = true,
+        callback = function()
+          return vim.fn.ClickedOnText() == 1 and '<Cmd>lua require("oil").select()<CR>' or '<2-LeftMouse>'
+        end,
+      },
       [ "zc"] = {
         desc = "Toggle file detail view",
         callback = function()
@@ -588,6 +612,34 @@ endfunction
 
 function! DisplayErrors() abort
     lua vim.diagnostic.setloclist()
+endfunction
+
+" Whether the right-click menu item a:name can do anything at the cursor, in
+"   mode a:mode ('n' or 'x'). An LSP item needs a language server that has
+"   that method. The selection items need a Treesitter parser, and so, more
+"   loosely than they could, do the swaps: a parameter with another next to
+"   it isn't looked for.
+let s:popup_lsp_methods = {
+            \ 'Hover': 'hover', 'Code actions': 'codeAction',
+            \ 'Definition': 'definition', 'Declaration': 'declaration',
+            \ 'References': 'references', 'Implementations': 'implementation',
+            \ 'Rename': 'rename'}
+function! PopUpItemWorks(name, mode) abort
+    let l:method = a:name ==# 'Format' ? (a:mode ==# 'x' ? 'rangeFormatting' : 'formatting')
+                \ : get(s:popup_lsp_methods, a:name, '')
+    if !empty(l:method)
+        return luaeval('#vim.lsp.get_clients({bufnr = 0, method = _A}) > 0', 'textDocument/' . l:method)
+    elseif index(['Expand selection', 'Shrink selection', 'Swap with next', 'Swap with previous'], a:name) >= 0
+        return luaeval('vim.treesitter.get_parser(0, nil, {error = false}) ~= nil')
+    elseif a:name ==# 'Show error'
+        " The cursor line's, which open_float() shows
+        return !empty(v:lua.vim.diagnostic.get(0, {'lnum': line('.') - 1}))
+    elseif a:name ==# 'Go to file'
+        " Where gf looks
+        let l:file = expand('<cfile>')
+        return !empty(l:file) && (!empty(findfile(l:file)) || !empty(finddir(l:file)))
+    endif
+    return 1
 endfunction
 
 " dir: where the shell starts, instead of the cwd. Only this Neovim version

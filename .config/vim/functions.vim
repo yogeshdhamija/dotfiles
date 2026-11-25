@@ -222,6 +222,31 @@ function! ClickableConfirm(msg, choices = "&Ok", default = 1) abort
     endtry
 endfunction
 
+" Whether the last mouse click was on a line's own text, in the current window.
+"   getmousepos() also gives a line for a click on what isn't: the line under
+"   it for a virtual line or text property drawn between lines, the last line
+"   for the ~ rows past the end, and some line for the winbar and status line.
+"   For mouse maps and menu items that act on the line under the cursor, which
+"   the click has moved the cursor to.
+function! ClickedOnText() abort
+    let l:m = getmousepos()
+    if l:m.winid != win_getid() || l:m.line < 1
+        return 0
+    endif
+    " Vim's screenpos() puts a line with text properties above it at the
+    "   first of those, which take a row each, and has no row for its other
+    "   columns when 'nowrap' is set. Of such a line, wrapped, only the first
+    "   row counts.
+    if !has('nvim') && has('textprop')
+        let l:above = len(filter(prop_list(l:m.line),
+                    \ {_, p -> get(p, 'text_align', '') ==# 'above'}))
+        if l:above
+            return screenpos(l:m.winid, l:m.line, 1).row + l:above == l:m.screenrow
+        endif
+    endif
+    return screenpos(l:m.winid, l:m.line, max([1, l:m.column])).row == l:m.screenrow
+endfunction
+
 " The text of the last Visual selection, as one line: a selection of several
 "   lines is joined with spaces, without their indentation
 function! LastVisualSelection() abort

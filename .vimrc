@@ -116,7 +116,12 @@ source ~/.config/vim/settings.vim
     " They're in the name, lined up: the menu in a terminal leaves out the text
     "   after a <Tab> (:help menu-text), where Vim's own menus put them.
     "   cmd: the :menu command, e.g. 'nmenu'; the item is for that mode only.
+    " With s:popup_marks set, an item that won't do anything at the cursor
+    "   gets a × in front of its name, and the rest two spaces, so that the
+    "   names still line up. It still runs its keys. A <Nop> never does
+    "   anything; for the rest, PopUpItemWorks() tells.
     let s:popup_name_width = 18
+    let s:popup_marks = 0
     function! s:Item(cmd, name, rhs, ...) abort
         let keys = a:0 ? a:1
                     \ : a:rhs ==? '<Nop>' ? ''
@@ -127,11 +132,140 @@ source ~/.config/vim/settings.vim
             let label .= repeat(' ', max([2, s:popup_name_width + 2 - strdisplaywidth(a:name)]))
                         \ . substitute(keys, '&', '\&\&', 'g')
         endif
-        execute a:cmd 'PopUp.' . escape(label, ' .\|') a:rhs
+        let label = escape(label, ' .\|')
+        if s:popup_marks
+            let works = a:rhs !=? '<Nop>' && PopUpItemWorks(a:name, a:cmd[0])
+            let label = (works ? '\ \ ' : '×\ ') . label
+        endif
+        execute a:cmd 'PopUp.' . label a:rhs
     endfunction
 
-    if has('menu')
+    " Whether the right-click menu item a:name can do anything at the cursor,
+    "   in mode a:mode ('n' or 'x'). This default says every one can, which
+    "   leaves only the <Nop> items marked; other programs can tell better.
+    function! PopUpItemWorks(name, mode) abort
+        return 1
+    endfunction
+
+    " The right-click menu, made anew for each right-click (MenuPopup): the
+    "   buffer list, mark list, file search and oil each have their own, and
+    "   anywhere else it's the default one. Items that act on the line under
+    "   the cursor (where the right-click moved it) are only there when the
+    "   click was on that line's own text: a click on the hints above the
+    "   first entry, say, moves the cursor to that entry (ClickedOnText()).
+    function! s:PopUp() abort
         silent! aunmenu PopUp
+        if &filetype ==# 'oil'
+            call s:OilPopUp(ClickedOnText())
+        elseif &filetype ==# 'filesearch'
+            call s:FileSearchPopUp(ClickedOnText())
+        elseif &filetype ==# 'bufferlist'
+            call s:BufferListPopUp(ClickedOnText())
+        elseif &filetype ==# 'marklist'
+            call s:MarkListPopUp(ClickedOnText())
+        else
+            call s:DefaultPopUp()
+        endif
+    endfunction
+
+    " Nothing in oil saves: it makes the changes on :w, and asks first. So,
+    "   as with yy and p, Copy then Paste copies the file, Delete then Paste
+    "   moves it, and New is a line to type a name on.
+    function! s:OilPopUp(entry) abort
+        let s:popup_name_width = 21
+        let s:popup_marks = 0
+        if a:entry
+            call s:Item('nmenu',     'Open',                  '<CR>')
+            call s:Item('xnoremenu', 'Open',                  '<Nop>')
+            call s:Item('nmenu',     'Open with default app', 'gx')
+            call s:Item('xnoremenu', 'Open with default app', '<Nop>')
+        endif
+        call s:Item('nmenu',     'Open in file manager',  'gX')
+        call s:Item('xnoremenu', 'Open in file manager',  '<Nop>')
+        if a:entry
+            anoremenu PopUp.-1- <Nop>
+            call s:Item('nnoremenu', 'Copy path',          '<Cmd>CP<CR>')
+            call s:Item('xnoremenu', 'Copy path',          '<Nop>')
+            call s:Item('nnoremenu', 'Copy absolute path', '<Cmd>CP!<CR>')
+            call s:Item('xnoremenu', 'Copy absolute path', '<Nop>')
+        endif
+        anoremenu PopUp.-2- <Nop>
+        if a:entry
+            call s:Item('nnoremenu', 'Copy',   'yy')
+            call s:Item('xnoremenu', 'Copy',   'y')
+        endif
+        call s:Item('nnoremenu', 'Paste',  'p')
+        call s:Item('xnoremenu', 'Paste',  '<Nop>')
+        call s:Item('nnoremenu', 'New',    'o')
+        call s:Item('xnoremenu', 'New',    '<Nop>')
+        if a:entry
+            call s:Item('nnoremenu', 'Delete', 'dd')
+            call s:Item('xnoremenu', 'Delete', 'd')
+            anoremenu PopUp.-3- <Nop>
+            call s:Item('nmenu',     'Terminal here', 'gt')
+            call s:Item('xnoremenu', 'Terminal here', '<Nop>')
+        endif
+    endfunction
+
+    " On the query line, Open opens the top result, as <CR> does there, and
+    "   there's no Remove: dd there empties the query. u undoes a Remove.
+    function! s:FileSearchPopUp(entry) abort
+        let s:popup_name_width = 19
+        let s:popup_marks = 0
+        if a:entry
+            call s:Item('nmenu',     'Open', '<CR>')
+            call s:Item('xnoremenu', 'Open', '<Nop>')
+        endif
+        if a:entry && line('.') > 1
+            call s:Item('nnoremenu', 'Remove from results', 'dd')
+            call s:Item('xnoremenu', 'Remove from results', 'd')
+        endif
+    endfunction
+
+    " Close asks first, as the toolbar's Close buttons do: the list runs :BL
+    "   on each line deleted, which closes the buffer at once
+    function! s:BufferListPopUp(entry) abort
+        let s:popup_name_width = 5
+        let s:popup_marks = 0
+        if a:entry
+            call s:Item('nmenu',     'Open',  '<CR>')
+            call s:Item('xnoremenu', 'Open',  '<Nop>')
+            call s:Item('nnoremenu', 'Close', '<Cmd>call <SID>ConfirmClose("dd")<CR>', 'dd')
+            call s:Item('xnoremenu', 'Close', '<Cmd>call <SID>ConfirmClose("d")<CR>', 'd')
+        endif
+    endfunction
+
+    " Delete mark asks nothing: u puts it back. On ^ and ., which can't be
+    "   deleted, the list puts the line back and says why, as for dd.
+    function! s:MarkListPopUp(entry) abort
+        let s:popup_name_width = 11
+        let s:popup_marks = 0
+        if a:entry
+            call s:Item('nmenu',     'Jump',        '<CR>')
+            call s:Item('xnoremenu', 'Jump',        '<Nop>')
+            call s:Item('nnoremenu', 'Delete mark', 'dd')
+            call s:Item('xnoremenu', 'Delete mark', 'd')
+        endif
+    endfunction
+
+    " Types a:keys, which close the buffer list's buffers on the lines they
+    "   delete, once that's confirmed. Typed, so the list sees the change;
+    "   in Visual mode, a No ends it.
+    function! s:ConfirmClose(keys) abort
+        let l:visual = mode() =~# "^[vV\<C-V>]"
+        let l:count = l:visual ? abs(line('v') - line('.')) + 1 : 1
+        if ClickableConfirm(l:count == 1 ? 'Close this buffer?' : 'Close ' . l:count . ' buffers?',
+                    \ "&Yes\n&No", 2) == 1
+            call feedkeys(a:keys, 'm')
+        elseif l:visual
+            call feedkeys("\<Esc>", 'n')
+        endif
+    endfunction
+
+    " Each item stays in its place, marked if it won't do anything here.
+    function! s:DefaultPopUp() abort
+        let s:popup_name_width = 18
+        let s:popup_marks = 1
         call s:Item('nnoremenu', 'Expand selection',   'vv')
         call s:Item('xmenu',     'Expand selection',   'v')
         call s:Item('nnoremenu', 'Shrink selection',   '<Nop>')
@@ -166,6 +300,16 @@ source ~/.config/vim/settings.vim
         call s:Item('xnoremenu', 'Swap with next',     '<Nop>')
         call s:Item('nnoremenu', 'Swap with previous', '<Cmd>PREVSWAP<CR>')
         call s:Item('xnoremenu', 'Swap with previous', '<Nop>')
+    endfunction
+
+    if has('menu')
+        " Made here too, so that it's there before the first right-click
+        silent! aunmenu PopUp
+        call s:DefaultPopUp()
+        augroup PopUpMenu
+            autocmd!
+            autocmd MenuPopup * call s:PopUp()
+        augroup END
 
         " The buttons (toolbar-menu.nvim). After the <Tab>, the keys or command
         "   each runs, as its button and the popups show it (:help menu-text);
