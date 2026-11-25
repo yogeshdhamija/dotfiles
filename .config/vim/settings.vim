@@ -64,6 +64,7 @@ endif
 let g:terminal_command_motion_prompt_matcher = '^\%(^\n\)\@1<=\%(.\+\n\)\{-1,}❯\s*'
 let g:indentLine_setColors = 0
 let g:fzf_preview_window = ['up:50%', 'ctrl-/']
+let g:editable_buffer_list_delete_command = 'BL'
 
 let g:SignatureMap = {
     \ 'Leader'             :  "m",

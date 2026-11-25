@@ -70,14 +70,13 @@ source ~/.vimrc
 " set foldexpr=nvim_treesitter#foldexpr()
 
 set termguicolors
+set noshowmode
 
 set scrollback=100000
 " Guarded so an --cmd from the $EDITOR wrapper wins; init.vim is sourced after it.
 if !exists('g:unception_open_buffer_in_new_tab')
     let g:unception_open_buffer_in_new_tab=1
 endif
-" Deleting a line in \b runs :BL, so windows that showed the buffer show the list instead
-let g:editable_buffer_list_delete_command = 'BL'
 
 set background=dark
 set winborder=single
@@ -91,7 +90,6 @@ lua << EOF
 
 local farstatus, far = pcall(require, 'grug-far')
 if (farstatus) then
- -- Only true while the <enter> mapping below runs. See the comment on that mapping.
  local force_new_target = false
  far.setup{
     windowCreationCommand = '',
@@ -129,12 +127,7 @@ if (farstatus) then
     },
  }
 
-  -- goto_location opens into some window other than its own, reusing an existing one at
-  -- preferredLocation if it finds a candidate. Excluding everything for the duration of the call
-  -- forces it to build a throwaway window instead of hijacking one that already has a buffer in it;
-  -- we then pull the result back into the grug-far window and close the throwaway. The exclude is
-  -- scoped to this mapping so <localleader>n/p keep reusing windows as usual. The m' is what
-  -- makes <C-O> land back on the search results: jumplists are per-window, not per-buffer.
+  -- make <CR> in grug-far open in the current window (instead of a new split)
   vim.api.nvim_create_autocmd('FileType', {
     pattern = 'grug-far',
     callback = function(ev)
@@ -216,42 +209,28 @@ if (oilstatus) then
       cursorlineopt = "both",
     },
     keymaps = {
-      -- Keep ` for the mark list instead of oil's :cd
       ["`"] = false,
-      -- No accidental cwd changes (:tcd)
       ["g~"] = false,
-      -- Open in a vertical split with t instead of <C-s>
       ["<C-s>"] = false,
       ["t"] = { "actions.select", opts = { vertical = true }, mode = "n" },
-      -- Terminal in the directory under the cursor, or the one being shown
-      --   when the cursor is on a file (\t stays in cwd), like gx opens
-      --   externally.
       ["gt"] = {
         desc = "Open a terminal in the directory under the cursor",
         mode = "n",
         callback = function()
           local dir = _G.get_oil_cursor_path()
           if dir == "" then
-            -- No local path (e.g. oil-ssh://): oil's own action, which opens
-            --   in the directory being shown
             require("oil.actions").open_terminal.callback()
-            -- Insert mode like StartTerminal(); unsupported adapters only
-            --   warn, leaving the oil buffer in place
             if vim.bo.buftype == "terminal" then
               vim.cmd.startinsert()
             end
             return
           end
-          -- isdirectory() also follows symlinks to directories, and rejects
-          --   a directory typed into the buffer but not yet written
           if vim.fn.isdirectory(dir) == 0 then
             dir = require("oil").get_current_dir()
           end
           vim.fn.StartTerminal(dir)
         end,
       },
-      -- The directory being shown, in the default app (the file manager),
-      --   as gx opens the entry under the cursor
       ["gX"] = {
         desc = "Open the directory being shown in the default app",
         mode = "n",
@@ -264,8 +243,6 @@ if (oilstatus) then
           end
         end,
       },
-      -- Like <CR>, on an entry. Anywhere else, such as the winbar or past
-      --   the last entry, the usual double-click
       ["<2-LeftMouse>"] = {
         desc = "Open the entry double-clicked",
         mode = "n",
@@ -438,33 +415,12 @@ if (dapuistatus and dapstatus and masondapstatus and dapvtstatus) then
 end
 
 ---------------- Mouse ---------------------------------
--- The right-click menu and toolbar buttons are in ~/.vimrc. Neovim's own
---   MenuPopup handler enables and disables its default items, now gone.
-pcall(vim.api.nvim_clear_autocmds, { group = 'nvim.popupmenu' })
+pcall(vim.api.nvim_clear_autocmds, { group = 'nvim.popupmenu' }) -- disable neovim's default
 
--- The mode, the file's name and flags, filetype and line number, then the
---   toolbar buttons (toolbar-menu.nvim): a help button that pops up all of
---   them, then each one's icon (the menu in ~/.vimrc). The keys each runs
---   show in the popups only. The mode and buttons are in the current window
---   only. The buttons are last so that they stay
---   put at the right edge, whatever the width of the rest. They take the room
---   it leaves, which they measure for themselves; the ones that don't fit go
---   behind a …, from before Back and Forward, the last two items (keep = 2),
---   and the help button last of all. The buffer count is on the buffers
---   button (g:toolbar_menu_state in ~/.vimrc).
--- All this is kept short to leave the buttons room: the mode in 3 letters,
---   the name in at most 40.
--- The mode replaces 'showmode'. 'showmode' isn't what shows "recording @q",
---   so that still shows.
-vim.o.showmode = false
+---------------- Status Line ---------------------------------
 local mode_group = vim.api.nvim_create_augroup('statusline_mode', {})
-
--- By what mode() starts with, the longest match: its name, and the color
---   it's in (StatusLineMode<color>)
 local modes = {
   n = { 'NOR', 'Normal' },
-  -- After i_CTRL-O and t_CTRL-\_CTRL-O, which 'showmode' showed as
-  --   (INSERT), (REPLACE), (V-REPLACE) and (TERMINAL)
   niI = { '(I)', 'Normal' },
   niR = { '(R)', 'Normal' },
   niV = { '(V)', 'Normal' },
@@ -481,13 +437,10 @@ local modes = {
   Rv = { 'V-R', 'Replace' },
   c = { 'CMD', 'Command' },
   cv = { 'EX', 'Command' },
-  -- Hit-enter, more and confirm()'s
   r = { 'PRM', 'Command' },
   ['!'] = { 'SHL', 'Command' },
 }
 
--- Neovim's own palette, the one its default colorscheme uses. Set again after
---   a :colorscheme, which clears them.
 local function set_mode_colors()
   local colors = {
     Normal = 'NvimLightBlue',
@@ -503,15 +456,12 @@ end
 set_mode_colors()
 vim.api.nvim_create_autocmd('ColorScheme', { group = mode_group, callback = set_mode_colors })
 
--- Neovim draws the statusline again whenever the mode changes, except into
---   Normal mode for an i_CTRL-O or t_CTRL-\_CTRL-O
 vim.api.nvim_create_autocmd('ModeChanged', {
   group = mode_group,
   pattern = '*:n[it][IRVT]',
   command = 'redrawstatus',
 })
 
--- The name %t shows, cut from the left to at most 40 cells: '…' and the end
 local function file_name(win)
   local name = vim.api.nvim_eval_statusline('%t', { winid = win, maxwidth = 1000 }).str
   local width = vim.api.nvim_strwidth(name)
@@ -542,10 +492,8 @@ vim.o.statusline = '%!v:lua.get_statusline()'
 
 ---------------- Other stuff ---------------------------
 pcall(function() require('mini.bufremove').setup() end)
--- Ended terminals stay open, read-only, until :bd
-require('terminal-exit')
--- Yanks from a terminal don't break where it wrapped long lines
-require('terminal-yank')
+require('terminal-exit') -- Ended terminals stay open, read-only, until :bd
+require('terminal-yank') -- Yanks from a terminal don't break where it wrapped long lines
 local statusibl,ibl = pcall(require, 'ibl')
 if(statusibl) then
   ibl.setup({
@@ -642,8 +590,66 @@ function! PopUpItemWorks(name, mode) abort
     return 1
 endfunction
 
-" dir: where the shell starts, instead of the cwd. Only this Neovim version
-"   takes it, for oil's gt.
+function! PopUp() abort
+    if &filetype ==# 'oil'
+        call s:OilPopUp(ClickedOnText())
+    elseif &filetype ==# 'filesearch'
+        call s:FileSearchPopUp(ClickedOnText())
+    elseif &filetype ==# 'bufferlist'
+        call BufferListPopUp(ClickedOnText())
+    elseif &filetype ==# 'marklist'
+        call MarkListPopUp(ClickedOnText())
+    else
+        call DefaultPopUp()
+    endif
+endfunction
+function! s:OilPopUp(entry) abort
+    call PopUpStart(21, 0)
+    if a:entry
+        call PopUpItem('nmenu',     'Open',                  '<CR>')
+        call PopUpItem('xnoremenu', 'Open',                  '<Nop>')
+        call PopUpItem('nmenu',     'Open with default app', 'gx')
+        call PopUpItem('xnoremenu', 'Open with default app', '<Nop>')
+    endif
+    call PopUpItem('nmenu',     'Open in file manager',  'gX')
+    call PopUpItem('xnoremenu', 'Open in file manager',  '<Nop>')
+    if a:entry
+        anoremenu PopUp.-1- <Nop>
+        call PopUpItem('nnoremenu', 'Copy path',          '<Cmd>CP<CR>')
+        call PopUpItem('xnoremenu', 'Copy path',          '<Nop>')
+        call PopUpItem('nnoremenu', 'Copy absolute path', '<Cmd>CP!<CR>')
+        call PopUpItem('xnoremenu', 'Copy absolute path', '<Nop>')
+    endif
+    anoremenu PopUp.-2- <Nop>
+    if a:entry
+        call PopUpItem('nnoremenu', 'Copy',   'yy')
+        call PopUpItem('xnoremenu', 'Copy',   'y')
+    endif
+    call PopUpItem('nnoremenu', 'Paste',  'p')
+    call PopUpItem('xnoremenu', 'Paste',  '<Nop>')
+    call PopUpItem('nnoremenu', 'New',    'o')
+    call PopUpItem('xnoremenu', 'New',    '<Nop>')
+    if a:entry
+        call PopUpItem('nnoremenu', 'Delete', 'dd')
+        call PopUpItem('xnoremenu', 'Delete', 'd')
+        anoremenu PopUp.-3- <Nop>
+        call PopUpItem('nmenu',     'Terminal here', 'gt')
+        call PopUpItem('xnoremenu', 'Terminal here', '<Nop>')
+    endif
+endfunction
+
+function! s:FileSearchPopUp(entry) abort
+    call PopUpStart(19, 0)
+    if a:entry
+        call PopUpItem('nmenu',     'Open', '<CR>')
+        call PopUpItem('xnoremenu', 'Open', '<Nop>')
+    endif
+    if a:entry && line('.') > 1
+        call PopUpItem('nnoremenu', 'Remove from results', 'dd')
+        call PopUpItem('xnoremenu', 'Remove from results', 'd')
+    endif
+endfunction
+
 function! StartTerminal(dir = '') abort
     if empty(a:dir)
         terminal

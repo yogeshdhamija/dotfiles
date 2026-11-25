@@ -247,6 +247,50 @@ function! ClickedOnText() abort
     return screenpos(l:m.winid, l:m.line, max([1, l:m.column])).row == l:m.screenrow
 endfunction
 
+" Right-click menus, made anew for each right-click (PopUp(): ~/.vimrc's, or
+"   the program's own)
+
+" Starts a new right-click menu: clears the old one, and sets how the
+"   PopUpItem() calls that follow lay out their names.
+"   name_width: the longest name, past which the keys after each line up
+"   marks: whether to mark the items that won't do anything at the cursor
+let s:popup_name_width = 18
+let s:popup_marks = 0
+function! PopUpStart(name_width, marks) abort
+    silent! aunmenu PopUp
+    let s:popup_name_width = a:name_width
+    let s:popup_marks = a:marks
+endfunction
+
+" A right-click menu item, with the keys or command it runs after its
+"   name: rhs itself, a <Cmd>...<CR> or :...<CR> as that command, or the
+"   optional keys to show instead. A <Nop> shows nothing.
+" They're in the name, lined up: the menu in a terminal leaves out the text
+"   after a <Tab> (:help menu-text), where Vim's own menus put them.
+"   cmd: the :menu command, e.g. 'nmenu'; the item is for that mode only.
+" With marks set (PopUpStart()), an item that won't do anything at the
+"   cursor gets a × in front of its name, and the rest two spaces, so that
+"   the names still line up. It still runs its keys. A <Nop> never does
+"   anything; for the rest, PopUpItemWorks() tells (~/.vimrc's default, or
+"   the program's own).
+function! PopUpItem(cmd, name, rhs, ...) abort
+    let keys = a:0 ? a:1
+                \ : a:rhs ==? '<Nop>' ? ''
+                \ : substitute(a:rhs, '\c^\%(<Cmd>\|:\)\(.*\)<CR>$', ':\1', '')
+    let label = a:name
+    if !empty(keys)
+        " && is a literal &, where & would underline the next letter
+        let label .= repeat(' ', max([2, s:popup_name_width + 2 - strdisplaywidth(a:name)]))
+                    \ . substitute(keys, '&', '\&\&', 'g')
+    endif
+    let label = escape(label, ' .\|')
+    if s:popup_marks
+        let works = a:rhs !=? '<Nop>' && PopUpItemWorks(a:name, a:cmd[0])
+        let label = (works ? '\ \ ' : '×\ ') . label
+    endif
+    execute a:cmd 'PopUp.' . label a:rhs
+endfunction
+
 " The text of the last Visual selection, as one line: a selection of several
 "   lines is joined with spaces, without their indentation
 function! LastVisualSelection() abort
