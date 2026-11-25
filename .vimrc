@@ -222,16 +222,16 @@ source ~/.config/vim/settings.vim
         endif
     endfunction
 
-    " Close asks first, as the toolbar's Close buttons do: the list runs :BL
-    "   on each line deleted, which closes the buffer at once
+    " Close asks nothing: the list runs :BL on each line deleted, which
+    "   closes the buffer at once
     function! s:BufferListPopUp(entry) abort
         let s:popup_name_width = 5
         let s:popup_marks = 0
         if a:entry
             call s:Item('nmenu',     'Open',  '<CR>')
             call s:Item('xnoremenu', 'Open',  '<Nop>')
-            call s:Item('nnoremenu', 'Close', '<Cmd>call <SID>ConfirmClose("dd")<CR>', 'dd')
-            call s:Item('xnoremenu', 'Close', '<Cmd>call <SID>ConfirmClose("d")<CR>', 'd')
+            call s:Item('nnoremenu', 'Close', 'dd')
+            call s:Item('xnoremenu', 'Close', 'd')
         endif
     endfunction
 
@@ -245,20 +245,6 @@ source ~/.config/vim/settings.vim
             call s:Item('xnoremenu', 'Jump',        '<Nop>')
             call s:Item('nnoremenu', 'Delete mark', 'dd')
             call s:Item('xnoremenu', 'Delete mark', 'd')
-        endif
-    endfunction
-
-    " Types a:keys, which close the buffer list's buffers on the lines they
-    "   delete, once that's confirmed. Typed, so the list sees the change;
-    "   in Visual mode, a No ends it.
-    function! s:ConfirmClose(keys) abort
-        let l:visual = mode() =~# "^[vV\<C-V>]"
-        let l:count = l:visual ? abs(line('v') - line('.')) + 1 : 1
-        if ClickableConfirm(l:count == 1 ? 'Close this buffer?' : 'Close ' . l:count . ' buffers?',
-                    \ "&Yes\n&No", 2) == 1
-            call feedkeys(a:keys, 'm')
-        elseif l:visual
-            call feedkeys("\<Esc>", 'n')
         endif
     endfunction
 
