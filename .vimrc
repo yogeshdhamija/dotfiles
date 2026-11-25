@@ -95,12 +95,6 @@ source ~/.config/vim/settings.vim
     command!          BREAKPOINT       call ToggleBreakpoint()
     command!          TOGGLEDEBUGGERUI call ToggleDebuggerUi()
     command!          DEBUG            call StartDebugger()
-    " Like :bd, which closes the buffer's windows, but these keep them: BD has
-    "   them show other buffers (if CloseBuffer() is implemented that way), BL
-    "   has them show the buffer list.
-    " Errors are echoed from here so they read like :bdelete's own one-liner;
-    "   left alone (or re-raised with echoerr) they come with an 'Error detected
-    "   while processing' header line, and so a hit-enter prompt
     command! -bar -bang -nargs=? -complete=buffer BD
                 \ try | call CloseBuffer(<q-args>, <bang>0)
                 \ | catch | echohl ErrorMsg | echomsg substitute(v:exception, '^Vim\%((\a\+)\)\=:', '', '')
@@ -178,18 +172,25 @@ source ~/.config/vim/settings.vim
         augroup END
 	endif
 
+" Clickable items (status bar in neovim or menu bar in gvim)
 	if has('menu')
         silent! aunmenu ToolBar
+		" Format: nmenu ToolBar.A\ B<Tab>C D
+		" 	A = what appears in the menu/status bar (usually an icon), may not contain spaces
+		" 	B = what appears in the popup menu to describe the icon
+		" 	C = what appears as the "hint text" (usually what command/keymap would be run)
+		" 	D = what actually runs
         nnoremenu ToolBar.󰆓\ Save<Tab>:w                         <Cmd>write<CR>
         nnoremenu ToolBar.󰕌\ Undo<Tab>u                          u
         nnoremenu ToolBar.󰑎\ Redo<Tab>^R                         <C-R>
+        anoremenu ToolBar.-listbuffers-                          <Nop>
+        nmenu     ToolBar.󰈢\ List\ buffers<Tab>\\bb              \bb
         anoremenu ToolBar.-open-                                 <Nop>
         nmenu     ToolBar.󰈞\ Open\ file<Tab>\\oo                 \oo
         xmenu     ToolBar.󰈞\ Open\ file                          \oo
         nmenu     ToolBar.󱎸\ Find\ in\ files<Tab>\\ff            \ff
         xmenu     ToolBar.󱎸\ Find\ in\ files                     \ff
         nmenu     ToolBar.󰉋\ Browse\ directory<Tab>\\dd          \dd
-        nmenu     ToolBar.󰈢\ List\ buffers<Tab>\\bb              \bb
         nmenu     ToolBar.󰚩\ Model\ chat<Tab>\\mm                \mm
         xmenu     ToolBar.󰚩\ Model\ chat                         \m
         nmenu     ToolBar.󰆍\ Terminal<Tab>\\tt                   \tt
@@ -200,8 +201,8 @@ source ~/.config/vim/settings.vim
         nnoremenu ToolBar.󰊓\ Only\ this\ window<Tab>:ONLY        <Cmd>ONLY<CR>
         nnoremenu ToolBar.󰖭\ Quit\ window<Tab>:q                 <Cmd>confirm quit<CR>
         anoremenu ToolBar.-buffers-                              <Nop>
-        nnoremenu ToolBar.󰅖\ Close\ buffer<Tab>:bd               <Cmd>if ClickableConfirm('Close this buffer?', "&Yes\n&No", 2) == 1 <Bar> bdelete <Bar> endif<CR>
-        nnoremenu ToolBar.󰐓\ Close\ buffer\ to\ list<Tab>:BL     <Cmd>if ClickableConfirm('Close this buffer?', "&Yes\n&No", 2) == 1 <Bar> BL <Bar> endif<CR>
+        nnoremenu ToolBar.󰅖\ Close\ buffer<Tab>:bd               <Cmd>bdelete<CR>
+        nnoremenu ToolBar.󰐓\ Close\ buffer\ to\ list<Tab>:BL     <Cmd>BL<CR>
         nnoremenu ToolBar.󰃢\ Close\ hidden\ buffers<Tab>:CLO     <Cmd>if ClickableConfirm('Close hidden buffers?', "&Yes\n&No", 2) == 1 <Bar> execute 'CLOSEHIDDENBUFFERS' <Bar> endif<CR>
         nnoremenu ToolBar.󰗩\ Close\ hidden\ buffers\ and\ terminals<Tab>:CLO! <Cmd>if ClickableConfirm('Close hidden buffers and terminals?', "&Yes\n&No", 2) == 1 <Bar> execute 'CLOSEHIDDENBUFFERS!' <Bar> endif<CR>
         anoremenu ToolBar.-marks-                                <Nop>
