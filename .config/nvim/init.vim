@@ -418,10 +418,11 @@ end
 --   MenuPopup handler enables and disables its default items, now gone.
 pcall(vim.api.nvim_clear_autocmds, { group = 'nvim.popupmenu' })
 
--- The mode, the file's name and flags, and the line number, then the toolbar
---   buttons (toolbar-menu.nvim): a help button that pops up all of them, then
---   each with the keys it runs (the menu in ~/.vimrc). The mode and buttons
---   are in the current window only. The buttons are last so that they stay
+-- The mode, the file's name and flags, filetype and line number, then the
+--   toolbar buttons (toolbar-menu.nvim): a help button that pops up all of
+--   them, then each one's icon (the menu in ~/.vimrc). The keys each runs
+--   show in the popups only. The mode and buttons are in the current window
+--   only. The buttons are last so that they stay
 --   put at the right edge, whatever the width of the rest. They take the room
 --   it leaves, which they measure for themselves; the ones that don't fit go
 --   behind a …, from before Back and Forward, the last two items (keep = 2),
@@ -503,14 +504,14 @@ end
 
 function _G.get_statusline()
   local win = vim.g.statusline_winid
-  local info = ' %<' .. file_name(win) .. ' %h%w%m%r%= %l '
+  local info = ' %<' .. file_name(win) .. ' %h%w%m%r%= %{&filetype}  %l '
   if win ~= vim.api.nvim_get_current_win() then
     return info
   end
   local m = vim.api.nvim_get_mode().mode
   local mode = modes[m:sub(1, 3)] or modes[m:sub(1, 2)] or modes[m:sub(1, 1)] or { m:sub(1, 3), 'Normal' }
   local ok, toolbar = pcall(require, 'toolbar-menu')
-  local buttons = ok and toolbar.render({ keep = 2, hints = true, help = '󰋗' }) or ''
+  local buttons = ok and toolbar.render({ keep = 2, help = '󰋗' }) or ''
   return ('%%#StatusLineMode%s# %-3s %%*'):format(mode[2], mode[1]) .. info .. buttons .. ' '
 end
 vim.o.statusline = '%!v:lua.get_statusline()'
