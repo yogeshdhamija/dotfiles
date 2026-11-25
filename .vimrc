@@ -110,74 +110,98 @@ source ~/.config/vim/settings.vim
                 \ | catch | echohl ErrorMsg | echomsg substitute(v:exception, '^Vim\%((\a\+)\)\=:', '', '')
                 \ | echohl None | endtry
 
+    " A right-click menu item, with the keys or command it runs after its
+    "   name: rhs itself, a <Cmd>...<CR> or :...<CR> as that command, or the
+    "   optional keys to show instead. A <Nop> shows nothing.
+    " They're in the name, lined up: the menu in a terminal leaves out the text
+    "   after a <Tab> (:help menu-text), where Vim's own menus put them.
+    "   cmd: the :menu command, e.g. 'nmenu'; the item is for that mode only.
+    let s:popup_name_width = 18
+    function! s:Item(cmd, name, rhs, ...) abort
+        let keys = a:0 ? a:1
+                    \ : a:rhs ==? '<Nop>' ? ''
+                    \ : substitute(a:rhs, '\c^\%(<Cmd>\|:\)\(.*\)<CR>$', ':\1', '')
+        let label = a:name
+        if !empty(keys)
+            " && is a literal &, where & would underline the next letter
+            let label .= repeat(' ', max([2, s:popup_name_width + 2 - strdisplaywidth(a:name)]))
+                        \ . substitute(keys, '&', '\&\&', 'g')
+        endif
+        execute a:cmd 'PopUp.' . escape(label, ' .\|') a:rhs
+    endfunction
+
     if has('menu')
         silent! aunmenu PopUp
-        nnoremenu PopUp.Expand\ selection     <Nop>
-        xmenu     PopUp.Expand\ selection     v
-        nnoremenu PopUp.Shrink\ selection     <Nop>
-        xmenu     PopUp.Shrink\ selection     V
-        nnoremenu PopUp.Copy                  <Nop>
-        xnoremenu PopUp.Copy                  "+y
-        nnoremenu PopUp.Paste                 "+p
-        xnoremenu PopUp.Paste                 "+p
-        anoremenu PopUp.-1-                   <Nop>
-        nmenu     PopUp.Hover                 \h
-        xnoremenu PopUp.Hover                 <Nop>
-        nmenu     PopUp.Show\ error           \e
-        xnoremenu PopUp.Show\ error           <Nop>
-        nmenu     PopUp.Code\ actions         \q
-        xmenu     PopUp.Code\ actions         \q
-        nmenu     PopUp.Definition            \gdd
-        xnoremenu PopUp.Definition            <Nop>
-        nmenu     PopUp.Declaration           \gDD
-        xnoremenu PopUp.Declaration           <Nop>
-        nmenu     PopUp.References            \grr
-        xnoremenu PopUp.References            <Nop>
-        nmenu     PopUp.Implementations       \gii
-        xnoremenu PopUp.Implementations       <Nop>
-        nmenu     PopUp.Go\ to\ file          \gff
-        xnoremenu PopUp.Go\ to\ file          <Nop>
-        anoremenu PopUp.-2-                   <Nop>
-        nnoremenu PopUp.Rename                <Cmd>RENAME<CR>
-        xnoremenu PopUp.Rename                <Nop>
-        nnoremenu PopUp.Format                <Cmd>FORMAT<CR>
-        xnoremenu PopUp.Format                :FORMAT<CR>
-        nnoremenu PopUp.Swap\ with\ next      <Cmd>SWAP<CR>
-        xnoremenu PopUp.Swap\ with\ next      <Nop>
-        nnoremenu PopUp.Swap\ with\ previous  <Cmd>PREVSWAP<CR>
-        xnoremenu PopUp.Swap\ with\ previous  <Nop>
+        call s:Item('nnoremenu', 'Expand selection',   'vv')
+        call s:Item('xmenu',     'Expand selection',   'v')
+        call s:Item('nnoremenu', 'Shrink selection',   '<Nop>')
+        call s:Item('xmenu',     'Shrink selection',   'V')
+        call s:Item('nnoremenu', 'Copy',               '<Nop>')
+        call s:Item('xnoremenu', 'Copy',               '"+y')
+        call s:Item('nnoremenu', 'Paste',              '"+p')
+        call s:Item('xnoremenu', 'Paste',              '"+p')
+        anoremenu PopUp.-1- <Nop>
+        call s:Item('nmenu',     'Hover',              '\h')
+        call s:Item('xnoremenu', 'Hover',              '<Nop>')
+        call s:Item('nmenu',     'Show error',         '\e')
+        call s:Item('xnoremenu', 'Show error',         '<Nop>')
+        call s:Item('nmenu',     'Code actions',       '\q')
+        call s:Item('xmenu',     'Code actions',       '\q')
+        call s:Item('nmenu',     'Definition',         '\gdd')
+        call s:Item('xnoremenu', 'Definition',         '<Nop>')
+        call s:Item('nmenu',     'Declaration',        '\gDD')
+        call s:Item('xnoremenu', 'Declaration',        '<Nop>')
+        call s:Item('nmenu',     'References',         '\grr')
+        call s:Item('xnoremenu', 'References',         '<Nop>')
+        call s:Item('nmenu',     'Implementations',    '\gii')
+        call s:Item('xnoremenu', 'Implementations',    '<Nop>')
+        call s:Item('nmenu',     'Go to file',         '\gff')
+        call s:Item('xnoremenu', 'Go to file',         '<Nop>')
+        anoremenu PopUp.-2- <Nop>
+        call s:Item('nnoremenu', 'Rename',             '<Cmd>RENAME<CR>')
+        call s:Item('xnoremenu', 'Rename',             '<Nop>')
+        call s:Item('nnoremenu', 'Format',             '<Cmd>FORMAT<CR>')
+        call s:Item('xnoremenu', 'Format',             ':FORMAT<CR>')
+        call s:Item('nnoremenu', 'Swap with next',     '<Cmd>SWAP<CR>')
+        call s:Item('xnoremenu', 'Swap with next',     '<Nop>')
+        call s:Item('nnoremenu', 'Swap with previous', '<Cmd>PREVSWAP<CR>')
+        call s:Item('xnoremenu', 'Swap with previous', '<Nop>')
 
+        " The buttons (toolbar-menu.nvim). After the <Tab>, the keys or command
+        "   each runs, as its button and the popups show it (:help menu-text);
+        "   a confirmation in front isn't part of it. Only an item's first
+        "   entry's counts, so it's on the Normal mode one.
         silent! aunmenu ToolBar
-        nnoremenu ToolBar.󰆓\ Save                    <Cmd>write<CR>
-        nnoremenu ToolBar.󰕌\ Undo                    u
-        nnoremenu ToolBar.󰑎\ Redo                    <C-R>
-        anoremenu ToolBar.-open-                     <Nop>
-        nmenu     ToolBar.󰈞\ Open\ file              \oo
-        xmenu     ToolBar.󰈞\ Open\ file              \oo
-        nmenu     ToolBar.󱎸\ Find\ in\ files         \ff
-        xmenu     ToolBar.󱎸\ Find\ in\ files         \ff
-        nmenu     ToolBar.󰉋\ Browse\ directory       \dd
-        nmenu     ToolBar.󰈢\ List\ buffers           \bb
-        nmenu     ToolBar.󰚩\ Model\ chat             \mm
-        xmenu     ToolBar.󰚩\ Model\ chat             \m
-        nmenu     ToolBar.󰆍\ Terminal                \tt
-        xmenu     ToolBar.󰆍\ Terminal                \t
-        anoremenu ToolBar.-windows-                  <Nop>
-        nnoremenu ToolBar.󰯋\ Split                   <C-W>s
-        nnoremenu ToolBar.󰯌\ Split\ vertically       <C-W>v
-        nnoremenu ToolBar.󰊓\ Only\ this\ window      <Cmd>ONLY<CR>
-        nnoremenu ToolBar.󰖭\ Quit\ window            <Cmd>confirm quit<CR>
-        anoremenu ToolBar.-buffers-                  <Nop>
-        nnoremenu ToolBar.󰅖\ Close\ buffer           <Cmd>if ClickableConfirm('Close this buffer?', "&Yes\n&No", 2) == 1 <Bar> bdelete <Bar> endif<CR>
-        nnoremenu ToolBar.󰐓\ Close\ buffer\ to\ list <Cmd>if ClickableConfirm('Close this buffer?', "&Yes\n&No", 2) == 1 <Bar> BL <Bar> endif<CR>
-        nnoremenu ToolBar.󰃢\ Close\ hidden\ buffers  <Cmd>if ClickableConfirm('Close hidden buffers?', "&Yes\n&No", 2) == 1 <Bar> execute 'CLOSEHIDDENBUFFERS' <Bar> endif<CR>
-        nnoremenu ToolBar.󰗩\ Close\ hidden\ buffers\ and\ terminals <Cmd>if ClickableConfirm('Close hidden buffers and terminals?', "&Yes\n&No", 2) == 1 <Bar> execute 'CLOSEHIDDENBUFFERS!' <Bar> endif<CR>
-        anoremenu ToolBar.-marks-                    <Nop>
-        nmenu     ToolBar.󰃀\ Marks                   `
-        nnoremenu ToolBar.󰧎\ Delete\ all\ marks      <Cmd>if ClickableConfirm('Delete all marks?', "&Yes\n&No", 2) == 1 <Bar> DELMARKS <Bar> endif<CR>
-        anoremenu ToolBar.-jumps-                    <Nop>
-        nnoremenu ToolBar.󰁍\ Back                    <C-O>
-        nnoremenu ToolBar.󰁔\ Forward                 <C-I>
+        nnoremenu ToolBar.󰆓\ Save<Tab>:w                         <Cmd>write<CR>
+        nnoremenu ToolBar.󰕌\ Undo<Tab>u                          u
+        nnoremenu ToolBar.󰑎\ Redo<Tab>^R                         <C-R>
+        anoremenu ToolBar.-open-                                 <Nop>
+        nmenu     ToolBar.󰈞\ Open\ file<Tab>\\oo                 \oo
+        xmenu     ToolBar.󰈞\ Open\ file                          \oo
+        nmenu     ToolBar.󱎸\ Find\ in\ files<Tab>\\ff            \ff
+        xmenu     ToolBar.󱎸\ Find\ in\ files                     \ff
+        nmenu     ToolBar.󰉋\ Browse\ directory<Tab>\\dd          \dd
+        nmenu     ToolBar.󰈢\ List\ buffers<Tab>\\bb              \bb
+        nmenu     ToolBar.󰚩\ Model\ chat<Tab>\\mm                \mm
+        xmenu     ToolBar.󰚩\ Model\ chat                         \m
+        nmenu     ToolBar.󰆍\ Terminal<Tab>\\tt                   \tt
+        xmenu     ToolBar.󰆍\ Terminal                            \t
+        anoremenu ToolBar.-windows-                              <Nop>
+        nnoremenu ToolBar.󰯋\ Split<Tab>^Ws                       <C-W>s
+        nnoremenu ToolBar.󰯌\ Split\ vertically<Tab>^Wv           <C-W>v
+        nnoremenu ToolBar.󰊓\ Only\ this\ window<Tab>:ONLY        <Cmd>ONLY<CR>
+        nnoremenu ToolBar.󰖭\ Quit\ window<Tab>:q                 <Cmd>confirm quit<CR>
+        anoremenu ToolBar.-buffers-                              <Nop>
+        nnoremenu ToolBar.󰅖\ Close\ buffer<Tab>:bd               <Cmd>if ClickableConfirm('Close this buffer?', "&Yes\n&No", 2) == 1 <Bar> bdelete <Bar> endif<CR>
+        nnoremenu ToolBar.󰐓\ Close\ buffer\ to\ list<Tab>:BL     <Cmd>if ClickableConfirm('Close this buffer?', "&Yes\n&No", 2) == 1 <Bar> BL <Bar> endif<CR>
+        nnoremenu ToolBar.󰃢\ Close\ hidden\ buffers<Tab>:CLO     <Cmd>if ClickableConfirm('Close hidden buffers?', "&Yes\n&No", 2) == 1 <Bar> execute 'CLOSEHIDDENBUFFERS' <Bar> endif<CR>
+        nnoremenu ToolBar.󰗩\ Close\ hidden\ buffers\ and\ terminals<Tab>:CLO! <Cmd>if ClickableConfirm('Close hidden buffers and terminals?', "&Yes\n&No", 2) == 1 <Bar> execute 'CLOSEHIDDENBUFFERS!' <Bar> endif<CR>
+        anoremenu ToolBar.-marks-                                <Nop>
+        nnoremenu ToolBar.󰃀\ Marks<Tab>:MarkList                 <Cmd>MarkList<CR>
+        nnoremenu ToolBar.󰧎\ Delete\ all\ marks<Tab>:DELMARKS    <Cmd>if ClickableConfirm('Delete all marks?', "&Yes\n&No", 2) == 1 <Bar> DELMARKS <Bar> endif<CR>
+        anoremenu ToolBar.-jumps-                                <Nop>
+        nnoremenu ToolBar.󰁍\ Back<Tab>^O                         <C-O>
+        nnoremenu ToolBar.󰁔\ Forward<Tab>^I                      <C-I>
 
         let g:toolbar_menu_state = {
                     \ '󰈢 List buffers': 'ListedBuffersState',
@@ -265,7 +289,7 @@ function! AllAction() abort
 endfunction
 
 function! AccessMarks() abort
-    call MarksHelper()
+    call editableMarkList#Pick()
 endfunction
 
 function! DirectoryBrowser() abort
