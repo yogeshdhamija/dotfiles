@@ -251,41 +251,32 @@ function! Only() abort
     execute "normal! :only\<CR>"
 endfunction
 
-" Plain :bdelete, which closes every window the buffer is in.
 function! CloseBuffer(buf, force) abort
     execute 'bdelete' . (a:force ? '!' : '') a:buf
 endfunction
 
-" Like :bdelete, but every window showing the buffer switches to the buffer
-"   list instead of closing.
 function! CloseBufferToList(buf, force) abort
-    " bufnr('5') would look for a buffer *named* 5
     let l:buf = empty(a:buf) ? bufnr('%') : a:buf =~# '^\d\+$' ? str2nr(a:buf) : bufnr(a:buf)
-    " Left to :bdelete, before any window has switched, when it would refuse:
-    "   no single buffer matches (E93/E94), or unsaved changes (E89), which
-    "   'modified' tells exactly -- including a terminal's running job, in Vim
-    "   (E948) but not Nvim, where that's checked separately (E89)
+	
+	" plain :bdelete when we know it'll fail (to get the error message)
     if l:buf < 1 || (!a:force && (getbufvar(l:buf, '&modified') || (has('nvim')
                 \ && getbufvar(l:buf, '&buftype') ==# 'terminal'
                 \ && jobwait([getbufvar(l:buf, '&channel')], 0)[0] == -1)))
         execute 'bdelete' a:buf
         return
     endif
+
     let l:wins = win_findbuf(l:buf)
     for l:win in l:wins
         call win_execute(l:win, 'BufferList')
     endfor
-    " Still on screen means the list *is* the buffer: it was a list already
-    "   (BufferList from a list redraws it in place), or an empty [No Name]
-    "   one, which the :enew that opens a new list reuses. Either way it's
-    "   unlisted now, and deleting it would close the very windows it's in
     if !empty(win_findbuf(l:buf))
+		" Still on screen means the list *is* the buffer, so do nothing
         return
     endif
     execute 'bdelete' . (a:force ? '!' : '') l:buf
-    " Again, so those lists don't still show it: while the buffer list applies
-    "   a deleted line (which runs this), lists don't update themselves
     for l:win in l:wins
+		" Refresh now that buffer has been removed
         call win_execute(l:win, 'BufferList')
     endfor
 endfunction
